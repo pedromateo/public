@@ -1,0 +1,22 @@
+{
+  "name": "brainfit",
+  "version": "1.0.0",
+  "description": "**Brain-Fit 3000** es una aplicación web interactiva de entrenamiento cerebral y agilidad mental de alto ritmo. Diseñada con una estética brillante estilo *\"Candy/Bubblegum 3D\"*, la aplicación ofrece una experiencia inmersiva compuesta por 17 minijuegos dinámicos que desafían la memoria, la velocidad de cálculo, la atención selectiva, la lógica visual, la coordinación motora y el procesamiento lingüístico.",
+  "main": "sw.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "jsdom": "^30.0.1",
+    "vitest": "^4.1.11"
+  }
+}

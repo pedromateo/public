@@ -1,0 +1,17 @@
+{
+  "name": "Brain-Fit 3000",
+  "short_name": "BrainFit",
+  "description": "Entrenamiento cerebral y agilidad mental, protein free!",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdf2f8",
+  "theme_color": "#831843",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
