@@ -436,20 +436,27 @@ export const Games = {
       
     let ang = 0, balTime = 0;
     const beam = document.getElementById('b-beam');
-    const cfg = CONFIG[State.diffKey];
+    const cfg = CONFIG[State.diffKey] || CONFIG.medium;
     const fallSpd = cfg.balanceSpd;
     const pushPwr = cfg.balancePush;
     const goalMs = cfg.balanceGoalMs;
+    const delayMs = cfg.balanceDelayMs !== undefined ? cfg.balanceDelayMs : (State.diffKey === 'hard' ? 1000 : State.diffKey === 'medium' ? 2000 : 3000);
+    const startTime = Date.now();
     let rId;
     
     const loop = () => {
-      ang += fallSpd;
-      if(beam) beam.style.transform = `rotate(${ang}deg)`;
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= delayMs) {
+        ang += fallSpd;
+        if (Math.abs(ang) < 10) {
+          balTime += 16;
+          if (balTime > goalMs) { cancelAnimationFrame(rId); return Engine.success(); }
+        } else {
+          balTime = 0;
+        }
+      }
       
-      if(Math.abs(ang) < 10) {
-        balTime += 16;
-        if(balTime > goalMs) { cancelAnimationFrame(rId); return Engine.success(); }
-      } else { balTime = 0; }
+      if (beam) beam.style.transform = `rotate(${ang}deg)`;
       
       if (Math.abs(ang) > 40) { cancelAnimationFrame(rId); return Engine.fail(TEXTS.balanceFail); }
       rId = requestAnimationFrame(loop);

@@ -487,9 +487,9 @@ export const STROOP_COLORS = [
 
 export let TOTAL_LEVELS = 17;
 export let CONFIG = {
-  easy:   { name: "Fácil",   time: 16000, mem: 5000, speedMod: 0.7, balanceSpd: 0.45, balancePush: 10, balanceGoalMs: 1200 },
-  medium: { name: "Medio",   time: 12000, mem: 3500, speedMod: 1.0, balanceSpd: 0.75, balancePush: 9,  balanceGoalMs: 1400 },
-  hard:   { name: "Difícil", time:  8000, mem: 2000, speedMod: 1.4, balanceSpd: 1.12, balancePush: 8,  balanceGoalMs: 1500 }
+  easy:   { name: "Fácil",   time: 16000, mem: 5000, speedMod: 0.7, balanceSpd: 0.45, balancePush: 10, balanceGoalMs: 1200, balanceDelayMs: 3000 },
+  medium: { name: "Medio",   time: 12000, mem: 3500, speedMod: 1.0, balanceSpd: 0.75, balancePush: 9,  balanceGoalMs: 1400, balanceDelayMs: 2000 },
+  hard:   { name: "Difícil", time:  8000, mem: 2000, speedMod: 1.4, balanceSpd: 1.12, balancePush: 8,  balanceGoalMs: 1500, balanceDelayMs: 1000 }
 };
 
 export let TYPES = [

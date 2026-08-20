@@ -52,4 +52,10 @@ describe('Brain-Fit 3000 Engine', () => {
     expect(container.innerHTML).toContain('Repetir nivel');
     expect(container.innerHTML).not.toContain('🔄 Repetir nivel');
   });
+
+  it('configures balanceDelayMs correctly for each difficulty level', () => {
+    expect(CONFIG.easy.balanceDelayMs).toBe(3000);
+    expect(CONFIG.medium.balanceDelayMs).toBe(2000);
+    expect(CONFIG.hard.balanceDelayMs).toBe(1000);
+  });
 });
