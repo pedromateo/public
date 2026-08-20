@@ -636,31 +636,22 @@ export const Games = {
   },
 
   heavy_deduction(container) {
-    const items = ['🍎', '🍉', '🍇', '🍌', '🍍', '🍒', '🍓', '🥥', '🥝'].sort(() => Math.random() - 0.5).slice(0, 3);
+    const items = ['🍎', '🍉', '🍇', '🍌', '🍍', '🍒', '🍓', '🥥', '🥝'].sort(() => Math.random() - 0.5).slice(0, 2);
     
-    let rules = [];
-    if (Math.random() > 0.5) {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[0]} ⚖️ pesa MÁS que ⚖️ ${items[1]}</div>`);
-    } else {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[1]} ⚖️ pesa MENOS que ⚖️ ${items[0]}</div>`);
-    }
+    const isMore = Math.random() > 0.5;
+    const ruleText = isMore
+      ? `<span style="font-size:32px;vertical-align:middle;">${items[0]}</span> ⚖️ pesa <strong style="color:#d97706;">MÁS</strong> que ⚖️ <span style="font-size:32px;vertical-align:middle;">${items[1]}</span>`
+      : `<span style="font-size:32px;vertical-align:middle;">${items[1]}</span> ⚖️ pesa <strong style="color:#2563eb;">MENOS</strong> que ⚖️ <span style="font-size:32px;vertical-align:middle;">${items[0]}</span>`;
     
-    if (Math.random() > 0.5) {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[1]} ⚖️ pesa MÁS que ⚖️ ${items[2]}</div>`);
-    } else {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[2]} ⚖️ pesa MENOS que ⚖️ ${items[1]}</div>`);
-    }
-    
-    rules.sort(() => Math.random() - 0.5);
     const displayItems = [...items].sort(() => Math.random() - 0.5);
     
     container.innerHTML = `
       <div class="game-title mb-2">${TEXTS.heavyTitle}</div>
-      <div style="background:#f3f4f6; padding:15px; border-radius:12px; text-align:center; margin-bottom:20px;">
-        ${rules.join('')}
+      <div style="background:#f3f4f6; padding:18px 12px; border-radius:12px; text-align:center; margin-bottom:20px; font-size:19px; font-weight:800;">
+        ${ruleText}
       </div>
-      <div class="grid-3">
-        ${displayItems.map(i => `<button id="heavy-${i}" style="font-size:40px; height:80px;">${i}</button>`).join('')}
+      <div class="grid-2">
+        ${displayItems.map(i => `<button id="heavy-${i}" style="font-size:44px; height:84px;">${i}</button>`).join('')}
       </div>
     `;
     
