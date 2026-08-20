@@ -54,8 +54,8 @@ describe('Brain-Fit 3000 Engine', () => {
   });
 
   it('configures balanceDelayMs correctly for each difficulty level', () => {
-    expect(CONFIG.easy.balanceDelayMs).toBe(3000);
-    expect(CONFIG.medium.balanceDelayMs).toBe(2000);
-    expect(CONFIG.hard.balanceDelayMs).toBe(1000);
+    expect(CONFIG.easy.balanceDelayMs).toBe(2000);
+    expect(CONFIG.medium.balanceDelayMs).toBe(1000);
+    expect(CONFIG.hard.balanceDelayMs).toBe(500);
   });
 });

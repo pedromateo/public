@@ -440,7 +440,7 @@ export const Games = {
     const fallSpd = cfg.balanceSpd;
     const pushPwr = cfg.balancePush;
     const goalMs = cfg.balanceGoalMs;
-    const delayMs = cfg.balanceDelayMs !== undefined ? cfg.balanceDelayMs : (State.diffKey === 'hard' ? 1000 : State.diffKey === 'medium' ? 2000 : 3000);
+    const delayMs = cfg.balanceDelayMs !== undefined ? cfg.balanceDelayMs : (State.diffKey === 'hard' ? 500 : State.diffKey === 'medium' ? 1000 : 2000);
     const startTime = Date.now();
     let rId;
     
