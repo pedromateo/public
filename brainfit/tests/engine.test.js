@@ -58,4 +58,12 @@ describe('Brain-Fit 3000 Engine', () => {
     expect(CONFIG.medium.balanceDelayMs).toBe(1000);
     expect(CONFIG.hard.balanceDelayMs).toBe(500);
   });
+
+  it('renders difficulty name in bold on end screen summary', () => {
+    Engine.initSession('easy');
+    State.score = 50;
+    Engine.renderEndScreen();
+    const container = document.getElementById('screen-container');
+    expect(container.innerHTML).toContain('<strong>Fácil</strong>');
+  });
 });

@@ -213,7 +213,7 @@ export const Engine = {
         endMsg = TEXTS.endNearPerfectHardMsg;
       } else {
         const nextName = CONFIG[nextDiff].name;
-        endMsg = TEXTS.endNearPerfectMsg.replace('{nextDiff}', nextName);
+        endMsg = TEXTS.endNearPerfectMsg.replace('{diff}', CONFIG[currentDiff].name).replace('{nextDiff}', nextName);
       }
       actionBtnHTML = `<button class="mb-2" onclick="Engine.initSession('${currentDiff}')">${TEXTS.btnTryMax}</button>`;
     } 
