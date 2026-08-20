@@ -40,9 +40,9 @@ jobs:
       - name: Prepare production build
         working-directory: brainfit
         run: |
-          mkdir dist
-          cp index.html manifest.json sw.js config.json dist/
-          cp -r css js assets dist/
+          mkdir -p dist/brainfit
+          cp index.html manifest.json sw.js config.json dist/brainfit/
+          cp -r css js assets dist/brainfit/
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
