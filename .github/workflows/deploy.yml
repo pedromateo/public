@@ -3,10 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ "main", "master" ]
-  # Permite ejecutar manualmente
   workflow_dispatch:
 
-# Permisos requeridos para GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -32,12 +30,15 @@ jobs:
           node-version: '20.x'
           
       - name: Install dependencies
+        working-directory: brainfit
         run: npm install
         
       - name: Run Tests
+        working-directory: brainfit
         run: npm run test
 
       - name: Prepare production build
+        working-directory: brainfit
         run: |
           mkdir dist
           cp index.html manifest.json sw.js config.json dist/
@@ -49,7 +50,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './brainfit/dist'
           
       - name: Deploy to GitHub Pages
         id: deployment
