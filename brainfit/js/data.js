@@ -536,7 +536,9 @@ export let TEXTS = {
   matrixTitle: "Memoriza las celdas ({seconds}s):",
   matrixPlayTitle: "Toca las celdas marcadas:",
   matrixFail: "❌ Celda incorrecta",
-  heavyTitle: "¿Cuál es más pesado?",
+  heavyTitle: "¿Cuál es MÁS pesado?",
+  heavyTitleMore: "¿Cuál es MÁS pesado?",
+  heavyTitleLess: "¿Cuál es MENOS pesado?",
   heavyFail: "❌ Deducción incorrecta",
 
   calcTitle: "Resuelve:",

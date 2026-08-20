@@ -637,6 +637,11 @@ export const Games = {
 
   heavy_deduction(container) {
     const items = ['🍎', '🍉', '🍇', '🍌', '🍍', '🍒', '🍓', '🥥', '🥝'].sort(() => Math.random() - 0.5).slice(0, 3);
+    const askMore = Math.random() > 0.5;
+    const targetItem = askMore ? items[0] : items[2];
+    const titleText = askMore 
+      ? (TEXTS.heavyTitleMore || "¿Cuál es MÁS pesado?") 
+      : (TEXTS.heavyTitleLess || "¿Cuál es MENOS pesado?");
     
     let rules = [];
     if (Math.random() > 0.5) {
@@ -655,7 +660,7 @@ export const Games = {
     const displayItems = [...items].sort(() => Math.random() - 0.5);
     
     container.innerHTML = `
-      <div class="game-title mb-2">${TEXTS.heavyTitle}</div>
+      <div class="game-title mb-2">${titleText}</div>
       <div style="background:#f3f4f6; padding:15px; border-radius:12px; text-align:center; margin-bottom:20px;">
         ${rules.join('')}
       </div>
@@ -667,7 +672,7 @@ export const Games = {
     displayItems.forEach(i => {
       document.getElementById(`heavy-${i}`).onclick = () => {
         if (State.isLocked) return;
-        if (i === items[0]) Engine.success();
+        if (i === targetItem) Engine.success();
         else Engine.fail(TEXTS.heavyFail);
       };
     });
