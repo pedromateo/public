@@ -564,5 +564,112 @@ export const Games = {
         }
       };
     });
+  },
+
+  rps_inverted(container) {
+    const choices = [
+      { id: 'rock', icon: '🪨', wins: 'scissors', loses: 'paper' },
+      { id: 'paper', icon: '📄', wins: 'rock', loses: 'scissors' },
+      { id: 'scissors', icon: '✂️', wins: 'paper', loses: 'rock' }
+    ];
+    const target = choices[Math.floor(Math.random() * choices.length)];
+    const winMode = Math.random() > 0.5;
+    
+    container.innerHTML = `
+      <div class="game-title mb-2">${winMode ? TEXTS.rpsTitleWin : TEXTS.rpsTitleLose}</div>
+      <div style="font-size: 80px; text-align: center; margin-bottom: 20px;">${target.icon}</div>
+      <div class="grid-3">
+        ${choices.map(c => `<button id="rps-${c.id}" style="font-size:40px; height:80px;">${c.icon}</button>`).join('')}
+      </div>`;
+      
+    choices.forEach(c => {
+      document.getElementById(`rps-${c.id}`).onclick = () => {
+        if (State.isLocked) return;
+        const isCorrect = winMode ? (c.wins === target.id) : (c.loses === target.id);
+        if (isCorrect) Engine.success();
+        else Engine.fail(TEXTS.rpsFail);
+      };
+    });
+  },
+
+  memory_matrix(container) {
+    const size = State.diffKey === 'easy' ? 3 : 4;
+    const count = State.diffKey === 'easy' ? 3 : (State.diffKey === 'medium' ? 4 : 5);
+    const total = size * size;
+    const cells = Array.from({length: total}, (_, i) => i);
+    cells.sort(() => Math.random() - 0.5);
+    const activeCells = cells.slice(0, count);
+    
+    const cfg = CONFIG[State.diffKey] || CONFIG.medium;
+    const memTime = cfg.mem || 3500;
+    
+    container.innerHTML = `
+      <div class="game-title mb-2" id="matrix-title">${TEXTS.matrixTitle.replace('{seconds}', (memTime/1000).toFixed(1))}</div>
+      <div class="matrix-grid" style="display:grid; grid-template-columns: repeat(${size}, 1fr); gap: 10px; margin-top: 20px;">
+        ${Array.from({length: total}, (_, i) => `
+          <div id="mcell-${i}" style="aspect-ratio: 1; background: ${activeCells.includes(i) ? '#3b82f6' : '#e5e7eb'}; border-radius: 8px; transition: background 0.3s; cursor: pointer;"></div>
+        `).join('')}
+      </div>
+    `;
+    
+    const to = setTimeout(() => {
+      if (State.isLocked) return;
+      document.getElementById('matrix-title').innerText = TEXTS.matrixPlayTitle;
+      Array.from({length: total}, (_, i) => {
+        const el = document.getElementById(`mcell-${i}`);
+        el.style.background = '#e5e7eb';
+        el.onclick = () => {
+          if (State.isLocked) return;
+          if (activeCells.includes(i)) {
+            el.style.background = '#22c55e';
+            el.onclick = null;
+            activeCells.splice(activeCells.indexOf(i), 1);
+            if (activeCells.length === 0) Engine.success();
+          } else {
+            el.style.background = '#ef4444';
+            Engine.fail(TEXTS.matrixFail);
+          }
+        };
+      });
+    }, memTime);
+    Engine.addCleanup(() => clearTimeout(to));
+  },
+
+  heavy_deduction(container) {
+    const items = ['🍎', '🍉', '🍇', '🍌', '🍍', '🍒', '🍓', '🥥', '🥝'].sort(() => Math.random() - 0.5).slice(0, 3);
+    
+    let rules = [];
+    if (Math.random() > 0.5) {
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[0]} ⚖️ pesa MÁS que ⚖️ ${items[1]}</div>`);
+    } else {
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[1]} ⚖️ pesa MENOS que ⚖️ ${items[0]}</div>`);
+    }
+    
+    if (Math.random() > 0.5) {
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[1]} ⚖️ pesa MÁS que ⚖️ ${items[2]}</div>`);
+    } else {
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[2]} ⚖️ pesa MENOS que ⚖️ ${items[1]}</div>`);
+    }
+    
+    rules.sort(() => Math.random() - 0.5);
+    const displayItems = [...items].sort(() => Math.random() - 0.5);
+    
+    container.innerHTML = `
+      <div class="game-title mb-2">${TEXTS.heavyTitle}</div>
+      <div style="background:#f3f4f6; padding:15px; border-radius:12px; text-align:center; margin-bottom:20px;">
+        ${rules.join('')}
+      </div>
+      <div class="grid-3">
+        ${displayItems.map(i => `<button id="heavy-${i}" style="font-size:40px; height:80px;">${i}</button>`).join('')}
+      </div>
+    `;
+    
+    displayItems.forEach(i => {
+      document.getElementById(`heavy-${i}`).onclick = () => {
+        if (State.isLocked) return;
+        if (i === items[0]) Engine.success();
+        else Engine.fail(TEXTS.heavyFail);
+      };
+    });
   }
 };

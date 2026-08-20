@@ -485,7 +485,7 @@ export const STROOP_COLORS = [
   { n: 'AMARILLO', h: '#d97706' }
 ];
 
-export let TOTAL_LEVELS = 17;
+export let TOTAL_LEVELS = 20;
 export let CONFIG = {
   easy:   { name: "Fácil",   time: 16000, mem: 5000, speedMod: 0.7, balanceSpd: 0.45, balancePush: 10, balanceGoalMs: 1200, balanceDelayMs: 2000 },
   medium: { name: "Medio",   time: 12000, mem: 3500, speedMod: 1.0, balanceSpd: 0.75, balancePush: 9,  balanceGoalMs: 1400, balanceDelayMs: 1000 },
@@ -495,7 +495,8 @@ export let CONFIG = {
 export let TYPES = [
   'calc', 'pattern', 'anagram', 'count_target', 'antonym', 'equation_val',
   'precision_stop', 'swipe_sort', 'catch_target', 'drag_drop', 'balance',
-  'sudoku_missing', 'domino_order', 'mem_seq', 'stroop', 'order_diff', 'odd_grid'
+  'sudoku_missing', 'domino_order', 'mem_seq', 'stroop', 'order_diff', 'odd_grid',
+  'rps_inverted', 'memory_matrix', 'heavy_deduction'
 ];
 
 export let TEXTS = {
@@ -528,6 +529,15 @@ export let TEXTS = {
   endGoodTrainingTitle: "¡BUEN ENTRENAMIENTO!",
   endGoodTrainingMsg: "Has completado las {levels} pruebas en nivel <strong>{diff}</strong>. ¡Sigue practicando para mejorar tu agilidad mental y conseguir más puntos de bonificación rápida!",
   btnRepeatLevel: "Repetir nivel",
+
+  rpsTitleWin: "Elige para <span style=\"color:#16a34a;background:#dcfce7;padding:2px 8px;border-radius:8px;\">GANAR</span> a:",
+  rpsTitleLose: "Elige para <span style=\"color:#e11d48;background:#ffe4e6;padding:2px 8px;border-radius:8px;\">PERDER</span> contra:",
+  rpsFail: "❌ Jugada incorrecta",
+  matrixTitle: "Memoriza las celdas ({seconds}s):",
+  matrixPlayTitle: "Toca las celdas marcadas:",
+  matrixFail: "❌ Celda incorrecta",
+  heavyTitle: "¿Cuál es más pesado?",
+  heavyFail: "❌ Deducción incorrecta",
 
   calcTitle: "Resuelve:",
   memTitle: "Memoriza el orden ({seconds}s):",

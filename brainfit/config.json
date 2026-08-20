@@ -30,6 +30,15 @@
     "endGoodTrainingMsg": "Has completado las {levels} pruebas en nivel <strong>{diff}</strong>. ¡Sigue practicando para mejorar tu agilidad mental y conseguir más puntos de bonificación rápida!",
     "btnRepeatLevel": "Repetir nivel",
 
+    "rpsTitleWin": "Elige para <span style=\"color:#16a34a;background:#dcfce7;padding:2px 8px;border-radius:8px;\">GANAR</span> a:",
+    "rpsTitleLose": "Elige para <span style=\"color:#e11d48;background:#ffe4e6;padding:2px 8px;border-radius:8px;\">PERDER</span> contra:",
+    "rpsFail": "❌ Jugada incorrecta",
+    "matrixTitle": "Memoriza las celdas ({seconds}s):",
+    "matrixPlayTitle": "Toca las celdas marcadas:",
+    "matrixFail": "❌ Celda incorrecta",
+    "heavyTitle": "¿Cuál es más pesado?",
+    "heavyFail": "❌ Deducción incorrecta",
+
     "calcTitle": "Resuelve:",
     "memTitle": "Memoriza el orden ({seconds}s):",
     "memPlayTitle": "Toca en orden:",
@@ -91,6 +100,9 @@
     "drag_drop": true,
     "balance": true,
     "sudoku_missing": true,
-    "domino_order": true
+    "domino_order": true,
+    "rps_inverted": true,
+    "memory_matrix": true,
+    "heavy_deduction": true
   }
 }
