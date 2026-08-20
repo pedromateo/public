@@ -41,6 +41,7 @@ jobs:
         working-directory: brainfit
         run: |
           mkdir -p dist/brainfit
+          sed -i "s/brainfit-cache-v1/brainfit-cache-${{ github.sha }}/g" sw.js
           cp index.html manifest.json sw.js config.json dist/brainfit/
           cp -r css js assets dist/brainfit/
           
