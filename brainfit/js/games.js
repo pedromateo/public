@@ -640,15 +640,15 @@ export const Games = {
     
     let rules = [];
     if (Math.random() > 0.5) {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[0]} ⚖️ pesa MÁS que ⚖️ ${items[1]}</div>`);
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;"><span style="font-size:26px;vertical-align:middle;">${items[0]}</span> pesa <strong style="color:#d97706;">MÁS</strong> que <span style="font-size:26px;vertical-align:middle;">${items[1]}</span></div>`);
     } else {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[1]} ⚖️ pesa MENOS que ⚖️ ${items[0]}</div>`);
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;"><span style="font-size:26px;vertical-align:middle;">${items[1]}</span> pesa <strong style="color:#2563eb;">MENOS</strong> que <span style="font-size:26px;vertical-align:middle;">${items[0]}</span></div>`);
     }
     
     if (Math.random() > 0.5) {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[1]} ⚖️ pesa MÁS que ⚖️ ${items[2]}</div>`);
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;"><span style="font-size:26px;vertical-align:middle;">${items[1]}</span> pesa <strong style="color:#d97706;">MÁS</strong> que <span style="font-size:26px;vertical-align:middle;">${items[2]}</span></div>`);
     } else {
-      rules.push(`<div style="font-size:20px;margin-bottom:10px;">${items[2]} ⚖️ pesa MENOS que ⚖️ ${items[1]}</div>`);
+      rules.push(`<div style="font-size:20px;margin-bottom:10px;"><span style="font-size:26px;vertical-align:middle;">${items[2]}</span> pesa <strong style="color:#2563eb;">MENOS</strong> que <span style="font-size:26px;vertical-align:middle;">${items[1]}</span></div>`);
     }
     
     rules.sort(() => Math.random() - 0.5);
