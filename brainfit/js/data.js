@@ -53,7 +53,7 @@ export const ANAGRAM_POOL = [
   { w: "POLO", s: "L O P O", f: ["PATO", "PELO", "PITO"] },
   { w: "CUCURUCHO", s: "R U C H O C U C U", f: ["CUCHARA", "CUBIERTO", "CUERPO"] },
   { w: "PALMERA", s: "M E R A P A L", f: ["PALOMA", "PALABRA", "PALETA"] },
-  { w: "ENSAYMADA", s: "Y M A D A E N S A", f: ["ENSALADA", "ENSAYO", "ENTRADA"] },
+  { w: "ENSAIMADA", s: "I M A D A E N S A", f: ["ENSALADA", "ENSAYO", "ENTRADA"] },
   { w: "SOBAO", s: "B A O S O", f: ["SOPA", "SOLO", "SELLO"] },
   { w: "ROSQUILLA", s: "L L A Q U I R O S", f: ["ROSA", "RODILLO", "ROQUEDAL"] },
   { w: "MAGDALENA", s: "D A L E N A M A G", f: ["MADRINA", "MARGARITA", "MANZANILLA"] },
