@@ -1,5 +1,5 @@
 import { auth, db, googleProvider, signInWithPopup } from './firebase-config.js';
-import { collection, doc, setDoc, getDoc, query, where, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+import { collection, doc, setDoc, getDoc, query, where, orderBy, limit, getDocs, serverTimestamp } from "firebase/firestore";
 
 const SEED_USERS = [
   { uid: 'seed_tony_soprano', name: 'Tony Soprano', score: 30, photoUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=TonySoprano' },
