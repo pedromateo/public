@@ -1,5 +1,6 @@
 import { TOTAL_LEVELS, CONFIG, TYPES, TEXTS } from "./data.js";
 import { Games } from "./games.js";
+import { RankingService } from "./ranking.js";
 
 export const State = {
   diffKey: null,
@@ -237,7 +238,111 @@ export const Engine = {
 
         ${actionBtnHTML}
         <button class="btn-neutral" onclick="Engine.renderMenu()">${TEXTS.btnChangeDiff}</button>
+        <div style="margin-top:20px; padding-top:20px; border-top:2px dashed #fbcfe8;">
+          <button class="btn-ranking" onclick="Engine.showRankingFlow()" style="background:#db2777; color:white; font-size:18px; padding:12px 24px; border-radius:16px; border:none; box-shadow:0 6px 0 #9d174d; font-weight:800; cursor:pointer; width:100%; transition:all 0.2s;">🏆 Ver Ranking Global</button>
+        </div>
       </div>`;
+  },
+
+  async showRankingFlow() {
+    try {
+      // 1. Mostrar estado de carga
+      document.getElementById('screen-container').innerHTML = `
+        <div class="card c">
+          <div style="font-size:64px;margin-bottom:10px;" class="spin">⏳</div>
+          <h2 style="font-size:24px;color:#be185d;margin:0;font-weight:900;">Conectando...</h2>
+        </div>`;
+      
+      // 2. Iniciar sesión con Google
+      const user = await RankingService.login();
+      
+      // 3. Mostrar guardando...
+      document.getElementById('screen-container').innerHTML = `
+        <div class="card c">
+          <div style="font-size:64px;margin-bottom:10px;" class="pulse">💾</div>
+          <h2 style="font-size:24px;color:#be185d;margin:0;font-weight:900;">Guardando tu puntuación...</h2>
+        </div>`;
+
+      // 4. Guardar puntuación
+      await RankingService.saveScore(user, State.diffKey, State.score);
+      
+      // 5. Iniciar carrusel
+      this.renderRankingCarousel();
+    } catch (e) {
+      console.error(e);
+      document.getElementById('screen-container').innerHTML = `
+        <div class="card c">
+          <div style="font-size:64px;margin-bottom:10px;">❌</div>
+          <h2 style="font-size:24px;color:#be185d;margin:0 0 10px 0;font-weight:900;">Error de conexión</h2>
+          <p style="font-size:16px;color:#831843;">No se pudo acceder al ranking.</p>
+          <button class="reset-btn mt-4" onclick="Engine.renderEndScreen()">Volver</button>
+        </div>`;
+    }
+  },
+
+  async renderRankingCarousel() {
+    this.clearAll();
+    const difficulties = ['easy', 'medium', 'hard'];
+    let currentIdx = 0;
+    
+    const drawRanking = async () => {
+      const diff = difficulties[currentIdx];
+      const diffConfig = CONFIG[diff];
+      
+      const badgeStyles = {
+        easy: "background: linear-gradient(to bottom, #34d399, #059669); box-shadow: 0 3px 0 #047857;",
+        medium: "background: linear-gradient(to bottom, #c084fc, #7e22ce); box-shadow: 0 3px 0 #6b21a8;",
+        hard: "background: linear-gradient(to bottom, #fb7185, #e11d48); box-shadow: 0 3px 0 #be123c;"
+      };
+
+      document.getElementById('screen-container').innerHTML = `
+        <div class="card c" style="padding:16px;">
+          <div style="text-align:center; margin-bottom:14px;">
+            <div style="font-size:26px;font-weight:900;color:#831843;margin-bottom:6px;">🏆 Ranking Global</div>
+            <div style="display:inline-block; font-size:18px; color:white; padding:6px 18px; border-radius:14px; font-weight:900; ${badgeStyles[diff] || ''} text-shadow:1px 1px 2px rgba(0,0,0,0.2);">
+              Nivel ${diffConfig.name}
+            </div>
+          </div>
+          <div id="ranking-list" style="min-height:350px; display:flex; flex-direction:column; justify-content:center;">
+             <div style="text-align:center; font-size:40px;" class="spin">⏳</div>
+          </div>
+          <button class="reset-btn" style="margin-top:16px; width:100%;" onclick="Engine.renderMenu()">Jugar de nuevo</button>
+        </div>`;
+
+      const topScores = await RankingService.getTopScores(diff);
+      const listContainer = document.getElementById('ranking-list');
+      
+      if (!listContainer) return;
+
+      if (topScores.length === 0) {
+        listContainer.innerHTML = `<div style="text-align:center;color:#9d174d;font-weight:700;">Aún no hay puntuaciones en este nivel. ¡Sé el primero!</div>`;
+      } else {
+        let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
+        topScores.forEach((s, idx) => {
+          let medal = '';
+          if (idx === 0) medal = '🥇';
+          else if (idx === 1) medal = '🥈';
+          else if (idx === 2) medal = '🥉';
+          else medal = `${idx + 1}º`;
+
+          html += `
+            <div style="display:flex;align-items:center;background:#fdf2f8;border:2px solid #fbcfe8;border-radius:12px;padding:8px 12px;">
+              <div style="width:30px;font-weight:900;color:#be185d;">${medal}</div>
+              <img src="${s.photoUrl || 'assets/icon.svg'}" style="width:36px;height:36px;border-radius:50%;border:2px solid #f9a8d4;margin-right:12px;object-fit:cover;" onerror="this.src='assets/icon.svg'">
+              <div style="flex-grow:1;text-align:left;font-weight:800;color:#831843;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.name}</div>
+              <div style="font-weight:900;color:#db2777;font-size:18px;">${s.score}</div>
+            </div>
+          `;
+        });
+        html += '</div>';
+        listContainer.innerHTML = html;
+      }
+      
+      currentIdx = (currentIdx + 1) % difficulties.length;
+    };
+
+    await drawRanking();
+    this.mainTimer = setInterval(drawRanking, 5000);
   }
 };
 
