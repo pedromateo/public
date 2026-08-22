@@ -145,15 +145,15 @@ export const Engine = {
         <div>
           <button class="diff-btn diff-easy" onclick="Engine.initSession('easy')">
             <span style="font-weight:900;">${TEXTS.menuEasy}</span>
-            <span class="diff-badge">16s</span>
+            <span class="diff-badge">${CONFIG.easy.time / 1000}s</span>
           </button>
           <button class="diff-btn diff-medium" onclick="Engine.initSession('medium')">
             <span style="font-weight:900;">${TEXTS.menuMedium}</span>
-            <span class="diff-badge">12s</span>
+            <span class="diff-badge">${CONFIG.medium.time / 1000}s</span>
           </button>
           <button class="diff-btn diff-hard" onclick="Engine.initSession('hard')">
             <span style="font-weight:900;">${TEXTS.menuHard}</span>
-            <span class="diff-badge">8s</span>
+            <span class="diff-badge">${CONFIG.hard.time / 1000}s</span>
           </button>
         </div>
       </div>`;

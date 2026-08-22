@@ -9,8 +9,8 @@
 - **🎮 17 Minijuegos Únicos**: Una gran variedad de desafíos cognitivos y de destreza motora.
 - **⚡ Sistema de Bonificación Rápida (x2 Bonus)**: Otorga 10 puntos por respuesta correcta y un superbonus de +20 puntos si el nivel se resuelve en menos del 50% del tiempo disponible.
 - **🎚️ 3 Niveles de Dificultad**:
-  - **🌱 Fácil**: 16 segundos por nivel | 5s de memorización | Velocidad moderada.
-  - **⚡ Medio**: 12 segundos por nivel | 3.5s de memorización | Velocidad estándar.
+  - **🌱 Fácil**: 20 segundos por nivel | 5s de memorización | Velocidad moderada.
+  - **⚡ Medio**: 14 segundos por nivel | 3.5s de memorización | Velocidad estándar.
   - **🔥 Difícil**: 8 segundos por nivel | 2s de memorización | Alta velocidad.
 - **📱 Mobile-First y Totalmente Responsivo**: Optimizado con eventos táctiles (`touch-action`, `touchstart`, `touchend`) y soporte para interacción con ratón en escritorio.
 - **🚀 Zero Dependencies / Vanilla Architecture**: Proyecto estructurado modularmente (Módulos ES6) sin frameworks de UI pesados.
