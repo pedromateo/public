@@ -112,7 +112,9 @@ export const Engine = {
     const btn = document.getElementById('sound-toggle');
     if (btn) {
       const muted = this.isMuted();
-      btn.innerText = muted ? '🔇' : '🔊';
+      const soundOnSVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#db2777" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 2px 0 #be185d);"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#fbcfe8"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+      const soundOffSVG = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#be185d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 2px 0 #9d174d);"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#fbcfe8" opacity="0.6"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
+      btn.innerHTML = muted ? soundOffSVG : soundOnSVG;
       btn.setAttribute('title', muted ? 'Activar sonido' : 'Desactivar sonido');
       btn.setAttribute('aria-label', muted ? 'Activar sonido' : 'Desactivar sonido');
     }
@@ -463,22 +465,50 @@ if (typeof window !== 'undefined') {
   window.Engine = Engine;
   window.State = State;
 
+  let unlocked = false;
   let lastTapTime = 0;
-  const handleTap = () => {
-    const now = Date.now();
-    if (now - lastTapTime > 60) {
-      lastTapTime = now;
-      Engine.vibrate(12);
-      Engine.playTap();
+
+  const unlockAudioAndVibrate = () => {
+    if (unlocked) return;
+    unlocked = true;
+    
+    const ctx = getAudioCtx();
+    if (ctx && ctx.state === 'suspended') {
+      try { ctx.resume(); } catch (_) {}
+    }
+    
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try { navigator.vibrate(1); } catch (_) {}
+    }
+    
+    if (ctx) {
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        gain.gain.value = 0;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(0);
+        osc.stop(ctx.currentTime + 0.001);
+      } catch (_) {}
     }
   };
 
-  window.addEventListener('touchstart', handleTap, { passive: true });
-  window.addEventListener('click', (e) => {
-    if (e.detail > 0) {
-      handleTap();
+  const handleTap = (e) => {
+    unlockAudioAndVibrate();
+    
+    const isInteractive = e.target.closest('button, #game-area, .card, [onclick]');
+    if (isInteractive) {
+      const now = Date.now();
+      if (now - lastTapTime > 50) {
+        lastTapTime = now;
+        Engine.vibrate(10);
+        Engine.playTap();
+      }
     }
-  }, { passive: true });
+  };
+
+  window.addEventListener('pointerdown', handleTap, { passive: false });
 
   window.addEventListener('DOMContentLoaded', () => {
     Engine.updateSoundBtn();
