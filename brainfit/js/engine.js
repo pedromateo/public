@@ -2,6 +2,20 @@ import { TOTAL_LEVELS, CONFIG, TYPES, TEXTS } from "./data.js";
 import { Games } from "./games.js";
 import { RankingService } from "./ranking.js";
 
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx && typeof window !== 'undefined') {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) {
+      audioCtx = new AudioCtx();
+    }
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
 export const State = {
   diffKey: null,
   idx: 0,
@@ -75,9 +89,101 @@ export const Engine = {
     this.cleanups = [];
   },
 
+  vibrate(pattern = 12) {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try { navigator.vibrate(pattern); } catch (_) {}
+    }
+  },
+
+  isMuted() {
+    return localStorage.getItem('brainfit_sound_muted') === 'true';
+  },
+
+  toggleSound() {
+    const muted = !this.isMuted();
+    localStorage.setItem('brainfit_sound_muted', muted ? 'true' : 'false');
+    this.updateSoundBtn();
+    if (!muted) {
+      this.playTap();
+    }
+  },
+
+  updateSoundBtn() {
+    const btn = document.getElementById('sound-toggle');
+    if (btn) {
+      const muted = this.isMuted();
+      btn.innerText = muted ? '🔇' : '🔊';
+      btn.setAttribute('title', muted ? 'Activar sonido' : 'Desactivar sonido');
+      btn.setAttribute('aria-label', muted ? 'Activar sonido' : 'Desactivar sonido');
+    }
+  },
+
+  playTap() {
+    if (this.isMuted()) return;
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(450, ctx.currentTime);
+      gain.gain.setValueAtTime(0.035, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.035);
+    } catch (_) {}
+  },
+
+  playSuccess() {
+    if (this.isMuted()) return;
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    try {
+      const notes = [587.33, 880];
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = ctx.currentTime + i * 0.06;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.04, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.14);
+      });
+    } catch (_) {}
+  },
+
+  playBonus() {
+    if (this.isMuted()) return;
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    try {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const startTime = ctx.currentTime + i * 0.07;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.05, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.16);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.18);
+      });
+    } catch (_) {}
+  },
+
   handleTimeout() {
     if (State.isLocked) return;
     State.isLocked = true;
+    this.vibrate([60, 40, 60]);
     this.clearAll();
     this.showFeedback(TEXTS.timeout, false);
     setTimeout(() => { State.idx++; this.nextLevel(); }, 900);
@@ -95,11 +201,13 @@ export const Engine = {
     State.score += isFast ? 20 : 10;
     document.getElementById('score-val').innerText = State.score;
 
+    this.vibrate(isFast ? [20, 30, 20, 30, 30] : [15, 30, 15]);
     this.showFeedback(isFast ? TEXTS.successFast : TEXTS.successNorm, true);
 
     if (isFast) {
       this.showBonus(() => { State.idx++; this.nextLevel(); });
     } else {
+      this.playSuccess();
       setTimeout(() => { State.idx++; this.nextLevel(); }, 600);
     }
   },
@@ -107,6 +215,7 @@ export const Engine = {
   fail(msg) {
     if (State.isLocked) return;
     State.isLocked = true;
+    this.vibrate([60, 40, 60]);
     this.clearAll();
     this.showFeedback(msg || TEXTS.failDefault, false);
     setTimeout(() => { State.idx++; this.nextLevel(); }, 900);
@@ -121,6 +230,7 @@ export const Engine = {
   },
 
   showBonus(cb) {
+    this.playBonus();
     const halfSec = CONFIG[State.diffKey].time / 2000;
     const overlay = document.createElement('div');
     overlay.className = 'bonus-overlay';
@@ -137,6 +247,7 @@ export const Engine = {
 
   renderMenu() {
     this.clearAll();
+    this.updateSoundBtn();
     document.getElementById('screen-container').innerHTML = `
       <div class="card c">
         <div style="font-size:64px;margin-bottom:8px;text-shadow: 0 10px 15px rgba(0,0,0,0.1);">🧠🍭</div>
@@ -193,11 +304,13 @@ export const Engine = {
     let endMsg = "";
     let actionBtnHTML = "";
 
+    const percentage = maxPts > 0 ? Math.round((State.score / maxPts) * 100) : 0;
+
     if (State.score === maxPts) {
       if (currentDiff === 'hard') {
         endIcon = "👑🔥";
         endTitle = TEXTS.endPerfectHardTitle;
-        endMsg = TEXTS.endPerfectHardMsg.replace('{score}', State.score).replace('{max}', maxPts);
+        endMsg = TEXTS.endPerfectHardMsg.replace('{score}', State.score).replace('{max}', maxPts).replace('{pct}', percentage);
         actionBtnHTML = `<button class="mb-2 btn-red" onclick="Engine.initSession('hard')">${TEXTS.btnPerfectHard}</button>`;
       } else {
         const nextName = CONFIG[nextDiff].name;
@@ -233,7 +346,7 @@ export const Engine = {
         
         <div style="background:#fdf2f8;border:4px solid #fbcfe8;border-radius:24px;padding:18px;margin-bottom:24px;box-shadow:inset 0 4px 6px rgba(0,0,0,0.05);">
           <div style="font-size:16px;color:#9d174d;font-weight:800;">${TEXTS.finalScoreTitle}</div>
-          <div style="font-size:52px;font-weight:900;color:#db2777;margin:6px 0;">${State.score} <span style="font-size:22px;font-weight:900;color:#f472b6;">/ ${maxPts}</span></div>
+          <div style="font-size:52px;font-weight:900;color:#db2777;margin:6px 0;">${percentage}%</div>
         </div>
 
         ${actionBtnHTML}
@@ -349,4 +462,25 @@ export const Engine = {
 if (typeof window !== 'undefined') {
   window.Engine = Engine;
   window.State = State;
+
+  let lastTapTime = 0;
+  const handleTap = () => {
+    const now = Date.now();
+    if (now - lastTapTime > 60) {
+      lastTapTime = now;
+      Engine.vibrate(12);
+      Engine.playTap();
+    }
+  };
+
+  window.addEventListener('touchstart', handleTap, { passive: true });
+  window.addEventListener('click', (e) => {
+    if (e.detail > 0) {
+      handleTap();
+    }
+  }, { passive: true });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    Engine.updateSoundBtn();
+  });
 }

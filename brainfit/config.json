@@ -17,7 +17,7 @@
     "finalScoreTitle": "PUNTUACIÓN FINAL",
     "btnChangeDiff": "Cambiar de dificultad",
     "endPerfectHardTitle": "¡CAMPEÓN DE CAMPEONES!",
-    "endPerfectHardMsg": "¡Increíble! Has conseguido la puntuación perfecta ({score}/{max}) en el nivel <strong>Difícil</strong>. ¡Eres el número uno indiscutible!",
+    "endPerfectHardMsg": "¡Increíble! Has conseguido la puntuación perfecta (100%) en el nivel <strong>Difícil</strong>. ¡Eres el número uno indiscutible!",
     "btnPerfectHard": "👑 Revalidar título",
     "endPerfectNextTitle": "¡PUNTUACIÓN PERFECTA!",
     "endPerfectNextMsg": "¡Brillante! Has obtenido el máximo posible de {score} puntos en nivel <strong>{diff}</strong>. ¡Estás listo para dar el salto al nivel <strong>{nextDiff}</strong>!",
