@@ -525,7 +525,7 @@ export let TEXTS = {
   endNearPerfectTitle: "¡CASI PERFECTO!",
   endNearPerfectHardMsg: "¡Extraordinario resultado! Te has quedado muy cerca de la perfección en el nivel <strong>Difícil</strong>. ¡Falta muy poco para coronarte como Campeón de Campeones!",
   endNearPerfectMsg: "¡Gran partida! Te has quedado muy cerca de la máxima puntuación en nivel <strong>{diff}</strong>. ¡Un pequeño empujón más y pasarás al nivel <strong>{nextDiff}</strong>!",
-  btnTryMax: "🔁 ¡Intentar el máximo!",
+  btnTryMax: "¡Intentar el máximo!",
   endGoodTrainingTitle: "¡BUEN ENTRENAMIENTO!",
   endGoodTrainingMsg: "Has completado las {levels} pruebas en nivel <strong>{diff}</strong>. ¡Sigue practicando para mejorar tu agilidad mental y conseguir más puntos de bonificación rápida!",
   btnRepeatLevel: "Repetir nivel",
