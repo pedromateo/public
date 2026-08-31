@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MurMeteo</title>
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  
+  <link rel="stylesheet" href="./style.css">
+  
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(e => console.warn('SW falló:', e));
+      });
+    }
+  </script>
+</head>
+<body>
+
+  <div id="error-overlay">
+    <div class="error-card">
+      <div class="error-icon">📡</div>
+      <h3 id="error-title" class="error-title">Sin acceso a datos</h3>
+      <p id="error-desc" class="error-desc">No ha sido posible acceder a los datos de la previsión meteorológica.</p>
+      <button id="btn-retry" class="btn-retry">Reintentar</button>
+    </div>
+  </div>
+
+  <div class="max-w-md">
+    <header>
+      <div class="header-content">
+        <div id="header-title" class="header-title">MurMeteo</div>
+        <div id="header-badge" class="header-badge">Actualizando...</div>
+      </div>
+    </header>
+
+    <div id="offline-banner" class="offline-banner">
+      Sin conexión - Mostrando datos guardados
+    </div>
+
+    <div id="ptr-container">
+      <div class="ptr-content">
+        <svg id="ptr-icon" class="ptr-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+        <span id="ptr-text">Tira para refrescar</span>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <div id="main-loader">
+        <div class="loader-spinner"></div>
+      </div>
+      
+      <div id="data-container" style="display: none;">
+        <div class="top-card">
+          <div id="top-location" class="top-card-location">📍 Murcia</div>
+          <div id="top-temp" class="top-card-temp">--°</div>
+          <div id="top-desc" class="top-card-desc">--</div>
+          <div class="top-card-stats">
+            <span id="top-wind">💨 -- km/h</span>
+            <span id="top-minmax">🌡️ --° / --°</span>
+          </div>
+        </div>
+
+        <div id="hourly-list" class="hourly-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </main>
+
+    <div id="pwa-prompt">
+      <div id="pwa-text" class="pwa-text">Instala MurMeteo para un acceso más rápido</div>
+      <button id="pwa-btn" class="pwa-btn">Añadir a Inicio</button>
+    </div>
+  </div>
+
+  <script src="./aemetService.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

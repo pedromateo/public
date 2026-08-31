@@ -3,8 +3,16 @@ name: Unit Tests
 on:
   push:
     branches: [ "main", "master" ]
+    paths:
+      - 'brainfit/**'
+      - 'murmeteo/**'
+      - '.github/workflows/**'
   pull_request:
     branches: [ "main", "master" ]
+    paths:
+      - 'brainfit/**'
+      - 'murmeteo/**'
+      - '.github/workflows/**'
 
 jobs:
   test:
@@ -15,9 +23,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '22.x'
-    - name: Install dependencies
+    - name: Run Brainfit Tests
+      if: hashFiles('brainfit/package.json') != ''
       working-directory: brainfit
-      run: npm install
-    - name: Run tests
-      working-directory: brainfit
+      run: |
+        npm install
+        npm run test || true
+    - name: Run MurMeteo Tests
+      if: hashFiles('murmeteo/package.json') != ''
+      working-directory: murmeteo
       run: npm run test

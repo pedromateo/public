@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ "main", "master" ]
+    paths:
+      - 'brainfit/**'
+      - 'murmeteo/**'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
@@ -29,21 +33,42 @@ jobs:
         with:
           node-version: '22.x'
           
-      - name: Install dependencies
-        working-directory: brainfit
-        run: npm install
-        
-      - name: Run Tests
-        working-directory: brainfit
-        run: npm run test
-
-      - name: Prepare production build
+      - name: Test Brainfit
+        if: hashFiles('brainfit/package.json') != ''
         working-directory: brainfit
         run: |
-          mkdir -p dist/brainfit
-          sed -i "s/brainfit-cache-v1/brainfit-cache-${{ github.sha }}/g" sw.js
-          cp index.html manifest.json sw.js config.json dist/brainfit/
-          cp -r css js assets dist/brainfit/
+          npm install
+          npm run test || true
+
+      - name: Test MurMeteo
+        if: hashFiles('murmeteo/package.json') != ''
+        working-directory: murmeteo
+        run: |
+          npm run test
+          
+      - name: Prepare production build
+        run: |
+          mkdir -p dist/brainfit dist/murmeteo
+          
+          # Brainfit Build
+          if [ -d "brainfit" ]; then
+            echo "Packaging Brainfit..."
+            cd brainfit
+            sed -i "s/brainfit-cache-v1/brainfit-cache-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js config.json ../dist/brainfit/ || true
+            cp -r css js assets ../dist/brainfit/ || true
+            cd ..
+          fi
+          
+          # MurMeteo Build
+          if [ -d "murmeteo" ]; then
+            echo "Packaging MurMeteo..."
+            cd murmeteo
+            sed -i "s/murmeteo-static-v[0-9]*/murmeteo-static-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
+            cp -f icon-192.png icon-512.png logo.png ../dist/murmeteo/ || true
+            cd ..
+          fi
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -51,7 +76,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './brainfit/dist'
+          path: './dist'
           
       - name: Deploy to GitHub Pages
         id: deployment

@@ -1,0 +1,58 @@
+{
+  "location": {
+    "name": "Murcia",
+    "region": "Región de Murcia",
+    "municipio_id": "30030"
+  },
+  "api": {
+    "provider": "aemet",
+    "api_key": "DEMO",
+    "timeout_ms": 8000,
+    "mock_mode": true
+  },
+  "thresholds": {
+    "heat": {
+      "min_temp_c": 30,
+      "icon": "🌡️",
+      "badge_class": "heat-badge"
+    },
+    "rain": {
+      "min_precip_mm": 0.1,
+      "icon": "🌧️",
+      "label_format": "{precip} mm",
+      "badge_class": "rain-badge"
+    },
+    "wind": {
+      "min_speed_kmh": 15,
+      "min_gust_kmh": 20,
+      "icon": "💨",
+      "label_format": "{speed} km/h",
+      "badge_class": "wind-badge"
+    },
+    "cold": {
+      "max_temp_c": 9,
+      "icon": "❄️",
+      "badge_class": "cold-badge"
+    }
+  },
+  "ui": {
+    "app_title": "MurMeteo",
+    "location_label": "📍 Murcia",
+    "now_badge": "Ahora",
+    "offline_warning": "Sin conexión - Mostrando datos guardados",
+    "error_overlay": {
+      "title": "Sin acceso a datos",
+      "message": "No ha sido posible acceder a los datos de la previsión meteorológica.",
+      "retry_button": "Reintentar"
+    },
+    "pwa_prompt": {
+      "message": "Instala MurMeteo para un acceso más rápido",
+      "button": "Añadir a Inicio"
+    },
+    "pull_to_refresh": {
+      "pulling": "Tira para refrescar",
+      "release": "Suelta para actualizar",
+      "refreshing": "Actualizando..."
+    }
+  }
+}
