@@ -92,7 +92,7 @@ async function initApp() {
 
 function setupUIFromConfig() {
   document.getElementById('header-title').textContent = config.ui.app_title;
-  elements.topLocation.textContent = config.ui.location_label;
+  elements.topLocation.innerHTML = config.ui.location_label;
   document.getElementById('error-title').textContent = config.ui.error_overlay.title;
   document.getElementById('error-desc').textContent = config.ui.error_overlay.message;
   elements.btnRetry.textContent = config.ui.error_overlay.retry_button;
@@ -127,8 +127,8 @@ function renderApp(data, isOffline) {
   // Render Top Card
   elements.topTemp.textContent = `${data.current.temp}°`;
   elements.topDesc.textContent = `${data.current.desc}`;
-  elements.topWind.textContent = `💨 ${data.current.wind} km/h`;
-  elements.topMinMax.textContent = `🌡️ ${data.current.temp_min}° / ${data.current.temp_max}°`;
+  elements.topWind.innerHTML = `<svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2'></path></svg> ${data.current.wind} km/h`;
+  elements.topMinMax.innerHTML = `<svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z'></path></svg> ${data.current.temp_min}° / ${data.current.temp_max}°`;
   
   // Render Hourly List
   elements.hourlyList.innerHTML = '';
