@@ -144,22 +144,30 @@ function renderApp(data, isOffline) {
   
   let currentDay = -1;
   const now = new Date();
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
   
   data.hourly.forEach((hourData, index) => {
     // Parse date from data or construct if mock
     const itemDate = new Date(hourData.date);
     const day = itemDate.getDate();
+    const itemMidnight = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate()).getTime();
     
     // Add day separator if day changes
     if (currentDay !== -1 && day !== currentDay) {
       const sep = document.createElement('div');
       sep.className = 'day-separator';
       
-      const isTomorrow = (day === now.getDate() + 1);
+      const diffDays = Math.round((itemMidnight - todayMidnight) / (1000 * 60 * 60 * 24));
       const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
       const dayName = days[itemDate.getDay()];
       
-      sep.textContent = isTomorrow ? `Mañana - ${dayName} ${day}` : `${dayName} ${day}`;
+      if (diffDays === 1) {
+        sep.textContent = `Mañana · ${dayName} ${day}`;
+      } else if (diffDays === 2) {
+        sep.textContent = `Pasado mañana · ${dayName} ${day}`;
+      } else {
+        sep.textContent = `${dayName} ${day}`;
+      }
       elements.hourlyList.appendChild(sep);
     }
     currentDay = day;

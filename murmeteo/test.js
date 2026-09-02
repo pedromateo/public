@@ -40,7 +40,7 @@ const AemetService = require('./aemetService.js');
 const service = new AemetService({ ...config, api: { ...config.api, mock_mode: true } });
 
 service.getForecast().then(data => {
-  console.assert(data.hourly && data.hourly.length === 48, "Error: Deberían generarse 48 horas de mock");
+  console.assert(data.hourly && data.hourly.length === 56, "Error: Deberían generarse 56 horas de mock");
   const temps = data.hourly.map(h => h.temp);
   const minT = Math.min(...temps);
   const maxT = Math.max(...temps);

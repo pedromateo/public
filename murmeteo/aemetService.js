@@ -308,7 +308,7 @@ class AemetService {
     for (let i = 0; i < data.hourly.time.length; i++) {
       const dt = new Date(data.hourly.time[i]);
       if (dt.getTime() < currentHourTime - 3600000) continue; // Skip past hours
-      if (hourlyList.length >= 48) break; // Limit to 48h
+      if (hourlyList.length >= 56) break; // Limit to full AEMET window (56h)
       
       const hour = dt.getHours();
       const temp = Math.round(data.hourly.temperature_2m[i]);
@@ -354,7 +354,7 @@ class AemetService {
     };
   }
 
-  // Generates 48 hours of mock data aligned with realistic Murcia AEMET observations
+  // Generates 56 hours of mock data aligned with realistic Murcia AEMET observations
   async _generateMockData() {
     // Simulate slight network delay
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -383,7 +383,7 @@ class AemetService {
       { desc: "Lluvia débil", icon: "🌦️" }
     ];
 
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 56; i++) {
       let d = new Date();
       d.setHours(currentHour + i);
       let h = d.getHours();
