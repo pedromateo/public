@@ -9,7 +9,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/android/mipmap-xxxhdpi/ic_launcher.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/ios/Icon-App-60x60@3x.png">
   
   <link rel="stylesheet" href="./style.css">
   
@@ -35,8 +36,22 @@
   <div class="max-w-md">
     <header>
       <div class="header-content">
-        <div id="header-title" class="header-title">MurMeteo</div>
-        <div id="header-badge" class="header-badge">Actualizando...</div>
+        <div id="header-title" class="header-title">
+          <img src="./icons/android/mipmap-xxhdpi/ic_launcher.png" alt="MurMeteo Icon" class="header-logo">
+          <span id="header-title-text">MurMeteo</span>
+        </div>
+        <div class="header-actions">
+          <div id="header-badge" class="header-badge">Actualizando...</div>
+          <button id="btn-share" class="btn-share" aria-label="Compartir" title="Compartir">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -67,6 +82,7 @@
           <div class="top-card-stats">
             <span id="top-wind"><svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2'></path></svg> -- km/h</span>
             <span id="top-minmax"><svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z'></path></svg> --° / --°</span>
+            <span id="top-sun"><svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M17 18a5 5 0 0 0-10 0'></path><line x1='12' y1='2' x2='12' y2='9'></line><line x1='4.22' y1='10.22' x2='5.64' y2='11.64'></line><line x1='1' y1='18' x2='3' y2='18'></line><line x1='21' y1='18' x2='23' y2='18'></line><line x1='18.36' y1='11.64' x2='19.78' y2='10.22'></line><line x1='23' y1='22' x2='1' y2='22'></line><polyline points='8 6 12 2 16 6'></polyline></svg> --:-- / --:--</span>
           </div>
         </div>
 
@@ -81,6 +97,8 @@
       <button id="pwa-btn" class="pwa-btn">Añadir a Inicio</button>
     </div>
   </div>
+
+  <div id="toast" class="toast"></div>
 
   <script src="./aemetService.js"></script>
   <script src="./app.js"></script>

@@ -24,6 +24,7 @@ const elements = {
   topDesc: document.getElementById('top-desc'),
   topWind: document.getElementById('top-wind'),
   topMinMax: document.getElementById('top-minmax'),
+  topSun: document.getElementById('top-sun'),
   
   // PWA
   pwaPrompt: document.getElementById('pwa-prompt'),
@@ -37,7 +38,7 @@ const elements = {
 
 async function loadConfig() {
   try {
-    const res = await fetch('./config.json');
+    const res = await fetch('./config.json', { cache: 'no-store' });
     config = await res.json();
     return true;
   } catch (err) {
@@ -91,7 +92,12 @@ async function initApp() {
 }
 
 function setupUIFromConfig() {
-  document.getElementById('header-title').textContent = config.ui.app_title;
+  const titleTextEl = document.getElementById('header-title-text');
+  if (titleTextEl) {
+    titleTextEl.textContent = config.ui.app_title;
+  } else {
+    document.getElementById('header-title').textContent = config.ui.app_title;
+  }
   elements.topLocation.innerHTML = config.ui.location_label;
   document.getElementById('error-title').textContent = config.ui.error_overlay.title;
   document.getElementById('error-desc').textContent = config.ui.error_overlay.message;
@@ -129,6 +135,9 @@ function renderApp(data, isOffline) {
   elements.topDesc.textContent = `${data.current.desc}`;
   elements.topWind.innerHTML = `<svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2'></path></svg> ${data.current.wind} km/h`;
   elements.topMinMax.innerHTML = `<svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z'></path></svg> ${data.current.temp_min}° / ${data.current.temp_max}°`;
+  if (elements.topSun) {
+    elements.topSun.innerHTML = `<svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M17 18a5 5 0 0 0-10 0'></path><line x1='12' y1='2' x2='12' y2='9'></line><line x1='4.22' y1='10.22' x2='5.64' y2='11.64'></line><line x1='1' y1='18' x2='3' y2='18'></line><line x1='21' y1='18' x2='23' y2='18'></line><line x1='18.36' y1='11.64' x2='19.78' y2='10.22'></line><line x1='23' y1='22' x2='1' y2='22'></line><polyline points='8 6 12 2 16 6'></polyline></svg> ${data.current.orto || '--:--'} / ${data.current.ocaso || '--:--'}`;
+  }
   
   // Render Hourly List
   elements.hourlyList.innerHTML = '';
@@ -294,6 +303,52 @@ elements.pwaBtn.addEventListener('click', async () => {
     deferredPrompt = null;
   }
 });
+
+// Toast Notification Helper
+let toastTimeout;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
+// Native OS Share & Clipboard Fallback
+async function handleShare() {
+  const shareData = {
+    title: config?.ui?.app_title || 'MurMeteo',
+    text: 'Consulta la previsión meteorológica de Murcia en tiempo real con MurMeteo ☀️🌧️',
+    url: window.location.href
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.warn('Error al compartir:', err);
+      }
+    }
+  } else if (navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      showToast('¡Enlace copiado al portapapeles!');
+    } catch (err) {
+      showToast('No se pudo copiar el enlace');
+    }
+  } else {
+    showToast(window.location.href);
+  }
+}
+
+const btnShare = document.getElementById('btn-share');
+if (btnShare) {
+  btnShare.addEventListener('click', handleShare);
+}
 
 // Boot
 window.addEventListener('DOMContentLoaded', initApp);

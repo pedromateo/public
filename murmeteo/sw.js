@@ -1,5 +1,5 @@
-const CACHE_NAME = 'murmeteo-static-v3';
-const DATA_CACHE_NAME = 'murmeteo-data-v1';
+const CACHE_NAME = 'murmeteo-static-v5';
+const DATA_CACHE_NAME = 'murmeteo-data-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -8,9 +8,14 @@ const ASSETS = [
   './app.js',
   './aemetService.js',
   './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  './logo.png'
+  './icons/original_1024.png',
+  './icons/android/play_store_512.png',
+  './icons/android/mipmap-xxxhdpi/ic_launcher.png',
+  './icons/android/mipmap-xxhdpi/ic_launcher.png',
+  './icons/android/mipmap-xhdpi/ic_launcher.png',
+  './icons/android/mipmap-hdpi/ic_launcher.png',
+  './icons/android/mipmap-mdpi/ic_launcher.png',
+  './icons/ios/Icon-App-60x60@3x.png'
 ];
 
 self.addEventListener('install', event => {
@@ -34,19 +39,21 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // Data API calls (AEMET or mock endpoints)
-  if (url.hostname.includes('aemet.es') || url.hostname.includes('open-meteo')) {
+  // Data API calls (Backend /api/ endpoints, AEMET, Open-Meteo) -> Network first with data fallback
+  if (url.pathname.includes('/api/') || url.hostname.includes('aemet.es') || url.hostname.includes('open-meteo')) {
     event.respondWith(
       fetch(event.request)
         .then(networkResponse => {
-          const responseToCache = networkResponse.clone();
-          caches.open(DATA_CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(DATA_CACHE_NAME).then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+          }
           return networkResponse;
         })
         .catch(async () => {
-          // If network fails, try to return cached data
+          // If network fails, return cached forecast if available
           const cachedResponse = await caches.match(event.request);
           if (cachedResponse) {
              return cachedResponse;
@@ -55,7 +62,7 @@ self.addEventListener('fetch', event => {
         })
     );
   } else {
-    // Static assets
+    // Static assets (Network first for fresh config and scripts, fallback to cache)
     event.respondWith(
       fetch(event.request)
         .then(networkResponse => {
