@@ -329,7 +329,7 @@ function showToast(message) {
 async function handleShare() {
   const shareData = {
     title: config?.ui?.app_title || 'MurMeteo',
-    text: 'Consulta la previsión meteorológica de Murcia en tiempo real con MurMeteo ☀️🌧️',
+    text: 'MurMeteo: la previsión meteorológica para Murcia y nada más ☀️🌧️ (con datos AEMET)',
     url: window.location.href
   };
 
