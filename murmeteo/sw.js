@@ -1,4 +1,4 @@
-const CACHE_NAME = 'murmeteo-static-v8';
+const CACHE_NAME = 'murmeteo-static-v9';
 const DATA_CACHE_NAME = 'murmeteo-data-v2';
 const ASSETS = [
   './',
@@ -8,6 +8,8 @@ const ASSETS = [
   './app.js',
   './aemetService.js',
   './manifest.json',
+  './icons/icon.svg',
+  './icons/original_1024.svg',
   './icons/original_1024.png',
   './icons/android/play_store_512.png',
   './icons/android/mipmap-xxxhdpi/ic_launcher.png',
