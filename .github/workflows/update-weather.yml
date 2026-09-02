@@ -23,13 +23,12 @@ jobs:
     - name: Fetch AEMET Data
       env:
         AEMET_API_KEY: ${{ secrets.AEMET_API_KEY }}
+      working-directory: murmeteo
       run: node fetch-aemet.js
 
     - name: Commit and Push changes
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add forecast.json
-        # Solo hace commit si hay cambios reales en el json
-        git diff --quiet && git diff --staged --quiet || git commit -m "Actualizar pronóstico AEMET [skip ci]"
-        git push
+        git add murmeteo/forecast.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar pronóstico AEMET" && git push)

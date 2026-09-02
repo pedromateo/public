@@ -66,7 +66,8 @@ jobs:
             cd murmeteo
             sed -i "s/murmeteo-static-v[0-9]*/murmeteo-static-${{ github.sha }}/g" sw.js || true
             cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
-            cp -f icon-192.png icon-512.png logo.png ../dist/murmeteo/ || true
+            cp -r icons ../dist/murmeteo/ || true
+            cp -f forecast.json ../dist/murmeteo/ || true
             cd ..
           fi
           
