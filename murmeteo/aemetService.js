@@ -4,19 +4,19 @@ class AemetService {
   }
 
   async getForecast() {
-    // 1. Si estamos en el navegador, consultar el backend seguro /api/forecast
+    // 1. Intentar cargar el archivo estático (forecast.json) generado por GitHub Actions
     if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
       try {
-        const res = await fetch('./api/forecast', { cache: 'no-store' });
+        // Cache-busting para obligar al Service Worker a usar la regla NetworkFirst en lugar de la caché del navegador
+        const cacheBuster = Date.now();
+        const res = await fetch(`./forecast.json?t=${cacheBuster}`);
         if (res.ok) {
           const data = await res.json();
-          if (data && !data.error) {
-            return data;
-          }
-          console.warn("Backend /api/forecast devolvió error:", data.error);
+          // El archivo forecast.json guarda la respuesta cruda de AEMET
+          return this._parseAemetResponse(data);
         }
       } catch (e) {
-        console.warn("No se pudo conectar con /api/forecast:", e);
+        console.info("No se encontró forecast.json estático, usando método alternativo.");
       }
     }
 

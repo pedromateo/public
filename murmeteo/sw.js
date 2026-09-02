@@ -1,4 +1,4 @@
-const CACHE_NAME = 'murmeteo-static-v6';
+const CACHE_NAME = 'murmeteo-static-v7';
 const DATA_CACHE_NAME = 'murmeteo-data-v2';
 const ASSETS = [
   './',
@@ -39,8 +39,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // Data API calls (Backend /api/ endpoints, AEMET, Open-Meteo) -> Network first with data fallback
-  if (url.pathname.includes('/api/') || url.hostname.includes('aemet.es') || url.hostname.includes('open-meteo')) {
+  // Data API calls (Backend /api/ endpoints, AEMET, Open-Meteo, forecast.json static) -> Network first with data fallback
+  if (url.pathname.includes('/api/') || url.hostname.includes('aemet.es') || url.hostname.includes('open-meteo') || url.pathname.endsWith('forecast.json')) {
     event.respondWith(
       fetch(event.request)
         .then(networkResponse => {
