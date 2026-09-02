@@ -162,9 +162,9 @@ function renderApp(data, isOffline) {
       const dayName = days[itemDate.getDay()];
       
       if (diffDays === 1) {
-        sep.textContent = `Mañana · ${dayName} ${day}`;
+        sep.textContent = `${dayName} ${day} (Mañana)`;
       } else if (diffDays === 2) {
-        sep.textContent = `Pasado mañana · ${dayName} ${day}`;
+        sep.textContent = `${dayName} ${day}`;
       } else {
         sep.textContent = `${dayName} ${day}`;
       }
