@@ -21,10 +21,17 @@ class AemetService {
     }
 
     const apiKey = this.config.api?.api_key;
-    const isMock = this.config.api?.mock_mode === true || (!apiKey || apiKey === 'DEMO' || apiKey.trim() === '');
+    const isMock = this.config.api?.mock_mode === true;
+    const needsFallback = (!apiKey || apiKey === 'DEMO' || apiKey.trim() === '') && !isMock;
     
     if (isMock) {
       return this._generateMockData();
+    }
+
+    // Fallback a Open-Meteo (Sin API Key) si estamos en Github Pages sin clave
+    if (needsFallback) {
+      console.info("Usando Open-Meteo como fallback (No AEMET API Key detectada)");
+      return this._fetchOpenMeteoFallback();
     }
 
     try {
@@ -267,6 +274,84 @@ class AemetService {
     }
 
     return { desc, icon };
+  }
+
+  // Generates data from Open-Meteo as a free fallback when no AEMET API key is available (e.g., GitHub Pages)
+  async _fetchOpenMeteoFallback() {
+    // Murcia coords
+    const lat = 37.9870;
+    const lon = -1.1300;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,precipitation,wind_speed_10m,wind_gusts_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Europe%2FMadrid`;
+    
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error("Error obteniendo datos de Open-Meteo");
+    
+    const data = await res.json();
+    const hourlyList = [];
+    
+    const currentHourTime = new Date().getTime();
+    
+    // Mapeo simple de WMO codes a descripciones de AEMET
+    const codeToDesc = (code) => {
+      if (code === 0) return "Despejado";
+      if (code === 1 || code === 2) return "Poco nuboso";
+      if (code === 3) return "Cubierto";
+      if (code === 45 || code === 48) return "Niebla";
+      if (code >= 51 && code <= 55) return "Llovizna";
+      if (code >= 61 && code <= 65) return "Lluvia";
+      if (code >= 71 && code <= 77) return "Nieve";
+      if (code >= 80 && code <= 82) return "Chubasco";
+      if (code >= 95) return "Tormenta";
+      return "Despejado";
+    };
+
+    for (let i = 0; i < data.hourly.time.length; i++) {
+      const dt = new Date(data.hourly.time[i]);
+      if (dt.getTime() < currentHourTime - 3600000) continue; // Skip past hours
+      if (hourlyList.length >= 48) break; // Limit to 48h
+      
+      const hour = dt.getHours();
+      const temp = Math.round(data.hourly.temperature_2m[i]);
+      const precip = data.hourly.precipitation[i] || 0;
+      const desc = codeToDesc(data.hourly.weather_code[i]);
+      
+      const { icon } = this._resolveCondition({ descripcion: desc, value: "" }, hour, precip);
+      
+      hourlyList.push({
+        date: dt,
+        hour: hour,
+        temp: temp,
+        feels_like: Math.round(data.hourly.apparent_temperature[i]),
+        desc: desc,
+        icon: icon,
+        precip: precip,
+        windSpeed: Math.round(data.hourly.wind_speed_10m[i]),
+        windGust: Math.round(data.hourly.wind_gusts_10m[i])
+      });
+    }
+
+    const first = hourlyList[0];
+    const today = data.daily;
+    const formatTime = (isoStr) => {
+      if (!isoStr) return "--:--";
+      const d = new Date(isoStr);
+      return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+    };
+
+    return {
+      location: this.config.location?.name || "Murcia",
+      current: {
+        temp: first.temp,
+        feels_like: first.feels_like,
+        desc: first.desc,
+        wind: first.windSpeed,
+        temp_min: Math.round(today.temperature_2m_min[0]),
+        temp_max: Math.round(today.temperature_2m_max[0]),
+        orto: formatTime(today.sunrise[0]),
+        ocaso: formatTime(today.sunset[0])
+      },
+      hourly: hourlyList
+    };
   }
 
   // Generates 48 hours of mock data aligned with realistic Murcia AEMET observations
