@@ -9,7 +9,13 @@ class AemetService {
       try {
         // Cache-busting para obligar al Service Worker a usar la regla NetworkFirst en lugar de la caché del navegador
         const cacheBuster = Date.now();
-        const res = await fetch(`./forecast.json?t=${cacheBuster}`);
+        const res = await fetch(`./forecast.json?t=${cacheBuster}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
         if (res.ok) {
           const data = await res.json();
           // El archivo forecast.json guarda la respuesta cruda de AEMET

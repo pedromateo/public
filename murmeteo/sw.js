@@ -1,5 +1,5 @@
-const CACHE_NAME = 'murmeteo-static-v9';
-const DATA_CACHE_NAME = 'murmeteo-data-v2';
+const CACHE_NAME = 'murmeteo-static-v10';
+const DATA_CACHE_NAME = 'murmeteo-data-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -49,14 +49,17 @@ self.addEventListener('fetch', event => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
             caches.open(DATA_CACHE_NAME).then(cache => {
-              cache.put(event.request, responseToCache);
+              // Store without search parameters to prevent cache bloating and allow ignoreSearch to work reliably
+              const cacheKey = url.pathname.endsWith('forecast.json') ? new Request(url.origin + url.pathname) : event.request;
+              cache.put(cacheKey, responseToCache);
             });
           }
           return networkResponse;
         })
         .catch(async () => {
           // If network fails, return cached forecast if available
-          const cachedResponse = await caches.match(event.request);
+          const cacheKey = url.pathname.endsWith('forecast.json') ? new Request(url.origin + url.pathname) : event.request;
+          const cachedResponse = await caches.match(cacheKey, { ignoreSearch: true });
           if (cachedResponse) {
              return cachedResponse;
           }
