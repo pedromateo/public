@@ -66,6 +66,11 @@ async function fetchAemet() {
     
     const forecastData = await dataRes.json();
     
+    // Guardar fecha y hora exacta de creación del fichero
+    if (Array.isArray(forecastData) && forecastData.length > 0) {
+        forecastData[0].ficheroCreado = new Date().toISOString();
+    }
+    
     const outputPath = path.join(__dirname, 'forecast.json');
     fs.writeFileSync(outputPath, JSON.stringify(forecastData, null, 2));
     console.log('Pronóstico guardado exitosamente en forecast.json');

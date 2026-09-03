@@ -114,21 +114,31 @@ function showCriticalError() {
 }
 
 function renderApp(data, isOffline) {
+  // Obtener la hora a la que se creó el fichero de forecast (datos más recientes)
+  let timeStr = "";
+  if (data && data.updatedAt) {
+    const d = new Date(data.updatedAt);
+    if (!isNaN(d.getTime())) {
+      timeStr = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+    }
+  }
+  if (!timeStr) {
+    const d = new Date();
+    timeStr = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+  }
+
   if (isOffline) {
     elements.offlineBanner.classList.add('active');
-    elements.headerBadge.textContent = "Offline";
+    elements.headerBadge.textContent = "Offline (" + timeStr + ")";
     elements.headerBadge.style.background = "#fef3c7";
     elements.headerBadge.style.color = "#92400e";
   } else {
     elements.offlineBanner.classList.remove('active');
-    
-    // Format time
-    const d = new Date();
-    const timeStr = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
     elements.headerBadge.textContent = "Act. " + timeStr;
     elements.headerBadge.style.background = "#dbeafe";
     elements.headerBadge.style.color = "#1e40af";
   }
+  elements.headerBadge.title = "Previsión generada a las " + timeStr;
   
   // Render Top Card
   elements.topTemp.textContent = `${data.current.temp}°`;

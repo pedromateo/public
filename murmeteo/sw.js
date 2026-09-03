@@ -1,4 +1,4 @@
-const CACHE_NAME = 'murmeteo-static-v10';
+const CACHE_NAME = 'murmeteo-static-v11';
 const DATA_CACHE_NAME = 'murmeteo-data-v3';
 const ASSETS = [
   './',

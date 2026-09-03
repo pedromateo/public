@@ -17,9 +17,10 @@ class AemetService {
           }
         });
         if (res.ok) {
+          const lastModified = res.headers.get('last-modified');
           const data = await res.json();
           // El archivo forecast.json guarda la respuesta cruda de AEMET
-          return this._parseAemetResponse(data);
+          return this._parseAemetResponse(data, lastModified);
         }
       } catch (e) {
         console.info("No se encontró forecast.json estático, usando método alternativo.");
@@ -100,7 +101,7 @@ class AemetService {
   }
 
   // Parse AEMET OpenData JSON response into MurMeteo forecast model
-  _parseAemetResponse(rawData) {
+  _parseAemetResponse(rawData, fileCreatedAt) {
     if (!Array.isArray(rawData) || rawData.length === 0) {
       throw new Error("Formato de respuesta de AEMET no reconocido");
     }
@@ -108,6 +109,7 @@ class AemetService {
     const root = rawData[0];
     const dias = root.prediccion?.dia || [];
     const locationName = root.nombre || this.config.location.name || "Murcia";
+    const updatedAt = root.ficheroCreado || fileCreatedAt || root.elaborado || null;
     
     const now = new Date();
     const currentHourTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours()).getTime();
@@ -220,6 +222,7 @@ class AemetService {
 
     return {
       location: locationName,
+      updatedAt: updatedAt,
       current: {
         temp: first.temp,
         feels_like: first.feels_like,
@@ -346,6 +349,7 @@ class AemetService {
 
     return {
       location: this.config.location?.name || "Murcia",
+      updatedAt: new Date().toISOString(),
       current: {
         temp: first.temp,
         feels_like: first.feels_like,
@@ -368,6 +372,7 @@ class AemetService {
     const currentHour = new Date().getHours();
     const mockData = {
       location: this.config.location?.name || "Murcia",
+      updatedAt: new Date().toISOString(),
       current: {
         temp: 0,
         feels_like: 0,
