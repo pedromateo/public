@@ -114,17 +114,27 @@ function showCriticalError() {
 }
 
 function renderApp(data, isOffline) {
-  // Obtener la hora a la que se creó el fichero de forecast (datos más recientes)
+  // Hora almacenada en el fichero de previsión (AEMET elaborado / creación)
   let timeStr = "";
   if (data && data.updatedAt) {
-    const d = new Date(data.updatedAt);
-    if (!isNaN(d.getTime())) {
-      timeStr = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+    if (typeof data.updatedAt === 'string' && data.updatedAt.includes(':') && data.updatedAt.length <= 5) {
+      timeStr = data.updatedAt;
+    } else {
+      const match = String(data.updatedAt).match(/T?(\d{1,2}):(\d{2})/);
+      if (match) {
+        timeStr = match[1].padStart(2, '0') + ':' + match[2];
+      } else {
+        const d = new Date(data.updatedAt);
+        if (!isNaN(d.getTime())) {
+          timeStr = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+        }
+      }
     }
   }
+  
+  // Si no hay hora en el fichero, mostrar indicador neutral, nunca la hora del reloj del dispositivo
   if (!timeStr) {
-    const d = new Date();
-    timeStr = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+    timeStr = "--:--";
   }
 
   if (isOffline) {

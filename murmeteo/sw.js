@@ -1,12 +1,12 @@
-const CACHE_NAME = 'murmeteo-static-v11';
-const DATA_CACHE_NAME = 'murmeteo-data-v3';
+const CACHE_NAME = 'murmeteo-static-v12';
+const DATA_CACHE_NAME = 'murmeteo-data-v4';
 const ASSETS = [
   './',
   './index.html',
-  './style.css',
+  './style.css?v=12',
   './config.json',
-  './app.js',
-  './aemetService.js',
+  './app.js?v=12',
+  './aemetService.js?v=12',
   './manifest.json',
   './icons/icon.svg',
   './icons/original_1024.svg',
@@ -21,8 +21,20 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
   self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return Promise.all(
+        ASSETS.map(url => {
+          return fetch(url, { cache: 'reload' })
+            .then(res => {
+              if (res.ok) return cache.put(url, res);
+            })
+            .catch(err => console.warn('Precache error:', url, err));
+        })
+      );
+    })
+  );
 });
 
 self.addEventListener('activate', event => {
@@ -33,9 +45,8 @@ self.addEventListener('activate', event => {
           return caches.delete(key);
         }
       })
-    ))
+    )).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
@@ -67,9 +78,9 @@ self.addEventListener('fetch', event => {
         })
     );
   } else {
-    // Static assets (Network first for fresh config and scripts, fallback to cache)
+    // Static assets (Network first with no-cache validation to prevent stale files, fallback to cache)
     event.respondWith(
-      fetch(event.request)
+      fetch(event.request, { cache: 'no-cache' })
         .then(networkResponse => {
           if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
             const responseToCache = networkResponse.clone();

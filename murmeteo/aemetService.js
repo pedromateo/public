@@ -109,7 +109,32 @@ class AemetService {
     const root = rawData[0];
     const dias = root.prediccion?.dia || [];
     const locationName = root.nombre || this.config.location.name || "Murcia";
-    const updatedAt = root.ficheroCreado || fileCreatedAt || root.elaborado || null;
+    
+    // Extraer la hora exacta almacenada en el fichero (elaborado por AEMET o ficheroCreado)
+    let updatedAt = null;
+    if (root.elaborado) {
+      const match = root.elaborado.match(/T?(\d{1,2}):(\d{2})/);
+      if (match) {
+        updatedAt = match[1].padStart(2, '0') + ':' + match[2];
+      }
+    }
+    if (!updatedAt && root.ficheroCreado) {
+      const match = root.ficheroCreado.match(/T?(\d{1,2}):(\d{2})/);
+      if (match) {
+        updatedAt = match[1].padStart(2, '0') + ':' + match[2];
+      } else {
+        const d = new Date(root.ficheroCreado);
+        if (!isNaN(d.getTime())) {
+          updatedAt = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+        }
+      }
+    }
+    if (!updatedAt && fileCreatedAt) {
+      const d = new Date(fileCreatedAt);
+      if (!isNaN(d.getTime())) {
+        updatedAt = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+      }
+    }
     
     const now = new Date();
     const currentHourTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours()).getTime();

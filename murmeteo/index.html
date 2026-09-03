@@ -13,12 +13,22 @@
   <link rel="alternate icon" type="image/png" sizes="192x192" href="./icons/android/mipmap-xxxhdpi/ic_launcher.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/ios/Icon-App-60x60@3x.png">
   
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=12">
   
   <script>
     if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(e => console.warn('SW falló:', e));
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          reg.update().catch(() => {});
+        }).catch(e => console.warn('SW falló:', e));
+      });
+
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
       });
     }
   </script>
@@ -101,7 +111,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <script src="./aemetService.js"></script>
-  <script src="./app.js"></script>
+  <script src="./aemetService.js?v=12"></script>
+  <script src="./app.js?v=12"></script>
 </body>
 </html>
