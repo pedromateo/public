@@ -1,12 +1,12 @@
-const CACHE_NAME = 'murmeteo-static-v12';
-const DATA_CACHE_NAME = 'murmeteo-data-v4';
+const CACHE_NAME = 'murmeteo-static-v13';
+const DATA_CACHE_NAME = 'murmeteo-data-v5';
 const ASSETS = [
   './',
   './index.html',
-  './style.css?v=12',
+  './style.css?v=13',
   './config.json',
-  './app.js?v=12',
-  './aemetService.js?v=12',
+  './app.js?v=13',
+  './aemetService.js?v=13',
   './manifest.json',
   './icons/icon.svg',
   './icons/original_1024.svg',

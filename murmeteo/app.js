@@ -16,7 +16,19 @@ const elements = {
   offlineBanner: document.getElementById('offline-banner'),
   btnRetry: document.getElementById('btn-retry'),
   headerBadge: document.getElementById('header-badge'),
+  btnInfo: document.getElementById('btn-info'),
+  btnShare: document.getElementById('btn-share'),
   hourlyList: document.getElementById('hourly-list'),
+  
+  // Modal de instalación
+  infoModal: document.getElementById('info-modal'),
+  modalClose: document.getElementById('modal-close'),
+  modalBtnOk: document.getElementById('modal-btn-ok'),
+  modalBadge: document.getElementById('modal-badge'),
+  modalTitle: document.getElementById('modal-title'),
+  modalInstructions: document.getElementById('modal-instructions'),
+  modalInstallWrapper: document.getElementById('modal-install-wrapper'),
+  modalInstallBtn: document.getElementById('modal-install-btn'),
   
   // Top card
   topLocation: document.getElementById('top-location'),
@@ -373,9 +385,195 @@ async function handleShare() {
   }
 }
 
-const btnShare = document.getElementById('btn-share');
-if (btnShare) {
-  btnShare.addEventListener('click', handleShare);
+if (elements.btnShare) {
+  elements.btnShare.addEventListener('click', handleShare);
+}
+
+// Modal de Información / Instrucciones de Instalación
+function getInstallInstructions() {
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+  
+  const isFirefox = /Firefox|FxiOS/i.test(ua);
+  const isChrome = (/Chrome|CriOS/i.test(ua) || /Chromium/i.test(ua)) && !/Edg/i.test(ua);
+  const isSafari = /Safari/i.test(ua) && !isChrome && !isFirefox && !/Edg/i.test(ua);
+  const isEdge = /Edg/i.test(ua);
+
+  if (isIOS) {
+    if (isSafari) {
+      return {
+        badge: 'iOS · Safari',
+        title: 'Instalar en iPhone o iPad',
+        steps: [
+          'Pulsa el botón <strong>Compartir</strong> (icono de cuadro con flecha hacia arriba <span style="font-size:1.1em">⎋</span> en la barra inferior de Safari).',
+          'En el menú que aparece, desliza hacia abajo y pulsa en <strong>"Añadir a la pantalla de inicio"</strong> ➕.',
+          'Pulsa <strong>"Añadir"</strong> arriba a la derecha para confirmar.'
+        ]
+      };
+    } else if (isChrome) {
+      return {
+        badge: 'iOS · Chrome',
+        title: 'Instalar en iPhone o iPad',
+        steps: [
+          'Pulsa el botón <strong>Compartir</strong> o el menú de tres puntos (<strong>...</strong>) en la barra de navegación.',
+          'Selecciona la opción <strong>"Añadir a pantalla de inicio"</strong> ➕.',
+          'Pulsa <strong>"Añadir"</strong> para tener el acceso directo en tu pantalla.'
+        ]
+      };
+    } else if (isFirefox) {
+      return {
+        badge: 'iOS · Firefox',
+        title: 'Instalar en iPhone o iPad',
+        steps: [
+          'Toca el menú de tres líneas (<strong>☰</strong>) en la esquina inferior.',
+          'Toca en <strong>"Compartir"</strong> y luego en <strong>"Añadir a la pantalla de inicio"</strong> ➕.',
+          'Confirma pulsando <strong>"Añadir"</strong>.'
+        ]
+      };
+    } else {
+      return {
+        badge: 'iOS',
+        title: 'Instalar en iPhone o iPad',
+        steps: [
+          'Abre el menú de opciones o el botón <strong>Compartir</strong> de tu navegador.',
+          'Selecciona la opción <strong>"Añadir a la pantalla de inicio"</strong> ➕.',
+          'Confirma pulsando <strong>"Añadir"</strong>.'
+        ]
+      };
+    }
+  }
+
+  if (isAndroid) {
+    if (isFirefox) {
+      return {
+        badge: 'Android · Firefox',
+        title: 'Instalar en Android',
+        steps: [
+          'Toca el menú de tres puntos (<strong>⋮</strong>) en la barra del navegador.',
+          'Pulsa en <strong>"Instalar"</strong> o <strong>"Añadir a la pantalla de inicio"</strong> ➕.',
+          'Confirma para añadir el acceso directo a tus aplicaciones.'
+        ]
+      };
+    } else if (isChrome) {
+      return {
+        badge: 'Android · Chrome',
+        title: 'Instalar en Android',
+        steps: [
+          'Toca el menú de tres puntos (<strong>⋮</strong>) en la esquina superior derecha de Chrome.',
+          'Selecciona <strong>"Instalar aplicación"</strong> o <strong>"Añadir a la pantalla de inicio"</strong>.',
+          'Pulsa <strong>"Instalar"</strong> en el mensaje de confirmación.'
+        ]
+      };
+    } else {
+      return {
+        badge: 'Android',
+        title: 'Instalar en Android',
+        steps: [
+          'Abre el menú de opciones (<strong>⋮</strong> o <strong>☰</strong>) de tu navegador.',
+          'Selecciona la opción <strong>"Instalar aplicación"</strong> o <strong>"Añadir a pantalla de inicio"</strong>.',
+          'Confirma la instalación.'
+        ]
+      };
+    }
+  }
+
+  // Escritorio / Desktop
+  if (isChrome || isEdge) {
+    return {
+      badge: 'Escritorio · ' + (isEdge ? 'Edge' : 'Chrome'),
+      title: 'Instalar en tu ordenador',
+      steps: [
+        'Haz clic en el icono de <strong>Instalar</strong> en la barra de direcciones (a la derecha de la URL).',
+        'O abre el menú (<strong>⋮</strong>) y haz clic en <strong>"Instalar MurMeteo..."</strong>.',
+        'La aplicación se abrirá en su propia ventana rápida e independiente.'
+      ]
+    };
+  } else if (isSafari) {
+    return {
+      badge: 'macOS · Safari',
+      title: 'Instalar en Mac',
+      steps: [
+        'En la barra de menús superior de Safari, haz clic en <strong>Archivo</strong>.',
+        'Selecciona <strong>"Añadir al Dock..."</strong>.',
+        'Haz clic en <strong>"Añadir"</strong> para tenerla siempre accesible.'
+      ]
+    };
+  } else {
+    return {
+      badge: 'Navegador Web',
+      title: 'Instalar como Web App',
+      steps: [
+        'Abre el menú de opciones de tu navegador web.',
+        'Busca la opción <strong>"Instalar aplicación"</strong> o <strong>"Añadir a la pantalla de inicio"</strong>.',
+        'Tendrás acceso instantáneo como cualquier otra app nativa.'
+      ]
+    };
+  }
+}
+
+function openInfoModal() {
+  if (!elements.infoModal) return;
+  
+  const info = getInstallInstructions();
+  if (elements.modalBadge) elements.modalBadge.textContent = info.badge;
+  if (elements.modalTitle) elements.modalTitle.textContent = info.title;
+  
+  if (elements.modalInstructions) {
+    elements.modalInstructions.innerHTML = `
+      <ul class="modal-steps">
+        ${info.steps.map((step, idx) => `
+          <li class="modal-step">
+            <span class="modal-step-num">${idx + 1}</span>
+            <span>${step}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+  }
+
+  if (deferredPrompt && elements.modalInstallWrapper) {
+    elements.modalInstallWrapper.style.display = 'block';
+  } else if (elements.modalInstallWrapper) {
+    elements.modalInstallWrapper.style.display = 'none';
+  }
+
+  elements.infoModal.classList.add('active');
+}
+
+function closeInfoModal() {
+  if (elements.infoModal) {
+    elements.infoModal.classList.remove('active');
+  }
+}
+
+if (elements.btnInfo) {
+  elements.btnInfo.addEventListener('click', openInfoModal);
+}
+if (elements.modalClose) {
+  elements.modalClose.addEventListener('click', closeInfoModal);
+}
+if (elements.modalBtnOk) {
+  elements.modalBtnOk.addEventListener('click', closeInfoModal);
+}
+if (elements.infoModal) {
+  elements.infoModal.addEventListener('click', (e) => {
+    if (e.target === elements.infoModal) closeInfoModal();
+  });
+}
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeInfoModal();
+});
+
+if (elements.modalInstallBtn) {
+  elements.modalInstallBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      closeInfoModal();
+    }
+  });
 }
 
 // Boot
