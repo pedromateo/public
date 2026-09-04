@@ -6,12 +6,14 @@ on:
     paths:
       - 'brainfit/**'
       - 'murmeteo/**'
+      - 'loopp/**'
       - '.github/workflows/**'
   pull_request:
     branches: [ "main", "master" ]
     paths:
       - 'brainfit/**'
       - 'murmeteo/**'
+      - 'loopp/**'
       - '.github/workflows/**'
 
 jobs:
@@ -33,3 +35,10 @@ jobs:
       if: hashFiles('murmeteo/package.json') != ''
       working-directory: murmeteo
       run: npm run test
+    - name: Run Loopp Tests
+      if: hashFiles('loopp/package.json') != ''
+      working-directory: loopp
+      run: |
+        npm ci || npm install
+        npx playwright install --with-deps chromium
+        npm run test

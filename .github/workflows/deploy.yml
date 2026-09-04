@@ -6,6 +6,7 @@ on:
     paths:
       - 'brainfit/**'
       - 'murmeteo/**'
+      - 'loopp/**'
       - '.github/workflows/**'
   workflow_dispatch:
 
@@ -46,9 +47,17 @@ jobs:
         run: |
           npm run test
           
+      - name: Test Loopp
+        if: hashFiles('loopp/package.json') != ''
+        working-directory: loopp
+        run: |
+          npm ci || npm install
+          npx playwright install --with-deps chromium
+          npm run test
+
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp
           
           # Brainfit Build
           if [ -d "brainfit" ]; then
@@ -68,6 +77,16 @@ jobs:
             cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
             cp -r icons ../dist/murmeteo/ || true
             cp -f forecast.json ../dist/murmeteo/ || true
+            cd ..
+          fi
+
+          # Loopp Build
+          if [ -d "loopp" ]; then
+            echo "Packaging Loopp..."
+            cd loopp
+            sed -i "s/looper-cache-v1/looper-cache-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js ../dist/loopp/ || true
+            cp -r js icons ../dist/loopp/ || true
             cd ..
           fi
           

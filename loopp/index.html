@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Station PWA</title>
+    <link rel="manifest" href="./manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        dark: '#111827',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans antialiased min-h-screen">
+    <div id="mic-error-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div class="bg-gray-800 p-6 rounded-lg max-w-md w-full border border-red-500 shadow-2xl">
+            <h2 class="text-xl font-bold text-red-400 mb-4">Error de Micrófono</h2>
+            <p class="mb-6">No pudimos acceder a tu micrófono. Por favor, asegúrate de haber dado los permisos en tu navegador.</p>
+            <div class="flex justify-end">
+                <button id="close-modal-btn" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-config" class="min-h-screen flex flex-col items-center justify-center p-4">
+        <h1 class="text-4xl font-bold mb-8 text-primary">Loop Station</h1>
+        <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Tempo (BPM): <span id="bpm-display">120</span></label>
+                <input type="range" id="bpm-slider" min="60" max="200" value="120" class="w-full">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Compás</label>
+                <select id="time-signature" class="w-full bg-gray-700 rounded p-2 text-white border border-gray-600 focus:outline-none focus:border-primary">
+                    <option value="4">4/4</option>
+                    <option value="3">3/4</option>
+                </select>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Longitud del Bucle (Compases)</label>
+                <select id="bars-length" class="w-full bg-gray-700 rounded p-2 text-white border border-gray-600 focus:outline-none focus:border-primary">
+                    <option value="1">1 Compás</option>
+                    <option value="2" selected>2 Compases</option>
+                    <option value="4">4 Compases</option>
+                </select>
+            </div>
+
+            <button id="start-session-btn" class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded transition-colors text-lg">
+                Iniciar Sesión
+            </button>
+        </div>
+    </div>
+
+    <div id="view-looper" class="hidden min-h-screen flex-col p-4 md:p-8 max-w-4xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center bg-gray-800 p-4 rounded-xl mb-6 shadow-md border border-gray-700">
+            <div class="flex items-center gap-4 mb-4 md:mb-0">
+                <div class="text-2xl font-mono bg-gray-900 px-4 py-2 rounded text-primary"><span id="active-bpm">120</span> BPM</div>
+                <div class="text-xl font-mono text-gray-400" id="active-signature">4/4</div>
+            </div>
+            
+            <div id="beat-visualizer" class="flex flex-col items-center justify-center gap-1.5 my-2 md:my-0">
+            </div>
+
+            <div class="flex gap-2 mt-4 md:mt-0">
+                <button id="metronome-btn" class="bg-primary text-white px-4 py-2 rounded font-medium flex items-center gap-2 transition-colors">
+                    <span id="metronome-icon"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></span> Metrónomo ON
+                </button>
+                <button id="global-stop-btn" class="bg-red-900 hover:bg-red-800 text-white px-4 py-2 rounded font-medium transition-colors">Stop</button>
+            </div>
+        </header>
+
+        <div class="flex justify-center mb-8">
+            <button id="record-btn" class="w-32 h-32 rounded-full bg-red-600 hover:bg-red-500 shadow-[0_0_20px_rgba(220,38,38,0.5)] border-4 border-red-800 text-white font-bold text-xl transition-all active:scale-95 flex flex-col items-center justify-center">
+                <div class="w-6 h-6 bg-white rounded-full mb-2" id="record-icon"></div>
+                <span id="record-text">GRABAR</span>
+            </button>
+        </div>
+
+        <div id="tracks-container" class="flex flex-col gap-4 mb-8 flex-grow">
+        </div>
+
+        <footer class="mt-auto border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between gap-4">
+            <button id="reset-song-btn" class="text-gray-400 hover:text-white transition-colors"><svg class="w-5 h-5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg> Reiniciar Canción</button>
+            <div class="flex gap-3">
+                <button id="export-wav-btn" class="bg-green-700 hover:bg-green-600 px-4 py-2 rounded font-medium transition-colors">Exportar WAV</button>
+                <button id="export-mp3-btn" class="bg-yellow-600 hover:bg-yellow-500 px-4 py-2 rounded font-medium transition-colors">Exportar MP3</button>
+            </div>
+        </footer>
+    </div>
+
+    <template id="track-template">
+        <div class="track-item bg-gray-800 p-4 rounded-lg flex items-center gap-4 border-l-4 border-primary shadow-sm transition-opacity">
+            <div class="track-name font-bold w-20 truncate">Pista</div>
+            <div class="flex-grow bg-gray-900 h-10 rounded overflow-hidden relative">
+                <div class="track-progress absolute top-0 left-0 h-full bg-primary bg-opacity-40 w-0"></div>
+            </div>
+            <button class="mute-btn bg-gray-700 p-2 rounded hover:bg-gray-600 w-10 text-center"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10c0-1.1.9-2 2-2h2l5-5v18l-5-5H7c-1.1 0-2-.9-2-2v-4z"></path></svg></button>
+            <input type="range" class="vol-slider w-24" min="0" max="1" step="0.01" value="1">
+            <button class="delete-btn bg-red-900 bg-opacity-50 text-red-300 hover:bg-red-800 p-2 rounded w-10 text-center">X</button>
+        </div>
+    </template>
+
+    <script src="./js/audio.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
