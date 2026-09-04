@@ -105,7 +105,20 @@ const server = http.createServer(async (req, res) => {
         res.end('500 Internal Server Error');
       }
     } else {
-      res.writeHead(200, { 'Content-Type': contentType });
+      const headers = { 'Content-Type': contentType };
+      // forecast.json nunca debe cachearse: es el dato dinámico principal
+      if (safePath.endsWith('forecast.json')) {
+        headers['Cache-Control'] = 'no-store, no-cache, must-revalidate';
+        headers['Pragma'] = 'no-cache';
+        headers['Expires'] = '0';
+      } else if (safePath.endsWith('sw.js') || safePath.endsWith('manifest.json')) {
+        // SW y manifest: no-cache para que el navegador revalide siempre
+        headers['Cache-Control'] = 'no-cache';
+      } else if (ext === '.html' || ext === '.css' || ext === '.js' || ext === '.json') {
+        // Resto de estáticos: 1 hora con revalidación
+        headers['Cache-Control'] = 'public, max-age=3600, must-revalidate';
+      }
+      res.writeHead(200, headers);
       res.end(content);
     }
   });

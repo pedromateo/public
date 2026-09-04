@@ -1,5 +1,5 @@
-const CACHE_NAME = 'murmeteo-static-v13';
-const DATA_CACHE_NAME = 'murmeteo-data-v5';
+const CACHE_NAME = 'murmeteo-static-v14';
+const DATA_CACHE_NAME = 'murmeteo-data-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -54,14 +54,26 @@ self.addEventListener('fetch', event => {
   
   // Data API calls (Backend /api/ endpoints, AEMET, Open-Meteo, forecast.json static) -> Network first with data fallback
   if (url.pathname.includes('/api/') || url.hostname.includes('aemet.es') || url.hostname.includes('open-meteo') || url.pathname.endsWith('forecast.json')) {
+    const isForecast = url.pathname.endsWith('forecast.json');
+
+    // Para forecast.json reconstruimos la request sin query params y con no-store
+    // para garantizar que siempre va a red ignorando cualquier caché HTTP del navegador
+    const networkRequest = isForecast
+      ? new Request(url.origin + url.pathname, {
+          method: 'GET',
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+        })
+      : event.request;
+
     event.respondWith(
-      fetch(event.request)
+      fetch(networkRequest)
         .then(networkResponse => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
             caches.open(DATA_CACHE_NAME).then(cache => {
               // Store without search parameters to prevent cache bloating and allow ignoreSearch to work reliably
-              const cacheKey = url.pathname.endsWith('forecast.json') ? new Request(url.origin + url.pathname) : event.request;
+              const cacheKey = isForecast ? new Request(url.origin + url.pathname) : event.request;
               cache.put(cacheKey, responseToCache);
             });
           }
@@ -69,7 +81,7 @@ self.addEventListener('fetch', event => {
         })
         .catch(async () => {
           // If network fails, return cached forecast if available
-          const cacheKey = url.pathname.endsWith('forecast.json') ? new Request(url.origin + url.pathname) : event.request;
+          const cacheKey = isForecast ? new Request(url.origin + url.pathname) : event.request;
           const cachedResponse = await caches.match(cacheKey, { ignoreSearch: true });
           if (cachedResponse) {
              return cachedResponse;
