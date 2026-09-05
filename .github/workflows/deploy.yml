@@ -29,26 +29,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
+      - name: Filter modified paths
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            workflows:
+              - '.github/workflows/**'
+            brainfit:
+              - 'brainfit/**'
+            murmeteo:
+              - 'murmeteo/**'
+            loopp:
+              - 'loopp/**'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           
       - name: Test Brainfit
-        if: hashFiles('brainfit/package.json') != ''
+        if: (steps.filter.outputs.brainfit == 'true' || steps.filter.outputs.workflows == 'true' || github.event_name == 'workflow_dispatch') && hashFiles('brainfit/package.json') != ''
         working-directory: brainfit
         run: |
           npm install
           npm run test || true
 
       - name: Test MurMeteo
-        if: hashFiles('murmeteo/package.json') != ''
+        if: (steps.filter.outputs.murmeteo == 'true' || steps.filter.outputs.workflows == 'true' || github.event_name == 'workflow_dispatch') && hashFiles('murmeteo/package.json') != ''
         working-directory: murmeteo
         run: |
           npm run test
           
       - name: Test Loopp
-        if: hashFiles('loopp/package.json') != ''
+        if: (steps.filter.outputs.loopp == 'true' || steps.filter.outputs.workflows == 'true' || github.event_name == 'workflow_dispatch') && hashFiles('loopp/package.json') != ''
         working-directory: loopp
         run: |
           npm ci || npm install

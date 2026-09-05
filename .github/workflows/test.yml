@@ -21,22 +21,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Filter modified paths
+      uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          workflows:
+            - '.github/workflows/**'
+          brainfit:
+            - 'brainfit/**'
+          murmeteo:
+            - 'murmeteo/**'
+          loopp:
+            - 'loopp/**'
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '22.x'
+
     - name: Run Brainfit Tests
-      if: hashFiles('brainfit/package.json') != ''
+      if: (steps.filter.outputs.brainfit == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('brainfit/package.json') != ''
       working-directory: brainfit
       run: |
         npm install
         npm run test || true
+
     - name: Run MurMeteo Tests
-      if: hashFiles('murmeteo/package.json') != ''
+      if: (steps.filter.outputs.murmeteo == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('murmeteo/package.json') != ''
       working-directory: murmeteo
       run: npm run test
+
     - name: Run Loopp Tests
-      if: hashFiles('loopp/package.json') != ''
+      if: (steps.filter.outputs.loopp == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('loopp/package.json') != ''
       working-directory: loopp
       run: |
         npm ci || npm install
