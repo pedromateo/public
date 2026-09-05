@@ -217,10 +217,13 @@ class AudioEngine {
         
         // Calculate offset to sync with master loop
         const currentContextTime = this.ctx.currentTime;
-        const timeSinceLoopStart = (currentContextTime - this.loopStartTime) % this.loopDuration;
-        const adjustedLoopStartTime = currentContextTime - timeSinceLoopStart;
+        let timeSinceLoopStart = (currentContextTime - this.loopStartTime) % this.loopDuration;
+        timeSinceLoopStart = ((timeSinceLoopStart % this.loopDuration) + this.loopDuration) % this.loopDuration;
+        if (timeSinceLoopStart >= buffer.duration) {
+            timeSinceLoopStart = 0;
+        }
         
-        sourceNode.start(adjustedLoopStartTime, timeSinceLoopStart);
+        sourceNode.start(0, timeSinceLoopStart);
         
         this.tracks.push({
             id,

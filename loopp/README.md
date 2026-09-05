@@ -111,7 +111,7 @@ loopp/
 
 ## 🌐 Despliegue en GitHub Pages
 
-El repositorio principal incluye un workflow en [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) que:
+El repositorio principal incluye un workflow en [`.github/workflows/deploy-loopp.yml`](../.github/workflows/deploy-loopp.yml) que:
 1. Detecta cambios en la carpeta `loopp/**`.
 2. Ejecuta automáticamente los tests funcionales con Playwright.
 3. Empaqueta la aplicación en `dist/loopp/` con actualización de versión en caché del Service Worker.

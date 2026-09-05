@@ -1,0 +1,84 @@
+name: Deploy Brainfit
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    paths:
+      - 'brainfit/**'
+      - '.github/workflows/deploy-brainfit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Test Brainfit
+        working-directory: brainfit
+        run: |
+          npm install
+          npm run test
+
+      - name: Prepare production build
+        run: |
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp
+
+          # Brainfit Build (with updated cache hash)
+          if [ -d "brainfit" ]; then
+            echo "Packaging Brainfit..."
+            cd brainfit
+            sed -i "s/brainfit-cache-v1/brainfit-cache-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js config.json ../dist/brainfit/ || true
+            cp -r css js assets ../dist/brainfit/ || true
+            cd ..
+          fi
+
+          # MurMeteo Copy
+          if [ -d "murmeteo" ]; then
+            echo "Packaging MurMeteo..."
+            cd murmeteo
+            cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
+            cp -r icons ../dist/murmeteo/ || true
+            cp -f forecast.json ../dist/murmeteo/ || true
+            cd ..
+          fi
+
+          # Loopp Copy
+          if [ -d "loopp" ]; then
+            echo "Packaging Loopp..."
+            cd loopp
+            cp index.html manifest.json sw.js ../dist/loopp/ || true
+            cp -r js icons ../dist/loopp/ || true
+            cd ..
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
