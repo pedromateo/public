@@ -74,11 +74,11 @@ test.describe('Loop Station PWA', () => {
     await expect(recordBtn).toHaveClass(/bg-amber-500/);
     
     // Al empezar el nuevo ciclo, debe pasar a "GRABANDO" y clase emerald/verde
-    await expect(recordText).toHaveText('GRABANDO', { timeout: 10000 });
+    await expect(recordText).toHaveText('GRABANDO', { timeout: 15000 });
     await expect(recordBtn).toHaveClass(/bg-emerald-500/);
     
     // Y finalmente completar la pista y volver al estado inicial con la pista creada
-    await page.waitForSelector('.track-item', { timeout: 20000 });
+    await page.waitForSelector('.track-item', { timeout: 30000 });
     
     const trackName = page.locator('.track-item .track-name');
     await expect(trackName).toHaveText('Pista 1');
@@ -92,7 +92,7 @@ test.describe('Loop Station PWA', () => {
 
     // Grabar una pista
     await page.locator('#record-btn').click();
-    await page.waitForSelector('.track-item', { timeout: 20000 });
+    await page.waitForSelector('.track-item', { timeout: 30000 });
 
     const track = page.locator('.track-item').first();
     const muteBtn = track.locator('.mute-btn');

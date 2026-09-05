@@ -42,6 +42,9 @@ class AudioEngine {
         this.targetSamples = Math.ceil(this.loopDuration * this.ctx.sampleRate);
         
         try {
+            if (this.ctx.state === 'suspended') {
+                await this.ctx.resume();
+            }
             this.micStream = await navigator.mediaDevices.getUserMedia({ 
                 audio: {
                     echoCancellation: false,
