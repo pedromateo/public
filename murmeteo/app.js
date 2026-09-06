@@ -80,22 +80,10 @@ async function initApp() {
     currentData = data;
     lastRefreshTime = Date.now();
     
-    // Save to local storage for offline fallback
-    localStorage.setItem('murmeteo_cache', JSON.stringify({
-      timestamp: lastRefreshTime,
-      data: currentData
-    }));
-    
     renderApp(data, false);
   } catch (err) {
-    console.warn("API Error, trying cache...", err);
-    const cachedStr = localStorage.getItem('murmeteo_cache');
-    if (cachedStr) {
-      const cached = JSON.parse(cachedStr);
-      renderApp(cached.data, true);
-    } else {
-      showCriticalError();
-    }
+    console.warn("API Error...", err);
+    showCriticalError();
   } finally {
     resetPullIndicator();
     elements.loader.style.display = 'none';
