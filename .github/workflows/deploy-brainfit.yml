@@ -40,7 +40,7 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo dist/loopp
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding
 
           # Brainfit Build (with updated cache hash)
           if [ -d "brainfit" ]; then
@@ -59,6 +59,7 @@ jobs:
             cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
             cp -r icons ../dist/murmeteo/ || true
             cp -f forecast.json ../dist/murmeteo/ || true
+            cp -r forecasts ../dist/murmeteo/ || true
             cd ..
           fi
 
@@ -68,6 +69,15 @@ jobs:
             cd loopp
             cp index.html manifest.json sw.js ../dist/loopp/ || true
             cp -r js icons ../dist/loopp/ || true
+            cd ..
+          fi
+
+          # MyLanding Copy
+          if [ -d "mylanding" ]; then
+            echo "Packaging MyLanding..."
+            cd mylanding
+            cp index.html ../dist/mylanding/ || true
+            cp -r index_files ../dist/mylanding/ || true
             cd ..
           fi
 

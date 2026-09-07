@@ -1,11 +1,11 @@
-name: Deploy Loopp
+name: Deploy MyLanding
 
 on:
   push:
     branches: [ "main", "master" ]
     paths:
-      - 'loopp/**'
-      - '.github/workflows/deploy-loopp.yml'
+      - 'mylanding/**'
+      - '.github/workflows/deploy-mylanding.yml'
   workflow_dispatch:
 
 permissions:
@@ -27,18 +27,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
-      - name: Test Loopp
-        working-directory: loopp
-        run: |
-          npm ci || npm install
-          npx playwright install --with-deps chromium
-          npm run test
-
       - name: Prepare production build
         run: |
           mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding
@@ -58,16 +46,15 @@ jobs:
             cd murmeteo
             cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
             cp -r icons ../dist/murmeteo/ || true
-            cp -r forecasts ../dist/murmeteo/ || true
             cp -f forecast.json ../dist/murmeteo/ || true
+            cp -r forecasts ../dist/murmeteo/ || true
             cd ..
           fi
 
-          # Loopp Build (with updated cache hash)
+          # Loopp Copy
           if [ -d "loopp" ]; then
             echo "Packaging Loopp..."
             cd loopp
-            sed -i "s/looper-cache-v1/looper-cache-${{ github.sha }}/g" sw.js || true
             cp index.html manifest.json sw.js ../dist/loopp/ || true
             cp -r js icons ../dist/loopp/ || true
             cd ..
