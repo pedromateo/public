@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Pedro Dashboard</title>
+
+  <!-- Meta tags para experiencia móvil / PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pedro">
+  <meta name="theme-color" content="#0f172a" id="meta-theme-color">
+  <link rel="icon" type="image/svg+xml" href="./index_files/favicon.svg">
+  <link rel="apple-touch-icon" href="./index_files/favicon.svg">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(226, 232, 240, 0.9);
+      --card-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
+      --icon-bg: #ffffff;
+      --icon-border: rgba(0, 0, 0, 0.06);
+      --icon-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-title: #0f172a;
+      --pill-bg: #ffffff;
+      --pill-border: #e2e8f0;
+      --pill-text: #1e293b;
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+      --card-bg: rgba(30, 41, 59, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.4);
+      --icon-bg: #1e293b;
+      --icon-border: rgba(255, 255, 255, 0.1);
+      --icon-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-title: #ffffff;
+      --pill-bg: #1e293b;
+      --pill-border: #334155;
+      --pill-text: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      padding: env(safe-area-inset-top, 14px) 14px calc(env(safe-area-inset-bottom, 24px) + 24px);
+      transition: background 0.25s ease, color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Header móvil compacto */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 6px;
+    }
+
+    .time-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .clock-display {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text-title);
+      line-height: 1;
+    }
+
+    .date-display {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 3px;
+      text-transform: capitalize;
+    }
+
+    .theme-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .theme-btn:active {
+      transform: scale(0.9);
+    }
+
+    .theme-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Tarjeta contenedora de la parrilla de apps */
+    .launcher-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 16px 12px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    /* Grid estilo móvil iOS / Android (4 columnas) */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px 8px;
+      justify-items: center;
+    }
+
+    .app-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      width: 100%;
+      max-width: 80px;
+      padding: 6px 2px;
+      border-radius: 14px;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+      cursor: pointer;
+    }
+
+    .app-item:active {
+      transform: scale(0.88);
+      opacity: 0.8;
+    }
+
+    .app-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--icon-bg);
+      border: 1px solid var(--icon-border);
+      box-shadow: var(--icon-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 5px;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .app-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .app-name {
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-top: 6px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 72px;
+      line-height: 1.2;
+    }
+
+    /* Tarjeta Meteorológica adaptada a móvil */
+    .weather-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 16px 12px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .weather-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      align-self: flex-start;
+      padding-left: 4px;
+    }
+
+    /* Escalador responsivo del iframe meteorológico */
+    .weather-scale-box {
+      width: 100%;
+      max-width: 450px;
+      height: 295px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .weather-scale-box iframe {
+      width: 450px;
+      height: 295px;
+      border: 0;
+      transform-origin: top center;
+    }
+
+    /* Enlaces meteorológicos rápidos en cuadrícula táctil */
+    .weather-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .weather-actions-grid .pill-pozow {
+      grid-column: 1 / -1;
+    }
+
+    .weather-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      color: var(--pill-text);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    .weather-btn:active {
+      transform: scale(0.95);
+      opacity: 0.85;
+    }
+
+    .btn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .btn-subtext {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .pill-muh .btn-dot { background: #3b82f6; }
+    .pill-mur .btn-dot { background: #8b5cf6; }
+    .pill-pl .btn-dot { background: #ef4444; }
+    .pill-pozo .btn-dot { background: #06b6d4; }
+    .pill-pozow .btn-dot { background: #f59e0b; }
+
+    /* Pantallas muy pequeñas (< 360px) */
+    @media (max-width: 350px) {
+      .app-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .app-icon-wrap {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Cabecera Móvil: Reloj y Conmutador de Tema -->
+    <header class="header-bar">
+      <div class="time-info">
+        <span class="clock-display" id="clock">00:00</span>
+        <span class="date-display" id="date">Cargando...</span>
+      </div>
+      <button class="theme-btn" id="theme-toggle" aria-label="Cambiar tema (Claro / Oscuro)">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Lanzador de Aplicaciones Móvil -->
+    <main class="launcher-card">
+      <div class="app-grid" id="app-grid">
+        <a href="https://as.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/uf_1640102144bu0DWVc3uF3cILaYEa70tMbiNd.png" alt="AS" class="app-icon" loading="lazy"></div>
+          <span class="app-name">AS</span>
+        </a>
+
+        <a href="https://www.marca.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/apple-touch-icon-precomposed.png" alt="Marca" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Marca</span>
+        </a>
+
+        <a href="https://cadenaser.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/unnamed.jpg" alt="Cadena SER" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Cadena SER</span>
+        </a>
+
+        <a href="https://www.20minutos.es/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/20_minutos.svg" alt="20 Minutos" class="app-icon" loading="lazy"></div>
+          <span class="app-name">20 Minutos</span>
+        </a>
+
+        <a href="https://news.google.com/home?hl=es&amp;gl=ES&amp;ceid=ES%3Aes" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/unnamed(1).jpg" alt="Google News" class="app-icon" loading="lazy"></div>
+          <span class="app-name">News</span>
+        </a>
+
+        <a href="https://forocoches.com/foro/forumdisplay.php?f=2" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/5fa402c890270.jpeg" alt="Forocoches" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Forocoches</span>
+        </a>
+
+        <a href="https://www.xataka.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/id_Lr-EsRC.png" alt="Xataka" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Xataka</span>
+        </a>
+
+        <a href="https://www.xataka.com/categoria/magnet" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/images" alt="Magnet" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Magnet</span>
+        </a>
+
+        <a href="https://ecoinventos.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/images(1)" alt="Ecoinventos" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Ecoinventos</span>
+        </a>
+
+        <a href="https://www.google.com/finance/?hl=es" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/google-finance-icon-filled-256.png" alt="Google Finance" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Finance</span>
+        </a>
+
+        <a href="https://www.bolsamania.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/images(2)" alt="Bolsamanía" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Bolsamanía</span>
+        </a>
+
+        <a href="https://web.telegram.org/k/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/Telegram_2019_Logo.svg" alt="Telegram" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Telegram</span>
+        </a>
+
+        <a href="https://twitter.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/apps.60673.9007199266244427.4d45042b-d7a5-4a83-be66-97779553b24d.5d82b7eb-9734-4b51-b65d-a0383348ab1b" alt="Twitter / X" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Twitter / X</span>
+        </a>
+
+        <a href="https://m.facebook.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/Facebook_f_logo_(2019).svg" alt="Facebook" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Facebook</span>
+        </a>
+
+        <a href="https://www.instagram.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/Instagram_icon-icons.com_66804.png" alt="Instagram" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Instagram</span>
+        </a>
+
+        <a href="https://www.tiktok.com/foryou?lang=en" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/images(3)" alt="TikTok" class="app-icon" loading="lazy"></div>
+          <span class="app-name">TikTok</span>
+        </a>
+
+        <a href="https://copilot.microsoft.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/favicon.svg" alt="Copilot" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Copilot</span>
+        </a>
+
+        <a href="https://claude.ai/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/512x512bb.jpg" alt="Claude" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Claude</span>
+        </a>
+
+        <a href="https://www.perplexity.ai/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/512x512bb(1).jpg" alt="Perplexity" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Perplexity</span>
+        </a>
+
+        <a href="https://www.udemy.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/apple-touch-icon.png" alt="Udemy" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Udemy</span>
+        </a>
+
+        <a href="https://getpocket.com/es/saves" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/unnamed.png" alt="Pocket" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Pocket</span>
+        </a>
+
+        <a href="https://www.notion.so/85037c831a064db8bde8fb79c2429817?v=9f49ea0433034d2786b00ed21ccac25a" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/logo-ios.png" alt="Notion" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Notion</span>
+        </a>
+
+        <a href="https://hoofoot.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/unnamed(2).png" alt="HooFoot" class="app-icon" loading="lazy"></div>
+          <span class="app-name">HooFoot</span>
+        </a>
+
+        <a href="https://www.iberdrola.es/wclifral/login/loginUnicoForm" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/Logo_Iberdrola.png" alt="Iberdrola" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Iberdrola</span>
+        </a>
+
+        <a href="https://sede.carm.es/sms/portaldelpaciente/home.xhtml" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/unnamed(3).png" alt="Portal Paciente SMS" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Portal Salud</span>
+        </a>
+
+        <a href="https://www.speedtest.net/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/1200x630bb.png" alt="Speedtest" class="app-icon" loading="lazy"></div>
+          <span class="app-name">Speedtest</span>
+        </a>
+      </div>
+    </main>
+
+    <!-- Módulo Meteorológico Adaptado a Pantallas Móviles -->
+    <section class="weather-card">
+      <span class="weather-title">Meteorología</span>
+
+      <!-- Iframe auto-escalado dinámicamente según el ancho de pantalla -->
+      <div class="weather-scale-box" id="weather-box">
+        <iframe src="./index_files/77b5a45056e5e32c0ca1263aabb32345.html" scrolling="no" allowtransparency="true" title="El tiempo en Murcia"></iframe>
+      </div>
+
+      <!-- Botones de consulta rápida pensados para toque con el pulgar -->
+      <nav class="weather-actions-grid" aria-label="Enlaces meteorológicos">
+        <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/horas/murcia-id30030" target="_blank" rel="noopener noreferrer" class="weather-btn pill-muh">
+          <span class="btn-dot"></span>
+          <span>MUh <span class="btn-subtext">Horas</span></span>
+        </a>
+
+        <a href="https://www.tiempo.com/radar-murcia-LERI-reflect.html" target="_blank" rel="noopener noreferrer" class="weather-btn pill-mur">
+          <span class="btn-dot"></span>
+          <span>MUr <span class="btn-subtext">Radar</span></span>
+        </a>
+
+        <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/puerto-lumbreras-id30033" target="_blank" rel="noopener noreferrer" class="weather-btn pill-pl">
+          <span class="btn-dot"></span>
+          <span>PL <span class="btn-subtext">P. Lumbreras</span></span>
+        </a>
+
+        <a href="https://www.aemet.es/es/eltiempo/prediccion/playas/pozo-del-esparto-0403501" target="_blank" rel="noopener noreferrer" class="weather-btn pill-pozo">
+          <span class="btn-dot"></span>
+          <span>POZO <span class="btn-subtext">Playa</span></span>
+        </a>
+
+        <a href="https://windy.app/es/forecast2/spot/5035433/Villaricos" target="_blank" rel="noopener noreferrer" class="weather-btn pill-pozow">
+          <span class="btn-dot"></span>
+          <span>POZOW <span class="btn-subtext">Villaricos / Viento y Olas</span></span>
+        </a>
+      </nav>
+    </section>
+
+  </div>
+
+  <script>
+    // 1. Reloj en tiempo real
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}`;
+
+      const options = { weekday: 'short', day: 'numeric', month: 'short' };
+      document.getElementById('date').textContent = now.toLocaleDateString('es-ES', options);
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 2. Modo Oscuro / Claro con persistencia y meta theme-color
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const metaThemeColor = document.getElementById('meta-theme-color');
+    const savedTheme = localStorage.getItem('dashboard_theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function setTheme(dark) {
+      if (dark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        metaThemeColor.setAttribute('content', '#090d16');
+        localStorage.setItem('dashboard_theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        metaThemeColor.setAttribute('content', '#f8fafc');
+        localStorage.setItem('dashboard_theme', 'light');
+      }
+    }
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      setTheme(!isDark);
+    });
+
+    // 3. Escalado responsivo del widget del tiempo para pantallas móviles
+    function scaleWeatherWidget() {
+      const box = document.getElementById('weather-box');
+      if (!box) return;
+      const iframe = box.querySelector('iframe');
+      if (!iframe) return;
+
+      const baseWidth = 450;
+      const baseHeight = 295;
+      const currentWidth = box.clientWidth;
+
+      if (currentWidth < baseWidth) {
+        const scale = currentWidth / baseWidth;
+        iframe.style.transform = `scale(${scale})`;
+        box.style.height = `${Math.round(baseHeight * scale)}px`;
+      } else {
+        iframe.style.transform = 'scale(1)';
+        box.style.height = `${baseHeight}px`;
+      }
+    }
+    window.addEventListener('resize', scaleWeatherWidget);
+    window.addEventListener('orientationchange', () => setTimeout(scaleWeatherWidget, 200));
+    scaleWeatherWidget();
+
+  </script>
+</body>
+</html>

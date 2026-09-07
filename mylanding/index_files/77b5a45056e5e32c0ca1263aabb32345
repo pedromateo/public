@@ -1,0 +1,37 @@
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+var widget	= document.getElementById('c_77b5a45056e5e32c0ca1263aabb32345');
+var url_suffix = '';
+
+if ('completo' == 'special') {
+	var vlc = readCookie('vlc_r_b');
+
+	if (vlc) {
+		vlc = eval(vlc);
+
+		url_suffix = '/' + vlc[0].urlized;
+	}
+}
+
+
+if (widget) {
+
+	var taller = 0;
+	var wider = 0;
+
+				wider = 450 + 15;
+			taller = 290 + 15;
+		
+	
+	widget.style.cssText	= 'border:1px solid rgb(244, 245, 247);background:#fff;overflow:hidden;-moz-border-radius:7px;-webkit-border-radius:7px;-o-border-radius:7px;-ms-border-radius:7px;border-radius:7px;'+(wider?'width:'+wider+'px;':'')+(taller?'height:'+taller+'px;':'')
+	widget.innerHTML		= '<iframe id="fr_77b5a45056e5e32c0ca1263aabb32345" class="completo 465 305" src="https://www.eltiempo.es/widget/get_widget/77b5a45056e5e32c0ca1263aabb32345?v=11000" frameborder="0" scrolling="no" width="100%" height="100%" allowTransparency="true" style="overflow: hidden;"></iframe>';
+}
