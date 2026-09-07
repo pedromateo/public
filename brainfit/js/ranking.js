@@ -1,4 +1,12 @@
-import { auth, db, googleProvider, signInWithPopup } from './firebase-config.js';
+import {
+  auth,
+  db,
+  googleProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged
+} from './firebase-config.js';
 import { collection, doc, setDoc, getDoc, query, where, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 const SEED_USERS = [
@@ -8,21 +16,87 @@ const SEED_USERS = [
 ];
 
 export const RankingService = {
+  formatUser(user) {
+    if (!user) return null;
+    const rawName = user.displayName || user.name || 'Jugador';
+    const shortName = rawName.split(' ')[0] || 'Jugador';
+    return {
+      uid: user.uid,
+      name: shortName,
+      photoUrl: user.photoURL || user.photoUrl || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(shortName)}`,
+      isGuest: !!user.isGuest
+    };
+  },
+
+  async getCurrentUser() {
+    if (auth && auth.currentUser) {
+      return this.formatUser(auth.currentUser);
+    }
+    if (auth && typeof auth.authStateReady === 'function') {
+      try {
+        await auth.authStateReady();
+        if (auth.currentUser) {
+          return this.formatUser(auth.currentUser);
+        }
+      } catch (_) {}
+    }
+    const savedGuest = localStorage.getItem('brainfit_guest_user');
+    if (savedGuest) {
+      try {
+        return JSON.parse(savedGuest);
+      } catch (_) {}
+    }
+    return null;
+  },
+
   async login() {
+    // Si ya hay usuario autenticado con Google, lo devolvemos directamente
+    if (auth && auth.currentUser) {
+      return this.formatUser(auth.currentUser);
+    }
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-      // Get short name (first name)
-      const shortName = user.displayName ? user.displayName.split(' ')[0] : 'Jugador';
-      return {
-        uid: user.uid,
-        name: shortName,
-        photoUrl: user.photoURL || ''
-      };
+      return this.formatUser(result.user);
     } catch (error) {
-      console.error("Error en login:", error);
+      console.error("Error en login con Google:", error);
       throw error;
     }
+  },
+
+  async loginWithRedirect(pendingScore = null) {
+    if (pendingScore) {
+      sessionStorage.setItem('brainfit_pending_score', JSON.stringify(pendingScore));
+    }
+    return await signInWithRedirect(auth, googleProvider);
+  },
+
+  async checkRedirectResult() {
+    try {
+      const result = await getRedirectResult(auth);
+      if (result && result.user) {
+        return this.formatUser(result.user);
+      }
+    } catch (error) {
+      console.warn("Error comprobando redirect:", error);
+    }
+    return null;
+  },
+
+  createGuestUser(alias) {
+    const cleanName = (alias || 'Jugador').trim().slice(0, 16) || 'Jugador';
+    let guestId = localStorage.getItem('brainfit_guest_uid');
+    if (!guestId) {
+      guestId = 'guest_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 6);
+      localStorage.setItem('brainfit_guest_uid', guestId);
+    }
+    const user = {
+      uid: guestId,
+      name: cleanName,
+      photoUrl: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanName)}`,
+      isGuest: true
+    };
+    localStorage.setItem('brainfit_guest_user', JSON.stringify(user));
+    return user;
   },
 
   async saveScore(user, difficulty, score) {

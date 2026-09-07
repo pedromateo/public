@@ -26,9 +26,12 @@ export default defineConfig({
         if (id === '\0vitest-mock-firebase') {
           return `
             export const initializeApp = () => ({});
-            export const getAuth = () => ({});
+            export const getAuth = () => ({ currentUser: null, authStateReady: async () => {} });
             export const GoogleAuthProvider = class {};
             export const signInWithPopup = async () => ({ user: {} });
+            export const signInWithRedirect = async () => {};
+            export const getRedirectResult = async () => null;
+            export const onAuthStateChanged = (auth, cb) => { if (cb) cb(null); return () => {}; };
             export const getFirestore = () => ({});
             export const collection = () => ({});
             export const doc = () => ({});

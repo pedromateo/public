@@ -354,42 +354,183 @@ export const Engine = {
         ${actionBtnHTML}
         <button class="btn-neutral" onclick="Engine.renderMenu()">${TEXTS.btnChangeDiff}</button>
         <div style="margin-top:20px; padding-top:20px; border-top:2px dashed #fbcfe8;">
-          <button class="btn-ranking" onclick="Engine.showRankingFlow()" style="background:#db2777; color:white; font-size:18px; padding:12px 24px; border-radius:16px; border:none; box-shadow:0 6px 0 #9d174d; font-weight:800; cursor:pointer; width:100%; transition:all 0.2s;">🏆 Ver Ranking Global</button>
+          <button class="btn-ranking" onclick="Engine.showRankingFlow()" style="background:#db2777; color:white; font-size:18px; padding:12px 24px; border-radius:16px; border:none; box-shadow:0 6px 0 #9d174d; font-weight:800; cursor:pointer; width:100%; transition:all 0.2s;">🏆 Subir puntuación al Ranking</button>
         </div>
       </div>`;
   },
 
   async showRankingFlow() {
+    this.clearAll();
     try {
-      // 1. Mostrar estado de carga
+      // 1. Si ya hay usuario autenticado o con alias previo, guardamos directamente
+      const currentUser = await RankingService.getCurrentUser();
+      if (currentUser && !currentUser.isGuest) {
+        await this.saveScoreAndShowRanking(currentUser);
+        return;
+      }
+    } catch (e) {
+      console.warn("Error comprobando usuario actual:", e);
+    }
+    // Si no está identificado con Google, mostrar pantalla con opciones (Google o Alias)
+    this.renderScoreSubmissionOptions();
+  },
+
+  renderScoreSubmissionOptions(errorInfo = null) {
+    this.clearAll();
+    const diffConfig = CONFIG[State.diffKey] || { name: 'Normal' };
+    const maxPts = State.levels.length * 20;
+    const percentage = maxPts > 0 ? Math.round((State.score / maxPts) * 100) : 0;
+    const savedAlias = localStorage.getItem('brainfit_last_alias') || '';
+
+    let errorHTML = '';
+    if (errorInfo) {
+      errorHTML = `
+        <div style="background:#fee2e2; border:2px solid #f87171; border-radius:14px; padding:10px 12px; margin-bottom:12px; text-align:left; font-size:13px; color:#991b1b; line-height:1.4;">
+          <div style="font-weight:900; margin-bottom:2px;">⚠️ ${errorInfo.title}</div>
+          <div>${errorInfo.message}</div>
+          ${errorInfo.showRedirect ? `
+            <button type="button" class="btn-neutral" onclick="Engine.submitWithRedirect()" style="font-size:13px; font-weight:800; padding:6px 10px; margin-top:8px; width:100%; border-radius:10px;">
+              🔄 Probar inicio con redirección
+            </button>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    document.getElementById('screen-container').innerHTML = `
+      <div class="card c" style="padding:16px;">
+        <div style="font-size:36px;margin-bottom:4px;">🏆</div>
+        <h2 style="font-size:22px;color:#831843;margin:0 0 6px 0;font-weight:900;">Subir al Ranking Global</h2>
+        <div style="display:inline-block; align-self:center; font-size:14px; color:#9d174d; background:#fdf2f8; border:2px solid #fbcfe8; border-radius:12px; padding:4px 12px; font-weight:800; margin-bottom:12px;">
+          Nivel ${diffConfig.name}: <strong>${percentage}%</strong> (${State.score} pts)
+        </div>
+
+        ${errorHTML}
+
+        <!-- Opción 1: Google -->
+        <button type="button" onclick="Engine.submitWithGoogle()" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; background:#ffffff; color:#374151; font-size:16px; padding:10px 16px; border-radius:16px; border:2.5px solid #e5e7eb; box-shadow:0 4px 0 #d1d5db; cursor:pointer; font-weight:800; margin-bottom:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.02h3.87c2.26-2.09 3.675-5.17 3.675-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.02c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.24v3.12C3.26 21.36 7.35 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.61H1.24C.45 8.18 0 9.94 0 12s.45 3.82 1.24 5.39l4.03-3.12z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.24 6.61l4.03 3.12c.95-2.85 3.6-4.98 6.73-4.98z"/></svg>
+          Subir con Google
+        </button>
+
+        <div style="display:flex; align-items:center; margin:10px 0; color:#db2777; font-size:12px; font-weight:800;">
+          <div style="flex-grow:1; height:1px; background:#fbcfe8;"></div>
+          <span style="padding:0 8px;">O CON TU NOMBRE / ALIAS</span>
+          <div style="flex-grow:1; height:1px; background:#fbcfe8;"></div>
+        </div>
+
+        <!-- Opción 2: Guardar con Nombre / Alias -->
+        <form onsubmit="event.preventDefault(); Engine.submitWithAlias(document.getElementById('player-alias-input').value);" style="margin-bottom:8px;">
+          <input id="player-alias-input" type="text" maxlength="16" placeholder="Escribe tu apodo o nombre" value="${savedAlias}" style="width:100%; padding:10px 14px; font-size:16px; font-weight:700; border-radius:14px; border:2px solid #fbcfe8; outline:none; text-align:center; box-sizing:border-box; margin-bottom:8px; color:#831843; background:#fff;">
+          <button type="submit" class="btn-green" style="font-size:16px; padding:10px 18px; width:100%; border-radius:14px;">
+            👤 Guardar con este nombre
+          </button>
+        </form>
+
+        <button type="button" class="btn-neutral" onclick="Engine.renderRankingCarousel()" style="font-size:14px; padding:8px 14px; width:100%; margin-top:2px;">
+          👁️ Ver ranking sin guardar
+        </button>
+        <button type="button" class="reset-btn mt-4" onclick="Engine.renderEndScreen()">Volver</button>
+      </div>
+    `;
+  },
+
+  async submitWithGoogle() {
+    try {
       document.getElementById('screen-container').innerHTML = `
         <div class="card c">
           <div style="font-size:64px;margin-bottom:10px;" class="spin">⏳</div>
-          <h2 style="font-size:24px;color:#be185d;margin:0;font-weight:900;">Conectando...</h2>
+          <h2 style="font-size:24px;color:#be185d;margin:0;font-weight:900;">Conectando con Google...</h2>
         </div>`;
-      
-      // 2. Iniciar sesión con Google
+
       const user = await RankingService.login();
-      
-      // 3. Mostrar guardando...
+      await this.saveScoreAndShowRanking(user);
+    } catch (e) {
+      console.error("Error en submitWithGoogle:", e);
+      let errorInfo = {
+        title: "No se pudo iniciar sesión con Google",
+        message: "Ocurrió un problema durante la autenticación.",
+        showRedirect: false
+      };
+
+      if (e.code === 'auth/popup-blocked') {
+        errorInfo = {
+          title: "Ventana emergente bloqueada",
+          message: "Tu navegador ha bloqueado la ventana emergente de Google. Puedes probar el inicio con redirección o guardar con tu nombre/alias abajo.",
+          showRedirect: true
+        };
+      } else if (e.code === 'auth/unauthorized-domain') {
+        errorInfo = {
+          title: "Dominio no autorizado en Firebase",
+          message: `El dominio actual (${window.location.hostname}) no está autorizado en la consola de Firebase Authentication. Guarda tu puntuación abajo con tu nombre o alias.`,
+          showRedirect: false
+        };
+      } else if (e.code === 'auth/popup-closed-by-user' || e.code === 'auth/cancelled-popup-request') {
+        errorInfo = {
+          title: "Inicio cancelado",
+          message: "Has cerrado la ventana de inicio de sesión de Google.",
+          showRedirect: false
+        };
+      } else if (e.code === 'auth/network-request-failed') {
+        errorInfo = {
+          title: "Error de red",
+          message: "No se pudo conectar con el servidor de autenticación. Comprueba tu conexión.",
+          showRedirect: false
+        };
+      } else if (e.message) {
+        errorInfo.message = e.message;
+      }
+
+      this.renderScoreSubmissionOptions(errorInfo);
+    }
+  },
+
+  async submitWithAlias(alias) {
+    const cleanAlias = (alias || '').trim();
+    if (!cleanAlias) {
+      alert('Por favor, escribe un nombre o apodo para guardar tu puntuación.');
+      return;
+    }
+    localStorage.setItem('brainfit_last_alias', cleanAlias);
+    const user = RankingService.createGuestUser(cleanAlias);
+    await this.saveScoreAndShowRanking(user);
+  },
+
+  async submitWithRedirect() {
+    try {
+      await RankingService.loginWithRedirect({
+        score: State.score,
+        diffKey: State.diffKey
+      });
+    } catch (e) {
+      console.error("Error en redirección:", e);
+      this.renderScoreSubmissionOptions({
+        title: "Error de redirección",
+        message: e.message || "No se pudo iniciar la redirección.",
+        showRedirect: false
+      });
+    }
+  },
+
+  async saveScoreAndShowRanking(user) {
+    try {
       document.getElementById('screen-container').innerHTML = `
         <div class="card c">
           <div style="font-size:64px;margin-bottom:10px;" class="pulse">💾</div>
-          <h2 style="font-size:24px;color:#be185d;margin:0;font-weight:900;">Guardando tu puntuación...</h2>
+          <h2 style="font-size:24px;color:#be185d;margin:0 0 8px 0;font-weight:900;">Guardando tu puntuación...</h2>
+          <p style="font-size:16px;color:#831843;margin:0;">Jugador: <strong>${user.name}</strong></p>
         </div>`;
 
-      // 4. Guardar puntuación
       await RankingService.saveScore(user, State.diffKey, State.score);
-      
-      // 5. Iniciar carrusel
       this.renderRankingCarousel();
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error("Error guardando puntuación:", err);
       document.getElementById('screen-container').innerHTML = `
         <div class="card c">
-          <div style="font-size:64px;margin-bottom:10px;">❌</div>
-          <h2 style="font-size:24px;color:#be185d;margin:0 0 10px 0;font-weight:900;">Error de conexión</h2>
-          <p style="font-size:16px;color:#831843;">No se pudo acceder al ranking.</p>
+          <div style="font-size:64px;margin-bottom:10px;">⚠️</div>
+          <h2 style="font-size:22px;color:#be185d;margin:0 0 10px 0;font-weight:900;">Error al guardar</h2>
+          <p style="font-size:15px;color:#831843;margin-bottom:16px;">No se pudo registrar la puntuación en la base de datos.</p>
+          <button class="btn-green mb-2" onclick="Engine.renderRankingCarousel()">Ver Ranking de todos modos</button>
           <button class="reset-btn mt-4" onclick="Engine.renderEndScreen()">Volver</button>
         </div>`;
     }

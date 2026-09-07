@@ -65,5 +65,42 @@ describe('Brain-Fit 3000 Engine', () => {
     Engine.renderEndScreen();
     const container = document.getElementById('screen-container');
     expect(container.innerHTML).toContain('<strong>Fácil</strong>');
+    expect(container.innerHTML).toContain('Subir puntuación al Ranking');
+  });
+
+  it('renders score submission options with Google and alias form', () => {
+    Engine.initSession('easy');
+    State.score = 50;
+    Engine.renderScoreSubmissionOptions();
+    const container = document.getElementById('screen-container');
+    expect(container.innerHTML).toContain('Subir al Ranking Global');
+    expect(container.innerHTML).toContain('Subir con Google');
+    expect(container.innerHTML).toContain('player-alias-input');
+    expect(container.innerHTML).toContain('Guardar con este nombre');
+    expect(container.innerHTML).toContain('Ver ranking sin guardar');
+  });
+
+  it('renders descriptive error notification when errorInfo is passed to renderScoreSubmissionOptions', () => {
+    Engine.initSession('medium');
+    State.score = 80;
+    Engine.renderScoreSubmissionOptions({
+      title: 'Ventana emergente bloqueada',
+      message: 'El navegador ha bloqueado la ventana.',
+      showRedirect: true
+    });
+    const container = document.getElementById('screen-container');
+    expect(container.innerHTML).toContain('Ventana emergente bloqueada');
+    expect(container.innerHTML).toContain('El navegador ha bloqueado la ventana.');
+    expect(container.innerHTML).toContain('Probar inicio con redirección');
+  });
+
+  it('saves score with alias using RankingService', async () => {
+    Engine.initSession('easy');
+    State.score = 120;
+    await Engine.submitWithAlias('Gamer123');
+    const savedUser = JSON.parse(localStorage.getItem('brainfit_guest_user'));
+    expect(savedUser.name).toBe('Gamer123');
+    expect(savedUser.isGuest).toBe(true);
+    expect(localStorage.getItem('brainfit_last_alias')).toBe('Gamer123');
   });
 });

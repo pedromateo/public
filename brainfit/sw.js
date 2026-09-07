@@ -6,6 +6,8 @@ const urlsToCache = [
   './js/data.js',
   './js/engine.js',
   './js/games.js',
+  './js/ranking.js',
+  './js/firebase-config.js',
   './js/main.js',
   './assets/icon.svg',
   './manifest.json',
@@ -37,6 +39,18 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Ignorar peticiones que no sean GET
+  if (event.request.method !== 'GET') return;
+
+  const url = event.request.url;
+  // Ignorar llamadas a autenticación y Firebase API para evitar interferencias en login
+  if (url.includes('identitytoolkit.googleapis.com') ||
+      url.includes('securetoken.googleapis.com') ||
+      url.includes('accounts.google.com') ||
+      url.includes('firestore.googleapis.com')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request);
