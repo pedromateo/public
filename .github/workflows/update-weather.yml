@@ -30,5 +30,5 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add murmeteo/forecast.json
+        git add murmeteo/forecasts/ murmeteo/forecast.json
         git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar pronóstico AEMET" && git push)

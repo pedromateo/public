@@ -3,12 +3,73 @@ class AemetService {
     this.config = config;
   }
 
+  static getCandidateForecastFiles(count = 5, now = new Date()) {
+    const candidates = [];
+    const getParts = (d) => {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Madrid',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        hour12: false
+      }).formatToParts(d);
+      const y = parts.find(p => p.type === 'year').value;
+      const m = parts.find(p => p.type === 'month').value;
+      const dStr = parts.find(p => p.type === 'day').value;
+      const rawHour = parseInt(parts.find(p => p.type === 'hour').value, 10);
+      const hour = rawHour === 24 ? 0 : rawHour;
+      return { y, m, d: dStr, hour };
+    };
+
+    const initial = getParts(now);
+    let currentIsPm = initial.hour >= 12;
+    let currentDate = new Date(Date.UTC(parseInt(initial.y, 10), parseInt(initial.m, 10) - 1, parseInt(initial.d, 10), 12, 0, 0));
+
+    for (let i = 0; i < count; i++) {
+      const y = currentDate.getUTCFullYear();
+      const m = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
+      const d = String(currentDate.getUTCDate()).padStart(2, '0');
+      const period = currentIsPm ? 'pm' : 'am';
+      candidates.push(`forecast_${y}${m}${d}_${period}.json`);
+
+      if (currentIsPm) {
+        currentIsPm = false;
+      } else {
+        currentIsPm = true;
+        currentDate.setUTCDate(currentDate.getUTCDate() - 1);
+      }
+    }
+    return candidates;
+  }
+
   async getForecast() {
-    // 1. Intentar cargar el archivo estático (forecast.json) generado por GitHub Actions
+    // 1. Intentar cargar los archivos estáticos rotativos (forecasts/forecast_YYYYMMDD_xx.json)
     if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
+      const candidates = AemetService.getCandidateForecastFiles(5);
+      const cacheBuster = Date.now();
+
+      for (const filename of candidates) {
+        try {
+          const res = await fetch(`./forecasts/${filename}?t=${cacheBuster}`, {
+            cache: 'no-store',
+            headers: {
+              'Cache-Control': 'no-cache',
+              'Pragma': 'no-cache'
+            }
+          });
+          if (res.ok) {
+            const lastModified = res.headers.get('last-modified');
+            const data = await res.json();
+            return this._parseAemetResponse(data, lastModified);
+          }
+        } catch (e) {
+          // Continuar con el siguiente candidato si hay error de red o 404
+        }
+      }
+
+      // Fallback a forecast.json tradicional en la raíz si ninguno de los rotativos responde
       try {
-        // Cache-busting para obligar al Service Worker a usar la regla NetworkFirst en lugar de la caché del navegador
-        const cacheBuster = Date.now();
         const res = await fetch(`./forecast.json?t=${cacheBuster}`, {
           cache: 'no-store',
           headers: {
@@ -19,7 +80,6 @@ class AemetService {
         if (res.ok) {
           const lastModified = res.headers.get('last-modified');
           const data = await res.json();
-          // El archivo forecast.json guarda la respuesta cruda de AEMET
           return this._parseAemetResponse(data, lastModified);
         }
       } catch (e) {

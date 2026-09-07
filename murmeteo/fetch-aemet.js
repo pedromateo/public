@@ -71,12 +71,74 @@ async function fetchAemet() {
         forecastData[0].ficheroCreado = new Date().toISOString();
     }
     
-    const outputPath = path.join(__dirname, 'forecast.json');
-    fs.writeFileSync(outputPath, JSON.stringify(forecastData, null, 2));
-    console.log('Pronóstico guardado exitosamente en forecast.json');
+    // 1. Guardar en directorio forecasts con formato forecast_YYYYMMDD_am/pm.json
+    const forecastsDir = path.join(__dirname, 'forecasts');
+    if (!fs.existsSync(forecastsDir)) {
+        fs.mkdirSync(forecastsDir, { recursive: true });
+    }
+
+    const { filename } = getMadridSlot();
+    const slotPath = path.join(forecastsDir, filename);
+    fs.writeFileSync(slotPath, JSON.stringify(forecastData, null, 2));
+    console.log(`Pronóstico guardado exitosamente en forecasts/${filename}`);
+
+    // 2. Mantener copia en forecast.json para retrocompatibilidad
+    const legacyPath = path.join(__dirname, 'forecast.json');
+    fs.writeFileSync(legacyPath, JSON.stringify(forecastData, null, 2));
+    console.log('Copia de retrocompatibilidad guardada en forecast.json');
+
+    // 3. Purgar pronósticos antiguos dejando como máximo 5 ficheros
+    pruneOldForecasts(forecastsDir, 5);
 }
 
-fetchAemet().catch(e => {
-    console.error('El script de AEMET falló:', e);
-    process.exit(1);
-});
+function getMadridSlot(date = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Madrid',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        hour12: false
+    }).formatToParts(date);
+    
+    const y = parts.find(p => p.type === 'year').value;
+    const m = parts.find(p => p.type === 'month').value;
+    const d = parts.find(p => p.type === 'day').value;
+    const rawHour = parseInt(parts.find(p => p.type === 'hour').value, 10);
+    const hour = rawHour === 24 ? 0 : rawHour;
+    const period = hour < 12 ? 'am' : 'pm';
+    
+    return {
+        slot: `${y}${m}${d}_${period}`,
+        filename: `forecast_${y}${m}${d}_${period}.json`
+    };
+}
+
+function pruneOldForecasts(dirPath, maxFiles = 5) {
+    if (!fs.existsSync(dirPath)) return;
+    const files = fs.readdirSync(dirPath)
+        .filter(f => /^forecast_\d{8}_(am|pm)\.json$/.test(f))
+        .sort()
+        .reverse();
+        
+    if (files.length > maxFiles) {
+        const toDelete = files.slice(maxFiles);
+        for (const file of toDelete) {
+            fs.unlinkSync(path.join(dirPath, file));
+            console.log(`Eliminado pronóstico antiguo: ${file}`);
+        }
+    }
+}
+
+if (require.main === module) {
+    fetchAemet().catch(e => {
+        console.error('El script de AEMET falló:', e);
+        process.exit(1);
+    });
+}
+
+module.exports = {
+    fetchAemet,
+    getMadridSlot,
+    pruneOldForecasts
+};
