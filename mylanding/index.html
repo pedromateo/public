@@ -309,6 +309,107 @@
     .pill-pozo .btn-dot { background: #06b6d4; }
     .pill-pozow .btn-dot { background: #f59e0b; }
 
+    /* Tarjeta de Próximos Partidos */
+    .matches-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 16px 14px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .matches-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .matches-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .matches-link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .matches-link:active,
+    .matches-link:hover {
+      color: var(--text-main);
+    }
+
+    .matches-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .match-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      border-radius: 14px;
+      gap: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .match-team-wrap {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .match-rival {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-title);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .match-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .match-badge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .match-date {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .match-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
     /* Pantallas muy pequeñas (< 360px) */
     @media (max-width: 350px) {
       .app-grid {
@@ -428,6 +529,11 @@
           <span class="app-name">TikTok</span>
         </a>
 
+        <a href="https://chatgpt.com/" class="app-item">
+          <div class="app-icon-wrap"><img src="./index_files/chatgpt.svg" alt="ChatGPT" class="app-icon" loading="lazy"></div>
+          <span class="app-name">ChatGPT</span>
+        </a>
+
         <a href="https://copilot.microsoft.com/" class="app-item">
           <div class="app-icon-wrap"><img src="./index_files/favicon.svg" alt="Copilot" class="app-icon" loading="lazy"></div>
           <span class="app-name">Copilot</span>
@@ -516,6 +622,71 @@
           <span>POZOW <span class="btn-subtext">Villaricos / Viento y Olas</span></span>
         </a>
       </nav>
+    </section>
+
+    <!-- Tarjeta de Próximos Partidos Real Madrid -->
+    <section class="matches-card">
+      <div class="matches-header">
+        <span class="matches-title">Partidos Real Madrid</span>
+        <a href="https://www.realmadrid.com/es-ES/futbol/primer-equipo/calendario" target="_blank" rel="noopener noreferrer" class="matches-link">Calendario ↗</a>
+      </div>
+
+      <div class="matches-list">
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Real Madrid vs Inter Milán</span>
+            <span class="match-meta">Champions League · Bernabéu</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">8 Sep</span>
+            <span class="match-time">21:00</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Real Madrid vs Rayo Vallecano</span>
+            <span class="match-meta">LaLiga · Bernabéu</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">12 Sep</span>
+            <span class="match-time">21:00</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Elche CF vs Real Madrid</span>
+            <span class="match-meta">LaLiga · Martínez Valero</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">15 Sep</span>
+            <span class="match-time">21:30</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Atlético Madrid vs Real Madrid</span>
+            <span class="match-meta">LaLiga · Metropolitano</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">20 Sep</span>
+            <span class="match-time">16:15</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Real Madrid vs Arsenal</span>
+            <span class="match-meta">Champions League · Bernabéu</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">29 Sep</span>
+            <span class="match-time">21:00</span>
+          </div>
+        </div>
+      </div>
     </section>
 
   </div>
