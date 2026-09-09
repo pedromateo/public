@@ -296,6 +296,18 @@ if (typeof window !== 'undefined') {
     }
   });
 
+  function resetPullIndicator() {
+    if (elements.ptrContainer) {
+      elements.ptrContainer.style.height = '0px';
+    }
+    setTimeout(() => {
+      if (elements.ptrIcon) {
+        elements.ptrIcon.classList.remove('spin');
+        elements.ptrIcon.classList.remove('flip');
+      }
+    }, 200);
+  }
+
   if (elements.btnRetry) elements.btnRetry.addEventListener('click', initApp);
 
   if (typeof document !== 'undefined') {
