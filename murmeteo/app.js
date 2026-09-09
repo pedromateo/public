@@ -9,7 +9,7 @@ let touchCurrentY = 0;
 let isPulling = false;
 const PULL_THRESHOLD = 65;
 
-const elements = {
+const elements = (typeof document !== 'undefined') ? {
   loader: document.getElementById('main-loader'),
   dataContainer: document.getElementById('data-container'),
   errorOverlay: document.getElementById('error-overlay'),
@@ -46,7 +46,7 @@ const elements = {
   ptrContainer: document.getElementById('ptr-container'),
   ptrIcon: document.getElementById('ptr-icon'),
   ptrText: document.getElementById('ptr-text')
-};
+} : {};
 
 async function loadConfig() {
   try {
@@ -111,6 +111,29 @@ function showCriticalError() {
   elements.errorOverlay.classList.add('active');
   elements.loader.style.display = 'none';
   elements.dataContainer.style.display = 'none';
+}
+
+function generateHourBadges(hourData, tConfig) {
+  const badges = [];
+  if (!tConfig) return badges;
+  
+  if (tConfig.heat && hourData.temp >= tConfig.heat.min_temp_c) {
+    badges.push(`<span class="badge ${tConfig.heat.badge_class}"><span class="badge-icon">${tConfig.heat.icon}</span></span>`);
+  } else if (tConfig.cold && hourData.temp <= tConfig.cold.max_temp_c) {
+    badges.push(`<span class="badge ${tConfig.cold.badge_class}"><span class="badge-icon">${tConfig.cold.icon}</span></span>`);
+  }
+  
+  if (tConfig.rain && hourData.precip >= tConfig.rain.min_precip_mm) {
+    const lbl = tConfig.rain.label_format.replace('{precip}', hourData.precip);
+    badges.push(`<span class="badge ${tConfig.rain.badge_class}"><span class="badge-icon">${tConfig.rain.icon}</span><span class="badge-text">${lbl}</span></span>`);
+  }
+  
+  if (tConfig.wind && (hourData.windSpeed >= tConfig.wind.min_speed_kmh || hourData.windGust >= tConfig.wind.min_gust_kmh)) {
+    const lbl = tConfig.wind.label_format.replace('{speed}', hourData.windSpeed);
+    badges.push(`<span class="badge ${tConfig.wind.badge_class}"><span class="badge-icon">${tConfig.wind.icon}</span><span class="badge-text">${lbl}</span></span>`);
+  }
+
+  return badges;
 }
 
 function renderApp(data, isOffline) {
@@ -212,24 +235,7 @@ function renderApp(data, isOffline) {
     `;
     
     // Evaluate thresholds
-    let badges = [];
-    const tConfig = config.thresholds;
-    
-    if (hourData.temp >= tConfig.heat.min_temp_c) {
-      badges.push(`<span class="badge ${tConfig.heat.badge_class}"><span class="badge-icon">${tConfig.heat.icon}</span></span>`);
-    } else if (hourData.temp <= tConfig.cold.max_temp_c) {
-      badges.push(`<span class="badge ${tConfig.cold.badge_class}"><span class="badge-icon">${tConfig.cold.icon}</span></span>`);
-    }
-    
-    if (hourData.precip >= tConfig.rain.min_precip_mm) {
-      const lbl = tConfig.rain.label_format.replace('{precip}', hourData.precip);
-      badges.push(`<span class="badge ${tConfig.rain.badge_class}"><span class="badge-icon">${tConfig.rain.icon}</span><span class="badge-text">${lbl}</span></span>`);
-    }
-    
-    if (hourData.windSpeed >= tConfig.wind.min_speed_kmh || hourData.windGust >= tConfig.wind.min_gust_kmh) {
-      const lbl = tConfig.wind.label_format.replace('{speed}', hourData.windSpeed);
-      badges.push(`<span class="badge ${tConfig.wind.badge_class}"><span class="badge-icon">${tConfig.wind.icon}</span><span class="badge-text">${lbl}</span></span>`);
-    }
+    const badges = generateHourBadges(hourData, config?.thresholds);
     
     let rightHtml = `
       <div class="hour-right">
@@ -243,94 +249,94 @@ function renderApp(data, isOffline) {
 }
 
 // Pull to refresh logic
-window.addEventListener('touchstart', (e) => {
-  if (window.scrollY === 0) {
-    touchStartY = e.touches[0].clientY;
-    isPulling = true;
-  }
-}, { passive: true });
-
-window.addEventListener('touchmove', (e) => {
-  if (!isPulling || window.scrollY > 0) return;
-  touchCurrentY = e.touches[0].clientY;
-  const distance = Math.max(0, touchCurrentY - touchStartY);
-  if (distance > 0) {
-    const pullHeight = Math.min(distance * 0.45, 80);
-    elements.ptrContainer.style.height = `${pullHeight}px`;
-    elements.ptrContainer.style.opacity = pullHeight / 80;
-    
-    if (distance >= PULL_THRESHOLD) {
-      elements.ptrIcon.classList.add('flip');
-      elements.ptrText.textContent = config.ui.pull_to_refresh.release;
-    } else {
-      elements.ptrIcon.classList.remove('flip');
-      elements.ptrText.textContent = config.ui.pull_to_refresh.pulling;
+if (typeof window !== 'undefined') {
+  window.addEventListener('touchstart', (e) => {
+    if (window.scrollY === 0) {
+      touchStartY = e.touches[0].clientY;
+      isPulling = true;
     }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isPulling || window.scrollY > 0) return;
+    touchCurrentY = e.touches[0].clientY;
+    const distance = Math.max(0, touchCurrentY - touchStartY);
+    if (distance > 0) {
+      const pullHeight = Math.min(distance * 0.45, 80);
+      if (elements.ptrContainer) {
+        elements.ptrContainer.style.height = `${pullHeight}px`;
+        elements.ptrContainer.style.opacity = pullHeight / 80;
+      }
+      
+      if (distance >= PULL_THRESHOLD) {
+        if (elements.ptrIcon) elements.ptrIcon.classList.add('flip');
+        if (elements.ptrText) elements.ptrText.textContent = config?.ui?.pull_to_refresh?.release;
+      } else {
+        if (elements.ptrIcon) elements.ptrIcon.classList.remove('flip');
+        if (elements.ptrText) elements.ptrText.textContent = config?.ui?.pull_to_refresh?.pulling;
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', async () => {
+    if (!isPulling) return;
+    const distance = touchCurrentY - touchStartY;
+    isPulling = false;
+    
+    if (distance >= PULL_THRESHOLD && window.scrollY === 0) {
+      if (elements.ptrContainer) elements.ptrContainer.style.height = '60px';
+      if (elements.ptrIcon) {
+        elements.ptrIcon.classList.remove('flip');
+        elements.ptrIcon.classList.add('spin');
+      }
+      if (elements.ptrText) elements.ptrText.textContent = config?.ui?.pull_to_refresh?.refreshing;
+      await initApp();
+    } else {
+      resetPullIndicator();
+    }
+  });
+
+  if (elements.btnRetry) elements.btnRetry.addEventListener('click', initApp);
+
+  if (typeof document !== 'undefined') {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        // Refresh if older than 15 mins
+        if (Date.now() - lastRefreshTime > 15 * 60 * 1000) {
+          initApp();
+        }
+      }
+    });
   }
-}, { passive: true });
 
-window.addEventListener('touchend', async () => {
-  if (!isPulling) return;
-  const distance = touchCurrentY - touchStartY;
-  isPulling = false;
-  
-  if (distance >= PULL_THRESHOLD && window.scrollY === 0) {
-    elements.ptrContainer.style.height = '60px';
-    elements.ptrIcon.classList.remove('flip');
-    elements.ptrIcon.classList.add('spin');
-    elements.ptrText.textContent = config.ui.pull_to_refresh.refreshing;
-    await initApp();
-  } else {
-    resetPullIndicator();
-  }
-});
-
-function resetPullIndicator() {
-  elements.ptrContainer.style.height = '0px';
-  setTimeout(() => {
-    elements.ptrIcon.classList.remove('spin');
-    elements.ptrIcon.classList.remove('flip');
-  }, 200);
-}
-
-// Event Listeners
-elements.btnRetry.addEventListener('click', initApp);
-
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    // Refresh if older than 15 mins
-    if (Date.now() - lastRefreshTime > 15 * 60 * 1000) {
+  // Setup periodic refresh (20 mins)
+  setInterval(() => {
+    if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
       initApp();
     }
-  }
-});
+  }, 20 * 60 * 1000);
 
-// Setup periodic refresh (20 mins)
-setInterval(() => {
-  if (document.visibilityState === 'visible') {
-    initApp();
-  }
-}, 20 * 60 * 1000);
+  // PWA Prompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Wait a few seconds before showing
+    setTimeout(() => {
+      if (elements.pwaPrompt) elements.pwaPrompt.classList.add('active');
+    }, 3000);
+  });
 
-// PWA Prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  // Wait a few seconds before showing
-  setTimeout(() => {
-    elements.pwaPrompt.classList.add('active');
-  }, 3000);
-});
-
-elements.pwaBtn.addEventListener('click', async () => {
-  elements.pwaPrompt.classList.remove('active');
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
+  if (elements.pwaBtn) {
+    elements.pwaBtn.addEventListener('click', async () => {
+      if (elements.pwaPrompt) elements.pwaPrompt.classList.remove('active');
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      }
+    });
   }
-});
+}
 
 // Toast Notification Helper
 let toastTimeout;
@@ -549,10 +555,6 @@ if (elements.infoModal) {
     if (e.target === elements.infoModal) closeInfoModal();
   });
 }
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeInfoModal();
-});
-
 if (elements.modalInstallBtn) {
   elements.modalInstallBtn.addEventListener('click', async () => {
     if (deferredPrompt) {
@@ -564,5 +566,17 @@ if (elements.modalInstallBtn) {
   });
 }
 
-// Boot
-window.addEventListener('DOMContentLoaded', initApp);
+if (typeof window !== 'undefined') {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeInfoModal();
+  });
+
+  window.generateHourBadges = generateHourBadges;
+
+  // Boot
+  window.addEventListener('DOMContentLoaded', initApp);
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { generateHourBadges };
+}

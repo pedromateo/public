@@ -15,7 +15,7 @@
   - Temperatura máxima y mínima del día.
   - Velocidad y rachas de viento en km/h.
   - Precipitaciones acumuladas (mm) e iconos de estado del cielo diurnos y nocturnos.
-- **🏷️ Badges condicionales inteligentes**: Avisos visuales automáticos configurables por umbrales de calor ($\ge 30^\circ\text{C}$), frío ($\le 9^\circ\text{C}$), lluvia ($\ge 0.1\text{ mm}$) y viento ($\ge 15\text{ km/h}$).
+- **🏷️ Badges condicionales inteligentes**: Avisos visuales automáticos configurables por umbrales de calor ($\ge 30^\circ\text{C}$), frío ($\le 9^\circ\text{C}$), lluvia ($\ge 0.1\text{ mm}$) y viento ($\ge 20\text{ km/h}$ o rachas $\ge 25\text{ km/h}$).
 - **🔒 Seguridad de API Key**: Las claves secretas se gestionan en el archivo `.env` o variables de entorno en el servidor ([`server.js`](server.js)), evitando que se expongan en el navegador o en repositorios públicos.
 - **📱 PWA 100% instalable y Offline-First**:
   - Service Worker con estrategia de caché inteligente para funcionamiento sin conexión.
@@ -96,7 +96,7 @@ El archivo [`config.json`](config.json) permite personalizar la interfaz y los u
     "heat": { "min_temp_c": 30 },
     "cold": { "max_temp_c": 9 },
     "rain": { "min_precip_mm": 0.1 },
-    "wind": { "min_speed_kmh": 15, "min_gust_kmh": 20 }
+    "wind": { "min_speed_kmh": 20, "min_gust_kmh": 25 }
   }
 }
 ```

@@ -224,10 +224,25 @@ class AemetService {
       storeValues(d.temperatura, 'temp');
       storeValues(d.sensTermica, 'sensTermica');
       storeValues(d.humedadRelativa, 'humedad');
-      storeValues(d.vientoAndRachaMax, 'vientoRacha');
+      storeValues(d.nieve, 'nieve');
+
+      // AEMET OpenData puede devolver viento y racha en vientoAndRachaMax con múltiples entradas por periodo
+      // (una entrada con 'velocidad' y otra con 'value' para la racha máxima), o en arrays separados (viento, rachaMax).
+      if (Array.isArray(d.vientoAndRachaMax)) {
+        for (const item of d.vientoAndRachaMax) {
+          const p = parseInt(item.periodo, 10);
+          if (isNaN(p)) continue;
+          if (!mapByPeriod[p]) mapByPeriod[p] = {};
+          if (item.velocidad !== undefined) {
+            mapByPeriod[p].viento = item;
+          }
+          if (item.value !== undefined || item.rachaMax !== undefined) {
+            mapByPeriod[p].racha = item;
+          }
+        }
+      }
       storeValues(d.viento, 'viento');
       storeValues(d.rachaMax, 'racha');
-      storeValues(d.nieve, 'nieve');
 
       for (let h = 0; h < 24; h++) {
         const itemDate = new Date(year, month - 1, day, h);
@@ -262,21 +277,19 @@ class AemetService {
         // Wind & gust
         let windSpeed = 0;
         let windGust = 0;
-        if (dataHour.vientoRacha) {
-          const v = dataHour.vientoRacha;
-          const vel = Array.isArray(v.velocidad) ? v.velocidad[0] : v.velocidad;
-          windSpeed = vel ? parseInt(vel, 10) || 0 : 0;
-          const racha = Array.isArray(v.rachaMax) ? v.rachaMax[0] : v.rachaMax;
-          windGust = racha ? parseInt(racha, 10) || windSpeed : windSpeed;
+        if (dataHour.viento) {
+          const vel = Array.isArray(dataHour.viento.velocidad) ? dataHour.viento.velocidad[0] : dataHour.viento.velocidad;
+          windSpeed = vel !== undefined && vel !== "" ? parseInt(vel, 10) || 0 : 0;
+        }
+        if (dataHour.racha) {
+          const rawRacha = dataHour.racha.value !== undefined ? dataHour.racha.value : dataHour.racha.rachaMax;
+          const rachaVal = Array.isArray(rawRacha) ? rawRacha[0] : rawRacha;
+          windGust = rachaVal !== undefined && rachaVal !== "" ? parseInt(rachaVal, 10) || windSpeed : windSpeed;
         } else {
-          if (dataHour.viento) {
-            const vel = Array.isArray(dataHour.viento.velocidad) ? dataHour.viento.velocidad[0] : dataHour.viento.velocidad;
-            windSpeed = vel ? parseInt(vel, 10) || 0 : 0;
-          }
-          if (dataHour.racha) {
-            const racha = Array.isArray(dataHour.racha.value) ? dataHour.racha.value[0] : dataHour.racha.value;
-            windGust = racha ? parseInt(racha, 10) || windSpeed : windSpeed;
-          }
+          windGust = windSpeed;
+        }
+        if (windGust < windSpeed) {
+          windGust = windSpeed;
         }
 
         // Condition & icon
