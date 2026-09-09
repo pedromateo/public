@@ -1,4 +1,4 @@
-// murmeteo-static-v1
+// murmeteo-static-v2
 self.addEventListener('install', event => {
   self.skipWaiting();
 });
