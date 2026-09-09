@@ -8,6 +8,7 @@ try {
   const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
   console.assert(config.location.name === "Murcia", "Error: Location is not Murcia");
   console.assert(config.thresholds.heat.min_temp_c === 30, "Error: Heat threshold changed");
+  console.assert(config.thresholds.wind.min_gust_kmh === 40, "Error: Wind gust threshold is not 40");
   console.log("✅ Configuración JSON válida y leída correctamente.");
 } catch(e) {
   console.error("❌ Error leyendo config.json", e);
@@ -53,11 +54,11 @@ console.assert(badgesWindSpeed[0].includes(tConfig.wind.icon), "Badge debe conte
 console.assert(badgesWindSpeed[0].includes('<span class="badge-text">21 km/h</span>'), "Badge de viento debe mostrar '21 km/h'");
 
 // Viento por racha máxima con viento bajo
-const testWindGust = { temp: 22, precip: 0, windSpeed: 12, windGust: 28 };
+const testWindGust = { temp: 22, precip: 0, windSpeed: 12, windGust: 42 };
 const badgesWindGust = generateHourBadges(testWindGust, tConfig);
-console.assert(badgesWindGust.length === 1, "Racha de 28 km/h debe activar el badge de viento");
-console.assert(badgesWindGust[0].includes('<span class="badge-text">Racha 28 km/h</span>'), "Badge activado por racha debe indicar 'Racha 28 km/h'");
-console.assert(badgesWindGust[0].includes('title="Viento sostenido: 12 km/h, Racha máxima: 28 km/h"'), "Badge debe tener tooltip explicativo");
+console.assert(badgesWindGust.length === 1, "Racha de 42 km/h debe activar el badge de viento");
+console.assert(badgesWindGust[0].includes('<span class="badge-text">Rachas 42 km/h</span>'), "Badge activado por racha debe indicar 'Rachas 42 km/h'");
+console.assert(badgesWindGust[0].includes('title="Viento sostenido: 12 km/h, Rachas: 42 km/h"'), "Badge debe tener tooltip explicativo");
 
 // 2.2 Test límites y umbrales estrictos (límites exactos y justo debajo)
 // Calor: 29°C no activa, 30°C sí activa
@@ -72,15 +73,15 @@ console.assert(generateHourBadges({ temp: 9, precip: 0, windSpeed: 0, windGust: 
 console.assert(generateHourBadges({ temp: 20, precip: 0.05, windSpeed: 0, windGust: 0 }, tConfig).length === 0, "0.05 mm no debe activar lluvia");
 console.assert(generateHourBadges({ temp: 20, precip: 0.1, windSpeed: 0, windGust: 0 }, tConfig).length === 1, "0.1 mm debe activar lluvia");
 
-// Viento: 19 km/h con racha de 24 km/h no activa, 20 km/h o racha 25 km/h sí activa
-const testWindJustBelow = { temp: 20, precip: 0, windSpeed: 19, windGust: 24 };
-console.assert(generateHourBadges(testWindJustBelow, tConfig).length === 0, "Viento 19 km/h y racha 24 km/h no deben activar badge");
+// Viento: 19 km/h con racha de 39 km/h no activa, 20 km/h o racha 40 km/h sí activa
+const testWindJustBelow = { temp: 20, precip: 0, windSpeed: 19, windGust: 39 };
+console.assert(generateHourBadges(testWindJustBelow, tConfig).length === 0, "Viento 19 km/h y racha 39 km/h no deben activar badge");
 
 const testWindAtSpeedLimit = { temp: 20, precip: 0, windSpeed: 20, windGust: 15 };
 console.assert(generateHourBadges(testWindAtSpeedLimit, tConfig).length === 1, "Viento 20 km/h exacto debe activar badge");
 
-const testWindAtGustLimit = { temp: 20, precip: 0, windSpeed: 10, windGust: 25 };
-console.assert(generateHourBadges(testWindAtGustLimit, tConfig).length === 1, "Racha 25 km/h exacta debe activar badge");
+const testWindAtGustLimit = { temp: 20, precip: 0, windSpeed: 10, windGust: 40 };
+console.assert(generateHourBadges(testWindAtGustLimit, tConfig).length === 1, "Racha 40 km/h exacta debe activar badge");
 
 // 2.3 Test combinaciones simultáneas de badges
 // Calor + Lluvia + Viento
@@ -118,12 +119,12 @@ const mock24HoursDataset = [
   { hour: 10, temp: 23, precip: 0, windSpeed: 12, windGust: 16, expected: [] },
   { hour: 11, temp: 27, precip: 0, windSpeed: 15, windGust: 22, expected: [] },
   { hour: 12, temp: 30, precip: 0, windSpeed: 16, windGust: 23, expected: ['heat-badge'] },
-  { hour: 13, temp: 32, precip: 0, windSpeed: 18, windGust: 24, expected: ['heat-badge'] },
-  { hour: 14, temp: 33, precip: 0, windSpeed: 19, windGust: 26, expected: ['heat-badge', 'wind-badge'] },
+  { hour: 13, temp: 32, precip: 0, windSpeed: 17, windGust: 41, expected: ['heat-badge', 'wind-badge'] },
+  { hour: 14, temp: 33, precip: 0, windSpeed: 19, windGust: 26, expected: ['heat-badge'] },
   { hour: 15, temp: 35, precip: 0, windSpeed: 21, windGust: 38, expected: ['heat-badge', 'wind-badge'] },
   { hour: 16, temp: 31, precip: 2.8, windSpeed: 24, windGust: 42, expected: ['heat-badge', 'rain-badge', 'wind-badge'] },
   { hour: 17, temp: 28, precip: 5.0, windSpeed: 22, windGust: 35, expected: ['rain-badge', 'wind-badge'] },
-  { hour: 18, temp: 25, precip: 0.2, windSpeed: 18, windGust: 25, expected: ['rain-badge', 'wind-badge'] },
+  { hour: 18, temp: 25, precip: 0.2, windSpeed: 18, windGust: 25, expected: ['rain-badge'] },
   { hour: 19, temp: 22, precip: 0, windSpeed: 15, windGust: 20, expected: [] },
   { hour: 20, temp: 20, precip: 0, windSpeed: 10, windGust: 14, expected: [] },
   { hour: 21, temp: 17, precip: 0, windSpeed: 8, windGust: 11, expected: [] },

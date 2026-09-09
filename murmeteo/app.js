@@ -138,9 +138,9 @@ function generateHourBadges(hourData, tConfig) {
         titleAttr = ` title="Viento: ${hourData.windSpeed} km/h, Rachas: ${hourData.windGust} km/h"`;
       }
     } else {
-      const gustFmt = tConfig.wind.label_gust_format || "Racha {gust} km/h";
+      const gustFmt = tConfig.wind.label_gust_format || "Rachas {gust} km/h";
       lbl = gustFmt.replace('{gust}', hourData.windGust);
-      titleAttr = ` title="Viento sostenido: ${hourData.windSpeed} km/h, Racha máxima: ${hourData.windGust} km/h"`;
+      titleAttr = ` title="Viento sostenido: ${hourData.windSpeed} km/h, Rachas: ${hourData.windGust} km/h"`;
     }
     badges.push(`<span class="badge ${tConfig.wind.badge_class}"${titleAttr}><span class="badge-icon">${tConfig.wind.icon}</span><span class="badge-text">${lbl}</span></span>`);
   }

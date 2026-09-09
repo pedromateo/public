@@ -107,16 +107,16 @@ test.describe('MurMeteo PWA - Pruebas E2E', () => {
     const totalBadges = await allBadges.count();
     expect(totalBadges).toBeGreaterThan(0);
 
-    // Badges de viento (con los umbrales >= 20 km/h o rachas >= 25 km/h)
+    // Badges de viento (con los umbrales >= 20 km/h o rachas >= 40 km/h)
     const windBadges = page.locator('#hourly-list .badge.wind-badge');
     const windCount = await windBadges.count();
     expect(windCount).toBeGreaterThan(0);
 
-    // Cada badge de viento debe tener su icono y texto con formato "{speed} km/h"
+    // Cada badge de viento debe tener su icono y texto con formato "{speed} km/h" o "Rachas {gust} km/h"
     for (let i = 0; i < Math.min(windCount, 5); i++) {
       const badge = windBadges.nth(i);
       await expect(badge.locator('.badge-icon svg')).toBeVisible();
-      await expect(badge.locator('.badge-text')).toHaveText(/\d+\s+km\/h/);
+      await expect(badge.locator('.badge-text')).toHaveText(/(Rachas\s+)?\d+\s*km\/h/);
     }
 
     // Ningún badge debe mostrar texto "undefined", "null" o "NaN"
