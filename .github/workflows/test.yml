@@ -50,7 +50,10 @@ jobs:
     - name: Run MurMeteo Tests
       if: (steps.filter.outputs.murmeteo == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('murmeteo/package.json') != ''
       working-directory: murmeteo
-      run: npm run test
+      run: |
+        npm ci || npm install
+        npx playwright install --with-deps chromium
+        npm run test
 
     - name: Run Loopp Tests
       if: (steps.filter.outputs.loopp == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('loopp/package.json') != ''

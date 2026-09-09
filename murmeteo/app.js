@@ -2,6 +2,7 @@ let config = null;
 let aemetService = null;
 let currentData = null;
 let lastRefreshTime = 0;
+let deferredPrompt = null;
 
 // Pull-to-refresh state
 let touchStartY = 0;
@@ -129,8 +130,19 @@ function generateHourBadges(hourData, tConfig) {
   }
   
   if (tConfig.wind && (hourData.windSpeed >= tConfig.wind.min_speed_kmh || hourData.windGust >= tConfig.wind.min_gust_kmh)) {
-    const lbl = tConfig.wind.label_format.replace('{speed}', hourData.windSpeed);
-    badges.push(`<span class="badge ${tConfig.wind.badge_class}"><span class="badge-icon">${tConfig.wind.icon}</span><span class="badge-text">${lbl}</span></span>`);
+    let lbl = "";
+    let titleAttr = "";
+    if (hourData.windSpeed >= tConfig.wind.min_speed_kmh) {
+      lbl = tConfig.wind.label_format.replace('{speed}', hourData.windSpeed);
+      if (hourData.windGust && hourData.windGust > hourData.windSpeed) {
+        titleAttr = ` title="Viento: ${hourData.windSpeed} km/h, Rachas: ${hourData.windGust} km/h"`;
+      }
+    } else {
+      const gustFmt = tConfig.wind.label_gust_format || "Racha {gust} km/h";
+      lbl = gustFmt.replace('{gust}', hourData.windGust);
+      titleAttr = ` title="Viento sostenido: ${hourData.windSpeed} km/h, Racha máxima: ${hourData.windGust} km/h"`;
+    }
+    badges.push(`<span class="badge ${tConfig.wind.badge_class}"${titleAttr}><span class="badge-icon">${tConfig.wind.icon}</span><span class="badge-text">${lbl}</span></span>`);
   }
 
   return badges;

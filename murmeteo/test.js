@@ -56,7 +56,8 @@ console.assert(badgesWindSpeed[0].includes('<span class="badge-text">21 km/h</sp
 const testWindGust = { temp: 22, precip: 0, windSpeed: 12, windGust: 28 };
 const badgesWindGust = generateHourBadges(testWindGust, tConfig);
 console.assert(badgesWindGust.length === 1, "Racha de 28 km/h debe activar el badge de viento");
-console.assert(badgesWindGust[0].includes('<span class="badge-text">12 km/h</span>'), "Badge debe reflejar la velocidad sostenida de 12 km/h");
+console.assert(badgesWindGust[0].includes('<span class="badge-text">Racha 28 km/h</span>'), "Badge activado por racha debe indicar 'Racha 28 km/h'");
+console.assert(badgesWindGust[0].includes('title="Viento sostenido: 12 km/h, Racha máxima: 28 km/h"'), "Badge debe tener tooltip explicativo");
 
 // 2.2 Test límites y umbrales estrictos (límites exactos y justo debajo)
 // Calor: 29°C no activa, 30°C sí activa

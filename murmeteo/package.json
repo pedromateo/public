@@ -4,6 +4,11 @@
   "description": "MurMeteo PWA",
   "scripts": {
     "start": "node server.js",
-    "test": "node test.js"
+    "test": "node test.js && npx playwright test",
+    "test:unit": "node test.js",
+    "test:e2e": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
   }
 }
