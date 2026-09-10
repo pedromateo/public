@@ -8,7 +8,7 @@
       "copyright": "� AEMET. Autorizado el uso de la informaci�n y su reproducci�n citando a AEMET como autora de la misma.",
       "notaLegal": "https://www.aemet.es/es/nota_legal"
     },
-    "elaborado": "2026-09-10T07:15:13",
+    "elaborado": "2026-09-10T09:09:10",
     "nombre": "Murcia",
     "provincia": "Murcia",
     "prediccion": {
@@ -16,64 +16,34 @@
         {
           "estadoCielo": [
             {
-              "value": "43n",
-              "periodo": "02",
-              "descripcion": "Intervalos nubosos con lluvia escasa"
-            },
-            {
-              "value": "43n",
-              "periodo": "03",
-              "descripcion": "Intervalos nubosos con lluvia escasa"
-            },
-            {
-              "value": "45n",
-              "periodo": "04",
-              "descripcion": "Muy nuboso con lluvia escasa"
-            },
-            {
-              "value": "45n",
-              "periodo": "05",
-              "descripcion": "Muy nuboso con lluvia escasa"
-            },
-            {
-              "value": "46n",
-              "periodo": "06",
-              "descripcion": "Cubierto con lluvia escasa"
-            },
-            {
-              "value": "43n",
-              "periodo": "07",
-              "descripcion": "Intervalos nubosos con lluvia escasa"
-            },
-            {
-              "value": "13",
+              "value": "11",
               "periodo": "08",
-              "descripcion": "Intervalos nubosos"
+              "descripcion": "Despejado"
             },
             {
-              "value": "13",
+              "value": "11",
               "periodo": "09",
-              "descripcion": "Intervalos nubosos"
+              "descripcion": "Despejado"
             },
             {
-              "value": "13",
+              "value": "16",
               "periodo": "10",
-              "descripcion": "Intervalos nubosos"
+              "descripcion": "Cubierto"
             },
             {
-              "value": "13",
+              "value": "16",
               "periodo": "11",
-              "descripcion": "Intervalos nubosos"
+              "descripcion": "Cubierto"
             },
             {
-              "value": "13",
+              "value": "17",
               "periodo": "12",
-              "descripcion": "Intervalos nubosos"
+              "descripcion": "Nubes altas"
             },
             {
-              "value": "13",
+              "value": "12",
               "periodo": "13",
-              "descripcion": "Intervalos nubosos"
+              "descripcion": "Poco nuboso"
             },
             {
               "value": "12",
@@ -81,9 +51,9 @@
               "descripcion": "Poco nuboso"
             },
             {
-              "value": "17",
+              "value": "11",
               "periodo": "15",
-              "descripcion": "Nubes altas"
+              "descripcion": "Despejado"
             },
             {
               "value": "17",
@@ -91,14 +61,14 @@
               "descripcion": "Nubes altas"
             },
             {
-              "value": "12",
+              "value": "17",
               "periodo": "17",
-              "descripcion": "Poco nuboso"
+              "descripcion": "Nubes altas"
             },
             {
-              "value": "11",
+              "value": "12",
               "periodo": "18",
-              "descripcion": "Despejado"
+              "descripcion": "Poco nuboso"
             },
             {
               "value": "11",
@@ -106,51 +76,27 @@
               "descripcion": "Despejado"
             },
             {
-              "value": "11",
+              "value": "12",
               "periodo": "20",
-              "descripcion": "Despejado"
+              "descripcion": "Poco nuboso"
             },
             {
-              "value": "12n",
+              "value": "15n",
               "periodo": "21",
-              "descripcion": "Poco nuboso"
+              "descripcion": "Muy nuboso"
+            },
+            {
+              "value": "14n",
+              "periodo": "22",
+              "descripcion": "Nuboso"
             },
             {
               "value": "12n",
-              "periodo": "22",
-              "descripcion": "Poco nuboso"
-            },
-            {
-              "value": "11n",
               "periodo": "23",
-              "descripcion": "Despejado"
+              "descripcion": "Poco nuboso"
             }
           ],
           "precipitacion": [
-            {
-              "value": "0.1",
-              "periodo": "02"
-            },
-            {
-              "value": "0.1",
-              "periodo": "03"
-            },
-            {
-              "value": "0.1",
-              "periodo": "04"
-            },
-            {
-              "value": "0.1",
-              "periodo": "05"
-            },
-            {
-              "value": "0.1",
-              "periodo": "06"
-            },
-            {
-              "value": "0.1",
-              "periodo": "07"
-            },
             {
               "value": "0",
               "periodo": "08"
@@ -218,15 +164,11 @@
           ],
           "probPrecipitacion": [
             {
-              "value": "70",
-              "periodo": "0208"
-            },
-            {
-              "value": "30",
+              "value": "25",
               "periodo": "0814"
             },
             {
-              "value": "45",
+              "value": "20",
               "periodo": "1420"
             },
             {
@@ -236,15 +178,11 @@
           ],
           "probTormenta": [
             {
-              "value": "60",
-              "periodo": "0208"
-            },
-            {
-              "value": "30",
+              "value": "25",
               "periodo": "0814"
             },
             {
-              "value": "45",
+              "value": "20",
               "periodo": "1420"
             },
             {
@@ -253,30 +191,6 @@
             }
           ],
           "nieve": [
-            {
-              "value": "0",
-              "periodo": "02"
-            },
-            {
-              "value": "0",
-              "periodo": "03"
-            },
-            {
-              "value": "0",
-              "periodo": "04"
-            },
-            {
-              "value": "0",
-              "periodo": "05"
-            },
-            {
-              "value": "0",
-              "periodo": "06"
-            },
-            {
-              "value": "0",
-              "periodo": "07"
-            },
             {
               "value": "0",
               "periodo": "08"
@@ -345,10 +259,6 @@
           "probNieve": [
             {
               "value": "0",
-              "periodo": "0208"
-            },
-            {
-              "value": "0",
               "periodo": "0814"
             },
             {
@@ -361,30 +271,6 @@
             }
           ],
           "temperatura": [
-            {
-              "value": "22",
-              "periodo": "03"
-            },
-            {
-              "value": "21",
-              "periodo": "04"
-            },
-            {
-              "value": "19",
-              "periodo": "05"
-            },
-            {
-              "value": "20",
-              "periodo": "06"
-            },
-            {
-              "value": "20",
-              "periodo": "07"
-            },
-            {
-              "value": "20",
-              "periodo": "08"
-            },
             {
               "value": "21",
               "periodo": "09"
@@ -448,30 +334,6 @@
           ],
           "sensTermica": [
             {
-              "value": "22",
-              "periodo": "03"
-            },
-            {
-              "value": "21",
-              "periodo": "04"
-            },
-            {
-              "value": "19",
-              "periodo": "05"
-            },
-            {
-              "value": "20",
-              "periodo": "06"
-            },
-            {
-              "value": "20",
-              "periodo": "07"
-            },
-            {
-              "value": "20",
-              "periodo": "08"
-            },
-            {
               "value": "21",
               "periodo": "09"
             },
@@ -500,11 +362,11 @@
               "periodo": "15"
             },
             {
-              "value": "30",
+              "value": "29",
               "periodo": "16"
             },
             {
-              "value": "29",
+              "value": "28",
               "periodo": "17"
             },
             {
@@ -521,940 +383,6 @@
             },
             {
               "value": "24",
-              "periodo": "21"
-            },
-            {
-              "value": "24",
-              "periodo": "22"
-            },
-            {
-              "value": "23",
-              "periodo": "23"
-            }
-          ],
-          "humedadRelativa": [
-            {
-              "value": "93",
-              "periodo": "03"
-            },
-            {
-              "value": "84",
-              "periodo": "04"
-            },
-            {
-              "value": "85",
-              "periodo": "05"
-            },
-            {
-              "value": "88",
-              "periodo": "06"
-            },
-            {
-              "value": "90",
-              "periodo": "07"
-            },
-            {
-              "value": "93",
-              "periodo": "08"
-            },
-            {
-              "value": "84",
-              "periodo": "09"
-            },
-            {
-              "value": "80",
-              "periodo": "10"
-            },
-            {
-              "value": "73",
-              "periodo": "11"
-            },
-            {
-              "value": "66",
-              "periodo": "12"
-            },
-            {
-              "value": "60",
-              "periodo": "13"
-            },
-            {
-              "value": "56",
-              "periodo": "14"
-            },
-            {
-              "value": "52",
-              "periodo": "15"
-            },
-            {
-              "value": "54",
-              "periodo": "16"
-            },
-            {
-              "value": "59",
-              "periodo": "17"
-            },
-            {
-              "value": "61",
-              "periodo": "18"
-            },
-            {
-              "value": "63",
-              "periodo": "19"
-            },
-            {
-              "value": "66",
-              "periodo": "20"
-            },
-            {
-              "value": "72",
-              "periodo": "21"
-            },
-            {
-              "value": "75",
-              "periodo": "22"
-            },
-            {
-              "value": "79",
-              "periodo": "23"
-            }
-          ],
-          "vientoAndRachaMax": [
-            {
-              "direccion": [
-                "S"
-              ],
-              "velocidad": [
-                "6"
-              ],
-              "periodo": "03"
-            },
-            {
-              "value": "15",
-              "periodo": "03"
-            },
-            {
-              "direccion": [
-                "NO"
-              ],
-              "velocidad": [
-                "9"
-              ],
-              "periodo": "04"
-            },
-            {
-              "value": "13",
-              "periodo": "04"
-            },
-            {
-              "direccion": [
-                "O"
-              ],
-              "velocidad": [
-                "6"
-              ],
-              "periodo": "05"
-            },
-            {
-              "value": "11",
-              "periodo": "05"
-            },
-            {
-              "direccion": [
-                "SO"
-              ],
-              "velocidad": [
-                "1"
-              ],
-              "periodo": "06"
-            },
-            {
-              "value": "6",
-              "periodo": "06"
-            },
-            {
-              "direccion": [
-                "SO"
-              ],
-              "velocidad": [
-                "3"
-              ],
-              "periodo": "07"
-            },
-            {
-              "value": "11",
-              "periodo": "07"
-            },
-            {
-              "direccion": [
-                "O"
-              ],
-              "velocidad": [
-                "8"
-              ],
-              "periodo": "08"
-            },
-            {
-              "value": "12",
-              "periodo": "08"
-            },
-            {
-              "direccion": [
-                "O"
-              ],
-              "velocidad": [
-                "7"
-              ],
-              "periodo": "09"
-            },
-            {
-              "value": "14",
-              "periodo": "09"
-            },
-            {
-              "direccion": [
-                "NO"
-              ],
-              "velocidad": [
-                "5"
-              ],
-              "periodo": "10"
-            },
-            {
-              "value": "10",
-              "periodo": "10"
-            },
-            {
-              "direccion": [
-                "N"
-              ],
-              "velocidad": [
-                "3"
-              ],
-              "periodo": "11"
-            },
-            {
-              "value": "14",
-              "periodo": "11"
-            },
-            {
-              "direccion": [
-                "NE"
-              ],
-              "velocidad": [
-                "6"
-              ],
-              "periodo": "12"
-            },
-            {
-              "value": "21",
-              "periodo": "12"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "10"
-              ],
-              "periodo": "13"
-            },
-            {
-              "value": "21",
-              "periodo": "13"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "8"
-              ],
-              "periodo": "14"
-            },
-            {
-              "value": "18",
-              "periodo": "14"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "7"
-              ],
-              "periodo": "15"
-            },
-            {
-              "value": "25",
-              "periodo": "15"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "13"
-              ],
-              "periodo": "16"
-            },
-            {
-              "value": "29",
-              "periodo": "16"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "16"
-              ],
-              "periodo": "17"
-            },
-            {
-              "value": "29",
-              "periodo": "17"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "17"
-              ],
-              "periodo": "18"
-            },
-            {
-              "value": "29",
-              "periodo": "18"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "17"
-              ],
-              "periodo": "19"
-            },
-            {
-              "value": "28",
-              "periodo": "19"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "15"
-              ],
-              "periodo": "20"
-            },
-            {
-              "value": "23",
-              "periodo": "20"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "10"
-              ],
-              "periodo": "21"
-            },
-            {
-              "value": "15",
-              "periodo": "21"
-            },
-            {
-              "direccion": [
-                "SE"
-              ],
-              "velocidad": [
-                "6"
-              ],
-              "periodo": "22"
-            },
-            {
-              "value": "8",
-              "periodo": "22"
-            },
-            {
-              "direccion": [
-                "SE"
-              ],
-              "velocidad": [
-                "4"
-              ],
-              "periodo": "23"
-            },
-            {
-              "value": "8",
-              "periodo": "23"
-            }
-          ],
-          "fecha": "2026-09-10T00:00:00",
-          "orto": "07:41",
-          "ocaso": "20:20"
-        },
-        {
-          "estadoCielo": [
-            {
-              "value": "11n",
-              "periodo": "00",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "01",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "02",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "03",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "04",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "12n",
-              "periodo": "05",
-              "descripcion": "Poco nuboso"
-            },
-            {
-              "value": "12n",
-              "periodo": "06",
-              "descripcion": "Poco nuboso"
-            },
-            {
-              "value": "11n",
-              "periodo": "07",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "13",
-              "periodo": "08",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "09",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "10",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "11",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "12",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "13",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "14",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "15",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "16",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "17",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "18",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "13",
-              "periodo": "19",
-              "descripcion": "Intervalos nubosos"
-            },
-            {
-              "value": "11",
-              "periodo": "20",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "21",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "22",
-              "descripcion": "Despejado"
-            },
-            {
-              "value": "11n",
-              "periodo": "23",
-              "descripcion": "Despejado"
-            }
-          ],
-          "precipitacion": [
-            {
-              "value": "0",
-              "periodo": "00"
-            },
-            {
-              "value": "0",
-              "periodo": "01"
-            },
-            {
-              "value": "0",
-              "periodo": "02"
-            },
-            {
-              "value": "0",
-              "periodo": "03"
-            },
-            {
-              "value": "0",
-              "periodo": "04"
-            },
-            {
-              "value": "0",
-              "periodo": "05"
-            },
-            {
-              "value": "0",
-              "periodo": "06"
-            },
-            {
-              "value": "0",
-              "periodo": "07"
-            },
-            {
-              "value": "0",
-              "periodo": "08"
-            },
-            {
-              "value": "0",
-              "periodo": "09"
-            },
-            {
-              "value": "0",
-              "periodo": "10"
-            },
-            {
-              "value": "0",
-              "periodo": "11"
-            },
-            {
-              "value": "0",
-              "periodo": "12"
-            },
-            {
-              "value": "0",
-              "periodo": "13"
-            },
-            {
-              "value": "0",
-              "periodo": "14"
-            },
-            {
-              "value": "0",
-              "periodo": "15"
-            },
-            {
-              "value": "0",
-              "periodo": "16"
-            },
-            {
-              "value": "0",
-              "periodo": "17"
-            },
-            {
-              "value": "0",
-              "periodo": "18"
-            },
-            {
-              "value": "0",
-              "periodo": "19"
-            },
-            {
-              "value": "0",
-              "periodo": "20"
-            },
-            {
-              "value": "0",
-              "periodo": "21"
-            },
-            {
-              "value": "0",
-              "periodo": "22"
-            },
-            {
-              "value": "0",
-              "periodo": "23"
-            }
-          ],
-          "probPrecipitacion": [
-            {
-              "value": "0",
-              "periodo": "0208"
-            },
-            {
-              "value": "10",
-              "periodo": "0814"
-            },
-            {
-              "value": "15",
-              "periodo": "1420"
-            },
-            {
-              "value": "0",
-              "periodo": "2002"
-            }
-          ],
-          "probTormenta": [
-            {
-              "value": "0",
-              "periodo": "0208"
-            },
-            {
-              "value": "0",
-              "periodo": "0814"
-            },
-            {
-              "value": "0",
-              "periodo": "1420"
-            },
-            {
-              "value": "0",
-              "periodo": "2002"
-            }
-          ],
-          "nieve": [
-            {
-              "value": "0",
-              "periodo": "00"
-            },
-            {
-              "value": "0",
-              "periodo": "01"
-            },
-            {
-              "value": "0",
-              "periodo": "02"
-            },
-            {
-              "value": "0",
-              "periodo": "03"
-            },
-            {
-              "value": "0",
-              "periodo": "04"
-            },
-            {
-              "value": "0",
-              "periodo": "05"
-            },
-            {
-              "value": "0",
-              "periodo": "06"
-            },
-            {
-              "value": "0",
-              "periodo": "07"
-            },
-            {
-              "value": "0",
-              "periodo": "08"
-            },
-            {
-              "value": "0",
-              "periodo": "09"
-            },
-            {
-              "value": "0",
-              "periodo": "10"
-            },
-            {
-              "value": "0",
-              "periodo": "11"
-            },
-            {
-              "value": "0",
-              "periodo": "12"
-            },
-            {
-              "value": "0",
-              "periodo": "13"
-            },
-            {
-              "value": "0",
-              "periodo": "14"
-            },
-            {
-              "value": "0",
-              "periodo": "15"
-            },
-            {
-              "value": "0",
-              "periodo": "16"
-            },
-            {
-              "value": "0",
-              "periodo": "17"
-            },
-            {
-              "value": "0",
-              "periodo": "18"
-            },
-            {
-              "value": "0",
-              "periodo": "19"
-            },
-            {
-              "value": "0",
-              "periodo": "20"
-            },
-            {
-              "value": "0",
-              "periodo": "21"
-            },
-            {
-              "value": "0",
-              "periodo": "22"
-            },
-            {
-              "value": "0",
-              "periodo": "23"
-            }
-          ],
-          "probNieve": [
-            {
-              "value": "0",
-              "periodo": "0208"
-            },
-            {
-              "value": "0",
-              "periodo": "0814"
-            },
-            {
-              "value": "0",
-              "periodo": "1420"
-            },
-            {
-              "value": "0",
-              "periodo": "2002"
-            }
-          ],
-          "temperatura": [
-            {
-              "value": "22",
-              "periodo": "00"
-            },
-            {
-              "value": "22",
-              "periodo": "01"
-            },
-            {
-              "value": "21",
-              "periodo": "02"
-            },
-            {
-              "value": "21",
-              "periodo": "03"
-            },
-            {
-              "value": "20",
-              "periodo": "04"
-            },
-            {
-              "value": "20",
-              "periodo": "05"
-            },
-            {
-              "value": "19",
-              "periodo": "06"
-            },
-            {
-              "value": "19",
-              "periodo": "07"
-            },
-            {
-              "value": "19",
-              "periodo": "08"
-            },
-            {
-              "value": "21",
-              "periodo": "09"
-            },
-            {
-              "value": "23",
-              "periodo": "10"
-            },
-            {
-              "value": "25",
-              "periodo": "11"
-            },
-            {
-              "value": "26",
-              "periodo": "12"
-            },
-            {
-              "value": "27",
-              "periodo": "13"
-            },
-            {
-              "value": "29",
-              "periodo": "14"
-            },
-            {
-              "value": "29",
-              "periodo": "15"
-            },
-            {
-              "value": "30",
-              "periodo": "16"
-            },
-            {
-              "value": "30",
-              "periodo": "17"
-            },
-            {
-              "value": "29",
-              "periodo": "18"
-            },
-            {
-              "value": "28",
-              "periodo": "19"
-            },
-            {
-              "value": "26",
-              "periodo": "20"
-            },
-            {
-              "value": "25",
-              "periodo": "21"
-            },
-            {
-              "value": "24",
-              "periodo": "22"
-            },
-            {
-              "value": "23",
-              "periodo": "23"
-            }
-          ],
-          "sensTermica": [
-            {
-              "value": "22",
-              "periodo": "00"
-            },
-            {
-              "value": "22",
-              "periodo": "01"
-            },
-            {
-              "value": "21",
-              "periodo": "02"
-            },
-            {
-              "value": "21",
-              "periodo": "03"
-            },
-            {
-              "value": "20",
-              "periodo": "04"
-            },
-            {
-              "value": "20",
-              "periodo": "05"
-            },
-            {
-              "value": "19",
-              "periodo": "06"
-            },
-            {
-              "value": "19",
-              "periodo": "07"
-            },
-            {
-              "value": "19",
-              "periodo": "08"
-            },
-            {
-              "value": "21",
-              "periodo": "09"
-            },
-            {
-              "value": "23",
-              "periodo": "10"
-            },
-            {
-              "value": "25",
-              "periodo": "11"
-            },
-            {
-              "value": "26",
-              "periodo": "12"
-            },
-            {
-              "value": "28",
-              "periodo": "13"
-            },
-            {
-              "value": "30",
-              "periodo": "14"
-            },
-            {
-              "value": "29",
-              "periodo": "15"
-            },
-            {
-              "value": "30",
-              "periodo": "16"
-            },
-            {
-              "value": "30",
-              "periodo": "17"
-            },
-            {
-              "value": "29",
-              "periodo": "18"
-            },
-            {
-              "value": "28",
-              "periodo": "19"
-            },
-            {
-              "value": "26",
-              "periodo": "20"
-            },
-            {
-              "value": "25",
               "periodo": "21"
             },
             {
@@ -1469,18 +397,850 @@
           "humedadRelativa": [
             {
               "value": "82",
+              "periodo": "09"
+            },
+            {
+              "value": "78",
+              "periodo": "10"
+            },
+            {
+              "value": "74",
+              "periodo": "11"
+            },
+            {
+              "value": "67",
+              "periodo": "12"
+            },
+            {
+              "value": "60",
+              "periodo": "13"
+            },
+            {
+              "value": "56",
+              "periodo": "14"
+            },
+            {
+              "value": "51",
+              "periodo": "15"
+            },
+            {
+              "value": "47",
+              "periodo": "16"
+            },
+            {
+              "value": "48",
+              "periodo": "17"
+            },
+            {
+              "value": "58",
+              "periodo": "18"
+            },
+            {
+              "value": "65",
+              "periodo": "19"
+            },
+            {
+              "value": "68",
+              "periodo": "20"
+            },
+            {
+              "value": "72",
+              "periodo": "21"
+            },
+            {
+              "value": "77",
+              "periodo": "22"
+            },
+            {
+              "value": "81",
+              "periodo": "23"
+            }
+          ],
+          "vientoAndRachaMax": [
+            {
+              "direccion": [
+                "SO"
+              ],
+              "velocidad": [
+                "7"
+              ],
+              "periodo": "09"
+            },
+            {
+              "value": "13",
+              "periodo": "09"
+            },
+            {
+              "direccion": [
+                "O"
+              ],
+              "velocidad": [
+                "4"
+              ],
+              "periodo": "10"
+            },
+            {
+              "value": "13",
+              "periodo": "10"
+            },
+            {
+              "direccion": [
+                "NO"
+              ],
+              "velocidad": [
+                "4"
+              ],
+              "periodo": "11"
+            },
+            {
+              "value": "12",
+              "periodo": "11"
+            },
+            {
+              "direccion": [
+                "NE"
+              ],
+              "velocidad": [
+                "5"
+              ],
+              "periodo": "12"
+            },
+            {
+              "value": "16",
+              "periodo": "12"
+            },
+            {
+              "direccion": [
+                "NE"
+              ],
+              "velocidad": [
+                "7"
+              ],
+              "periodo": "13"
+            },
+            {
+              "value": "19",
+              "periodo": "13"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "8"
+              ],
+              "periodo": "14"
+            },
+            {
+              "value": "19",
+              "periodo": "14"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "8"
+              ],
+              "periodo": "15"
+            },
+            {
+              "value": "19",
+              "periodo": "15"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "8"
+              ],
+              "periodo": "16"
+            },
+            {
+              "value": "19",
+              "periodo": "16"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "8"
+              ],
+              "periodo": "17"
+            },
+            {
+              "value": "25",
+              "periodo": "17"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "15"
+              ],
+              "periodo": "18"
+            },
+            {
+              "value": "29",
+              "periodo": "18"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "15"
+              ],
+              "periodo": "19"
+            },
+            {
+              "value": "25",
+              "periodo": "19"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "13"
+              ],
+              "periodo": "20"
+            },
+            {
+              "value": "20",
+              "periodo": "20"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "9"
+              ],
+              "periodo": "21"
+            },
+            {
+              "value": "13",
+              "periodo": "21"
+            },
+            {
+              "direccion": [
+                "SE"
+              ],
+              "velocidad": [
+                "7"
+              ],
+              "periodo": "22"
+            },
+            {
+              "value": "11",
+              "periodo": "22"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "5"
+              ],
+              "periodo": "23"
+            },
+            {
+              "value": "9",
+              "periodo": "23"
+            }
+          ],
+          "fecha": "2026-09-10T00:00:00",
+          "orto": "07:41",
+          "ocaso": "20:20"
+        },
+        {
+          "estadoCielo": [
+            {
+              "value": "12n",
+              "periodo": "00",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "01",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "02",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "03",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "11n",
+              "periodo": "04",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11n",
+              "periodo": "05",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "12n",
+              "periodo": "06",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "07",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "11",
+              "periodo": "08",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11",
+              "periodo": "09",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11",
+              "periodo": "10",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11",
+              "periodo": "11",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11",
+              "periodo": "12",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "12",
+              "periodo": "13",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "13",
+              "periodo": "14",
+              "descripcion": "Intervalos nubosos"
+            },
+            {
+              "value": "13",
+              "periodo": "15",
+              "descripcion": "Intervalos nubosos"
+            },
+            {
+              "value": "13",
+              "periodo": "16",
+              "descripcion": "Intervalos nubosos"
+            },
+            {
+              "value": "13",
+              "periodo": "17",
+              "descripcion": "Intervalos nubosos"
+            },
+            {
+              "value": "13",
+              "periodo": "18",
+              "descripcion": "Intervalos nubosos"
+            },
+            {
+              "value": "13",
+              "periodo": "19",
+              "descripcion": "Intervalos nubosos"
+            },
+            {
+              "value": "11",
+              "periodo": "20",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11n",
+              "periodo": "21",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11n",
+              "periodo": "22",
+              "descripcion": "Despejado"
+            },
+            {
+              "value": "11n",
+              "periodo": "23",
+              "descripcion": "Despejado"
+            }
+          ],
+          "precipitacion": [
+            {
+              "value": "0",
               "periodo": "00"
             },
             {
-              "value": "85",
+              "value": "0",
               "periodo": "01"
             },
             {
-              "value": "87",
+              "value": "0",
               "periodo": "02"
             },
             {
-              "value": "87",
+              "value": "0",
+              "periodo": "03"
+            },
+            {
+              "value": "0",
+              "periodo": "04"
+            },
+            {
+              "value": "0",
+              "periodo": "05"
+            },
+            {
+              "value": "0",
+              "periodo": "06"
+            },
+            {
+              "value": "0",
+              "periodo": "07"
+            },
+            {
+              "value": "0",
+              "periodo": "08"
+            },
+            {
+              "value": "0",
+              "periodo": "09"
+            },
+            {
+              "value": "0",
+              "periodo": "10"
+            },
+            {
+              "value": "0",
+              "periodo": "11"
+            },
+            {
+              "value": "0",
+              "periodo": "12"
+            },
+            {
+              "value": "0",
+              "periodo": "13"
+            },
+            {
+              "value": "0",
+              "periodo": "14"
+            },
+            {
+              "value": "0",
+              "periodo": "15"
+            },
+            {
+              "value": "0",
+              "periodo": "16"
+            },
+            {
+              "value": "0",
+              "periodo": "17"
+            },
+            {
+              "value": "0",
+              "periodo": "18"
+            },
+            {
+              "value": "0",
+              "periodo": "19"
+            },
+            {
+              "value": "0",
+              "periodo": "20"
+            },
+            {
+              "value": "0",
+              "periodo": "21"
+            },
+            {
+              "value": "0",
+              "periodo": "22"
+            },
+            {
+              "value": "0",
+              "periodo": "23"
+            }
+          ],
+          "probPrecipitacion": [
+            {
+              "value": "0",
+              "periodo": "0208"
+            },
+            {
+              "value": "0",
+              "periodo": "0814"
+            },
+            {
+              "value": "10",
+              "periodo": "1420"
+            },
+            {
+              "value": "0",
+              "periodo": "2002"
+            }
+          ],
+          "probTormenta": [
+            {
+              "value": "0",
+              "periodo": "0208"
+            },
+            {
+              "value": "0",
+              "periodo": "0814"
+            },
+            {
+              "value": "0",
+              "periodo": "1420"
+            },
+            {
+              "value": "0",
+              "periodo": "2002"
+            }
+          ],
+          "nieve": [
+            {
+              "value": "0",
+              "periodo": "00"
+            },
+            {
+              "value": "0",
+              "periodo": "01"
+            },
+            {
+              "value": "0",
+              "periodo": "02"
+            },
+            {
+              "value": "0",
+              "periodo": "03"
+            },
+            {
+              "value": "0",
+              "periodo": "04"
+            },
+            {
+              "value": "0",
+              "periodo": "05"
+            },
+            {
+              "value": "0",
+              "periodo": "06"
+            },
+            {
+              "value": "0",
+              "periodo": "07"
+            },
+            {
+              "value": "0",
+              "periodo": "08"
+            },
+            {
+              "value": "0",
+              "periodo": "09"
+            },
+            {
+              "value": "0",
+              "periodo": "10"
+            },
+            {
+              "value": "0",
+              "periodo": "11"
+            },
+            {
+              "value": "0",
+              "periodo": "12"
+            },
+            {
+              "value": "0",
+              "periodo": "13"
+            },
+            {
+              "value": "0",
+              "periodo": "14"
+            },
+            {
+              "value": "0",
+              "periodo": "15"
+            },
+            {
+              "value": "0",
+              "periodo": "16"
+            },
+            {
+              "value": "0",
+              "periodo": "17"
+            },
+            {
+              "value": "0",
+              "periodo": "18"
+            },
+            {
+              "value": "0",
+              "periodo": "19"
+            },
+            {
+              "value": "0",
+              "periodo": "20"
+            },
+            {
+              "value": "0",
+              "periodo": "21"
+            },
+            {
+              "value": "0",
+              "periodo": "22"
+            },
+            {
+              "value": "0",
+              "periodo": "23"
+            }
+          ],
+          "probNieve": [
+            {
+              "value": "0",
+              "periodo": "0208"
+            },
+            {
+              "value": "0",
+              "periodo": "0814"
+            },
+            {
+              "value": "0",
+              "periodo": "1420"
+            },
+            {
+              "value": "0",
+              "periodo": "2002"
+            }
+          ],
+          "temperatura": [
+            {
+              "value": "22",
+              "periodo": "00"
+            },
+            {
+              "value": "22",
+              "periodo": "01"
+            },
+            {
+              "value": "21",
+              "periodo": "02"
+            },
+            {
+              "value": "21",
+              "periodo": "03"
+            },
+            {
+              "value": "20",
+              "periodo": "04"
+            },
+            {
+              "value": "20",
+              "periodo": "05"
+            },
+            {
+              "value": "19",
+              "periodo": "06"
+            },
+            {
+              "value": "19",
+              "periodo": "07"
+            },
+            {
+              "value": "19",
+              "periodo": "08"
+            },
+            {
+              "value": "21",
+              "periodo": "09"
+            },
+            {
+              "value": "23",
+              "periodo": "10"
+            },
+            {
+              "value": "25",
+              "periodo": "11"
+            },
+            {
+              "value": "26",
+              "periodo": "12"
+            },
+            {
+              "value": "27",
+              "periodo": "13"
+            },
+            {
+              "value": "29",
+              "periodo": "14"
+            },
+            {
+              "value": "29",
+              "periodo": "15"
+            },
+            {
+              "value": "30",
+              "periodo": "16"
+            },
+            {
+              "value": "30",
+              "periodo": "17"
+            },
+            {
+              "value": "29",
+              "periodo": "18"
+            },
+            {
+              "value": "28",
+              "periodo": "19"
+            },
+            {
+              "value": "26",
+              "periodo": "20"
+            },
+            {
+              "value": "25",
+              "periodo": "21"
+            },
+            {
+              "value": "24",
+              "periodo": "22"
+            },
+            {
+              "value": "23",
+              "periodo": "23"
+            }
+          ],
+          "sensTermica": [
+            {
+              "value": "22",
+              "periodo": "00"
+            },
+            {
+              "value": "22",
+              "periodo": "01"
+            },
+            {
+              "value": "21",
+              "periodo": "02"
+            },
+            {
+              "value": "21",
+              "periodo": "03"
+            },
+            {
+              "value": "20",
+              "periodo": "04"
+            },
+            {
+              "value": "20",
+              "periodo": "05"
+            },
+            {
+              "value": "19",
+              "periodo": "06"
+            },
+            {
+              "value": "19",
+              "periodo": "07"
+            },
+            {
+              "value": "19",
+              "periodo": "08"
+            },
+            {
+              "value": "21",
+              "periodo": "09"
+            },
+            {
+              "value": "23",
+              "periodo": "10"
+            },
+            {
+              "value": "25",
+              "periodo": "11"
+            },
+            {
+              "value": "26",
+              "periodo": "12"
+            },
+            {
+              "value": "28",
+              "periodo": "13"
+            },
+            {
+              "value": "29",
+              "periodo": "14"
+            },
+            {
+              "value": "29",
+              "periodo": "15"
+            },
+            {
+              "value": "30",
+              "periodo": "16"
+            },
+            {
+              "value": "30",
+              "periodo": "17"
+            },
+            {
+              "value": "29",
+              "periodo": "18"
+            },
+            {
+              "value": "28",
+              "periodo": "19"
+            },
+            {
+              "value": "26",
+              "periodo": "20"
+            },
+            {
+              "value": "25",
+              "periodo": "21"
+            },
+            {
+              "value": "24",
+              "periodo": "22"
+            },
+            {
+              "value": "23",
+              "periodo": "23"
+            }
+          ],
+          "humedadRelativa": [
+            {
+              "value": "86",
+              "periodo": "00"
+            },
+            {
+              "value": "88",
+              "periodo": "01"
+            },
+            {
+              "value": "89",
+              "periodo": "02"
+            },
+            {
+              "value": "90",
               "periodo": "03"
             },
             {
@@ -1492,7 +1252,7 @@
               "periodo": "05"
             },
             {
-              "value": "94",
+              "value": "95",
               "periodo": "06"
             },
             {
@@ -1504,11 +1264,11 @@
               "periodo": "08"
             },
             {
-              "value": "87",
+              "value": "86",
               "periodo": "09"
             },
             {
-              "value": "79",
+              "value": "78",
               "periodo": "10"
             },
             {
@@ -1516,35 +1276,35 @@
               "periodo": "11"
             },
             {
-              "value": "62",
+              "value": "63",
               "periodo": "12"
             },
             {
-              "value": "53",
+              "value": "54",
               "periodo": "13"
             },
             {
-              "value": "49",
+              "value": "47",
               "periodo": "14"
             },
             {
-              "value": "45",
+              "value": "43",
               "periodo": "15"
             },
             {
-              "value": "40",
+              "value": "37",
               "periodo": "16"
             },
             {
-              "value": "38",
+              "value": "36",
               "periodo": "17"
             },
             {
-              "value": "40",
+              "value": "41",
               "periodo": "18"
             },
             {
-              "value": "45",
+              "value": "47",
               "periodo": "19"
             },
             {
@@ -1552,15 +1312,15 @@
               "periodo": "20"
             },
             {
-              "value": "61",
+              "value": "59",
               "periodo": "21"
             },
             {
-              "value": "69",
+              "value": "66",
               "periodo": "22"
             },
             {
-              "value": "76",
+              "value": "72",
               "periodo": "23"
             }
           ],
@@ -1570,25 +1330,25 @@
                 "E"
               ],
               "velocidad": [
-                "6"
+                "7"
               ],
               "periodo": "00"
             },
             {
-              "value": "8",
+              "value": "10",
               "periodo": "00"
             },
             {
               "direccion": [
-                "E"
+                "NE"
               ],
               "velocidad": [
-                "5"
+                "6"
               ],
               "periodo": "01"
             },
             {
-              "value": "7",
+              "value": "9",
               "periodo": "01"
             },
             {
@@ -1596,30 +1356,30 @@
                 "NE"
               ],
               "velocidad": [
-                "4"
+                "6"
               ],
               "periodo": "02"
             },
             {
-              "value": "6",
+              "value": "8",
               "periodo": "02"
             },
             {
               "direccion": [
-                "N"
+                "NE"
               ],
               "velocidad": [
-                "1"
+                "5"
               ],
               "periodo": "03"
             },
             {
-              "value": "3",
+              "value": "7",
               "periodo": "03"
             },
             {
               "direccion": [
-                "SO"
+                "NE"
               ],
               "velocidad": [
                 "2"
@@ -1674,25 +1434,25 @@
                 "O"
               ],
               "velocidad": [
-                "6"
-              ],
-              "periodo": "08"
-            },
-            {
-              "value": "9",
-              "periodo": "08"
-            },
-            {
-              "direccion": [
-                "O"
-              ],
-              "velocidad": [
                 "5"
               ],
-              "periodo": "09"
+              "periodo": "08"
             },
             {
               "value": "11",
+              "periodo": "08"
+            },
+            {
+              "direccion": [
+                "O"
+              ],
+              "velocidad": [
+                "7"
+              ],
+              "periodo": "09"
+            },
+            {
+              "value": "12",
               "periodo": "09"
             },
             {
@@ -1700,7 +1460,7 @@
                 "O"
               ],
               "velocidad": [
-                "5"
+                "6"
               ],
               "periodo": "10"
             },
@@ -1710,36 +1470,36 @@
             },
             {
               "direccion": [
-                "NO"
+                "O"
               ],
               "velocidad": [
-                "4"
+                "5"
               ],
               "periodo": "11"
             },
             {
-              "value": "10",
+              "value": "12",
               "periodo": "11"
+            },
+            {
+              "direccion": [
+                "S"
+              ],
+              "velocidad": [
+                "1"
+              ],
+              "periodo": "12"
+            },
+            {
+              "value": "14",
+              "periodo": "12"
             },
             {
               "direccion": [
                 "E"
               ],
               "velocidad": [
-                "2"
-              ],
-              "periodo": "12"
-            },
-            {
-              "value": "16",
-              "periodo": "12"
-            },
-            {
-              "direccion": [
-                "E"
-              ],
-              "velocidad": [
-                "6"
+                "5"
               ],
               "periodo": "13"
             },
@@ -1765,12 +1525,12 @@
                 "E"
               ],
               "velocidad": [
-                "11"
+                "10"
               ],
               "periodo": "15"
             },
             {
-              "value": "24",
+              "value": "26",
               "periodo": "15"
             },
             {
@@ -1778,46 +1538,46 @@
                 "E"
               ],
               "velocidad": [
-                "11"
+                "12"
               ],
               "periodo": "16"
             },
             {
-              "value": "27",
+              "value": "29",
               "periodo": "16"
             },
             {
               "direccion": [
                 "E"
+              ],
+              "velocidad": [
+                "15"
+              ],
+              "periodo": "17"
+            },
+            {
+              "value": "29",
+              "periodo": "17"
+            },
+            {
+              "direccion": [
+                "SE"
+              ],
+              "velocidad": [
+                "16"
+              ],
+              "periodo": "18"
+            },
+            {
+              "value": "29",
+              "periodo": "18"
+            },
+            {
+              "direccion": [
+                "SE"
               ],
               "velocidad": [
                 "14"
-              ],
-              "periodo": "17"
-            },
-            {
-              "value": "28",
-              "periodo": "17"
-            },
-            {
-              "direccion": [
-                "SE"
-              ],
-              "velocidad": [
-                "15"
-              ],
-              "periodo": "18"
-            },
-            {
-              "value": "28",
-              "periodo": "18"
-            },
-            {
-              "direccion": [
-                "SE"
-              ],
-              "velocidad": [
-                "15"
               ],
               "periodo": "19"
             },
@@ -1830,7 +1590,7 @@
                 "SE"
               ],
               "velocidad": [
-                "15"
+                "14"
               ],
               "periodo": "20"
             },
@@ -1843,12 +1603,12 @@
                 "E"
               ],
               "velocidad": [
-                "11"
+                "12"
               ],
               "periodo": "21"
             },
             {
-              "value": "16",
+              "value": "18",
               "periodo": "21"
             },
             {
@@ -1856,7 +1616,7 @@
                 "E"
               ],
               "velocidad": [
-                "9"
+                "8"
               ],
               "periodo": "22"
             },
@@ -1869,12 +1629,12 @@
                 "E"
               ],
               "velocidad": [
-                "7"
+                "8"
               ],
               "periodo": "23"
             },
             {
-              "value": "9",
+              "value": "11",
               "periodo": "23"
             }
           ],
@@ -1893,6 +1653,36 @@
               "value": "12n",
               "periodo": "01",
               "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "02",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "03",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "15n",
+              "periodo": "04",
+              "descripcion": "Muy nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "05",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "06",
+              "descripcion": "Poco nuboso"
+            },
+            {
+              "value": "12n",
+              "periodo": "07",
+              "descripcion": "Poco nuboso"
             }
           ],
           "precipitacion": [
@@ -1903,10 +1693,44 @@
             {
               "value": "0",
               "periodo": "01"
+            },
+            {
+              "value": "0",
+              "periodo": "02"
+            },
+            {
+              "value": "0",
+              "periodo": "03"
+            },
+            {
+              "value": "0",
+              "periodo": "04"
+            },
+            {
+              "value": "0",
+              "periodo": "05"
+            },
+            {
+              "value": "0",
+              "periodo": "06"
+            },
+            {
+              "value": "0",
+              "periodo": "07"
             }
           ],
-          "probPrecipitacion": [],
-          "probTormenta": [],
+          "probPrecipitacion": [
+            {
+              "value": "0",
+              "periodo": "0208"
+            }
+          ],
+          "probTormenta": [
+            {
+              "value": "0",
+              "periodo": "0208"
+            }
+          ],
           "nieve": [
             {
               "value": "0",
@@ -1915,9 +1739,38 @@
             {
               "value": "0",
               "periodo": "01"
+            },
+            {
+              "value": "0",
+              "periodo": "02"
+            },
+            {
+              "value": "0",
+              "periodo": "03"
+            },
+            {
+              "value": "0",
+              "periodo": "04"
+            },
+            {
+              "value": "0",
+              "periodo": "05"
+            },
+            {
+              "value": "0",
+              "periodo": "06"
+            },
+            {
+              "value": "0",
+              "periodo": "07"
             }
           ],
-          "probNieve": [],
+          "probNieve": [
+            {
+              "value": "0",
+              "periodo": "0208"
+            }
+          ],
           "temperatura": [
             {
               "value": "23",
@@ -1926,6 +1779,30 @@
             {
               "value": "22",
               "periodo": "01"
+            },
+            {
+              "value": "22",
+              "periodo": "02"
+            },
+            {
+              "value": "21",
+              "periodo": "03"
+            },
+            {
+              "value": "21",
+              "periodo": "04"
+            },
+            {
+              "value": "20",
+              "periodo": "05"
+            },
+            {
+              "value": "20",
+              "periodo": "06"
+            },
+            {
+              "value": "20",
+              "periodo": "07"
             }
           ],
           "sensTermica": [
@@ -1936,16 +1813,64 @@
             {
               "value": "22",
               "periodo": "01"
+            },
+            {
+              "value": "22",
+              "periodo": "02"
+            },
+            {
+              "value": "21",
+              "periodo": "03"
+            },
+            {
+              "value": "21",
+              "periodo": "04"
+            },
+            {
+              "value": "20",
+              "periodo": "05"
+            },
+            {
+              "value": "20",
+              "periodo": "06"
+            },
+            {
+              "value": "20",
+              "periodo": "07"
             }
           ],
           "humedadRelativa": [
             {
-              "value": "78",
+              "value": "74",
               "periodo": "00"
             },
             {
-              "value": "82",
+              "value": "78",
               "periodo": "01"
+            },
+            {
+              "value": "81",
+              "periodo": "02"
+            },
+            {
+              "value": "83",
+              "periodo": "03"
+            },
+            {
+              "value": "85",
+              "periodo": "04"
+            },
+            {
+              "value": "86",
+              "periodo": "05"
+            },
+            {
+              "value": "88",
+              "periodo": "06"
+            },
+            {
+              "value": "90",
+              "periodo": "07"
             }
           ],
           "vientoAndRachaMax": [
@@ -1954,13 +1879,26 @@
                 "NE"
               ],
               "velocidad": [
-                "6"
+                "7"
               ],
               "periodo": "00"
             },
             {
-              "value": "8",
+              "value": "9",
               "periodo": "00"
+            },
+            {
+              "direccion": [
+                "NE"
+              ],
+              "velocidad": [
+                "6"
+              ],
+              "periodo": "01"
+            },
+            {
+              "value": "9",
+              "periodo": "01"
             },
             {
               "direccion": [
@@ -1969,11 +1907,76 @@
               "velocidad": [
                 "5"
               ],
-              "periodo": "01"
+              "periodo": "02"
+            },
+            {
+              "value": "7",
+              "periodo": "02"
+            },
+            {
+              "direccion": [
+                "E"
+              ],
+              "velocidad": [
+                "3"
+              ],
+              "periodo": "03"
             },
             {
               "value": "6",
-              "periodo": "01"
+              "periodo": "03"
+            },
+            {
+              "direccion": [
+                "O"
+              ],
+              "velocidad": [
+                "5"
+              ],
+              "periodo": "04"
+            },
+            {
+              "value": "8",
+              "periodo": "04"
+            },
+            {
+              "direccion": [
+                "O"
+              ],
+              "velocidad": [
+                "5"
+              ],
+              "periodo": "05"
+            },
+            {
+              "value": "8",
+              "periodo": "05"
+            },
+            {
+              "direccion": [
+                "O"
+              ],
+              "velocidad": [
+                "5"
+              ],
+              "periodo": "06"
+            },
+            {
+              "value": "8",
+              "periodo": "06"
+            },
+            {
+              "direccion": [
+                "O"
+              ],
+              "velocidad": [
+                "5"
+              ],
+              "periodo": "07"
+            },
+            {
+              "value": "8",
+              "periodo": "07"
             }
           ],
           "fecha": "2026-09-12T00:00:00",
@@ -1984,6 +1987,6 @@
     },
     "id": "30030",
     "version": "1.0",
-    "ficheroCreado": "2026-09-10T08:04:07.845Z"
+    "ficheroCreado": "2026-09-10T09:51:16.335Z"
   }
 ]
