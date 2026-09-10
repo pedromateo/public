@@ -98,33 +98,136 @@ test.describe('MurMeteo PWA - Pruebas E2E', () => {
     expect(firstTemp).toMatch(/-?\d+°/);
   });
 
-  test('Badges condicionales: se muestran los avisos de viento, lluvia y calor con datos reales', async ({ page }) => {
+  test('Badges condicionales: se renderizan correctamente todos los tipos de aviso con datos simulados', async ({ page }) => {
+    // Generar un pronóstico simulado para mañana garantizando todas las condiciones de aviso:
+    // frío (8°C), lluvia (3.5 mm), calor (35°C), viento sostenido (25 km/h) y rachas (45 km/h)
+    const tomorrow = new Date(Date.now() + 86400000);
+    const y = tomorrow.getFullYear();
+    const m = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const d = String(tomorrow.getDate()).padStart(2, '0');
+    const dateStr = `${y}-${m}-${d}T00:00:00`;
+
+    const mockForecast = [{
+      nombre: 'Murcia',
+      elaborado: `${dateStr.split('T')[0]}T08:00:00`,
+      prediccion: {
+        dia: [{
+          fecha: dateStr,
+          temperatura: [
+            { periodo: '08', value: '8' },
+            { periodo: '12', value: '25' },
+            { periodo: '14', value: '35' },
+            { periodo: '16', value: '22' },
+            { periodo: '18', value: '21' }
+          ],
+          sensTermica: [{ periodo: '12', value: '25' }],
+          humedadRelativa: [{ periodo: '12', value: '50' }],
+          estadoCielo: [
+            { periodo: '08', descripcion: 'Despejado', value: '11' },
+            { periodo: '12', descripcion: 'Lluvia', value: '43' },
+            { periodo: '14', descripcion: 'Despejado', value: '11' },
+            { periodo: '16', descripcion: 'Despejado', value: '11' },
+            { periodo: '18', descripcion: 'Despejado', value: '11' }
+          ],
+          precipitacion: [
+            { periodo: '12', value: '3.5' }
+          ],
+          vientoAndRachaMax: [
+            { direccion: ['NO'], velocidad: ['25'], periodo: '16' },
+            { direccion: ['SO'], velocidad: ['15'], periodo: '18' },
+            { value: '45', periodo: '18' }
+          ]
+        }]
+      }
+    }];
+
+    // Interceptar llamadas a ficheros de previsión (tanto rotativos en forecasts/ como forecast.json)
+    await page.route(/.*forecast.*\.json.*/, route => {
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json; charset=utf-8',
+        body: JSON.stringify(mockForecast)
+      });
+    });
+
     await page.goto('/');
     await expect(page.locator('#data-container')).toBeVisible();
 
-    // Verificar que existen badges en la lista
-    const allBadges = page.locator('#hourly-list .badge');
-    const totalBadges = await allBadges.count();
-    expect(totalBadges).toBeGreaterThan(0);
+    // 1. Badge de frío (<= 9°C)
+    const coldBadges = page.locator('#hourly-list .badge.cold-badge');
+    await expect(coldBadges.first()).toBeVisible();
+    await expect(coldBadges.first().locator('.badge-icon svg')).toBeVisible();
 
-    // Badges de viento (con los umbrales >= 20 km/h o rachas >= 40 km/h)
+    // 2. Badge de calor (>= 30°C)
+    const heatBadges = page.locator('#hourly-list .badge.heat-badge');
+    await expect(heatBadges.first()).toBeVisible();
+    await expect(heatBadges.first().locator('.badge-icon svg')).toBeVisible();
+
+    // 3. Badge de lluvia (>= 0.1 mm) con texto formateado
+    const rainBadges = page.locator('#hourly-list .badge.rain-badge');
+    await expect(rainBadges.first()).toBeVisible();
+    await expect(rainBadges.first().locator('.badge-icon svg')).toBeVisible();
+    await expect(rainBadges.first().locator('.badge-text')).toHaveText('3.5 mm');
+
+    // 4. Badges de viento: sostenido y por rachas
     const windBadges = page.locator('#hourly-list .badge.wind-badge');
-    const windCount = await windBadges.count();
-    expect(windCount).toBeGreaterThan(0);
+    await expect(windBadges).toHaveCount(2);
 
-    // Cada badge de viento debe tener su icono y texto con formato "{speed} km/h" o "Rachas {gust} km/h"
-    for (let i = 0; i < Math.min(windCount, 5); i++) {
-      const badge = windBadges.nth(i);
-      await expect(badge.locator('.badge-icon svg')).toBeVisible();
-      await expect(badge.locator('.badge-text')).toHaveText(/(Rachas\s+)?\d+\s*km\/h/);
-    }
+    // Viento sostenido (25 km/h)
+    const sustainedWind = windBadges.nth(0);
+    await expect(sustainedWind.locator('.badge-icon svg')).toBeVisible();
+    await expect(sustainedWind.locator('.badge-text')).toHaveText('25 km/h');
 
-    // Ningún badge debe mostrar texto "undefined", "null" o "NaN"
+    // Viento por racha (racha 45 km/h con viento base 15 km/h)
+    const gustWind = windBadges.nth(1);
+    await expect(gustWind.locator('.badge-icon svg')).toBeVisible();
+    await expect(gustWind.locator('.badge-text')).toHaveText('Rachas 45 km/h');
+    await expect(gustWind).toHaveAttribute('title', 'Viento sostenido: 15 km/h, Rachas: 45 km/h');
+
+    // 5. Ningún badge debe mostrar "undefined", "null" o "NaN"
     const allTexts = await page.locator('#hourly-list .badge-text').allTextContents();
     for (const txt of allTexts) {
       expect(txt).not.toContain('undefined');
       expect(txt).not.toContain('null');
       expect(txt).not.toContain('NaN');
+    }
+  });
+
+  test('Integración con datos reales: si existen avisos meteorológicos, están correctamente formateados', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#data-container')).toBeVisible();
+
+    // Con datos meteorológicos reales, los avisos son condicionales según el tiempo real en Murcia.
+    // Si hay avisos activos, validamos que su estructura y textos sean consistentes.
+    const allBadges = page.locator('#hourly-list .badge');
+    const totalBadges = await allBadges.count();
+
+    if (totalBadges > 0) {
+      // Validar badges de viento si los hay
+      const windBadges = page.locator('#hourly-list .badge.wind-badge');
+      const windCount = await windBadges.count();
+      for (let i = 0; i < windCount; i++) {
+        const badge = windBadges.nth(i);
+        await expect(badge.locator('.badge-icon svg')).toBeVisible();
+        await expect(badge.locator('.badge-text')).toHaveText(/(Rachas\s+)?\d+\s*km\/h/);
+      }
+
+      // Validar badges de lluvia si los hay
+      const rainBadges = page.locator('#hourly-list .badge.rain-badge');
+      const rainCount = await rainBadges.count();
+      for (let i = 0; i < rainCount; i++) {
+        const badge = rainBadges.nth(i);
+        await expect(badge.locator('.badge-icon svg')).toBeVisible();
+        await expect(badge.locator('.badge-text')).toHaveText(/\d+(\.\d+)?\s*mm/);
+      }
+
+      // Ningún badge debe mostrar texto "undefined", "null" o "NaN"
+      const allTexts = await page.locator('#hourly-list .badge-text').allTextContents();
+      for (const txt of allTexts) {
+        expect(txt).not.toContain('undefined');
+        expect(txt).not.toContain('null');
+        expect(txt).not.toContain('NaN');
+      }
     }
   });
 

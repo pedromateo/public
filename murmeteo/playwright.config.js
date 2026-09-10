@@ -17,6 +17,7 @@ module.exports = defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:8085',
     trace: 'on-first-retry',
+    serviceWorkers: 'block',
     launchOptions: {
       executablePath: process.env.CHROMIUM_PATH || systemChromium || undefined,
       args: [
