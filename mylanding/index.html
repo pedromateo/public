@@ -631,40 +631,7 @@
         <a href="https://www.realmadrid.com/es-ES/futbol/primer-equipo/calendario" target="_blank" rel="noopener noreferrer" class="matches-link">Calendario ↗</a>
       </div>
 
-      <div class="matches-list">
-        <div class="match-item">
-          <div class="match-team-wrap">
-            <span class="match-rival">Real Madrid vs Inter Milán</span>
-            <span class="match-meta">Champions League · Bernabéu</span>
-          </div>
-          <div class="match-badge-wrap">
-            <span class="match-date">MAR 8 Sep</span>
-            <span class="match-time">21:00</span>
-          </div>
-        </div>
-
-        <div class="match-item">
-          <div class="match-team-wrap">
-            <span class="match-rival">Real Madrid vs Rayo Vallecano</span>
-            <span class="match-meta">LaLiga · Bernabéu</span>
-          </div>
-          <div class="match-badge-wrap">
-            <span class="match-date">SÁB 12 Sep</span>
-            <span class="match-time">21:00</span>
-          </div>
-        </div>
-
-        <div class="match-item">
-          <div class="match-team-wrap">
-            <span class="match-rival">Elche CF vs Real Madrid</span>
-            <span class="match-meta">LaLiga · Martínez Valero</span>
-          </div>
-          <div class="match-badge-wrap">
-            <span class="match-date">MAR 15 Sep</span>
-            <span class="match-time">21:30</span>
-          </div>
-        </div>
-
+      <div class="matches-list" id="matches-list">
         <div class="match-item">
           <div class="match-team-wrap">
             <span class="match-rival">Atlético Madrid vs Real Madrid</span>
@@ -678,11 +645,44 @@
 
         <div class="match-item">
           <div class="match-team-wrap">
-            <span class="match-rival">Real Madrid vs Arsenal</span>
+            <span class="match-rival">Real Madrid vs Villarreal</span>
+            <span class="match-meta">LaLiga · Bernabéu</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">SÁB 10 Oct</span>
+            <span class="match-time">21:00</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">AS Roma vs Real Madrid</span>
+            <span class="match-meta">Champions League · Olimpico</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">MIÉ 14 Oct</span>
+            <span class="match-time">21:00</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Real Madrid vs Sevilla</span>
+            <span class="match-meta">LaLiga · Bernabéu</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">DOM 18 Oct</span>
+            <span class="match-time">21:00</span>
+          </div>
+        </div>
+
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">Real Madrid vs RB Leipzig</span>
             <span class="match-meta">Champions League · Bernabéu</span>
           </div>
           <div class="match-badge-wrap">
-            <span class="match-date">MAR 29 Sep</span>
+            <span class="match-date">MIÉ 21 Oct</span>
             <span class="match-time">21:00</span>
           </div>
         </div>
@@ -757,6 +757,134 @@
     window.addEventListener('resize', scaleWeatherWidget);
     window.addEventListener('orientationchange', () => setTimeout(scaleWeatherWidget, 200));
     scaleWeatherWidget();
+
+    // 4. Actualización dinámica de partidos del Real Madrid
+    const MATCHES_CACHE_KEY = 'rm_upcoming_matches';
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderMatches(matches) {
+      const container = document.getElementById('matches-list');
+      if (!container || !matches || !matches.length) return;
+
+      container.innerHTML = matches.map(m => `
+        <div class="match-item">
+          <div class="match-team-wrap">
+            <span class="match-rival">${escapeHtml(m.rival)}</span>
+            <span class="match-meta">${escapeHtml(m.meta)}</span>
+          </div>
+          <div class="match-badge-wrap">
+            <span class="match-date">${escapeHtml(m.dateFormatted)}</span>
+            <span class="match-time">${escapeHtml(m.timeFormatted)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function updateRealMadridMatches() {
+      // 1. Mostrar caché previo si existe para visualización inmediata sin saltos visuales
+      try {
+        const cached = localStorage.getItem(MATCHES_CACHE_KEY);
+        if (cached) {
+          renderMatches(JSON.parse(cached));
+        }
+      } catch (e) {}
+
+      // 2. Siempre se lanza la consulta a la API pública para traer los partidos actualizados
+      const leagues = ['esp.1', 'uefa.champions', 'esp.copa_del_rey'];
+
+      try {
+        const fetchPromises = leagues.map(async (lg) => {
+          try {
+            const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${lg}/teams/86/schedule?fixture=true`);
+            if (!res.ok) return [];
+            const data = await res.json();
+            return (data.events || []).map(event => {
+              const comp = event.competitions?.[0] || {};
+              const competitors = comp.competitors || [];
+              const home = competitors.find(c => c.homeAway === 'home');
+              const away = competitors.find(c => c.homeAway === 'away');
+              const homeName = home?.team?.displayName || home?.team?.shortDisplayName || 'Real Madrid';
+              const awayName = away?.team?.displayName || away?.team?.shortDisplayName || 'Rival';
+
+              const leagueRaw = event.league?.name || event.league?.shortName || lg;
+              let league = leagueRaw;
+              if (/champions/i.test(leagueRaw)) league = 'Champions League';
+              else if (/copa/i.test(leagueRaw)) league = 'Copa del Rey';
+              else if (/super/i.test(leagueRaw)) league = 'Supercopa';
+              else if (/laliga|la liga/i.test(leagueRaw)) league = 'LaLiga';
+
+              let venue = comp.venue?.fullName || '';
+              venue = venue.replace('Santiago Bernabéu', 'Bernabéu')
+                           .replace('Riyadh Air Metropolitano', 'Metropolitano')
+                           .replace('Spotify Camp Nou', 'Camp Nou');
+
+              const meta = [league, venue].filter(Boolean).join(' · ');
+              const rival = `${homeName} vs ${awayName}`;
+              const dateObj = new Date(event.date);
+
+              const dayName = dateObj.toLocaleDateString('es-ES', { weekday: 'short' }).replace('.', '').toUpperCase();
+              const dayNum = dateObj.getDate();
+              let monthName = dateObj.toLocaleDateString('es-ES', { month: 'short' }).replace('.', '');
+              monthName = monthName.charAt(0).toUpperCase() + monthName.slice(1, 3);
+              const dateFormatted = `${dayName} ${dayNum} ${monthName}`;
+
+              let timeFormatted;
+              if (comp.status?.type?.state === 'in') {
+                timeFormatted = 'EN VIVO';
+              } else if (event.timeValid === false) {
+                timeFormatted = 'Pendiente';
+              } else {
+                timeFormatted = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+              }
+
+              return {
+                timestamp: dateObj.getTime(),
+                rival,
+                meta,
+                dateFormatted,
+                timeFormatted
+              };
+            });
+          } catch (err) {
+            return [];
+          }
+        });
+
+        const allResults = (await Promise.all(fetchPromises)).flat();
+        // Margen de 3 horas por si el partido está en juego o acaba de finalizar
+        const upcoming = allResults
+          .filter(m => m.timestamp > (Date.now() - 3 * 3600 * 1000))
+          .sort((a, b) => a.timestamp - b.timestamp);
+
+        if (upcoming.length > 0) {
+          const topMatches = upcoming.slice(0, 5);
+          renderMatches(topMatches);
+          try {
+            localStorage.setItem(MATCHES_CACHE_KEY, JSON.stringify(topMatches));
+          } catch (e) {}
+        }
+      } catch (err) {
+        console.warn('Error al consultar partidos del Real Madrid:', err);
+      }
+    }
+
+    // Ejecutar siempre la consulta al cargar la página
+    updateRealMadridMatches();
+
+    // Reconsultar automáticamente si el usuario vuelve a enfocar la pestaña
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        updateRealMadridMatches();
+      }
+    });
 
   </script>
 </body>
