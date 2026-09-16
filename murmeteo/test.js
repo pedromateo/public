@@ -229,6 +229,99 @@ service.getForecast().then(data => {
   console.assert(hour12 && hour12.windGust === 32, `Error parseando racha viento: ${hour12?.windGust}`);
   console.log("✅ Parseo de vientoAndRachaMax de AEMET validado correctamente.");
 
+  // 7. Test Shortcuts Configuration & renderShortcuts export
+  const { renderShortcuts } = require('./app.js');
+  console.assert(typeof renderShortcuts === 'function', "Error: renderShortcuts debe ser una función");
+  console.assert(Array.isArray(config.shortcuts) && config.shortcuts.length === 4, "Error: config.shortcuts debe tener 4 elementos");
+  
+  const [aemetShortcut, eltiempoShortcut, meteoredShortcut, radarShortcut] = config.shortcuts;
+  console.assert(aemetShortcut.id === 'aemet-horas' && aemetShortcut.label === 'AEMET', "Error en shortcut AEMET");
+  console.assert(aemetShortcut.url.startsWith('https://www.aemet.es'), "URL de AEMET inválida");
+  console.assert(eltiempoShortcut.id === 'eltiempo-es' && eltiempoShortcut.label === 'ElTiempo', "Error en shortcut ElTiempo");
+  console.assert(eltiempoShortcut.url.startsWith('https://www.eltiempo.es'), "URL de ElTiempo inválida");
+  console.assert(meteoredShortcut.id === 'meteored' && meteoredShortcut.label === 'MeteoRed', "Error en shortcut MeteoRed");
+  console.assert(meteoredShortcut.url.startsWith('https://www.tiempo.com'), "URL de MeteoRed inválida");
+  console.assert(radarShortcut.id === 'radar-lluvia' && radarShortcut.label === null, "Error en shortcut Radar: debe tener label null (solo icono)");
+  console.assert(radarShortcut.icon && radarShortcut.icon.includes('<svg'), "Error en shortcut Radar: debe contener SVG");
+  console.assert(radarShortcut.url.startsWith('https://www.tiempo.com'), "URL de Radar inválida");
+  console.log("✅ Configuración de accesos directos (shortcuts) con MeteoRed validada correctamente.");
+
+  // 8. Test Card Background Images Inventory (19 SVG & 19 PNG)
+  const expectedImages = [
+    "01_despejado_dia",
+    "02_despejado_noche",
+    "03_parcialmente_nublado_dia",
+    "04_parcialmente_nublado_noche",
+    "05_nublado",
+    "06_lluvia",
+    "07_tormenta",
+    "08_niebla",
+    "09_viento",
+    "10_nieve",
+    "11_atardecer_amanecer",
+    "12_nublado_noche",
+    "13_lluvia_noche",
+    "14_tormenta_noche",
+    "15_niebla_noche",
+    "16_viento_noche",
+    "17_nieve_noche",
+    "18_calima_dia",
+    "19_calima_noche"
+  ];
+
+  expectedImages.forEach(imgName => {
+    const svgPath = path.join(__dirname, 'card_images', 'svg', `${imgName}.svg`);
+    const pngPath = path.join(__dirname, 'card_images', 'png', `${imgName}.png`);
+    console.assert(fs.existsSync(svgPath) && fs.statSync(svgPath).size > 100, `Falta SVG o archivo vacío: ${imgName}.svg`);
+    console.assert(fs.existsSync(pngPath) && fs.statSync(pngPath).size > 100, `Falta PNG o archivo vacío: ${imgName}.png`);
+  });
+  console.log("✅ Colección completa de 19 fondos en SVG y PNG validada correctamente.");
+
+  // 9. Test Dynamic Card Background Selection Algorithm
+  console.assert(data.current.bgImage && expectedImages.includes(data.current.bgImage), `current.bgImage inválido: ${data.current.bgImage}`);
+  
+  // Test specific conditions
+  const orto = "07:30";
+  const ocaso = "20:30";
+
+  // Calima día y noche
+  console.assert(service._resolveCardBackground({ desc: "Calima sahariana", hour: 14, orto, ocaso }) === "18_calima_dia", "Error en calima día");
+  console.assert(service._resolveCardBackground({ desc: "Polvo en suspensión", hour: 23, orto, ocaso }) === "19_calima_noche", "Error en calima noche");
+
+  // Tormenta día y noche
+  console.assert(service._resolveCardBackground({ val: "51", desc: "Tormenta", hour: 12, orto, ocaso }) === "07_tormenta", "Error tormenta día");
+  console.assert(service._resolveCardBackground({ val: "51n", desc: "Tormenta", hour: 1, orto, ocaso }) === "14_tormenta_noche", "Error tormenta noche");
+
+  // Lluvia día y noche
+  console.assert(service._resolveCardBackground({ val: "23", desc: "Chubascos", hour: 15, orto, ocaso }) === "06_lluvia", "Error lluvia día");
+  console.assert(service._resolveCardBackground({ val: "23", desc: "Lluvia débil", hour: 23, orto, ocaso }) === "13_lluvia_noche", "Error lluvia noche");
+
+  // Cubierto / Nublado día y noche
+  console.assert(service._resolveCardBackground({ val: "14", desc: "Cubierto", hour: 12, orto, ocaso }) === "05_nublado", "Error cubierto día");
+  console.assert(service._resolveCardBackground({ val: "14", desc: "Muy nuboso", hour: 3, orto, ocaso }) === "12_nublado_noche", "Error cubierto noche");
+
+  // Niebla día y noche
+  console.assert(service._resolveCardBackground({ val: "81", desc: "Niebla", hour: 10, orto, ocaso }) === "08_niebla", "Error niebla día");
+  console.assert(service._resolveCardBackground({ val: "81", desc: "Niebla", hour: 4, orto, ocaso }) === "15_niebla_noche", "Error niebla noche");
+
+  // Viento día y noche
+  console.assert(service._resolveCardBackground({ val: "11", desc: "Despejado", hour: 12, orto, ocaso, windGust: 60 }) === "09_viento", "Error viento día");
+  console.assert(service._resolveCardBackground({ val: "11", desc: "Despejado", hour: 2, orto, ocaso, windGust: 60 }) === "16_viento_noche", "Error viento noche");
+
+  // Nieve día y noche
+  console.assert(service._resolveCardBackground({ val: "33", desc: "Nieve", hour: 12, orto, ocaso }) === "10_nieve", "Error nieve día");
+  console.assert(service._resolveCardBackground({ val: "33", desc: "Nieve", hour: 1, orto, ocaso }) === "17_nieve_noche", "Error nieve noche");
+
+  // Atardecer / Amanecer
+  console.assert(service._resolveCardBackground({ val: "11", desc: "Despejado", hour: 7.5, orto, ocaso }) === "11_atardecer_amanecer", "Error amanecer crepúsculo");
+  console.assert(service._resolveCardBackground({ val: "11", desc: "Despejado", hour: 20.5, orto, ocaso }) === "11_atardecer_amanecer", "Error atardecer crepúsculo");
+
+  // Despejado día y noche
+  console.assert(service._resolveCardBackground({ val: "11", desc: "Despejado", hour: 14, orto, ocaso }) === "01_despejado_dia", "Error despejado día");
+  console.assert(service._resolveCardBackground({ val: "11", desc: "Despejado", hour: 0, orto, ocaso }) === "02_despejado_noche", "Error despejado noche");
+
+  console.log("✅ Algoritmo dinámico de selección de fondos día/noche/crepúsculo validado correctamente.");
+
   console.log("Todas las pruebas pasaron satisfactoriamente.");
 }).catch(err => {
   console.error("❌ Error en prueba de AemetService", err);

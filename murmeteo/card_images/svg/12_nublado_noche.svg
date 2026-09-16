@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="cloudyNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="660" fill="url(#cloudyNightSky)"/>
+  <!-- Faint Moon glow behind clouds -->
+  <circle cx="920" cy="200" r="55" fill="#F8FAFC" opacity="0.18"/>
+  <!-- Background Cloud -->
+  <g fill="#334155" opacity="0.6" transform="translate(160, 190) scale(1.15)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Foreground Cloud 1 -->
+  <g fill="#475569" opacity="0.75" transform="translate(620, 170) scale(1.35)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Foreground Cloud 2 -->
+  <g fill="#334155" opacity="0.7" transform="translate(820, 240) scale(1.05)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="windNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E2945"/>
+    </linearGradient>
+    <mask id="moonWindCutout">
+      <rect width="1200" height="660" fill="white"/>
+      <circle cx="210" cy="155" r="50" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="1200" height="660" fill="url(#windNightSky)"/>
+  <!-- Crescent Moon on Left -->
+  <circle cx="230" cy="170" r="55" fill="#F1F5F9" mask="url(#moonWindCutout)" opacity="0.85"/>
+  <!-- Wind Streaks -->
+  <g stroke="#94A3B8" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.85">
+    <path d="M 680 230 L 960 230 A 25 25 0 1 0 955 195"/>
+    <path d="M 600 310 L 910 310 A 25 25 0 1 1 905 345"/>
+    <path d="M 720 380 L 980 380"/>
+  </g>
+</svg>

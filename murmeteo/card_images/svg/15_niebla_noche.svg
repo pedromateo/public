@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="fogNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="660" fill="url(#fogNightSky)"/>
+  <!-- Faint Moon -->
+  <circle cx="920" cy="180" r="50" fill="#E2E8F0" opacity="0.25"/>
+  <!-- Night Fog Stripes -->
+  <g fill="#94A3B8" opacity="0.45">
+    <rect x="150" y="210" width="500" height="15" rx="7.5"/>
+    <rect x="680" y="240" width="400" height="15" rx="7.5"/>
+    <rect x="220" y="311" width="750" height="15" rx="7.5"/>
+    <rect x="120" y="390" width="600" height="15" rx="7.5"/>
+    <rect x="760" y="420" width="340" height="15" rx="7.5"/>
+    <rect x="280" y="481" width="650" height="15" rx="7.5"/>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="snowSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#879BAF"/>
+      <stop offset="100%" stop-color="#B3C2D1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="660" fill="url(#snowSky)"/>
+  <!-- Cloud 1 (Left) -->
+  <g fill="#FFFFFF" opacity="0.85" transform="translate(180, 160) scale(0.85)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Cloud 2 (Right) -->
+  <g fill="#FFFFFF" opacity="0.95" transform="translate(720, 170) scale(1.15)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Snowflakes -->
+  <g fill="#FFFFFF" opacity="0.9">
+    <!-- Left fall -->
+    <circle cx="260" cy="290" r="7"/>
+    <circle cx="320" cy="350" r="7"/>
+    <circle cx="370" cy="310" r="5"/>
+    <circle cx="310" cy="430" r="7"/>
+    <!-- Right fall -->
+    <circle cx="820" cy="340" r="7"/>
+    <circle cx="940" cy="330" r="5"/>
+    <circle cx="880" cy="380" r="7"/>
+    <circle cx="1000" cy="390" r="7"/>
+    <circle cx="850" cy="450" r="7"/>
+    <circle cx="970" cy="460" r="5"/>
+    <circle cx="910" cy="500" r="7"/>
+    <circle cx="1030" cy="510" r="7"/>
+  </g>
+</svg>

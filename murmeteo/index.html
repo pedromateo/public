@@ -13,7 +13,7 @@
   <link rel="alternate icon" type="image/png" sizes="192x192" href="./icons/android/mipmap-xxxhdpi/ic_launcher.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/ios/Icon-App-60x60@3x.png">
   
-  <link rel="stylesheet" href="./style.css?v=14">
+  <link rel="stylesheet" href="./style.css?v=16">
   
   <script>
     if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
@@ -81,16 +81,9 @@
           <span id="header-title-text">MurMeteo</span>
         </div>
         <div class="header-actions">
-          <div id="header-badge" class="header-badge">Actualizando...</div>
-          <button id="btn-info" class="btn-info" aria-label="Cómo instalar" title="Cómo instalar MurMeteo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-          </button>
-          <button id="btn-share" class="btn-share" aria-label="Compartir" title="Compartir">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <span id="header-badge" class="header-badge" title="Estado de la conexión">Actualizando...</span>
+          <button id="btn-share" class="btn-share" aria-label="Compartir enlace">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="18" cy="5" r="3"></circle>
               <circle cx="6" cy="12" r="3"></circle>
               <circle cx="18" cy="19" r="3"></circle>
@@ -98,15 +91,20 @@
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
             </svg>
           </button>
+          <button id="btn-info" class="btn-info" aria-label="Información de instalación">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </button>
         </div>
       </div>
+      <div id="offline-banner" class="offline-banner">Sin conexión - Mostrando datos guardados</div>
     </header>
 
-    <div id="offline-banner" class="offline-banner">
-      Sin conexión - Mostrando datos guardados
-    </div>
-
-    <div id="ptr-container">
+    <!-- Pull to Refresh Visual Indicator -->
+    <div id="ptr-container" class="ptr-container">
       <div class="ptr-content">
         <svg id="ptr-icon" class="ptr-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -122,7 +120,7 @@
       </div>
       
       <div id="data-container" style="display: none;">
-        <div class="top-card">
+        <div id="top-card" class="top-card">
           <div id="top-location" class="top-card-location"><svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path><circle cx='12' cy='10' r='3'></circle></svg> Murcia</div>
           <div id="top-temp" class="top-card-temp">--°</div>
           <div id="top-desc" class="top-card-desc">--</div>
@@ -136,6 +134,8 @@
         <div id="hourly-list" class="hourly-list">
           <!-- Rendered by JS -->
         </div>
+
+        <nav id="bottom-bar" class="bottom-bar" aria-label="Accesos directos"></nav>
       </div>
     </main>
 
@@ -147,7 +147,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <script src="./aemetService.js?v=13"></script>
-  <script src="./app.js?v=13"></script>
+  <script src="./aemetService.js?v=14"></script>
+  <script src="./app.js?v=15"></script>
 </body>
 </html>

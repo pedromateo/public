@@ -71,6 +71,12 @@ test.describe('MurMeteo PWA - Pruebas E2E', () => {
     const topSun = page.locator('#top-sun');
     await expect(topSun).toBeVisible();
     await expect(topSun).toHaveText(/\d{2}:\d{2}\s*\/\s*\d{2}:\d{2}/);
+
+    // Fondo dinámico de la tarjeta principal
+    const topCard = page.locator('#top-card');
+    await expect(topCard).toBeVisible();
+    const bgImage = await topCard.evaluate(el => window.getComputedStyle(el).backgroundImage);
+    expect(bgImage).toMatch(/card_images\/svg\/\d{2}_.+\.svg/);
   });
 
   test('Lista horaria: renderiza filas con indicador "Ahora" y formato correcto', async ({ page }) => {
@@ -249,6 +255,54 @@ test.describe('MurMeteo PWA - Pruebas E2E', () => {
     const okBtn = page.locator('#modal-btn-ok');
     await okBtn.click();
     await expect(modal).not.toHaveClass(/active/);
+  });
+
+  test('Barra inferior de accesos directos: renderiza AEMET, ElTiempo y Radar (icono)', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#data-container')).toBeVisible();
+
+    const bottomBar = page.locator('#bottom-bar');
+    await expect(bottomBar).toBeVisible();
+
+    // 1. Acceso directo AEMET
+    const aemetLink = page.locator('#shortcut-aemet-horas');
+    await expect(aemetLink).toBeVisible();
+    await expect(aemetLink).toHaveText('AEMET');
+    await expect(aemetLink).toHaveAttribute('href', 'https://www.aemet.es/es/eltiempo/prediccion/municipios/horas/murcia-id30030');
+    await expect(aemetLink).toHaveAttribute('target', '_blank');
+    await expect(aemetLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    // 2. Acceso directo ElTiempo
+    const eltiempoLink = page.locator('#shortcut-eltiempo-es');
+    await expect(eltiempoLink).toBeVisible();
+    await expect(eltiempoLink).toHaveText('ElTiempo');
+    await expect(eltiempoLink).toHaveAttribute('href', 'https://www.eltiempo.es/murcia.html?v=por_hora');
+    await expect(eltiempoLink).toHaveAttribute('target', '_blank');
+    await expect(eltiempoLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    // 3. Acceso directo MeteoRed
+    const meteoredLink = page.locator('#shortcut-meteored');
+    await expect(meteoredLink).toBeVisible();
+    await expect(meteoredLink).toHaveText('MeteoRed');
+    await expect(meteoredLink).toHaveAttribute('href', 'https://www.tiempo.com/murcia/por-horas');
+    await expect(meteoredLink).toHaveAttribute('target', '_blank');
+    await expect(meteoredLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    // 4. Acceso directo Radar (solo icono)
+    const radarLink = page.locator('#shortcut-radar-lluvia');
+    await expect(radarLink).toBeVisible();
+    await expect(radarLink).toHaveClass(/icon-only/);
+    await expect(radarLink).toHaveAttribute('href', 'https://www.tiempo.com/radar-murcia-LERI-reflect.html');
+    await expect(radarLink).toHaveAttribute('target', '_blank');
+    await expect(radarLink).toHaveAttribute('rel', 'noopener noreferrer');
+    await expect(radarLink).toHaveAttribute('title', 'Radar de lluvia Murcia');
+    await expect(radarLink).toHaveAttribute('aria-label', 'Radar de lluvia Murcia');
+    
+    // Debe contener el SVG del radar y ningún texto visible
+    const radarSvg = radarLink.locator('svg');
+    await expect(radarSvg).toBeVisible();
+    const radarText = await radarLink.textContent();
+    expect(radarText.trim()).toBe('');
   });
 
 });

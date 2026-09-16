@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="calimaNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#24160E"/>
+      <stop offset="100%" stop-color="#3D2719"/>
+    </linearGradient>
+    <mask id="moonCalimaCutout">
+      <rect width="1200" height="660" fill="white"/>
+      <circle cx="930" cy="185" r="68" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="1200" height="660" fill="url(#calimaNightSky)"/>
+  <!-- Amber/Reddish Hazy Crescent Moon -->
+  <circle cx="960" cy="210" r="75" fill="#FDBA74" mask="url(#moonCalimaCutout)" opacity="0.75"/>
+  <!-- Warm Dust Haze Layers -->
+  <g fill="#EA580C" opacity="0.15">
+    <rect x="140" y="240" width="520" height="18" rx="9"/>
+    <rect x="660" y="290" width="460" height="18" rx="9"/>
+    <rect x="200" y="360" width="800" height="18" rx="9"/>
+    <rect x="100" y="440" width="650" height="18" rx="9"/>
+    <rect x="740" y="480" width="380" height="18" rx="9"/>
+  </g>
+</svg>

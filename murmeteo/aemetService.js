@@ -292,9 +292,9 @@ class AemetService {
           windGust = windSpeed;
         }
 
-        // Condition & icon
+        // Condition, icon & dynamic background image
         const cielo = dataHour.cielo || {};
-        const { desc, icon } = this._resolveCondition(cielo, h, precip);
+        const { desc, icon, bgImage } = this._resolveCondition(cielo, h, precip, d.orto, d.ocaso, windGust);
 
         hourlyList.push({
           date: itemDate,
@@ -303,6 +303,7 @@ class AemetService {
           feels_like: feelsLike,
           desc: desc,
           icon: icon,
+          bgImage: bgImage,
           precip: precip,
           windSpeed: windSpeed,
           windGust: windGust
@@ -325,7 +326,10 @@ class AemetService {
         temp: first.temp,
         feels_like: first.feels_like,
         desc: first.desc,
+        icon: first.icon,
+        bgImage: first.bgImage,
         wind: first.windSpeed,
+        windGust: first.windGust,
         temp_min: temps24h.length > 0 ? Math.min(...temps24h) : first.temp,
         temp_max: temps24h.length > 0 ? Math.max(...temps24h) : first.temp,
         orto: todayDia.orto || "07:35",
@@ -335,16 +339,104 @@ class AemetService {
     };
   }
 
-  // Resolve condition description and appropriate icon
-  _resolveCondition(cielo, hour, precip) {
-    const isNight = hour >= 21 || hour <= 6;
-    let desc = cielo.descripcion || "Despejado";
+  // Parse HH:MM to decimal hour
+  _parseTime(timeStr, fallbackHour) {
+    if (!timeStr || typeof timeStr !== 'string' || !timeStr.includes(':')) return fallbackHour;
+    const [h, m] = timeStr.split(':').map(Number);
+    if (isNaN(h) || isNaN(m)) return fallbackHour;
+    return h + m / 60;
+  }
+
+  // Check whether it is night considering orto, ocaso and AEMET code
+  _isNight(hour, orto = "07:35", ocaso = "20:30", codeVal = "") {
+    if (typeof codeVal === 'string' && codeVal.endsWith('n')) {
+      return true;
+    }
+    const ortoDec = this._parseTime(orto, 7.58);
+    const ocasoDec = this._parseTime(ocaso, 20.5);
+    return hour < (ortoDec - 0.5) || hour >= (ocasoDec + 0.5);
+  }
+
+  // Check whether current hour is in dawn/dusk twilight window
+  _isTwilight(hour, orto = "07:35", ocaso = "20:30") {
+    const ortoDec = this._parseTime(orto, 7.58);
+    const ocasoDec = this._parseTime(ocaso, 20.5);
+    return Math.abs(hour - ortoDec) <= 0.75 || Math.abs(hour - ocasoDec) <= 0.75;
+  }
+
+  // Resolves the best-matching card background image from the 19 available illustrations
+  _resolveCardBackground({ val = "", desc = "", hour = 12, orto = "07:35", ocaso = "20:30", windGust = 0 }) {
+    const isNight = this._isNight(hour, orto, ocaso, val);
+    const isTwilight = !isNight && this._isTwilight(hour, orto, ocaso);
+    const cleanVal = typeof val === 'string' ? val.replace('n', '') : String(val);
+    const lower = (desc || "").toLowerCase();
+
+    // 1. Calima / Polvo en suspensión (Fenómeno típico en la Región de Murcia)
+    if (lower.includes("calima") || lower.includes("polvo")) {
+      return isNight ? "19_calima_noche" : "18_calima_dia";
+    }
+
+    // 2. Tormenta (Códigos 51-54, 61-64 o descripción con tormenta)
+    if (cleanVal.startsWith("51") || cleanVal.startsWith("52") || cleanVal.startsWith("53") || cleanVal.startsWith("54") ||
+        cleanVal.startsWith("61") || cleanVal.startsWith("62") || cleanVal.startsWith("63") || cleanVal.startsWith("64") ||
+        lower.includes("tormenta")) {
+      return isNight ? "14_tormenta_noche" : "07_tormenta";
+    }
+
+    // 3. Nieve (Códigos 33-36, 71-74 o descripción con nieve)
+    if (cleanVal.startsWith("33") || cleanVal.startsWith("34") || cleanVal.startsWith("35") || cleanVal.startsWith("36") ||
+        cleanVal.startsWith("71") || cleanVal.startsWith("72") || cleanVal.startsWith("73") || cleanVal.startsWith("74") ||
+        lower.includes("nieve")) {
+      return isNight ? "17_nieve_noche" : "10_nieve";
+    }
+
+    // 4. Lluvia / Chubascos (Códigos 23-26, 43-46 o descripción con lluvia/chubasco)
+    if (cleanVal.startsWith("23") || cleanVal.startsWith("24") || cleanVal.startsWith("25") || cleanVal.startsWith("26") ||
+        cleanVal.startsWith("43") || cleanVal.startsWith("44") || cleanVal.startsWith("45") || cleanVal.startsWith("46") ||
+        lower.includes("lluvia") || lower.includes("chubasco") || lower.includes("llovizna")) {
+      return isNight ? "13_lluvia_noche" : "06_lluvia";
+    }
+
+    // 5. Niebla / Bruma (Códigos 81/82 o descripción con niebla/bruma)
+    if (cleanVal === "81" || cleanVal === "82" || lower.includes("niebla") || lower.includes("bruma")) {
+      return isNight ? "15_niebla_noche" : "08_niebla";
+    }
+
+    // 6. Viento fuerte / rachas destacadas (>= 50 km/h o descripción de viento)
+    if (windGust >= 50 || lower.includes("viento")) {
+      return isNight ? "16_viento_noche" : "09_viento";
+    }
+
+    // 7. Atardecer / Amanecer (Ventana crepuscular con cielos mayormente despejados)
+    if (isTwilight && (cleanVal === "11" || cleanVal === "12" || cleanVal === "13" || cleanVal === "" || lower.includes("despejado") || lower.includes("poco nuboso"))) {
+      return "11_atardecer_amanecer";
+    }
+
+    // 8. Muy nublado / Cubierto (Códigos 14-17 o descripción con cubierto/nublado)
+    if (cleanVal.startsWith("14") || cleanVal.startsWith("15") || cleanVal.startsWith("16") || cleanVal.startsWith("17") ||
+        lower.includes("cubierto") || lower.includes("muy nuboso") || lower === "nublado" || lower === "nuboso") {
+      return isNight ? "12_nublado_noche" : "05_nublado";
+    }
+
+    // 9. Parcialmente nublado / Intervalos nubosos (Códigos 12, 13 o descripción)
+    if (cleanVal === "12" || cleanVal === "13" || lower.includes("intervalos") || lower.includes("poco nuboso") || lower.includes("parcialmente")) {
+      return isNight ? "04_parcialmente_nublado_noche" : "03_parcialmente_nublado_dia";
+    }
+
+    // 10. Despejado por defecto
+    return isNight ? "02_despejado_noche" : "01_despejado_dia";
+  }
+
+  // Resolve condition description, icon and background image
+  _resolveCondition(cielo, hour, precip, orto = "07:35", ocaso = "20:30", windGust = 0) {
     const val = cielo.value || "";
+    let desc = cielo.descripcion || "Despejado";
 
     if (desc) {
       desc = desc.charAt(0).toUpperCase() + desc.slice(1);
     }
 
+    const isNight = this._isNight(hour, orto, ocaso, val);
     let icon = isNight ? "🌙" : "☀️";
 
     if (val.startsWith("11")) {
@@ -373,14 +465,16 @@ class AemetService {
         icon = (lower.includes("débil") || lower.includes("escas") || precip < 1.0) ? "🌦️" : "🌧️";
       } else if (lower.includes("nub") || lower.includes("cubierto")) {
         icon = (lower.includes("poco") || lower.includes("intervalos")) ? (isNight ? "☁️" : "🌤️") : "☁️";
-      } else if (lower.includes("niebla") || lower.includes("bruma")) {
+      } else if (lower.includes("niebla") || lower.includes("bruma") || lower.includes("calima") || lower.includes("polvo")) {
         icon = "🌫️";
       } else {
         icon = isNight ? "🌙" : "☀️";
       }
     }
 
-    return { desc, icon };
+    const bgImage = this._resolveCardBackground({ val, desc, hour, orto, ocaso, windGust });
+
+    return { desc, icon, bgImage };
   }
 
   // Generates data from Open-Meteo as a free fallback when no AEMET API key is available (e.g., GitHub Pages)
@@ -412,6 +506,16 @@ class AemetService {
       return "Despejado";
     };
 
+    const today = data.daily;
+    const formatTime = (isoStr) => {
+      if (!isoStr) return "--:--";
+      const d = new Date(isoStr);
+      return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+    };
+
+    const sunriseStr = today.sunrise?.[0] ? formatTime(today.sunrise[0]) : "07:35";
+    const sunsetStr = today.sunset?.[0] ? formatTime(today.sunset[0]) : "20:30";
+
     for (let i = 0; i < data.hourly.time.length; i++) {
       const dt = new Date(data.hourly.time[i]);
       if (dt.getTime() < currentHourTime - 3600000) continue; // Skip past hours
@@ -421,8 +525,17 @@ class AemetService {
       const temp = Math.round(data.hourly.temperature_2m[i]);
       const precip = data.hourly.precipitation[i] || 0;
       const desc = codeToDesc(data.hourly.weather_code[i]);
+      const windSpeed = Math.round(data.hourly.wind_speed_10m[i]);
+      const windGust = Math.round(data.hourly.wind_gusts_10m[i]);
       
-      const { icon } = this._resolveCondition({ descripcion: desc, value: "" }, hour, precip);
+      const { icon, bgImage } = this._resolveCondition(
+        { descripcion: desc, value: "" },
+        hour,
+        precip,
+        sunriseStr,
+        sunsetStr,
+        windGust
+      );
       
       hourlyList.push({
         date: dt,
@@ -431,19 +544,14 @@ class AemetService {
         feels_like: Math.round(data.hourly.apparent_temperature[i]),
         desc: desc,
         icon: icon,
+        bgImage: bgImage,
         precip: precip,
-        windSpeed: Math.round(data.hourly.wind_speed_10m[i]),
-        windGust: Math.round(data.hourly.wind_gusts_10m[i])
+        windSpeed: windSpeed,
+        windGust: windGust
       });
     }
 
     const first = hourlyList[0];
-    const today = data.daily;
-    const formatTime = (isoStr) => {
-      if (!isoStr) return "--:--";
-      const d = new Date(isoStr);
-      return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
-    };
 
     return {
       location: this.config.location?.name || "Murcia",
@@ -452,11 +560,14 @@ class AemetService {
         temp: first.temp,
         feels_like: first.feels_like,
         desc: first.desc,
+        icon: first.icon,
+        bgImage: first.bgImage,
         wind: first.windSpeed,
+        windGust: first.windGust,
         temp_min: Math.round(today.temperature_2m_min[0]),
         temp_max: Math.round(today.temperature_2m_max[0]),
-        orto: formatTime(today.sunrise[0]),
-        ocaso: formatTime(today.sunset[0])
+        orto: sunriseStr,
+        ocaso: sunsetStr
       },
       hourly: hourlyList
     };
@@ -475,7 +586,10 @@ class AemetService {
         temp: 0,
         feels_like: 0,
         desc: "Despejado",
+        icon: "☀️",
+        bgImage: "01_despejado_dia",
         wind: 0,
+        windGust: 0,
         temp_min: 22,
         temp_max: 35,
         orto: "07:34",
@@ -518,19 +632,23 @@ class AemetService {
       else if (Math.random() < 0.25) condIndex = 2;
       else if (Math.random() < 0.35) condIndex = 1;
       
-      let icon = conditions[condIndex].icon;
-      if (h >= 21 || h <= 6) {
-        if (condIndex === 0) icon = "🌙";
-        if (condIndex === 1) icon = "☁️";
-      }
+      const { desc: mDesc, icon: mIcon, bgImage: mBgImage } = this._resolveCondition(
+        { descripcion: conditions[condIndex].desc, value: "" },
+        h,
+        precip,
+        "07:34",
+        "20:32",
+        windGust
+      );
 
       mockData.hourly.push({
         date: d,
         hour: h,
         temp: temp,
         feels_like: temp >= 30 ? temp + 2 : temp + 1,
-        desc: conditions[condIndex].desc,
-        icon: icon,
+        desc: mDesc,
+        icon: mIcon,
+        bgImage: mBgImage,
         precip: precip,
         windSpeed: windSpeed,
         windGust: windGust
@@ -541,7 +659,10 @@ class AemetService {
     mockData.current.temp = first.temp;
     mockData.current.feels_like = first.feels_like;
     mockData.current.desc = first.desc;
+    mockData.current.icon = first.icon;
+    mockData.current.bgImage = first.bgImage;
     mockData.current.wind = first.windSpeed;
+    mockData.current.windGust = first.windGust;
     
     let temps24h = mockData.hourly.slice(0, 24).map(h => h.temp);
     mockData.current.temp_min = Math.min(...temps24h);

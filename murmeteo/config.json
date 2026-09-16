@@ -55,5 +55,35 @@
       "release": "Suelta para actualizar",
       "refreshing": "Actualizando..."
     }
-  }
+  },
+  "shortcuts": [
+    {
+      "id": "aemet-horas",
+      "label": "AEMET",
+      "title": "AEMET - Predicción por horas en Murcia",
+      "url": "https://www.aemet.es/es/eltiempo/prediccion/municipios/horas/murcia-id30030",
+      "icon": null
+    },
+    {
+      "id": "eltiempo-es",
+      "label": "ElTiempo",
+      "title": "ElTiempo.es - Predicción por horas en Murcia",
+      "url": "https://www.eltiempo.es/murcia.html?v=por_hora",
+      "icon": null
+    },
+    {
+      "id": "meteored",
+      "label": "MeteoRed",
+      "title": "MeteoRed - Predicción por horas en Murcia",
+      "url": "https://www.tiempo.com/murcia/por-horas",
+      "icon": null
+    },
+    {
+      "id": "radar-lluvia",
+      "label": null,
+      "title": "Radar de lluvia Murcia",
+      "url": "https://www.tiempo.com/radar-murcia-LERI-reflect.html",
+      "icon": "<svg viewBox='0 0 24 24' width='22' height='22' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z'></path><path d='M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'></path><path d='M12 12h.01'></path><path d='m12 12 5.5-5.5'></path></svg>"
+    }
+  ]
 }

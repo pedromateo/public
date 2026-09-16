@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="partlyCloudyNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#121C34"/>
+      <stop offset="100%" stop-color="#1F2C4D"/>
+    </linearGradient>
+    <mask id="moonCutoutPartial">
+      <rect width="1200" height="660" fill="white"/>
+      <circle cx="925" cy="165" r="58" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="1200" height="660" fill="url(#partlyCloudyNightSky)"/>
+  <!-- Crescent Moon -->
+  <circle cx="950" cy="180" r="65" fill="#E2E8F0" mask="url(#moonCutoutPartial)" opacity="0.95"/>
+  <!-- Cloud 1 (Left) -->
+  <g fill="#94A3B8" opacity="0.65" transform="translate(150, 170) scale(0.85)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Cloud 2 (Right / in front of moon) -->
+  <g fill="#CBD5E1" opacity="0.8" transform="translate(700, 230) scale(1.15)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+</svg>

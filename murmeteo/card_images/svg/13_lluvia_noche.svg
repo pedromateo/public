@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="rainNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B132B"/>
+      <stop offset="100%" stop-color="#1C2541"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="660" fill="url(#rainNightSky)"/>
+  <!-- Storm/Rain Cloud (Night) -->
+  <g fill="#3A4D6B" opacity="0.75" transform="translate(720, 170) scale(1.35)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Raindrops -->
+  <g stroke="#60A5FA" stroke-width="4" stroke-linecap="round" opacity="0.8">
+    <line x1="810" y1="340" x2="804" y2="364"/>
+    <line x1="860" y1="390" x2="854" y2="414"/>
+    <line x1="910" y1="330" x2="904" y2="354"/>
+    <line x1="960" y1="410" x2="954" y2="434"/>
+    <line x1="1010" y1="350" x2="1004" y2="374"/>
+    <line x1="840" y1="460" x2="834" y2="484"/>
+    <line x1="890" y1="510" x2="884" y2="534"/>
+    <line x1="940" y1="470" x2="934" y2="494"/>
+    <line x1="990" y1="520" x2="984" y2="544"/>
+    <line x1="1040" y1="460" x2="1034" y2="484"/>
+  </g>
+</svg>

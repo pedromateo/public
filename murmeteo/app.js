@@ -20,6 +20,7 @@ const elements = (typeof document !== 'undefined') ? {
   btnInfo: document.getElementById('btn-info'),
   btnShare: document.getElementById('btn-share'),
   hourlyList: document.getElementById('hourly-list'),
+  bottomBar: document.getElementById('bottom-bar'),
   
   // Modal de instalación
   infoModal: document.getElementById('info-modal'),
@@ -32,6 +33,7 @@ const elements = (typeof document !== 'undefined') ? {
   modalInstallBtn: document.getElementById('modal-install-btn'),
   
   // Top card
+  topCard: document.getElementById('top-card'),
   topLocation: document.getElementById('top-location'),
   topTemp: document.getElementById('top-temp'),
   topDesc: document.getElementById('top-desc'),
@@ -106,6 +108,40 @@ function setupUIFromConfig() {
   document.getElementById('pwa-text').textContent = config.ui.pwa_prompt.message;
   elements.pwaBtn.textContent = config.ui.pwa_prompt.button;
   elements.offlineBanner.textContent = config.ui.offline_warning;
+  if (config.shortcuts) {
+    renderShortcuts(config.shortcuts);
+  }
+}
+
+function renderShortcuts(shortcuts) {
+  if (!elements.bottomBar || !Array.isArray(shortcuts)) return;
+  elements.bottomBar.innerHTML = '';
+  
+  shortcuts.forEach(item => {
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.id = `shortcut-${item.id}`;
+    
+    if (item.title) {
+      link.title = item.title;
+      link.setAttribute('aria-label', item.title);
+    }
+    
+    if (item.icon && !item.label) {
+      link.className = 'shortcut-pill icon-only';
+      link.innerHTML = item.icon;
+    } else if (item.icon && item.label) {
+      link.className = 'shortcut-pill';
+      link.innerHTML = `${item.icon}<span>${item.label}</span>`;
+    } else {
+      link.className = 'shortcut-pill';
+      link.textContent = item.label || '';
+    }
+    
+    elements.bottomBar.appendChild(link);
+  });
 }
 
 function showCriticalError() {
@@ -186,6 +222,9 @@ function renderApp(data, isOffline) {
   elements.headerBadge.title = "Previsión generada a las " + timeStr;
   
   // Render Top Card
+  if (elements.topCard && data.current && data.current.bgImage) {
+    elements.topCard.style.backgroundImage = `url('./card_images/svg/${data.current.bgImage}.svg')`;
+  }
   elements.topTemp.textContent = `${data.current.temp}°`;
   elements.topDesc.textContent = `${data.current.desc}`;
   elements.topWind.innerHTML = `<svg viewBox='0 0 24 24' width='16' height='16' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' style='vertical-align: text-bottom;'><path d='M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2'></path></svg> ${data.current.wind} km/h`;
@@ -596,11 +635,12 @@ if (typeof window !== 'undefined') {
   });
 
   window.generateHourBadges = generateHourBadges;
+  window.renderShortcuts = renderShortcuts;
 
   // Boot
   window.addEventListener('DOMContentLoaded', initApp);
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { generateHourBadges };
+  module.exports = { generateHourBadges, renderShortcuts };
 }

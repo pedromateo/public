@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="nightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E2945"/>
+    </linearGradient>
+    <mask id="moonCutout">
+      <rect width="1200" height="660" fill="white"/>
+      <circle cx="930" cy="185" r="68" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="1200" height="660" fill="url(#nightSky)"/>
+  <!-- Stars -->
+  <g fill="#FFFFFF" opacity="0.75">
+    <circle cx="180" cy="120" r="3"/>
+    <circle cx="320" cy="80" r="2"/>
+    <circle cx="540" cy="160" r="3"/>
+    <circle cx="720" cy="90" r="2"/>
+    <circle cx="850" cy="140" r="4"/>
+    <circle cx="1050" cy="110" r="3"/>
+    <circle cx="1120" cy="260" r="2"/>
+    <circle cx="250" cy="280" r="2"/>
+    <circle cx="640" cy="290" r="2"/>
+    <circle cx="800" cy="350" r="3"/>
+    <circle cx="980" cy="420" r="2"/>
+  </g>
+  <!-- Crescent Moon -->
+  <circle cx="960" cy="210" r="75" fill="#F1F5F9" mask="url(#moonCutout)" opacity="0.95"/>
+</svg>

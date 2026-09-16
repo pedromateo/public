@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="rainSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5A7387"/>
+      <stop offset="100%" stop-color="#879BAF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="660" fill="url(#rainSky)"/>
+  <!-- Cloud -->
+  <g fill="#E2E8F0" opacity="0.85" transform="translate(740, 180) scale(1.3)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Raindrops -->
+  <g stroke="#93C5FD" stroke-width="4" stroke-linecap="round" opacity="0.85">
+    <line x1="820" y1="340" x2="814" y2="364"/>
+    <line x1="870" y1="390" x2="864" y2="414"/>
+    <line x1="920" y1="330" x2="914" y2="354"/>
+    <line x1="970" y1="410" x2="964" y2="434"/>
+    <line x1="1020" y1="350" x2="1014" y2="374"/>
+    <line x1="850" y1="460" x2="844" y2="484"/>
+    <line x1="900" y1="510" x2="894" y2="534"/>
+    <line x1="950" y1="470" x2="944" y2="494"/>
+    <line x1="1000" y1="520" x2="994" y2="544"/>
+  </g>
+</svg>

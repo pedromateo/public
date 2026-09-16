@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660">
+  <defs>
+    <linearGradient id="windSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78A0B9"/>
+      <stop offset="100%" stop-color="#9FC2D6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="660" fill="url(#windSky)"/>
+  <!-- Cloud (Left) -->
+  <g fill="#FFFFFF" opacity="0.85" transform="translate(180, 160) scale(1.0)">
+    <circle cx="45" cy="0" r="45"/>
+    <circle cx="105" cy="-15" r="60"/>
+    <circle cx="175" cy="5" r="38"/>
+    <rect x="20" y="-10" width="175" height="50" rx="25"/>
+  </g>
+  <!-- Wind Streaks -->
+  <g stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9">
+    <path d="M 700 240 L 960 240 A 25 25 0 1 0 955 205"/>
+    <path d="M 640 320 L 910 320 A 25 25 0 1 1 905 355"/>
+    <path d="M 760 390 L 980 390"/>
+  </g>
+</svg>
