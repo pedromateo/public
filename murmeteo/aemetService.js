@@ -317,7 +317,10 @@ class AemetService {
 
     const first = hourlyList[0];
     const temps24h = hourlyList.slice(0, 24).map(h => h.temp);
-    const todayDia = dias[0] || {};
+    const firstDateStr = first?.date instanceof Date && !isNaN(first.date)
+      ? `${first.date.getFullYear()}-${String(first.date.getMonth() + 1).padStart(2, '0')}-${String(first.date.getDate()).padStart(2, '0')}`
+      : null;
+    const todayDia = (firstDateStr && dias.find(d => (d.fecha || '').startsWith(firstDateStr))) || dias[0] || {};
 
     return {
       location: locationName,

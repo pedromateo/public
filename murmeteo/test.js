@@ -322,6 +322,14 @@ service.getForecast().then(data => {
 
   console.log("✅ Algoritmo dinámico de selección de fondos día/noche/crepúsculo validado correctamente.");
 
+  // 10. Test CI/CD deployment workflows copy card_images into dist/murmeteo
+  const workflowPath = path.join(__dirname, '..', '.github', 'workflows', 'deploy-murmeteo.yml');
+  if (fs.existsSync(workflowPath)) {
+    const workflowContent = fs.readFileSync(workflowPath, 'utf8');
+    console.assert(workflowContent.includes('cp -r card_images ../dist/murmeteo/'), "Error: deploy-murmeteo.yml debe empaquetar card_images en dist/murmeteo");
+    console.log("✅ Empaquetado de card_images en el flujo CI/CD validado correctamente.");
+  }
+
   console.log("Todas las pruebas pasaron satisfactoriamente.");
 }).catch(err => {
   console.error("❌ Error en prueba de AemetService", err);

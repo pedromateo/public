@@ -6,6 +6,16 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ---
 
+## [1.0.2] - 2026-09-17
+
+### 🐛 Corregido
+
+- **Carga de imágenes de fondo en producción (GitHub Pages)**: Los flujos de despliegue de GitHub Actions (`deploy-murmeteo.yml`, `deploy-brainfit.yml`, `deploy-loopp.yml`, `deploy-mylanding.yml`) no copiaban la carpeta `card_images` a la distribución de producción (`dist/murmeteo/`), provocando errores HTTP 404 al intentar cargar cualquier fondo dinámico.
+- **Resiliencia visual de la tarjeta superior (Top Card)**: Se añade capa de gradiente y color de fondo de respaldo (`background-color: #0284c7;` y degradado CSS) para evitar tarjetas transparentes o en blanco ante demoras de red o fallos de carga.
+- **Sincronización de día y orto/ocaso en medianoche (00:00)**: Se ajusta la obtención de los datos del día en `aemetService.js` para que coincida exactamente con la fecha de la primera hora visible en lugar de asumir siempre `dias[0]`.
+
+---
+
 ## [1.0.0] - 2026-09-04
 
 ### ✨ Agregado

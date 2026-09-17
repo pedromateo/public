@@ -223,7 +223,7 @@ function renderApp(data, isOffline) {
   
   // Render Top Card
   if (elements.topCard && data.current && data.current.bgImage) {
-    elements.topCard.style.backgroundImage = `url('./card_images/svg/${data.current.bgImage}.svg')`;
+    elements.topCard.style.backgroundImage = `url('./card_images/svg/${data.current.bgImage}.svg'), linear-gradient(135deg, #0ea5e9, #0284c7)`;
   }
   elements.topTemp.textContent = `${data.current.temp}°`;
   elements.topDesc.textContent = `${data.current.desc}`;
