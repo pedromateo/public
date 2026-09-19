@@ -5,6 +5,10 @@ import com.swipeclean.data.model.PhotoItem
 import com.swipeclean.domain.usecase.CreateTrashRequestUseCase
 import io.mockk.every
 import io.mockk.mockk
+import android.net.Uri
+import io.mockk.mockkStatic
+import io.mockk.unmockkStatic
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -39,7 +43,15 @@ class SummaryViewModelTest {
 
     @Before
     fun setUp() {
+        mockkStatic(Uri::class)
+        val mockUri: Uri = mockk()
+        every { Uri.parse(any()) } returns mockUri
         viewModel = SummaryViewModel(createTrashRequestUseCase)
+    }
+
+    @After
+    fun tearDown() {
+        unmockkStatic(Uri::class)
     }
 
     @Test

@@ -63,7 +63,8 @@ class PhotoRepositoryTest {
 
     @Test
     fun `createTrashIntentSender delegates to dataSource`() {
-        val uris = listOf(Uri.parse("content://photo/1"))
+        val mockUri: Uri = mockk()
+        val uris = listOf(mockUri)
         every { dataSource.createTrashIntentSender(uris, true) } returns null
 
         val result = repository.createTrashIntentSender(uris, true)
