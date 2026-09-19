@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SwipeClean</string>
+    <string name="permission_title">Acceso a tus fotos</string>
+    <string name="permission_description">SwipeClean necesita acceso a tu galería para mostrarte tus fotos, ayudarte a revisar las que no necesitas y liberar espacio de forma segura.</string>
+    <string name="grant_permission">Permitir acceso a fotos</string>
+    <string name="swipe_to_clean">Desliza para limpiar</string>
+    <string name="keep">Conservar</string>
+    <string name="trash">Eliminar</string>
+    <string name="undo">Deshacer</string>
+    <string name="to_delete">A eliminar</string>
+    <string name="saved">Guardadas</string>
+    <string name="space_to_free">Espacio a liberar</string>
+    <string name="finish_review">Finalizar revisión</string>
+    <string name="summary_title">Resumen de limpieza</string>
+    <string name="confirm_trash_title">¿Mover fotos a la papelera?</string>
+    <string name="confirm_trash_description">Las fotos seleccionadas se moverán a la papelera de tu galería. Podrás recuperarlas durante 30 días si cambias de opinión.</string>
+    <string name="clean_now">Limpiar ahora</string>
+    <string name="all_done">¡Todo limpio!</string>
+    <string name="no_photos_left">No quedan fotos pendientes por revisar en este álbum.</string>
+    <string name="back_to_albums">Volver a los álbumes</string>
+</resources>
