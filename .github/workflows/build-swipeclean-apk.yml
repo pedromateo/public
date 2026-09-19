@@ -39,24 +39,26 @@ jobs:
 
       - name: Run Unit Tests
         working-directory: swipeclean
+        shell: bash
         run: |
-          ./gradlew testDebugUnitTest || {
-            echo "================== TEST FAILURES =================="
-            find app/build/test-results -type f -name "*.xml" -exec cat {} + 2>/dev/null || true
-            exit 1
-          }
-
-      - name: Upload Test Reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-reports
-          path: swipeclean/app/build/reports/tests/testDebugUnitTest/
-          retention-days: 7
+          set -o pipefail
+          ./gradlew testDebugUnitTest --stacktrace 2>&1 | tee build_log.txt
 
       - name: Build Debug APK
         working-directory: swipeclean
-        run: ./gradlew assembleDebug
+        run: |
+          ./gradlew assembleDebug --stacktrace 2>&1 | tee -a build_log.txt
+
+      - name: Publish Test Failure Diagnostics
+        if: failure()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: test-debug-log
+          name: "Test Debug Log"
+          body: "Log de compilación y pruebas para diagnóstico"
+          draft: false
+          prerelease: true
+          files: swipeclean/build_log.txt
 
       - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
