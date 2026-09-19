@@ -29,16 +29,16 @@ fun SwipeCleanNavGraph(
 ) {
     val context = LocalContext.current
 
-    // Dependencias básicas (DI directa)
-    val dataSource = MediaStoreDataSource(context)
-    val repository = PhotoRepositoryImpl(dataSource)
-    val getPhotosUseCase = GetPhotosUseCase(repository)
-    val getBucketsUseCase = GetBucketsUseCase(repository)
-    val createTrashRequestUseCase = CreateTrashRequestUseCase(repository)
+    // Dependencias básicas con ciclo de vida retenido
+    val dataSource = androidx.compose.runtime.remember { MediaStoreDataSource(context) }
+    val repository = androidx.compose.runtime.remember { PhotoRepositoryImpl(dataSource) }
+    val getPhotosUseCase = androidx.compose.runtime.remember { GetPhotosUseCase(repository) }
+    val getBucketsUseCase = androidx.compose.runtime.remember { GetBucketsUseCase(repository) }
+    val createTrashRequestUseCase = androidx.compose.runtime.remember { CreateTrashRequestUseCase(repository) }
 
-    val albumViewModel = AlbumPickerViewModel(getBucketsUseCase)
-    val swipeViewModel = SwipeViewModel(getPhotosUseCase)
-    val summaryViewModel = SummaryViewModel(createTrashRequestUseCase)
+    val albumViewModel = androidx.compose.runtime.remember { AlbumPickerViewModel(getBucketsUseCase) }
+    val swipeViewModel = androidx.compose.runtime.remember { SwipeViewModel(getPhotosUseCase) }
+    val summaryViewModel = androidx.compose.runtime.remember { SummaryViewModel(createTrashRequestUseCase) }
 
     val startDestination = if (PermissionUtils.hasStoragePermission(context)) {
         Screen.AlbumPicker.route

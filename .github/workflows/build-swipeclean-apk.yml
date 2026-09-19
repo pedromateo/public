@@ -39,7 +39,20 @@ jobs:
 
       - name: Run Unit Tests
         working-directory: swipeclean
-        run: ./gradlew testDebugUnitTest
+        run: |
+          ./gradlew testDebugUnitTest || {
+            echo "================== TEST FAILURES =================="
+            find app/build/test-results -type f -name "*.xml" -exec cat {} + 2>/dev/null || true
+            exit 1
+          }
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-reports
+          path: swipeclean/app/build/reports/tests/testDebugUnitTest/
+          retention-days: 7
 
       - name: Build Debug APK
         working-directory: swipeclean
