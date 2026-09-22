@@ -29,6 +29,12 @@ class AppNavigationTest {
     }
 
     @Test
+    fun `swipe route includes random flag when enabled`() {
+        val route = Screen.Swipe.createRoute(bucketId = "camera_123", bucketName = "Cámara", random = true)
+        assertEquals("swipe?bucketId=camera_123&bucketName=Cámara&random=true", route)
+    }
+
+    @Test
     fun `summary route is properly configured`() {
         assertEquals("summary", Screen.Summary.route)
     }

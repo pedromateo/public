@@ -63,8 +63,8 @@ fun SwipeCleanNavGraph(
         composable(Screen.AlbumPicker.route) {
             AlbumPickerScreen(
                 viewModel = albumViewModel,
-                onAlbumSelected = { bucketId, bucketName ->
-                    navController.navigate(Screen.Swipe.createRoute(bucketId, bucketName))
+                onAlbumSelected = { bucketId, bucketName, random ->
+                    navController.navigate(Screen.Swipe.createRoute(bucketId, bucketName, random = random))
                 }
             )
         }
@@ -79,11 +79,16 @@ fun SwipeCleanNavGraph(
                 navArgument("bucketName") {
                     type = NavType.StringType
                     defaultValue = ""
+                },
+                navArgument("random") {
+                    type = NavType.BoolType
+                    defaultValue = false
                 }
             )
         ) { backStackEntry ->
             val bucketIdArg = backStackEntry.arguments?.getString("bucketId")
             val bucketNameArg = backStackEntry.arguments?.getString("bucketName")
+            val randomArg = backStackEntry.arguments?.getBoolean("random") ?: false
             val effectiveBucketId = if (bucketIdArg.isNullOrEmpty()) null else bucketIdArg
             val effectiveBucketName = if (bucketNameArg.isNullOrEmpty()) "Todas las fotos" else bucketNameArg
 
@@ -92,6 +97,7 @@ fun SwipeCleanNavGraph(
             SwipeScreen(
                 bucketId = effectiveBucketId,
                 bucketName = effectiveBucketName,
+                startRandom = randomArg,
                 viewModel = swipeViewModel,
                 onNavigateBack = {
                     navController.popBackStack()

@@ -18,4 +18,12 @@
     <string name="all_done">¡Todo limpio!</string>
     <string name="no_photos_left">No quedan fotos pendientes por revisar en este álbum.</string>
     <string name="back_to_albums">Volver a los álbumes</string>
+    <string name="all_photos_title">Todas las fotos</string>
+    <string name="random_order">Orden aleatorio</string>
+    <string name="random_mode_active">Modo aleatorio activado</string>
+    <string name="show_random">Fotos en orden aleatorio</string>
+    <string name="reshuffle">Reordenar aleatoriamente</string>
+    <string name="random_mode_toast_on">Modo aleatorio activado</string>
+    <string name="random_mode_toast_off">Orden cronológico restaurado</string>
+    <string name="photos_reshuffled">Fotos reordenadas aleatoriamente</string>
 </resources>

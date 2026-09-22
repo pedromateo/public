@@ -18,9 +18,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -48,7 +50,7 @@ import com.swipeclean.data.model.PhotoBucket
 @Composable
 fun AlbumPickerScreen(
     viewModel: AlbumPickerViewModel,
-    onAlbumSelected: (bucketId: String?, bucketName: String?) -> Unit
+    onAlbumSelected: (bucketId: String?, bucketName: String?, random: Boolean) -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
 
@@ -102,7 +104,8 @@ fun AlbumPickerScreen(
                 items(state.buckets, key = { it.id ?: "all" }) { bucket ->
                     BucketCard(
                         bucket = bucket,
-                        onClick = { onAlbumSelected(bucket.id, bucket.name) }
+                        onClick = { onAlbumSelected(bucket.id, bucket.name, false) },
+                        onRandomClick = { onAlbumSelected(bucket.id, bucket.name, true) }
                     )
                 }
             }
@@ -113,7 +116,8 @@ fun AlbumPickerScreen(
 @Composable
 fun BucketCard(
     bucket: PhotoBucket,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onRandomClick: (() -> Unit)? = null
 ) {
     Surface(
         shape = RoundedCornerShape(16.dp),
@@ -149,6 +153,28 @@ fun BucketCard(
                             tint = TextSecondary,
                             modifier = Modifier.size(48.dp)
                         )
+                    }
+                }
+
+                if (onRandomClick != null) {
+                    Surface(
+                        color = DarkSurface.copy(alpha = 0.82f),
+                        shape = CircleShape,
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(8.dp)
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .clickable { onRandomClick() }
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Default.Shuffle,
+                                contentDescription = "Limpiar en orden aleatorio",
+                                tint = TextPrimary,
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
                     }
                 }
             }

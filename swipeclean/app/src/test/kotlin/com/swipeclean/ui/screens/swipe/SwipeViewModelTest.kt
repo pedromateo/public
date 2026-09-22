@@ -173,4 +173,105 @@ class SwipeViewModelTest {
         assertFalse(state.canUndo)
         assertTrue(state.history.isEmpty())
     }
+
+    @Test
+    fun `toggleRandomOrder toggles flag and preserves all photos`() = runTest {
+        viewModel.loadPhotos(null)
+        advanceUntilIdle()
+
+        assertFalse(viewModel.uiState.value.isRandomOrder)
+        assertEquals(samplePhotos.map { it.id }, viewModel.uiState.value.photos.map { it.id })
+
+        // Activar modo aleatorio
+        viewModel.toggleRandomOrder()
+        val randomState = viewModel.uiState.value
+        assertTrue(randomState.isRandomOrder)
+        assertEquals(samplePhotos.size, randomState.photos.size)
+        assertTrue(randomState.photos.map { it.id }.containsAll(samplePhotos.map { it.id }))
+
+        // Desactivar modo aleatorio
+        viewModel.toggleRandomOrder()
+        val restoredState = viewModel.uiState.value
+        assertFalse(restoredState.isRandomOrder)
+        assertEquals(samplePhotos.map { it.id }, restoredState.photos.map { it.id })
+    }
+
+    @Test
+    fun `loadPhotos with startRandom true initializes state in random mode`() = runTest {
+        viewModel.loadPhotos(null, startRandom = true)
+        advanceUntilIdle()
+
+        val state = viewModel.uiState.value
+        assertTrue(state.isRandomOrder)
+        assertEquals(samplePhotos.size, state.photos.size)
+        assertTrue(state.photos.map { it.id }.containsAll(samplePhotos.map { it.id }))
+    }
+
+    @Test
+    fun `toggleRandomOrder off after swiping restores unswiped photos to original order`() = runTest {
+        val manyPhotos = (1..10).map { i ->
+            PhotoItem(
+                id = i.toString(),
+                uri = "uri_$i",
+                name = "photo_$i.jpg",
+                sizeBytes = 1_000_000L,
+                timestamp = (1000 - i).toLong(),
+                mimeType = "image/jpeg"
+            )
+        }
+        coEvery { getPhotosUseCase.invoke(any()) } returns manyPhotos
+        viewModel.loadPhotos(null)
+        advanceUntilIdle()
+
+        // Deslizar primera foto
+        viewModel.onSwipeCompleted(manyPhotos[0], SwipeDirection.RIGHT)
+        assertEquals(1, viewModel.uiState.value.currentIndex)
+
+        // Activar aleatorio
+        viewModel.toggleRandomOrder()
+        assertTrue(viewModel.uiState.value.isRandomOrder)
+        // La foto ya procesada (index 0) sigue siendo foto 1
+        assertEquals("1", viewModel.uiState.value.photos[0].id)
+
+        // Desactivar aleatorio
+        viewModel.toggleRandomOrder()
+        assertFalse(viewModel.uiState.value.isRandomOrder)
+        // El orden de las pendientes vuelve exactamente al orden original (2..10)
+        assertEquals((1..10).map { it.toString() }, viewModel.uiState.value.photos.map { it.id })
+    }
+
+    @Test
+    fun `reshuffleRemaining preserves swiped photos and keeps random flag active`() = runTest {
+        viewModel.loadPhotos(null)
+        advanceUntilIdle()
+
+        viewModel.onSwipeCompleted(samplePhotos[0], SwipeDirection.LEFT)
+        viewModel.reshuffleRemaining()
+
+        val state = viewModel.uiState.value
+        assertTrue(state.isRandomOrder)
+        assertEquals(1, state.currentIndex)
+        assertEquals(samplePhotos[0].id, state.photos[0].id)
+        assertEquals(2, state.photos.size)
+    }
+
+    @Test
+    fun `undo works properly when random mode is active`() = runTest {
+        viewModel.loadPhotos(null, startRandom = true)
+        advanceUntilIdle()
+
+        val firstPhoto = viewModel.uiState.value.photos[0]
+        viewModel.onSwipeCompleted(firstPhoto, SwipeDirection.LEFT)
+
+        assertEquals(1, viewModel.uiState.value.currentIndex)
+        assertEquals(1, viewModel.uiState.value.trashedCount)
+
+        viewModel.onUndoClicked()
+        viewModel.onUndoAnimationFinished()
+
+        val state = viewModel.uiState.value
+        assertEquals(0, state.currentIndex)
+        assertEquals(0, state.trashedCount)
+        assertEquals(firstPhoto.id, state.photos[0].id)
+    }
 }

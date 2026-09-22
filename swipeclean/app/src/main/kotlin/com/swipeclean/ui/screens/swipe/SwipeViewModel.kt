@@ -20,21 +20,26 @@ class SwipeViewModel(
     private val _uiState = MutableStateFlow(SwipeUiState())
     val uiState: StateFlow<SwipeUiState> = _uiState.asStateFlow()
 
-    fun loadPhotos(bucketId: String? = null) {
+    private var originalPhotos: List<PhotoItem> = emptyList()
+
+    fun loadPhotos(bucketId: String? = null, startRandom: Boolean = false) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
             try {
-                val photos = getPhotosUseCase(bucketId)
+                val loadedPhotos = getPhotosUseCase(bucketId)
+                originalPhotos = loadedPhotos
+                val initialPhotos = if (startRandom) loadedPhotos.shuffled() else loadedPhotos
                 _uiState.update {
                     it.copy(
-                        photos = photos,
+                        photos = initialPhotos,
                         currentIndex = 0,
                         history = emptyList(),
                         trashedPhotoIds = emptySet(),
                         keptPhotoIds = emptySet(),
                         isLoading = false,
                         undoingAction = null,
-                        isAnimating = false
+                        isAnimating = false,
+                        isRandomOrder = startRandom
                     )
                 }
             } catch (e: Exception) {
@@ -45,6 +50,51 @@ class SwipeViewModel(
                     )
                 }
             }
+        }
+    }
+
+    fun toggleRandomOrder() {
+        setRandomOrder(!_uiState.value.isRandomOrder)
+    }
+
+    fun setRandomOrder(enabled: Boolean) {
+        val currentState = _uiState.value
+        if (currentState.photos.isEmpty()) {
+            _uiState.update { it.copy(isRandomOrder = enabled) }
+            return
+        }
+
+        val currentIndex = currentState.currentIndex
+        val processed = currentState.photos.take(currentIndex)
+        val processedIds = processed.map { it.id }.toSet()
+
+        val newRemaining = if (enabled) {
+            currentState.photos.drop(currentIndex).shuffled()
+        } else {
+            originalPhotos.filter { it.id !in processedIds }
+        }
+
+        _uiState.update { state ->
+            state.copy(
+                photos = processed + newRemaining,
+                isRandomOrder = enabled
+            )
+        }
+    }
+
+    fun reshuffleRemaining() {
+        val currentState = _uiState.value
+        if (currentState.photos.isEmpty()) return
+
+        val currentIndex = currentState.currentIndex
+        val processed = currentState.photos.take(currentIndex)
+        val remaining = currentState.photos.drop(currentIndex).shuffled()
+
+        _uiState.update { state ->
+            state.copy(
+                photos = processed + remaining,
+                isRandomOrder = true
+            )
         }
     }
 

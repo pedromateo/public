@@ -12,7 +12,8 @@ data class SwipeUiState(
     val isAnimating: Boolean = false,
     val undoingAction: SwipeAction? = null,
     val isLoading: Boolean = true,
-    val error: String? = null
+    val error: String? = null,
+    val isRandomOrder: Boolean = false
 ) {
     val currentPhoto: PhotoItem?
         get() = photos.getOrNull(currentIndex)
