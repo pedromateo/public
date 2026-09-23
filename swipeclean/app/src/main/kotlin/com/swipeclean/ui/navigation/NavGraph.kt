@@ -53,6 +53,7 @@ fun SwipeCleanNavGraph(
         composable(Screen.Permission.route) {
             PermissionScreen(
                 onPermissionGranted = {
+                    albumViewModel.loadBuckets()
                     navController.navigate(Screen.AlbumPicker.route) {
                         popUpTo(Screen.Permission.route) { inclusive = true }
                     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.swipeclean.data.model.PhotoBucket
 import com.swipeclean.domain.usecase.GetBucketsUseCase
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,14 +22,19 @@ class AlbumPickerViewModel(
 
     private val _uiState = MutableStateFlow(AlbumPickerUiState())
     val uiState: StateFlow<AlbumPickerUiState> = _uiState.asStateFlow()
+    private var loadJob: Job? = null
 
     init {
         loadBuckets()
     }
 
     fun loadBuckets() {
-        viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+        loadJob?.cancel()
+        loadJob = viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(
+                isLoading = _uiState.value.buckets.isEmpty(),
+                error = null
+            )
             try {
                 val buckets = getBucketsUseCase()
                 _uiState.value = _uiState.value.copy(

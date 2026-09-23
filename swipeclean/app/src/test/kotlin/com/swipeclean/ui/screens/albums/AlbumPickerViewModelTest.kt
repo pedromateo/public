@@ -80,4 +80,25 @@ class AlbumPickerViewModelTest {
         assertTrue(state.buckets.isEmpty())
         assertEquals("Error en base de datos", state.error)
     }
+
+    @Test
+    fun `loadBuckets reloads and updates state when called after permission is granted`() = runTest {
+        // Initial call during init without permission returns empty list
+        coEvery { getBucketsUseCase.invoke() } returns emptyList() andThen sampleBuckets
+
+        viewModel = AlbumPickerViewModel(getBucketsUseCase)
+        advanceUntilIdle()
+
+        assertEquals(0, viewModel.uiState.value.buckets.size)
+
+        // Reload triggered after permission is granted
+        viewModel.loadBuckets()
+        advanceUntilIdle()
+
+        val state = viewModel.uiState.value
+        assertFalse(state.isLoading)
+        assertNull(state.error)
+        assertEquals(2, state.buckets.size)
+        assertEquals("Todas las fotos", state.buckets[0].name)
+    }
 }
