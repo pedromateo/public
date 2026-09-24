@@ -40,7 +40,7 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte
 
           # Brainfit Build (with updated cache hash)
           if [ -d "brainfit" ]; then
@@ -79,6 +79,15 @@ jobs:
             cd mylanding
             cp index.html ../dist/mylanding/ || true
             cp -r index_files ../dist/mylanding/ || true
+            cd ..
+          fi
+
+          # ElParte Copy
+          if [ -d "elparte" ]; then
+            echo "Packaging ElParte..."
+            cd elparte
+            cp index.html manifest.webmanifest sw.js style.css app.js ../dist/elparte/ || true
+            cp -r icons ../dist/elparte/ || true
             cd ..
           fi
 
