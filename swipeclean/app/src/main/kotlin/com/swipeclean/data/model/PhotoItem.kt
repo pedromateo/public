@@ -8,5 +8,7 @@ data class PhotoItem(
     val timestamp: Long,
     val mimeType: String,
     val bucketId: String? = null,
-    val bucketName: String? = null
+    val bucketName: String? = null,
+    val width: Int = 0,
+    val height: Int = 0
 )

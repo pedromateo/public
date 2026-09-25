@@ -25,7 +25,10 @@ class MediaStoreDataSource(
             MediaStore.Images.Media.DATE_ADDED,
             MediaStore.Images.Media.MIME_TYPE,
             MediaStore.Images.Media.BUCKET_ID,
-            MediaStore.Images.Media.BUCKET_DISPLAY_NAME
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+            MediaStore.Images.Media.WIDTH,
+            MediaStore.Images.Media.HEIGHT,
+            MediaStore.Images.Media.ORIENTATION
         )
 
         val selection = bucketId?.let { "${MediaStore.Images.Media.BUCKET_ID} = ?" }
@@ -48,6 +51,9 @@ class MediaStoreDataSource(
             val mimeColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.MIME_TYPE)
             val bIdColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID)
             val bNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+            val widthColumn = cursor.getColumnIndex(MediaStore.Images.Media.WIDTH)
+            val heightColumn = cursor.getColumnIndex(MediaStore.Images.Media.HEIGHT)
+            val orientationColumn = cursor.getColumnIndex(MediaStore.Images.Media.ORIENTATION)
 
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idColumn)
@@ -59,6 +65,13 @@ class MediaStoreDataSource(
                 val bId = if (bIdColumn != -1 && !cursor.isNull(bIdColumn)) cursor.getString(bIdColumn) else null
                 val bName = if (bNameColumn != -1 && !cursor.isNull(bNameColumn)) cursor.getString(bNameColumn) else null
 
+                val rawW = if (widthColumn != -1 && !cursor.isNull(widthColumn)) cursor.getInt(widthColumn) else 0
+                val rawH = if (heightColumn != -1 && !cursor.isNull(heightColumn)) cursor.getInt(heightColumn) else 0
+                val orientation = if (orientationColumn != -1 && !cursor.isNull(orientationColumn)) cursor.getInt(orientationColumn) else 0
+
+                val finalW = if (orientation == 90 || orientation == 270) rawH else rawW
+                val finalH = if (orientation == 90 || orientation == 270) rawW else rawH
+
                 photos.add(
                     PhotoItem(
                         id = id.toString(),
@@ -68,7 +81,9 @@ class MediaStoreDataSource(
                         timestamp = date,
                         mimeType = mime,
                         bucketId = bId,
-                        bucketName = bName
+                        bucketName = bName,
+                        width = finalW,
+                        height = finalH
                     )
                 )
             }

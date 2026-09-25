@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -41,6 +42,8 @@ fun SwipeDeck(
     val nextPhoto = uiState.nextPhoto
     val scope = rememberCoroutineScope()
     val density = LocalDensity.current
+
+    var isCardZoomed by remember(currentPhoto?.id) { mutableStateOf(false) }
 
     BoxWithConstraints(
         modifier = modifier.fillMaxSize(),
@@ -101,8 +104,8 @@ fun SwipeDeck(
                         translationY = offsetY.value
                         rotationZ = rotationDegree
                     }
-                    .pointerInput(currentPhoto.id, uiState.isAnimating) {
-                        if (uiState.isAnimating) return@pointerInput
+                    .pointerInput(currentPhoto.id, uiState.isAnimating, isCardZoomed) {
+                        if (uiState.isAnimating || isCardZoomed) return@pointerInput
 
                         detectDragGestures(
                             onDrag = { change, dragAmount ->
@@ -143,7 +146,11 @@ fun SwipeDeck(
             ) {
                 SwipeCard(
                     photo = currentPhoto,
-                    swipeProgress = swipeProgress
+                    swipeProgress = swipeProgress,
+                    isZoomed = isCardZoomed,
+                    onZoomStateChanged = { zoomed ->
+                        isCardZoomed = zoomed
+                    }
                 )
             }
         }

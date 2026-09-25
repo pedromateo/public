@@ -26,4 +26,8 @@
     <string name="random_mode_toast_on">Modo aleatorio activado</string>
     <string name="random_mode_toast_off">Orden cronológico restaurado</string>
     <string name="photos_reshuffled">Fotos reordenadas aleatoriamente</string>
+    <string name="see_full_photo">Ver entera</string>
+    <string name="fit_photo_20">Ajustar (20%)</string>
+    <string name="zoom_in">Ampliar</string>
+    <string name="reset_zoom">Restablecer</string>
 </resources>
