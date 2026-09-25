@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elparte-shell-v13';
+const CACHE_NAME = 'elparte-shell-v17';
 const STATIC_SHELL_ASSETS = [
   './',
   './index.html',
@@ -8,6 +8,7 @@ const STATIC_SHELL_ASSETS = [
   './icons/icon.svg',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png'
 ];
 

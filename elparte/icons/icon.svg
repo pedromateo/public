@@ -1,17 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#1d4ed8"/>
+    <!-- Vibrant Sky Gradient matching elparte theme -->
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
     </linearGradient>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.3"/>
+
+    <!-- Warm Golden Sun Gradient -->
+    <linearGradient id="sun" x1="25%" y1="10%" x2="75%" y2="90%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="40%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+
+    <!-- Minimalist Cloud Gradient -->
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+
+    <!-- Refined Soft Elevation Shadow -->
+    <filter id="cloudShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0c4a6e" flood-opacity="0.24"/>
     </filter>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <g transform="translate(106, 106) scale(12.5)" filter="url(#shadow)">
-    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round"/>
-    <circle cx="12" cy="12" r="4.2" fill="#f59e0b"/>
-    <path d="M7 19h10a4 4 0 0 0 0-8 6 6 0 0 0-11.6 1.8A3.5 3.5 0 0 0 7 19z" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+
+  <!-- Round Circular Background -->
+  <circle cx="256" cy="256" r="256" fill="url(#sky)"/>
+
+  <g transform="translate(-14, 28)">
+    <!-- Minimalist Sun -->
+    <circle cx="340" cy="174" r="82" fill="url(#sun)"/>
+
+    <!-- Minimalist Cloud -->
+    <path filter="url(#cloudShadow)" fill="url(#cloud)" d="
+      M 148 354
+      C 114 354, 88 328, 88 294
+      C 88 262, 110 236, 142 232
+      C 148 188, 185 154, 232 154
+      C 265 154, 294 170, 308 196
+      C 320 188, 336 184, 354 184
+      C 390 184, 420 211, 422 246
+      C 442 254, 456 274, 456 300
+      C 456 330, 430 354, 400 354
+      Z
+    "/>
   </g>
 </svg>

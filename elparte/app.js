@@ -20,7 +20,8 @@ const SVG_ICONS = {
   themeMoon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
   moon: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#facc15" stroke="#eab308" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   moonCloud: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><g transform="translate(5, -2) scale(0.65)"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#facc15" stroke="#eab308" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g><path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.8A3.5 3.5 0 0 0 7 18z" fill="#94a3b8"/></svg>`,
-  unknown: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m0 3.5h.01"/></svg>`
+  unknown: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m0 3.5h.01"/></svg>`,
+  chevronDown: `<svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`
 };
 
 const lugares = {
@@ -217,11 +218,26 @@ function renderForecast(d) {
 
     const sunriseStr = z.sunrise?.[idx] ? hour(z.sunrise[idx]) : "--:--";
     const sunsetStr = z.sunset?.[idx] ? hour(z.sunset[idx]) : "--:--";
-    const rainSum = Number(z.precipitation_sum[idx] || 0).toFixed(1);
+    const rainVal = Number(z.precipitation_sum?.[idx] || 0);
+    const rainSum = rainVal.toFixed(1);
     const rainProb = Math.round(z.precipitation_probability_max?.[idx] || 0);
+    const windMax = Math.round(z.wind_speed_10m_max?.[idx] || 0);
 
-    out += `<section style="margin-bottom:18px"><div class="banner"><div class="dayhead"><div class="dayname-wrap"><span class="dayname">${day(date)}</span></div><div class="daystats"><span class="stat-pill" title="Orto y ocaso (salida / puesta)">${SVG_ICONS.sunCycle} ${sunriseStr} / ${sunsetStr}</span> <span class="stat-pill">${SVG_ICONS.thermometer} ${Math.round(z.temperature_2m_max[idx])}° / ${Math.round(z.temperature_2m_min[idx])}°</span> <span class="stat-pill">${SVG_ICONS.drop} ${rainSum} mm / ${rainProb}%</span> <span class="stat-pill">${SVG_ICONS.wind} ${Math.round(z.wind_speed_10m_max?.[idx] || 0)} km/h</span></div></div></div>
-    <div class="tablewrap"><table><thead><tr><th>Hora</th><th>Estado</th><th>Temp.</th><th>Avisos</th></tr></thead><tbody>`;
+    const stats = [
+      `<span class="stat-pill" title="Orto y ocaso (salida / puesta)">${SVG_ICONS.sunCycle} ${sunriseStr} / ${sunsetStr}</span>`,
+      `<span class="stat-pill">${SVG_ICONS.thermometer} ${Math.round(z.temperature_2m_max[idx])}° / ${Math.round(z.temperature_2m_min[idx])}°</span>`
+    ];
+
+    if (rainVal >= 0.1) {
+      stats.push(`<span class="stat-pill">${SVG_ICONS.drop} ${rainSum} mm / ${rainProb}%</span>`);
+    }
+
+    if (windMax >= 15) {
+      stats.push(`<span class="stat-pill">${SVG_ICONS.wind} ${windMax} km/h</span>`);
+    }
+
+    out += `<section class="day-section"><div class="banner" role="button" tabindex="0" aria-expanded="true" title="Clic para colapsar o expandir"><div class="dayhead"><div class="dayname-wrap"><span class="dayname">${day(date)}</span></div><div class="daystats">${stats.join(" ")}</div></div><div class="day-toggle"><span class="day-toggle-btn" title="Colapsar día">${SVG_ICONS.chevronDown}</span></div></div>
+    <div class="tablewrap"><table><colgroup><col class="col-hour"><col class="col-state"><col class="col-temp"><col class="col-badges"></colgroup><thead><tr><th class="col-hour">Hora</th><th class="col-state">Estado</th><th class="col-temp">Temp.</th><th class="col-badges">Avisos</th></tr></thead><tbody>`;
 
     pr.forEach(x => {
       const ci = info(x.code, x.isDay);
@@ -259,7 +275,7 @@ function renderForecast(d) {
         ? `<div class="badges">${badges.join("")}</div>`
         : `<span class="empty-badge">—</span>`;
 
-      out += `<tr><td class="hour">${hour(x.time)}</td><td><span class="weather-cell" title="${ci[1]}">${ci[0]}</span></td><td class="${tempClass}">${x.temp}°</td><td>${badgesHtml}</td></tr>`;
+      out += `<tr><td class="hour col-hour">${hour(x.time)}</td><td class="col-state"><span class="weather-cell" title="${ci[1]}">${ci[0]}</span></td><td class="${tempClass} col-temp">${x.temp}°</td><td class="col-badges">${badgesHtml}</td></tr>`;
     });
 
     out += "</tbody></table></div></section>";
@@ -323,6 +339,34 @@ selectEl.addEventListener("change", () => {
 });
 
 cargar();
+
+// Colapsar y expandir días al hacer clic en la cabecera
+const forecastContainer = document.getElementById("forecast");
+if (forecastContainer) {
+  forecastContainer.addEventListener("click", e => {
+    const banner = e.target.closest(".banner");
+    if (!banner) return;
+    const section = banner.closest(".day-section");
+    if (!section) return;
+
+    const isCollapsed = section.classList.toggle("is-collapsed");
+    banner.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+    const toggleBtn = banner.querySelector(".day-toggle-btn");
+    if (toggleBtn) {
+      toggleBtn.setAttribute("title", isCollapsed ? "Expandir día" : "Colapsar día");
+    }
+  });
+
+  forecastContainer.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      const banner = e.target.closest(".banner");
+      if (banner && (e.target === banner || banner.contains(e.target))) {
+        e.preventDefault();
+        banner.click();
+      }
+    }
+  });
+}
 
 // Gestión de Tema Claro / Oscuro con persistencia
 const THEME_KEY = "elparte_theme";

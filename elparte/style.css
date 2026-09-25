@@ -88,12 +88,28 @@ body {
 }
 
 h1 {
-  font-size: clamp(22px, 6vw, 26px);
+  font-size: clamp(26px, 7vw, 32px);
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   line-height: 1.2;
+}
+
+/* Icono corporativo de la aplicación */
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand-icon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
 /* Botón de cambio de tema */
@@ -127,14 +143,14 @@ h1 {
 .brand-title {
   display: inline-flex;
   align-items: baseline;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.6px;
   font-size: inherit;
 }
 
 .brand-el {
   font-weight: 500;
   color: var(--text);
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .brand-parte {
@@ -296,6 +312,10 @@ select option {
   margin: 0 1px;
 }
 
+.day-section {
+  margin-bottom: 18px;
+}
+
 .banner {
   background: var(--banner-bg);
   border: 1px solid var(--banner-border);
@@ -303,6 +323,23 @@ select option {
   padding: 13px 15px;
   margin-bottom: 10px;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.banner:hover {
+  border-color: var(--hover-border);
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.06);
+}
+
+.banner:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .dayhead {
@@ -310,6 +347,8 @@ select option {
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
+  flex: 1;
+  min-width: 0;
 }
 
 .dayname-wrap {
@@ -342,6 +381,62 @@ select option {
   font-size: 14px;
 }
 
+/* Botón e icono para colapsar / expandir día */
+.day-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.day-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+[data-theme="dark"] .day-toggle-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.banner:hover .day-toggle-btn {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] .banner:hover .day-toggle-btn {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.day-toggle-btn .icon-svg {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.day-section.is-collapsed {
+  margin-bottom: 12px;
+}
+
+.day-section.is-collapsed .banner {
+  margin-bottom: 0;
+}
+
+.day-section.is-collapsed .day-toggle-btn .icon-svg {
+  transform: rotate(-90deg);
+}
+
+.day-section.is-collapsed .tablewrap {
+  display: none;
+}
+
 .tablewrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -350,9 +445,28 @@ select option {
   background: var(--card);
 }
 
+/* Alineación consistente y fija entre todos los días */
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 440px;
+}
+
+.col-hour {
+  width: 82px;
+}
+
+.col-state {
+  width: 74px;
+}
+
+.col-temp {
+  width: 78px;
+}
+
+.col-badges {
+  width: auto;
 }
 
 th, td {
@@ -362,6 +476,10 @@ th, td {
   line-height: 1.35;
   text-align: left;
   white-space: nowrap;
+}
+
+td.col-badges {
+  white-space: normal;
 }
 
 th {
@@ -427,6 +545,7 @@ tr:last-child td {
   font-size: 12.5px;
   font-weight: 600;
   line-height: 1.25;
+  white-space: nowrap;
 }
 
 .badge-rain {
@@ -525,6 +644,15 @@ tr:last-child td {
     padding: 10px 12px;
     font-size: 14px;
   }
+  .col-hour {
+    width: 76px;
+  }
+  .col-state {
+    width: 68px;
+  }
+  .col-temp {
+    width: 72px;
+  }
   .daystats {
     font-size: 13.5px;
     gap: 8px 12px;
@@ -549,8 +677,13 @@ tr:last-child td {
   .compact-value {
     font-size: 17px;
   }
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+  }
   .banner {
     padding: 12px 14px;
+    gap: 10px;
   }
   .dayname {
     font-size: 16.5px;
@@ -564,6 +697,22 @@ tr:last-child td {
   }
   .stat-pill {
     font-size: 13.5px;
+  }
+  .day-toggle-btn {
+    width: 30px;
+    height: 30px;
+  }
+  table {
+    min-width: 380px;
+  }
+  .col-hour {
+    width: 68px;
+  }
+  .col-state {
+    width: 60px;
+  }
+  .col-temp {
+    width: 64px;
   }
   th, td {
     padding: 9px 10px;
@@ -604,6 +753,11 @@ tr:last-child td {
   .compact-value {
     font-size: 15.5px;
   }
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
   .dayname {
     font-size: 15.5px;
   }
@@ -613,6 +767,18 @@ tr:last-child td {
   }
   .stat-pill {
     font-size: 13px;
+  }
+  table {
+    min-width: 340px;
+  }
+  .col-hour {
+    width: 60px;
+  }
+  .col-state {
+    width: 52px;
+  }
+  .col-temp {
+    width: 58px;
   }
   th, td {
     padding: 8px 8px;
