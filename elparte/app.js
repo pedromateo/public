@@ -14,12 +14,18 @@ const SVG_ICONS = {
   cold: `<svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2.5" fill="#06b6d4"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>`,
   thermometer: `<svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>`,
   drop: `<svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+  umbrella: `<svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12A10 10 0 0 0 2 12h20z"/><path d="M12 12v7a2 2 0 0 0 4 0"/><path d="M12 2v2"/></svg>`,
+  sunCycle: `<svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3m-7.07.93l2.12 2.12M19.07 5.93l-2.12 2.12M2 16h20M7 16a5 5 0 0 1 10 0"/></svg>`,
+  themeSun: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+  themeMoon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  moon: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#facc15" stroke="#eab308" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  moonCloud: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><g transform="translate(5, -2) scale(0.65)"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#facc15" stroke="#eab308" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g><path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.8A3.5 3.5 0 0 0 7 18z" fill="#94a3b8"/></svg>`,
   unknown: `<svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m0 3.5h.01"/></svg>`
 };
 
 const lugares = {
   murcia: { nombre: "Murcia", lat: 37.9833, lon: -1.1333 },
-  pozo: { nombre: "Pozo del Esparto (Cuevas del Almanzora)", lat: 37.2750, lon: -1.6880 },
+  pozo: { nombre: "Pozo del Esparto", lat: 37.2750, lon: -1.6880 },
   puerto: { nombre: "Puerto Lumbreras", lat: 37.5630, lon: -1.8090 }
 };
 
@@ -54,7 +60,14 @@ const codes = {
   99: [SVG_ICONS.storm, "Tormenta fuerte"]
 };
 
-const info = c => codes[c] || [SVG_ICONS.unknown, "Desconocido"];
+const info = (c, isDay = 1) => {
+  if (isDay === 0) {
+    if (c === 0) return [SVG_ICONS.moon, "Despejado"];
+    if (c === 1) return [SVG_ICONS.moonCloud, "Principalmente despejado"];
+    if (c === 2) return [SVG_ICONS.moonCloud, "Parcialmente nublado"];
+  }
+  return codes[c] || [SVG_ICONS.unknown, "Desconocido"];
+};
 const hour = s => new Date(s).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
 const day = s => new Date(s + "T12:00:00").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
 const r1 = x => Math.round(x * 10) / 10;
@@ -75,7 +88,8 @@ function next24(d) {
         rain: d.hourly.precipitation[i] || 0,
         prob: d.hourly.precipitation_probability?.[i] || 0,
         wind: d.hourly.wind_speed_10m[i] || 0,
-        code: d.hourly.weather_code[i]
+        code: d.hourly.weather_code[i],
+        isDay: d.hourly.is_day ? d.hourly.is_day[i] : 1
       });
     }
   }
@@ -98,7 +112,8 @@ function pairs(a) {
       rain: r1(x.rain + y.rain),
       prob: Math.max(x.prob, y.prob),
       wind: Math.max(x.wind, y.wind),
-      code: severity(x.code, y.code)
+      code: severity(x.code, y.code),
+      isDay: x.isDay !== undefined ? x.isDay : 1
     });
   }
   return out;
@@ -128,18 +143,8 @@ function renderSummary(a) {
         <div class="compact-label">Temp. máx / mín</div>
         <div class="compact-value">
           <span class="${maxClass}">${Math.round(max)}°</span>
-          <span style="color:var(--muted);font-weight:400">/</span>
+          <span class="temp-separator">/</span>
           <span class="${minClass}">${Math.round(min)}°</span>
-        </div>
-      </div>
-    </div>
-    <div class="compact-metric">
-      <span class="compact-icon">${SVG_ICONS.drop}</span>
-      <div class="compact-text">
-        <div class="compact-label">Lluvia acumulada</div>
-        <div class="compact-value">
-          ${rain.toFixed(1)} mm
-          ${prob > 0 ? `<span class="compact-subval">(${Math.round(prob)}%)</span>` : ""}
         </div>
       </div>
     </div>
@@ -149,6 +154,24 @@ function renderSummary(a) {
         <div class="compact-label">Viento máximo</div>
         <div class="compact-value">
           ${Math.round(wind)} km/h ${windWarning}
+        </div>
+      </div>
+    </div>
+    <div class="compact-metric">
+      <span class="compact-icon">${SVG_ICONS.drop}</span>
+      <div class="compact-text">
+        <div class="compact-label">Lluvia acumulada</div>
+        <div class="compact-value">
+          ${rain.toFixed(1)} mm
+        </div>
+      </div>
+    </div>
+    <div class="compact-metric">
+      <span class="compact-icon">${SVG_ICONS.umbrella}</span>
+      <div class="compact-text">
+        <div class="compact-label">Prob. de lluvia</div>
+        <div class="compact-value">
+          ${Math.round(prob)}%
         </div>
       </div>
     </div>
@@ -173,7 +196,8 @@ function renderForecast(d) {
       rain: h.precipitation[i] || 0,
       prob: h.precipitation_probability?.[i] || 0,
       wind: h.wind_speed_10m[i] || 0,
-      code: h.weather_code[i]
+      code: h.weather_code[i],
+      isDay: h.is_day ? h.is_day[i] : 1
     });
   }
 
@@ -189,14 +213,18 @@ function renderForecast(d) {
 
     const z = daily;
     const idx = di[date] ?? 0;
-    const si = info(z.weather_code[idx]);
     const pr = pairs(rows);
 
-    out += `<section style="margin-bottom:18px"><div class="banner"><div class="dayhead"><div class="dayname-wrap"><span class="dayname">${day(date)}</span> ${si[0]} <span style="color:#687586;font-size:12px">${si[1]}</span></div><div class="daystats"><span class="stat-pill">${SVG_ICONS.thermometer} ${Math.round(z.temperature_2m_max[idx])}° / ${Math.round(z.temperature_2m_min[idx])}°</span> · <span class="stat-pill">${SVG_ICONS.drop} ${Number(z.precipitation_sum[idx] || 0).toFixed(1)} mm</span> · <span class="stat-pill">${SVG_ICONS.wind} ${Math.round(z.wind_speed_10m_max?.[idx] || 0)} km/h</span> · <span class="stat-pill">${SVG_ICONS.drop} ${Math.round(z.precipitation_probability_max?.[idx] || 0)}%</span></div></div></div>
+    const sunriseStr = z.sunrise?.[idx] ? hour(z.sunrise[idx]) : "--:--";
+    const sunsetStr = z.sunset?.[idx] ? hour(z.sunset[idx]) : "--:--";
+    const rainSum = Number(z.precipitation_sum[idx] || 0).toFixed(1);
+    const rainProb = Math.round(z.precipitation_probability_max?.[idx] || 0);
+
+    out += `<section style="margin-bottom:18px"><div class="banner"><div class="dayhead"><div class="dayname-wrap"><span class="dayname">${day(date)}</span></div><div class="daystats"><span class="stat-pill" title="Orto y ocaso (salida / puesta)">${SVG_ICONS.sunCycle} ${sunriseStr} / ${sunsetStr}</span> <span class="stat-pill">${SVG_ICONS.thermometer} ${Math.round(z.temperature_2m_max[idx])}° / ${Math.round(z.temperature_2m_min[idx])}°</span> <span class="stat-pill">${SVG_ICONS.drop} ${rainSum} mm / ${rainProb}%</span> <span class="stat-pill">${SVG_ICONS.wind} ${Math.round(z.wind_speed_10m_max?.[idx] || 0)} km/h</span></div></div></div>
     <div class="tablewrap"><table><thead><tr><th>Hora</th><th>Estado</th><th>Temp.</th><th>Avisos</th></tr></thead><tbody>`;
 
     pr.forEach(x => {
-      const ci = info(x.code);
+      const ci = info(x.code, x.isDay);
       const badges = [];
 
       // Lluvia relevante: más de 0.1 mm
@@ -243,15 +271,14 @@ function renderForecast(d) {
 // Consulta meteorológica siempre fresca en tiempo real (sin caché)
 async function cargar() {
   const loc = lugares[document.getElementById("lugar").value];
-  const st = document.getElementById("status");
-  st.textContent = "Cargando previsión…";
   document.getElementById("forecast").innerHTML = "";
+  document.getElementById("summary").innerHTML = "<div class='loading'>Cargando previsión…</div>";
 
   const q = new URLSearchParams({
     latitude: loc.lat,
     longitude: loc.lon,
-    hourly: "temperature_2m,precipitation,precipitation_probability,weather_code,wind_speed_10m",
-    daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max",
+    hourly: "temperature_2m,precipitation,precipitation_probability,weather_code,wind_speed_10m,is_day",
+    daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,sunrise,sunset",
     forecast_days: "7",
     timezone: "Europe/Madrid"
   });
@@ -264,10 +291,7 @@ async function cargar() {
     if (!r.ok) throw new Error("No se pudo obtener la previsión del servidor.");
     const d = await r.json();
     renderForecast(d);
-    document.getElementById("summarySubtitle").textContent = "Desde la hora actual · " + loc.nombre;
-    st.textContent = loc.nombre + " · actualizado " + new Date().toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
   } catch (e) {
-    st.textContent = "Error al consultar";
     const msg = navigator.onLine === false
       ? "Sin conexión a internet. Los datos meteorológicos no se almacenan en caché y requieren conexión activa."
       : e.message;
@@ -299,6 +323,52 @@ selectEl.addEventListener("change", () => {
 });
 
 cargar();
+
+// Gestión de Tema Claro / Oscuro con persistencia
+const THEME_KEY = "elparte_theme";
+const themeToggleBtn = document.getElementById("themeToggle");
+const themeColorMeta = document.getElementById("themeColorMeta");
+
+function applyTheme(isDark) {
+  if (isDark) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    if (themeToggleBtn) {
+      themeToggleBtn.innerHTML = SVG_ICONS.themeSun;
+      themeToggleBtn.setAttribute("aria-label", "Activar modo claro");
+      themeToggleBtn.setAttribute("title", "Activar modo claro");
+    }
+    if (themeColorMeta) themeColorMeta.setAttribute("content", "#0b1120");
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+    if (themeToggleBtn) {
+      themeToggleBtn.innerHTML = SVG_ICONS.themeMoon;
+      themeToggleBtn.setAttribute("aria-label", "Activar modo oscuro");
+      themeToggleBtn.setAttribute("title", "Activar modo oscuro");
+    }
+    if (themeColorMeta) themeColorMeta.setAttribute("content", "#2563eb");
+  }
+}
+
+try {
+  const savedTheme = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
+} catch (e) {
+  applyTheme(false);
+}
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    const isCurrentlyDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const nextDark = !isCurrentlyDark;
+    applyTheme(nextDark);
+    try {
+      localStorage.setItem(THEME_KEY, nextDark ? "dark" : "light");
+    } catch (err) {
+      console.warn("No se pudo guardar la preferencia de tema:", err);
+    }
+  });
+}
 
 // Registro de Service Worker para PWA (únicamente para la shell estática)
 if ("serviceWorker" in navigator) {

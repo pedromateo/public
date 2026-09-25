@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elparte-shell-v5';
+const CACHE_NAME = 'elparte-shell-v13';
 const STATIC_SHELL_ASSETS = [
   './',
   './index.html',
