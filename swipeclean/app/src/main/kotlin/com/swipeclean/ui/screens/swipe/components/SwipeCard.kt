@@ -1,11 +1,10 @@
 package com.swipeclean.ui.screens.swipe.components
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -39,6 +38,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -88,7 +88,7 @@ fun SwipeCard(
     )
 
     val intrinsicSize = painter.intrinsicSize
-    val hasIntrinsic = intrinsicSize.isSpecified && intrinsicSize.width > 0f && intrinsicSize.height > 0f
+    val hasIntrinsic = !intrinsicSize.width.isNaN() && intrinsicSize.width > 0f && !intrinsicSize.height.isNaN() && intrinsicSize.height > 0f
     val imageAspectRatio = when {
         hasIntrinsic -> intrinsicSize.width / intrinsicSize.height
         photo.width > 0 && photo.height > 0 -> photo.width.toFloat() / photo.height.toFloat()
@@ -105,6 +105,18 @@ fun SwipeCard(
     val scaleAnim = remember(photo.id) { Animatable(defaultScale) }
     val panXAnim = remember(photo.id) { Animatable(0f) }
     val panYAnim = remember(photo.id) { Animatable(0f) }
+
+    val infoAlpha by animateFloatAsState(
+        targetValue = if (!isZoomed) 1f else 0f,
+        animationSpec = tween(durationMillis = 200),
+        label = "infoAlpha"
+    )
+
+    val controlsAlpha by animateFloatAsState(
+        targetValue = if (swipeProgress == 0f) 1f else 0f,
+        animationSpec = tween(durationMillis = 150),
+        label = "controlsAlpha"
+    )
 
     LaunchedEffect(defaultScale) {
         if (!isZoomed && abs(scaleAnim.value - defaultScale) > 0.05f) {
@@ -263,13 +275,13 @@ fun SwipeCard(
                 )
 
                 // Gradiente inferior y metadatos (se ocultan suavemente cuando el usuario amplía la foto)
-                AnimatedVisibility(
-                    visible = !isZoomed,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                    modifier = Modifier.align(Alignment.BottomCenter)
-                ) {
-                    Box(modifier = Modifier.fillMaxWidth()) {
+                if (infoAlpha > 0f) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.BottomCenter)
+                            .graphicsLayer { alpha = infoAlpha }
+                    ) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -316,17 +328,13 @@ fun SwipeCard(
                 }
 
                 // Barra superior de controles de visualización y zoom
-                AnimatedVisibility(
-                    visible = swipeProgress == 0f,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                    modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                        .fillMaxWidth()
-                ) {
+                if (controlsAlpha > 0f) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.TopCenter)
+                            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                            .graphicsLayer { alpha = controlsAlpha },
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
