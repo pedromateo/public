@@ -8,7 +8,7 @@
       "copyright": "� AEMET. Autorizado el uso de la informaci�n y su reproducci�n citando a AEMET como autora de la misma.",
       "notaLegal": "https://www.aemet.es/es/nota_legal"
     },
-    "elaborado": "2026-09-28T09:03:07",
+    "elaborado": "2026-09-28T18:11:14",
     "nombre": "Murcia",
     "provincia": "Murcia",
     "prediccion": {
@@ -1987,6 +1987,6 @@
     },
     "id": "30030",
     "version": "1.0",
-    "ficheroCreado": "2026-09-28T11:59:31.136Z"
+    "ficheroCreado": "2026-09-28T19:29:32.323Z"
   }
 ]
