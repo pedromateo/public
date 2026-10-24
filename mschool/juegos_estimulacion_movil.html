@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Método 30 Minutos - Laboratorio Móvil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      font-size: 16px;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen pb-20 selection:bg-blue-100">
+
+  <!-- Cabecera adaptada a móvil -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
+      <div>
+        <span class="text-xs font-bold tracking-wider uppercase text-blue-600 block">Sesión 30 min • 3 Años</span>
+        <h1 class="text-xl font-extrabold text-slate-900">Laboratorio Diario</h1>
+      </div>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+        Fase Inicial
+      </span>
+    </div>
+
+    <!-- Temporizador con controles táctiles grandes -->
+    <div class="bg-slate-50 border-t border-slate-200 px-4 py-3">
+      <div class="max-w-lg mx-auto flex items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span id="timer-display" class="font-mono text-3xl font-black text-slate-900 tracking-tight">12:00</span>
+          </div>
+          <span id="block-label" class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Bloque 1 • Lenguaje</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button id="btn-timer-start" onclick="toggleTimer()" class="min-h-[44px] px-5 py-2 text-sm font-bold bg-blue-600 text-white rounded-xl shadow-md active:scale-95 transition flex items-center gap-1.5">
+            <span>▶</span> Iniciar
+          </button>
+          <button onclick="resetTimer()" class="min-h-[44px] px-3.5 py-2 text-sm font-semibold bg-slate-200 text-slate-700 rounded-xl active:scale-95 transition">
+            ↺
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestañas de categoría ampliadas -->
+    <div class="max-w-lg mx-auto px-4 py-2.5 overflow-x-auto no-scrollbar flex space-x-2">
+      <button onclick="filterCategory('all')" class="filter-btn active whitespace-nowrap min-h-[40px] px-4 py-2 text-sm font-bold rounded-xl bg-slate-900 text-white shadow transition" data-cat="all">
+        Todos
+      </button>
+      <button onclick="filterCategory('lenguaje')" class="filter-btn whitespace-nowrap min-h-[40px] px-4 py-2 text-sm font-semibold rounded-xl bg-slate-200 text-slate-700 hover:bg-slate-300 transition" data-cat="lenguaje">
+        Fonética
+      </button>
+      <button onclick="filterCategory('matematicas')" class="filter-btn whitespace-nowrap min-h-[40px] px-4 py-2 text-sm font-semibold rounded-xl bg-slate-200 text-slate-700 hover:bg-slate-300 transition" data-cat="matematicas">
+        Números
+      </button>
+      <button onclick="filterCategory('transicion')" class="filter-btn whitespace-nowrap min-h-[40px] px-4 py-2 text-sm font-semibold rounded-xl bg-slate-200 text-slate-700 hover:bg-slate-300 transition" data-cat="transicion">
+        Pausa Motora
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor principal con espaciado y tipografía legible -->
+  <main class="max-w-lg mx-auto px-4 pt-4 space-y-5">
+
+    <!-- Regla de oro -->
+    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-xl shadow-sm">
+      <div class="flex items-start gap-2.5">
+        <span class="text-xl leading-none">⚡</span>
+        <p class="text-sm text-amber-950 leading-snug">
+          <strong class="font-bold">Regla clave:</strong> Termina la sesión en el momento de mayor diversión. Si se queda con ganas de más, querrá empezar solo mañana.
+        </p>
+      </div>
+    </div>
+
+    <!-- Lista dinámica de actividades -->
+    <div id="games-container" class="space-y-4">
+      <!-- Inyectado vía JavaScript -->
+    </div>
+
+  </main>
+
+  <script>
+    const gamesData = [
+      {
+        id: 1,
+        title: "El Radar de Sonidos",
+        category: "lenguaje",
+        categoryName: "Fonética y Lectura",
+        time: "6-8 min",
+        materials: "Letras magnéticas (M, S, A)",
+        objective: "Asociar el sonido real (fonema) a la forma física, sin pasar por el nombre formal de la letra.",
+        stepByStep: [
+          "Coloca solo la letra <strong>M</strong> magnética visible. Guarda el resto fuera de vista.",
+          "Haz el sonido alargándolo con voz expresiva: <em>«Esta letra suena /mmmmm/, como comida deliciosa»</em>.",
+          "Reta a tu hijo: <em>«Busquemos dos cosas por la habitación que empiecen por /mmmmm/»</em> (manzana, mantel, muñeco)."
+        ],
+        masterySignal: "Reconoce el sonido al ver la letra al instante y dice palabras que empiezan por ese fonema.",
+        badgeColor: "bg-blue-100 text-blue-900 border-blue-300",
+        cardBorder: "border-l-blue-600"
+      },
+      {
+        id: 2,
+        title: "El Salto a la Lectura (Fusión)",
+        category: "lenguaje",
+        categoryName: "Fonética y Lectura",
+        time: "4-6 min",
+        materials: "Letras magnéticas M y A",
+        objective: "Comprender físicamente cómo se unen dos sonidos para formar una sílaba.",
+        stepByStep: [
+          "Coloca la <strong>M</strong> y la <strong>A</strong> separadas por un palmo sobre la mesa o nevera.",
+          "Desliza el dedo por debajo de la M alargando el sonido: <em>«/mmmmmm/...»</em> y al llegar a la A: <em>«.../aaaaa/»</em>.",
+          "Acerca físicamente ambas letras poco a poco hasta juntarlas: <em>«¡MA!»</em>.",
+          "Descubrid la magia juntos: <em>«¡Hemos creado la palabra de mamá y manzana!»</em>."
+        ],
+        masterySignal: "Él mismo arrastra las letras con los dedos mientras pronuncia ambos sonidos seguidos.",
+        badgeColor: "bg-blue-100 text-blue-900 border-blue-300",
+        cardBorder: "border-l-blue-600"
+      },
+      {
+        id: 3,
+        title: "Desafío Motor Express",
+        category: "transicion",
+        categoryName: "Pausa Motora",
+        time: "2-3 min",
+        materials: "Pasillo despejado / cojines",
+        objective: "Descargar energía física y reiniciar el foco antes del bloque de números.",
+        stepByStep: [
+          "Cierra el juego de letras alegremente: <em>«¡Pausa relámpago en marcha!»</em>.",
+          "Propón un reto rápido: cruzar el pasillo a saltos de rana o llevando un cojín en la cabeza sin que caiga.",
+          "Tomad dos respiraciones profundas juntos antes de sentaros con los bloques."
+        ],
+        masterySignal: "Regresa a la mesa despejado y receptivo para el siguiente juego.",
+        badgeColor: "bg-amber-100 text-amber-900 border-amber-300",
+        cardBorder: "border-l-amber-500"
+      },
+      {
+        id: 4,
+        title: "Torres Relámpago (Subitización)",
+        category: "matematicas",
+        categoryName: "Sentido Numérico",
+        time: "6 min",
+        materials: "1 dado de puntos y 10 bloques idénticos",
+        objective: "Reconocer cantidades de un solo vistazo sin necesidad de contar de uno en uno.",
+        stepByStep: [
+          "Lanza el dado con valores del 1 al 3 inicialmente.",
+          "Muestra el dado 2 segundos exactos y tápalo con tu palma: <em>«¿Cuántos puntos viste?»</em>.",
+          "El desafío: coger de un solo agarre esa misma cantidad de bloques para levantar una torre, sin ir pieza por pieza.",
+          "Amplía gradualmente a 4 y 5 puntos conforme adquiera confianza."
+        ],
+        masterySignal: "Atrapa 3 o 4 bloques de una sola vez sin enumerar con el dedo.",
+        badgeColor: "bg-emerald-100 text-emerald-900 border-emerald-300",
+        cardBorder: "border-l-emerald-600"
+      },
+      {
+        id: 5,
+        title: "La Descomposición del Tesoro",
+        category: "matematicas",
+        categoryName: "Sentido Numérico",
+        time: "6 min",
+        materials: "5 bloques y 1 vaso opaco",
+        objective: "Desarrollar cálculo mental intuitivo y lógica algebraica temprana.",
+        stepByStep: [
+          "Entrégale 5 bloques: <em>«Este es tu equipo de 5 piezas»</em>.",
+          "Pídele que construya dos casas distintas usando todos los bloques.",
+          "Descubrid juntos las combinaciones: 3 y 2, 4 y 1 (el total siempre es 5).",
+          "El truco del vaso: tapa 2 bloques con el vaso y deja 3 sobre la mesa. <em>«Si teníamos 5 y aquí veo 3... ¿cuántos están escondidos dentro?»</em>."
+        ],
+        masterySignal: "Averigua los bloques ocultos mentalmente sin necesidad de destapar el vaso primero.",
+        badgeColor: "bg-emerald-100 text-emerald-900 border-emerald-300",
+        cardBorder: "border-l-emerald-600"
+      }
+    ];
+
+    function renderGames(filter = 'all') {
+      const container = document.getElementById('games-container');
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' 
+        ? gamesData 
+        : gamesData.filter(g => g.category === filter);
+
+      filtered.forEach(game => {
+        const card = document.createElement('article');
+        card.className = `bg-white rounded-2xl shadow-sm border border-slate-200 border-l-[6px] ${game.cardBorder} p-4 sm:p-5 space-y-3.5`;
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="inline-block text-xs font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg border ${game.badgeColor} mb-1.5">
+                ${game.categoryName}
+              </span>
+              <h2 class="text-lg font-bold text-slate-900 leading-snug">${game.title}</h2>
+            </div>
+            <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg shrink-0 border border-slate-200">
+              ⏱ ${game.time}
+            </span>
+          </div>
+
+          <div class="text-sm bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-700">
+            <span class="font-bold text-slate-900 block mb-0.5">📦 Materiales:</span>
+            <span>${game.materials}</span>
+          </div>
+
+          <div class="text-sm text-slate-700">
+            <span class="font-bold text-slate-900 block mb-1">🎯 Objetivo:</span>
+            <p class="leading-relaxed text-slate-800">${game.objective}</p>
+          </div>
+
+          <div class="space-y-1.5">
+            <span class="text-sm font-bold text-slate-900 block">🚀 Cómo jugar paso a paso:</span>
+            <ol class="space-y-2 text-sm text-slate-700 pl-4 list-decimal marker:font-bold marker:text-slate-500">
+              ${game.stepByStep.map(step => `<li class="leading-relaxed pl-1">${step}</li>`).join('')}
+            </ol>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 bg-emerald-50/70 p-3 rounded-xl border border-emerald-100 flex items-start gap-2 text-xs sm:text-sm text-emerald-950">
+            <span class="text-emerald-700 font-bold shrink-0">✓ Señal de dominio:</span>
+            <span class="leading-snug">${game.masterySignal}</span>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function filterCategory(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === cat) {
+          btn.className = "filter-btn active whitespace-nowrap min-h-[40px] px-4 py-2 text-sm font-bold rounded-xl bg-slate-900 text-white shadow transition";
+        } else {
+          btn.className = "filter-btn whitespace-nowrap min-h-[40px] px-4 py-2 text-sm font-semibold rounded-xl bg-slate-200 text-slate-700 hover:bg-slate-300 transition";
+        }
+      });
+      renderGames(cat);
+    }
+
+    let timerDuration = 12 * 60;
+    let currentBlock = 1;
+    let timerRemaining = timerDuration;
+    let timerInterval = null;
+
+    const timerDisplay = document.getElementById('timer-display');
+    const blockLabel = document.getElementById('block-label');
+    const startBtn = document.getElementById('btn-timer-start');
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerRemaining / 60);
+      const secs = timerRemaining % 60;
+      timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        startBtn.innerHTML = '<span>▶</span> Reanudar';
+        startBtn.classList.replace('bg-amber-600', 'bg-blue-600');
+      } else {
+        startBtn.innerHTML = '<span>⏸</span> Pausar';
+        startBtn.classList.replace('bg-blue-600', 'bg-amber-600');
+        timerInterval = setInterval(() => {
+          if (timerRemaining > 0) {
+            timerRemaining--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            nextBlock();
+          }
+        }, 1000);
+      }
+    }
+
+    function nextBlock() {
+      if (currentBlock === 1) {
+        currentBlock = 2;
+        timerRemaining = 3 * 60;
+        blockLabel.textContent = "Transición • Pausa Motora";
+        alert("¡Bloque 1 completado! Tiempo de la pausa motora de 3 minutos.");
+      } else if (currentBlock === 2) {
+        currentBlock = 3;
+        timerRemaining = 12 * 60;
+        blockLabel.textContent = "Bloque 2 • Números";
+        alert("¡A por los números con los bloques!");
+      } else {
+        alert("¡Sesión de 30 minutos terminada con éxito! Gran trabajo hoy.");
+        resetTimer();
+        return;
+      }
+      startBtn.innerHTML = '<span>▶</span> Iniciar';
+      startBtn.classList.replace('bg-amber-600', 'bg-blue-600');
+      updateTimerDisplay();
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      currentBlock = 1;
+      timerRemaining = 12 * 60;
+      blockLabel.textContent = "Bloque 1 • Lenguaje";
+      startBtn.innerHTML = '<span>▶</span> Iniciar';
+      startBtn.classList.replace('bg-amber-600', 'bg-blue-600');
+      updateTimerDisplay();
+    }
+
+    renderGames('all');
+    updateTimerDisplay();
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+name: Deploy mSchool
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    paths:
+      - 'mschool/**'
+      - '.github/workflows/deploy-mschool.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare production build
+        run: |
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool
+
+          # Brainfit Copy
+          if [ -d "brainfit" ]; then
+            echo "Packaging Brainfit..."
+            cd brainfit
+            cp index.html manifest.json sw.js config.json ../dist/brainfit/ || true
+            cp -r css js assets ../dist/brainfit/ || true
+            cd ..
+          fi
+
+          # MurMeteo Copy
+          if [ -d "murmeteo" ]; then
+            echo "Packaging MurMeteo..."
+            cd murmeteo
+            cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
+            cp -r icons ../dist/murmeteo/ || true
+            cp -r card_images ../dist/murmeteo/ || true
+            cp -f forecast.json ../dist/murmeteo/ || true
+            cp -r forecasts ../dist/murmeteo/ || true
+            cd ..
+          fi
+
+          # Loopp Copy
+          if [ -d "loopp" ]; then
+            echo "Packaging Loopp..."
+            cd loopp
+            cp index.html manifest.json sw.js ../dist/loopp/ || true
+            cp -r js icons ../dist/loopp/ || true
+            cd ..
+          fi
+
+          # MyLanding Copy
+          if [ -d "mylanding" ]; then
+            echo "Packaging MyLanding..."
+            cd mylanding
+            cp index.html ../dist/mylanding/ || true
+            cp -r index_files ../dist/mylanding/ || true
+            cd ..
+          fi
+
+          # ElParte Copy
+          if [ -d "elparte" ]; then
+            echo "Packaging ElParte..."
+            cd elparte
+            cp index.html manifest.webmanifest sw.js style.css app.js ../dist/elparte/ || true
+            cp -r icons ../dist/elparte/ || true
+            cd ..
+          fi
+
+          # mSchool Copy
+          if [ -d "mschool" ]; then
+            echo "Packaging mSchool..."
+            cd mschool
+            sed -i "s/alpha-kids-v[0-9]*/alpha-kids-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js icon-192.svg icon-512.svg juegos_estimulacion_movil.html ../dist/mschool/ || true
+            cd ..
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Alpha Kids (3 Años) — Cuadro de Mando</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AlphaKids">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon-192.svg">
+  <link rel="apple-touch-icon" href="./icon-192.svg">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #f59e0b;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-card: #1e293b;
+      --surface-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-heading: #ffffff;
+      --header-bg: rgba(30, 41, 59, 0.85);
+      --timer-card-bg: linear-gradient(180deg, #1e293b, #0f172a);
+      --timer-display-color: #ffffff;
+      --timer-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+      --nav-bg: rgba(15, 23, 42, 0.95);
+      --input-bg: #0f172a;
+      --input-color: #ffffff;
+      --card-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      --tag-bg: rgba(255,255,255,0.08);
+      --tag-color: #cbd5e1;
+      --coach-bg: #1e293b;
+      --coach-highlight-bg: rgba(245, 158, 11, 0.15);
+      --coach-highlight-text: #fef08a;
+      --mastery-bg: rgba(16, 185, 129, 0.1);
+      --mastery-border: rgba(16, 185, 129, 0.3);
+      --mastery-text: #a7f3d0;
+      --radius: 18px;
+    }
+
+    [data-theme="light"] {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #dbeafe;
+      --accent: #d97706;
+      --accent-green: #059669;
+      --accent-purple: #7c3aed;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-card: #ffffff;
+      --surface-border: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --header-bg: rgba(255, 255, 255, 0.92);
+      --timer-card-bg: linear-gradient(180deg, #ffffff, #f1f5f9);
+      --timer-display-color: #0f172a;
+      --timer-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
+      --nav-bg: rgba(255, 255, 255, 0.96);
+      --input-bg: #f8fafc;
+      --input-color: #0f172a;
+      --card-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      --tag-bg: #f1f5f9;
+      --tag-color: #475569;
+      --coach-bg: #ffffff;
+      --coach-highlight-bg: #fef3c7;
+      --coach-highlight-text: #92400e;
+      --mastery-bg: #ecfdf5;
+      --mastery-border: #a7f3d0;
+      --mastery-text: #065f46;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 90px;
+      font-size: 16px;
+      line-height: 1.5;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Header */
+    header {
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--surface-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-heading);
+    }
+
+    .brand-text p {
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.15s, background-color 0.2s, border-color 0.2s;
+    }
+
+    .theme-toggle-btn:active {
+      transform: scale(0.92);
+    }
+
+    .btn-install {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+    }
+
+    .badge-status {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 600;
+    }
+
+    /* Navigation */
+    .tab-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--surface-border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 12px 14px;
+      z-index: 100;
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s, transform 0.1s, background-color 0.2s;
+      padding: 6px 14px;
+      border-radius: 14px;
+    }
+
+    .nav-btn.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .nav-btn .icon {
+      font-size: 1.35rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 16px;
+      width: 100%;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stage Steps Indicator */
+    .stages-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .stage-pill {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 8px 6px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .stage-pill.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(30, 58, 138, 0.35));
+      border-color: #3b82f6;
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);
+    }
+
+    .stage-pill.done {
+      border-color: var(--accent-green);
+      opacity: 0.75;
+    }
+
+    .stage-pill-time {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #93c5fd;
+      display: block;
+    }
+
+    .stage-pill-name {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Big Timer Card */
+    .timer-card {
+      background: var(--timer-card-bg);
+      border: 2px solid var(--surface-border);
+      border-radius: 28px;
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .timer-phase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      border: 1px solid var(--surface-border);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .timer-display {
+      font-size: 5rem;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 8px 0;
+      color: var(--timer-display-color);
+      text-shadow: var(--timer-shadow);
+      transition: color 0.25s;
+    }
+
+    .timer-total {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .timer-total span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Progress bar */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--surface-border);
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #38bdf8);
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 8px;
+    }
+
+    /* Timer Controls */
+    .timer-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .btn-timer-main {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border: none;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-timer-main:active {
+      transform: scale(0.92);
+    }
+
+    .btn-timer-secondary {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: all 0.2s;
+    }
+
+    .btn-timer-secondary:active {
+      background: var(--surface-border);
+      transform: scale(0.94);
+    }
+
+    .timer-settings-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--surface-border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .toggle-chip {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      padding: 6px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .toggle-chip.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Coaching Card */
+    .coach-card {
+      background: var(--coach-bg);
+      border: 1px solid var(--surface-border);
+      border-left: 5px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .coach-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .coach-text {
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .coach-highlight {
+      background: var(--coach-highlight-bg);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: var(--coach-highlight-text);
+      font-weight: 500;
+    }
+
+    /* Activity Cards */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-heading);
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+    .filter-pills::-webkit-scrollbar { display: none; }
+
+    .pill-btn {
+      white-space: nowrap;
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--card-shadow);
+      transition: all 0.2s;
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .activity-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s, border-color 0.2s, background-color 0.25s;
+    }
+
+    .activity-card:hover {
+      border-color: var(--primary);
+    }
+
+    .activity-card.practiced-today {
+      border-color: var(--accent-green);
+      background: var(--surface);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card-title-group h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .meta-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      border: 1px solid var(--surface-border);
+    }
+
+    .tag-lang { background: rgba(37, 99, 235, 0.15); color: #2563eb; }
+    .tag-math { background: rgba(16, 185, 129, 0.15); color: #059669; }
+    .tag-motor { background: rgba(245, 158, 11, 0.15); color: #d97706; }
+    .tag-sprint { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border-color: rgba(139, 92, 246, 0.3); }
+
+    .filter-group-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      margin-top: 6px;
+    }
+
+    .how-to-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      box-shadow: var(--card-shadow);
+    }
+
+    .how-to-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+    }
+
+    .how-to-content h5 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 4px;
+    }
+
+    .how-to-content p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .reference-box {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+      line-height: 1.45;
+      color: var(--text);
+      box-shadow: var(--card-shadow);
+    }
+
+    .reference-box strong {
+      color: var(--text-heading);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .reference-box em {
+      color: var(--primary);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .reference-box .ref-citation {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    .step-list {
+      list-style: none;
+      margin: 12px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-list li {
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: var(--text);
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .step-list li::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 20px;
+      height: 20px;
+      background: var(--surface-border);
+      color: var(--primary);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mastery-box {
+      background: var(--mastery-bg);
+      border: 1px solid var(--mastery-border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .mastery-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .mastery-text {
+      font-size: 0.88rem;
+      color: var(--mastery-text);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .card-footer-action {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--surface-border);
+      padding-top: 12px;
+    }
+
+    .btn-check-practice {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.2s;
+    }
+
+    .btn-check-practice.done {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    /* Progress & Stats View */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 18px;
+      padding: 16px 10px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .session-log-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .session-log-card textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 12px;
+      color: var(--input-color);
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      min-height: 80px;
+      margin: 10px 0 14px;
+      transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+    }
+
+    .session-log-card textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn-save-log {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      transition: transform 0.15s;
+    }
+
+    .btn-save-log:active {
+      transform: scale(0.98);
+    }
+
+    .history-item {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .history-note {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* Guide & Method view */
+    .guide-box {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.25s, border-color 0.25s;
+    }
+
+    .guide-box h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-box p {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .rule-pill {
+      display: inline-block;
+      background: var(--primary-light);
+      border: 1px solid var(--surface-border);
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 4px 4px 4px 0;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 500px;
+      padding: 24px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      color: var(--text);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-header h3 {
+      color: var(--text-heading);
+      font-size: 1.2rem;
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: var(--input-color);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Bar -->
+  <header>
+    <div class="brand">
+      <img src="./icon-192.svg" alt="Alpha Kids" class="brand-logo">
+      <div class="brand-text">
+        <h1>Alpha Kids</h1>
+        <p>3 Años • Sprint 30M</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar tema">☀️</button>
+      <button id="installBtn" class="btn-install">📲 Instalar</button>
+      <span class="badge-status" id="onlineBadge">● Offline OK</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- ================= VIEW 1: SESIÓN EN VIVO ================= -->
+    <section id="view-session" class="view-section active">
+      
+      <!-- Sprint Selector in Session -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; background:var(--surface); padding:10px 14px; border-radius:14px; border:1px solid var(--surface-border); box-shadow:var(--card-shadow);">
+        <span style="font-size:0.85rem; font-weight:700; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+          <span>🎯</span> Sprint Activo:
+        </span>
+        <select id="sessionSprintSelect" onchange="changeSessionSprint(this.value)" style="background:var(--input-bg); color:var(--text-heading); border:1px solid var(--surface-border); border-radius:10px; padding:6px 10px; font-weight:700; font-size:0.85rem; cursor:pointer; max-width:65%;">
+          <option value="1">Sprint 1: Fundacional (/m, s, a/ • Base 5)</option>
+          <option value="2">Sprint 2: Fusión Continua (/l, f, o/ • CVC)</option>
+          <option value="3">Sprint 3: Oclusivas (/p, t/ • Marco 5)</option>
+          <option value="4">Sprint 4: Bisílabas (/r, n/ • Marco 10)</option>
+          <option value="5">Sprint 5: Transferencia y Conceptual</option>
+        </select>
+      </div>
+
+      <!-- Phase Progress Pills -->
+      <div class="stages-bar" id="stagesBar">
+        <div class="stage-pill active" onclick="jumpToStage(0)">
+          <span class="stage-pill-time">12 min</span>
+          <span class="stage-pill-name">1. Lenguaje</span>
+        </div>
+        <div class="stage-pill" onclick="jumpToStage(1)">
+          <span class="stage-pill-time">3 min</span>
+          <span class="stage-pill-name">2. Pausa</span>
+        </div>
+        <div class="stage-pill" onclick="jumpToStage(2)">
+          <span class="stage-pill-time">12 min</span>
+          <span class="stage-pill-name">3. Mates</span>
+        </div>
+        <div class="stage-pill" onclick="jumpToStage(3)">
+          <span class="stage-pill-time">3 min</span>
+          <span class="stage-pill-name">4. Cierre</span>
+        </div>
+      </div>
+
+      <!-- Live Timer Display -->
+      <div class="timer-card">
+        <div class="timer-phase-badge" id="currentPhaseBadge">
+          🅰️ Bloque 1: Lenguaje Fónico
+        </div>
+        
+        <div class="timer-display" id="timerDisplay">12:00</div>
+        
+        <div class="timer-total">
+          Tiempo total sesión: <span id="totalTimeDisplay">00:00 / 30:00</span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="stageProgress"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="timer-controls">
+          <button class="btn-timer-secondary" title="Reiniciar etapa" onclick="resetCurrentStage()">
+            ↺
+          </button>
+          
+          <button class="btn-timer-main" id="playBtn" onclick="togglePlay()">
+            ▶
+          </button>
+          
+          <button class="btn-timer-secondary" title="Siguiente etapa" onclick="nextStage()">
+            ⏭
+          </button>
+        </div>
+
+        <div class="timer-settings-bar">
+          <div class="toggle-chip active" id="soundToggle" onclick="toggleSound()">
+            🔔 <span id="soundLabel">Sonido ON</span>
+          </div>
+          <div class="toggle-chip active" id="vibrateToggle" onclick="toggleVibration()">
+            📳 <span id="vibrateLabel">Vibración ON</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach Tip for the active stage -->
+      <div class="coach-card" id="coachCard">
+        <div class="coach-title" id="coachTitle">
+          💡 Enfoque del Bloque Actual
+        </div>
+        <div class="coach-text" id="coachText">
+          Usa fonemas continuos (/m/, /s/, /a/). Alarga el sonido con la voz. Nunca digas «eme».
+        </div>
+        <div class="coach-highlight" id="coachRule">
+          🎯 <strong>Regla de oro:</strong> Si domina el reto, elévalo. Si se frustra, descompón en pasos más fáciles.
+        </div>
+      </div>
+
+      <!-- Recommended activity for this stage -->
+      <div class="section-header">
+        <h2 class="section-title">Actividad sugerida ahora</h2>
+      </div>
+      <div id="suggestedActivityContainer">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 2: CATÁLOGO DE ACTIVIDADES ================= -->
+    <section id="view-activities" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">Catálogo de Retos (25 Juegos)</h2>
+        <button class="pill-btn" onclick="openNewActivityModal()" style="background:#2563eb;color:#fff;">
+          + Nuevo reto
+        </button>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div class="filter-group-label">Filtrar por Sprint:</div>
+        <div class="filter-pills" id="sprintFilterPills">
+          <button class="pill-btn active" onclick="filterSprint('all', this)">Todos (1-5)</button>
+          <button class="pill-btn" onclick="filterSprint('1', this)">Sprint 1</button>
+          <button class="pill-btn" onclick="filterSprint('2', this)">Sprint 2</button>
+          <button class="pill-btn" onclick="filterSprint('3', this)">Sprint 3</button>
+          <button class="pill-btn" onclick="filterSprint('4', this)">Sprint 4</button>
+          <button class="pill-btn" onclick="filterSprint('5', this)">Sprint 5</button>
+        </div>
+
+        <div class="filter-group-label">Filtrar por Área Pedagógica:</div>
+        <div class="filter-pills" id="areaFilterPills">
+          <button class="pill-btn active" onclick="filterArea('all', this)">Todas</button>
+          <button class="pill-btn" onclick="filterArea('lenguaje', this)">🅰️ Lenguaje Fónico</button>
+          <button class="pill-btn" onclick="filterArea('matematicas', this)">🎲 Matemáticas</button>
+          <button class="pill-btn" onclick="filterArea('motor', this)">🐸 Pausa Motora</button>
+        </div>
+      </div>
+
+      <div id="activitiesList">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: PROGRESO Y DIARIO ================= -->
+    <section id="view-progress" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">Tu Registro y Racha</h2>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="statCompletedSessions">0</div>
+          <div class="stat-label">Sesiones</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statStreak">0</div>
+          <div class="stat-label">Racha Días</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statActivitiesDone">0</div>
+          <div class="stat-label">Practicados</div>
+        </div>
+      </div>
+
+      <div class="session-log-card">
+        <h3 style="font-size:1.1rem; color:var(--text-heading); margin-bottom:4px;">📝 Registrar sesión de hoy</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted);">Apunta logros, palabras fusionadas o notas pedagógicas:</p>
+        <textarea id="sessionNotes" placeholder="Ej.: Hoy fusionó 'SOL' arrastrando el dedo a la primera. En el vaso dedujo que 5 = 2 + 3 sin titubear."></textarea>
+        <button class="btn-save-log" onclick="saveSessionLog()">
+          ✓ Guardar sesión completada
+        </button>
+      </div>
+
+      <div class="section-header">
+        <h2 class="section-title">Historial de Sesiones</h2>
+      </div>
+      <div id="historyList">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: GUÍA Y MÉTODO ================= -->
+    <section id="view-guide" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">Metodología y Guía de Aprendizaje</h2>
+      </div>
+
+      <!-- PARTE 1: RESUMEN EJECUTIVO DE USO -->
+      <div class="guide-box" style="border-left:5px solid #2563eb;">
+        <h4>⚡ Guía Rápida: Cómo Usar esta Web para el Aprendizaje Diario</h4>
+        <p style="color:var(--text-muted); margin-bottom:12px;">Esta aplicación no es un juego para que el niño juegue en el móvil. <strong>Es tu copiloto pedagógico en tiempo real</strong> para dirigir la sesión física de 30 minutos sin pantallas para él.</p>
+        
+        <div class="how-to-card">
+          <div class="how-to-num">1</div>
+          <div class="how-to-content">
+            <h5>Antes de empezar (1 minuto)</h5>
+            <p>Selecciona en la pestaña <em>Sesión</em> el <strong>Sprint Activo</strong> (por defecto Sprint 1). Prepara sobre la mesa solo los materiales tangibles del día (letras magnéticas, bloques, dado, vaso opaco). Deja el móvil apoyado en la mesa a medio metro visible para ti.</p>
+          </div>
+        </div>
+
+        <div class="how-to-card">
+          <div class="how-to-num">2</div>
+          <div class="how-to-content">
+            <h5>Durante los 30 minutos (Sigue el cronómetro)</h5>
+            <p>Pulsa <strong>▶ Iniciar</strong>. El cronómetro gestionará los intervalos automáticamente (12 min Lenguaje $\rightarrow$ 3 min Pausa motora $\rightarrow$ 12 min Matemáticas $\rightarrow$ 3 min Cierre). Las campanas y la vibración te avisarán del cambio sin que tengas que mirar el reloj. Consulta la tarjeta <em>Enfoque del Bloque</em> y la actividad sugerida en pantalla.</p>
+          </div>
+        </div>
+
+        <div class="how-to-card">
+          <div class="how-to-num">3</div>
+          <div class="how-to-content">
+            <h5>Al terminar (Regla de oro del pico-final)</h5>
+            <p>Detén la sesión justo en el momento de mayor entusiasmo (cuando pida <em>«¡otra vez!»</em>). Ve a la pestaña <em>Juegos</em> para marcar los retos practicados hoy, apunta una breve nota de logro en <em>Progreso</em> y recoged juntos los bloques en su caja.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARTE 2: FUNDAMENTOS PEDAGÓGICOS EN DETALLE -->
+      <div class="guide-box">
+        <h4>🔬 Fundamentos Pedagógicos y Neurociencia en Detalle</h4>
+
+        <div style="margin-bottom:14px;">
+          <p><strong>1. El Modelo Alpha School adaptado a los 3 años:</strong> En Alpha School (Austin), las materias troncales se condensan en 2 horas matutinas mediante software adaptativo, liberando la tarde para habilidades vitales y deporte. A los 3 años, la jornada se transpone a <strong>sprints de 30 minutos</strong> donde <em>el adulto actúa como el software adaptativo en tiempo real</em>: aumenta el reto si hay aburrimiento o lo descompone en micro-pasos si hay frustración.</p>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <p><strong>2. Ciencia de la Lectura y Decodificación Fónica Sintética:</strong> A los 3 años los niños están en la <em>Fase Pre-Alfabética</em> (Ehri). Solo se usan <strong>consonantes continuas</strong> (/m/, /s/, /f/, /l/, /r/, /n/) que se pueden sostener sin distorsión (/ssss/). Se evitan los nombres de letras ('eme') y las oclusivas tempranas para no introducir la vocal neutra parásita o <em>schwa</em> ('puh'). Se descarta la memorización visual pasiva de palabras completas (*flashcards*) en favor del mapeo ortográfico fonema-grafema.</p>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <p><strong>3. Sentido Numérico y Enfoque CRA (Bruner, Clements & Sarama):</strong> Se sigue la progresión <em>Concreto $\rightarrow$ Representativo $\rightarrow$ Abstracto</em>. Se entrena la <strong>subitización perceptual</strong> (identificar de un vistazo 1 a 4 puntos en menos de 2 segundos sin contar de uno en uno) antes de usar cifras numéricas escritas. Con el vaso opaco se introduce el <strong>álgebra temprana</strong> ($5 = 3 + x$) por conservación tangible.</p>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <p><strong>4. Neurobiología de la Atención y Pausas Sensoriomotoras:</strong> A los 3 años el umbral de atención sostenida prefrontal dura entre 6 y 9 minutos. La pausa motora de 3 minutos es un reinicio biológico compuesto de dos fases: <em>Estímulo Vestibular</em> (saltos, cambios de plano de cabeza) para despertar la alerta cortical (*arousal*), seguido de <em>Estímulo Propioceptivo o Heavy Work</em> (paso de oso, empujar pared, compresión articular) que activa neurotransmisores reguladores (GABA y serotonina) para reenfocar la mente.</p>
+        </div>
+
+        <div>
+          <p><strong>5. Coaching y Mentalidad de Crecimiento (Dweck, Kahneman):</strong> Se practica el elogio al esfuerzo estratégico (*«¡Te fijaste en que faltaban dos!»* en vez de *«¡Qué listo eres!»*). Se aplica la <em>Regla del Pico-Final</em> (Kahneman) para que la experiencia quede grabada en la memoria afectiva como un triunfo emocionante.</p>
+        </div>
+      </div>
+
+      <!-- PARTE 3: PUERTAS DE DOMINIO (MASTERY GATES) -->
+      <div class="guide-box">
+        <h4>🚪 Puertas de Dominio (*Mastery Gates*): ¿Cuándo pasar de Sprint?</h4>
+        <p>Inspirado en la política de Alpha School de avanzar solo con el 90%+ de dominio comprobado:</p>
+        <p>• <strong>Regla de los 3 Días:</strong> El niño debe resolver los retos del Sprint con soltura durante 3 sesiones consecutivas.</p>
+        <p>• <strong>Latencia < 2 segundos:</strong> Reconocimiento de fonemas y cantidades inmediato, sin conteo secuencial con el dedo.</p>
+        <p>• <strong>Cero frustración:</strong> Si hay sobrecarga cognitiva, retroceder un paso en el andamiaje inmediatamente.</p>
+      </div>
+
+      <!-- PARTE 4: REFERENCIAS CIENTÍFICAS -->
+      <div class="guide-box">
+        <h4>📚 Referencias Bibliográficas y Publicaciones Científicas</h4>
+        
+        <div class="reference-box">
+          <strong>Bloom, B. S. (1984)</strong>
+          <em>The 2 Sigma Problem: The Search for Methods of Group Instruction as Effective as One-to-One Tutoring.</em>
+          <div class="ref-citation">Educational Researcher, 13(6), 4–16. Evidencia fundamental de que la tutoría personalizada 1 a 1 y el aprendizaje por dominio (*Mastery Learning*) elevan el rendimiento 2 desviaciones típicas sobre la enseñanza grupal pasiva.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Ehri, L. C. (2005)</strong>
+          <em>Development of Sight Word Reading: Phases and Findings.</em>
+          <div class="ref-citation">In M. J. Snowling & C. Hulme (Eds.), The Science of Reading: A Handbook (pp. 135–154). Blackwell. Modelo evolutivo de 4 fases de la lectura (pre-alfabética a consolidada) y la necesidad del mapeo ortográfico fónico frente a la memorización visual.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Clements, D. H., & Sarama, J. (2009 / 2014)</strong>
+          <em>Learning and Teaching Early Math: The Learning Trajectories Approach.</em>
+          <div class="ref-citation">Routledge. Trayectorias del desarrollo matemático temprano y la subitización perceptual como cimiento indispensable de la cardinalidad y la aritmética mental.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Bruner, J. S. (1966)</strong>
+          <em>Toward a Theory of Instruction.</em>
+          <div class="ref-citation">Harvard University Press. Marco pedagógico CRA (Concreto, Icónico/Representativo y Simbólico/Abstracto) para la internalización de conceptos lógico-matemáticos.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Ayres, A. J. (1972 / 2005)</strong>
+          <em>Sensory Integration and the Child.</em>
+          <div class="ref-citation">Western Psychological Services. Función del sistema vestibular y propioceptivo en la modulación del sistema nervioso central y la autorregulación atencional en la infancia temprana.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Dweck, C. S. (2006)</strong>
+          <em>Mindset: The New Psychology of Success.</em>
+          <div class="ref-citation">Random House. Demostración experimental del impacto del elogio al proceso frente al elogio a la capacidad en la motivación intrínseca y la resiliencia ante el error.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Kahneman, D. (2011)</strong>
+          <em>Thinking, Fast and Slow.</em>
+          <div class="ref-citation">Farrar, Straus and Giroux. La Regla del Pico-Final (*Peak-End Rule*), heurística por la cual el ser humano evalúa las experiencias según el punto álgido y el momento de cierre.</div>
+        </div>
+
+        <div class="reference-box">
+          <strong>Vygotsky, L. S. (1978)</strong>
+          <em>Mind in Society: The Development of Higher Psychological Processes.</em>
+          <div class="ref-citation">Harvard University Press. Concepto de Zona de Desarrollo Próximo (ZDP) y andamiaje adaptativo guiado por un facilitador más competente.</div>
+        </div>
+      </div>
+
+      <div class="guide-box">
+        <h4>💾 Copia de Seguridad y Datos</h4>
+        <p>Tus notas, retos y rachas se guardan en este dispositivo. Puedes exportarlas cuando quieras.</p>
+        <button class="pill-btn" onclick="exportData()" style="margin-right:8px;">📥 Exportar Datos</button>
+        <button class="pill-btn" onclick="resetAllData()" style="color:#f87171;">⚠️ Reiniciar Datos</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="tab-nav">
+    <button class="nav-btn active" onclick="switchTab('session', this)">
+      <span class="icon">⏱️</span>
+      <span>Sesión</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('activities', this)">
+      <span class="icon">🧩</span>
+      <span>Juegos</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('progress', this)">
+      <span class="icon">📈</span>
+      <span>Progreso</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('guide', this)">
+      <span class="icon">📖</span>
+      <span>Método</span>
+    </button>
+  </nav>
+
+  <!-- Modal: Crear Nuevo Reto -->
+  <div class="modal-backdrop" id="activityModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color:var(--text-heading); font-size:1.2rem;">➕ Nuevo Reto de Estimulación</h3>
+        <button class="btn-close-modal" onclick="closeNewActivityModal()">✕</button>
+      </div>
+      <form id="newActivityForm" onsubmit="handleCreateActivity(event)">
+        <div class="form-group">
+          <label>Título del Juego</label>
+          <input type="text" id="formTitle" placeholder="Ej: Radar del sonido /s/" required>
+        </div>
+        <div class="form-group">
+          <label>Nivel de Sprint</label>
+          <select id="formSprint">
+            <option value="1">Sprint 1: Fundacional</option>
+            <option value="2">Sprint 2: Fusión Continua</option>
+            <option value="3">Sprint 3: Oclusivas</option>
+            <option value="4">Sprint 4: Bisílabas</option>
+            <option value="5">Sprint 5: Transferencia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Área</label>
+          <select id="formArea">
+            <option value="lenguaje">🅰️ Lenguaje Fónico</option>
+            <option value="matematicas">🎲 Matemáticas / Subitización</option>
+            <option value="motor">🐸 Pausa Motora</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Duración recomendada</label>
+          <input type="text" id="formDuration" placeholder="Ej: 6 minutos" value="6 minutos" required>
+        </div>
+        <div class="form-group">
+          <label>Materiales</label>
+          <input type="text" id="formMaterials" placeholder="Ej: Letras magnéticas S y O" required>
+        </div>
+        <div class="form-group">
+          <label>Instrucciones paso a paso (separadas por salto de línea)</label>
+          <textarea id="formSteps" rows="4" placeholder="1. Colocar la letra S&#10;2. Sonar /sssss/ como una serpiente&#10;3. Buscar objetos con /s/" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>🎯 Señal de Dominio (Mastery)</label>
+          <input type="text" id="formMastery" placeholder="Ej: Reconoce el sonido /s/ sin titubear" required>
+        </div>
+        <button type="submit" class="btn-save-log" style="background:#2563eb; margin-top:8px;">
+          Guardar Actividad
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    /* =================================================================
+       1. DATA STRUCTURE & ALL 25 SPRINT ACTIVITIES
+       ================================================================= */
+    const STAGES = [
+      {
+        id: 0,
+        name: "1. Lenguaje",
+        badge: "🅰️ Bloque 1: Lenguaje Fónico",
+        duration: 12 * 60, // 12 minutes in seconds
+        coachTitle: "💡 Enfoque: Lenguaje Fónico (12 min)",
+        coachText: "Trabaja con sonidos puros alargados (/mmmm/, /ssss/). Evita nombrar letras ('eme'). Fusión física de piezas para decodificar.",
+        coachRule: "🎯 Regla de dominio: Arrastra las letras mientras pronuncia el sonido continuo sin cortes."
+      },
+      {
+        id: 1,
+        name: "2. Pausa Motora",
+        badge: "🐸 Pausa Motora Relámpago",
+        duration: 3 * 60, // 3 minutes
+        coachTitle: "⚡ Pausa de Regulación Sensorial (3 min)",
+        coachText: "Reinicio biológico: primero estímulo vestibular (saltos, equilibrio) y después propioceptivo pesado (oso, empuje, abrazo).",
+        coachRule: "🎯 Regla de dominio: Vuelve a sentarse calmado y listo para el bloque de lógica."
+      },
+      {
+        id: 2,
+        name: "3. Matemáticas",
+        badge: "🎲 Bloque 2: Matemáticas Manipulativas",
+        duration: 12 * 60, // 12 minutes
+        coachTitle: "💡 Enfoque: Sentido Numérico Manipulativo (12 min)",
+        coachText: "Subitización (ver de un vistazo en <2s) y descomposición con vasos opacos. ¡Cero símbolos numéricos escritos aún!",
+        coachRule: "🎯 Regla de dominio: Deduce mentalmente cuántos bloques están ocultos antes de levantar el vaso."
+      },
+      {
+        id: 3,
+        name: "4. Cierre",
+        badge: "🌟 Cierre Positivo & Recogida",
+        duration: 3 * 60, // 3 minutes
+        coachTitle: "🎉 Cierre Emocional & Recogida (3 min)",
+        coachText: "Celebra el esfuerzo del día con entusiasmo genuino. Recoged juntos los materiales en equipo.",
+        coachRule: "⚡ Regla de oro: Déjalo siempre con ganas de más para que mañana vuelva a pedirlo."
+      }
+    ];
+
+    const DEFAULT_ACTIVITIES = [
+      /* ==================== SPRINT 1: FUNDACIONAL ==================== */
+      {
+        id: 1,
+        sprint: 1,
+        area: "lenguaje",
+        title: "El Radar de Sonidos",
+        time: "6 a 8 min",
+        materials: "Letras magnéticas (M, S y A)",
+        steps: [
+          "Pegar solo la letra M magnética en la nevera o pizarra visible.",
+          "Alargar el fonema con expresividad: «Esta letra suena /mmmmm/, como algo riquísimo».",
+          "Desafío lúdico: buscar juntos dos objetos del salón que empiecen por /m/ (manzana, mantel, muñeco)."
+        ],
+        mastery: "Reconoce el fonema /m/ al instante (<2s) al ver la pieza y propone espontáneamente palabras que empiezan por ese sonido.",
+        practicedToday: false
+      },
+      {
+        id: 2,
+        sprint: 1,
+        area: "lenguaje",
+        title: "El Salto a la Lectura (Fusión Silábica)",
+        time: "4 a 6 min",
+        materials: "Letras magnéticas M y A",
+        steps: [
+          "Colocar la M y la A sobre la mesa separadas por unos 25 cm.",
+          "Deslizar el dedo por debajo de la M sosteniendo el sonido: «/mmmmmm/...» y al tocar la A: «.../aaaaa/».",
+          "Aproximar ambas letras poco a poco hasta que choquen: «¡MA!».",
+          "Descubrir el significado: «¡Hemos creado el principio de mamá y manzana!»."
+        ],
+        mastery: "El propio niño arrastra las letras con los dedos mientras pronuncia ambos sonidos de forma continua sin pausas.",
+        practicedToday: false
+      },
+      {
+        id: 3,
+        sprint: 1,
+        area: "motor",
+        title: "Desafío Motor Express: Rana y Oso",
+        time: "2 a 3 min",
+        materials: "Pasillo despejado o alfombra",
+        steps: [
+          "Fase Vestibular: Cruzar el pasillo a saltos de rana o caminar en puntillas como gigantes (aceleración de cabeza).",
+          "Fase Propioceptiva: Caminar a 4 patas como un oso pesado descargando peso en manos y pies (heavy work).",
+          "Tomar dos respiraciones lentas inflando el abdomen antes de sentarse en la alfombra."
+        ],
+        mastery: "Vuelve a sentarse calmado, relajado y con la atención reseteada para el siguiente bloque.",
+        practicedToday: false
+      },
+      {
+        id: 4,
+        sprint: 1,
+        area: "matematicas",
+        title: "Torres Relámpago (Subitización 1-3)",
+        time: "6 min",
+        materials: "1 dado de puntos y 10 bloques de construcción iguales",
+        steps: [
+          "Tirar el dado sobre la mesa (valores de 1 a 3 inicialmente).",
+          "Dejar el dado visible 2 segundos y taparlo con la palma: «¿Cuántos puntos viste?».",
+          "Desafío: coger de un solo agarre esa misma cantidad de bloques para levantar una torre, sin contar uno a uno con el dedo.",
+          "Ampliar a 4 puntos conforme adquiera precisión."
+        ],
+        mastery: "Atrapa 3 o 4 bloques de una sola intención motora sin necesidad de enumerarlos verbalmente.",
+        practicedToday: false
+      },
+      {
+        id: 5,
+        sprint: 1,
+        area: "matematicas",
+        title: "La Descomposición del Tesoro (Base 5)",
+        time: "6 min",
+        materials: "5 bloques y 1 vaso de plástico opaco",
+        steps: [
+          "Entregarle exactamente 5 bloques: «Este es tu equipo de 5 piezas».",
+          "Pedirle que construya dos casitas usando todos los bloques y explorar combinaciones (3 y 2, 4 y 1).",
+          "El truco del vaso: esconder 2 bloques bajo el vaso y dejar 3 a la vista.",
+          "Pregunta inductiva: «Si teníamos 5 y aquí veo 3... ¿cuántos están atrapados en el vaso?»."
+        ],
+        mastery: "Deduce mentalmente el número de piezas escondidas antes de levantar el vaso para comprobarlo.",
+        practicedToday: false
+      },
+
+      /* ==================== SPRINT 2: FUSIÓN CONTINUA Y CVC ==================== */
+      {
+        id: 6,
+        sprint: 2,
+        area: "lenguaje",
+        title: "El Radar de Nuevos Ecos (/l/, /f/, /o/)",
+        time: "6 min",
+        materials: "Letras magnéticas L, F, O y un espejo pequeño",
+        steps: [
+          "Colocar la letra L magnética y alargar: «/llllll/, la lengua sube detrás de los dientes». Mirarse en el espejo.",
+          "Introducir la F con aire soplado suave: «/ffffff/, como viento fresco entre los dientes».",
+          "Añadir la vocal abierta /o/ redondeando los labios: «¡Oooooh!»."
+        ],
+        mastery: "Distingue acústicamente entre /l/ y /f/ al instante (<2s) y adopta la posición orofacial correcta sin dudar.",
+        practicedToday: false
+      },
+      {
+        id: 7,
+        sprint: 2,
+        area: "lenguaje",
+        title: "El Tren de las 3 Letras (Lectura CVC)",
+        time: "6 min",
+        materials: "Letras magnéticas S, O, L y M, A, S",
+        steps: [
+          "Formar la palabra SOL separando las letras unos 10 cm en la mesa.",
+          "Deslizar el 'dedo locomotora' arrastrando la voz sin cortar el aire: «/sssss/... /ooooo/... /lllll/».",
+          "Juntar los vagones de golpe: «¡SOL! ¡Mira al cielo, hemos escrito el sol brillante!»",
+          "Repetir la misma dinámica con MAS, MAL y OLA."
+        ],
+        mastery: "Decodifica palabras de 3 letras consonante-vocal-consonante continua arrastrando la sonoridad sin pausas.",
+        practicedToday: false
+      },
+      {
+        id: 8,
+        sprint: 2,
+        area: "motor",
+        title: "La Caminata del Cangrejo y el Muro Fuerte",
+        time: "3 min",
+        materials: "Pared despejada y alfombra",
+        steps: [
+          "Paso de Cangrejo: Caminar boca arriba apoyando manos y pies hacia atrás 5 metros por el salón.",
+          "El Muro Fuerte: Apoyar las dos palmas en la pared y empujar con toda la fuerza durante 10 segundos como si quisiéramos mover la casa.",
+          "Sacudir las manos y tomar dos respiraciones profundas antes de sentarse."
+        ],
+        mastery: "Realiza el esfuerzo isométrico consciente y vuelve a la mesa con tono corporal regulado.",
+        practicedToday: false
+      },
+      {
+        id: 9,
+        sprint: 2,
+        area: "matematicas",
+        title: "El Golpe de Cuatro (Subitización hasta 4)",
+        time: "6 min",
+        materials: "Tarjetas con 1 a 4 puntos grandes o dado clásico",
+        steps: [
+          "Mostrar una tarjeta con 4 puntos en disposición cuadrada durante solo 1 segundo y ocultarla.",
+          "Preguntar: «¿Cuántos puntos brillaron?». El niño debe responder sin contar con el dedo.",
+          "Desafío de réplica: coger inmediatamente 4 bloques con una mano y formar la misma figura cuadrada.",
+          "Alternar rápidamente entre 2, 3 y 4 puntos."
+        ],
+        mastery: "Dice «¡cuatro!» en menos de 1,5 segundos al ver la disposición de puntos.",
+        practicedToday: false
+      },
+      {
+        id: 10,
+        sprint: 2,
+        area: "matematicas",
+        title: "El Misterio de los Dos Vasos",
+        time: "6 min",
+        materials: "5 bloques y 2 vasos opacos (uno rojo y uno azul)",
+        steps: [
+          "Contar los 5 bloques juntos sobre la mesa.",
+          "Con los ojos del niño cerrados, meter 2 bloques bajo el vaso rojo y 2 bajo el azul, dejando 1 a la vista.",
+          "El niño abre los ojos: «Aquí veo 1... si levanto el vaso rojo y hay 2... ¿cuántos quedan en el azul?».",
+          "Guiar la deducción encadenada sin dar la respuesta."
+        ],
+        mastery: "Resuelve mentalmente la descomposición tripartita (2+2+1=5) por eliminación lógica.",
+        practicedToday: false
+      },
+
+      /* ==================== SPRINT 3: OCLUSIVAS SUAVES Y MARCOS DE CINCO ==================== */
+      {
+        id: 11,
+        sprint: 3,
+        area: "lenguaje",
+        title: "El Despegue de la P y la T (Oclusivas)",
+        time: "6 min",
+        materials: "Letras magnéticas P, T, A, O, E y un trocito de papel fino",
+        steps: [
+          "Poner un trocito de papel fino delante de los labios y emitir /p/ sintiendo cómo el aire lo empuja.",
+          "¡Aviso clave para el adulto: cero 'puh'! Sonido puro /p/ explosivo.",
+          "Unir P y A: arrancar con la pequeña explosión /p/ y abrir a /aaaa/: «¡PA! ¡PAPA!».",
+          "Repetir con T y O: «¡TO! ¡TOS! ¡TOP!»."
+        ],
+        mastery: "Articula /p/ y /t/ limpias sin añadir la vocal parásita schwa y las fusiona con la vocal contigua.",
+        practicedToday: false
+      },
+      {
+        id: 12,
+        sprint: 3,
+        area: "lenguaje",
+        title: "El Detective de Sonidos Iniciales",
+        time: "6 min",
+        materials: "Letras magnéticas P, T, M, S y 4 juguetes pequeños",
+        steps: [
+          "Disponer en la mesa 4 juguetes: Pelota, Tren, Manzana, Serpiente.",
+          "El niño coge la letra P: «¿Cuál de estos tesoros empieza por la explosión /p/?».",
+          "Colocar la letra correspondiente encima de cada objeto.",
+          "Desafío inverso: decir una palabra misteriosa (ej.: «tapa») y buscar la letra con la que arranca."
+        ],
+        mastery: "Asocia el objeto al fonema inicial correcto en menos de 2 segundos sin titubeos.",
+        practicedToday: false
+      },
+      {
+        id: 13,
+        sprint: 3,
+        area: "motor",
+        title: "La Pista Ninja de Cojines y Carga Pesada",
+        time: "3 min",
+        materials: "3 cojines y una caja o cesta con juguetes",
+        steps: [
+          "Circuito en Zigzag: Correr esquivando los 3 cojines sin tocarlos y saltar con pies juntos sobre el último.",
+          "Arrastre de Carga: Arrastrar por la alfombra una cesta pesada con libros hasta la meta (heavy work intenso).",
+          "Sentarse en el suelo y frotar las palmas de las manos enérgicamente antes de respirar."
+        ],
+        mastery: "Ejecuta el control de frenada inhibitoria (no tocar obstáculos) y regula su esfuerzo físico.",
+        practicedToday: false
+      },
+      {
+        id: 14,
+        sprint: 3,
+        area: "matematicas",
+        title: "El Marco de Cinco Mágico (Five-Frame)",
+        time: "6 min",
+        materials: "Cuadrícula dibujada de 5 casillas en línea y 5 fichas bicolores",
+        steps: [
+          "Presentar el Marco de Cinco: «Esta es la nave espacial de 5 asientos».",
+          "Colocar 3 fichas en las casillas: «¿Cuántos asientos están ocupados? (3). ¿Cuántos quedan vacíos?».",
+          "El niño responde de un solo vistazo: «¡2 vacíos!».",
+          "Verificar juntos: 3 ocupados + 2 vacíos = 5 en total."
+        ],
+        mastery: "Identifica instantáneamente cuántos faltan para completar 5 sin contar las casillas vacías con el dedo.",
+        practicedToday: false
+      },
+      {
+        id: 15,
+        sprint: 3,
+        area: "matematicas",
+        title: "El Baile de los Patrones Rítmicos (AB)",
+        time: "6 min",
+        materials: "Bloques de dos colores (Rojos y Azules)",
+        steps: [
+          "Construir un tren con bloques: Rojo - Azul - Rojo - Azul.",
+          "Cantar el ritmo dando palmadas: «¡Rojo! (plas), ¡Azul! (plas)... ¿cuál viene ahora?».",
+          "El niño debe colocar la siguiente pieza continuando la regla lógica de forma autónoma.",
+          "Probar variando con formas: Bloque cubo - Bloque cilindro."
+        ],
+        mastery: "Predice y continúa el patrón AB de forma autónoma durante al menos 6 elementos seguidos.",
+        practicedToday: false
+      },
+
+      /* ==================== SPRINT 4: CONSOLIDACIÓN BISÍLABA Y MARCOS DE DIEZ ==================== */
+      {
+        id: 16,
+        sprint: 4,
+        area: "lenguaje",
+        title: "El Espejo de las Bisílabas (RANA, SOPA, LUNA)",
+        time: "6 min",
+        materials: "Letras magnéticas para formar RANA, SOPA, LUNA, MESA",
+        steps: [
+          "Colocar la primera sílaba RA: el niño la lee. Colocar la segunda NA: el niño la lee.",
+          "Juntar ambas partes: «¿Qué animal saltarín se formó? ¡RANA!».",
+          "Hacer lo mismo con SO-PA y LU-NA.",
+          "Juego de cambio: cambiar la R por M: «¡MANA! ¿Y si cambiamos la A por O? ¡MONO!»."
+        ],
+        mastery: "Decodifica palabras de dos sílabas abiertas directas (CV-CV) comprendiendo el significado global.",
+        practicedToday: false
+      },
+      {
+        id: 17,
+        sprint: 4,
+        area: "lenguaje",
+        title: "Caza de Sonidos Líquidos y Nasales (/r/, /n/)",
+        time: "6 min",
+        materials: "Letras magnéticas R y N, tarjetas con dibujos cotidianos",
+        steps: [
+          "Diferenciar el sonido vibrante suave /r/ (la moto suave) del sonido nasal /n/ (la campana por la nariz).",
+          "Juego de eco: el adulto dice palabras (ratón, nube, rana, nido) y el niño levanta la letra correspondiente.",
+          "Buscar palabras que contengan el sonido dentro (no solo al inicio): pera, cuna."
+        ],
+        mastery: "Discrimina sin error entre los fonemas /r/ y /n/ por vía auditiva pura.",
+        practicedToday: false
+      },
+      {
+        id: 18,
+        sprint: 4,
+        area: "motor",
+        title: "La Cuerda Floja Ninja",
+        time: "3 min",
+        materials: "Cinta de carrocero pegada en el suelo en línea recta (3 metros)",
+        steps: [
+          "Paso de equilibrista: Caminar talón con punta justo encima de la línea sin salirse.",
+          "El flamenco: Pararse en el centro de la línea y aguantar en una sola pierna contando mentalmente hasta 5.",
+          "Salto de aterrizaje: Salto con dos pies juntos amortiguando la caída con rodillas dobladas."
+        ],
+        mastery: "Mantiene el equilibrio vestibular dinámico y estático sin apoyos externos.",
+        practicedToday: false
+      },
+      {
+        id: 19,
+        sprint: 4,
+        area: "matematicas",
+        title: "El Laboratorio del Marco de Diez (Ten-Frame)",
+        time: "6 min",
+        materials: "Cuadrícula de 2 filas de 5 casillas y 10 fichas",
+        steps: [
+          "Presentar el Marco de Diez como dos marcos de cinco juntos.",
+          "Llenar la fila superior completa (5 fichas rojas) y añadir 2 fichas azules en la inferior: «¿Cuántas hay? 5 y 2 son 7».",
+          "Pregunta de complemento a 10: «¿Cuántos huecos vacíos faltan para que la nave de 10 esté llena?».",
+          "El niño visualiza: «¡Faltan 3!»."
+        ],
+        mastery: "Resuelve mentalmente complementos a diez (7+3=10, 8+2=10) apoyado en la estructura visual de 5+X.",
+        practicedToday: false
+      },
+      {
+        id: 20,
+        sprint: 4,
+        area: "matematicas",
+        title: "Sumas Tangibles sin Cifras Escritas",
+        time: "6 min",
+        materials: "10 bloques de dos colores distintos",
+        steps: [
+          "Poner en la mesa un grupo de 3 bloques amarillos y otro de 2 bloques verdes.",
+          "El niño los junta con las dos manos de un golpe: «¡Fusión! ¿Cuántos son en total?».",
+          "El niño dice «¡5!» reconociendo la combinación.",
+          "Probar con 4 + 2 = 6 y 5 + 1 = 6."
+        ],
+        mastery: "Combina dos conjuntos pequeños y declara el total sin contar desde el 1 (empieza a contar desde el conjunto mayor).",
+        practicedToday: false
+      },
+
+      /* ==================== SPRINT 5: TRANSFERENCIA Y CONCEPTUAL ==================== */
+      {
+        id: 21,
+        sprint: 5,
+        area: "lenguaje",
+        title: "El Lector Misterioso (Micro-Frases)",
+        time: "6 min",
+        materials: "Pizarra blanca y letras magnéticas",
+        steps: [
+          "Componer con letras magnéticas 2 o 3 palabras con significado: «EL SOL SALE».",
+          "El niño decodifica la primera palabra, luego la segunda y la tercera.",
+          "Pregunta de comprensión: «¿Quién sale? ¡El sol! ¿Qué hace el sol? ¡Sale!».",
+          "Componer otra micro-frase: «MAMÁ VE LA LUNA»."
+        ],
+        mastery: "Lee una micro-frase simple manteniendo el significado global en su memoria de trabajo.",
+        practicedToday: false
+      },
+      {
+        id: 22,
+        sprint: 5,
+        area: "lenguaje",
+        title: "El Pequeño Profesor de Lectura (Metacognición)",
+        time: "6 min",
+        materials: "Letras magnéticas y pizarra",
+        steps: [
+          "Invertir los roles: «Hoy tú eres el profesor y yo soy el alumno que no sabe leer».",
+          "El niño escoge dos letras (ej.: M y O) y le enseña al adulto cómo se fusionan.",
+          "El adulto comete un error a propósito (dice 'eme-o') y el niño debe corregirlo: «¡No, suena /mooo/!».",
+          "Celebrar su capacidad de explicación y maestría."
+        ],
+        mastery: "Detecta y corrige el error fonético del adulto justificando la regla con sus propias palabras.",
+        practicedToday: false
+      },
+      {
+        id: 23,
+        sprint: 5,
+        area: "motor",
+        title: "El Gran Circuito del Espía Secreto",
+        time: "3 min",
+        materials: "Mesa, colchoneta o cojines",
+        steps: [
+          "Reptado militar: Pasar arrastrándose boca abajo por debajo de una mesa o sillas sin tocar el techo.",
+          "Salto de precisión: Subirse a un cojín firme y saltar cayendo sobre dos huellas marcadas en el suelo.",
+          "Abrazo profundo de oso: El adulto le da un abrazo con presión propioceptiva durante 5 segundos para cerrar el circuito."
+        ],
+        mastery: "Completa el circuito de 3 posturas con agilidad motora y regulación propioceptiva plena.",
+        practicedToday: false
+      },
+      {
+        id: 24,
+        sprint: 5,
+        area: "matematicas",
+        title: "Subitización Conceptual Rápida",
+        time: "6 min",
+        materials: "Fichas o dados con disposiciones compuestas",
+        steps: [
+          "Mostrar durante 2 segundos una tarjeta con 5 puntos distribuidos en 3 arriba y 2 abajo.",
+          "El niño no cuenta 1, 2, 3, 4, 5. El niño dice: «¡Veo 3 y 2, son 5!».",
+          "Mostrar 4 puntos dispuestos en 2 y 2.",
+          "Comprobar la velocidad de descomposición instantánea."
+        ],
+        mastery: "Expresa la cantidad total identificando los dos subgrupos que la forman sin enumeración cardinal.",
+        practicedToday: false
+      },
+      {
+        id: 25,
+        sprint: 5,
+        area: "matematicas",
+        title: "El Maestro del Vaso Oculto (Transferencia)",
+        time: "6 min",
+        materials: "5 o 6 bloques y 1 vaso opaco",
+        steps: [
+          "El niño asume el mando del reto: «Yo escondo los bloques y tú tienes que adivinar».",
+          "El niño esconde 3 bloques bajo el vaso y deja 2 fuera.",
+          "El niño le pregunta al adulto: «¿Cuántos hay dentro?».",
+          "El adulto responde mal a propósito («¿Hay 4?») y el niño demuestra con lógica por qué es imposible: «¡No, porque 2 y 4 serían 6, y solo teníamos 5!»."
+        ],
+        mastery: "Aplica la conservación de la cantidad y la reversibilidad matemática para refutar un error ajeno.",
+        practicedToday: false
+      }
+    ];
+
+    /* =================================================================
+       2. APP STATE & MIGRATION
+       ================================================================= */
+    const DATA_VERSION = 3; // Migration trigger for all 25 activities
+    let currentStageIndex = 0;
+    let timerSeconds = STAGES[0].duration;
+    let timerRunning = false;
+    let timerInterval = null;
+    let totalElapsedSeconds = 0;
+    const TOTAL_SESSION_SECONDS = 30 * 60;
+
+    let soundEnabled = true;
+    let vibrationEnabled = true;
+
+    // Filter states
+    let selectedSprintFilter = 'all';
+    let selectedAreaFilter = 'all';
+    let currentSessionSprint = Number(localStorage.getItem('alphakids_current_sprint')) || 1;
+
+    // Load data from localStorage with auto-migration to version 3
+    let activities = [];
+    const savedVer = localStorage.getItem('alphakids_data_version');
+    const savedActs = localStorage.getItem('alphakids_activities');
+
+    if (!savedActs || savedVer !== String(DATA_VERSION)) {
+      activities = DEFAULT_ACTIVITIES;
+      localStorage.setItem('alphakids_activities', JSON.stringify(activities));
+      localStorage.setItem('alphakids_data_version', String(DATA_VERSION));
+    } else {
+      try {
+        activities = JSON.parse(savedActs);
+      } catch(e) {
+        activities = DEFAULT_ACTIVITIES;
+      }
+    }
+
+    let sessionsHistory = JSON.parse(localStorage.getItem('alphakids_history')) || [];
+
+    /* =================================================================
+       3. AUDIO SINTESIS (100% Offline via Web Audio API)
+       ================================================================= */
+    let audioCtx = null;
+
+    function playChime() {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const now = audioCtx.currentTime;
+        // Two-tone cheerful bell
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(523.25, now); // C5
+        osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.2); // E5
+
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(659.25, now + 0.2);
+        osc2.frequency.exponentialRampToValueAtTime(783.99, now + 0.45); // G5
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc1.start(now);
+        osc1.stop(now + 0.5);
+        osc2.start(now + 0.2);
+        osc2.stop(now + 1.2);
+      } catch (e) {
+        console.warn('Audio not available', e);
+      }
+    }
+
+    function triggerVibration() {
+      if (vibrationEnabled && 'vibrate' in navigator) {
+        navigator.vibrate([250, 100, 250]);
+      }
+    }
+
+    /* =================================================================
+       4. TIMER ENGINE
+       ================================================================= */
+    function formatTime(secs) {
+      const m = Math.floor(secs / 60).toString().padStart(2, '0');
+      const s = (secs % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function updateTimerUI() {
+      const stage = STAGES[currentStageIndex];
+      document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+      document.getElementById('currentPhaseBadge').textContent = stage.badge;
+      
+      const totalMin = formatTime(totalElapsedSeconds);
+      document.getElementById('totalTimeDisplay').textContent = `${totalMin} / 30:00`;
+
+      // Progress calculation
+      const stagePercent = ((stage.duration - timerSeconds) / stage.duration) * 100;
+      document.getElementById('stageProgress').style.width = `${Math.min(100, Math.max(0, stagePercent))}%`;
+
+      // Stages bar pills
+      const pills = document.querySelectorAll('.stage-pill');
+      pills.forEach((p, idx) => {
+        p.classList.remove('active', 'done');
+        if (idx === currentStageIndex) p.classList.add('active');
+        else if (idx < currentStageIndex) p.classList.add('done');
+      });
+
+      // Update Coach Card
+      document.getElementById('coachTitle').textContent = stage.coachTitle;
+      document.getElementById('coachText').textContent = stage.coachText;
+      document.getElementById('coachRule').innerHTML = stage.coachRule;
+
+      // Update Play Button Icon
+      document.getElementById('playBtn').textContent = timerRunning ? '⏸' : '▶';
+
+      // Update suggested activity for current sprint and active stage
+      renderSuggestedActivity();
+    }
+
+    function togglePlay() {
+      if (timerRunning) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      if (!timerRunning) {
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        timerRunning = true;
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            totalElapsedSeconds++;
+            updateTimerUI();
+          } else {
+            playChime();
+            triggerVibration();
+            if (currentStageIndex < STAGES.length - 1) {
+              jumpToStage(currentStageIndex + 1);
+            } else {
+              pauseTimer();
+              alert('🎉 ¡Enhorabuena! Has completado el Sprint de 30 minutos de Alpha Kids.');
+              saveSessionLog(true);
+            }
+          }
+        }, 1000);
+        updateTimerUI();
+      }
+    }
+
+    function pauseTimer() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      updateTimerUI();
+    }
+
+    function resetCurrentStage() {
+      pauseTimer();
+      timerSeconds = STAGES[currentStageIndex].duration;
+      updateTimerUI();
+    }
+
+    function nextStage() {
+      if (currentStageIndex < STAGES.length - 1) {
+        jumpToStage(currentStageIndex + 1);
+      } else {
+        jumpToStage(0);
+      }
+    }
+
+    function jumpToStage(idx) {
+      currentStageIndex = idx;
+      timerSeconds = STAGES[idx].duration;
+      updateTimerUI();
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const el = document.getElementById('soundToggle');
+      el.classList.toggle('active', soundEnabled);
+      document.getElementById('soundLabel').textContent = soundEnabled ? 'Sonido ON' : 'Sonido OFF';
+      if (soundEnabled) playChime();
+    }
+
+    function toggleVibration() {
+      vibrationEnabled = !vibrationEnabled;
+      const el = document.getElementById('vibrateToggle');
+      el.classList.toggle('active', vibrationEnabled);
+      document.getElementById('vibrateLabel').textContent = vibrationEnabled ? 'Vibración ON' : 'Vibración OFF';
+      if (vibrationEnabled) triggerVibration();
+    }
+
+    /* =================================================================
+       5. ACTIVITIES & DUAL FILTERING (Sprint + Área)
+       ================================================================= */
+    function getAreaBadge(area) {
+      if (area === 'lenguaje') return '<span class="meta-tag tag-lang">🅰️ Lenguaje</span>';
+      if (area === 'matematicas') return '<span class="meta-tag tag-math">🎲 Matemáticas</span>';
+      return '<span class="meta-tag tag-motor">🐸 Pausa Motora</span>';
+    }
+
+    function changeSessionSprint(sprintVal) {
+      currentSessionSprint = Number(sprintVal);
+      localStorage.setItem('alphakids_current_sprint', currentSessionSprint);
+      updateTimerUI();
+    }
+
+    function renderSuggestedActivity() {
+      const container = document.getElementById('suggestedActivityContainer');
+      if (currentStageIndex === 3) {
+        container.innerHTML = `
+          <div class="activity-card" style="text-align:center; padding:24px;">
+            <p style="color:#a7f3d0; font-size:1.15rem; font-weight:800; margin-bottom:6px;">🌟 Momento de Celebración y Recogida</p>
+            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.45;">Choca los cinco con alegría genuina, valida su concentración («¡Me encantó cómo persististe hoy!») y guardad juntos los materiales en equipo en su caja.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let targetArea = 'lenguaje';
+      if (currentStageIndex === 1) targetArea = 'motor';
+      else if (currentStageIndex === 2) targetArea = 'matematicas';
+
+      // Find activity in currentSessionSprint
+      const matching = activities.filter(a => (a.sprint || 1) === currentSessionSprint && a.area === targetArea);
+      const chosen = matching.length > 0 ? matching[0] : (activities.find(a => a.area === targetArea) || activities[0]);
+
+      container.innerHTML = generateActivityCardHtml(chosen, true);
+    }
+
+    function generateActivityCardHtml(act, isSuggested = false) {
+      const isDone = act.practicedToday;
+      const sprintNum = act.sprint || 1;
+      return `
+        <div class="activity-card ${isDone ? 'practiced-today' : ''}" id="act-card-${act.id}">
+          <div class="card-top">
+            <div class="card-title-group">
+              <h3>${act.title}</h3>
+              <div class="card-meta">
+                <span class="meta-tag tag-sprint">Sprint ${sprintNum}</span>
+                ${getAreaBadge(act.area)}
+                <span class="meta-tag">⏱️ ${act.time}</span>
+                <span class="meta-tag">📦 ${act.materials}</span>
+              </div>
+            </div>
+          </div>
+
+          <ol class="step-list">
+            ${act.steps.map((st, i) => `<li data-step="${i+1}">${st}</li>`).join('')}
+          </ol>
+
+          <div class="mastery-box">
+            <span class="mastery-icon">🎯</span>
+            <div class="mastery-text">
+              <strong>Señal de Dominio:</strong> ${act.mastery}
+            </div>
+          </div>
+
+          <div class="card-footer-action">
+            <button class="btn-check-practice ${isDone ? 'done' : ''}" onclick="togglePractice(${act.id})">
+              ${isDone ? '✓ Practicado hoy' : '○ Marcar como practicado'}
+            </button>
+            ${!isSuggested ? `
+              <button style="background:none; border:none; color:var(--text-muted); font-size:0.8rem; cursor:pointer;" onclick="deleteActivity(${act.id})">
+                Eliminar
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function filterSprint(sprint, btn) {
+      selectedSprintFilter = sprint;
+      document.querySelectorAll('#sprintFilterPills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderActivities();
+    }
+
+    function filterArea(area, btn) {
+      selectedAreaFilter = area;
+      document.querySelectorAll('#areaFilterPills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderActivities();
+    }
+
+    function renderActivities() {
+      const list = document.getElementById('activitiesList');
+      const filtered = activities.filter(a => {
+        const matchesSprint = selectedSprintFilter === 'all' || String(a.sprint || 1) === String(selectedSprintFilter);
+        const matchesArea = selectedAreaFilter === 'all' || a.area === selectedAreaFilter;
+        return matchesSprint && matchesArea;
+      });
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:30px 20px;">No hay retos en este filtro de sprint o área pedagógica.</p>';
+        return;
+      }
+      list.innerHTML = filtered.map(act => generateActivityCardHtml(act)).join('');
+    }
+
+    function togglePractice(id) {
+      const act = activities.find(a => a.id === id);
+      if (act) {
+        act.practicedToday = !act.practicedToday;
+        saveActivities();
+        renderActivities();
+        updateTimerUI();
+        updateStats();
+      }
+    }
+
+    function saveActivities() {
+      localStorage.setItem('alphakids_activities', JSON.stringify(activities));
+    }
+
+    function openNewActivityModal() {
+      document.getElementById('activityModal').classList.add('active');
+    }
+
+    function closeNewActivityModal() {
+      document.getElementById('activityModal').classList.remove('active');
+    }
+
+    function handleCreateActivity(e) {
+      e.preventDefault();
+      const title = document.getElementById('formTitle').value.trim();
+      const sprint = Number(document.getElementById('formSprint').value) || 1;
+      const area = document.getElementById('formArea').value;
+      const time = document.getElementById('formDuration').value.trim();
+      const materials = document.getElementById('formMaterials').value.trim();
+      const steps = document.getElementById('formSteps').value.trim().split('\n').filter(s => s.trim().length > 0);
+      const mastery = document.getElementById('formMastery').value.trim();
+
+      const newAct = {
+        id: Date.now(),
+        sprint,
+        area,
+        title,
+        time,
+        materials,
+        steps,
+        mastery,
+        practicedToday: false
+      };
+
+      activities.push(newAct);
+      saveActivities();
+      renderActivities();
+      closeNewActivityModal();
+      document.getElementById('newActivityForm').reset();
+    }
+
+    function deleteActivity(id) {
+      if (confirm('¿Deseas eliminar este reto del catálogo?')) {
+        activities = activities.filter(a => a.id !== id);
+        saveActivities();
+        renderActivities();
+      }
+    }
+
+    /* =================================================================
+       6. STATS & PROGRESS TRACKER
+       ================================================================= */
+    function updateStats() {
+      document.getElementById('statCompletedSessions').textContent = sessionsHistory.length;
+      
+      const practicedCount = activities.filter(a => a.practicedToday).length;
+      document.getElementById('statActivitiesDone').textContent = practicedCount;
+
+      // Calculate streak
+      const streak = calculateStreak();
+      document.getElementById('statStreak').textContent = streak;
+
+      // Render history
+      const historyList = document.getElementById('historyList');
+      if (sessionsHistory.length === 0) {
+        historyList.innerHTML = '<p style="text-align:center; color:#64748b; padding:20px;">Aún no hay sesiones registradas.</p>';
+      } else {
+        historyList.innerHTML = sessionsHistory.slice().reverse().map(s => `
+          <div class="history-item">
+            <div class="history-header">
+              <span>📅 ${s.date}</span>
+              <span>⏱️ ${s.duration}</span>
+            </div>
+            <div class="history-note">${s.notes ? s.notes : 'Sesión completada con éxito.'}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function calculateStreak() {
+      if (sessionsHistory.length === 0) return 0;
+      // Simple streak calculation based on unique days
+      const dates = [...new Set(sessionsHistory.map(s => s.isoDate))].sort().reverse();
+      const today = new Date().toISOString().split('T')[0];
+      
+      let streak = 0;
+      let checkDate = new Date();
+
+      for (let i = 0; i < dates.length; i++) {
+        const expected = checkDate.toISOString().split('T')[0];
+        if (dates.includes(expected)) {
+          streak++;
+          checkDate.setDate(checkDate.getDate() - 1);
+        } else if (i === 0 && !dates.includes(today)) {
+          // If haven't completed today yet, check yesterday
+          checkDate.setDate(checkDate.getDate() - 1);
+          const yesterday = checkDate.toISOString().split('T')[0];
+          if (dates.includes(yesterday)) {
+            streak++;
+            checkDate.setDate(checkDate.getDate() - 1);
+          } else {
+            break;
+          }
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    function saveSessionLog(automatic = false) {
+      const notesInput = document.getElementById('sessionNotes');
+      const notes = notesInput ? notesInput.value.trim() : '';
+      const now = new Date();
+      
+      const entry = {
+        id: Date.now(),
+        date: now.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        isoDate: now.toISOString().split('T')[0],
+        duration: "30 minutos",
+        notes: notes || (automatic ? "Sesión completa finalizada con cronómetro." : "Sesión de estimulación diaria.")
+      };
+
+      sessionsHistory.push(entry);
+      localStorage.setItem('alphakids_history', JSON.stringify(sessionsHistory));
+
+      if (notesInput) notesInput.value = '';
+      updateStats();
+      if (!automatic) {
+        alert('✅ ¡Sesión guardada en tu historial!');
+      }
+    }
+
+    function exportData() {
+      const data = {
+        activities,
+        sessionsHistory,
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `alphakids_backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetAllData() {
+      if (confirm('¿Seguro que deseas reiniciar todos los datos locales? Esto borrará el historial y restablecerá los juegos originales.')) {
+        localStorage.removeItem('alphakids_activities');
+        localStorage.removeItem('alphakids_history');
+        activities = DEFAULT_ACTIVITIES;
+        sessionsHistory = [];
+        saveActivities();
+        renderActivities();
+        updateStats();
+        updateTimerUI();
+        alert('Datos restablecidos correctamente.');
+      }
+    }
+
+    /* =================================================================
+       7. VIEW NAVIGATION
+       ================================================================= */
+    function switchTab(viewId, btn) {
+      document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.tab-nav .nav-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById(`view-${viewId}`).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* =================================================================
+       8. SERVICE WORKER & PWA INSTALL
+       ================================================================= */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW registrado con éxito:', reg.scope))
+          .catch(err => console.error('Error al registrar SW:', err));
+      });
+    }
+
+    // PWA Install Prompt
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          installBtn.style.display = 'none';
+        }
+        deferredPrompt = null;
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+    });
+
+    // Online / Offline Status
+    function updateOnlineStatus() {
+      const badge = document.getElementById('onlineBadge');
+      if (navigator.onLine) {
+        badge.textContent = '● Offline OK';
+        badge.style.color = '#34d399';
+      } else {
+        badge.textContent = '● Modo Sin Conexión';
+        badge.style.color = '#f59e0b';
+      }
+    }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    /* =================================================================
+       9. THEME CONTROLLER (Dark / Light)
+       ================================================================= */
+    function initTheme() {
+      const savedTheme = localStorage.getItem('alphakids_theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        setTheme(prefersLight ? 'light' : 'dark');
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('alphakids_theme', theme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.textContent = theme === 'light' ? '🌙' : '☀️';
+        btn.title = theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro';
+      }
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) {
+        themeMeta.setAttribute('content', theme === 'light' ? '#f8fafc' : '#1e3a8a');
+      }
+    }
+
+    // Initial boot
+    initTheme();
+    const sprintSelect = document.getElementById('sessionSprintSelect');
+    if (sprintSelect) {
+      sprintSelect.value = String(currentSessionSprint);
+    }
+    updateTimerUI();
+    renderActivities();
+    updateStats();
+    updateOnlineStatus();
+  </script>
+</body>
+</html>

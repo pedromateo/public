@@ -41,7 +41,7 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool
 
           # Brainfit Copy
           if [ -d "brainfit" ]; then
@@ -89,6 +89,14 @@ jobs:
             cd elparte
             cp index.html manifest.webmanifest sw.js style.css app.js ../dist/elparte/ || true
             cp -r icons ../dist/elparte/ || true
+            cd ..
+          fi
+
+          # mSchool Copy
+          if [ -d "mschool" ]; then
+            echo "Packaging mSchool..."
+            cd mschool
+            cp index.html manifest.json sw.js icon-192.svg icon-512.svg juegos_estimulacion_movil.html ../dist/mschool/ || true
             cd ..
           fi
 

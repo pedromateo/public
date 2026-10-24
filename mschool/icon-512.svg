@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="blockGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="blockGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="blockGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background with smooth rounded rect -->
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)"/>
+
+  <!-- Subtle glow inner ring -->
+  <rect x="16" y="16" width="480" height="480" rx="98" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4"/>
+
+  <!-- Blocks and Greek Alpha Design -->
+  <g filter="url(#shadow)">
+    <!-- Block 1: Left (Orange) -->
+    <rect x="88" y="270" width="100" height="100" rx="20" fill="url(#blockGrad1)"/>
+    <text x="138" y="338" font-family="system-ui, -apple-system, sans-serif" font-size="54" font-weight="900" fill="#ffffff" text-anchor="middle">A</text>
+
+    <!-- Block 2: Center (Green) -->
+    <rect x="206" y="270" width="100" height="100" rx="20" fill="url(#blockGrad2)"/>
+    <text x="256" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="900" fill="#ffffff" text-anchor="middle">123</text>
+
+    <!-- Block 3: Right (Pink) -->
+    <rect x="324" y="270" width="100" height="100" rx="20" fill="url(#blockGrad3)"/>
+    <!-- Small star or brain icon -->
+    <path d="M 374 295 L 381 315 L 402 315 L 385 328 L 391 348 L 374 335 L 357 348 L 363 328 L 346 315 L 367 315 Z" fill="#ffffff"/>
+
+    <!-- Main Alpha Symbol (Greek letter alpha) styled as modern emblem -->
+    <path d="M 345 130 C 315 130, 275 160, 245 195 C 220 160, 185 130, 150 130 C 105 130, 75 168, 75 208 C 75 252, 112 285, 160 285 C 205 285, 240 250, 268 215 C 298 255, 335 285, 385 285 C 418 285, 442 268, 442 245 C 442 225, 424 212, 400 212 C 382 212, 368 220, 355 234 C 330 220, 305 188, 305 165 C 305 145, 324 130, 345 130 Z" 
+          fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Small Sparkles -->
+    <circle cx="110" cy="115" r="10" fill="#fbbf24"/>
+    <circle cx="415" cy="110" r="14" fill="#38bdf8"/>
+    <circle cx="430" cy="390" r="8" fill="#f472b6"/>
+  </g>
+
+  <!-- App Label at Bottom -->
+  <text x="256" y="440" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="800" letter-spacing="4" fill="#ffffff" text-anchor="middle">ALPHA KIDS</text>
+  <text x="256" y="475" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="600" letter-spacing="2" fill="#93c5fd" text-anchor="middle">3 AÑOS • SPRINT 30M</text>
+</svg>
