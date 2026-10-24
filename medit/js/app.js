@@ -492,14 +492,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- Central Expanding Rings -->
           <div class="relative w-64 h-64 flex items-center justify-center my-4 z-10">
-            <div class="absolute rounded-full border border-teal-500/20 transition-transform duration-200" style="width: 100%; height: 100%; transform: scale(${targetScale});"></div>
-            <div class="absolute rounded-full bg-teal-400/20 blur-md transition-transform duration-200" style="width: 85%; height: 85%; transform: scale(${targetScale * 0.95});"></div>
+            <div id="breath-orb-ring-outer" class="absolute rounded-full border border-teal-500/20 transition-transform duration-200" style="width: 100%; height: 100%; transform: scale(${targetScale});"></div>
+            <div id="breath-orb-ring-inner" class="absolute rounded-full bg-teal-400/20 blur-md transition-transform duration-200" style="width: 85%; height: 85%; transform: scale(${targetScale * 0.95});"></div>
 
-            <div class="w-44 h-44 rounded-full flex flex-col items-center justify-center text-center p-4 border border-teal-400/30 bg-gradient-to-b from-slate-900/90 to-[#080d1a]/90 backdrop-blur-md shadow-2xl transition-transform duration-200" style="transform: scale(${targetScale});">
+            <div id="breath-orb-sphere" class="w-44 h-44 rounded-full flex flex-col items-center justify-center text-center p-4 border border-teal-400/30 bg-gradient-to-b from-slate-900/90 to-[#080d1a]/90 backdrop-blur-md shadow-2xl transition-transform duration-200" style="transform: scale(${targetScale});">
               ${
                 !breathState.isCompleted
                   ? `
-                <span class="text-[11px] font-semibold uppercase tracking-widest text-teal-400 mb-1">
+                <span id="breath-action-text" class="text-[11px] font-semibold uppercase tracking-widest text-teal-400 mb-1">
                   ${
                     currentStep.action === 'inhale'
                       ? 'Inhala'
@@ -510,10 +510,10 @@ document.addEventListener('DOMContentLoaded', () => {
                       : 'Exhala'
                   }
                 </span>
-                <h4 class="text-xl font-extrabold text-white tracking-tight leading-tight mb-1">
+                <h4 id="breath-label-text" class="text-xl font-extrabold text-white tracking-tight leading-tight mb-1">
                   ${currentStep.label}
                 </h4>
-                <span class="font-mono text-sm text-slate-400 font-medium">
+                <span id="breath-seconds-text" class="font-mono text-sm text-slate-400 font-medium">
                   ${Math.max(0, currentStep.duration - breathState.stepElapsed).toFixed(1)}s
                 </span>
               `
@@ -582,9 +582,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('btn-toggle-breath-run')?.addEventListener('click', () => {
+      const runBtn = document.getElementById('btn-toggle-breath-run');
       if (breathState.isRunning) {
         stopBreathLoop();
         breathState.isRunning = false;
+        if (runBtn) runBtn.textContent = 'Comenzar';
         renderBreathe();
       } else {
         if (breathState.isCompleted) {
@@ -595,6 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
           breathState.isCompleted = false;
         }
         breathState.isRunning = true;
+        if (runBtn) runBtn.textContent = 'Pausar';
         if (breathState.soundCues) {
           window.soundEngine.playBreathCue(true, state.soundVolume);
         }
@@ -654,8 +657,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Re-render only if current tab is breathe
-      if (currentTab === 'breathe') {
+      // Smooth in-place DOM update without tearing down the subtree
+      if (currentTab === 'breathe' && !breathState.isCompleted) {
+        const secondsEl = document.getElementById('breath-seconds-text');
+        if (secondsEl) {
+          secondsEl.textContent = `${Math.max(0, currentStep.duration - breathState.stepElapsed).toFixed(1)}s`;
+        }
+        const actionEl = document.getElementById('breath-action-text');
+        if (actionEl) {
+          actionEl.textContent =
+            currentStep.action === 'inhale'
+              ? 'Inhala'
+              : currentStep.action === 'topInhale'
+              ? '+ Inhala extra'
+              : currentStep.action === 'hold'
+              ? 'Sostén'
+              : 'Exhala';
+        }
+        const labelEl = document.getElementById('breath-label-text');
+        if (labelEl) {
+          labelEl.textContent = currentStep.label;
+        }
+
+        let scale = 0.6;
+        const ratio = Math.min(breathState.stepElapsed / currentStep.duration, 1);
+        if (currentStep.action === 'inhale') scale = 0.6 + ratio * 0.35;
+        else if (currentStep.action === 'topInhale') scale = 0.95 + ratio * 0.08;
+        else if (currentStep.action === 'hold') scale = 1.0;
+        else if (currentStep.action === 'exhale') scale = 1.0 - ratio * 0.4;
+
+        const sphere = document.getElementById('breath-orb-sphere');
+        if (sphere) sphere.style.transform = `scale(${scale})`;
+        const inner = document.getElementById('breath-orb-ring-inner');
+        if (inner) inner.style.transform = `scale(${scale * 0.95})`;
+        const outer = document.getElementById('breath-orb-ring-outer');
+        if (outer) outer.style.transform = `scale(${scale})`;
+      } else if (currentTab === 'breathe' && breathState.isCompleted) {
         renderBreathe();
       }
     }, 100);

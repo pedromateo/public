@@ -27,6 +27,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Test Medit
+        working-directory: medit
+        run: |
+          npm ci || npm install
+          npx playwright install --with-deps chromium
+          npm run test
+
       - name: Prepare production build
         run: |
           mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit

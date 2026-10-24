@@ -34,6 +34,8 @@ jobs:
             - 'murmeteo/**'
           loopp:
             - 'loopp/**'
+          medit:
+            - 'medit/**'
 
     - name: Use Node.js
       uses: actions/setup-node@v4
@@ -58,6 +60,14 @@ jobs:
     - name: Run Loopp Tests
       if: (steps.filter.outputs.loopp == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('loopp/package.json') != ''
       working-directory: loopp
+      run: |
+        npm ci || npm install
+        npx playwright install --with-deps chromium
+        npm run test
+
+    - name: Run Medit Tests
+      if: (steps.filter.outputs.medit == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('medit/package.json') != ''
+      working-directory: medit
       run: |
         npm ci || npm install
         npx playwright install --with-deps chromium
