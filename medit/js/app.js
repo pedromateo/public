@@ -124,21 +124,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDoneToday = state.lastActiveDate === todayStr;
 
     headerStreak.innerHTML = `
-      <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border ${
+      <div class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium border ${
         isDoneToday
           ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30'
           : 'bg-amber-500/10 text-amber-300 border-amber-500/30'
       }">
-        <span>${isDoneToday ? '✓' : '🔥'}</span>
-        <span class="font-bold">${state.streakDays}</span>
-        <span class="text-[11px] opacity-80">${state.streakDays === 1 ? 'día' : 'días'}</span>
+        <span class="${isDoneToday ? 'text-emerald-400' : 'text-amber-400'} flex items-center">
+          ${isDoneToday ? window.MEDIT_ICONS.check('w-3.5 h-3.5') : window.MEDIT_ICONS.flame('w-3.5 h-3.5')}
+        </span>
+        <span class="font-bold text-white">${state.streakDays}</span>
+        <span class="text-[10px] sm:text-[11px] opacity-80">${state.streakDays === 1 ? 'día' : 'días'}</span>
       </div>
     `;
 
     const isSoundOn = state.soundVolume > 0;
     headerSoundBtn.innerHTML = isSoundOn
-      ? `<svg class="w-4 h-4 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`
-      : `<svg class="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
+      ? window.MEDIT_ICONS.soundOn('w-4 h-4 text-teal-400')
+      : window.MEDIT_ICONS.soundOff('w-4 h-4 text-slate-500');
   }
 
   headerSoundBtn.addEventListener('click', () => {
@@ -229,8 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Active Anchor Banner -->
             <div id="btn-open-anchor-modal" class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800/80 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
               <div class="flex items-center gap-3">
-                <div class="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 text-lg group-hover:scale-105 transition-transform">
-                  ${activeAnchor.icon}
+                <div class="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 group-hover:scale-105 transition-transform flex items-center justify-center">
+                  ${window.getAnchorSvg ? window.getAnchorSvg(activeAnchor.id, 'w-5 h-5 text-teal-300') : activeAnchor.icon}
                 </div>
                 <div>
                   <span class="text-[10px] text-teal-300 uppercase tracking-widest font-bold block">
@@ -242,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <p class="text-[11px] text-slate-400 line-clamp-1">${activeAnchor.cue}</p>
                 </div>
               </div>
-              <span class="text-xs text-teal-400 font-semibold shrink-0">Cambiar →</span>
+              <span class="text-xs text-teal-400 font-semibold shrink-0 flex items-center gap-1">Cambiar ${window.MEDIT_ICONS.arrowRight('w-3 h-3')}</span>
             </div>
           </div>
         </div>
@@ -250,96 +252,96 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- 2 Instant Action Buttons -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <!-- Button 1: STOP 60s -->
-          <div id="btn-start-stop-protocol" class="group bg-gradient-to-br from-[#12192b] to-[#0c1220] border border-slate-800 hover:border-amber-500/50 p-5 rounded-3xl shadow-lg cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between">
+          <div id="btn-start-stop-protocol" class="group bg-gradient-to-br from-[#12192b] to-[#0c1220] border border-slate-800 hover:border-amber-500/50 p-4 sm:p-5 rounded-3xl shadow-lg cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center justify-between mb-2 sm:mb-3">
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/20">
                   Prisa / Transición
                 </span>
                 <span class="text-xs font-mono font-bold text-slate-400">60 seg</span>
               </div>
-              <h3 class="text-base font-bold text-white mb-1">Pausa S.T.O.P.</h3>
-              <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              <h3 class="text-sm sm:text-base font-bold text-white mb-1">Pausa S.T.O.P.</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-3 sm:mb-4">
                 Stop, Take a breath, Observe, Proceed. Desconecta de la rumiación entre tareas en 1 minuto.
               </p>
             </div>
             <button class="w-full py-2.5 rounded-xl bg-amber-500/20 group-hover:bg-amber-400 text-amber-200 group-hover:text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
-              ▶ Iniciar Protocolo S.T.O.P.
+              ${window.MEDIT_ICONS.play('w-3.5 h-3.5')} Iniciar Protocolo S.T.O.P.
             </button>
           </div>
 
           <!-- Button 2: Suspiro Fisiológico Stanford -->
-          <div id="btn-start-sigh-protocol" class="group bg-gradient-to-br from-[#0e1b29] to-[#0a121d] border border-slate-800 hover:border-cyan-500/50 p-5 rounded-3xl shadow-lg cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between">
+          <div id="btn-start-sigh-protocol" class="group bg-gradient-to-br from-[#0e1b29] to-[#0a121d] border border-slate-800 hover:border-cyan-500/50 p-4 sm:p-5 rounded-3xl shadow-lg cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center justify-between mb-2 sm:mb-3">
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/20">
                   Stanford Medicine
                 </span>
                 <span class="text-xs font-mono font-bold text-slate-400">90 seg</span>
               </div>
-              <h3 class="text-base font-bold text-white mb-1">Suspiro Fisiológico</h3>
-              <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              <h3 class="text-sm sm:text-base font-bold text-white mb-1">Suspiro Fisiológico</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-3 sm:mb-4">
                 Doble inhalación nasal + exhalación prolongada. Baja el ritmo cardíaco de golpe ante estrés agudo.
               </p>
             </div>
             <button class="w-full py-2.5 rounded-xl bg-cyan-500/20 group-hover:bg-cyan-400 text-cyan-200 group-hover:text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
-              🌬️ Respirar Ahora
+              ${window.MEDIT_ICONS.breathe('w-3.5 h-3.5')} Respirar Ahora
             </button>
           </div>
         </div>
 
         <!-- Presets Grid: Including 10m, 12m, 15m -->
-        <div class="bg-[#0e1422] border border-slate-800/90 rounded-3xl p-5 sm:p-6 shadow-xl space-y-3">
+        <div class="bg-[#0e1422] border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-xl space-y-3">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-sm font-bold text-white tracking-tight">Micro & Macro Sesiones con Cuenco Tibetano</h3>
-              <p class="text-xs text-slate-400">Desde dosis de 1 minuto hasta el umbral neuroprotector de 12-15 min</p>
+              <h3 class="text-xs sm:text-sm font-bold text-white tracking-tight">Micro & Macro Sesiones con Cuenco</h3>
+              <p class="text-[11px] sm:text-xs text-slate-400">Desde dosis de 1 minuto hasta el umbral neuroprotector de 12-15 min</p>
             </div>
-            <button id="btn-go-to-timer" class="text-xs text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1">
-              Personalizar →
+            <button id="btn-go-to-timer" class="text-xs text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1 shrink-0 ml-2">
+              Personalizar ${window.MEDIT_ICONS.arrowRight('w-3 h-3')}
             </button>
           </div>
 
           <!-- Micro Doses (1m to 5m) -->
-          <div class="grid grid-cols-4 gap-2 pt-1">
+          <div class="grid grid-cols-4 gap-1.5 sm:gap-2 pt-1">
             ${[
               { sec: 60, l: '1 min', tag: 'Tiny' },
               { sec: 120, l: '2 min', tag: 'Base' },
               { sec: 180, l: '3 min', tag: 'Pausa' },
               { sec: 300, l: '5 min', tag: 'Recarga' }
             ].map(item => `
-              <button data-seconds="${item.sec}" class="btn-quick-timer p-3 rounded-2xl bg-slate-900 border border-slate-800 hover:border-teal-500/50 hover:bg-teal-500/10 text-center transition-all group">
-                <span class="text-base font-black font-mono text-white group-hover:text-teal-300 block mb-0.5">${item.l}</span>
-                <span class="text-[10px] text-slate-400 truncate block">${item.tag}</span>
+              <button data-seconds="${item.sec}" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-slate-900 border border-slate-800 hover:border-teal-500/50 hover:bg-teal-500/10 text-center transition-all group">
+                <span class="text-sm sm:text-base font-black font-mono text-white group-hover:text-teal-300 block mb-0.5">${item.l}</span>
+                <span class="text-[9px] sm:text-[10px] text-slate-400 truncate block">${item.tag}</span>
               </button>
             `).join('')}
           </div>
 
           <!-- Deeper 10-15 Min Doses (New Amishi Jha & NSDR) -->
           <div class="pt-2 border-t border-slate-800/80">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+            <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
               Sesiones de 10 a 15 Minutos (Neuroprotección Cognitiva)
             </span>
             <div class="grid grid-cols-3 gap-2">
-              <button data-seconds="600" class="btn-quick-timer p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 hover:bg-indigo-500/10 text-left transition-all">
+              <button data-seconds="600" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 hover:bg-indigo-500/10 text-left transition-all">
                 <div class="flex items-center justify-between mb-1">
-                  <span class="text-sm font-black font-mono text-white">10 min</span>
+                  <span class="text-xs sm:text-sm font-black font-mono text-white">10 min</span>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-bold">Reset</span>
                 </div>
                 <p class="text-[10px] text-slate-400 line-clamp-1">Atención dual y foco</p>
               </button>
 
-              <button data-seconds="720" class="btn-quick-timer p-3 rounded-2xl bg-gradient-to-br from-indigo-950/40 to-slate-900 border border-indigo-500/40 hover:border-teal-400 text-left transition-all shadow-md">
+              <button data-seconds="720" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-gradient-to-br from-indigo-950/40 to-slate-900 border border-indigo-500/40 hover:border-teal-400 text-left transition-all shadow-md">
                 <div class="flex items-center justify-between mb-1">
-                  <span class="text-sm font-black font-mono text-teal-300">12 min</span>
+                  <span class="text-xs sm:text-sm font-black font-mono text-teal-300">12 min</span>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-teal-400 text-slate-950 font-bold">Jha ★</span>
                 </div>
                 <p class="text-[10px] text-slate-300 line-clamp-1">Umbral anti-burnout</p>
               </button>
 
-              <button data-seconds="900" class="btn-quick-timer p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 hover:bg-purple-500/10 text-left transition-all">
+              <button data-seconds="900" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 hover:bg-purple-500/10 text-left transition-all">
                 <div class="flex items-center justify-between mb-1">
-                  <span class="text-sm font-black font-mono text-white">15 min</span>
+                  <span class="text-xs sm:text-sm font-black font-mono text-white">15 min</span>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold">NSDR</span>
                 </div>
                 <p class="text-[10px] text-slate-400 line-clamp-1">Dopamina y descanso</p>
@@ -349,18 +351,18 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <!-- Ambient Noise Toggle Widget -->
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between gap-3">
+        <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between gap-3">
           <div class="flex items-center gap-3">
-            <div class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-lg">
-              🌊
+            <div class="p-2 sm:p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center">
+              ${window.MEDIT_ICONS.wave('w-5 h-5 text-cyan-400')}
             </div>
             <div>
               <span class="text-xs font-bold text-white block">Ruido Marrón de Concentración</span>
-              <span class="text-[11px] text-slate-400">Aísla ruidos de la oficina y frena el parloteo mental</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400">Aísla ruidos del entorno y frena el parloteo mental</span>
             </div>
           </div>
 
-          <button id="btn-toggle-ambient" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+          <button id="btn-toggle-ambient" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border shrink-0 ${
             state.ambientType !== 'none'
               ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20'
               : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white'
@@ -370,16 +372,21 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <!-- Daily Science Insight -->
-        <div id="btn-read-science-today" class="p-4 rounded-2xl bg-gradient-to-r from-teal-500/10 via-slate-900/80 to-indigo-500/10 border border-teal-500/20 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
-          <div>
-            <span class="text-[10px] text-teal-400 uppercase tracking-wider font-bold block mb-0.5">
-              Neuro-Píldora: Dra. Amishi Jha
-            </span>
-            <p class="text-xs text-slate-200 font-medium">
-              "12 minutos diarios de mindfulness es la dosis mínima demostrada para blindar tu memoria de trabajo bajo estrés intenso."
-            </p>
+        <div id="btn-read-science-today" class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-teal-500/10 via-slate-900/80 to-indigo-500/10 border border-teal-500/20 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
+          <div class="flex items-start gap-2.5">
+            <span class="mt-0.5">${window.MEDIT_ICONS.sparkle('w-4 h-4 text-teal-400 shrink-0')}</span>
+            <div>
+              <span class="text-[10px] text-teal-400 uppercase tracking-wider font-bold block mb-0.5">
+                Neuro-Píldora: Dra. Amishi Jha
+              </span>
+              <p class="text-xs text-slate-200 font-medium leading-relaxed">
+                "12 minutos diarios de mindfulness es la dosis mínima demostrada para blindar tu memoria de trabajo bajo estrés intenso."
+              </p>
+            </div>
           </div>
-          <span class="text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 transition-all text-sm shrink-0">→</span>
+          <span class="text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 transition-all text-sm shrink-0">
+            ${window.MEDIT_ICONS.chevronRight('w-4 h-4')}
+          </span>
         </div>
       </div>
     `;
@@ -445,9 +452,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Header -->
         <div class="text-center space-y-1">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">
-            <span>🌬️ Regulación Fisiológica Directa</span>
+            <span>${window.MEDIT_ICONS.breathe('w-3.5 h-3.5')}</span>
+            <span>Regulación Fisiológica Directa</span>
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-white">Respiración Guiada</h2>
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Respiración Guiada</h2>
           <p class="text-xs text-slate-400 max-w-md mx-auto">
             Estimula el nervio vago y resetea tu ritmo biológico en pocos ciclos.
           </p>
@@ -458,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ${window.MEDIT_DATA.BREATH_PROTOCOLS.map((p) => {
             const isSel = p.id === breathState.protocolId;
             return `
-              <button data-protocol="${p.id}" class="btn-select-protocol p-3 rounded-2xl border text-left transition-all ${
+              <button data-protocol="${p.id}" class="btn-select-protocol p-2.5 sm:p-3 rounded-2xl border text-left transition-all ${
                 isSel
                   ? 'bg-teal-500/15 border-teal-500/50 shadow-md text-white'
                   : 'bg-slate-900/70 border-slate-800 text-slate-400 hover:bg-slate-800/60'
@@ -476,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <!-- Breathing Orb Visualizer Card -->
-        <div class="relative bg-gradient-to-b from-[#0e1526] to-[#090d16] border border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center shadow-xl overflow-hidden min-h-[380px]">
+        <div class="relative bg-gradient-to-b from-[#0e1526] to-[#090d16] border border-slate-800 rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center shadow-xl overflow-hidden min-h-[360px] sm:min-h-[380px]">
           <!-- Ambient Glow -->
           <div class="absolute w-72 h-72 rounded-full bg-teal-500/10 blur-3xl pointer-events-none transition-all duration-500" style="transform: scale(${targetScale * 1.3});"></div>
 
@@ -485,21 +493,21 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="text-xs font-medium text-slate-400">
               Ciclo <strong class="text-white">${breathState.currentCycle}</strong> de ${maxCycles}
             </span>
-            <button id="btn-toggle-breath-audio" class="p-1.5 rounded-xl bg-slate-800/80 text-xs text-slate-300">
-              ${breathState.soundCues ? '🔊 Tono activo' : '🔇 Silencio'}
+            <button id="btn-toggle-breath-audio" class="p-1.5 px-2.5 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors border border-slate-700/60">
+              ${breathState.soundCues ? window.MEDIT_ICONS.soundOn('w-3.5 h-3.5 text-teal-400') + '<span>Tono activo</span>' : window.MEDIT_ICONS.soundOff('w-3.5 h-3.5 text-slate-500') + '<span>Silencio</span>'}
             </button>
           </div>
 
           <!-- Central Expanding Rings -->
-          <div class="relative w-64 h-64 flex items-center justify-center my-4 z-10">
+          <div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center my-3 sm:my-4 z-10">
             <div id="breath-orb-ring-outer" class="absolute rounded-full border border-teal-500/20 transition-transform duration-200" style="width: 100%; height: 100%; transform: scale(${targetScale});"></div>
             <div id="breath-orb-ring-inner" class="absolute rounded-full bg-teal-400/20 blur-md transition-transform duration-200" style="width: 85%; height: 85%; transform: scale(${targetScale * 0.95});"></div>
 
-            <div id="breath-orb-sphere" class="w-44 h-44 rounded-full flex flex-col items-center justify-center text-center p-4 border border-teal-400/30 bg-gradient-to-b from-slate-900/90 to-[#080d1a]/90 backdrop-blur-md shadow-2xl transition-transform duration-200" style="transform: scale(${targetScale});">
+            <div id="breath-orb-sphere" class="w-40 h-40 sm:w-44 sm:h-44 rounded-full flex flex-col items-center justify-center text-center p-3 sm:p-4 border border-teal-400/30 bg-gradient-to-b from-slate-900/90 to-[#080d1a]/90 backdrop-blur-md shadow-2xl transition-transform duration-200" style="transform: scale(${targetScale});">
               ${
                 !breathState.isCompleted
                   ? `
-                <span id="breath-action-text" class="text-[11px] font-semibold uppercase tracking-widest text-teal-400 mb-1">
+                <span id="breath-action-text" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-teal-400 mb-0.5 sm:mb-1">
                   ${
                     currentStep.action === 'inhale'
                       ? 'Inhala'
@@ -510,15 +518,17 @@ document.addEventListener('DOMContentLoaded', () => {
                       : 'Exhala'
                   }
                 </span>
-                <h4 id="breath-label-text" class="text-xl font-extrabold text-white tracking-tight leading-tight mb-1">
+                <h4 id="breath-label-text" class="text-lg sm:text-xl font-extrabold text-white tracking-tight leading-tight mb-1">
                   ${currentStep.label}
                 </h4>
-                <span id="breath-seconds-text" class="font-mono text-sm text-slate-400 font-medium">
+                <span id="breath-seconds-text" class="font-mono text-xs sm:text-sm text-slate-400 font-medium">
                   ${Math.max(0, currentStep.duration - breathState.stepElapsed).toFixed(1)}s
                 </span>
               `
                   : `
-                <span class="text-2xl mb-1">✓</span>
+                <div class="w-10 h-10 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-1 text-emerald-400">
+                  ${window.MEDIT_ICONS.check('w-6 h-6')}
+                </div>
                 <span class="text-xs font-bold text-white">¡Completado!</span>
               `
               }
@@ -526,17 +536,17 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- Step Instruction -->
-          <p class="text-xs text-slate-400 text-center max-w-sm z-10 h-8 flex items-center justify-center mb-5">
+          <p class="text-xs text-slate-400 text-center max-w-sm z-10 h-8 flex items-center justify-center mb-4 sm:mb-5">
             ${breathState.isRunning ? currentStep.tip : 'Pulsa comenzar para iniciar la sincronización'}
           </p>
 
           <!-- Buttons -->
-          <div class="flex items-center gap-4 z-10">
-            <button id="btn-reset-breath" class="p-3 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors border border-slate-700" title="Reiniciar">
-              ↺
+          <div class="flex items-center gap-3 sm:gap-4 z-10">
+            <button id="btn-reset-breath" class="p-3 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors border border-slate-700 flex items-center justify-center" title="Reiniciar">
+              ${window.MEDIT_ICONS.reset('w-4 h-4')}
             </button>
-            <button id="btn-toggle-breath-run" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-teal-500 to-emerald-400 text-slate-950 font-bold text-sm shadow-xl shadow-teal-500/25 hover:brightness-110 active:scale-95 transition-all">
-              ${breathState.isRunning ? 'Pausar' : breathState.isCompleted ? 'Repetir' : 'Comenzar'}
+            <button id="btn-toggle-breath-run" class="px-7 sm:px-8 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-teal-500 to-emerald-400 text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-teal-500/25 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+              ${breathState.isRunning ? window.MEDIT_ICONS.pause('w-4 h-4') + ' Pausar' : breathState.isCompleted ? window.MEDIT_ICONS.reset('w-4 h-4') + ' Repetir' : window.MEDIT_ICONS.play('w-4 h-4') + ' Comenzar'}
             </button>
           </div>
         </div>
@@ -720,22 +730,23 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Header -->
         <div class="text-center space-y-1">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">
-            <span>🔔 Espacio de Meditación Silenciosa</span>
+            <span>${window.MEDIT_ICONS.timer('w-3.5 h-3.5')}</span>
+            <span>Espacio de Meditación Silenciosa</span>
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-white">Temporizador Zen</h2>
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Temporizador Zen</h2>
           <p class="text-xs text-slate-400 max-w-md mx-auto">
             Desde micro-pausas de 1-3 minutos hasta sesiones completas de 10-15 min con fases de atención guiadas.
           </p>
         </div>
 
         <!-- Presets Configuration Card -->
-        <div class="bg-[#0e1422] border border-slate-800/90 rounded-3xl p-6 shadow-xl space-y-6">
+        <div class="bg-[#0e1422] border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-xl space-y-5 sm:space-y-6">
           <!-- Section 1: Micro Presets (1 to 5 min) -->
           <div>
-            <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
+            <label class="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2 sm:mb-2.5">
               Micro-Dosis (Construcción del Hábito)
             </label>
-            <div class="grid grid-cols-4 gap-2">
+            <div class="grid grid-cols-4 gap-1.5 sm:gap-2">
               ${[
                 { sec: 60, label: '1 min', tag: 'Tiny Habit' },
                 { sec: 120, label: '2 min', tag: 'Dosis Base' },
@@ -744,13 +755,13 @@ document.addEventListener('DOMContentLoaded', () => {
               ].map((p) => {
                 const isSel = timerState.selectedSeconds === p.sec;
                 return `
-                  <button data-sec="${p.sec}" class="btn-timer-preset p-3 rounded-2xl border text-center transition-all ${
+                  <button data-sec="${p.sec}" class="btn-timer-preset p-2.5 sm:p-3 rounded-2xl border text-center transition-all ${
                     isSel
                       ? 'bg-teal-500/20 border-teal-500/60 shadow-lg text-white'
                       : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
                   }">
-                    <p class="text-base font-extrabold font-mono leading-none mb-1">${p.label}</p>
-                    <p class="text-[10px] text-slate-400 truncate">${p.tag}</p>
+                    <p class="text-sm sm:text-base font-extrabold font-mono leading-none mb-1">${p.label}</p>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 truncate">${p.tag}</p>
                   </button>
                 `;
               }).join('')}
@@ -760,15 +771,15 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Section 2: Deep 10-15 Min Presets (Amishi Jha & NSDR) -->
           <div class="pt-3 border-t border-slate-800/80">
             <div class="flex items-center justify-between mb-2.5">
-              <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
+              <label class="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider block">
                 Sesiones Profundas de 10 a 15 Minutos (Neuroprotección)
               </label>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+              <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
                 Peak Mind & NSDR
               </span>
             </div>
 
-            <div class="grid grid-cols-3 gap-2.5">
+            <div class="grid grid-cols-3 gap-2 sm:gap-2.5">
               ${[
                 { sec: 600, label: '10 min', title: 'Reset Profundo', desc: 'Atención dual & calma' },
                 { sec: 720, label: '12 min', title: 'Umbral Amishi Jha', desc: 'Inoculación anti-burnout' },
@@ -776,17 +787,17 @@ document.addEventListener('DOMContentLoaded', () => {
               ].map((p) => {
                 const isSel = timerState.selectedSeconds === p.sec;
                 return `
-                  <button data-sec="${p.sec}" class="btn-timer-preset p-3.5 rounded-2xl border text-left transition-all ${
+                  <button data-sec="${p.sec}" class="btn-timer-preset p-2.5 sm:p-3.5 rounded-2xl border text-left transition-all ${
                     isSel
                       ? 'bg-gradient-to-br from-indigo-950/60 to-slate-900 border-teal-400/70 shadow-lg text-white'
                       : 'bg-slate-900/90 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
                   }">
                     <div class="flex items-center justify-between mb-1">
-                      <span class="text-base font-black font-mono ${isSel ? 'text-teal-300' : 'text-white'}">${p.label}</span>
+                      <span class="text-sm sm:text-base font-black font-mono ${isSel ? 'text-teal-300' : 'text-white'}">${p.label}</span>
                       ${p.sec === 720 ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-teal-400 text-slate-950 font-bold">Clave</span>' : ''}
                     </div>
-                    <p class="text-xs font-bold leading-tight text-slate-200">${p.title}</p>
-                    <p class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">${p.desc}</p>
+                    <p class="text-[11px] sm:text-xs font-bold leading-tight text-slate-200">${p.title}</p>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 mt-0.5 line-clamp-1">${p.desc}</p>
                   </button>
                 `;
               }).join('')}
@@ -795,8 +806,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ${
               timerState.selectedSeconds >= 600
                 ? `
-              <div class="mt-3 p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-[11px] text-indigo-300 leading-relaxed">
-                💡 <strong>Estructura guiada de 3 fases:</strong> Campanadas a los 5 min (cambio a Foco Amplio) y a los 10 min (descanso en presencia lúcida).
+              <div class="mt-3 p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-[11px] text-indigo-300 leading-relaxed flex items-start gap-2">
+                <span class="mt-0.5">${window.MEDIT_ICONS.sparkle('w-3.5 h-3.5 text-indigo-400 shrink-0')}</span>
+                <span><strong>Estructura guiada de 3 fases:</strong> Campanadas a los 5 min (cambio a Foco Amplio) y a los 10 min (descanso en presencia lúcida).</span>
               </div>
             `
                 : ''
@@ -804,14 +816,55 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- Big Action Button -->
-          <button id="btn-start-timer-session" class="w-full py-4 rounded-2xl bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-400 text-slate-950 font-bold text-base shadow-xl shadow-teal-500/25 hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
-            ▶ Comenzar Sesión (${Math.round(timerState.selectedSeconds / 60)} min)
+          <button id="btn-start-timer-session" class="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-400 text-slate-950 font-bold text-sm sm:text-base shadow-xl shadow-teal-500/25 hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+            ${window.MEDIT_ICONS.play('w-4 h-4 text-slate-950')} Comenzar Sesión (${Math.round(timerState.selectedSeconds / 60)} min)
           </button>
         </div>
 
+        <!-- Tarjeta de Acompañamiento: Qué hacer y qué sensaciones buscar antes de empezar -->
+        <div class="bg-gradient-to-br from-[#0e1628] to-[#0a101d] border border-teal-500/25 rounded-3xl p-4 sm:p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="p-1.5 rounded-xl bg-teal-500/15 text-teal-300">${window.MEDIT_ICONS.breathe('w-4 h-4')}</span>
+              <h3 class="text-xs sm:text-sm font-bold text-white tracking-tight">Antes de empezar: Guía Acompañada</h3>
+            </div>
+            <span class="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20">Instrucciones Clave</span>
+          </div>
+
+          <!-- 1. Qué hacer -->
+          <div class="space-y-2">
+            <span class="text-[10px] sm:text-[11px] font-bold text-teal-300 uppercase tracking-wider block">1. Qué hacer (Paso a paso)</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              ${window.MEDIT_DATA.SESSION_GUIDANCE.prepSteps.map(step => `
+                <div class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs">
+                  <div class="flex items-center gap-1.5 mb-1 font-bold text-teal-300">
+                    <span class="w-4 h-4 rounded-full bg-teal-500/20 text-teal-400 text-[10px] flex items-center justify-center font-mono">${step.num}</span>
+                    <span>${step.title}</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">${step.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- 2. Qué sensaciones buscar -->
+          <div class="space-y-2 pt-2 border-t border-slate-800/80">
+            <span class="text-[10px] sm:text-[11px] font-bold text-cyan-300 uppercase tracking-wider block">2. Qué sensaciones buscar (Tu mapa sensorial)</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              ${window.MEDIT_DATA.SESSION_GUIDANCE.sensationsToFind.map(s => `
+                <div class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs">
+                  <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 mb-1 inline-block">${s.badge}</span>
+                  <p class="font-bold text-white mb-0.5">${s.name}</p>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">${s.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
         <!-- Practical Tip -->
-        <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-300 leading-relaxed flex items-start gap-3">
-          <span class="text-teal-400 text-lg">💡</span>
+        <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-3.5 sm:p-4 text-xs text-slate-300 leading-relaxed flex items-start gap-3">
+          <span class="text-teal-400 mt-0.5 shrink-0">${window.MEDIT_ICONS.sparkle('w-4 h-4')}</span>
           <div>
             <strong class="text-white">Para días con agenda apretada:</strong> Comienza con 1 o 2 minutos para asegurar tu racha. Cuando tengas 12-15 minutos libres tras comer o al terminar la jornada, realiza una sesión profunda para renovar tu agilidad mental.
           </div>
@@ -841,7 +894,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       startTimerLoop();
-      renderTimer();
+      renderTimerFullscreen();
     });
   }
 
@@ -855,21 +908,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressPercent =
       ((timerState.selectedSeconds - timerState.remainingSeconds) / timerState.selectedSeconds) * 100;
 
-    // Guidance text for longer 10-15 min sessions
-    let phaseTip = 'Si tu mente se dispersa, nótalo con amabilidad y regresa a la sensación del aire.';
-    if (timerState.selectedSeconds >= 600) {
-      const elapsed = timerState.selectedSeconds - timerState.remainingSeconds;
-      if (elapsed < 300) {
-        phaseTip = 'Fase 1 (Linterna): Atención estrecha y concentrada en tu respiración.';
-      } else if (elapsed < 600) {
-        phaseTip = 'Fase 2 (Foco Amplio): Abre la conciencia a todo el cuerpo, sonidos y pensamientos sin juzgar.';
-      } else {
-        phaseTip = 'Fase 3 (Presencia): Descanso en la quietud lúcida y claridad interior.';
-      }
-    }
+    // Accompanied real-time guidance prompts based on progress percentage
+    const guidanceList = (window.MEDIT_DATA && window.MEDIT_DATA.SESSION_GUIDANCE)
+      ? window.MEDIT_DATA.SESSION_GUIDANCE.phasePrompts
+      : [];
+    const currentGuidance = guidanceList.find(g => progressPercent >= g.minPercent && progressPercent < g.maxPercent)
+      || guidanceList[guidanceList.length - 1]
+      || { stage: 'Presencia Lúcida', prompt: 'Si tu mente se dispersa, nótalo con amabilidad y regresa a la sensación del aire.' };
 
     mainContent.innerHTML = `
-      <div class="fixed inset-0 z-50 bg-[#060911] text-white flex flex-col justify-between p-6 sm:p-10 select-none animate-fade-in safe-pt safe-pb">
+      <div class="fixed inset-0 z-50 bg-[#060911] text-white flex flex-col justify-between p-5 sm:p-10 select-none animate-fade-in safe-pt safe-pb">
         <!-- Top Controls -->
         <div class="flex items-center justify-between z-10">
           <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -878,11 +926,11 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <div class="flex items-center gap-2">
-            <button id="btn-toggle-clock" class="p-2.5 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-colors">
-              ${timerState.hideClock ? '👁️' : '🕶️'}
+            <button id="btn-toggle-clock" class="w-9 h-9 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center justify-center" title="Alternar reloj">
+              ${timerState.hideClock ? window.MEDIT_ICONS.eye('w-4 h-4 text-teal-400') : window.MEDIT_ICONS.eyeOff('w-4 h-4')}
             </button>
-            <button id="btn-cancel-timer" class="p-2.5 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-colors">
-              ✕
+            <button id="btn-cancel-timer" class="w-9 h-9 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center justify-center" title="Cancelar sesión">
+              ${window.MEDIT_ICONS.close('w-4 h-4')}
             </button>
           </div>
         </div>
@@ -894,7 +942,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="flex flex-col items-center justify-center my-auto relative">
             <div class="absolute w-72 h-72 sm:w-88 sm:h-88 rounded-full bg-teal-500/10 blur-3xl animate-breath-glow pointer-events-none"></div>
 
-            <div class="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
+            <div class="relative w-60 h-60 sm:w-72 sm:h-72 flex items-center justify-center">
               <svg class="w-full h-full -rotate-90">
                 <circle cx="50%" cy="50%" r="45%" class="stroke-slate-800/80 fill-none" stroke-width="4"></circle>
                 <circle cx="50%" cy="50%" r="45%" class="stroke-teal-400 fill-none transition-all duration-1000 ease-linear" stroke-width="4" stroke-dasharray="283%" stroke-dashoffset="${
@@ -906,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${
                   !timerState.hideClock
                     ? `
-                  <span class="font-mono text-5xl font-extralight tracking-tight text-white mb-1">
+                  <span class="font-mono text-4xl sm:text-5xl font-extralight tracking-tight text-white mb-1">
                     ${formatTime(timerState.remainingSeconds)}
                   </span>
                 `
@@ -921,25 +969,31 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>
 
-            <p class="text-xs text-slate-400 text-center mt-6 max-w-sm font-light leading-relaxed">
-              ${phaseTip}
-            </p>
+            <!-- Accompanied Guidance Prompt -->
+            <div class="mt-5 sm:mt-6 max-w-sm mx-auto text-center px-4 z-10">
+              <span class="text-[10px] uppercase font-bold tracking-widest text-teal-400 block mb-1">
+                ${currentGuidance.stage}
+              </span>
+              <p class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+                ${currentGuidance.prompt}
+              </p>
+            </div>
           </div>
         `
             : `
           <!-- Finished Reflection Modal -->
-          <div class="max-w-md w-full mx-auto bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center my-auto shadow-2xl backdrop-blur-md animate-fade-in">
-            <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4 text-emerald-400 text-2xl font-bold">
-              ✓
+          <div class="max-w-md w-full mx-auto bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-8 text-center my-auto shadow-2xl backdrop-blur-md animate-fade-in">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-3 sm:mb-4 text-emerald-400 font-bold">
+              ${window.MEDIT_ICONS.check('w-7 h-7 sm:w-8 sm:h-8')}
             </div>
-            <h3 class="text-2xl font-bold text-white mb-1">Sesión Completada</h3>
-            <p class="text-xs text-teal-300 font-medium mb-5">
+            <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Sesión Completada</h3>
+            <p class="text-xs text-teal-300 font-medium mb-4 sm:mb-5">
               +${Math.round(timerState.selectedSeconds / 60)} min para tu bienestar
             </p>
 
-            <div class="space-y-2 mb-5">
+            <div class="space-y-2 mb-4 sm:mb-5">
               <label class="text-xs text-slate-400">¿Cómo te sientes ahora?</label>
-              <div class="flex justify-center gap-3">
+              <div class="flex justify-center gap-2 sm:gap-3">
                 ${[
                   { val: 1, e: '😴', l: 'Cansado' },
                   { val: 2, e: '😐', l: 'Neutro' },
@@ -947,19 +1001,19 @@ document.addEventListener('DOMContentLoaded', () => {
                   { val: 4, e: '😌', l: 'En paz' },
                   { val: 5, e: '⚡', l: 'Renovado' }
                 ].map((item) => `
-                  <button data-val="${item.val}" class="btn-rate-mood flex flex-col items-center p-2 rounded-xl border transition-all ${
+                  <button data-val="${item.val}" class="btn-rate-mood flex flex-col items-center p-2 sm:p-2.5 rounded-xl border transition-all ${
                     timerState.ratingAfter === item.val
-                      ? 'bg-teal-500/20 border-teal-500/60 scale-105'
+                      ? 'bg-teal-500/20 border-teal-500/60 scale-105 shadow-md'
                       : 'bg-slate-800/60 border-slate-700/60 text-slate-400'
                   }">
-                    <span class="text-2xl">${item.e}</span>
-                    <span class="text-[10px] mt-1">${item.l}</span>
+                    <span class="text-xl sm:text-2xl">${item.e}</span>
+                    <span class="text-[9px] sm:text-[10px] mt-1">${item.l}</span>
                   </button>
                 `).join('')}
               </div>
             </div>
 
-            <input id="input-session-note" type="text" placeholder="Nota personal (opcional)" value="${timerState.note}" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-teal-400 mb-5" />
+            <input id="input-session-note" type="text" placeholder="Nota personal (opcional)" value="${timerState.note}" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-teal-400 mb-4 sm:mb-5" />
 
             <button id="btn-save-session-reflection" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-400 text-slate-950 font-bold text-sm shadow-xl shadow-teal-500/25 active:scale-95 transition-all">
               Guardar y Finalizar
@@ -973,8 +1027,8 @@ document.addEventListener('DOMContentLoaded', () => {
           !timerState.isFinished
             ? `
           <div class="flex items-center justify-center gap-4 z-10">
-            <button id="btn-toggle-pause" class="px-8 py-3 rounded-full bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-medium text-sm flex items-center gap-2 transition-colors">
-              ${timerState.isPaused ? '▶ Reanudar' : '⏸ Pausar'}
+            <button id="btn-toggle-pause" class="px-7 sm:px-8 py-3 rounded-full bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-medium text-xs sm:text-sm flex items-center gap-2 transition-colors">
+              ${timerState.isPaused ? window.MEDIT_ICONS.play('w-4 h-4 text-teal-400') + ' Reanudar' : window.MEDIT_ICONS.pause('w-4 h-4 text-slate-400') + ' Pausar'}
             </button>
           </div>
         `
@@ -1077,44 +1131,89 @@ document.addEventListener('DOMContentLoaded', () => {
   // VIEW 4: LEARN (Aprender sin Mitos)
   // ==========================================
   function renderLearn() {
+    const totalArticles = window.MEDIT_DATA.SCIENCE_ARTICLES.length;
+    const completedCount = window.MEDIT_DATA.SCIENCE_ARTICLES.filter((a) =>
+      state.completedArticleIds.includes(a.id)
+    ).length;
+    const progressPercent = Math.round((completedCount / totalArticles) * 100);
+
     mainContent.innerHTML = `
-      <div class="space-y-6 animate-fade-in pb-20">
+      <div class="space-y-5 sm:space-y-6 animate-fade-in pb-20">
         <!-- Header -->
         <div class="text-center space-y-1">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">
-            <span>📚 Neurociencia en Píldoras (&lt; 2 min)</span>
+            <span>${window.MEDIT_ICONS.learn('w-3.5 h-3.5')}</span>
+            <span>Neurociencia en Píldoras (&lt; 2 min)</span>
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-white">Aprender sin Mitos</h2>
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Aprender sin Mitos</h2>
           <p class="text-xs text-slate-400 max-w-md mx-auto">
-            Fundamentos científicos rigurosos para desmitificar la práctica y maximizar tu adherencia.
+            Guía ordenada de iniciación: desde el concepto básico hasta la consolidación atencional.
           </p>
         </div>
 
-        <!-- Articles Accordion -->
+        <!-- Curriculum Roadmap Progress Card -->
+        <div class="p-4 sm:p-5 rounded-3xl bg-gradient-to-br from-[#0d1627] to-[#080d19] border border-teal-500/30 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-teal-400 block">Ruta Guiada de Iniciación</span>
+              <h3 class="text-xs sm:text-sm font-bold text-white">De Principiante a Práctica Sólida</h3>
+            </div>
+            <span class="font-mono text-xs sm:text-sm font-bold text-teal-300 bg-teal-500/10 border border-teal-500/30 px-2.5 py-1 rounded-xl">
+              ${completedCount}/${totalArticles} Niveles
+            </span>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="space-y-1.5">
+            <div class="w-full bg-slate-800/90 rounded-full h-2 overflow-hidden">
+              <div class="bg-gradient-to-r from-teal-500 to-emerald-400 h-2 rounded-full transition-all duration-500" style="width: ${progressPercent}%"></div>
+            </div>
+            <div class="flex justify-between text-[10px] sm:text-[11px] text-slate-400">
+              <span>Nivel 1: Qué es y qué NO es</span>
+              <span class="text-teal-300 font-semibold">${progressPercent}% Completado</span>
+              <span>Nivel 6: Umbral 12-15m</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Articles Accordion (Curriculum Levels 1 to 6) -->
         <div class="space-y-3">
           ${window.MEDIT_DATA.SCIENCE_ARTICLES.map((art, idx) => {
             const isRead = state.completedArticleIds.includes(art.id);
+            const levelNum = art.level || idx + 1;
             return `
-              <div class="article-card rounded-2xl border border-slate-800/90 bg-[#0e1422] overflow-hidden transition-all">
-                <div class="article-header p-4 sm:p-5 cursor-pointer flex items-start justify-between gap-3">
+              <div class="article-card rounded-2xl border ${
+                isRead ? 'border-teal-500/30 bg-[#0c1524]' : 'border-slate-800/90 bg-[#0e1422]'
+              } overflow-hidden transition-all shadow-sm">
+                <div class="article-header p-3.5 sm:p-5 cursor-pointer flex items-start justify-between gap-3">
                   <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1.5">
-                      <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-teal-500/15 text-teal-400 border border-teal-500/20">
-                        ${art.badge}
+                    <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                      <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                        isRead
+                          ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
+                          : 'bg-slate-800 text-slate-400 border border-slate-700/80'
+                      }">
+                        Nivel ${levelNum} · ${art.badge}
                       </span>
-                      <span class="text-[11px] text-slate-400">⏱ ${art.readTime}</span>
-                      ${isRead ? '<span class="text-[10px] text-emerald-400 font-semibold">✓ Leído</span>' : ''}
+                      <span class="text-[10px] sm:text-[11px] text-slate-400 flex items-center gap-1">
+                        ${window.MEDIT_ICONS.clock('w-3 h-3')} ${art.readTime}
+                      </span>
+                      ${
+                        isRead
+                          ? `<span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-0.5">${window.MEDIT_ICONS.check('w-3 h-3')} Aprendido</span>`
+                          : ''
+                      }
                     </div>
-                    <h3 class="text-sm sm:text-base font-bold text-white tracking-tight leading-snug">
+                    <h3 class="text-xs sm:text-base font-bold text-white tracking-tight leading-snug">
                       ${art.title}
                     </h3>
-                    <p class="text-xs text-slate-400 mt-1 line-clamp-1">${art.hook}</p>
+                    <p class="text-[11px] sm:text-xs text-slate-400 mt-1 line-clamp-1">${art.hook}</p>
                   </div>
-                  <button class="text-slate-400 text-sm">▼</button>
+                  <button class="text-slate-400 p-1 shrink-0 article-chevron" aria-label="Expandir">${window.MEDIT_ICONS.chevronDown('w-4 h-4')}</button>
                 </div>
 
-                <div class="article-body hidden px-4 pb-5 sm:px-5 sm:pb-6 pt-2 border-t border-slate-800/80 space-y-4">
-                  <div class="p-4 rounded-xl bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-indigo-500/10 border border-teal-500/30">
+                <div class="article-body hidden px-3.5 pb-4 sm:px-5 sm:pb-6 pt-2 border-t border-slate-800/80 space-y-3 sm:space-y-4">
+                  <div class="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-indigo-500/10 border border-teal-500/30">
                     <span class="text-[10px] font-bold text-teal-300 uppercase tracking-wider block mb-1">Idea Central</span>
                     <p class="text-xs text-slate-200 leading-relaxed">${art.coreInsight}</p>
                   </div>
@@ -1123,24 +1222,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${art.content.map((c) => `
                       <div>
                         <h4 class="font-bold text-white mb-1">${c.subtitle}</h4>
-                        <p>${c.text}</p>
+                        <p class="text-slate-300">${c.text}</p>
                       </div>
                     `).join('')}
                   </div>
 
                   <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-xs text-emerald-300">
-                    <strong class="block text-[10px] uppercase tracking-wider mb-0.5 text-emerald-400">⚡ Paso Práctico</strong>
+                    <strong class="flex items-center gap-1 text-[10px] uppercase tracking-wider mb-0.5 text-emerald-400">
+                      ${window.MEDIT_ICONS.bolt('w-3 h-3')} Ejercicio Práctico del Nivel ${levelNum}
+                    </strong>
                     <p class="text-slate-200">${art.actionable}</p>
                   </div>
 
                   <p class="text-[10px] text-slate-500 font-mono italic">Fuente: ${art.reference}</p>
 
-                  <button data-id="${art.id}" class="btn-toggle-read w-full py-2.5 rounded-xl text-xs font-semibold border ${
+                  <button data-id="${art.id}" class="btn-toggle-read w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${
                     isRead
-                      ? 'bg-slate-800 text-slate-400 border-slate-700'
-                      : 'bg-teal-500/20 text-teal-300 border-teal-500/40'
+                      ? 'bg-slate-800 text-slate-400 border-slate-700 hover:text-white'
+                      : 'bg-teal-500/20 text-teal-300 border-teal-500/40 hover:bg-teal-500/30 shadow-md'
                   }">
-                    ${isRead ? 'Marcado como leído (Desmarcar)' : 'Comprendido · Marcar como leído'}
+                    ${isRead ? 'Nivel completado (Desmarcar)' : `Comprendido · Marcar Nivel ${levelNum} como aprendido`}
                   </button>
                 </div>
               </div>
@@ -1151,15 +1252,16 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- FAQs -->
         <div class="pt-4 border-t border-slate-800/80 space-y-3">
           <h3 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
-            <span>❓ Preguntas Frecuentes de Principiantes</span>
+            <span class="text-teal-400">${window.MEDIT_ICONS.sparkle('w-4 h-4')}</span>
+            <span>Preguntas Frecuentes de Principiantes</span>
           </h3>
 
           <div class="space-y-2">
             ${window.MEDIT_DATA.FAQS.map((faq) => `
               <div class="faq-item rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
-                <button class="faq-header w-full p-3.5 text-left flex items-center justify-between gap-3 text-xs font-medium text-slate-200">
+                <button class="faq-header w-full p-3 sm:p-3.5 text-left flex items-center justify-between gap-3 text-xs sm:text-sm font-semibold text-slate-200 hover:text-white">
                   <span>${faq.q}</span>
-                  <span class="text-slate-500">▼</span>
+                  <span class="text-slate-500 shrink-0">${window.MEDIT_ICONS.chevronDown('w-3.5 h-3.5')}</span>
                 </button>
                 <div class="faq-body hidden px-3.5 pb-3.5 pt-1 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 bg-[#090d16]">
                   ${faq.a}
@@ -1176,6 +1278,10 @@ document.addEventListener('DOMContentLoaded', () => {
       hdr.addEventListener('click', () => {
         const body = hdr.nextElementSibling;
         body.classList.toggle('hidden');
+        const chevron = hdr.querySelector('.article-chevron');
+        if (chevron) {
+          chevron.classList.toggle('rotate-180');
+        }
       });
     });
 
@@ -1213,56 +1319,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalMinutes = Math.round(state.totalSeconds / 60);
 
     mainContent.innerHTML = `
-      <div class="space-y-6 animate-fade-in pb-20">
+      <div class="space-y-5 sm:space-y-6 animate-fade-in pb-20">
         <!-- Header -->
         <div class="text-center space-y-1">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
-            <span>🔥 Ciencia del Hábito (B.J. Fogg)</span>
+            <span>${window.MEDIT_ICONS.flame('w-3.5 h-3.5')}</span>
+            <span>Ciencia del Hábito (B.J. Fogg)</span>
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-white">Mi Práctica & Progreso</h2>
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Mi Práctica & Progreso</h2>
           <p class="text-xs text-slate-400 max-w-md mx-auto">
             Racha "Cero Culpas": un solo minuto al día consolida tu circuito neuronal de calma.
           </p>
         </div>
 
         <!-- 3 Primary Metrics -->
-        <div class="grid grid-cols-3 gap-3">
-          <div class="bg-[#0e1422] border border-slate-800 p-4 rounded-2xl text-center">
-            <span class="text-xl mb-1 block">🔥</span>
-            <span class="text-2xl font-black font-mono text-white block">${state.streakDays}</span>
-            <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Días Racha</span>
+        <div class="grid grid-cols-3 gap-2.5 sm:gap-3">
+          <div class="bg-[#0e1422] border border-slate-800 p-3 sm:p-4 rounded-2xl text-center">
+            <div class="flex justify-center mb-1 text-amber-400">${window.MEDIT_ICONS.flame('w-5 h-5')}</div>
+            <span class="text-xl sm:text-2xl font-black font-mono text-white block">${state.streakDays}</span>
+            <span class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Días Racha</span>
           </div>
 
-          <div class="bg-[#0e1422] border border-slate-800 p-4 rounded-2xl text-center">
-            <span class="text-xl mb-1 block">⏱</span>
-            <span class="text-2xl font-black font-mono text-white block">${totalMinutes}</span>
-            <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Minutos Totales</span>
+          <div class="bg-[#0e1422] border border-slate-800 p-3 sm:p-4 rounded-2xl text-center">
+            <div class="flex justify-center mb-1 text-teal-400">${window.MEDIT_ICONS.clock('w-5 h-5')}</div>
+            <span class="text-xl sm:text-2xl font-black font-mono text-white block">${totalMinutes}</span>
+            <span class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Minutos Totales</span>
           </div>
 
-          <div class="bg-[#0e1422] border border-slate-800 p-4 rounded-2xl text-center">
-            <span class="text-xl mb-1 block">🏆</span>
-            <span class="text-2xl font-black font-mono text-white block">${state.totalSessions}</span>
-            <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Pausas Hechas</span>
+          <div class="bg-[#0e1422] border border-slate-800 p-3 sm:p-4 rounded-2xl text-center">
+            <div class="flex justify-center mb-1 text-cyan-400">${window.MEDIT_ICONS.award('w-5 h-5')}</div>
+            <span class="text-xl sm:text-2xl font-black font-mono text-white block">${state.totalSessions}</span>
+            <span class="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Pausas Hechas</span>
           </div>
         </div>
 
         <!-- Active Habit Stacking Card -->
-        <div class="bg-gradient-to-br from-[#0e172a] to-[#080d1a] border border-teal-500/30 rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
+        <div class="bg-gradient-to-br from-[#0e172a] to-[#080d1a] border border-teal-500/30 rounded-3xl p-4 sm:p-6 shadow-xl relative overflow-hidden">
           <div class="flex items-start justify-between mb-3">
-            <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-400 border border-teal-500/30">
+            <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-400 border border-teal-500/30">
               Anclaje Activo (Habit Stacking)
             </span>
-            <button id="btn-change-anchor" class="text-xs text-teal-400 hover:text-teal-300 font-semibold">
-              Cambiar →
+            <button id="btn-change-anchor" class="text-xs text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1">
+              <span>Cambiar</span>
+              <span>${window.MEDIT_ICONS.arrowRight('w-3 h-3')}</span>
             </button>
           </div>
 
-          <div class="flex items-start gap-4">
-            <div class="p-3 rounded-2xl bg-teal-500/20 border border-teal-500/40 text-2xl shrink-0">
-              ${activeAnchor.icon}
+          <div class="flex items-start gap-3.5 sm:gap-4">
+            <div class="p-3 rounded-2xl bg-teal-500/20 border border-teal-500/40 text-teal-300 shrink-0">
+              ${window.getAnchorSvg(activeAnchor.id, 'w-6 h-6')}
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-base font-bold text-white mb-1">${activeAnchor.title}</h3>
+              <h3 class="text-sm sm:text-base font-bold text-white mb-1">${activeAnchor.title}</h3>
               <p class="text-xs text-teal-300 font-medium mb-1">Disparador: ${activeAnchor.cue}</p>
               <p class="text-xs text-slate-300 leading-relaxed">${activeAnchor.action}</p>
             </div>
@@ -1270,12 +1378,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <!-- History of Sessions -->
-        <div class="bg-[#0e1422] border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="bg-[#0e1422] border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-3.5 sm:space-y-4">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-white flex items-center gap-2">
-              <span>📅 Historial de Práctica</span>
+            <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+              <span class="text-teal-400">${window.MEDIT_ICONS.calendar('w-4 h-4')}</span>
+              <span>Historial de Práctica</span>
             </h3>
-            <span class="text-xs text-slate-400 font-mono">${state.sessions.length} registros</span>
+            <span class="text-[11px] sm:text-xs text-slate-400 font-mono">${state.sessions.length} registros</span>
           </div>
 
           ${
@@ -1300,8 +1409,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </span>
                   </div>
                   <div class="flex items-center gap-2">
-                    ${sess.ratingAfter ? `<span class="px-2 py-0.5 rounded bg-teal-500/10 text-teal-300 border border-teal-500/20 text-[11px]">Estado: ${sess.ratingAfter}/5</span>` : ''}
-                    <span class="text-emerald-400">✓</span>
+                    ${sess.ratingAfter ? `<span class="px-2 py-0.5 rounded bg-teal-500/10 text-teal-300 border border-teal-500/20 text-[10px] sm:text-[11px]">Estado: ${sess.ratingAfter}/5</span>` : ''}
+                    <span class="text-emerald-400">${window.MEDIT_ICONS.check('w-4 h-4')}</span>
                   </div>
                 </div>
               `).join('')}
@@ -1318,11 +1427,13 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <div class="flex items-center gap-2 shrink-0">
-            <button id="btn-export-json" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors border border-slate-700 text-xs font-medium">
-              Exportar JSON
+            <button id="btn-export-json" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors border border-slate-700 text-xs font-medium flex items-center gap-1.5">
+              <span>${window.MEDIT_ICONS.download('w-3.5 h-3.5 text-teal-400')}</span>
+              <span>Exportar JSON</span>
             </button>
-            <label class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors border border-slate-700 text-xs font-medium cursor-pointer">
-              Importar
+            <label class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors border border-slate-700 text-xs font-medium cursor-pointer flex items-center gap-1.5">
+              <span>${window.MEDIT_ICONS.upload('w-3.5 h-3.5 text-cyan-400')}</span>
+              <span>Importar</span>
               <input id="input-import-file" type="file" accept=".json" class="hidden" />
             </label>
           </div>
@@ -1435,11 +1546,12 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <div class="flex items-center justify-center gap-3">
-            <button id="btn-stop-modal-pause" class="px-5 py-2.5 rounded-2xl bg-slate-800 text-slate-200 text-sm font-medium border border-slate-700">
-              ${stopState.isRunning ? '⏸ Pausar' : '▶ Continuar'}
+            <button id="btn-stop-modal-pause" class="px-5 py-2.5 rounded-2xl bg-slate-800 text-slate-200 text-sm font-medium border border-slate-700 flex items-center gap-1.5 hover:bg-slate-700 transition-colors">
+              ${stopState.isRunning ? window.MEDIT_ICONS.pause('w-4 h-4 text-slate-400') + '<span>Pausar</span>' : window.MEDIT_ICONS.play('w-4 h-4 text-teal-400') + '<span>Continuar</span>'}
             </button>
-            <button id="btn-stop-modal-next" class="px-5 py-2.5 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-semibold text-sm">
-              Siguiente →
+            <button id="btn-stop-modal-next" class="px-5 py-2.5 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-semibold text-sm flex items-center gap-1.5 transition-colors">
+              <span>Siguiente</span>
+              <span>${window.MEDIT_ICONS.arrowRight('w-3.5 h-3.5')}</span>
             </button>
           </div>
         </div>
@@ -1463,8 +1575,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       modalBody.innerHTML = `
         <div class="text-center py-6">
-          <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4 text-emerald-400 text-2xl font-bold">
-            ✓
+          <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4 text-emerald-400">
+            ${window.MEDIT_ICONS.check('w-8 h-8')}
           </div>
           <h3 class="text-2xl font-bold text-white mb-2">¡Pausa S.T.O.P. Completada!</h3>
           <p class="text-sm text-slate-300 max-w-sm mx-auto mb-6">
@@ -1502,22 +1614,24 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = window.MEDIT_DATA.HABIT_ANCHORS.map((anc) => {
       const isSel = anc.id === state.activeAnchorId;
       return `
-        <div data-id="${anc.id}" class="btn-select-anchor p-4 rounded-2xl border transition-all cursor-pointer ${
+        <div data-id="${anc.id}" class="btn-select-anchor p-3.5 sm:p-4 rounded-2xl border transition-all cursor-pointer ${
           isSel
             ? 'bg-teal-500/15 border-teal-500/50 shadow-md text-white'
             : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
         }">
           <div class="flex items-start gap-3.5">
-            <span class="text-2xl">${anc.icon}</span>
+            <div class="p-2.5 rounded-xl ${isSel ? 'bg-teal-500/20 text-teal-300' : 'bg-slate-800 text-slate-400'} shrink-0">
+              ${window.getAnchorSvg(anc.id, 'w-5 h-5')}
+            </div>
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="text-sm font-bold text-white">${anc.title}</h4>
+                <h4 class="text-xs sm:text-sm font-bold text-white">${anc.title}</h4>
                 <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">${anc.seconds}s</span>
               </div>
               <p class="text-xs text-teal-300 font-medium mb-1">Disparador: ${anc.cue}</p>
               <p class="text-xs text-slate-400">${anc.action}</p>
             </div>
-            ${isSel ? '<span class="text-teal-400 font-bold">✓</span>' : ''}
+            ${isSel ? `<span class="text-teal-400 font-bold shrink-0">${window.MEDIT_ICONS.check('w-4 h-4')}</span>` : ''}
           </div>
         </div>
       `;
@@ -1537,24 +1651,72 @@ document.addEventListener('DOMContentLoaded', () => {
     anchorModalEl.classList.add('hidden');
   });
 
-  // Sound Settings Modal
-  function openSoundModal() {
-    soundModalEl.classList.remove('hidden');
+  // Sound & Settings Modal (Robust single initialization + reactive UI update)
+  let soundModalEventsBound = false;
 
-    const bellBtns = document.querySelectorAll('.btn-select-bell');
-    bellBtns.forEach((btn) => {
-      btn.classList.toggle('border-teal-500', btn.dataset.tone === state.bellTone);
+  function updateSoundModalUI() {
+    // 1. Bell tones buttons
+    document.querySelectorAll('.btn-select-bell').forEach((btn) => {
+      const isSel = btn.dataset.tone === state.bellTone;
+      btn.classList.toggle('border-teal-500', isSel);
+      btn.classList.toggle('bg-teal-500/15', isSel);
+      btn.classList.toggle('border-slate-800', !isSel);
+      btn.classList.toggle('bg-slate-900/60', !isSel);
+      const checkBadge = btn.querySelector('.bell-check-badge');
+      if (checkBadge) {
+        checkBadge.classList.toggle('hidden', !isSel);
+      }
+    });
+
+    // 2. Bell volume
+    const bellVol = document.getElementById('slider-bell-vol');
+    const bellVolLabel = document.getElementById('label-bell-vol');
+    if (bellVol) bellVol.value = state.soundVolume;
+    if (bellVolLabel) bellVolLabel.textContent = `${Math.round(state.soundVolume * 100)}%`;
+
+    // 3. Ambient buttons
+    document.querySelectorAll('.btn-select-ambient').forEach((btn) => {
+      const isSel = btn.dataset.ambient === state.ambientType;
+      btn.classList.toggle('border-cyan-500', isSel);
+      btn.classList.toggle('bg-cyan-500/15', isSel);
+      btn.classList.toggle('border-slate-800', !isSel);
+      btn.classList.toggle('bg-slate-900/60', !isSel);
+      const checkBadge = btn.querySelector('.amb-check-badge');
+      if (checkBadge) {
+        checkBadge.classList.toggle('hidden', !isSel);
+      }
+    });
+
+    // 4. Ambient volume
+    const ambVol = document.getElementById('slider-amb-vol');
+    const ambVolLabel = document.getElementById('label-amb-vol');
+    if (ambVol) ambVol.value = state.ambientVolume;
+    if (ambVolLabel) ambVolLabel.textContent = `${Math.round(state.ambientVolume * 100)}%`;
+
+    // 5. Preferences toggles
+    const breathSoundToggle = document.getElementById('toggle-setting-breath-sound');
+    if (breathSoundToggle) breathSoundToggle.checked = Boolean(state.soundCues !== false);
+
+    const hideClockToggle = document.getElementById('toggle-setting-hide-clock');
+    if (hideClockToggle) hideClockToggle.checked = Boolean(state.hideClockDefault);
+  }
+
+  function initSoundModalEvents() {
+    if (soundModalEventsBound) return;
+    soundModalEventsBound = true;
+
+    // Bell tone click
+    document.querySelectorAll('.btn-select-bell').forEach((btn) => {
       btn.addEventListener('click', () => {
         state.bellTone = btn.dataset.tone;
         window.soundEngine.playBell(state.bellTone, state.soundVolume);
         window.habitStorage.save(state);
-        openSoundModal();
+        updateSoundModalUI();
       });
     });
 
-    const ambientBtns = document.querySelectorAll('.btn-select-ambient');
-    ambientBtns.forEach((btn) => {
-      btn.classList.toggle('border-cyan-500', btn.dataset.ambient === state.ambientType);
+    // Ambient tone click
+    document.querySelectorAll('.btn-select-ambient').forEach((btn) => {
       btn.addEventListener('click', () => {
         state.ambientType = btn.dataset.ambient;
         if (state.ambientType === 'none') {
@@ -1563,33 +1725,106 @@ document.addEventListener('DOMContentLoaded', () => {
           window.soundEngine.startAmbient(state.ambientType, state.ambientVolume);
         }
         window.habitStorage.save(state);
-        openSoundModal();
+        updateSoundModalUI();
+        if (currentTab === 'home') renderHome();
       });
     });
 
+    // Bell volume slider
     const bellVol = document.getElementById('slider-bell-vol');
     if (bellVol) {
-      bellVol.value = state.soundVolume;
-      bellVol.oninput = (e) => {
+      bellVol.addEventListener('input', (e) => {
         state.soundVolume = parseFloat(e.target.value);
         window.habitStorage.save(state);
         updateHeader();
-      };
+        updateSoundModalUI();
+      });
     }
 
+    // Ambient volume slider
     const ambVol = document.getElementById('slider-amb-vol');
     if (ambVol) {
-      ambVol.value = state.ambientVolume;
-      ambVol.oninput = (e) => {
+      ambVol.addEventListener('input', (e) => {
         state.ambientVolume = parseFloat(e.target.value);
         window.soundEngine.setAmbientVolume(state.ambientVolume);
         window.habitStorage.save(state);
-      };
+        updateSoundModalUI();
+      });
     }
+
+    // Preference toggles
+    document.getElementById('toggle-setting-breath-sound')?.addEventListener('change', (e) => {
+      state.soundCues = e.target.checked;
+      breathState.soundCues = state.soundCues;
+      window.habitStorage.save(state);
+    });
+
+    document.getElementById('toggle-setting-hide-clock')?.addEventListener('change', (e) => {
+      state.hideClockDefault = e.target.checked;
+      timerState.hideClock = state.hideClockDefault;
+      window.habitStorage.save(state);
+    });
+
+    // Backup buttons inside settings
+    document.getElementById('btn-settings-export')?.addEventListener('click', () => {
+      const dataStr = window.habitStorage.exportData(state);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `medit_backup_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('input-settings-import')?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imported = window.habitStorage.importData(event.target.result);
+        if (imported) {
+          state = imported;
+          updateHeader();
+          updateSoundModalUI();
+          renderView();
+          alert('¡Datos restaurados con éxito!');
+        } else {
+          alert('Archivo de copia no válido.');
+        }
+      };
+      reader.readAsText(file);
+    });
+  }
+
+  function openSoundModal() {
+    initSoundModalEvents();
+    updateSoundModalUI();
+    soundModalEl.classList.remove('hidden');
   }
 
   document.getElementById('btn-close-sound-modal')?.addEventListener('click', () => {
     soundModalEl.classList.add('hidden');
+  });
+
+  // Backdrop dismissals for all modals
+  stopModalEl?.addEventListener('click', (e) => {
+    if (e.target === stopModalEl) closeStopModal();
+  });
+  anchorModalEl?.addEventListener('click', (e) => {
+    if (e.target === anchorModalEl) anchorModalEl.classList.add('hidden');
+  });
+  soundModalEl?.addEventListener('click', (e) => {
+    if (e.target === soundModalEl) soundModalEl.classList.add('hidden');
+  });
+
+  // Global Escape key dismiss
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (!stopModalEl.classList.contains('hidden')) closeStopModal();
+      anchorModalEl.classList.add('hidden');
+      soundModalEl.classList.add('hidden');
+    }
   });
 
   // Initial render

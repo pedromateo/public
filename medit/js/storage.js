@@ -12,7 +12,9 @@ const DEFAULT_STATE = {
   bellTone: 'tibetan',
   ambientType: 'brown-noise',
   ambientVolume: 0.35,
-  completedArticleIds: []
+  completedArticleIds: [],
+  soundCues: true,
+  hideClockDefault: false
 };
 
 function getTodayString() {
