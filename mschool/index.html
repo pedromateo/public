@@ -183,16 +183,6 @@
       box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
     }
 
-    .badge-status {
-      font-size: 0.7rem;
-      padding: 4px 8px;
-      border-radius: 12px;
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      font-weight: 600;
-    }
-
     /* Navigation */
     .tab-nav {
       position: fixed;
@@ -1011,7 +1001,6 @@
     <div class="header-actions">
       <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar tema">☀️</button>
       <button id="installBtn" class="btn-install">📲 Instalar</button>
-      <span class="badge-status" id="onlineBadge">● Offline OK</span>
     </div>
   </header>
 
@@ -2381,20 +2370,6 @@
     window.addEventListener('appinstalled', () => {
       installBtn.style.display = 'none';
     });
-
-    // Online / Offline Status
-    function updateOnlineStatus() {
-      const badge = document.getElementById('onlineBadge');
-      if (navigator.onLine) {
-        badge.textContent = '● Offline OK';
-        badge.style.color = '#34d399';
-      } else {
-        badge.textContent = '● Modo Sin Conexión';
-        badge.style.color = '#f59e0b';
-      }
-    }
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
 
     /* =================================================================
        9. THEME CONTROLLER (Dark / Light)
