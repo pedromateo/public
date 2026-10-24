@@ -1,0 +1,22 @@
+{
+  "name": "medit",
+  "version": "1.1.0",
+  "description": "PWA de micro-meditación, neuro-reset y atención plena basada en ciencia para personas ocupadas",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -l 5173",
+    "preview": "npx -y serve . -l 4173"
+  },
+  "keywords": [
+    "meditation",
+    "mindfulness",
+    "pwa",
+    "web-audio-api",
+    "neuro-reset",
+    "breathwork",
+    "amishi-jha",
+    "nsdr"
+  ],
+  "author": "pedromateo",
+  "license": "GPL-3.0"
+}

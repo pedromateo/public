@@ -8,4 +8,5 @@ Proyectos públicos web y PWAs:
 - [MyLanding](mylanding/): Dashboard de inicio móvil con accesos directos y widget meteorológico.
 - [ElParte](elparte/): PWA de información meteorológica y previsión detallada por horas.
 - [mSchool](mschool/): PWA y método de estimulación temprana diaria de 30 minutos adaptado del modelo Alpha School.
+- [Medit](medit/): PWA de micro-meditación, neuro-reset y atención plena basada en ciencia (Stanford, Amishi Jha, BJ Fogg).
 
