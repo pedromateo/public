@@ -81,7 +81,7 @@ test.describe('Medit PWA — E2E Tests', () => {
     // Probar alternar visibilidad del reloj
     const toggleClockBtn = page.locator('#btn-toggle-clock');
     await toggleClockBtn.click();
-    await expect(page.locator('text=Presencia')).toBeVisible();
+    await expect(page.getByText('Presencia', { exact: true })).toBeVisible();
 
     // Salir de la sesión con botón cerrar
     await page.locator('#btn-cancel-timer').click();
