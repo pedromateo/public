@@ -76,7 +76,7 @@ class VoicePlayer {
           shortLabel: 'Equilibrada',
           desc: 'Voz suave en inicios, primer ciclo y cambios de fase',
           iconName: 'voice-high',
-          emoji: '🔊'
+          svg: (cls = 'w-4 h-4') => window.MEDIT_ICONS.voiceHigh(cls)
         };
       case 'minimal':
         return {
@@ -85,7 +85,7 @@ class VoicePlayer {
           shortLabel: 'Mínima',
           desc: 'Solo bienvenida y felicitación final',
           iconName: 'voice-low',
-          emoji: '🔉'
+          svg: (cls = 'w-4 h-4') => window.MEDIT_ICONS.voiceLow(cls)
         };
       case 'none':
       default:
@@ -95,7 +95,7 @@ class VoicePlayer {
           shortLabel: 'Silencio',
           desc: 'Silencio vocal total (solo cuencos y campanas)',
           iconName: 'voice-off',
-          emoji: '🔇'
+          svg: (cls = 'w-4 h-4') => window.MEDIT_ICONS.voiceOff(cls)
         };
     }
   }

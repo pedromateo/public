@@ -182,7 +182,7 @@ window.MEDIT_DATA = {
       cue: 'Al terminar la jornada laboral y bajar la pantalla del ordenador',
       action: 'Hacer 60 segundos de respiración consciente o pausa S.T.O.P. antes de levantarte.',
       seconds: 60,
-      icon: '💻'
+      icon: 'laptop'
     },
     {
       id: 'morning-coffee',
@@ -190,7 +190,7 @@ window.MEDIT_DATA = {
       cue: 'Mientras la cafetera calienta o durante los primeros sorbos',
       action: 'Sentir los pies en el suelo, la calidez de la taza y 2 minutos de atención a la respiración.',
       seconds: 120,
-      icon: '☕'
+      icon: 'coffee'
     },
     {
       id: 'pre-meeting-stop',
@@ -198,7 +198,7 @@ window.MEDIT_DATA = {
       cue: '2 minutos antes de unirse a una reunión importante',
       action: 'Aplicar la técnica S.T.O.P. para no arrastrar la frustración de la tarea anterior.',
       seconds: 60,
-      icon: '📅'
+      icon: 'calendar'
     },
     {
       id: 'doorway-threshold',
@@ -206,7 +206,7 @@ window.MEDIT_DATA = {
       cue: 'Al llegar a casa y tocar el pomo de la puerta',
       action: 'Pausar 30 segundos, dejar caer los hombros y soltar dos suspiros largos.',
       seconds: 60,
-      icon: '🚪'
+      icon: 'door'
     },
     {
       id: 'night-unplug',
@@ -214,7 +214,7 @@ window.MEDIT_DATA = {
       cue: 'Al conectar el cargador del móvil en la mesita de noche',
       action: 'Hacer 3 minutos de respiración 4-7-8 o micro-meditación en la cama.',
       seconds: 180,
-      icon: '🌙'
+      icon: 'moon'
     },
     {
       id: 'midday-reset',
@@ -222,7 +222,7 @@ window.MEDIT_DATA = {
       cue: 'A las 15:00 antes de iniciar el bloque de la tarde',
       action: 'Sesión de 12-15 min para proteger la memoria de trabajo y renovar energía.',
       seconds: 720,
-      icon: '⚡'
+      icon: 'bolt'
     }
   ],
 

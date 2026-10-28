@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       seconds: 720,
       label: '12 min',
-      tag: 'Peak Mind ★',
+      tag: 'Peak Mind',
       badge: 'Amishi Jha · 12m',
       title: 'Umbral Neuroprotector',
       desc: 'La dosis diaria mínima demostrada contra el agotamiento cognitivo.',
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div id="btn-open-anchor-modal" class="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
               <div class="flex items-center gap-2.5">
                 <span class="p-1.5 rounded-xl bg-teal-500/10 text-teal-300 flex items-center justify-center">
-                  ${window.getAnchorSvg ? window.getAnchorSvg(activeAnchor.id, 'w-4 h-4 text-teal-300') : '📍'}
+                  ${window.getAnchorSvg ? window.getAnchorSvg(activeAnchor.id, 'w-4 h-4 text-teal-300') : window.MEDIT_ICONS.sparkle('w-4 h-4 text-teal-300')}
                 </span>
                 <div>
                   <span class="text-[9px] uppercase font-bold tracking-wider text-teal-400 block">Tu anclaje diario</span>
@@ -476,7 +476,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Voice Guidance Setting Quick Toggle -->
       <div class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
-          <span class="text-lg">${voiceDetails.emoji}</span>
+          <div class="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center shrink-0">
+            ${voiceDetails.svg ? voiceDetails.svg('w-4 h-4') : window.MEDIT_ICONS.voiceHigh('w-4 h-4')}
+          </div>
           <div>
             <span class="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider">Locución por voz</span>
             <span class="text-xs font-bold text-white">${voiceDetails.label}</span>
@@ -629,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
               Ciclo <strong class="text-white">${breathState.currentCycle}</strong> de ${maxCycles}
             </span>
             <div class="flex items-center gap-1.5">
-              <button id="btn-toggle-breath-voice" class="p-1.5 px-2 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition-colors border border-slate-700/60" title="Locución por voz">
-                <span>${window.voicePlayer.getLevelDetails().emoji}</span>
+              <button id="btn-toggle-breath-voice" class="p-1.5 px-2 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors border border-slate-700/60" title="Locución por voz">
+                <span class="text-teal-400 flex items-center">${window.voicePlayer.getLevelDetails().svg ? window.voicePlayer.getLevelDetails().svg('w-3.5 h-3.5') : window.MEDIT_ICONS.voiceHigh('w-3.5 h-3.5')}</span>
                 <span id="label-breath-voice" class="text-[11px] font-medium">${window.voicePlayer.getLevelDetails().shortLabel}</span>
               </button>
               <button id="btn-toggle-breath-audio" class="p-1.5 px-2 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition-colors border border-slate-700/60">
@@ -739,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const details = window.voicePlayer.getLevelDetails();
       const btn = document.getElementById('btn-toggle-breath-voice');
       if (btn) {
-        btn.innerHTML = `<span>${details.emoji}</span><span id="label-breath-voice" class="text-[11px] font-medium">${details.shortLabel}</span>`;
+        btn.innerHTML = `<span class="text-teal-400 flex items-center">${details.svg ? details.svg('w-3.5 h-3.5') : window.MEDIT_ICONS.voiceHigh('w-3.5 h-3.5')}</span><span id="label-breath-voice" class="text-[11px] font-medium">${details.shortLabel}</span>`;
       }
     });
 
@@ -1171,8 +1173,8 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <div class="flex items-center gap-2">
-            <button id="btn-toggle-voice-timer" class="w-9 h-9 rounded-full bg-slate-900/80 text-slate-300 hover:text-white border border-slate-800 transition-colors flex items-center justify-center relative group" title="Locución por voz">
-              <span>${window.voicePlayer.getLevelDetails().emoji}</span>
+            <button id="btn-toggle-voice-timer" class="w-9 h-9 rounded-full bg-slate-900/80 text-teal-400 hover:text-white border border-slate-800 transition-colors flex items-center justify-center relative group" title="Locución por voz">
+              <span>${window.voicePlayer.getLevelDetails().svg ? window.voicePlayer.getLevelDetails().svg('w-4 h-4') : window.MEDIT_ICONS.voiceHigh('w-4 h-4')}</span>
             </button>
             <button id="btn-toggle-clock" class="w-9 h-9 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center justify-center" title="Alternar reloj">
               ${timerState.hideClock ? window.MEDIT_ICONS.eye('w-4 h-4 text-teal-400') : window.MEDIT_ICONS.eyeOff('w-4 h-4')}
@@ -1240,18 +1242,18 @@ document.addEventListener('DOMContentLoaded', () => {
               <label class="text-xs text-slate-400">¿Cómo te sientes ahora?</label>
               <div class="flex justify-center gap-2 sm:gap-3">
                 ${[
-                  { val: 1, e: '😴', l: 'Cansado' },
-                  { val: 2, e: '😐', l: 'Neutro' },
-                  { val: 3, e: '🙂', l: 'Calmado' },
-                  { val: 4, e: '😌', l: 'En paz' },
-                  { val: 5, e: '⚡', l: 'Renovado' }
+                  { val: 1, svg: window.MEDIT_ICONS.moodTired, l: 'Cansado' },
+                  { val: 2, svg: window.MEDIT_ICONS.moodNeutral, l: 'Neutro' },
+                  { val: 3, svg: window.MEDIT_ICONS.moodCalm, l: 'Calmado' },
+                  { val: 4, svg: window.MEDIT_ICONS.moodPeaceful, l: 'En paz' },
+                  { val: 5, svg: window.MEDIT_ICONS.moodRenewed, l: 'Renovado' }
                 ].map((item) => `
                   <button data-val="${item.val}" class="btn-rate-mood flex flex-col items-center p-2 sm:p-2.5 rounded-xl border transition-all ${
                     timerState.ratingAfter === item.val
-                      ? 'bg-teal-500/20 border-teal-500/60 scale-105 shadow-md'
-                      : 'bg-slate-800/60 border-slate-700/60 text-slate-400'
+                      ? 'bg-teal-500/20 border-teal-500/60 text-teal-300 scale-105 shadow-md'
+                      : 'bg-slate-800/60 border-slate-700/60 text-slate-400 hover:text-slate-200'
                   }">
-                    <span class="text-xl sm:text-2xl">${item.e}</span>
+                    <span class="flex items-center justify-center">${item.svg('w-6 h-6')}</span>
                     <span class="text-[9px] sm:text-[10px] mt-1">${item.l}</span>
                   </button>
                 `).join('')}
@@ -1288,7 +1290,8 @@ document.addEventListener('DOMContentLoaded', () => {
       window.habitStorage.save(state);
       const btn = document.getElementById('btn-toggle-voice-timer');
       if (btn) {
-        btn.innerHTML = `<span>${window.voicePlayer.getLevelDetails().emoji}</span>`;
+        const details = window.voicePlayer.getLevelDetails();
+        btn.innerHTML = `<span>${details.svg ? details.svg('w-4 h-4') : window.MEDIT_ICONS.voiceHigh('w-4 h-4')}</span>`;
       }
     });
 
@@ -1768,7 +1771,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </span>
                   </div>
                   <div class="flex items-center gap-2">
-                    ${sess.ratingAfter ? `<span class="px-2 py-0.5 rounded bg-teal-500/10 text-teal-300 border border-teal-500/20 text-[10px] sm:text-[11px]">Estado: ${sess.ratingAfter}/5</span>` : ''}
+                    ${sess.ratingAfter ? `<span class="px-2 py-0.5 rounded bg-teal-500/10 text-teal-300 border border-teal-500/20 text-[10px] sm:text-[11px] flex items-center gap-1">${window.getMoodSvg ? window.getMoodSvg(sess.ratingAfter, 'w-3 h-3 text-teal-300') : ''}<span>Estado: ${sess.ratingAfter}/5</span></span>` : ''}
                     <span class="text-emerald-400">${window.MEDIT_ICONS.check('w-4 h-4')}</span>
                   </div>
                 </div>
@@ -1946,8 +1949,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="text-sm text-slate-300 max-w-sm mx-auto mb-6">
             Has roto el bucle del piloto automático. Tu sistema nervioso está más regulado y tu atención está en el presente.
           </p>
-          <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-xs text-emerald-300 mb-6">
-            ✨ 60 segundos registrados en tu racha diaria sin culpas.
+          <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-xs text-emerald-300 mb-6 flex items-center justify-center gap-2">
+            ${window.MEDIT_ICONS.sparkle('w-4 h-4 text-emerald-400 shrink-0')}
+            <span>60 segundos registrados en tu racha diaria sin culpas.</span>
           </div>
           <button id="btn-close-stop-done" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 font-bold text-sm shadow-xl active:scale-95">
             Volver a mi día con serenidad

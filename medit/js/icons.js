@@ -277,24 +277,84 @@ window.MEDIT_ICONS = {
 
   voiceOff: (cls = 'w-4 h-4') => `
     <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="1" y1="1" x2="23" y2="23"/>
-      <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/>
-      <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/>
-      <line x1="12" y1="19" x2="12" y2="23"/>
-      <line x1="8" y1="23" x2="16" y2="23"/>
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  `,
+
+  // Mood Tracker SVGs
+  moodTired: (cls = 'w-6 h-6') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 11.5h2.5"/>
+      <path d="M13.5 11.5H16"/>
+      <path d="M10 16h4"/>
+    </svg>
+  `,
+
+  moodNeutral: (cls = 'w-6 h-6') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="9" y1="10" x2="9.01" y2="10" stroke-width="2.5"/>
+      <line x1="15" y1="10" x2="15.01" y2="10" stroke-width="2.5"/>
+      <line x1="9" y1="15" x2="15" y2="15"/>
+    </svg>
+  `,
+
+  moodCalm: (cls = 'w-6 h-6') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="9" y1="10" x2="9.01" y2="10" stroke-width="2.5"/>
+      <line x1="15" y1="10" x2="15.01" y2="10" stroke-width="2.5"/>
+      <path d="M8.5 14.5c1 .9 2.1 1.5 3.5 1.5s2.5-.6 3.5-1.5"/>
+    </svg>
+  `,
+
+  moodPeaceful: (cls = 'w-6 h-6') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M7.5 10.5c.8-.9 1.7-.9 2.5 0"/>
+      <path d="M14 10.5c.8-.9 1.7-.9 2.5 0"/>
+      <path d="M8.5 14.5c1 1.2 2.1 1.8 3.5 1.8s2.5-.6 3.5-1.8"/>
+    </svg>
+  `,
+
+  moodRenewed: (cls = 'w-6 h-6') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 6.5l1.6 3.9 3.9 1.6-3.9 1.6L12 17.5l-1.6-3.9L6.5 12l3.9-1.6L12 6.5z" fill="currentColor"/>
     </svg>
   `
 };
 
 // Helper to get anchor icon SVG
-window.getAnchorSvg = function(anchorId, cls = 'w-5 h-5') {
+window.getAnchorSvg = function(anchorIdOrIcon, cls = 'w-5 h-5') {
   const map = {
     'laptop-close': window.MEDIT_ICONS.laptop,
+    'laptop': window.MEDIT_ICONS.laptop,
     'morning-coffee': window.MEDIT_ICONS.coffee,
+    'coffee': window.MEDIT_ICONS.coffee,
     'pre-meeting-stop': window.MEDIT_ICONS.calendar,
+    'calendar': window.MEDIT_ICONS.calendar,
     'doorway-threshold': window.MEDIT_ICONS.door,
+    'door': window.MEDIT_ICONS.door,
     'night-unplug': window.MEDIT_ICONS.moon,
-    'midday-reset': window.MEDIT_ICONS.bolt
+    'moon': window.MEDIT_ICONS.moon,
+    'midday-reset': window.MEDIT_ICONS.bolt,
+    'bolt': window.MEDIT_ICONS.bolt
   };
-  return map[anchorId] ? map[anchorId](cls) : window.MEDIT_ICONS.sparkle(cls);
+  return map[anchorIdOrIcon] ? map[anchorIdOrIcon](cls) : window.MEDIT_ICONS.sparkle(cls);
+};
+
+// Helper to get mood SVG
+window.getMoodSvg = function(val, cls = 'w-6 h-6') {
+  const map = {
+    1: window.MEDIT_ICONS.moodTired,
+    2: window.MEDIT_ICONS.moodNeutral,
+    3: window.MEDIT_ICONS.moodCalm,
+    4: window.MEDIT_ICONS.moodPeaceful,
+    5: window.MEDIT_ICONS.moodRenewed
+  };
+  return map[val] ? map[val](cls) : window.MEDIT_ICONS.moodCalm(cls);
 };
