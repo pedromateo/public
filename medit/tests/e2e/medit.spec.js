@@ -20,7 +20,7 @@ test.describe('Medit PWA — E2E Tests', () => {
 
     // 1. Navegar a Biblioteca
     await page.locator('button[data-tab="library"]').click();
-    await expect(page.locator('h2')).toContainText('Biblioteca de Técnicas');
+    await expect(page.locator('h2').first()).toContainText('Biblioteca de Técnicas');
 
     // Subpestaña Respiración: 4 protocolos
     await page.locator('button[data-subtab="breathe"]').click();
@@ -114,7 +114,7 @@ test.describe('Medit PWA — E2E Tests', () => {
 
     // Salir de la sesión con botón cerrar
     await page.locator('#btn-cancel-timer').click();
-    await expect(page.locator('h2')).toContainText('Biblioteca de Técnicas');
+    await expect(page.locator('h2').first()).toContainText('Biblioteca de Técnicas');
   });
 
   test('Protocolo S.T.O.P. Modal (60s) desde selector de 1 min', async ({ page }) => {

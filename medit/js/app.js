@@ -712,13 +712,13 @@ document.addEventListener('DOMContentLoaded', () => {
         breathState.totalElapsed = 0;
         breathState.isCompleted = false;
         breathState.isRunning = false;
-        renderBreathe();
+        if (currentTab === 'library') renderLibrary(); else renderBreathe();
       });
     });
 
     document.getElementById('btn-toggle-breath-audio')?.addEventListener('click', () => {
       breathState.soundCues = !breathState.soundCues;
-      renderBreathe();
+      if (currentTab === 'library') renderLibrary(); else renderBreathe();
     });
 
     document.getElementById('btn-reset-breath')?.addEventListener('click', () => {
@@ -729,7 +729,7 @@ document.addEventListener('DOMContentLoaded', () => {
       breathState.totalElapsed = 0;
       breathState.isCompleted = false;
       breathState.isRunning = false;
-      renderBreathe();
+      if (currentTab === 'library') renderLibrary(); else renderBreathe();
     });
 
     document.getElementById('btn-toggle-breath-voice')?.addEventListener('click', () => {
@@ -749,7 +749,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopBreathLoop();
         breathState.isRunning = false;
         if (runBtn) runBtn.textContent = 'Comenzar';
-        renderBreathe();
+        if (currentTab === 'library') renderLibrary(); else renderBreathe();
       } else {
         if (breathState.isCompleted) {
           breathState.currentCycle = 1;
@@ -1057,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sec = parseInt(btn.dataset.sec, 10);
         timerState.selectedSeconds = sec;
         timerState.remainingSeconds = sec;
-        renderTimer();
+        if (currentTab === 'library') renderLibrary(); else renderTimer();
       });
     });
 
@@ -1311,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isActive = false;
       timerState.isPaused = false;
       window.soundEngine.stopAmbient();
-      renderTimer();
+      if (currentTab === 'library') renderLibrary(); else renderTimer();
     });
 
     document.getElementById('btn-toggle-pause')?.addEventListener('click', () => {
@@ -1359,7 +1359,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isActive = false;
       timerState.isFinished = false;
       timerState.note = '';
-      renderTimer();
+      if (currentTab === 'library') renderLibrary(); else renderTimer();
     });
   }
 
@@ -1647,7 +1647,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const topDiv = mainContent.firstElementChild;
       if (topDiv) {
         const defaultHeader = topDiv.querySelector('.text-center.space-y-1');
-        if (defaultHeader) defaultHeader.classList.add('hidden');
+        if (defaultHeader) defaultHeader.remove();
 
         const headerPlaceholder = document.createElement('div');
         headerPlaceholder.innerHTML = subnavHtml;
