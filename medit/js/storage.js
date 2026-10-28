@@ -14,7 +14,8 @@ const DEFAULT_STATE = {
   ambientVolume: 0.35,
   completedArticleIds: [],
   soundCues: true,
-  hideClockDefault: false
+  hideClockDefault: false,
+  voiceLevel: 'balanced'
 };
 
 function getTodayString() {

@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // App State
   let state = window.habitStorage.load();
   let currentTab = 'home';
+  let librarySubTab = 'breathe'; // 'breathe' | 'timer' | 'science'
+
+  if (state.voiceLevel && window.voicePlayer) {
+    window.voicePlayer.setLevel(state.voiceLevel);
+  }
 
   // Breathing Visualizer State
   let breathState = {
@@ -37,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     intervalBell: 'auto', // 'auto' plays at 5m/10m for longer sessions
     ratingAfter: 4,
     note: '',
-    timerId: null
+    timerId: null,
+    lastSpokenPhase: -1
   };
 
   // S.T.O.P. Modal State
@@ -154,10 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Navigation tab switcher
-  function switchTab(tabId) {
+  function switchTab(tabId, subTab = null) {
     currentTab = tabId;
+    if (subTab) librarySubTab = subTab;
+
     navTabs.forEach((btn) => {
-      const isCurrent = btn.dataset.tab === tabId;
+      const targetTab = btn.dataset.tab;
+      const isCurrent =
+        targetTab === tabId ||
+        (targetTab === 'library' && ['library', 'breathe', 'timer', 'learn'].includes(tabId)) ||
+        (targetTab === 'progress' && ['progress', 'habits'].includes(tabId));
+
       btn.classList.toggle('text-teal-400', isCurrent);
       btn.classList.toggle('font-medium', isCurrent);
       btn.classList.toggle('text-slate-400', !isCurrent);
@@ -179,20 +192,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentTab === 'home') {
       renderHome();
+    } else if (currentTab === 'library' || currentTab === 'learn') {
+      renderLibrary();
     } else if (currentTab === 'breathe') {
       renderBreathe();
     } else if (currentTab === 'timer') {
       renderTimer();
-    } else if (currentTab === 'learn') {
-      renderLearn();
-    } else if (currentTab === 'habits') {
-      renderHabits();
+    } else if (currentTab === 'progress' || currentTab === 'habits') {
+      renderProgress();
     }
   }
 
   // ==========================================
-  // VIEW 1: HOME (Inicio)
+  // VIEW 1: HOME (Inicio Simplificado)
   // ==========================================
+  const TIME_OPTIONS = [
+    {
+      seconds: 60,
+      label: '1 min',
+      tag: 'Micro-Pausa',
+      badge: 'Cero Fricción',
+      title: 'Pausa S.T.O.P.',
+      desc: 'Corte de inercia y rumiación mental en 4 pasos guiados.',
+      actionType: 'stop',
+      science: 'Rompe el ciclo de reactividad simpática en 60 segundos antes de cambiar de tarea.'
+    },
+    {
+      seconds: 120,
+      label: '2 min',
+      tag: 'Reseteo Rápido',
+      badge: 'Stanford · 2m',
+      title: 'Suspiro Fisiológico Cíclico',
+      desc: 'Doble inhalación nasal y exhalación bucal prolongada.',
+      actionType: 'breathe',
+      protocolId: 'cyclic-sighing',
+      science: 'Estudio Stanford (Cell Reports Medicine, 2023). Baja la frecuencia cardíaca y la activación simpática de inmediato.'
+    },
+    {
+      seconds: 180,
+      label: '3 min',
+      tag: 'Foco & Calma',
+      badge: 'Navy SEALs · 3m',
+      title: 'Respiración Cuadrada (Box)',
+      desc: 'Regulación del sistema autonómico en 4 tiempos equilibrados.',
+      actionType: 'breathe',
+      protocolId: 'box-breathing',
+      science: 'Equilibra el sistema simpático y parasimpático antes de momentos de alta demanda ejecutiva.'
+    },
+    {
+      seconds: 300,
+      label: '5 min',
+      tag: 'Pausa Zen',
+      badge: 'Presencia · 5m',
+      title: 'Meditación Zen con Cuenco',
+      desc: 'Silencio consciente con cuenco tibetano e intervalos de presencia.',
+      actionType: 'timer',
+      secondsParam: 300,
+      science: 'Desacelera el flujo de pensamientos intrusivos y renueva la claridad mental.'
+    },
+    {
+      seconds: 600,
+      label: '10 min',
+      tag: 'Atención Dual',
+      badge: 'Reset · 10m',
+      title: 'Reset Mental Profundo',
+      desc: 'Entrenamiento de foco en respiración + monitoreo abierto.',
+      actionType: 'timer',
+      secondsParam: 600,
+      science: 'Entrena la corteza prefrontal y reduce la tendencia a la distracción recurrente.'
+    },
+    {
+      seconds: 720,
+      label: '12 min',
+      tag: 'Peak Mind ★',
+      badge: 'Amishi Jha · 12m',
+      title: 'Umbral Neuroprotector',
+      desc: 'La dosis diaria mínima demostrada contra el agotamiento cognitivo.',
+      actionType: 'timer',
+      secondsParam: 720,
+      science: 'Investigación clínica de la Dra. Amishi Jha: 12 min/día blinda la memoria de trabajo contra el burnout.'
+    },
+    {
+      seconds: 900,
+      label: '15 min',
+      tag: 'NSDR Stanford',
+      badge: 'Dopamina · 15m',
+      title: 'Descanso Profundo (NSDR)',
+      desc: 'Non-Sleep Deep Rest: restauración ejecutiva y calma total.',
+      actionType: 'timer',
+      secondsParam: 900,
+      science: 'Protocolo de Stanford (Dr. Huberman) para restaurar las reservas de dopamina y energía mental.'
+    }
+  ];
+
+  let pendingTimeOption = null;
+
   function renderHome() {
     const activeAnchor =
       window.MEDIT_DATA.HABIT_ANCHORS.find((a) => a.id === state.activeAnchorId) ||
@@ -203,166 +297,102 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDoneToday = state.lastActiveDate === todayStr;
 
     mainContent.innerHTML = `
-      <div class="space-y-5 animate-fade-in pb-20">
-        <!-- Hero Card -->
-        <div class="bg-gradient-to-br from-[#0e172a] via-[#0b101e] to-[#080d17] border border-slate-800 rounded-3xl p-6 sm:p-7 shadow-xl relative overflow-hidden">
+      <div class="space-y-6 animate-fade-in pb-20">
+        <!-- Streak & Daily Goal Summary Card -->
+        <div class="bg-gradient-to-br from-[#0e172a] via-[#0b101e] to-[#080d17] border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl relative overflow-hidden">
           <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          
-          <div class="relative z-10">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-400 border border-teal-500/30">
-                Ciencia & Micro-Hábitos
-              </span>
-              <span class="text-xs text-slate-400">Sin culpas · Alta Adherencia</span>
-            </div>
 
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
-              ${isDoneToday ? '¡Objetivo de hoy completado!' : 'Tu momento de calma hoy'}
-            </h2>
-
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mb-5">
-              ${
-                isDoneToday
-                  ? 'Has entrenado tu corteza prefrontal hoy. Cualquier pausa adicional es un extra para tu claridad mental.'
-                  : 'Solo necesitas entre 60 segundos y 2 minutos para romper la inercia del estrés y resetear tu sistema nervioso.'
-              }
-            </p>
-
-            <!-- Active Anchor Banner -->
-            <div id="btn-open-anchor-modal" class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800/80 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
-              <div class="flex items-center gap-3">
-                <div class="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 group-hover:scale-105 transition-transform flex items-center justify-center">
-                  ${window.getAnchorSvg ? window.getAnchorSvg(activeAnchor.id, 'w-5 h-5 text-teal-300') : activeAnchor.icon}
-                </div>
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <span class="p-2.5 rounded-2xl ${isDoneToday ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/15 text-amber-400 border border-amber-500/30'} flex items-center justify-center">
+                  ${isDoneToday ? window.MEDIT_ICONS.check('w-5 h-5') : window.MEDIT_ICONS.flame('w-5 h-5')}
+                </span>
                 <div>
-                  <span class="text-[10px] text-teal-300 uppercase tracking-widest font-bold block">
-                    Tu Anclaje Diario (Habit Stacking)
-                  </span>
-                  <p class="text-xs font-semibold text-white tracking-tight">
-                    ${activeAnchor.title}
-                  </p>
-                  <p class="text-[11px] text-slate-400 line-clamp-1">${activeAnchor.cue}</p>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Tu Racha Cero Culpas</span>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-2xl sm:text-3xl font-extrabold text-white font-mono">${state.streakDays}</span>
+                    <span class="text-xs text-slate-300 font-medium">${state.streakDays === 1 ? 'día consecutivo' : 'días consecutivos'}</span>
+                  </div>
                 </div>
               </div>
-              <span class="text-xs text-teal-400 font-semibold shrink-0 flex items-center gap-1">Cambiar ${window.MEDIT_ICONS.arrowRight('w-3 h-3')}</span>
+
+              <div class="text-right">
+                <span class="text-[10px] font-semibold text-slate-400 block">Total meditado</span>
+                <span class="text-xs sm:text-sm font-bold font-mono text-teal-300">${Math.round(state.totalSeconds / 60)} min</span>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-2xl ${isDoneToday ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-300' : 'bg-slate-900/80 border border-slate-800 text-slate-300'} text-xs flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full ${isDoneToday ? 'bg-emerald-400' : 'bg-amber-400 animate-pulse'}"></span>
+                <span>
+                  ${isDoneToday ? '<strong>¡Objetivo de hoy completado!</strong> Cualquier pausa adicional sumará claridad.' : '<strong>Pausa de hoy pendiente:</strong> Desde solo 60 segundos mantienes activa tu racha.'}
+                </span>
+              </div>
+            </div>
+
+            <!-- Compact Habit Anchor Reminder -->
+            <div id="btn-open-anchor-modal" class="p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
+              <div class="flex items-center gap-2.5">
+                <span class="p-1.5 rounded-xl bg-teal-500/10 text-teal-300 flex items-center justify-center">
+                  ${window.getAnchorSvg ? window.getAnchorSvg(activeAnchor.id, 'w-4 h-4 text-teal-300') : '📍'}
+                </span>
+                <div>
+                  <span class="text-[9px] uppercase font-bold tracking-wider text-teal-400 block">Tu anclaje diario</span>
+                  <p class="text-xs font-semibold text-white tracking-tight">${activeAnchor.title}</p>
+                </div>
+              </div>
+              <span class="text-[11px] text-teal-400 font-medium shrink-0 flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                Cambiar ${window.MEDIT_ICONS.chevronRight('w-3.5 h-3.5')}
+              </span>
             </div>
           </div>
         </div>
 
-        <!-- 2 Instant Action Buttons -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <!-- Button 1: STOP 60s -->
-          <div id="btn-start-stop-protocol" class="group bg-gradient-to-br from-[#12192b] to-[#0c1220] border border-slate-800 hover:border-amber-500/50 p-4 sm:p-5 rounded-3xl shadow-lg cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2 sm:mb-3">
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/20">
-                  Prisa / Transición
+        <!-- Central Question: ¿Cuánto tiempo tienes para meditar ahora? -->
+        <div class="space-y-3">
+          <div class="px-1">
+            <h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">¿Cuánto tiempo tienes para ti ahora?</h3>
+            <p class="text-xs text-slate-400">Pulsa tu tiempo disponible y te guiaremos en la práctica ideal.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            ${TIME_OPTIONS.map((opt) => `
+              <button data-time-sec="${opt.seconds}" class="btn-select-time group p-3.5 sm:p-4 rounded-3xl bg-[#0e1422] border border-slate-800/90 hover:border-teal-500/50 hover:bg-slate-900/90 text-left transition-all active:scale-[0.99] flex items-center justify-between gap-3 shadow-lg">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-teal-500/15 to-indigo-500/10 border border-teal-500/25 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform text-center p-1">
+                    <span class="text-xs sm:text-sm font-black font-mono text-teal-300 text-center leading-none whitespace-nowrap">${opt.label}</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1.5 mb-0.5">
+                      <span class="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700/60">${opt.badge}</span>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-teal-200 transition-colors">${opt.title}</h4>
+                    <p class="text-[11px] text-slate-400 line-clamp-1 mt-0.5">${opt.desc}</p>
+                  </div>
+                </div>
+                <span class="p-2 rounded-xl bg-slate-900 text-slate-400 group-hover:text-teal-400 group-hover:bg-teal-500/10 transition-colors shrink-0">
+                  ${window.MEDIT_ICONS.chevronRight('w-4 h-4')}
                 </span>
-                <span class="text-xs font-mono font-bold text-slate-400">60 seg</span>
-              </div>
-              <h3 class="text-sm sm:text-base font-bold text-white mb-1">Pausa S.T.O.P.</h3>
-              <p class="text-xs text-slate-300 leading-relaxed mb-3 sm:mb-4">
-                Stop, Take a breath, Observe, Proceed. Desconecta de la rumiación entre tareas en 1 minuto.
-              </p>
-            </div>
-            <button class="w-full py-2.5 rounded-xl bg-amber-500/20 group-hover:bg-amber-400 text-amber-200 group-hover:text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
-              ${window.MEDIT_ICONS.play('w-3.5 h-3.5')} Iniciar Protocolo S.T.O.P.
-            </button>
-          </div>
-
-          <!-- Button 2: Suspiro Fisiológico Stanford -->
-          <div id="btn-start-sigh-protocol" class="group bg-gradient-to-br from-[#0e1b29] to-[#0a121d] border border-slate-800 hover:border-cyan-500/50 p-4 sm:p-5 rounded-3xl shadow-lg cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2 sm:mb-3">
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/20">
-                  Stanford Medicine
-                </span>
-                <span class="text-xs font-mono font-bold text-slate-400">90 seg</span>
-              </div>
-              <h3 class="text-sm sm:text-base font-bold text-white mb-1">Suspiro Fisiológico</h3>
-              <p class="text-xs text-slate-300 leading-relaxed mb-3 sm:mb-4">
-                Doble inhalación nasal + exhalación prolongada. Baja el ritmo cardíaco de golpe ante estrés agudo.
-              </p>
-            </div>
-            <button class="w-full py-2.5 rounded-xl bg-cyan-500/20 group-hover:bg-cyan-400 text-cyan-200 group-hover:text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
-              ${window.MEDIT_ICONS.breathe('w-3.5 h-3.5')} Respirar Ahora
-            </button>
-          </div>
-        </div>
-
-        <!-- Presets Grid: Including 10m, 12m, 15m -->
-        <div class="bg-[#0e1422] border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-xl space-y-3">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-xs sm:text-sm font-bold text-white tracking-tight">Micro & Macro Sesiones con Cuenco</h3>
-              <p class="text-[11px] sm:text-xs text-slate-400">Desde dosis de 1 minuto hasta el umbral neuroprotector de 12-15 min</p>
-            </div>
-            <button id="btn-go-to-timer" class="text-xs text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1 shrink-0 ml-2">
-              Personalizar ${window.MEDIT_ICONS.arrowRight('w-3 h-3')}
-            </button>
-          </div>
-
-          <!-- Micro Doses (1m to 5m) -->
-          <div class="grid grid-cols-4 gap-1.5 sm:gap-2 pt-1">
-            ${[
-              { sec: 60, l: '1 min', tag: 'Tiny' },
-              { sec: 120, l: '2 min', tag: 'Base' },
-              { sec: 180, l: '3 min', tag: 'Pausa' },
-              { sec: 300, l: '5 min', tag: 'Recarga' }
-            ].map(item => `
-              <button data-seconds="${item.sec}" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-slate-900 border border-slate-800 hover:border-teal-500/50 hover:bg-teal-500/10 text-center transition-all group">
-                <span class="text-sm sm:text-base font-black font-mono text-white group-hover:text-teal-300 block mb-0.5">${item.l}</span>
-                <span class="text-[9px] sm:text-[10px] text-slate-400 truncate block">${item.tag}</span>
               </button>
             `).join('')}
           </div>
-
-          <!-- Deeper 10-15 Min Doses (New Amishi Jha & NSDR) -->
-          <div class="pt-2 border-t border-slate-800/80">
-            <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-              Sesiones de 10 a 15 Minutos (Neuroprotección Cognitiva)
-            </span>
-            <div class="grid grid-cols-3 gap-2">
-              <button data-seconds="600" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 hover:bg-indigo-500/10 text-left transition-all">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs sm:text-sm font-black font-mono text-white">10 min</span>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-bold">Reset</span>
-                </div>
-                <p class="text-[10px] text-slate-400 line-clamp-1">Atención dual y foco</p>
-              </button>
-
-              <button data-seconds="720" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-gradient-to-br from-indigo-950/40 to-slate-900 border border-indigo-500/40 hover:border-teal-400 text-left transition-all shadow-md">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs sm:text-sm font-black font-mono text-teal-300">12 min</span>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-teal-400 text-slate-950 font-bold">Jha ★</span>
-                </div>
-                <p class="text-[10px] text-slate-300 line-clamp-1">Umbral anti-burnout</p>
-              </button>
-
-              <button data-seconds="900" class="btn-quick-timer p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 hover:bg-purple-500/10 text-left transition-all">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs sm:text-sm font-black font-mono text-white">15 min</span>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold">NSDR</span>
-                </div>
-                <p class="text-[10px] text-slate-400 line-clamp-1">Dopamina y descanso</p>
-              </button>
-            </div>
-          </div>
         </div>
 
-        <!-- Ambient Noise Toggle Widget -->
-        <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between gap-3">
+        <!-- Ambient Noise Quick Widget -->
+        <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex items-center justify-between gap-3">
           <div class="flex items-center gap-3">
-            <div class="p-2 sm:p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center">
-              ${window.MEDIT_ICONS.wave('w-5 h-5 text-cyan-400')}
+            <div class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center">
+              ${window.MEDIT_ICONS.wave('w-4 h-4 text-cyan-400')}
             </div>
             <div>
               <span class="text-xs font-bold text-white block">Ruido Marrón de Concentración</span>
-              <span class="text-[10px] sm:text-[11px] text-slate-400">Aísla ruidos del entorno y frena el parloteo mental</span>
+              <span class="text-[10px] text-slate-400">Aísla ruidos y frena la distracción</span>
             </div>
           </div>
 
-          <button id="btn-toggle-ambient" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border shrink-0 ${
+          <button id="btn-toggle-ambient" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all border shrink-0 ${
             state.ambientType !== 'none'
               ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20'
               : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white'
@@ -370,43 +400,23 @@ document.addEventListener('DOMContentLoaded', () => {
             ${state.ambientType !== 'none' ? 'Activo (Apagar)' : 'Encender'}
           </button>
         </div>
+      </div>
 
-        <!-- Daily Science Insight -->
-        <div id="btn-read-science-today" class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-teal-500/10 via-slate-900/80 to-indigo-500/10 border border-teal-500/20 hover:border-teal-500/40 transition-all cursor-pointer flex items-center justify-between gap-3 group">
-          <div class="flex items-start gap-2.5">
-            <span class="mt-0.5">${window.MEDIT_ICONS.sparkle('w-4 h-4 text-teal-400 shrink-0')}</span>
-            <div>
-              <span class="text-[10px] text-teal-400 uppercase tracking-wider font-bold block mb-0.5">
-                Neuro-Píldora: Dra. Amishi Jha
-              </span>
-              <p class="text-xs text-slate-200 font-medium leading-relaxed">
-                "12 minutos diarios de mindfulness es la dosis mínima demostrada para blindar tu memoria de trabajo bajo estrés intenso."
-              </p>
-            </div>
-          </div>
-          <span class="text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 transition-all text-sm shrink-0">
-            ${window.MEDIT_ICONS.chevronRight('w-4 h-4')}
-          </span>
+      <!-- Confirmation Modal / 1-Click Card -->
+      <div id="time-confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in" role="dialog" aria-modal="true">
+        <div id="time-confirm-card" class="relative w-full max-w-md bg-[#0d1424] border border-slate-800 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4" onclick="event.stopPropagation()">
+          <!-- Populated dynamically -->
         </div>
       </div>
     `;
 
     // Hook listeners
     document.getElementById('btn-open-anchor-modal')?.addEventListener('click', openAnchorModal);
-    document.getElementById('btn-start-stop-protocol')?.addEventListener('click', startStopModal);
-    document.getElementById('btn-start-sigh-protocol')?.addEventListener('click', () => {
-      breathState.protocolId = 'cyclic-sighing';
-      switchTab('breathe');
-    });
-    document.getElementById('btn-go-to-timer')?.addEventListener('click', () => switchTab('timer'));
-    document.getElementById('btn-read-science-today')?.addEventListener('click', () => switchTab('learn'));
 
-    document.querySelectorAll('.btn-quick-timer').forEach((btn) => {
+    document.querySelectorAll('.btn-select-time').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const sec = parseInt(btn.dataset.seconds, 10);
-        timerState.selectedSeconds = sec;
-        timerState.remainingSeconds = sec;
-        switchTab('timer');
+        const sec = parseInt(btn.dataset.timeSec, 10);
+        showTimeConfirmation(sec);
       });
     });
 
@@ -421,6 +431,131 @@ document.addEventListener('DOMContentLoaded', () => {
       window.habitStorage.save(state);
       renderHome();
     });
+
+    // Close confirmation modal on backdrop click
+    const confirmModalEl = document.getElementById('time-confirm-modal');
+    confirmModalEl?.addEventListener('click', (e) => {
+      if (e.target === confirmModalEl) {
+        confirmModalEl.classList.add('hidden');
+      }
+    });
+  }
+
+  function showTimeConfirmation(seconds) {
+    const opt = TIME_OPTIONS.find((o) => o.seconds === seconds) || TIME_OPTIONS[0];
+    pendingTimeOption = opt;
+
+    const modalEl = document.getElementById('time-confirm-modal');
+    const cardEl = document.getElementById('time-confirm-card');
+    if (!modalEl || !cardEl) return;
+
+    const voiceDetails = window.voicePlayer.getLevelDetails();
+
+    cardEl.innerHTML = `
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/40 font-mono">
+            ${opt.label}
+          </span>
+          <span class="text-xs text-slate-400 font-medium">Técnica Recomendada</span>
+        </div>
+        <button id="btn-close-confirm-modal" class="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          ${window.MEDIT_ICONS.close('w-5 h-5')}
+        </button>
+      </div>
+
+      <div class="space-y-2 py-1">
+        <h3 class="text-xl font-extrabold text-white tracking-tight">${opt.title}</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">${opt.desc}</p>
+        <div class="p-3 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-[11px] text-teal-300 leading-relaxed flex items-start gap-2">
+          <span class="mt-0.5">${window.MEDIT_ICONS.sparkle('w-3.5 h-3.5 text-teal-400 shrink-0')}</span>
+          <span><strong>Base científica:</strong> ${opt.science}</span>
+        </div>
+      </div>
+
+      <!-- Voice Guidance Setting Quick Toggle -->
+      <div class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="text-lg">${voiceDetails.emoji}</span>
+          <div>
+            <span class="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider">Locución por voz</span>
+            <span class="text-xs font-bold text-white">${voiceDetails.label}</span>
+          </div>
+        </div>
+        <button id="btn-confirm-cycle-voice" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-teal-300 border border-slate-700 text-xs font-semibold transition-colors flex items-center gap-1">
+          <span>Cambiar</span>
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-2 pt-2">
+        <button id="btn-start-confirmed-session" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-400 text-slate-950 font-bold text-sm shadow-xl shadow-teal-500/25 hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          ${window.MEDIT_ICONS.play('w-4 h-4 text-slate-950')} Comenzar Sesión (${opt.label})
+        </button>
+        <button id="btn-explore-library-from-confirm" class="w-full py-2.5 rounded-xl text-slate-400 hover:text-slate-200 text-xs font-semibold transition-colors text-center">
+          Ver todas las técnicas en la Biblioteca →
+        </button>
+      </div>
+    `;
+
+    modalEl.classList.remove('hidden');
+
+    document.getElementById('btn-close-confirm-modal')?.addEventListener('click', () => {
+      modalEl.classList.add('hidden');
+    });
+
+    document.getElementById('btn-explore-library-from-confirm')?.addEventListener('click', () => {
+      modalEl.classList.add('hidden');
+      switchTab('library');
+    });
+
+    document.getElementById('btn-confirm-cycle-voice')?.addEventListener('click', () => {
+      const newLvl = window.voicePlayer.cycleLevel();
+      state.voiceLevel = newLvl;
+      window.habitStorage.save(state);
+      showTimeConfirmation(seconds);
+    });
+
+    document.getElementById('btn-start-confirmed-session')?.addEventListener('click', () => {
+      modalEl.classList.add('hidden');
+      launchConfirmedSession(opt);
+    });
+  }
+
+  function launchConfirmedSession(opt) {
+    if (opt.actionType === 'stop') {
+      startStopModal();
+    } else if (opt.actionType === 'breathe') {
+      breathState.protocolId = opt.protocolId;
+      breathState.currentCycle = 1;
+      breathState.currentStepIdx = 0;
+      breathState.stepElapsed = 0;
+      breathState.totalElapsed = 0;
+      breathState.isCompleted = false;
+      breathState.isRunning = true;
+      switchTab('breathe');
+      startBreathLoop();
+      // Voice intro
+      window.voicePlayer.play('zen_inicio', 'intro');
+    } else if (opt.actionType === 'timer') {
+      timerState.selectedSeconds = opt.secondsParam;
+      timerState.remainingSeconds = opt.secondsParam;
+      timerState.isActive = true;
+      timerState.isPaused = false;
+      timerState.isFinished = false;
+      timerState.lastSpokenPhase = -1;
+
+      // Play bell & ambient
+      window.soundEngine.playBell(state.bellTone, state.soundVolume);
+      if (state.ambientType !== 'none') {
+        window.soundEngine.startAmbient(state.ambientType, state.ambientVolume);
+      }
+
+      startTimerLoop();
+      renderTimerFullscreen();
+      // Voice intro
+      window.voicePlayer.play('zen_inicio', 'intro');
+    }
   }
 
   // ==========================================
@@ -493,9 +628,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="text-xs font-medium text-slate-400">
               Ciclo <strong class="text-white">${breathState.currentCycle}</strong> de ${maxCycles}
             </span>
-            <button id="btn-toggle-breath-audio" class="p-1.5 px-2.5 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors border border-slate-700/60">
-              ${breathState.soundCues ? window.MEDIT_ICONS.soundOn('w-3.5 h-3.5 text-teal-400') + '<span>Tono activo</span>' : window.MEDIT_ICONS.soundOff('w-3.5 h-3.5 text-slate-500') + '<span>Silencio</span>'}
-            </button>
+            <div class="flex items-center gap-1.5">
+              <button id="btn-toggle-breath-voice" class="p-1.5 px-2 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition-colors border border-slate-700/60" title="Locución por voz">
+                <span>${window.voicePlayer.getLevelDetails().emoji}</span>
+                <span id="label-breath-voice" class="text-[11px] font-medium">${window.voicePlayer.getLevelDetails().shortLabel}</span>
+              </button>
+              <button id="btn-toggle-breath-audio" class="p-1.5 px-2 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition-colors border border-slate-700/60">
+                ${breathState.soundCues ? window.MEDIT_ICONS.soundOn('w-3.5 h-3.5 text-teal-400') + '<span class="text-[11px]">Tono</span>' : window.MEDIT_ICONS.soundOff('w-3.5 h-3.5 text-slate-500') + '<span class="text-[11px]">Silencio</span>'}
+              </button>
+            </div>
           </div>
 
           <!-- Central Expanding Rings -->
@@ -591,6 +732,17 @@ document.addEventListener('DOMContentLoaded', () => {
       renderBreathe();
     });
 
+    document.getElementById('btn-toggle-breath-voice')?.addEventListener('click', () => {
+      const newLvl = window.voicePlayer.cycleLevel();
+      state.voiceLevel = newLvl;
+      window.habitStorage.save(state);
+      const details = window.voicePlayer.getLevelDetails();
+      const btn = document.getElementById('btn-toggle-breath-voice');
+      if (btn) {
+        btn.innerHTML = `<span>${details.emoji}</span><span id="label-breath-voice" class="text-[11px] font-medium">${details.shortLabel}</span>`;
+      }
+    });
+
     document.getElementById('btn-toggle-breath-run')?.addEventListener('click', () => {
       const runBtn = document.getElementById('btn-toggle-breath-run');
       if (breathState.isRunning) {
@@ -616,11 +768,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function playBreathStepVoice(action, prevAction = null) {
+    if (breathState.currentCycle !== 1) return;
+    if (action === 'inhale') {
+      window.voicePlayer.play('resp_inhala', 'step');
+    } else if (action === 'topInhale') {
+      window.voicePlayer.play('resp_inhala_extra', 'step');
+    } else if (action === 'hold') {
+      if (prevAction === 'exhale') {
+        window.voicePlayer.play('resp_vacio', 'step');
+      } else {
+        window.voicePlayer.play('resp_sosten', 'step');
+      }
+    } else if (action === 'exhale') {
+      window.voicePlayer.play('resp_exhala', 'step');
+    }
+  }
+
   function startBreathLoop() {
     stopBreathLoop();
     const protocol =
       window.MEDIT_DATA.BREATH_PROTOCOLS.find((p) => p.id === breathState.protocolId) ||
       window.MEDIT_DATA.BREATH_PROTOCOLS[0];
+
+    // Play first step voice cue in cycle 1
+    if (breathState.currentCycle === 1 && breathState.stepElapsed <= 0.15) {
+      playBreathStepVoice(protocol.steps[breathState.currentStepIdx].action);
+    }
 
     breathState.timerId = setInterval(() => {
       breathState.totalElapsed += 0.1;
@@ -628,12 +802,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const currentStep = protocol.steps[breathState.currentStepIdx];
       if (breathState.stepElapsed >= currentStep.duration) {
+        const prevAction = currentStep.action;
         breathState.stepElapsed = 0;
 
         if (breathState.currentStepIdx < protocol.steps.length - 1) {
           breathState.currentStepIdx += 1;
+          const nextAction = protocol.steps[breathState.currentStepIdx].action;
+          playBreathStepVoice(nextAction, prevAction);
           if (breathState.soundCues) {
-            const isHigh = protocol.steps[breathState.currentStepIdx].action.includes('inhale');
+            const isHigh = nextAction.includes('inhale');
             window.soundEngine.playBreathCue(isHigh, state.soundVolume);
           }
         } else {
@@ -641,6 +818,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (breathState.currentCycle < protocol.defaultCycles) {
             breathState.currentCycle += 1;
             breathState.currentStepIdx = 0;
+            const nextAction = protocol.steps[0].action;
+            playBreathStepVoice(nextAction, prevAction);
             if (breathState.soundCues) {
               window.soundEngine.playBreathCue(true, state.soundVolume);
             }
@@ -650,6 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
             breathState.isCompleted = true;
             breathState.isRunning = false;
             window.soundEngine.playBell(state.bellTone, state.soundVolume);
+            window.voicePlayer.play('zen_cierre', 'outro');
 
             if (typeof window.confetti === 'function') {
               window.confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
@@ -713,6 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(breathState.timerId);
       breathState.timerId = null;
     }
+    if (window.voicePlayer) window.voicePlayer.stop();
   }
 
   // ==========================================
@@ -755,13 +936,12 @@ document.addEventListener('DOMContentLoaded', () => {
               ].map((p) => {
                 const isSel = timerState.selectedSeconds === p.sec;
                 return `
-                  <button data-sec="${p.sec}" class="btn-timer-preset p-2.5 sm:p-3 rounded-2xl border text-center transition-all ${
+                  <button data-sec="${p.sec}" class="btn-timer-preset p-3 sm:p-3.5 rounded-2xl border text-center flex items-center justify-center transition-all ${
                     isSel
                       ? 'bg-teal-500/20 border-teal-500/60 shadow-lg text-white'
                       : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
                   }">
-                    <p class="text-sm sm:text-base font-extrabold font-mono leading-none mb-1">${p.label}</p>
-                    <p class="text-[9px] sm:text-[10px] text-slate-400 truncate">${p.tag}</p>
+                    <p class="text-xs sm:text-sm font-extrabold font-mono leading-none text-center whitespace-nowrap">${p.label}</p>
                   </button>
                 `;
               }).join('')}
@@ -886,6 +1066,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isPaused = false;
       timerState.isFinished = false;
       timerState.remainingSeconds = timerState.selectedSeconds;
+      timerState.lastSpokenPhase = -1;
 
       // Play bell & ambient
       window.soundEngine.playBell(state.bellTone, state.soundVolume);
@@ -895,10 +1076,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
       startTimerLoop();
       renderTimerFullscreen();
+      // Voice intro
+      window.voicePlayer.play('zen_inicio', 'intro');
     });
   }
 
+  function updateTimerFullscreenDOM() {
+    const formatTime = (secs) => {
+      const m = Math.floor(secs / 60);
+      const s = secs % 60;
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    };
+
+    const progressPercent =
+      ((timerState.selectedSeconds - timerState.remainingSeconds) / timerState.selectedSeconds) * 100;
+
+    let phaseIdx = 0;
+    if (progressPercent >= 20 && progressPercent < 45) phaseIdx = 1;
+    else if (progressPercent >= 45 && progressPercent < 70) phaseIdx = 2;
+    else if (progressPercent >= 70 && progressPercent < 88) phaseIdx = 3;
+    else if (progressPercent >= 88) phaseIdx = 4;
+
+    if (timerState.lastSpokenPhase !== phaseIdx) {
+      timerState.lastSpokenPhase = phaseIdx;
+      if (phaseIdx === 0) window.voicePlayer.play('zen_fase1', 'phase');
+      else if (phaseIdx === 1) window.voicePlayer.play('zen_fase2', 'phase');
+      else if (phaseIdx === 2) window.voicePlayer.play('zen_fase3', 'phase');
+      else if (phaseIdx === 3) window.voicePlayer.play('zen_fase4', 'phase');
+    }
+
+    const ring = document.getElementById('timer-progress-ring');
+    if (ring) {
+      const offset = `${283 - (283 * progressPercent) / 100}%`;
+      ring.style.strokeDashoffset = offset;
+      ring.setAttribute('stroke-dashoffset', offset);
+    }
+
+    const timeText = document.getElementById('timer-countdown-text');
+    if (timeText) {
+      timeText.textContent = formatTime(timerState.remainingSeconds);
+    }
+
+    const guidanceList = (window.MEDIT_DATA && window.MEDIT_DATA.SESSION_GUIDANCE)
+      ? window.MEDIT_DATA.SESSION_GUIDANCE.phasePrompts
+      : [];
+    const currentGuidance = guidanceList.find(g => progressPercent >= g.minPercent && progressPercent < g.maxPercent)
+      || guidanceList[guidanceList.length - 1]
+      || { stage: 'Presencia Lúcida', prompt: 'Si tu mente se dispersa, nótalo con amabilidad y regresa a la sensación del aire.' };
+
+    const stageEl = document.getElementById('timer-guidance-stage');
+    if (stageEl && stageEl.textContent.trim() !== currentGuidance.stage) {
+      stageEl.textContent = currentGuidance.stage;
+    }
+    const promptEl = document.getElementById('timer-guidance-prompt');
+    if (promptEl && promptEl.textContent.trim() !== currentGuidance.prompt) {
+      promptEl.textContent = currentGuidance.prompt;
+    }
+  }
+
   function renderTimerFullscreen() {
+    const container = document.getElementById('timer-fullscreen-container');
+    const currentMode = container?.dataset?.mode;
+
+    // Smooth in-place DOM update without tearing down the subtree while active
+    if (!timerState.isFinished && currentMode === 'active') {
+      updateTimerFullscreenDOM();
+      return;
+    }
+
     const formatTime = (secs) => {
       const m = Math.floor(secs / 60);
       const s = secs % 60;
@@ -917,7 +1162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       || { stage: 'Presencia Lúcida', prompt: 'Si tu mente se dispersa, nótalo con amabilidad y regresa a la sensación del aire.' };
 
     mainContent.innerHTML = `
-      <div class="fixed inset-0 z-50 bg-[#060911] text-white flex flex-col justify-between p-5 sm:p-10 select-none animate-fade-in safe-pt safe-pb">
+      <div id="timer-fullscreen-container" data-mode="${timerState.isFinished ? 'finished' : 'active'}" class="fixed inset-0 z-50 bg-[#060911] text-white flex flex-col justify-between p-5 sm:p-10 select-none animate-fade-in safe-pt safe-pb">
         <!-- Top Controls -->
         <div class="flex items-center justify-between z-10">
           <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -926,6 +1171,9 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <div class="flex items-center gap-2">
+            <button id="btn-toggle-voice-timer" class="w-9 h-9 rounded-full bg-slate-900/80 text-slate-300 hover:text-white border border-slate-800 transition-colors flex items-center justify-center relative group" title="Locución por voz">
+              <span>${window.voicePlayer.getLevelDetails().emoji}</span>
+            </button>
             <button id="btn-toggle-clock" class="w-9 h-9 rounded-full bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center justify-center" title="Alternar reloj">
               ${timerState.hideClock ? window.MEDIT_ICONS.eye('w-4 h-4 text-teal-400') : window.MEDIT_ICONS.eyeOff('w-4 h-4')}
             </button>
@@ -945,25 +1193,22 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="relative w-60 h-60 sm:w-72 sm:h-72 flex items-center justify-center">
               <svg class="w-full h-full -rotate-90">
                 <circle cx="50%" cy="50%" r="45%" class="stroke-slate-800/80 fill-none" stroke-width="4"></circle>
-                <circle cx="50%" cy="50%" r="45%" class="stroke-teal-400 fill-none transition-all duration-1000 ease-linear" stroke-width="4" stroke-dasharray="283%" stroke-dashoffset="${
+                <circle id="timer-progress-ring" cx="50%" cy="50%" r="45%" class="stroke-teal-400 fill-none transition-all duration-1000 ease-linear" stroke-width="4" stroke-dasharray="283%" stroke-dashoffset="${
                   283 - (283 * progressPercent) / 100
                 }%" stroke-linecap="round"></circle>
               </svg>
 
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                ${
-                  !timerState.hideClock
-                    ? `
-                  <span class="font-mono text-4xl sm:text-5xl font-extralight tracking-tight text-white mb-1">
+                <div id="timer-clock-display" class="${timerState.hideClock ? 'hidden' : ''} flex flex-col items-center">
+                  <span id="timer-countdown-text" class="font-mono text-4xl sm:text-5xl font-extralight tracking-tight text-white mb-1">
                     ${formatTime(timerState.remainingSeconds)}
                   </span>
-                `
-                    : `
+                </div>
+                <div id="timer-zen-display" class="${timerState.hideClock ? '' : 'hidden'} flex flex-col items-center">
                   <div class="w-12 h-12 rounded-full border border-teal-400/40 animate-ping opacity-30 mb-2"></div>
                   <span class="text-xs text-teal-400 uppercase tracking-widest font-medium">Presencia</span>
-                `
-                }
-                <span class="text-xs text-slate-400 font-light">
+                </div>
+                <span id="timer-status-text" class="text-xs text-slate-400 font-light">
                   ${timerState.isPaused ? 'En pausa' : 'Respira con calma'}
                 </span>
               </div>
@@ -971,10 +1216,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <!-- Accompanied Guidance Prompt -->
             <div class="mt-5 sm:mt-6 max-w-sm mx-auto text-center px-4 z-10">
-              <span class="text-[10px] uppercase font-bold tracking-widest text-teal-400 block mb-1">
+              <span id="timer-guidance-stage" class="text-[10px] uppercase font-bold tracking-widest text-teal-400 block mb-1">
                 ${currentGuidance.stage}
               </span>
-              <p class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+              <p id="timer-guidance-prompt" class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
                 ${currentGuidance.prompt}
               </p>
             </div>
@@ -1037,9 +1282,28 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
+    document.getElementById('btn-toggle-voice-timer')?.addEventListener('click', () => {
+      const newLvl = window.voicePlayer.cycleLevel();
+      state.voiceLevel = newLvl;
+      window.habitStorage.save(state);
+      const btn = document.getElementById('btn-toggle-voice-timer');
+      if (btn) {
+        btn.innerHTML = `<span>${window.voicePlayer.getLevelDetails().emoji}</span>`;
+      }
+    });
+
     document.getElementById('btn-toggle-clock')?.addEventListener('click', () => {
       timerState.hideClock = !timerState.hideClock;
-      renderTimerFullscreen();
+      const clockDisp = document.getElementById('timer-clock-display');
+      const zenDisp = document.getElementById('timer-zen-display');
+      const clockBtn = document.getElementById('btn-toggle-clock');
+      if (clockDisp && zenDisp && clockBtn) {
+        clockDisp.classList.toggle('hidden', timerState.hideClock);
+        zenDisp.classList.toggle('hidden', !timerState.hideClock);
+        clockBtn.innerHTML = timerState.hideClock
+          ? window.MEDIT_ICONS.eye('w-4 h-4 text-teal-400')
+          : window.MEDIT_ICONS.eyeOff('w-4 h-4');
+      }
     });
 
     document.getElementById('btn-cancel-timer')?.addEventListener('click', () => {
@@ -1052,13 +1316,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btn-toggle-pause')?.addEventListener('click', () => {
       timerState.isPaused = !timerState.isPaused;
-      renderTimerFullscreen();
+      const pauseBtn = document.getElementById('btn-toggle-pause');
+      const statusText = document.getElementById('timer-status-text');
+      if (pauseBtn) {
+        pauseBtn.innerHTML = timerState.isPaused
+          ? window.MEDIT_ICONS.play('w-4 h-4 text-teal-400') + ' Reanudar'
+          : window.MEDIT_ICONS.pause('w-4 h-4 text-slate-400') + ' Pausar';
+      }
+      if (statusText) {
+        statusText.textContent = timerState.isPaused ? 'En pausa' : 'Respira con calma';
+      }
     });
 
     document.querySelectorAll('.btn-rate-mood').forEach((btn) => {
       btn.addEventListener('click', () => {
         timerState.ratingAfter = parseInt(btn.dataset.val, 10);
-        renderTimerFullscreen();
+        document.querySelectorAll('.btn-rate-mood').forEach((b) => {
+          const val = parseInt(b.dataset.val, 10);
+          if (val === timerState.ratingAfter) {
+            b.className = 'btn-rate-mood flex flex-col items-center p-2 sm:p-2.5 rounded-xl border transition-all bg-teal-500/20 border-teal-500/60 scale-105 shadow-md';
+          } else {
+            b.className = 'btn-rate-mood flex flex-col items-center p-2 sm:p-2.5 rounded-xl border transition-all bg-slate-800/60 border-slate-700/60 text-slate-400';
+          }
+        });
       });
     });
 
@@ -1112,6 +1392,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof window.confetti === 'function') {
           window.confetti({ particleCount: 70, spread: 80, origin: { y: 0.6 } });
         }
+        if (window.voicePlayer) window.voicePlayer.play('zen_cierre', 'outro');
       }
 
       if (currentTab === 'timer' && timerState.isActive) {
@@ -1125,6 +1406,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timerState.timerId);
       timerState.timerId = null;
     }
+    if (window.voicePlayer) window.voicePlayer.stop();
   }
 
   // ==========================================
@@ -1309,6 +1591,83 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
+  // VIEW: LIBRARY (Biblioteca Unificada)
+  // ==========================================
+  function renderLibrary() {
+    const subnavHtml = `
+      <div class="mb-5 space-y-3">
+        <div class="text-center space-y-1">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">
+            <span>${window.MEDIT_ICONS.library('w-3.5 h-3.5')}</span>
+            <span>Catálogo Completo</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Biblioteca de Técnicas</h2>
+          <p class="text-xs text-slate-400 max-w-md mx-auto">
+            Explora las prácticas según tu necesidad fisiológica o cognitiva.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-center p-1 rounded-2xl bg-slate-900/90 border border-slate-800 max-w-md mx-auto">
+          <button data-subtab="breathe" class="btn-lib-subtab flex-1 py-2 rounded-xl text-xs transition-all ${
+            librarySubTab === 'breathe'
+              ? 'bg-teal-500 text-slate-950 shadow-md font-bold'
+              : 'text-slate-400 hover:text-white font-semibold'
+          }">
+            Respiración
+          </button>
+          <button data-subtab="timer" class="btn-lib-subtab flex-1 py-2 rounded-xl text-xs transition-all ${
+            librarySubTab === 'timer'
+              ? 'bg-teal-500 text-slate-950 shadow-md font-bold'
+              : 'text-slate-400 hover:text-white font-semibold'
+          }">
+            Temporizador Zen
+          </button>
+          <button data-subtab="science" class="btn-lib-subtab flex-1 py-2 rounded-xl text-xs transition-all ${
+            librarySubTab === 'science'
+              ? 'bg-teal-500 text-slate-950 shadow-md font-bold'
+              : 'text-slate-400 hover:text-white font-semibold'
+          }">
+            Neurociencia
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Render the selected subview
+    if (librarySubTab === 'breathe') {
+      renderBreathe();
+    } else if (librarySubTab === 'timer') {
+      renderTimer();
+    } else if (librarySubTab === 'science') {
+      renderLearn();
+    }
+
+    // Prepend subnav if in library view
+    if (currentTab === 'library' || currentTab === 'learn') {
+      const topDiv = mainContent.firstElementChild;
+      if (topDiv) {
+        const defaultHeader = topDiv.querySelector('.text-center.space-y-1');
+        if (defaultHeader) defaultHeader.classList.add('hidden');
+
+        const headerPlaceholder = document.createElement('div');
+        headerPlaceholder.innerHTML = subnavHtml;
+        topDiv.insertBefore(headerPlaceholder, topDiv.firstChild);
+
+        headerPlaceholder.querySelectorAll('.btn-lib-subtab').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            librarySubTab = btn.dataset.subtab;
+            renderLibrary();
+          });
+        });
+      }
+    }
+  }
+
+  function renderProgress() {
+    renderHabits();
+  }
+
+  // ==========================================
   // VIEW 5: HABITS (Hábitos & Progreso)
   // ==========================================
   function renderHabits() {
@@ -1489,6 +1848,9 @@ document.addEventListener('DOMContentLoaded', () => {
     stopModalEl.classList.remove('hidden');
     renderStopModalContent();
 
+    const stopVoiceClips = ['stop_s', 'stop_t', 'stop_o', 'stop_p'];
+    window.voicePlayer.play(stopVoiceClips[0], 'step');
+
     if (stopState.timerId) clearInterval(stopState.timerId);
     stopState.timerId = setInterval(() => {
       if (!stopState.isRunning || stopState.isFinished) return;
@@ -1499,12 +1861,14 @@ document.addEventListener('DOMContentLoaded', () => {
           stopState.stepIdx += 1;
           stopState.remaining = STOP_STEPS[stopState.stepIdx].duration;
           window.soundEngine.playBreathCue(true, state.soundVolume);
+          window.voicePlayer.play(stopVoiceClips[stopState.stepIdx], 'step');
         } else {
           // Finished S.T.O.P.!
           clearInterval(stopState.timerId);
           stopState.isFinished = true;
           stopState.isRunning = false;
           window.soundEngine.playBell(state.bellTone, state.soundVolume);
+          window.voicePlayer.play('zen_cierre', 'outro');
 
           if (typeof window.confetti === 'function') {
             window.confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
@@ -1599,6 +1963,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeStopModal() {
     if (stopState.timerId) clearInterval(stopState.timerId);
+    if (window.voicePlayer) window.voicePlayer.stop();
     stopModalEl.classList.add('hidden');
     renderView();
   }
@@ -1693,7 +2058,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ambVol) ambVol.value = state.ambientVolume;
     if (ambVolLabel) ambVolLabel.textContent = `${Math.round(state.ambientVolume * 100)}%`;
 
-    // 5. Preferences toggles
+    // 5. Voice level buttons
+    document.querySelectorAll('.btn-select-voice-level').forEach((btn) => {
+      const isSel = btn.dataset.voiceLevel === (state.voiceLevel || 'balanced');
+      btn.classList.toggle('border-teal-500', isSel);
+      btn.classList.toggle('bg-teal-500/15', isSel);
+      btn.classList.toggle('border-slate-800', !isSel);
+      btn.classList.toggle('bg-slate-900', !isSel);
+      const checkBadge = btn.querySelector('.voice-check-badge');
+      if (checkBadge) {
+        checkBadge.classList.toggle('hidden', !isSel);
+      }
+    });
+
+    // 6. Preferences toggles
     const breathSoundToggle = document.getElementById('toggle-setting-breath-sound');
     if (breathSoundToggle) breathSoundToggle.checked = Boolean(state.soundCues !== false);
 
@@ -1727,6 +2105,16 @@ document.addEventListener('DOMContentLoaded', () => {
         window.habitStorage.save(state);
         updateSoundModalUI();
         if (currentTab === 'home') renderHome();
+      });
+    });
+
+    // Voice level click
+    document.querySelectorAll('.btn-select-voice-level').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.voiceLevel = btn.dataset.voiceLevel;
+        if (window.voicePlayer) window.voicePlayer.setLevel(state.voiceLevel);
+        window.habitStorage.save(state);
+        updateSoundModalUI();
       });
     });
 

@@ -72,12 +72,7 @@
           </div>
         </div>
         <div>
-          <div class="flex items-center gap-1.5">
-            <h1 class="font-bold text-sm sm:text-base tracking-tight text-white leading-none">Medit</h1>
-            <span class="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/25 leading-none">
-              Science
-            </span>
-          </div>
+          <h1 class="font-bold text-sm sm:text-base tracking-tight text-white leading-none">Medit</h1>
           <p class="text-[10px] sm:text-[11px] text-slate-400 font-normal leading-tight mt-0.5">Micro-Mindfulness</p>
         </div>
       </div>
@@ -118,9 +113,9 @@
   <main id="main-content" class="flex-1 px-3.5 sm:px-4 py-4 sm:py-5 max-w-2xl mx-auto w-full pb-28"></main>
 
   <!-- Bottom Floating Navigation Bar -->
-  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#070b13]/90 backdrop-blur-xl border-t border-slate-800/80 safe-pb px-2 sm:px-3 py-1">
+  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-[#070b13]/90 backdrop-blur-xl border-t border-slate-800/80 safe-pb px-3 sm:px-6 py-1.5">
     <div class="max-w-md mx-auto flex items-center justify-around">
-      <button data-tab="home" class="nav-tab text-teal-400 font-medium flex flex-col items-center justify-center py-1.5 px-2.5 rounded-xl transition-all relative group" aria-label="Inicio">
+      <button data-tab="home" class="nav-tab text-teal-400 font-medium flex flex-col items-center justify-center py-1.5 px-4 rounded-xl transition-all relative group" aria-label="Inicio">
         <span class="active-indicator absolute -top-1 w-6 h-1 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"></span>
         <span class="nav-tab-icon flex items-center justify-center mb-0.5">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -130,51 +125,27 @@
         <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Inicio</span>
       </button>
 
-      <button data-tab="breathe" class="nav-tab text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center py-1.5 px-2.5 rounded-xl transition-all relative group" aria-label="Respirar">
-        <span class="active-indicator hidden absolute -top-1 w-6 h-1 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"></span>
-        <span class="nav-tab-icon flex items-center justify-center mb-0.5">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 8.5h9.5a3.5 3.5 0 1 0-3.5-3.5"/>
-            <path d="M2.5 14h13.5a3.5 3.5 0 1 0-3.5-3.5"/>
-            <path d="M5 19.5h7.5a2.5 2.5 0 1 0-2.5-2.5"/>
-          </svg>
-        </span>
-        <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Respirar</span>
-      </button>
-
-      <button data-tab="timer" class="nav-tab text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center py-1.5 px-2.5 rounded-xl transition-all relative group" aria-label="Temporizador">
-        <span class="active-indicator hidden absolute -top-1 w-6 h-1 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"></span>
-        <span class="nav-tab-icon flex items-center justify-center mb-0.5">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-            <circle cx="12" cy="3" r="1"/>
-          </svg>
-        </span>
-        <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Temporizador</span>
-      </button>
-
-      <button data-tab="learn" class="nav-tab text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center py-1.5 px-2.5 rounded-xl transition-all relative group" aria-label="Aprender">
+      <button data-tab="library" class="nav-tab text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center py-1.5 px-4 rounded-xl transition-all relative group" aria-label="Biblioteca">
         <span class="active-indicator hidden absolute -top-1 w-6 h-1 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"></span>
         <span class="nav-tab-icon flex items-center justify-center mb-0.5">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            <line x1="8.5" y1="7" x2="15.5" y2="7"/>
-            <line x1="8.5" y1="11" x2="13.5" y2="11"/>
+            <line x1="9" y1="7" x2="15" y2="7"/>
+            <line x1="9" y1="11" x2="13" y2="11"/>
           </svg>
         </span>
-        <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Aprender</span>
+        <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Biblioteca</span>
       </button>
 
-      <button data-tab="habits" class="nav-tab text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center py-1.5 px-2.5 rounded-xl transition-all relative group" aria-label="Hábitos">
+      <button data-tab="progress" class="nav-tab text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center py-1.5 px-4 rounded-xl transition-all relative group" aria-label="Progreso">
         <span class="active-indicator hidden absolute -top-1 w-6 h-1 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]"></span>
         <span class="nav-tab-icon flex items-center justify-center mb-0.5">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
           </svg>
         </span>
-        <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Hábitos</span>
+        <span class="nav-tab-label text-[10px] sm:text-[11px] tracking-tight">Progreso</span>
       </button>
     </div>
   </nav>
@@ -326,6 +297,48 @@
         </div>
       </div>
 
+      <!-- Section: Voice Guidance (Locuciones) -->
+      <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
+        <div class="flex items-center justify-between">
+          <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+            Locución y Guía por Voz
+          </label>
+          <span class="text-[9px] px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-300 border border-teal-500/20 font-semibold">
+            Voz Femenina Suave
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400">Selecciona el nivel de acompañamiento hablado durante tus meditaciones:</p>
+
+        <div class="grid grid-cols-3 gap-2">
+          <button data-voice-level="balanced" class="btn-select-voice-level p-2.5 rounded-2xl border text-left transition-all relative">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm">🔊</span>
+              <span class="voice-check-badge text-teal-400 text-xs font-bold">✓</span>
+            </div>
+            <p class="text-xs font-bold text-white leading-tight">Equilibrada</p>
+            <p class="text-[9px] text-slate-400 mt-0.5">Fases y ciclos</p>
+          </button>
+
+          <button data-voice-level="minimal" class="btn-select-voice-level p-2.5 rounded-2xl border text-left transition-all relative">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm">🔉</span>
+              <span class="voice-check-badge hidden text-teal-400 text-xs font-bold">✓</span>
+            </div>
+            <p class="text-xs font-bold text-white leading-tight">Mínima</p>
+            <p class="text-[9px] text-slate-400 mt-0.5">Solo inicio y fin</p>
+          </button>
+
+          <button data-voice-level="none" class="btn-select-voice-level p-2.5 rounded-2xl border text-left transition-all relative">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm">🔇</span>
+              <span class="voice-check-badge hidden text-teal-400 text-xs font-bold">✓</span>
+            </div>
+            <p class="text-xs font-bold text-white leading-tight">Silencio</p>
+            <p class="text-[9px] text-slate-400 mt-0.5">Solo cuencos</p>
+          </button>
+        </div>
+      </div>
+
       <!-- Section: Preferences & Toggles -->
       <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
         <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
@@ -386,6 +399,7 @@
   <!-- Scripts -->
   <script src="./js/icons.js"></script>
   <script src="./js/audio.js"></script>
+  <script src="./js/voice.js"></script>
   <script src="./js/storage.js"></script>
   <script src="./js/data.js"></script>
   <script src="./js/app.js"></script>

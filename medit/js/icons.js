@@ -243,6 +243,46 @@ window.MEDIT_ICONS = {
       <rect x="5" y="2" width="14" height="20" rx="3"/>
       <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/>
     </svg>
+  `,
+
+  library: (cls = 'w-5 h-5') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      <line x1="9" y1="7" x2="15" y2="7"/>
+      <line x1="9" y1="11" x2="13" y2="11"/>
+    </svg>
+  `,
+
+  progress: (cls = 'w-5 h-5') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+    </svg>
+  `,
+
+  voiceHigh: (cls = 'w-4 h-4') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>
+  `,
+
+  voiceLow: (cls = 'w-4 h-4') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+  `,
+
+  voiceOff: (cls = 'w-4 h-4') => `
+    <svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/>
+      <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/>
+      <line x1="12" y1="19" x2="12" y2="23"/>
+      <line x1="8" y1="23" x2="16" y2="23"/>
+    </svg>
   `
 };
 

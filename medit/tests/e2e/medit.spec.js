@@ -15,41 +15,68 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(page.locator('#header-settings-btn')).toBeVisible();
   });
 
-  test('Barra de navegación y cambio de vistas', async ({ page }) => {
+  test('Barra de navegación y cambio de vistas (3 Pestañas)', async ({ page }) => {
     await page.goto('/');
 
-    // 1. Navegar a Respirar
-    await page.locator('button[data-tab="breathe"]').click();
-    await expect(page.locator('h2')).toContainText('Respiración Guiada');
+    // 1. Navegar a Biblioteca
+    await page.locator('button[data-tab="library"]').click();
+    await expect(page.locator('h2')).toContainText('Biblioteca de Técnicas');
 
-    // Verificar que los 4 protocolos están presentes
+    // Subpestaña Respiración: 4 protocolos
+    await page.locator('button[data-subtab="breathe"]').click();
     const protocolButtons = page.locator('.btn-select-protocol');
     await expect(protocolButtons).toHaveCount(4);
 
-    // 2. Navegar a Temporizador
-    await page.locator('button[data-tab="timer"]').click();
-    await expect(page.locator('h2')).toContainText('Temporizador Zen');
-
-    // Verificar presets incluyendo las nuevas opciones de 10m, 12m y 15m
+    // Subpestaña Temporizador: Presets incluyendo 10m, 12m y 15m
+    await page.locator('button[data-subtab="timer"]').click();
     const presetButtons = page.locator('.btn-timer-preset');
     await expect(presetButtons).toHaveCount(7);
     await expect(page.locator('button[data-sec="720"]')).toBeVisible();
     await expect(page.locator('button[data-sec="900"]')).toBeVisible();
 
-    // 3. Navegar a Aprender
-    await page.locator('button[data-tab="learn"]').click();
-    await expect(page.locator('h2')).toContainText('Aprender sin Mitos');
+    // Subpestaña Neurociencia
+    await page.locator('button[data-subtab="science"]').click();
     await expect(page.getByText('Dra. Amishi Jha', { exact: false }).first()).toBeVisible();
 
-    // 4. Navegar a Hábitos
-    await page.locator('button[data-tab="habits"]').click();
+    // 2. Navegar a Progreso
+    await page.locator('button[data-tab="progress"]').click();
     await expect(page.locator('h2')).toContainText('Mi Práctica & Progreso');
     await expect(page.locator('text=Días Racha')).toBeVisible();
+
+    // 3. Volver a Inicio
+    await page.locator('button[data-tab="home"]').click();
+    await expect(page.locator('h3').first()).toContainText('¿Cuánto tiempo tienes para ti ahora?');
   });
 
-  test('Visualizador de Respiración: Iniciar y Pausar', async ({ page }) => {
+  test('Selector de Tiempo en Home y Tarjeta de Confirmación', async ({ page }) => {
     await page.goto('/');
-    await page.locator('button[data-tab="breathe"]').click();
+
+    // Pulsar opción de 2 min
+    await page.locator('button[data-time-sec="120"]').click();
+
+    // Comprobar que se abre la tarjeta de confirmación
+    const confirmModal = page.locator('#time-confirm-modal');
+    await expect(confirmModal).toBeVisible();
+    await expect(confirmModal.locator('text=Suspiro Fisiológico')).toBeVisible();
+    await expect(confirmModal.locator('text=Locución por voz')).toBeVisible();
+
+    // Alternar nivel de voz desde la tarjeta
+    await page.locator('#btn-confirm-cycle-voice').click();
+    await expect(confirmModal.locator('text=Guía Mínima')).toBeVisible();
+
+    // Cerrar modal
+    await page.locator('#btn-close-confirm-modal').click();
+    await expect(confirmModal).toBeHidden();
+  });
+
+  test('Visualizador de Respiración: Iniciar, Pausar y Control de Voz', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('button[data-tab="library"]').click();
+    await page.locator('button[data-subtab="breathe"]').click();
+
+    // Botón de control de voz visible
+    const voiceBtn = page.locator('#btn-toggle-breath-voice');
+    await expect(voiceBtn).toBeVisible();
 
     const startBtn = page.locator('#btn-toggle-breath-run');
     await expect(startBtn).toContainText('Comenzar');
@@ -62,9 +89,10 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(startBtn).toContainText('Comenzar');
   });
 
-  test('Temporizador Zen: Iniciar sesión de 1 min y pantalla completa', async ({ page }) => {
+  test('Temporizador Zen: Iniciar sesión de 1 min y pantalla completa con voz', async ({ page }) => {
     await page.goto('/');
-    await page.locator('button[data-tab="timer"]').click();
+    await page.locator('button[data-tab="library"]').click();
+    await page.locator('button[data-subtab="timer"]').click();
 
     // Seleccionar 1 min
     await page.locator('button[data-sec="60"]').click();
@@ -74,8 +102,9 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(startSessionBtn).toContainText('1 min');
     await startSessionBtn.click();
 
-    // Debe mostrar la vista inmersiva
+    // Debe mostrar la vista inmersiva con controles de voz y reloj
     await expect(page.locator('text=Meditación en curso')).toBeVisible();
+    await expect(page.locator('#btn-toggle-voice-timer')).toBeVisible();
     await expect(page.locator('#btn-toggle-pause')).toBeVisible();
 
     // Probar alternar visibilidad del reloj
@@ -85,14 +114,16 @@ test.describe('Medit PWA — E2E Tests', () => {
 
     // Salir de la sesión con botón cerrar
     await page.locator('#btn-cancel-timer').click();
-    await expect(page.locator('h2')).toContainText('Temporizador Zen');
+    await expect(page.locator('h2')).toContainText('Biblioteca de Técnicas');
   });
 
-  test('Protocolo S.T.O.P. Modal (60s)', async ({ page }) => {
+  test('Protocolo S.T.O.P. Modal (60s) desde selector de 1 min', async ({ page }) => {
     await page.goto('/');
 
-    // Abrir modal S.T.O.P.
-    await page.locator('#btn-start-stop-protocol').click();
+    // Pulsar 1 min en la Home
+    await page.locator('button[data-time-sec="60"]').click();
+    await page.locator('#btn-start-confirmed-session').click();
+
     const stopModal = page.locator('#stop-modal');
     await expect(stopModal).toBeVisible();
 
@@ -122,7 +153,7 @@ test.describe('Medit PWA — E2E Tests', () => {
   test('Selector de Anclaje Diario (Habit Stacking)', async ({ page }) => {
     await page.goto('/');
 
-    // Abrir modal de anclajes
+    // Abrir modal de anclajes desde la Home
     await page.locator('#btn-open-anchor-modal').click();
     const anchorModal = page.locator('#anchor-modal');
     await expect(anchorModal).toBeVisible();
@@ -136,13 +167,17 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(page.locator('#btn-open-anchor-modal').locator('text=El Café / Té de la Mañana')).toBeVisible();
   });
 
-  test('Ajustes de Sonido Modal', async ({ page }) => {
+  test('Ajustes de Sonido y Locución Modal', async ({ page }) => {
     await page.goto('/');
 
-    // Abrir modal de ajustes de sonido
+    // Abrir modal de ajustes
     await page.locator('#header-settings-btn').click();
     const soundModal = page.locator('#sound-modal');
     await expect(soundModal).toBeVisible();
+
+    // Seleccionar nivel de voz
+    const voiceMinimalBtn = page.locator('.btn-select-voice-level[data-voice-level="minimal"]');
+    await voiceMinimalBtn.click();
 
     // Seleccionar Campana Zen
     const zenBtn = page.locator('.btn-select-bell[data-tone="zen"]');
