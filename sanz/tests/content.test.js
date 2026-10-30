@@ -15,7 +15,6 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
   const expectedHtmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
-    'nuevos_servicios.html',
     'test.html'
   ];
 
@@ -83,13 +82,9 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     assert.match(html, /Calle Mayor/i, 'Debe situar el obrador en la calle Mayor');
   });
 
-  it('nuevos_servicios.html debe incluir horarios, pedidos y condiciones de entrega', () => {
-    const html = readHtml('nuevos_servicios.html');
-
-    assert.match(html, /Horario de apertura/i, 'Debe indicar la sección de horarios');
-    assert.match(html, /Pedidos/i, 'Debe incluir información de pedidos');
-    assert.match(html, /968\s*40\s*20\s*10/, 'Debe incluir el teléfono para pedidos');
-    assert.match(html, /reparto a domicilio/i, 'Debe detallar el servicio de reparto');
+  it('nuevos_servicios.html debe estar eliminada y no existir en el sitio', () => {
+    const fullPath = path.join(ROOT_DIR, 'nuevos_servicios.html');
+    assert.strictEqual(fs.existsSync(fullPath), false, 'nuevos_servicios.html no debe existir en el repositorio');
   });
 });
 
@@ -102,7 +97,7 @@ describe('Tests de Contenido - Integridad de Recursos Multimedia y Dependencias'
   });
 
   it('todas las imágenes referenciadas en los HTML locales deben existir en disco', () => {
-    const htmlFiles = ['index.html', 'la-historia-del-bisabuelo-indalecio-sanz.html', 'nuevos_servicios.html'];
+    const htmlFiles = ['index.html', 'la-historia-del-bisabuelo-indalecio-sanz.html'];
     const missingImages = [];
 
     for (const file of htmlFiles) {
@@ -179,7 +174,6 @@ describe('Tests de Limpieza e Independencia de Plataforma (Weebly / EditMySite)'
   const htmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
-    'nuevos_servicios.html',
     'test.html'
   ];
 
@@ -240,7 +234,6 @@ describe('Tests de Compatibilidad con GitHub Pages', () => {
   const htmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
-    'nuevos_servicios.html',
     'test.html'
   ];
 
@@ -306,7 +299,6 @@ describe('Tests de Vídeos de YouTube y Recursos Multimedia Embebidos', () => {
     const htmlFiles = [
       'index.html',
       'la-historia-del-bisabuelo-indalecio-sanz.html',
-      'nuevos_servicios.html',
       'test.html'
     ];
     for (const file of htmlFiles) {
@@ -331,7 +323,6 @@ describe('Tests de Favicon, Pie de Página Unificado y Organización de Capítul
   const htmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
-    'nuevos_servicios.html',
     'test.html'
   ];
 

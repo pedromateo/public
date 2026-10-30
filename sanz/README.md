@@ -15,7 +15,6 @@ sanz/
 ├── index.html                               # Página principal (inicio, historia, catálogo y contacto)
 ├── jquery-1.11.2.min.js                     # Librería jQuery local para compatibilidad
 ├── la-historia-del-bisabuelo-indalecio-sanz.html # Monográfico: historia del bisabuelo Indalecio y el "Postrechino"
-├── nuevos_servicios.html                    # Página informativa de horarios, pedidos y reparto local
 ├── test.html                                # Página de plantilla / pruebas generada por el CMS
 ├── apps/
 │   └── audioPlayer2.swf                     # Reproductor de audio en Flash (componente heredado)
@@ -64,10 +63,7 @@ El sitio web cuenta con un sistema visual homogéneo centrado en el color corpor
    - Publicación especial que reivindica el obrador artesanal frente a la producción industrial masiva.
    - Detalla la rutina del obrador en la Calle Mayor y la receta del emblemático dulce **«Postrechino»**.
 
-3. **[nuevos_servicios.html](file:///home/pit/dev/public/sanz/nuevos_servicios.html)**:
-   - Comunicado informativo para clientes: horarios comerciales, servicio de recogida en tienda y reparto a domicilio en el casco urbano de Puerto Lumbreras.
-
-4. **[test.html](file:///home/pit/dev/public/sanz/test.html)**:
+3. **[test.html](file:///home/pit/dev/public/sanz/test.html)**:
    - Página de plantilla o borrador generada durante el diseño en la plataforma.
 
 5. **[uploads/](file:///home/pit/dev/public/sanz/uploads/)**:

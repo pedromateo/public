@@ -32,7 +32,7 @@ describe('Tests de Navegación - Menú y Enlaces Principales', () => {
   });
 
   it('las páginas interiores deben contener navegación cruzada hacia index.html', () => {
-    const subpages = ['la-historia-del-bisabuelo-indalecio-sanz.html', 'nuevos_servicios.html'];
+    const subpages = ['la-historia-del-bisabuelo-indalecio-sanz.html'];
 
     for (const file of subpages) {
       const html = readHtml(file);
@@ -66,7 +66,6 @@ describe('Tests de Navegación - Anclas Internas y Enlaces Relativos', () => {
     const htmlFiles = [
       'index.html',
       'la-historia-del-bisabuelo-indalecio-sanz.html',
-      'nuevos_servicios.html',
       'test.html'
     ];
 
@@ -103,6 +102,20 @@ describe('Tests de Navegación - Anclas Internas y Enlaces Relativos', () => {
 
     assert.equal(brokenLinks.length, 0,
       `Se encontraron enlaces HTML rotos:\n${JSON.stringify(brokenLinks, null, 2)}`);
+  });
+
+  it('ninguna página debe contener enlaces hacia nuevos_servicios.html', () => {
+    const htmlFiles = [
+      'index.html',
+      'la-historia-del-bisabuelo-indalecio-sanz.html',
+      'test.html'
+    ];
+
+    for (const file of htmlFiles) {
+      const html = readHtml(file);
+      assert.doesNotMatch(html, /href=[\"'][^\"']*nuevos_servicios\.html[^\"']*[\"']/i,
+        `${file} no debe contener enlaces a nuevos_servicios.html`);
+    }
   });
 });
 

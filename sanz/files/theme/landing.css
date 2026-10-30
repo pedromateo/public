@@ -7,10 +7,11 @@
 
 :root {
   --sanz-corporate: #D8086A;
-  --sanz-wine-dark: #630230;
-  --sanz-wine: #D8086A;
-  --sanz-wine-light: #ea2783;
+  --sanz-wine-dark: #5a0c32;
+  --sanz-wine: #9e1454;
+  --sanz-wine-light: #c21e6c;
   --sanz-wine-soft: #fdf2f7;
+  --sanz-divider: #a01858;
   --sanz-gold: #c4894d;
   --sanz-gold-light: #e8c49e;
   --sanz-gold-dark: #9a6530;
@@ -249,7 +250,7 @@ body.affix .birdseye-header .logo img {
 .sanz-feature-divider {
   width: 50px;
   height: 3px;
-  background: var(--sanz-wine);
+  background: var(--sanz-divider, #a01858);
   margin: 0 auto 18px auto;
   border-radius: 2px;
 }
@@ -981,8 +982,8 @@ body.affix .birdseye-header .logo img {
 }
 
 .sanz-lightbox-close:hover {
-  background: #ff3366;
-  border-color: #ff3366;
+  background: var(--sanz-corporate);
+  border-color: var(--sanz-corporate);
   transform: scale(1.1);
 }
 
