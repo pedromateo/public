@@ -1,0 +1,9 @@
+# Dependencias
+node_modules/
+
+# Copias de seguridad locales
+backup/*.zip
+
+# Logs y temporales
+*.log
+.DS_Store

@@ -8,6 +8,7 @@ on:
       - 'murmeteo/**'
       - 'loopp/**'
       - 'medit/**'
+      - 'sanz/**'
       - '.github/workflows/**'
   pull_request:
     branches: [ "main", "master" ]
@@ -16,6 +17,7 @@ on:
       - 'murmeteo/**'
       - 'loopp/**'
       - 'medit/**'
+      - 'sanz/**'
       - '.github/workflows/**'
 
 jobs:
@@ -38,6 +40,8 @@ jobs:
             - 'loopp/**'
           medit:
             - 'medit/**'
+          sanz:
+            - 'sanz/**'
 
     - name: Use Node.js
       uses: actions/setup-node@v4
@@ -74,3 +78,9 @@ jobs:
         npm ci || npm install
         npx playwright install --with-deps chromium
         npm run test
+
+    - name: Run Sanz Tests
+      if: (steps.filter.outputs.sanz == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('sanz/package.json') != ''
+      working-directory: sanz
+      run: |
+        npm test

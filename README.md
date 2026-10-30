@@ -9,4 +9,5 @@ Proyectos públicos web y PWAs:
 - [ElParte](elparte/): PWA de información meteorológica y previsión detallada por horas.
 - [mSchool](mschool/): PWA y método de estimulación temprana diaria de 30 minutos adaptado del modelo Alpha School.
 - [Medit](medit/): PWA de micro-meditación, neuro-reset y atención plena basada en ciencia (Stanford, Amishi Jha, BJ Fogg).
+- [Pastelería Sanz](sanz/): Sitio web estático y archivo histórico de la Confitería Artesana Sanz (Puerto Lumbreras). Web en funcionamiento: [pasteleriasanz.weebly.com](https://pasteleriasanz.weebly.com/).
 

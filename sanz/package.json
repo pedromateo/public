@@ -1,0 +1,24 @@
+{
+  "name": "pasteleria-sanz",
+  "version": "1.0.0",
+  "description": "Sitio web oficial y archivo histórico de Pastelería y Confitería Artesana Sanz (Puerto Lumbreras)",
+  "homepage": "https://pasteleriasanz.weebly.com/",
+  "scripts": {
+    "test": "node --test tests/**/*.test.js",
+    "test:content": "node --test tests/content.test.js",
+    "test:navigation": "node --test tests/navigation.test.js",
+    "backup": "node scripts/backup.js",
+    "start": "npx -y http-server -p 8080 -c-1 ."
+  },
+  "keywords": [
+    "pasteleria",
+    "confiteria",
+    "sanz",
+    "puerto-lumbreras",
+    "artesanal",
+    "postrechino"
+  ],
+  "author": "Confitería Sanz",
+  "license": "UNLICENSED",
+  "private": true
+}

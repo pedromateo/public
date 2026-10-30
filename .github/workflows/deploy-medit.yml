@@ -41,7 +41,7 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz
 
           # Root Portal
           if [ -f "index.html" ]; then
@@ -111,6 +111,15 @@ jobs:
             sed -i "s/medit-cache-v[0-9]*/medit-cache-${{ github.sha }}/g" sw.js || true
             cp index.html manifest.json sw.js package.json ../dist/medit/ || true
             cp -r js css icons audio ../dist/medit/ || true
+            cd ..
+          fi
+
+          # Sanz Copy
+          if [ -d "sanz" ]; then
+            echo "Packaging Sanz..."
+            cd sanz
+            cp *.html favicon* apple-touch-icon.png jquery-1.11.2.min.js .nojekyll package.json ../dist/sanz/ || true
+            cp -r files uploads apps ../dist/sanz/ || true
             cd ..
           fi
 
