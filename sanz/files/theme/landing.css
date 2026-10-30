@@ -131,23 +131,31 @@ body.affix .birdseye-header .logo img {
   z-index: 2;
 }
 
-.sanz-callout-title {
+#wsite-content .sanz-callout-banner h2,
+#wsite-content .sanz-callout-title,
+#wsite-content h2.sanz-callout-title,
+.sanz-callout-banner .sanz-callout-title,
+.sanz-callout-title,
+.sanz-callout-title strong {
   font-family: "Montserrat", sans-serif !important;
   font-size: clamp(1.4rem, 3.2vw, 2.1rem) !important;
   font-weight: 800 !important;
   line-height: 1.35 !important;
   color: #ffffff !important;
   margin: 0 0 18px 0 !important;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
 }
 
+#wsite-content .sanz-callout-desc,
 .sanz-callout-desc {
   font-family: "Montserrat", sans-serif !important;
   font-size: clamp(1rem, 2vw, 1.2rem) !important;
   line-height: 1.75 !important;
-  color: #faeaf4 !important;
+  color: #ffffff !important;
+  opacity: 0.96;
   margin: 0 auto 30px auto !important;
   max-width: 840px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
 .sanz-btn-pill {

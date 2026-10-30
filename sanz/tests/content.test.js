@@ -68,6 +68,10 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     // Lema en la cabecera principal sin puntos
     assert.match(html, /La confiter(?:í|&iacute;)a artesana<\/span>\s*(?:<[^>]+>\s*)*La confiter(?:í|&iacute;)a de siempre<\/span>/i,
       'Debe contener el lema oficial "La confitería artesana" y "La confitería de siempre" sin puntos');
+
+    // Contraste garantizado en el banner callout histórico
+    assert.match(html, /sanz-callout-title[^>]*color:\s*#ffffff/i,
+      'El título del callout debe tener color blanco explícito para garantizar contraste con el fondo magenta');
   });
 
   it('la página de historia del bisabuelo debe contener el texto del homenaje y obrador', () => {
