@@ -1,14 +1,16 @@
 /* ==========================================================================
    PASTELERÍA SANZ - ESTILOS MODERNOS Y RESPONSIVE DE LA LANDING
-   Homogeneidad visual: Borgoña / Vino (#741d4f, #99336f, #4a1334),
-   Dorados artesanos (#c4894d, #dfa569), Crema (#faf7f8) y Blanco Puro.
+   Color Corporativo Oficial: #D8086A (Rosa frambuesa artesano).
+   Paleta armónica: Vino profundo (#630230, #5D022E), Acento dorado (#c4894d),
+   Fondos suaves (#faf7f8, #fdf2f7) y Blanco puro.
    ========================================================================== */
 
 :root {
-  --sanz-wine-dark: #4a1334;
-  --sanz-wine: #741d4f;
-  --sanz-wine-light: #99336f;
-  --sanz-wine-soft: #fbf3f7;
+  --sanz-corporate: #D8086A;
+  --sanz-wine-dark: #630230;
+  --sanz-wine: #D8086A;
+  --sanz-wine-light: #ea2783;
+  --sanz-wine-soft: #fdf2f7;
   --sanz-gold: #c4894d;
   --sanz-gold-light: #e8c49e;
   --sanz-gold-dark: #9a6530;
@@ -19,22 +21,22 @@
   --sanz-radius-sm: 8px;
   --sanz-radius-md: 14px;
   --sanz-radius-lg: 20px;
-  --sanz-shadow-soft: 0 4px 20px rgba(74, 19, 52, 0.08);
-  --sanz-shadow-hover: 0 12px 32px rgba(74, 19, 52, 0.16);
+  --sanz-shadow-soft: 0 4px 20px rgba(216, 8, 106, 0.08);
+  --sanz-shadow-hover: 0 12px 32px rgba(216, 8, 106, 0.2);
 }
 
 /* ==========================================================================
    CABECERA FIJA Y LOGOTIPO EN SCROLL
    Al hacer scroll (> 50px), la cabecera pasa a fondo blanco y el logotipo
-   blanco vira al tono rosa/vino corporativo de la cabecera (#99336f / #741d4f).
+   blanco vira al color corporativo oficial #D8086A.
    ========================================================================== */
 .birdseye-header .logo img {
   transition: filter 0.3s ease, -webkit-filter 0.3s ease !important;
 }
 
 body.affix .birdseye-header .logo img {
-  filter: brightness(0) saturate(100%) invert(22%) sepia(58%) saturate(2500%) hue-rotate(298deg) brightness(80%) !important;
-  -webkit-filter: brightness(0) saturate(100%) invert(22%) sepia(58%) saturate(2500%) hue-rotate(298deg) brightness(80%) !important;
+  filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(5975%) hue-rotate(323deg) brightness(85%) !important;
+  -webkit-filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(5975%) hue-rotate(323deg) brightness(85%) !important;
 }
 
 /* ==========================================================================
@@ -105,7 +107,7 @@ body.affix .birdseye-header .logo img {
    2. BANNER CALLOUT (Nuestra familia ha ligado el apellido Sanz...)
    ========================================================================== */
 .sanz-callout-banner {
-  background: linear-gradient(135deg, #741d4f 0%, #99336f 55%, #4a1334 100%) !important;
+  background: linear-gradient(135deg, #A80652 0%, #D8086A 52%, #5D022E 100%) !important;
   color: #ffffff !important;
   padding: 65px 24px !important;
   position: relative;

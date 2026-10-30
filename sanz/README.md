@@ -33,7 +33,27 @@ sanz/
 
 ---
 
-## 📄 Contenido y Páginas
+## 🎨 Identidad Visual y Color Corporativo
+
+El sitio web cuenta con un sistema visual homogéneo centrado en el color corporativo oficial:
+
+- **Color Corporativo Oficial:** `#D8086A` (Rosa frambuesa artesano / Pantone Raspberry Rose).
+- **Valores RGB:** `rgb(216, 8, 106)`.
+- **Paleta de apoyo y armonía:**
+  - **Gradiente de cabeceras Hero:** `linear-gradient(135deg, #A80652 0%, #D8086A 52%, #5D022E 100%)`.
+  - **Vino profundo (contraste y tipografía sobre blanco):** `#630230` / `#5D022E`.
+  - **Tinte suave (fondos de tarjetas y detalles):** `#fdf2f7`.
+  - **Acento artesano tradicional:** `#c4894d` (dorado / miel).
+- **Tipografía Oficial:** `Montserrat`, sans-serif (para títulos y destacados).
+- **Comportamiento del logotipo en scroll:**
+  - En la cabecera superior se muestra en su color blanco original sobre el degradado rosa.
+  - Al hacer scroll (`body.affix`), el logotipo transiciona suavemente al color corporativo `#D8086A` mediante el filtro CSS calibrado:
+    ```css
+    filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(5975%) hue-rotate(323deg) brightness(85%) !important;
+    ```
+- **Directriz futura obligatoria:** Cualquier nuevo desarrollo, banner, botón o elemento de interfaz debe utilizar de forma estricta `#D8086A` como color principal de marca.
+
+---
 
 1. **[index.html](file:///home/pit/dev/public/sanz/index.html)**:
    - **Historia y tradición:** Presentación de la familia Sanz, su arraigo a la repostería artesana en Puerto Lumbreras y el legado de Ezequiel y María («la confitera»).
