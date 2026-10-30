@@ -15,6 +15,7 @@ sanz/
 ├── index.html                               # Página principal (inicio, historia, catálogo y contacto)
 ├── jquery-1.11.2.min.js                     # Librería jQuery local para compatibilidad
 ├── la-historia-del-bisabuelo-indalecio-sanz.html # Monográfico: historia del bisabuelo Indalecio y el "Postrechino"
+├── postrechino.html                         # Landing oficial del producto estrella «El Postrechino»
 ├── test.html                                # Página de plantilla / pruebas generada por el CMS
 ├── apps/
 │   └── audioPlayer2.swf                     # Reproductor de audio en Flash (componente heredado)
@@ -63,7 +64,17 @@ El sitio web cuenta con un sistema visual homogéneo centrado en el color corpor
    - Publicación especial que reivindica el obrador artesanal frente a la producción industrial masiva.
    - Detalla la rutina del obrador en la Calle Mayor y la receta del emblemático dulce **«Postrechino»**.
 
-3. **[test.html](file:///home/pit/dev/public/sanz/test.html)**:
+3. **[postrechino.html](file:///home/pit/dev/public/sanz/postrechino.html)**:
+   - Landing oficial monográfica del dulce identitario y producto estrella de la confitería: **El Postrechino**.
+   - Anatomía en 6 capas artesanales (bizcocho borracho con almíbar aromático, crema pastelera de yema, merengue suizo denso, yema tostada al fuego de soplete, canela de Ceilán espolvoreada y almendra Marcona tostada) e ingredientes de proximidad (Km 0).
+   - Experiencia de degustación a través de los 5 sentidos.
+   - Historia y doble denominación tradicional («El Postrechino» en Puerto Lumbreras y «El Obispo» en Lorca).
+   - Maridajes recomendados (helado artesanal de turrón de Jijona, café solo o mocca, cava o champagne brut nature).
+   - Consejos del maestro repostero para el corte perfecto y pautas de conservación.
+   - Videoteca de reportajes de televisión local (7 Región de Murcia).
+   - Sistema de pedidos y encargos vía WhatsApp y teléfono directo.
+
+4. **[test.html](file:///home/pit/dev/public/sanz/test.html)**:
    - Página de plantilla o borrador generada durante el diseño en la plataforma.
 
 5. **[uploads/](file:///home/pit/dev/public/sanz/uploads/)**:

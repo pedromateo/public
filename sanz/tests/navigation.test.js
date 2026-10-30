@@ -23,6 +23,8 @@ describe('Tests de Navegación - Menú y Enlaces Principales', () => {
       'Debe enlazar a la sección #historia');
     assert.match(html, /href=[\"']#dulces[\"'][^>]*>\s*Dulces y tartas\s*<\/a>/i,
       'Debe enlazar a la sección #dulces');
+    assert.match(html, /href=[\"']postrechino\.html[\"'][^>]*>\s*El Postrechino\s*<\/a>/i,
+      'Debe enlazar a la landing oficial del Postrechino');
     assert.match(html, /href=[\"']#encargos[\"'][^>]*>\s*Encargos\s*<\/a>/i,
       'Debe enlazar a la sección #encargos');
     assert.match(html, /href=[\"']#donde[\"'][^>]*>\s*¿Dónde estamos\?\s*<\/a>/i,
@@ -32,7 +34,7 @@ describe('Tests de Navegación - Menú y Enlaces Principales', () => {
   });
 
   it('las páginas interiores deben contener navegación cruzada hacia index.html', () => {
-    const subpages = ['la-historia-del-bisabuelo-indalecio-sanz.html'];
+    const subpages = ['la-historia-del-bisabuelo-indalecio-sanz.html', 'postrechino.html'];
 
     for (const file of subpages) {
       const html = readHtml(file);
@@ -66,6 +68,7 @@ describe('Tests de Navegación - Anclas Internas y Enlaces Relativos', () => {
     const htmlFiles = [
       'index.html',
       'la-historia-del-bisabuelo-indalecio-sanz.html',
+      'postrechino.html',
       'test.html'
     ];
 
@@ -108,6 +111,7 @@ describe('Tests de Navegación - Anclas Internas y Enlaces Relativos', () => {
     const htmlFiles = [
       'index.html',
       'la-historia-del-bisabuelo-indalecio-sanz.html',
+      'postrechino.html',
       'test.html'
     ];
 

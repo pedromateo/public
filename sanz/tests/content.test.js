@@ -15,6 +15,7 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
   const expectedHtmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
+    'postrechino.html',
     'test.html'
   ];
 
@@ -88,6 +89,49 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     assert.doesNotMatch(html, /sidebar-obrador-box/i, 'No debe incluir la caja duplicada del obrador en la barra lateral');
   });
 
+  it('postrechino.html debe ser la landing oficial del dulce estrella con todos sus bloques y Schema.org', () => {
+    const html = readHtml('postrechino.html');
+
+    // Título y branding oficial
+    assert.match(html, /<title>.*?El Postrechino.*?Pasteler(?:í|&iacute;)a (?:y Confiter(?:í|&iacute;)a )?Sanz.*?<\/title>/i, 'Debe contener título oficial con Postrechino y Pastelería Sanz');
+
+    // Llamadas a la acción principales
+    assert.match(html, /https:\/\/wa\.me\/34621281600/i, 'Debe incluir enlace de pedido por WhatsApp');
+    assert.match(html, /href=[\"']tel:968402010[\"']/i, 'Debe incluir teléfono para encargos');
+
+    // 5 Sentidos
+    assert.match(html, /Vista/i, 'Debe incluir sentido de la Vista');
+    assert.match(html, /Olfato/i, 'Debe incluir sentido del Olfato');
+    assert.match(html, /Tacto/i, 'Debe incluir sentido del Tacto');
+    assert.match(html, /O(?:í|&iacute;)do/i, 'Debe incluir sentido del Oído');
+    assert.match(html, /Gusto/i, 'Debe incluir sentido del Gusto');
+
+    // 6 Capas de anatomía
+    assert.match(html, /Base de Hojaldre/i, 'Debe incluir capa 1: base de hojaldre');
+    assert.match(html, /Crema Pastelera/i, 'Debe incluir capa 2: crema pastelera');
+    assert.match(html, /Merengue Italiano/i, 'Debe incluir capa 3: merengue italiano');
+    assert.match(html, /Emborrizado/i, 'Debe incluir capa 4: emborrizado tostado');
+    assert.match(html, /Tostado Tradicional a la Pala/i, 'Debe incluir capa 5: tostado a la pala');
+    assert.match(html, /Corona de Fresa/i, 'Debe incluir capa 6: corona de fresa');
+
+    // Km 0 e ingredientes nobles
+    assert.match(html, /Km\s*0/i, 'Debe mencionar ingredientes Km 0');
+
+    // Historia y doble denominación
+    assert.match(html, /El Obispo/i, 'Debe mencionar la doble denominación El Obispo en Lorca');
+    assert.match(html, /Calle Mayor/i, 'Debe ubicar la tradición en Calle Mayor');
+
+    // Maridajes gourmet
+    assert.match(html, /Helado Artesan[oa] de Turr(?:ó|&oacute;)n/i, 'Debe incluir maridaje con helado de turrón');
+    assert.match(html, /Caf(?:é|&eacute;).*?Mocca/i, 'Debe incluir maridaje con café de especialidad mocca');
+    assert.match(html, /Champagne/i, 'Debe incluir maridaje con champagne brut');
+
+    // Microdatos Schema.org Product
+    assert.match(html, /application\/ld\+json/i, 'Debe incluir JSON-LD');
+    assert.match(html, /@type[\"']\s*:\s*[\"']Product[\"']/i, 'Debe contener Schema.org tipo Product');
+    assert.match(html, /Postrechino/i, 'El producto debe nombrarse Postrechino en JSON-LD');
+  });
+
   it('nuevos_servicios.html debe estar eliminada y no existir en el sitio', () => {
     const fullPath = path.join(ROOT_DIR, 'nuevos_servicios.html');
     assert.strictEqual(fs.existsSync(fullPath), false, 'nuevos_servicios.html no debe existir en el repositorio');
@@ -103,7 +147,7 @@ describe('Tests de Contenido - Integridad de Recursos Multimedia y Dependencias'
   });
 
   it('todas las imágenes referenciadas en los HTML locales deben existir en disco', () => {
-    const htmlFiles = ['index.html', 'la-historia-del-bisabuelo-indalecio-sanz.html'];
+    const htmlFiles = ['index.html', 'la-historia-del-bisabuelo-indalecio-sanz.html', 'postrechino.html'];
     const missingImages = [];
 
     for (const file of htmlFiles) {
@@ -180,6 +224,7 @@ describe('Tests de Limpieza e Independencia de Plataforma (Weebly / EditMySite)'
   const htmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
+    'postrechino.html',
     'test.html'
   ];
 
@@ -240,6 +285,7 @@ describe('Tests de Compatibilidad con GitHub Pages', () => {
   const htmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
+    'postrechino.html',
     'test.html'
   ];
 
@@ -305,6 +351,7 @@ describe('Tests de Vídeos de YouTube y Recursos Multimedia Embebidos', () => {
     const htmlFiles = [
       'index.html',
       'la-historia-del-bisabuelo-indalecio-sanz.html',
+      'postrechino.html',
       'test.html'
     ];
     for (const file of htmlFiles) {
@@ -329,6 +376,7 @@ describe('Tests de Favicon, Pie de Página Unificado y Organización de Capítul
   const htmlFiles = [
     'index.html',
     'la-historia-del-bisabuelo-indalecio-sanz.html',
+    'postrechino.html',
     'test.html'
   ];
 
