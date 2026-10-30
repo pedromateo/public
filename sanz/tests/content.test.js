@@ -94,10 +94,14 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
 
     // Título y branding oficial
     assert.match(html, /<title>.*?El Postrechino.*?Pasteler(?:í|&iacute;)a (?:y Confiter(?:í|&iacute;)a )?Sanz.*?<\/title>/i, 'Debe contener título oficial con Postrechino y Pastelería Sanz');
+    assert.match(html, /<h1[^>]*>\s*El Postrechino\s*<\/h1>/i, 'Debe titularse al inicio simplemente "El Postrechino"');
+    assert.match(html, /El mejor se hace aqu(?:í|&iacute;)/i, 'Debe incluir el claim "El mejor se hace aquí"');
 
-    // Llamadas a la acción principales
-    assert.match(html, /https:\/\/wa\.me\/34621281600/i, 'Debe incluir enlace de pedido por WhatsApp');
+    // Llamadas a la acción y restricciones requeridas
     assert.match(html, /href=[\"']tel:968402010[\"']/i, 'Debe incluir teléfono para encargos');
+    assert.doesNotMatch(html, /wa\.me|whatsapp/i, 'No debe incluir reservas por WhatsApp');
+    assert.doesNotMatch(html, /1920/, 'No debe incluir referencias a 1920');
+    assert.doesNotMatch(html, /porte(?:ñ|&ntilde;)o/i, 'No debe incluir menciones al origen porteño');
 
     // 5 Sentidos
     assert.match(html, /Vista/i, 'Debe incluir sentido de la Vista');

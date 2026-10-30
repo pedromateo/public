@@ -72,7 +72,7 @@ El sitio web cuenta con un sistema visual homogéneo centrado en el color corpor
    - Maridajes recomendados (helado artesanal de turrón de Jijona, café solo o mocca, cava o champagne brut nature).
    - Consejos del maestro repostero para el corte perfecto y pautas de conservación.
    - Videoteca de reportajes de televisión local (7 Región de Murcia).
-   - Sistema de pedidos y encargos vía WhatsApp y teléfono directo.
+   - Sistema de pedidos y encargos vía atención telefónica directa.
 
 4. **[test.html](file:///home/pit/dev/public/sanz/test.html)**:
    - Página de plantilla o borrador generada durante el diseño en la plataforma.
