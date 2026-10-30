@@ -359,6 +359,10 @@ describe('Tests de Favicon, Pie de Página Unificado y Organización de Capítul
         `${file} debe contener la identidad oficial en el footer`);
       assert.match(html, /href=[\"']tel:968402010[\"']/i,
         `${file} debe incluir el teléfono clickeable 968 40 20 10`);
+      assert.match(html, /<h4[^>]*class=[\"'][^\"']*site-footer-heading[^\"']*[\"'][^>]*>\s*Navegaci(?:ó|&oacute;)n\s*<\/h4>/i,
+        `${file} debe incluir el encabezado "Navegación" en el footer`);
+      assert.match(html, /<h4[^>]*class=[\"'][^\"']*site-footer-heading[^\"']*[\"'][^>]*>\s*Contacto\s*<\/h4>/i,
+        `${file} debe incluir el encabezado "Contacto" en el footer`);
       assert.match(html, /Calle\s+Mayor/i,
         `${file} debe incluir la dirección del obrador`);
       assert.match(html, /Puerto\s+Lumbreras/i,
