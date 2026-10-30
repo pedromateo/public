@@ -65,9 +65,9 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     assert.match(html, /968\s*40\s*20\s*10/, 'Debe mostrar el teléfono de atención y pedidos');
     assert.match(html, /Mayor/i, 'Debe indicar la dirección en Calle Mayor');
 
-    // Lema en la cabecera principal
-    assert.match(html, /La confiter(?:í|&iacute;)a artesana\.\s*(?:<[^>]+>\s*)*La confiter(?:í|&iacute;)a de siempre/i,
-      'Debe contener el lema oficial "La confitería artesana. La confitería de siempre" en la cabecera');
+    // Lema en la cabecera principal sin punto final
+    assert.match(html, /La confiter(?:í|&iacute;)a artesana\.\s*(?:<[^>]+>\s*)*La confiter(?:í|&iacute;)a de siempre<\/span>/i,
+      'Debe contener el lema oficial "La confitería artesana. La confitería de siempre" sin punto final');
   });
 
   it('la página de historia del bisabuelo debe contener el texto del homenaje y obrador', () => {
