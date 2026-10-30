@@ -80,6 +80,12 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     assert.match(html, /Postrechino/i, 'Debe explicar la anatomía del Postrechino');
     assert.match(html, /obrador/i, 'Debe hablar del obrador artesanal');
     assert.match(html, /Calle Mayor/i, 'Debe situar el obrador en la calle Mayor');
+
+    // No debe incluir fechas de publicación ni bloques innecesarios en la barra lateral
+    assert.doesNotMatch(html, /class=[\"'][^\"']*date-text/i, 'No debe incluir fechas de publicación');
+    assert.doesNotMatch(html, /class=[\"'][^\"']*blog-archive-list/i, 'No debe incluir la sección de Archivos');
+    assert.doesNotMatch(html, /class=[\"'][^\"']*blog-category-list/i, 'No debe incluir la sección de Categorías');
+    assert.doesNotMatch(html, /sidebar-obrador-box/i, 'No debe incluir la caja duplicada del obrador en la barra lateral');
   });
 
   it('nuevos_servicios.html debe estar eliminada y no existir en el sitio', () => {
