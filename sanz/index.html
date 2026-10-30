@@ -120,6 +120,99 @@ _W.setup_model_rpc({"rpc_namespace":"_W.CustomerAccounts.RPC","model_namespace":
     <link rel="icon" type="image/jpeg" href="favicon.jpeg" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 
+    <style>
+    /* ========================================================
+       CABECERA PRINCIPAL HERO - DISEÑO PROFESIONAL
+       ======================================================== */
+    .home-hero-banner {
+      background: linear-gradient(135deg, #741d4f 0%, #99336f 55%, #4a1334 100%) !important;
+      color: #ffffff !important;
+      padding: 125px 24px 65px 24px !important;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      height: auto !important;
+      min-height: 290px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+
+    .home-hero-banner::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.22) 100%);
+      pointer-events: none;
+    }
+
+    .home-hero-container {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .home-hero-title {
+      font-family: "Montserrat", sans-serif !important;
+      color: #ffffff !important;
+      margin: 0 auto !important;
+      line-height: 1.25 !important;
+      text-align: center !important;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .home-hero-title-main {
+      display: block;
+      font-size: clamp(2rem, 5.2vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.15;
+    }
+
+    .home-hero-divider {
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 2px;
+      margin: 2px auto;
+    }
+
+    .home-hero-title-sub {
+      display: block;
+      font-size: clamp(1.2rem, 3vw, 1.9rem);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      color: #faeaf4;
+      line-height: 1.3;
+      font-style: italic;
+      opacity: 0.95;
+    }
+
+    @media (max-width: 767px) {
+      .home-hero-banner {
+        padding: 95px 16px 45px 16px !important;
+        min-height: 230px !important;
+      }
+      .home-hero-title {
+        gap: 8px;
+      }
+      .home-hero-divider {
+        width: 44px;
+        height: 2px;
+      }
+    }
+    </style>
+
 </head>
 	<body class="header-page  wsite-page-index  full-width-body-off header-overlay-on alt-nav-off  wsite-theme-light"><div class="wrapper">
     <div class="birdseye-header">
@@ -188,15 +281,17 @@ _W.setup_model_rpc({"rpc_namespace":"_W.CustomerAccounts.RPC","model_namespace":
     <div class="banner-wrap" id="historia">
       <div class="wsite-elements wsite-not-footer wsite-header-elements">
 	<div class="wsite-section-wrap">
-	<div  class="wsite-section wsite-header-section wsite-section-bg-color wsite-section-effect-reveal" style="height: 367px;vertical-align: middle;background-color: #99336f;background-image: none;is_customized: 1;" >
+	<div class="wsite-section wsite-header-section wsite-section-bg-color home-hero-banner" style="background-color: #99336f; background-image: none; is_customized: 1;">
 		<div class="wsite-section-content">
 			
-          <div class="container">
+          <div class="container home-hero-container">
             <div class="banner">
 				<div class="wsite-section-elements">
-					<div class="wsite-spacer" style="height:33px;"></div>
-
-<h2 class="wsite-content-title" style="text-align:center;"><font size="7">La confiter&iacute;a artesana</font></h2>
+					<h2 class="wsite-content-title home-hero-title">
+						<span class="home-hero-title-main">La confiter&iacute;a artesana.</span>
+						<span class="home-hero-divider"></span>
+						<span class="home-hero-title-sub">La confiter&iacute;a de siempre.</span>
+					</h2>
 				</div>
 			</div>
           </div>
