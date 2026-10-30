@@ -130,6 +130,7 @@ describe('Tests de Navegación - Enlaces de Contacto, Mapas y Redes Sociales', (
 
     assert.match(html, /facebook\.com/i, 'Debe enlazar al perfil de Facebook');
     assert.match(html, /youtube\.com/i, 'Debe enlazar al canal de YouTube');
+    assert.match(html, /instagram\.com\/PASTELERIASANZ/i, 'Debe enlazar al perfil oficial de Instagram');
 
     const socialLinks = [...html.matchAll(/<a[^>]+class=[\"'][^\"']*wsite-social-item[^\"']*[\"'][^>]*>/gi)];
     for (const match of socialLinks) {
