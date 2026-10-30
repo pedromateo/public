@@ -43,6 +43,11 @@ jobs:
         run: |
           mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit
 
+          # Root Portal
+          if [ -f "index.html" ]; then
+            cp index.html dist/ || true
+          fi
+
           # Brainfit Copy
           if [ -d "brainfit" ]; then
             echo "Packaging Brainfit..."

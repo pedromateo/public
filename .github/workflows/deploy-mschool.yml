@@ -31,6 +31,11 @@ jobs:
         run: |
           mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit
 
+          # Root Portal
+          if [ -f "index.html" ]; then
+            cp index.html dist/ || true
+          fi
+
           # Brainfit Copy
           if [ -d "brainfit" ]; then
             echo "Packaging Brainfit..."
@@ -94,7 +99,7 @@ jobs:
             cd medit
             sed -i "s/medit-cache-v[0-9]*/medit-cache-${{ github.sha }}/g" sw.js || true
             cp index.html manifest.json sw.js package.json ../dist/medit/ || true
-            cp -r js css icons ../dist/medit/ || true
+            cp -r js css icons audio ../dist/medit/ || true
             cd ..
           fi
 
