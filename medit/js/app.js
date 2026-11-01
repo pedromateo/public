@@ -87,6 +87,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
+  // Screen Wake Lock API (Evita que la pantalla se apague durante los ejercicios)
+  let wakeLockSentinel = null;
+
+  async function requestScreenWakeLock() {
+    if ('wakeLock' in navigator && !wakeLockSentinel) {
+      try {
+        wakeLockSentinel = await navigator.wakeLock.request('screen');
+        wakeLockSentinel.addEventListener('release', () => {
+          wakeLockSentinel = null;
+        });
+      } catch (err) {
+        console.warn('Medit: No se pudo adquirir Screen Wake Lock:', err);
+      }
+    }
+  }
+
+  async function releaseScreenWakeLock() {
+    if (wakeLockSentinel) {
+      try {
+        await wakeLockSentinel.release();
+      } catch (err) {
+        console.warn('Medit: Error al liberar Screen Wake Lock:', err);
+      }
+      wakeLockSentinel = null;
+    }
+  }
+
+  function updateWakeLockState() {
+    const isSessionActive =
+      breathState.isRunning ||
+      (timerState.isActive && !timerState.isPaused && !timerState.isFinished) ||
+      (stopState.isRunning && !stopState.isFinished);
+
+    if (isSessionActive) {
+      requestScreenWakeLock();
+    } else {
+      releaseScreenWakeLock();
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      updateWakeLockState();
+    }
+  });
+
   // DOM Elements
   const headerStreak = document.getElementById('header-streak');
   const headerSoundBtn = document.getElementById('header-sound-btn');
@@ -189,6 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderView() {
     updateHeader();
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    if (timerState.isActive) {
+      renderTimerFullscreen();
+      return;
+    }
 
     if (currentTab === 'home') {
       renderHome();
@@ -535,7 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
       breathState.totalElapsed = 0;
       breathState.isCompleted = false;
       breathState.isRunning = true;
-      switchTab('breathe');
+      switchTab('library', 'breathe');
       startBreathLoop();
       // Voice intro
       window.voicePlayer.play('zen_inicio', 'intro');
@@ -628,7 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Top status bar -->
           <div class="w-full flex items-center justify-between z-10 mb-2">
             <span class="text-xs font-medium text-slate-400">
-              Ciclo <strong class="text-white">${breathState.currentCycle}</strong> de ${maxCycles}
+              Ciclo <strong id="breath-cycle-current" class="text-white">${breathState.currentCycle}</strong> de ${maxCycles}
             </span>
             <div class="flex items-center gap-1.5">
               <button id="btn-toggle-breath-voice" class="p-1.5 px-2 rounded-xl bg-slate-800/80 text-xs text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors border border-slate-700/60" title="Locución por voz">
@@ -679,7 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- Step Instruction -->
-          <p class="text-xs text-slate-400 text-center max-w-sm z-10 h-8 flex items-center justify-center mb-4 sm:mb-5">
+          <p id="breath-tip-text" class="text-xs text-slate-400 text-center max-w-sm z-10 h-8 flex items-center justify-center mb-4 sm:mb-5">
             ${breathState.isRunning ? currentStep.tip : 'Pulsa comenzar para iniciar la sincronización'}
           </p>
 
@@ -789,6 +840,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startBreathLoop() {
     stopBreathLoop();
+    updateWakeLockState();
     const protocol =
       window.MEDIT_DATA.BREATH_PROTOCOLS.find((p) => p.id === breathState.protocolId) ||
       window.MEDIT_DATA.BREATH_PROTOCOLS[0];
@@ -850,11 +902,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Smooth in-place DOM update without tearing down the subtree
-      if (currentTab === 'breathe' && !breathState.isCompleted) {
-        const secondsEl = document.getElementById('breath-seconds-text');
-        if (secondsEl) {
-          secondsEl.textContent = `${Math.max(0, currentStep.duration - breathState.stepElapsed).toFixed(1)}s`;
-        }
+      const secondsEl = document.getElementById('breath-seconds-text');
+      if (secondsEl && !breathState.isCompleted) {
+        secondsEl.textContent = `${Math.max(0, currentStep.duration - breathState.stepElapsed).toFixed(1)}s`;
         const actionEl = document.getElementById('breath-action-text');
         if (actionEl) {
           actionEl.textContent =
@@ -871,6 +921,16 @@ document.addEventListener('DOMContentLoaded', () => {
           labelEl.textContent = currentStep.label;
         }
 
+        const cycleEl = document.getElementById('breath-cycle-current');
+        if (cycleEl) {
+          cycleEl.textContent = breathState.currentCycle;
+        }
+
+        const tipEl = document.getElementById('breath-tip-text');
+        if (tipEl && tipEl.textContent.trim() !== currentStep.tip) {
+          tipEl.textContent = currentStep.tip;
+        }
+
         let scale = 0.6;
         const ratio = Math.min(breathState.stepElapsed / currentStep.duration, 1);
         if (currentStep.action === 'inhale') scale = 0.6 + ratio * 0.35;
@@ -884,8 +944,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (inner) inner.style.transform = `scale(${scale * 0.95})`;
         const outer = document.getElementById('breath-orb-ring-outer');
         if (outer) outer.style.transform = `scale(${scale})`;
-      } else if (currentTab === 'breathe' && breathState.isCompleted) {
-        renderBreathe();
+      } else if (breathState.isCompleted) {
+        if (currentTab === 'library') renderLibrary(); else renderBreathe();
       }
     }, 100);
   }
@@ -896,6 +956,7 @@ document.addEventListener('DOMContentLoaded', () => {
       breathState.timerId = null;
     }
     if (window.voicePlayer) window.voicePlayer.stop();
+    updateWakeLockState();
   }
 
   // ==========================================
@@ -1314,11 +1375,13 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isActive = false;
       timerState.isPaused = false;
       window.soundEngine.stopAmbient();
-      if (currentTab === 'library') renderLibrary(); else renderTimer();
+      updateWakeLockState();
+      renderView();
     });
 
     document.getElementById('btn-toggle-pause')?.addEventListener('click', () => {
       timerState.isPaused = !timerState.isPaused;
+      updateWakeLockState();
       const pauseBtn = document.getElementById('btn-toggle-pause');
       const statusText = document.getElementById('timer-status-text');
       if (pauseBtn) {
@@ -1362,12 +1425,14 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isActive = false;
       timerState.isFinished = false;
       timerState.note = '';
-      if (currentTab === 'library') renderLibrary(); else renderTimer();
+      updateWakeLockState();
+      renderView();
     });
   }
 
   function startTimerLoop() {
     stopTimerLoop();
+    updateWakeLockState();
     timerState.timerId = setInterval(() => {
       if (timerState.isPaused || timerState.isFinished) return;
 
@@ -1398,7 +1463,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.voicePlayer) window.voicePlayer.play('zen_cierre', 'outro');
       }
 
-      if (currentTab === 'timer' && timerState.isActive) {
+      if (timerState.isActive) {
         renderTimerFullscreen();
       }
     }, 1000);
@@ -1410,6 +1475,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.timerId = null;
     }
     if (window.voicePlayer) window.voicePlayer.stop();
+    updateWakeLockState();
   }
 
   // ==========================================
@@ -1846,6 +1912,7 @@ document.addEventListener('DOMContentLoaded', () => {
     stopState.remaining = STOP_STEPS[0].duration;
     stopState.isRunning = true;
     stopState.isFinished = false;
+    updateWakeLockState();
 
     window.soundEngine.playBell(state.bellTone, state.soundVolume);
     stopModalEl.classList.remove('hidden');
@@ -1870,6 +1937,7 @@ document.addEventListener('DOMContentLoaded', () => {
           clearInterval(stopState.timerId);
           stopState.isFinished = true;
           stopState.isRunning = false;
+          updateWakeLockState();
           window.soundEngine.playBell(state.bellTone, state.soundVolume);
           window.voicePlayer.play('zen_cierre', 'outro');
 
@@ -1897,10 +1965,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!modalBody) return;
 
     if (!stopState.isFinished) {
+      const stepLetterEl = document.getElementById('stop-step-letter');
+      const secondsEl = document.getElementById('stop-seconds-text');
+
+      if (secondsEl && stepLetterEl && stepLetterEl.textContent.trim() === cur.letter) {
+        secondsEl.textContent = `${stopState.remaining}s`;
+        return;
+      }
+
       modalBody.innerHTML = `
         <div class="text-center py-4">
           <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-slate-800 border border-slate-700/80 shadow-inner mb-4">
-            <span class="text-4xl font-extrabold text-teal-300">${cur.letter}</span>
+            <span id="stop-step-letter" class="text-4xl font-extrabold text-teal-300">${cur.letter}</span>
           </div>
 
           <p class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-1">${cur.word}</p>
@@ -1908,7 +1984,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="text-sm text-slate-300 leading-relaxed max-w-md mx-auto mb-6">${cur.desc}</p>
 
           <div class="flex items-center justify-center gap-2 text-slate-400 text-sm mb-6">
-            <span class="font-mono text-2xl font-bold text-white">${stopState.remaining}s</span>
+            <span id="stop-seconds-text" class="font-mono text-2xl font-bold text-white">${stopState.remaining}s</span>
             <span>en este paso</span>
           </div>
 
@@ -1926,7 +2002,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('btn-stop-modal-pause')?.addEventListener('click', () => {
         stopState.isRunning = !stopState.isRunning;
-        renderStopModalContent();
+        updateWakeLockState();
+        const pauseBtn = document.getElementById('btn-stop-modal-pause');
+        if (pauseBtn) {
+          pauseBtn.innerHTML = stopState.isRunning
+            ? window.MEDIT_ICONS.pause('w-4 h-4 text-slate-400') + '<span>Pausar</span>'
+            : window.MEDIT_ICONS.play('w-4 h-4 text-teal-400') + '<span>Continuar</span>';
+        }
       });
 
       document.getElementById('btn-stop-modal-next')?.addEventListener('click', () => {
@@ -1936,6 +2018,8 @@ document.addEventListener('DOMContentLoaded', () => {
           renderStopModalContent();
         } else {
           stopState.isFinished = true;
+          stopState.isRunning = false;
+          updateWakeLockState();
           renderStopModalContent();
         }
       });
@@ -1967,6 +2051,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeStopModal() {
     if (stopState.timerId) clearInterval(stopState.timerId);
+    stopState.isRunning = false;
+    stopState.isFinished = false;
+    stopState.isOpen = false;
+    updateWakeLockState();
     if (window.voicePlayer) window.voicePlayer.stop();
     stopModalEl.classList.add('hidden');
     renderView();

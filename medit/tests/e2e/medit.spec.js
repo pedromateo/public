@@ -81,10 +81,19 @@ test.describe('Medit PWA — E2E Tests', () => {
     const startBtn = page.locator('#btn-toggle-breath-run');
     await expect(startBtn).toContainText('Comenzar');
 
+    const secondsLocator = page.locator('#breath-seconds-text');
+    await expect(secondsLocator).toHaveText('2.5s');
+
     await startBtn.click();
     await expect(startBtn).toContainText('Pausar');
 
-    await page.waitForTimeout(300);
+    // Comprobar que los segundos van bajando en tiempo real
+    await expect(async () => {
+      const text = await secondsLocator.innerText();
+      const val = parseFloat(text.replace('s', ''));
+      expect(val).toBeLessThan(2.5);
+    }).toPass({ timeout: 3000 });
+
     await startBtn.click();
     await expect(startBtn).toContainText('Comenzar');
   });
@@ -107,6 +116,12 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(page.locator('#btn-toggle-voice-timer')).toBeVisible();
     await expect(page.locator('#btn-toggle-pause')).toBeVisible();
 
+    const countdownLocator = page.locator('#timer-countdown-text');
+    await expect(countdownLocator).toHaveText('1:00');
+
+    // Comprobar que los segundos van bajando en el temporizador
+    await expect(countdownLocator).not.toHaveText('1:00', { timeout: 3000 });
+
     // Probar alternar visibilidad del reloj
     const toggleClockBtn = page.locator('#btn-toggle-clock');
     await toggleClockBtn.click();
@@ -117,7 +132,26 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(page.locator('h2').first()).toContainText('Biblioteca de Técnicas');
   });
 
-  test('Protocolo S.T.O.P. Modal (60s) desde selector de 1 min', async ({ page }) => {
+  test('Temporizador Zen desde Home: la cuenta atrás de segundos va bajando', async ({ page }) => {
+    await page.goto('/');
+
+    // Pulsar opción de 5 min (300s)
+    await page.locator('button[data-time-sec="300"]').click();
+    await page.locator('#btn-start-confirmed-session').click();
+
+    await expect(page.locator('text=Meditación en curso')).toBeVisible();
+    const countdownLocator = page.locator('#timer-countdown-text');
+    await expect(countdownLocator).toHaveText('5:00');
+
+    // Verificar que los segundos bajan
+    await expect(countdownLocator).not.toHaveText('5:00', { timeout: 3000 });
+
+    // Cancelar y comprobar que regresa limpiamente
+    await page.locator('#btn-cancel-timer').click();
+    await expect(page.locator('h3').first()).toContainText('¿Cuánto tiempo tienes para ti ahora?');
+  });
+
+  test('Protocolo S.T.O.P. Modal (60s) desde selector de 1 min con descenso de segundos', async ({ page }) => {
     await page.goto('/');
 
     // Pulsar 1 min en la Home
@@ -127,9 +161,15 @@ test.describe('Medit PWA — E2E Tests', () => {
     const stopModal = page.locator('#stop-modal');
     await expect(stopModal).toBeVisible();
 
-    // Debe mostrar paso S (Stop)
+    // Debe mostrar paso S (Stop) y el contador
     await expect(stopModal.getByText('STOP', { exact: true })).toBeVisible();
     await expect(stopModal.locator('text=Para lo que estás haciendo')).toBeVisible();
+
+    const secondsLocator = page.locator('#stop-seconds-text');
+    await expect(secondsLocator).toHaveText('15s');
+
+    // Verificar que los segundos bajan
+    await expect(secondsLocator).not.toHaveText('15s', { timeout: 3000 });
 
     // Avanzar paso a paso
     await page.locator('#btn-stop-modal-next').click(); // T
@@ -186,5 +226,60 @@ test.describe('Medit PWA — E2E Tests', () => {
     // Cerrar modal
     await page.locator('#btn-close-sound-modal').click();
     await expect(soundModal).toBeHidden();
+  });
+
+  test('Screen Wake Lock: se solicita al iniciar un ejercicio y se libera al pausar/cancelar', async ({ page }) => {
+    // Simular Screen Wake Lock API
+    await page.addInitScript(() => {
+      window.__wakeLockRequests = 0;
+      window.__wakeLockReleases = 0;
+      const fakeSentinel = {
+        released: false,
+        release: async () => {
+          fakeSentinel.released = true;
+          window.__wakeLockReleases++;
+          if (fakeSentinel.onrelease) fakeSentinel.onrelease();
+        },
+        addEventListener: (event, cb) => {
+          if (event === 'release') fakeSentinel.onrelease = cb;
+        }
+      };
+
+      Object.defineProperty(navigator, 'wakeLock', {
+        value: {
+          request: async (type) => {
+            if (type === 'screen') {
+              window.__wakeLockRequests++;
+              fakeSentinel.released = false;
+              return fakeSentinel;
+            }
+          }
+        },
+        configurable: true
+      });
+    });
+
+    await page.goto('/');
+
+    // 1. Iniciar temporizador desde biblioteca
+    await page.locator('button[data-tab="library"]').click();
+    await page.locator('button[data-subtab="timer"]').click();
+    await page.locator('button[data-sec="60"]').click();
+    await page.locator('#btn-start-timer-session').click();
+
+    // Debe haber solicitado Wake Lock
+    await expect(async () => {
+      const requests = await page.evaluate(() => window.__wakeLockRequests);
+      expect(requests).toBeGreaterThanOrEqual(1);
+    }).toPass({ timeout: 2000 });
+
+    // Cancelar la sesión
+    await page.locator('#btn-cancel-timer').click();
+
+    // Debe haber liberado Wake Lock
+    await expect(async () => {
+      const releases = await page.evaluate(() => window.__wakeLockReleases);
+      expect(releases).toBeGreaterThanOrEqual(1);
+    }).toPass({ timeout: 2000 });
   });
 });
