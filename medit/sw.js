@@ -1,4 +1,4 @@
-const CACHE_NAME = 'medit-cache-v4';
+const CACHE_NAME = 'medit-cache-v5';
 const urlsToCache = [
   './',
   './index.html',

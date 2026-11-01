@@ -363,4 +363,50 @@ test.describe('Medit PWA — E2E Tests', () => {
     await page.reload();
     await expect(page.locator('html')).not.toHaveClass(/dark/);
   });
+
+  test('Fuentes adaptadas a mobile y eliminación de espacios en blanco entre párrafos en lectura', async ({ page }) => {
+    // Simular pantalla de móvil (iPhone/Pixel estándar: 375x667)
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+
+    // 1. Verificar legibilidad de tipografía en móvil (los textos no deben ser inferiores a ~12px)
+    const navTabLabel = page.locator('.nav-tab-label').first();
+    await expect(navTabLabel).toBeVisible();
+    const navFontSize = await navTabLabel.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+    expect(navFontSize).toBeGreaterThanOrEqual(12);
+
+    // 2. Ir a la sección de lectura (Biblioteca -> Neurociencia)
+    await page.locator('button[data-tab="library"]').click();
+    await page.locator('button[data-subtab="science"]').click();
+
+    // Comprobar que los títulos de artículos son legibles en móvil (>14px)
+    const articleTitle = page.locator('.article-card h3').first();
+    await expect(articleTitle).toBeVisible();
+    const titleFontSize = await articleTitle.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+    expect(titleFontSize).toBeGreaterThanOrEqual(15);
+
+    // 3. Abrir el primer artículo (Nivel 1)
+    await page.locator('.article-header').first().click();
+    const articleBody = page.locator('.article-body').first();
+    await expect(articleBody).toBeVisible();
+
+    // 4. Verificar que los párrafos de lectura no tienen espacios en blanco ni márgenes verticales vacíos entre sí
+    const paragraphsContainer = articleBody.locator('.article-paragraphs').first();
+    await expect(paragraphsContainer).toBeVisible();
+
+    const paragraphs = paragraphsContainer.locator('.article-p');
+    const count = await paragraphs.count();
+    expect(count).toBeGreaterThanOrEqual(1);
+
+    // Comprobar que el contenedor de párrafos tiene gap = 0px y margen inferior nulo
+    const containerGap = await paragraphsContainer.evaluate((el) => window.getComputedStyle(el).gap);
+    expect(['0px', 'normal', '0']).toContain(containerGap);
+
+    const firstP = paragraphs.first();
+    const pMarginBottom = await firstP.evaluate((el) => parseFloat(window.getComputedStyle(el).marginBottom));
+    expect(pMarginBottom).toBe(0);
+
+    const pFontSize = await firstP.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+    expect(pFontSize).toBeGreaterThanOrEqual(14); // Cómodo para lectura sin forzar la vista en móvil
+  });
 });

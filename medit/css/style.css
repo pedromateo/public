@@ -504,13 +504,116 @@ html:not(.dark) .article-content {
   border-color: var(--border-card) !important;
 }
 
-/* Mobile responsive typography */
+/* ==========================================================================
+   READING SECTION — PARAGRAPH COMPACT FLOW (NO BLANK LINES BETWEEN PARAGRAPHS)
+   ========================================================================== */
+.article-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.article-p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.6;
+}
+
+.article-content-block + .article-content-block {
+  margin-top: 0.75rem;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE TYPOGRAPHY (< 640px)
+   Adapts fonts for mobile screens to eliminate eye strain & improve legibility
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* Scale up microscopic micro-text and arbitrary pixel sizes on mobile */
+  .text-\[9px\] {
+    font-size: 0.74rem !important; /* ~11.8px */
+    line-height: 1.15rem !important;
+  }
+
+  .text-\[10px\] {
+    font-size: 0.78rem !important; /* ~12.5px */
+    line-height: 1.2rem !important;
+  }
+
+  .text-\[11px\] {
+    font-size: 0.84rem !important; /* ~13.4px */
+    line-height: 1.25rem !important;
+  }
+
+  .text-xs {
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.35rem !important;
+  }
+
+  /* Nav tab labels readable without overflow */
+  .nav-tab-label {
+    font-size: 0.76rem !important; /* ~12.2px */
+    letter-spacing: -0.01em;
+  }
+
+  /* Reading Section on Mobile */
+  .article-card h3 {
+    font-size: 1.05rem !important; /* ~16.8px */
+    line-height: 1.35 !important;
+  }
+
+  .article-card p.line-clamp-1 {
+    font-size: 0.84rem !important;
+  }
+
+  .article-badge {
+    font-size: 0.75rem !important;
+  }
+
+  .article-body {
+    font-size: 0.94rem !important; /* ~15px */
+    line-height: 1.6 !important;
+  }
+
+  .article-body h4 {
+    font-size: 0.98rem !important; /* ~15.7px */
+    line-height: 1.35 !important;
+  }
+
+  .article-p {
+    font-size: 0.94rem !important; /* ~15px */
+    line-height: 1.55 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Home & Cards Typography on Mobile */
+  .btn-select-time p.text-xs,
+  .btn-select-protocol p.text-xs,
+  .btn-timer-preset p.text-xs,
+  .btn-select-anchor p.text-xs,
+  .btn-select-bell p.text-xs,
+  .btn-select-ambient p.text-xs,
+  .btn-select-voice-level p.text-xs,
+  .btn-select-theme p.text-xs {
+    font-size: 0.9rem !important;
+  }
+
+  /* Modals on mobile */
+  #stop-modal h3,
+  #anchor-modal h3,
+  #sound-modal h3 {
+    font-size: 1.05rem !important;
+  }
+}
+
 @media (max-width: 380px) {
   .nav-tab-label {
-    font-size: 10px !important;
+    font-size: 0.75rem !important;
   }
   .nav-tab {
-    padding-left: 0.35rem !important;
-    padding-right: 0.35rem !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
   }
 }

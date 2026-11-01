@@ -1589,50 +1589,63 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="article-header p-3.5 sm:p-5 cursor-pointer flex items-start justify-between gap-3">
                   <div class="flex-1">
                     <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                      <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                      <span class="article-badge text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
                         isRead
                           ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
                           : 'bg-slate-800 text-slate-400 border border-slate-700/80'
                       }">
                         Nivel ${levelNum} · ${art.badge}
                       </span>
-                      <span class="text-[10px] sm:text-[11px] text-slate-400 flex items-center gap-1">
+                      <span class="text-xs sm:text-sm text-slate-400 flex items-center gap-1">
                         ${window.MEDIT_ICONS.clock('w-3 h-3')} ${art.readTime}
                       </span>
                       ${
                         isRead
-                          ? `<span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-0.5">${window.MEDIT_ICONS.check('w-3 h-3')} Aprendido</span>`
+                          ? `<span class="text-xs sm:text-sm text-emerald-400 font-semibold flex items-center gap-0.5">${window.MEDIT_ICONS.check('w-3 h-3')} Aprendido</span>`
                           : ''
                       }
                     </div>
-                    <h3 class="text-xs sm:text-base font-bold text-white tracking-tight leading-snug">
+                    <h3 class="text-sm sm:text-base font-bold text-white tracking-tight leading-snug">
                       ${art.title}
                     </h3>
-                    <p class="text-[11px] sm:text-xs text-slate-400 mt-1 line-clamp-1">${art.hook}</p>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1 line-clamp-1">${art.hook}</p>
                   </div>
                   <button class="text-slate-400 p-1 shrink-0 article-chevron" aria-label="Expandir">${window.MEDIT_ICONS.chevronDown('w-4 h-4')}</button>
                 </div>
 
                 <div class="article-body hidden px-3.5 pb-4 sm:px-5 sm:pb-6 pt-2 border-t border-slate-800/80 space-y-3 sm:space-y-4">
                   <div class="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-indigo-500/10 border border-teal-500/30">
-                    <span class="text-[10px] font-bold text-teal-300 uppercase tracking-wider block mb-1">Idea Central</span>
-                    <p class="text-xs text-slate-200 leading-relaxed">${art.coreInsight}</p>
+                    <span class="text-xs font-bold text-teal-300 uppercase tracking-wider block mb-1">Idea Central</span>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${art.coreInsight}</p>
                   </div>
 
-                  <div class="space-y-3 pt-1 text-xs text-slate-300 leading-relaxed whitespace-pre-line">
-                    ${art.content.map((c) => `
-                      <div>
-                        <h4 class="font-bold text-white mb-1">${c.subtitle}</h4>
-                        <p class="text-slate-300">${c.text}</p>
-                      </div>
-                    `).join('')}
+                  <div class="space-y-3 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    ${art.content.map((c) => {
+                      const paragraphs = c.text
+                        .replace(/\r/g, '')
+                        .split(/\n+/)
+                        .map((p) => p.trim())
+                        .filter(Boolean);
+                      return `
+                        <div class="article-content-block">
+                          <h4 class="font-bold text-white text-xs sm:text-sm mb-1">${c.subtitle}</h4>
+                          <div class="article-paragraphs">
+                            ${paragraphs
+                              .map(
+                                (p) => `<p class="article-p text-slate-300 leading-relaxed">${p}</p>`
+                              )
+                              .join('')}
+                          </div>
+                        </div>
+                      `;
+                    }).join('')}
                   </div>
 
                   ${
                     art.sensationsGuide
                       ? `
                     <div class="p-3.5 sm:p-4 rounded-xl bg-gradient-to-br from-teal-500/10 via-cyan-500/10 to-slate-900 border border-teal-500/30 space-y-2">
-                      <div class="flex items-center gap-1.5 text-teal-300 font-bold text-xs uppercase tracking-wider">
+                      <div class="flex items-center gap-1.5 text-teal-300 font-bold text-xs sm:text-sm uppercase tracking-wider">
                         ${window.MEDIT_ICONS.sparkle('w-3.5 h-3.5 text-teal-400')}
                         <span>${art.sensationsGuide.heading}</span>
                       </div>
@@ -1640,7 +1653,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${art.sensationsGuide.items
                           .map(
                             (item) => `
-                          <div class="flex items-start gap-2 text-xs">
+                          <div class="flex items-start gap-2 text-xs sm:text-sm">
                             <span class="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 shrink-0"></span>
                             <div class="leading-relaxed text-slate-300">
                               <strong class="text-white font-semibold">${item.label}:</strong> ${item.desc}
@@ -1655,16 +1668,16 @@ document.addEventListener('DOMContentLoaded', () => {
                       : ''
                   }
 
-                  <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-xs text-emerald-300">
-                    <strong class="flex items-center gap-1 text-[10px] uppercase tracking-wider mb-0.5 text-emerald-400">
+                  <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-xs sm:text-sm text-emerald-300">
+                    <strong class="flex items-center gap-1 text-[11px] sm:text-xs uppercase tracking-wider mb-0.5 text-emerald-400">
                       ${window.MEDIT_ICONS.bolt('w-3 h-3')} Ejercicio Práctico del Nivel ${levelNum}
                     </strong>
                     <p class="text-slate-200">${art.actionable}</p>
                   </div>
 
-                  <p class="text-[10px] text-slate-500 font-mono italic">Fuente: ${art.reference}</p>
+                  <p class="text-[11px] sm:text-xs text-slate-500 font-mono italic">Fuente: ${art.reference}</p>
 
-                  <button data-id="${art.id}" class="btn-toggle-read w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${
+                  <button data-id="${art.id}" class="btn-toggle-read w-full py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition-all ${
                     isRead
                       ? 'bg-slate-800 text-slate-400 border-slate-700 hover:text-white'
                       : 'bg-teal-500/20 text-teal-300 border-teal-500/40 hover:bg-teal-500/30 shadow-md'

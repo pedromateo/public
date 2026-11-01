@@ -390,7 +390,7 @@ window.MEDIT_DATA = {
       content: [
         {
           subtitle: 'La metodología en 3 fases (Guiada por campanas)',
-          text: 'En una sesión de 12 o 15 minutos, tu mente pasa por tres fases naturales:\n\n1. Fase Linterna (0 a 5 min): Atención focalizada como un haz estrecho en la respiración nasal.\n2. Fase Foco Amplio (5 a 10 min): Abres el foco a las sensaciones de todo el cuerpo y los sonidos del entorno.\n3. Fase de Presencia e Integración (10 a 12-15 min): Descanso en quietud lúcida, fijando serenidad antes de retomar tus tareas.'
+          text: 'En una sesión de 12 o 15 minutos, tu mente pasa por tres fases naturales:\n1. Fase Linterna (0 a 5 min): Atención focalizada como un haz estrecho en la respiración nasal.\n2. Fase Foco Amplio (5 a 10 min): Abres el foco a las sensaciones de todo el cuerpo y los sonidos del entorno.\n3. Fase de Presencia e Integración (10 a 12-15 min): Descanso en quietud lúcida, fijando serenidad antes de retomar tus tareas.'
         },
         {
           subtitle: 'El Protocolo NSDR (Non-Sleep Deep Rest) de Stanford',
