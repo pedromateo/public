@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isActive = true;
       timerState.isPaused = false;
       timerState.isFinished = false;
-      timerState.lastSpokenPhase = -1;
+      timerState.lastSpokenPhase = 0;
 
       // Play bell & ambient
       window.soundEngine.playBell(state.bellTone, state.soundVolume);
@@ -606,8 +606,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       startTimerLoop();
       renderTimerFullscreen();
-      // Voice intro
-      window.voicePlayer.play('zen_inicio', 'intro');
+      // Locución de fase inicial según el nivel (permisivo: texto completo; restrictivo: nombre fase + resumen)
+      window.voicePlayer.playPhase(0);
     }
   }
 
@@ -1129,7 +1129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timerState.isPaused = false;
       timerState.isFinished = false;
       timerState.remainingSeconds = timerState.selectedSeconds;
-      timerState.lastSpokenPhase = -1;
+      timerState.lastSpokenPhase = 0;
 
       // Play bell & ambient
       window.soundEngine.playBell(state.bellTone, state.soundVolume);
@@ -1139,8 +1139,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       startTimerLoop();
       renderTimerFullscreen();
-      // Voice intro
-      window.voicePlayer.play('zen_inicio', 'intro');
+      // Locución de fase inicial según el nivel (permisivo: texto completo; restrictivo: nombre fase + resumen)
+      window.voicePlayer.playPhase(0);
     });
   }
 
@@ -1162,10 +1162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (timerState.lastSpokenPhase !== phaseIdx) {
       timerState.lastSpokenPhase = phaseIdx;
-      if (phaseIdx === 0) window.voicePlayer.play('zen_fase1', 'phase');
-      else if (phaseIdx === 1) window.voicePlayer.play('zen_fase2', 'phase');
-      else if (phaseIdx === 2) window.voicePlayer.play('zen_fase3', 'phase');
-      else if (phaseIdx === 3) window.voicePlayer.play('zen_fase4', 'phase');
+      window.voicePlayer.playPhase(phaseIdx);
     }
 
     const ring = document.getElementById('timer-progress-ring');
@@ -1577,6 +1574,33 @@ document.addEventListener('DOMContentLoaded', () => {
                       </div>
                     `).join('')}
                   </div>
+
+                  ${
+                    art.sensationsGuide
+                      ? `
+                    <div class="p-3.5 sm:p-4 rounded-xl bg-gradient-to-br from-teal-500/10 via-cyan-500/10 to-slate-900 border border-teal-500/30 space-y-2">
+                      <div class="flex items-center gap-1.5 text-teal-300 font-bold text-xs uppercase tracking-wider">
+                        ${window.MEDIT_ICONS.sparkle('w-3.5 h-3.5 text-teal-400')}
+                        <span>${art.sensationsGuide.heading}</span>
+                      </div>
+                      <div class="space-y-1.5 pt-0.5">
+                        ${art.sensationsGuide.items
+                          .map(
+                            (item) => `
+                          <div class="flex items-start gap-2 text-xs">
+                            <span class="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 shrink-0"></span>
+                            <div class="leading-relaxed text-slate-300">
+                              <strong class="text-white font-semibold">${item.label}:</strong> ${item.desc}
+                            </div>
+                          </div>
+                        `
+                          )
+                          .join('')}
+                      </div>
+                    </div>
+                  `
+                      : ''
+                  }
 
                   <div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-xs text-emerald-300">
                     <strong class="flex items-center gap-1 text-[10px] uppercase tracking-wider mb-0.5 text-emerald-400">

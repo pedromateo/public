@@ -248,6 +248,14 @@ window.MEDIT_DATA = {
         }
       ],
       actionable: 'Cuando notes un pensamiento de trabajo, sonríe mentalmente, etiquétalo como "pensando", y vuelve suavemente a sentir el aire en tu nariz.',
+      sensationsGuide: {
+        heading: 'Qué debes sentir o buscar en este ejercicio',
+        items: [
+          { label: 'El chispazo del "darse cuenta"', desc: 'No intentes vaciar la mente ni forzar la calma. Busca ese instante lúcido en el que dices: "vaya, estaba pensando en pendientes". Ese milisegundo es el verdadero éxito de la meditación.' },
+          { label: 'El alivio de soltar', desc: 'Siente el pequeño descanso físico y mental que ocurre al decidir no continuar ese hilo de pensamientos y dejarlo pasar como una nube.' },
+          { label: 'Amabilidad somática', desc: 'Percibe cómo se ablanda la microtensión en el entrecejo o el pecho al sonreír mentalmente en lugar de enfadarte por haberte distraído.' }
+        ]
+      },
       reference: 'Brewer, J. A., et al. (2011). Meditation experience is associated with differences in default mode network activity. PNAS, 108(50), 20254-20259.'
     },
     {
@@ -270,6 +278,14 @@ window.MEDIT_DATA = {
         }
       ],
       actionable: 'Haz una pausa ahora: rueda los hombros una vez hacia atrás, suelta la mandíbula y toma aire por la nariz sintiendo los pies en el suelo.',
+      sensationsGuide: {
+        heading: 'Qué debes sentir o buscar en este ejercicio',
+        items: [
+          { label: 'El soporte de la gravedad', desc: 'Siente el contacto sólido y plano de tus pies en el suelo y el peso estable de tus caderas en la silla. Permite que el suelo cargue con tu peso.' },
+          { label: 'Elongación sin tensión', desc: 'Busca la sensación de ligereza en la columna vertebral, como si la coronilla flotara suavemente hacia arriba creando espacio entre las vértebras.' },
+          { label: 'Descarga al exhalar', desc: 'Con cada exhalación, busca la caída visible de los hombros hacia abajo y atrás, y el espacio libre entre los dientes superiores e inferiores (mandíbula suelta).' }
+        ]
+      },
       reference: 'Kabat-Zinn, J. (1990). Full Catastrophe Living. Bantam Books.'
     },
     {
@@ -292,6 +308,14 @@ window.MEDIT_DATA = {
         }
       ],
       actionable: 'Prueba durante 3 respiraciones: siente únicamente el frescor del aire en la punta de tu nariz.',
+      sensationsGuide: {
+        heading: 'Qué debes sentir o buscar en este ejercicio',
+        items: [
+          { label: 'El roce térmico en las narinas', desc: 'Busca el roce fresco del aire en el borde de las fosas nasales al entrar, y la suave tibieza más densa al salir sobre el labio superior.' },
+          { label: 'El vaivén diafragmático', desc: 'Si eliges el vientre como anclaje, busca la agradable sensación de inflarse como un globo al inhalar y el descenso pasivo al desinflarse sin esfuerzo.' },
+          { label: 'El retorno cariñoso', desc: 'Al volver tras una distracción, busca la sensación de guiar la atención con gentileza, como quien devuelve un cachorro travieso a su cojín.' }
+        ]
+      },
       reference: 'Goleman, D., & Davidson, R. J. (2017). Altered Traits: Science Reveals How Meditation Changes Your Mind, Brain, and Body.'
     },
     {
@@ -314,6 +338,14 @@ window.MEDIT_DATA = {
         }
       ],
       actionable: 'En tu próxima sesión con el Temporizador, pon tu atención en la pequeña pausa que ocurre justo al terminar de exhalar.',
+      sensationsGuide: {
+        heading: 'Qué debes sentir o buscar en este ejercicio',
+        items: [
+          { label: 'La pausa de quietud', desc: 'Busca el segundo de silencio y descanso absoluto que ocurre justo al terminar de exhalar, antes de que el cuerpo pida aire de nuevo.' },
+          { label: 'Pálpito y temperatura', desc: 'Busca el micro-latido o sutil hormigueo cálido en la yema de los dedos o en las palmas reposadas sobre las piernas.' },
+          { label: 'Liberación cervical', desc: 'Siente cómo la nuca y la base del cráneo se distienden dos milímetros en cada exhalación prolongada.' }
+        ]
+      },
       reference: 'Critchley, H. D., et al. (2004). Neural systems supporting interoceptive awareness. Nature Neuroscience, 7(2), 189-195.'
     },
     {
@@ -336,6 +368,14 @@ window.MEDIT_DATA = {
         }
       ],
       actionable: 'Usa el botón "Pausa S.T.O.P. 60s" de la portada al terminar tu próximo bloque de trabajo.',
+      sensationsGuide: {
+        heading: 'Qué debes sentir o buscar en este ejercicio',
+        items: [
+          { label: 'El freno de la inercia', desc: 'Al soltar teclado y ratón, siente cómo la prisa mental se detiene físicamente en tus manos y brazos al cortar la inercia de acción.' },
+          { label: 'El suspiro diafragmático', desc: 'Al inhalar hondo y exhalar, busca la sensación de soltar una mochila pesada que llevabas en la espalda sin darte cuenta.' },
+          { label: 'El testigo lúcido', desc: 'Al observar sin juzgar, busca colocarte un paso por detrás de tus pensamientos, viéndolos con curiosidad antes de elegir tu siguiente paso.' }
+        ]
+      },
       reference: 'Fogg, B. J. (2019). Tiny Habits; Goldstein, E. (2015). Uncovering Happiness.'
     },
     {
@@ -358,6 +398,14 @@ window.MEDIT_DATA = {
         }
       ],
       actionable: 'Cuando tengas un hueco tras el almuerzo o antes de una tarde intensa, programa 12 o 15 minutos en el Temporizador Zen y sigue las campanas intermedias.',
+      sensationsGuide: {
+        heading: 'Qué debes sentir o buscar en este ejercicio',
+        items: [
+          { label: 'Minutos 0 a 5 (Foco linterna)', desc: 'Busca afinar la nitidez del roce del aire en la nariz para serenar la mente agitada que viene de trabajar.' },
+          { label: 'Minutos 5 a 10 (Foco panorámico)', desc: 'Con la campana intermedia, busca la sensación de amplitud: siente el contorno de todo el cuerpo y los sonidos lejanos sin analizarlos.' },
+          { label: 'Minutos 10 a 15 (Descanso NSDR)', desc: 'Busca la profunda pesadez muscular y la regeneración celular de estar en reposo total, con la mente perfectamente despierta y lúcida.' }
+        ]
+      },
       reference: 'Jha, A. P., et al. (2020). Cognition and Emotion, 34(6), 1188-1202; Huberman, A. D., et al. (2023). Cell Reports Medicine.'
     }
   ],

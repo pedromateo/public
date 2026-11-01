@@ -1,4 +1,4 @@
-const CACHE_NAME = 'medit-cache-v2';
+const CACHE_NAME = 'medit-cache-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -24,10 +24,21 @@ const urlsToCache = [
   './audio/voice/stop_t.mp3',
   './audio/voice/stop_o.mp3',
   './audio/voice/stop_p.mp3',
+  './audio/voice/zen_fase1_full.mp3',
+  './audio/voice/zen_fase2_full.mp3',
+  './audio/voice/zen_fase3_full.mp3',
+  './audio/voice/zen_fase4_full.mp3',
+  './audio/voice/zen_fase5_full.mp3',
+  './audio/voice/zen_fase1_short.mp3',
+  './audio/voice/zen_fase2_short.mp3',
+  './audio/voice/zen_fase3_short.mp3',
+  './audio/voice/zen_fase4_short.mp3',
+  './audio/voice/zen_fase5_short.mp3',
   './audio/voice/zen_fase1.mp3',
   './audio/voice/zen_fase2.mp3',
   './audio/voice/zen_fase3.mp3',
   './audio/voice/zen_fase4.mp3',
+  './audio/voice/zen_fase5.mp3',
   'https://cdn.tailwindcss.com',
   'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js'
 ];

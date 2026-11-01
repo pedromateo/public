@@ -34,9 +34,15 @@ test.describe('Medit PWA — E2E Tests', () => {
     await expect(page.locator('button[data-sec="720"]')).toBeVisible();
     await expect(page.locator('button[data-sec="900"]')).toBeVisible();
 
-    // Subpestaña Neurociencia
+    // Subpestaña Neurociencia: comprobar artículos y guía de qué sentir o buscar
     await page.locator('button[data-subtab="science"]').click();
     await expect(page.getByText('Dra. Amishi Jha', { exact: false }).first()).toBeVisible();
+
+    // Desplegar Nivel 1 y verificar bloque de qué sentir o buscar
+    const firstArticleHeader = page.locator('.article-header').first();
+    await firstArticleHeader.click();
+    await expect(page.locator('text=Qué debes sentir o buscar en este ejercicio').first()).toBeVisible();
+    await expect(page.locator('text=El chispazo del "darse cuenta"')).toBeVisible();
 
     // 2. Navegar a Progreso
     await page.locator('button[data-tab="progress"]').click();
@@ -281,5 +287,42 @@ test.describe('Medit PWA — E2E Tests', () => {
       const releases = await page.evaluate(() => window.__wakeLockReleases);
       expect(releases).toBeGreaterThanOrEqual(1);
     }).toPass({ timeout: 2000 });
+  });
+
+  test('Locuciones de fases: versión completa en nivel permisivo y resumen con nombre de fase en nivel restrictivo', async ({ page }) => {
+    await page.goto('/');
+
+    const result = await page.evaluate(() => {
+      const player = window.voicePlayer;
+      const played = [];
+      const origPlay = player.play.bind(player);
+      player.play = (key, cat) => {
+        played.push({ key, cat, level: player.level });
+      };
+
+      // 1. Nivel más permisivo ('balanced')
+      player.setLevel('balanced');
+      player.playPhase(0); // Fase 1
+      player.playPhase(4); // Fase 5
+
+      // 2. Nivel más restrictivo ('minimal')
+      player.setLevel('minimal');
+      player.playPhase(0); // Fase 1
+      player.playPhase(4); // Fase 5
+
+      // 3. Silencio ('none')
+      player.setLevel('none');
+      player.playPhase(0);
+
+      player.play = origPlay;
+      return played;
+    });
+
+    expect(result).toEqual([
+      { key: 'zen_fase1_full', cat: 'phase', level: 'balanced' },
+      { key: 'zen_fase5_full', cat: 'phase', level: 'balanced' },
+      { key: 'zen_fase1_short', cat: 'phase', level: 'minimal' },
+      { key: 'zen_fase5_short', cat: 'phase', level: 'minimal' }
+    ]);
   });
 });
