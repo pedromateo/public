@@ -18,7 +18,7 @@
   <!-- Google Fonts & Tailwind CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -27,6 +27,7 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
           },
           screens: {
             'xs': '380px',
@@ -50,7 +51,13 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="bg-[#070b13] text-slate-100 antialiased selection:bg-teal-500/30 selection:text-teal-200 min-h-screen flex flex-col font-sans">
+<body class="bg-[#070b13] text-slate-100 antialiased selection:bg-teal-500/30 selection:text-teal-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
+
+  <!-- Calming Wellness Ambient Lighting Aura -->
+  <div class="wellness-ambient fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
+    <div class="wellness-orb-1"></div>
+    <div class="wellness-orb-2"></div>
+  </div>
 
   <!-- Header -->
   <header class="sticky top-0 z-30 w-full backdrop-blur-xl bg-[#070b13]/85 border-b border-slate-800/80 px-3.5 sm:px-4 py-2.5 sm:py-3 safe-pt">
@@ -77,6 +84,10 @@
       <!-- Right Header Actions -->
       <div class="flex items-center gap-1.5 sm:gap-2">
         <div id="header-streak"></div>
+
+        <button id="header-theme-btn" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-teal-300 transition-all border border-slate-800 flex items-center justify-center active:scale-95" title="Cambiar a Modo Claro / Oscuro" aria-label="Cambiar tema">
+          <!-- Dynamically populated by JS (Sun / Moon) -->
+        </button>
 
         <button id="header-sound-btn" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white transition-all border border-slate-800 flex items-center justify-center active:scale-95" title="Silenciar / Activar sonido">
           <!-- Dynamically populated by JS with SVG -->
@@ -367,6 +378,69 @@
             </div>
             <p class="text-xs font-bold text-white leading-tight">Silencio</p>
             <p class="text-[9px] text-slate-400 mt-0.5">Solo cuencos</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section: Visual Theme & Wellness Atmosphere -->
+      <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
+        <div class="flex items-center justify-between">
+          <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+            Ambiente & Estilo Visual
+          </label>
+          <span class="text-[9px] px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-300 border border-teal-500/20 font-semibold">
+            Wellness Design
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400">Elige la atmósfera que mejor acompañe tu estado de ánimo:</p>
+
+        <div class="grid grid-cols-3 gap-2">
+          <button data-theme-option="dark" class="btn-select-theme p-2.5 rounded-2xl border text-left transition-all relative">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-indigo-400">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              </span>
+              <span class="theme-check-badge text-teal-400 text-xs font-bold">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <p class="text-xs font-bold text-white leading-tight">Noche Zen</p>
+            <p class="text-[9px] text-slate-400 mt-0.5">Modo Oscuro</p>
+          </button>
+
+          <button data-theme-option="light" class="btn-select-theme p-2.5 rounded-2xl border text-left transition-all relative">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-amber-400">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4.5"/>
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
+              </span>
+              <span class="theme-check-badge hidden text-teal-400 text-xs font-bold">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <p class="text-xs font-bold text-white leading-tight">Día Sereno</p>
+            <p class="text-[9px] text-slate-400 mt-0.5">Modo Claro</p>
+          </button>
+
+          <button data-theme-option="system" class="btn-select-theme p-2.5 rounded-2xl border text-left transition-all relative">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-teal-400">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </span>
+              <span class="theme-check-badge hidden text-teal-400 text-xs font-bold">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <p class="text-xs font-bold text-white leading-tight">Automático</p>
+            <p class="text-[9px] text-slate-400 mt-0.5">Según sistema</p>
           </button>
         </div>
       </div>

@@ -325,4 +325,42 @@ test.describe('Medit PWA — E2E Tests', () => {
       { key: 'zen_fase5_short', cat: 'phase', level: 'minimal' }
     ]);
   });
+
+  test('Modo Claro y Oscuro: alternancia fluida desde cabecera y ajustes con persistencia', async ({ page }) => {
+    await page.goto('/');
+
+    const html = page.locator('html');
+    const headerThemeBtn = page.locator('#header-theme-btn');
+
+    // Por defecto inicia en modo oscuro
+    await expect(headerThemeBtn).toBeVisible();
+    await expect(html).toHaveClass(/dark/);
+
+    // 1. Alternar a Modo Claro desde el botón de la cabecera
+    await headerThemeBtn.click();
+    await expect(html).not.toHaveClass(/dark/);
+    const themeMeta = await page.locator('meta[name="theme-color"]').getAttribute('content');
+    expect(themeMeta).toBe('#f7f5f0');
+
+    // 2. Alternar de vuelta a Modo Oscuro desde la cabecera
+    await headerThemeBtn.click();
+    await expect(html).toHaveClass(/dark/);
+
+    // 3. Probar selección desde el modal de Configuración
+    await page.locator('#header-settings-btn').click();
+    const soundModal = page.locator('#sound-modal');
+    await expect(soundModal).toBeVisible();
+
+    // Seleccionar Modo Claro (Día Sereno)
+    const lightBtn = page.locator('.btn-select-theme[data-theme-option="light"]');
+    await lightBtn.click();
+    await expect(html).not.toHaveClass(/dark/);
+
+    // Cerrar modal y comprobar persistencia tras recargar página
+    await page.locator('#btn-close-sound-modal').click();
+    await expect(soundModal).toBeHidden();
+
+    await page.reload();
+    await expect(page.locator('html')).not.toHaveClass(/dark/);
+  });
 });

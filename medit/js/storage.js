@@ -15,7 +15,8 @@ const DEFAULT_STATE = {
   completedArticleIds: [],
   soundCues: true,
   hideClockDefault: false,
-  voiceLevel: 'balanced'
+  voiceLevel: 'balanced',
+  theme: 'dark'
 };
 
 function getTodayString() {

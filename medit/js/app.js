@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DOM Elements
   const headerStreak = document.getElementById('header-streak');
+  const headerThemeBtn = document.getElementById('header-theme-btn');
   const headerSoundBtn = document.getElementById('header-sound-btn');
   const headerSettingsBtn = document.getElementById('header-settings-btn');
   const mainContent = document.getElementById('main-content');
@@ -144,6 +145,58 @@ document.addEventListener('DOMContentLoaded', () => {
   const stopModalEl = document.getElementById('stop-modal');
   const anchorModalEl = document.getElementById('anchor-modal');
   const soundModalEl = document.getElementById('sound-modal');
+
+  // Theme Manager (Light / Dark / System)
+  const mediaQueryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function getEffectiveTheme(themeSetting) {
+    if (themeSetting === 'system') {
+      return mediaQueryPrefersDark.matches ? 'dark' : 'light';
+    }
+    return themeSetting === 'light' ? 'light' : 'dark';
+  }
+
+  function applyTheme(themeSetting) {
+    const effective = getEffectiveTheme(themeSetting || state.theme || 'dark');
+    const isDark = effective === 'dark';
+
+    document.documentElement.classList.toggle('dark', isDark);
+
+    // Update meta theme-color for browser address bar & PWA status
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', isDark ? '#070b13' : '#f7f5f0');
+    }
+
+    // Update header toggle button icon
+    if (headerThemeBtn) {
+      headerThemeBtn.innerHTML = isDark
+        ? window.MEDIT_ICONS.sun('w-4 h-4 text-amber-400')
+        : window.MEDIT_ICONS.moon('w-4 h-4 text-indigo-500');
+      headerThemeBtn.setAttribute(
+        'title',
+        isDark ? 'Cambiar a Día Sereno (Modo Claro)' : 'Cambiar a Noche Zen (Modo Oscuro)'
+      );
+    }
+  }
+
+  // React to OS dark mode changes when set to system
+  mediaQueryPrefersDark.addEventListener('change', () => {
+    if (state.theme === 'system') {
+      applyTheme('system');
+    }
+  });
+
+  if (headerThemeBtn) {
+    headerThemeBtn.addEventListener('click', () => {
+      const effective = getEffectiveTheme(state.theme || 'dark');
+      const nextTheme = effective === 'dark' ? 'light' : 'dark';
+      state.theme = nextTheme;
+      window.habitStorage.save(state);
+      applyTheme(state.theme);
+      updateSoundModalUI();
+    });
+  }
 
   // PWA Install prompt
   let deferredPrompt = null;
@@ -2193,11 +2246,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hideClockToggle = document.getElementById('toggle-setting-hide-clock');
     if (hideClockToggle) hideClockToggle.checked = Boolean(state.hideClockDefault);
+
+    // 7. Theme selector buttons
+    document.querySelectorAll('.btn-select-theme').forEach((btn) => {
+      const isSel = btn.dataset.themeOption === (state.theme || 'dark');
+      btn.classList.toggle('border-teal-500', isSel);
+      btn.classList.toggle('bg-teal-500/15', isSel);
+      btn.classList.toggle('border-slate-800', !isSel);
+      btn.classList.toggle('bg-slate-900', !isSel);
+      const checkBadge = btn.querySelector('.theme-check-badge');
+      if (checkBadge) {
+        checkBadge.classList.toggle('hidden', !isSel);
+      }
+    });
   }
 
   function initSoundModalEvents() {
     if (soundModalEventsBound) return;
     soundModalEventsBound = true;
+
+    // Theme selector click
+    document.querySelectorAll('.btn-select-theme').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.theme = btn.dataset.themeOption;
+        window.habitStorage.save(state);
+        applyTheme(state.theme);
+        updateSoundModalUI();
+      });
+    });
 
     // Bell tone click
     document.querySelectorAll('.btn-select-bell').forEach((btn) => {
@@ -2331,6 +2407,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initial render
+  // Initial Theme & Render
+  applyTheme(state.theme || 'dark');
   renderView();
 });
