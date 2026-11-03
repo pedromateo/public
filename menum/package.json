@@ -1,0 +1,25 @@
+{
+  "name": "menum",
+  "version": "1.0.0",
+  "description": "MenuM — Menú familiar interactivo, PWA offline y decisor de recetas",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y http-server -p 8086 -c-1 .",
+    "test": "playwright test"
+  },
+  "keywords": [
+    "pwa",
+    "cooking",
+    "family",
+    "recipes",
+    "food",
+    "mobile-first",
+    "pixel-8a"
+  ],
+  "author": "pedromateo",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "http-server": "^14.1.1"
+  }
+}

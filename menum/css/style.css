@@ -1,0 +1,50 @@
+/* MenuM — Estilos Globales, Animaciones y Optimización Pixel 8a */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Animación de Ruleta / Shuffle */
+@keyframes spin-shuffle {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.animate-shuffle {
+  animation: spin-shuffle 0.35s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Resaltado de Tarjeta Ganadora en Sorteo */
+.winner-card {
+  box-shadow: 0 0 0 2px #f97316, 0 16px 32px -8px rgba(249, 115, 22, 0.35) !important;
+  border-color: #f97316 !important;
+}
+
+/* Scrollbar Personalizado Fino */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+}
+.dark .custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #27272a;
+}
+
+/* Modales Deslizantes (Bottom-Sheets) */
+.modal-sheet {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Transiciones Suaves */
+.transition-sheet {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}

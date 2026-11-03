@@ -1,0 +1,682 @@
+{
+  "categories": {
+    "Ensaladas y platos fríos": {
+      "emoji": "🥗",
+      "badge": "bg-orange-50 text-orange-700 border-orange-200/60 dark:bg-orange-950/60 dark:text-orange-300 dark:border-orange-800/50"
+    },
+    "Guisos, caldos y cremas": {
+      "emoji": "🍲",
+      "badge": "bg-amber-50 text-amber-700 border-amber-200/60 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/50"
+    },
+    "Huevos y tortillas": {
+      "emoji": "🍳",
+      "badge": "bg-yellow-50 text-yellow-800 border-yellow-200/60 dark:bg-yellow-950/60 dark:text-yellow-300 dark:border-yellow-800/50"
+    },
+    "Carnes y aves": {
+      "emoji": "🥩",
+      "badge": "bg-rose-50 text-rose-700 border-rose-200/60 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/50"
+    },
+    "Pescados y mariscos": {
+      "emoji": "🐟",
+      "badge": "bg-sky-50 text-sky-700 border-sky-200/60 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800/50"
+    },
+    "Pastas, pizzas y arroces": {
+      "emoji": "🍝",
+      "badge": "bg-red-50 text-red-700 border-red-200/60 dark:bg-red-950/60 dark:text-red-300 dark:border-red-800/50"
+    },
+    "Salteados": {
+      "emoji": "🥘",
+      "badge": "bg-emerald-50 text-emerald-700 border-emerald-200/60 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/50"
+    }
+  },
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Ensalada de garbanzos y huevo",
+      "category": "Ensaladas y platos fríos",
+      "familyNote": "Plato suave y digestivo. Para peques menores de 3 años, aplasta los garbanzos ligeramente con el tenedor.",
+      "ingredients": [
+        "garbanzos",
+        "huevo",
+        "tomate",
+        "atún",
+        "cebolla"
+      ],
+      "steps": [
+        "Cocer los huevos durante 10 minutos en agua hirviendo, enfriar bajo el grifo y pelar.",
+        "Enjuagar y escurrir los garbanzos cocidos en un colador.",
+        "Picar en dados pequeños el tomate (pelado para niños pequeños), la cebolla muy finita y los huevos.",
+        "Mezclar todo en una ensaladera con el atún desmigado y aliñar suavemente con aceite de oliva virgen extra."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/ensalada-de-garbanzos-receta-facil"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/ensalada-de-garbanzos/"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Ensalada de habichuelas (alubias blancas)",
+      "category": "Ensaladas y platos fríos",
+      "familyNote": "Alubias tiernas ricas en fibra y hierro. Para niños pequeños, pela el tomate y corta las verduras muy chiquitas.",
+      "ingredients": [
+        "alubias blancas",
+        "tomate",
+        "pimiento",
+        "cebolla",
+        "atún"
+      ],
+      "steps": [
+        "Lavar y escurrir las alubias blancas cocidas con cuidado para no romperlas.",
+        "Picar el tomate maduro, el pimiento y la cebolla en trocitos muy pequeños.",
+        "Añadir el atún escurrido y desmigado.",
+        "Mezclar con delicadeza en un bol y dejar reposar 10 minutos en la nevera antes de servir."
+      ],
+      "sources": [
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/ensaladas-verduras/ensalada-alubias-blancas-karlos-arguinano.html"
+        },
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/ensalada-de-alubias-blancas-receta-saludable"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Ensalada de pasta",
+      "category": "Ensaladas y platos fríos",
+      "familyNote": "Elige pasta corta (hélices, lazos o plumas) fácil de agarrar con las manos o el tenedor por niños pequeños.",
+      "ingredients": [
+        "pasta",
+        "atún",
+        "maíz",
+        "huevo",
+        "tomate",
+        "queso"
+      ],
+      "steps": [
+        "Hervir la pasta el tiempo indicado en el paquete, refrescar con agua fría y escurrir bien.",
+        "Cocer el huevo durante 10 minutos y picar en daditos junto al tomate y el queso en dados.",
+        "Juntar en un bol la pasta con el maíz dulce, el atún desmigado, el huevo y el queso.",
+        "Aliñar con unas gotas de aceite de oliva y servir fresca."
+      ],
+      "sources": [
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/ensalada-de-pasta-fresca-recetas/"
+        },
+        {
+          "name": "RTVE Cocina",
+          "url": "https://www.rtve.es/play/videos/cocina-abierta/ensalada-de-pasta-receta-sencilla/5610234/"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Ensalada de patata y huevo",
+      "category": "Ensaladas y platos fríos",
+      "familyNote": "Textura blanda excelente para los más pequeños. Puedes aplastar fácilmente la patata con el huevo.",
+      "ingredients": [
+        "patata",
+        "huevo",
+        "atún",
+        "pimiento",
+        "cebolla"
+      ],
+      "steps": [
+        "Cocer las patatas con piel y los huevos en agua hirviendo hasta que la patata esté muy tierna (unos 20 min).",
+        "Dejar templar, pelar las patatas y cortarlas en rodajas o dados de bocado tierno.",
+        "Picar los huevos duros, el pimiento y la cebolla dulce.",
+        "Colocar en una fuente, repartir el atún desmigado por encima y regar con aceite de oliva virgen."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/ensalada-campera-receta-tradicional"
+        },
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/ensaladas-verduras/ensalada-patatas-huevo-atun.html"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Huevos rellenos de atún y aguacate",
+      "category": "Ensaladas y platos fríos",
+      "familyNote": "Grasas saludables del aguacate en vez de mayonesa industrial, cremosa e ideal para niños pequeños.",
+      "ingredients": [
+        "huevo",
+        "atún",
+        "aguacate",
+        "mayonesa"
+      ],
+      "steps": [
+        "Cocer los huevos durante 10 minutos, enfriar en agua con hielo y pelar con cuidado.",
+        "Cortar los huevos por la mitad a lo largo y retirar las yemas a un bol.",
+        "Chafar las yemas con la pulpa del aguacate maduro, el atún escurrido y una cucharadita opcional de mayonesa casera hasta tener una pasta cremosa.",
+        "Rellenar las claras cocidas con la mezcla y refrigerar hasta la hora de comer."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-huevos-y-tortillas/huevos-rellenos-aguacate-atun-receta-saludable"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/huevos-rellenos-de-aguacate/"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Cocido / Caldo tradicional casero",
+      "category": "Guisos, caldos y cremas",
+      "familyNote": "Sopa reconfortante y nutritiva. Desmenuza el pollo y aplasta los garbanzos y zanahoria para niños pequeños.",
+      "ingredients": [
+        "garbanzos",
+        "pollo",
+        "ternera",
+        "patata",
+        "zanahoria",
+        "apio",
+        "puerro"
+      ],
+      "steps": [
+        "Poner en una olla grande la carne de ternera, el pollo y abundante agua fría; llevar a ebullición y espumar.",
+        "Añadir los garbanzos (remojados previamente), la zanahoria, el puerro y el apio limpios.",
+        "Cocer a fuego suave tapado durante 90 minutos hasta que la carne esté tierna.",
+        "Añadir las patatas peladas y troceadas durante los últimos 20 minutos de cocción; servir el caldo con fideos o los ingredientes desmenuzados."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/cocido-madrileno-receta-tradicional"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/caldo-de-pollo-casero/"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Crema de verduras casera",
+      "category": "Guisos, caldos y cremas",
+      "familyNote": "Textura aterciopelada y sabor naturalmente dulce por la calabaza y zanahoria, favorita de los niños.",
+      "ingredients": [
+        "calabacín",
+        "zanahoria",
+        "patata",
+        "puerro",
+        "calabaza"
+      ],
+      "steps": [
+        "Lavar, pelar y trocear el calabacín, la zanahoria, la patata, la calabaza y la parte blanca del puerro.",
+        "Rehogar suavemente el puerro con un chorrito de aceite de oliva en una cacerola durante 3 minutos.",
+        "Añadir el resto de verduras, cubrir con agua o caldo suave y cocer a fuego medio 20-25 minutos hasta que estén muy tiernas.",
+        "Triturar con la batidora hasta obtener una textura fina, homogénea y cremosa."
+      ],
+      "sources": [
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/sopas-cremas/crema-verduras-receta-saludable.html"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/crema-de-calabacin-facil/"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Lentejas con verduras tiernas",
+      "category": "Guisos, caldos y cremas",
+      "familyNote": "Guiso 100% vegetal lleno de hierro. Las lentejas pardinas quedan muy mantecosas sin necesidad de remojo previo.",
+      "ingredients": [
+        "lentejas",
+        "zanahoria",
+        "patata",
+        "pimiento",
+        "cebolla",
+        "tomate"
+      ],
+      "steps": [
+        "Lavar las lentejas pardinas y colocarlas en una cacerola con agua fría.",
+        "Picar la cebolla, el pimiento, el tomate pelado, las zanahorias en rodajas y la patata chascada en trozos medianos.",
+        "Añadir todas las verduras a la olla con una cucharadita de pimentón dulce y un chorrito de aceite de oliva.",
+        "Cocer a fuego lento durante 40-45 minutos hasta que las lentejas y la patata estén completamente tiernas."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/lentejas-verduras-receta-tradicional-saludable"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/lentejas-con-verduras-receta-ninos/"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Tortilla de patatas casera",
+      "category": "Huevos y tortillas",
+      "familyNote": "Para niños menores de 4 años, asegúrate de cuajar bien el huevo en el centro por seguridad alimentaria.",
+      "ingredients": [
+        "patata",
+        "huevo",
+        "cebolla"
+      ],
+      "steps": [
+        "Pelar las patatas y cortarlas en láminas finas; picar la cebolla en juliana.",
+        "Pochar las patatas y la cebolla en sartén con aceite a fuego suave hasta que estén tiernas y deshechas.",
+        "Escurrir bien el aceite y mezclar las patatas calientes en un bol con los huevos batidos, dejando reposar 5 minutos.",
+        "Cuajar en sartén antiadherente a fuego medio 3-4 minutos por cada lado dándole la vuelta con un plato."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-huevos-y-tortillas/receta-tortilla-patatas-espanola"
+        },
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/huevos/tortilla-patata-cebolla-arguinano.html"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Tortilla francesa jugosa",
+      "category": "Huevos y tortillas",
+      "familyNote": "La cena rápida por excelencia: proteína pura y textura suave que los niños aprenden a cortar con tenedor.",
+      "ingredients": [
+        "huevo"
+      ],
+      "steps": [
+        "Cascar y batir enérgicamente dos huevos con un tenedor hasta que queden espumosos.",
+        "Poner una sartén pequeña antiadherente a fuego medio con unas gotas de aceite de oliva.",
+        "Verter los huevos batidos y remover suavemente los primeros segundos para dar volumen.",
+        "Doblar los bordes hacia el centro formando un rollito jugoso y retirar al plato."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-huevos-y-tortillas/como-hacer-tortilla-francesa-perfecta"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/tortilla-francesa-trucos/"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Albóndigas caseras en salsa de tomate",
+      "category": "Carnes y aves",
+      "familyNote": "El pan rallado y el huevo dejan la carne tiernísima. Hazlas de tamaño pequeño para que los niños las coman solitos.",
+      "ingredients": [
+        "carne picada",
+        "huevo",
+        "pan rallado",
+        "tomate",
+        "cebolla"
+      ],
+      "steps": [
+        "Mezclar la carne picada con el huevo batido, el pan rallado y una pizca de cebolla rallada hasta que quede manejable.",
+        "Bolear bolitas pequeñas y dorarlas ligeramente en una sartén con poco aceite (o 12 min al horno).",
+        "En una cazuela, pochar la cebolla picada y verter el tomate triturado, cocinando 10 minutos a fuego medio.",
+        "Añadir las albóndigas a la salsa de tomate y cocinar tapadas a fuego suave durante 15 minutos para que se impregnen bien."
+      ],
+      "sources": [
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/carnes/albondigas-carne-salsa-tomate.html"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/albondigas-en-salsa-de-tomate/"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Fajitas suaves de pollo con verduras",
+      "category": "Carnes y aves",
+      "familyNote": "Corta el pollo y verduras en tiras alargadas blandas; a los niños les encanta rellenar su propia tortita.",
+      "ingredients": [
+        "pollo",
+        "pimiento",
+        "cebolla",
+        "tortillas de trigo"
+      ],
+      "steps": [
+        "Cortar la pechuga de pollo y los pimientos (rojo y verde) y la cebolla en tiras finas.",
+        "Saltear en una sartén amplia primero el pollo hasta dorar y reservar.",
+        "Pochéar las verduras a fuego medio hasta que estén dulces y muy tiernas.",
+        "Unir el pollo con las verduras, calentar las tortillas de trigo unos segundos en sartén limpia y montar las fajitas."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/fajitas-pollo-receta-mexicana-facil"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/fajitas-de-pollo/"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Hamburguesa casera de carne",
+      "category": "Carnes y aves",
+      "familyNote": "Carne magra fresca y huevo sin aditivos industriales. Sírvela al plato o en panecillo tierno cortado en cuartos.",
+      "ingredients": [
+        "carne picada",
+        "huevo",
+        "pan"
+      ],
+      "steps": [
+        "Mezclar en un cuenco la carne picada con el huevo batido hasta compactar la masa.",
+        "Dividir en porciones y dar forma redondeada con las manos del grosor de un dedo.",
+        "Cocinar a la plancha a fuego medio-fuerte 3-4 minutos por cada lado asegurando que quede bien cocinada por dentro.",
+        "Servir caliente en el pan con rodajas de tomate fresco o lechuga tierna."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/como-hacer-hamburguesa-casera-perfecta"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/hamburguesas-caseras/"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Pollo a la plancha jugoso",
+      "category": "Carnes y aves",
+      "familyNote": "Para evitar que quede seco para los peques, cocínalo con la plancha bien caliente poco tiempo y córtalo al bies.",
+      "ingredients": [
+        "pollo"
+      ],
+      "steps": [
+        "Cortar los filetes de pollo a un grosor homogéneo y pincelar ligeramente con aceite de oliva.",
+        "Calentar bien una sartén o plancha antiadherente a fuego vivo.",
+        "Cocinar los filetes durante 2-3 minutos por el primer lado hasta que empiece a blanquear la superficie.",
+        "Dar la vuelta y cocinar apenas 1 minuto y medio más para sellar jugos; retirar y cortar en tiras tiernas para los peques."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/como-hacer-pechuga-pollo-a-plancha-jugosa"
+        },
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/carnes/pechuga-pollo-plancha.html"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Bacalao al horno con verduras",
+      "category": "Pescados y mariscos",
+      "familyNote": "Revisa cuidadosamente los lomos de bacalao al punto de sal asegurando que estén 100% limpios de espinas.",
+      "ingredients": [
+        "bacalao",
+        "patata",
+        "pimiento",
+        "cebolla",
+        "tomate"
+      ],
+      "steps": [
+        "Cortar las patatas en láminas finas y la cebolla, tomate y pimiento en juliana.",
+        "Colocar las verduras en una bandeja de horno con un chorrito de aceite de oliva y hornear a 180°C durante 25 minutos hasta que estén tiernas.",
+        "Colocar los lomos de bacalao desalados sobre la cama de verduras con la piel hacia abajo.",
+        "Hornear todo junto 10-12 minutos más hasta que las lascas del bacalao se separen fácilmente con el tenedor."
+      ],
+      "sources": [
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/pescados/bacalao-horno-patatas-panadera.html"
+        },
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-pescados-y-mariscos/bacalao-al-horno-con-patatas"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Hamburguesa casera de pescado",
+      "category": "Pescados y mariscos",
+      "familyNote": "Forma infalible y divertida de que los niños coman pescado blanco sin quejas ni miedo a espinas.",
+      "ingredients": [
+        "merluza",
+        "huevo",
+        "pan rallado"
+      ],
+      "steps": [
+        "Comprobar que los filetes de merluza no tienen ninguna espina y picarlos finos a cuchillo.",
+        "Mezclar el pescado picado con el huevo y el pan rallado hasta conseguir una masa suave y moldeable.",
+        "Formar hamburguesas medianas y cocinar en sartén con unas gotas de aceite de oliva a fuego medio 3 minutos por lado.",
+        "Servir doradas y jugosas con una guarnición de ensalada o patatas cocidas."
+      ],
+      "sources": [
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/hamburguesa-de-merluza/"
+        },
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-pescados-y-mariscos/hamburguesas-pescado-caseras-receta-saludable"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Merluza a la plancha tierna",
+      "category": "Pescados y mariscos",
+      "familyNote": "Pescado blanco suave y muy fácil de digerir. Pide en la pescadería que retiren todas las espinas.",
+      "ingredients": [
+        "merluza"
+      ],
+      "steps": [
+        "Secar los lomos limpios de merluza con papel de cocina.",
+        "Calentar una sartén antiadherente a fuego medio-alto con unas gotas de aceite de oliva virgen extra.",
+        "Colocar la merluza primero por el lado de la piel durante 3 minutos sin moverla para que no se pegue.",
+        "Dar la vuelta con espátula ancha con suavidad y cocinar 2 minutos más por el otro lado hasta que esté blanca y tierna."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-pescados-y-mariscos/como-hacer-merluza-a-plancha-perfecta"
+        },
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/pescados/merluza-plancha-karlos-arguinano.html"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Salmón con patata o boniato",
+      "category": "Pescados y mariscos",
+      "familyNote": "Bomba de Omega 3 saludable para el desarrollo cerebral de los peques. La patata o boniato cocido contrasta de maravilla.",
+      "ingredients": [
+        "salmón",
+        "patata",
+        "boniato"
+      ],
+      "steps": [
+        "Pelar las patatas o el boniato, cortar en rodajas y cocer al vapor o en agua durante 15 minutos hasta que estén tiernos.",
+        "Revisar el lomo de salmón retirando cualquier espina con pinzas.",
+        "Marcar el salmón en una plancha caliente con la piel hacia abajo durante 3-4 minutos sin añadir apenas grasa (el salmón ya la tiene natural).",
+        "Dar la vuelta 1-2 minutos para que el centro quede sonrosado y jugoso, y servir sobre la base de patata o boniato."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-pescados-y-mariscos/salmon-a-plancha-receta-facil-saludable"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/salmon-con-patatas/"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Arroz con verduras y pollo",
+      "category": "Pastas, pizzas y arroces",
+      "familyNote": "Plato completo que aporta energía, verdura y proteína en un solo bocado. Deja el arroz tierno y meloso.",
+      "ingredients": [
+        "arroz",
+        "pollo",
+        "pimiento",
+        "judías verdes",
+        "tomate"
+      ],
+      "steps": [
+        "Dorar los trocitos de pollo en una paellera o cazuela con un chorrito de aceite de oliva y retirar.",
+        "Picar las judías verdes, el pimiento y el tomate maduro y sofreírlos a fuego suave 8 minutos.",
+        "Añadir el arroz (redondo), nacarar 1 minuto y reincorporar el pollo.",
+        "Verter el doble y medio de caldo de pollo o agua caliente y cocer 17-18 minutos hasta que el arroz esté en su punto."
+      ],
+      "sources": [
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/arroces-cereales/arroz-pollo-verduras.html"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/arroz-con-pollo-y-verduras/"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Arroz tres delicias casero",
+      "category": "Pastas, pizzas y arroces",
+      "familyNote": "Colores atractivos y sabores suaves que encantan a los niños. Los guisantes y la zanahoria deben quedar tiernos.",
+      "ingredients": [
+        "arroz",
+        "guisantes",
+        "zanahoria",
+        "jamón york",
+        "huevo",
+        "gambas"
+      ],
+      "steps": [
+        "Cocer el arroz blanco (tipo grano largo o jazmín) en abundante agua y escurrir para que quede suelto.",
+        "Hacer una tortilla francesa fina con el huevo y cortarla en tiritas pequeñas.",
+        "Cocer la zanahoria en cubitos y los guisantes hasta que estén tiernos.",
+        "Saltear todo en una sartén amplia durante 2 minutos con el jamón york en dados y las gambitas limpias."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-arroces/arroz-tres-delicias-receta-tradicional"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/arroz-tres-delicias/"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Pasta boloñesa casera con verduras",
+      "category": "Pastas, pizzas y arroces",
+      "familyNote": "Una salsa boloñesa llena de hortalizas picadas finas que se integran en el tomate sin tropezones grandes.",
+      "ingredients": [
+        "pasta",
+        "carne picada",
+        "tomate",
+        "cebolla",
+        "zanahoria"
+      ],
+      "steps": [
+        "Picar la cebolla y la zanahoria muy finas y pocharlas en una cazuela con un chorrito de aceite de oliva.",
+        "Añadir la carne picada y remover con cuchara de madera para que quede bien suelta hasta que cambie de color.",
+        "Añadir el tomate triturado y cocinar a fuego lento durante 20 minutos para concentrar sabores.",
+        "Hervir la pasta al dente, mezclar con la salsa boloñesa y servir caliente."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-pasta/salsa-bolonesa-receta-tradicional-italiana"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/salsa-bolonesa/"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Pizza saludable con masa de avena",
+      "category": "Pastas, pizzas y arroces",
+      "familyNote": "Masa express sin fermentación rica en fibra. Muy fácil y divertida para preparar con los niños en casa.",
+      "ingredients": [
+        "harina de avena",
+        "huevo",
+        "tomate",
+        "queso mozzarella"
+      ],
+      "steps": [
+        "Mezclar la harina de avena con el huevo batido y un par de cucharadas de agua hasta formar una masa espesa y maleable.",
+        "Extender en forma redonda sobre una bandeja con papel de horno y prehornear a 190°C durante 8 minutos hasta que coja firmeza.",
+        "Untar con salsa de tomate natural y cubrir con queso mozzarella rallado.",
+        "Hornear 6-8 minutos más hasta que el queso esté derretido y los bordes tostados."
+      ],
+      "sources": [
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-panes/pizza-masa-avena-receta-facil-saludable"
+        },
+        {
+          "name": "Pequerecetas",
+          "url": "https://www.pequerecetas.com/receta/pizza-de-avena/"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Guisantes con jamón y huevo tierno",
+      "category": "Salteados",
+      "familyNote": "Verdura dulce y mantecosa con proteína de alto valor. Para niños pequeños, cocer bien el huevo.",
+      "ingredients": [
+        "guisantes",
+        "jamón serrano",
+        "huevo",
+        "cebolla"
+      ],
+      "steps": [
+        "Cocer los guisantes si son frescos o descongelados en agua hirviendo durante 5 minutos y escurrir.",
+        "Picar la cebolla fina y pochar en una sartén a fuego medio hasta que esté transparente.",
+        "Añadir los taquitos de jamón y los guisantes, salteando todo junto un par de minutos.",
+        "Servir en plato hondo con un huevo a la plancha (o poché) encima para mezclar la yema con los guisantes."
+      ],
+      "sources": [
+        {
+          "name": "Cocina Abierta (Arguiñano)",
+          "url": "https://www.hogarmania.com/cocina/recetas/ensaladas-verduras/guisantes-jamon-huevo-escalfado.html"
+        },
+        {
+          "name": "Directo al Paladar",
+          "url": "https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/guisantes-con-jamon-receta-tradicional"
+        }
+      ]
+    }
+  ]
+}

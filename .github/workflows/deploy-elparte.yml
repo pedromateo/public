@@ -29,7 +29,7 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz dist/menum
 
           # Root Portal
           if [ -f "index.html" ]; then
@@ -111,6 +111,16 @@ jobs:
             cp -r files uploads apps ../dist/sanz/ || true
             cd ..
           fi
+          # MenuM Copy
+          if [ -d "menum" ]; then
+            echo "Packaging MenuM..."
+            cd menum
+            sed -i "s/menum-cache-v[0-9]*/menum-cache-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js package.json ../dist/menum/ || true
+            cp -r data css js icons ../dist/menum/ || true
+            cd ..
+          fi
+
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
