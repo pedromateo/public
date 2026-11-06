@@ -1457,7 +1457,7 @@ body.affix .birdseye-header .logo img {
   font-size: 13.5px;
   line-height: 1.6;
   color: var(--sanz-text, #2c2529);
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .anatomy-source {
