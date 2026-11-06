@@ -121,14 +121,27 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     // Km 0 e ingredientes nobles
     assert.match(html, /Km\s*0/i, 'Debe mencionar ingredientes Km 0');
 
-    // Historia y doble denominación
-    assert.match(html, /El Obispo/i, 'Debe mencionar la doble denominación El Obispo en Lorca');
+    // Historia y ubicación del obrador
+    assert.doesNotMatch(html, /El Obispo/i, 'No debe incluir la sección ni menciones a El Obispo');
     assert.match(html, /Calle Mayor/i, 'Debe ubicar la tradición en Calle Mayor');
 
     // Maridajes gourmet
     assert.match(html, /Helado Artesan[oa] de Turr(?:ó|&oacute;)n/i, 'Debe incluir maridaje con helado de turrón');
     assert.match(html, /Caf(?:é|&eacute;).*?Mocca/i, 'Debe incluir maridaje con café de especialidad mocca');
     assert.match(html, /Champagne/i, 'Debe incluir maridaje con champagne brut');
+
+    // Proceso artesanal y ritual en obrador
+    assert.match(html, /Ritual de Elaboraci(?:ó|&oacute;)n/i, 'Debe incluir el bloque del ritual de elaboración');
+    assert.match(html, /Montaje y Alzada del Merengue/i, 'Debe incluir la fase 1 del proceso');
+    assert.match(html, /Emborrizado y Tostado a la Pala/i, 'Debe incluir la fase 2 del proceso');
+
+    // Imágenes monográficas oficiales
+    assert.match(html, /uploads\/postrechino\/postrechino_terminado_4_unidades\.jpg/, 'Debe incluir foto de 4 unidades terminadas');
+    assert.match(html, /uploads\/postrechino\/postrechino_aislado\.jpeg/, 'Debe incluir foto del postrechino aislado');
+    assert.match(html, /uploads\/postrechino\/postrechino_proceso_1_de_2\.jpg/, 'Debe incluir foto de proceso 1');
+    assert.match(html, /uploads\/postrechino\/postrechino_proceso_2_de_2\.jpg/, 'Debe incluir foto de proceso 2');
+    assert.match(html, /uploads\/postrechino\/postrechino_cafe_especialidad\.jpg/, 'Debe incluir foto de maridaje con café');
+    assert.match(html, /uploads\/postrechino\/postrechino_champagne\.jpg/, 'Debe incluir foto de maridaje con champagne');
 
     // Microdatos Schema.org Product
     assert.match(html, /application\/ld\+json/i, 'Debe incluir JSON-LD');

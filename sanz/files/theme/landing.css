@@ -1330,6 +1330,81 @@ body.affix .birdseye-header .logo img {
   margin: 0 auto;
 }
 
+.anatomy-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px 1fr;
+  gap: 24px;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.anatomy-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.anatomy-visual-col {
+  display: flex;
+  justify-content: center;
+}
+
+.anatomy-visual-frame {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  border-radius: var(--sanz-radius-md, 14px);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 4px solid #ffffff;
+  background: #ffffff;
+}
+
+.anatomy-visual-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.anatomy-visual-frame:hover img {
+  transform: scale(1.03);
+}
+
+.anatomy-visual-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(90, 12, 50, 0.92);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .anatomy-layout {
+    grid-template-columns: 1fr;
+  }
+  .anatomy-visual-col {
+    order: -1;
+    margin-bottom: 10px;
+  }
+  .anatomy-visual-frame {
+    max-width: 280px;
+  }
+}
+
 .anatomy-card {
   background: #ffffff;
   border-radius: var(--sanz-radius-md, 14px);
@@ -1459,6 +1534,27 @@ body.affix .birdseye-header .logo img {
   flex-grow: 1;
 }
 
+.pairing-media {
+  width: calc(100% + 52px);
+  margin: -34px -26px 20px -26px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  background: #2a0b18;
+}
+
+.pairing-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.pairing-card:hover .pairing-media img {
+  transform: scale(1.05);
+}
+
 .pairing-notes {
   background: #ffffff;
   border-radius: var(--sanz-radius-sm, 8px);
@@ -1470,67 +1566,94 @@ body.affix .birdseye-header .logo img {
   color: var(--sanz-text-muted, #665c63);
 }
 
-/* 5. Tradición e Historia */
-.postrechino-tradition-section {
+/* 5. Proceso Artesanal Díptico */
+.postrechino-process-section {
   padding: 70px 20px !important;
   background-color: var(--sanz-bg-warm, #faf7f8) !important;
 }
 
-.tradition-grid {
+.process-diptych-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
   max-width: 1100px;
   margin: 0 auto;
-  align-items: center;
 }
 
-.tradition-media-stack {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.tradition-media-stack img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
+.process-step-card {
+  background: #ffffff;
   border-radius: var(--sanz-radius-md, 14px);
-  box-shadow: var(--sanz-shadow-soft);
+  overflow: hidden;
   border: 1px solid #f0e6ed;
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.tradition-media-stack img:hover {
-  transform: scale(1.03);
+.process-step-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sanz-corporate, #D8086A);
+  box-shadow: 0 10px 28px rgba(216, 8, 106, 0.14);
 }
 
-.tradition-content h2 {
+.process-step-media {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: #2a0b18;
+}
+
+.process-step-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.process-step-card:hover .process-step-media img {
+  transform: scale(1.04);
+}
+
+.process-step-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--sanz-corporate, #D8086A);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.process-step-body {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.process-step-title {
   font-family: "Montserrat", sans-serif !important;
-  font-size: clamp(1.8rem, 3.2vw, 2.3rem) !important;
+  font-size: 19px !important;
   font-weight: 800 !important;
   color: var(--sanz-wine-dark, #5a0c32) !important;
-  margin: 0 0 16px 0 !important;
+  margin: 0 0 12px 0 !important;
 }
 
-.tradition-content p {
+.process-step-text {
   font-family: "Montserrat", sans-serif;
-  font-size: 14.5px;
-  line-height: 1.75;
+  font-size: 14px;
+  line-height: 1.65;
   color: var(--sanz-text, #2c2529);
-  margin-bottom: 16px;
-}
-
-.tradition-dual-box {
-  background: #ffffff;
-  border-radius: var(--sanz-radius-sm, 8px);
-  padding: 16px 18px;
-  border-left: 4px solid var(--sanz-corporate, #D8086A);
-  margin-bottom: 22px;
-}
-
-.tradition-dual-box strong {
-  color: var(--sanz-wine-dark, #5a0c32);
+  margin: 0;
 }
 
 /* 6. Videoteca TV */
