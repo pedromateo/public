@@ -140,6 +140,7 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     assert.match(html, /uploads\/postrechino\/postrechino_aislado\.jpeg/, 'Debe incluir foto del postrechino aislado');
     assert.match(html, /uploads\/postrechino\/postrechino_proceso_1_de_2\.jpg/, 'Debe incluir foto de proceso 1');
     assert.match(html, /uploads\/postrechino\/postrechino_proceso_2_de_2\.jpg/, 'Debe incluir foto de proceso 2');
+    assert.match(html, /uploads\/postrechino\/postrechino_helado_turron\.jpg/, 'Debe incluir foto de maridaje con helado de turrón');
     assert.match(html, /uploads\/postrechino\/postrechino_cafe_especialidad\.jpg/, 'Debe incluir foto de maridaje con café');
     assert.match(html, /uploads\/postrechino\/postrechino_champagne\.jpg/, 'Debe incluir foto de maridaje con champagne');
 
