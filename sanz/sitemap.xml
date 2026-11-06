@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://pedromateo.github.io/public/sanz/index.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/1/0/8/6/10868401/1410608938.png</image:loc>
+      <image:title>Logotipo Oficial Pastelería y Confitería Artesana Sanz</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/postrechino/postrechino_terminado_4_unidades.jpg</image:loc>
+      <image:title>Postrechinos artesanos de Confitería Sanz</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pedromateo.github.io/public/sanz/postrechino.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/postrechino/postrechino_terminado_4_unidades.jpg</image:loc>
+      <image:title>Cuatro unidades de Postrechino artesano</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/postrechino/postrechino_aislado.jpeg</image:loc>
+      <image:title>Arquitectura viva del Postrechino - Vista individual</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/postrechino/postrechino_proceso_1_de_2.jpg</image:loc>
+      <image:title>Elaboración artesanal del Postrechino - Montaje de merengue</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/postrechino/postrechino_proceso_2_de_2.jpg</image:loc>
+      <image:title>Elaboración artesanal del Postrechino - Tostado a la pala</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pedromateo.github.io/public/sanz/la-historia-del-bisabuelo-indalecio-sanz.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/1/0/8/6/10868401/cap1_orig.png</image:loc>
+      <image:title>Homenaje al bisabuelo Indalecio Sanz y memoria centenaria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://pedromateo.github.io/public/sanz/uploads/1/0/8/6/10868401/3345487-orig.jpg</image:loc>
+      <image:title>El bisabuelo Indalecio Sanz en su confitería</image:title>
+    </image:image>
+  </url>
+</urlset>

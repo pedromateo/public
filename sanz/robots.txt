@@ -1,0 +1,10 @@
+# robots.txt para Pastelería y Confitería Artesana Sanz (Puerto Lumbreras)
+User-agent: *
+Allow: /
+Disallow: /backup/
+Disallow: /tests/
+Disallow: /scripts/
+Disallow: /test.html
+
+# Sitemap oficial del sitio
+Sitemap: https://pedromateo.github.io/public/sanz/sitemap.xml

@@ -28,3 +28,18 @@
 
 ## 5. Política de Copias de Seguridad
 - Ante cambios profundos o a petición del usuario, generar un archivo ZIP completo de la web con timestamp en el directorio `backup/` mediante `npm run backup`.
+
+## 6. Optimización SEO y Estándares Web (Regla Estricta)
+- **Metadatos y Cabeceras:**
+  - Todas las páginas públicas deben incluir `<html lang="es">`, `title` calibrado, `meta description` optimizada (140-160 caracteres), `meta keywords` y etiquetas de geolocalización de Puerto Lumbreras (`geo.region`, `geo.placename`, `geo.position`, `ICBM`).
+  - Las páginas de borrador o plantilla técnica (como `test.html`) deben incluir `<meta name="robots" content="noindex, nofollow" />`.
+  - Las páginas públicas deben definir `<link rel="canonical">` con su URL canónica completa en producción (`https://pedromateo.github.io/public/sanz/...`).
+- **Open Graph y Twitter Cards:**
+  - Cada página pública debe incluir metadatos Open Graph (`og:type`, `og:locale="es_ES"`, `og:site_name`, `og:title`, `og:description`, `og:url`, `og:image`, `og:image:alt`) y Twitter Cards (`twitter:card="summary_large_image"`, `twitter:title`, `twitter:description`, `twitter:image`).
+- **Datos Estructurados (Schema.org / JSON-LD):**
+  - Mantener JSON-LD enriquecido con schemas válidos (`Bakery`/`LocalBusiness` en portada, `Product` en `postrechino.html`, `Article` en historia del bisabuelo, y `BreadcrumbList`).
+- **Indexación y Rastreo:**
+  - Mantener actualizados y válidos `robots.txt` y `sitemap.xml` con todas las páginas canónicas e imágenes destacadas.
+- **Accesibilidad y Rendimiento Multimedia:**
+  - Todas las imágenes `<img>` deben incluir un atributo `alt` descriptivo y no vacío. La imagen principal de cabecera debe llevar `loading="eager"` y las secundarias `loading="lazy"`.
+
