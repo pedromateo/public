@@ -179,6 +179,11 @@
       modal.innerHTML =
         '<div class="sanz-lightbox-backdrop"></div>' +
         '<div class="sanz-lightbox-dialog">' +
+          '<button class="sanz-lightbox-zoom" aria-label="Alternar tamaño original" title="Alternar tamaño original">' +
+            '<svg class="icon-zoom-in" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>' +
+            '<svg class="icon-zoom-out" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>' +
+            '<span class="sanz-lightbox-zoom-text">Tamaño original</span>' +
+          '</button>' +
           '<button class="sanz-lightbox-close" aria-label="Cerrar vista">&times;</button>' +
           '<button class="sanz-lightbox-nav sanz-lightbox-nav-prev" aria-label="Foto anterior">' +
             '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>' +
@@ -197,10 +202,26 @@
       self.el = modal;
       self.img = modal.querySelector('.sanz-lightbox-img');
       self.caption = modal.querySelector('.sanz-lightbox-caption');
+      self.zoomBtn = modal.querySelector('.sanz-lightbox-zoom');
 
       // Cerrar
       modal.querySelector('.sanz-lightbox-backdrop').addEventListener('click', function () { self.close(); });
       modal.querySelector('.sanz-lightbox-close').addEventListener('click', function () { self.close(); });
+
+      // Alternar zoom a tamaño original
+      if (self.zoomBtn) {
+        self.zoomBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          self.toggleZoom();
+        });
+      }
+
+      if (self.img) {
+        self.img.addEventListener('click', function (e) {
+          e.stopPropagation();
+          self.toggleZoom();
+        });
+      }
 
       // Navegación
       modal.querySelector('.sanz-lightbox-nav-prev').addEventListener('click', function (e) {
@@ -212,12 +233,13 @@
         self.next();
       });
 
-      // Teclado (Esc, Flechas)
+      // Teclado (Esc, Flechas, Z)
       document.addEventListener('keydown', function (e) {
         if (!self.el.classList.contains('active')) return;
         if (e.key === 'Escape') self.close();
         if (e.key === 'ArrowLeft') self.prev();
         if (e.key === 'ArrowRight') self.next();
+        if (e.key === 'z' || e.key === 'Z') self.toggleZoom();
       });
 
       // Deslizar táctil en móviles para cambiar imagen o cerrar
@@ -231,6 +253,7 @@
       }, { passive: true });
 
       modal.addEventListener('touchend', function (e) {
+        if (self.el.classList.contains('is-zoomed')) return;
         if (e.changedTouches.length === 1) {
           var deltaX = e.changedTouches[0].clientX - touchStartX;
           var deltaY = e.changedTouches[0].clientY - touchStartY;
@@ -281,6 +304,7 @@
 
     open: function () {
       if (!this.currentGroup.length) return;
+      this.resetZoom();
       this.updateContent();
       this.el.classList.add('active');
       this.el.setAttribute('aria-hidden', 'false');
@@ -288,19 +312,50 @@
     },
 
     close: function () {
+      this.resetZoom();
       this.el.classList.remove('active');
       this.el.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     },
 
+    toggleZoom: function () {
+      var isZoomed = this.el.classList.toggle('is-zoomed');
+      var zoomIn = this.el.querySelector('.icon-zoom-in');
+      var zoomOut = this.el.querySelector('.icon-zoom-out');
+      var zoomText = this.el.querySelector('.sanz-lightbox-zoom-text');
+      if (zoomIn && zoomOut) {
+        zoomIn.style.display = isZoomed ? 'none' : 'inline-block';
+        zoomOut.style.display = isZoomed ? 'inline-block' : 'none';
+      }
+      if (zoomText) {
+        zoomText.textContent = isZoomed ? 'Ajustar a pantalla' : 'Tamaño original';
+      }
+    },
+
+    resetZoom: function () {
+      this.el.classList.remove('is-zoomed');
+      var zoomIn = this.el.querySelector('.icon-zoom-in');
+      var zoomOut = this.el.querySelector('.icon-zoom-out');
+      var zoomText = this.el.querySelector('.sanz-lightbox-zoom-text');
+      if (zoomIn && zoomOut) {
+        zoomIn.style.display = 'inline-block';
+        zoomOut.style.display = 'none';
+      }
+      if (zoomText) {
+        zoomText.textContent = 'Tamaño original';
+      }
+    },
+
     prev: function () {
       if (!this.currentGroup.length) return;
+      this.resetZoom();
       this.currentIndex = (this.currentIndex - 1 + this.currentGroup.length) % this.currentGroup.length;
       this.updateContent();
     },
 
     next: function () {
       if (!this.currentGroup.length) return;
+      this.resetZoom();
       this.currentIndex = (this.currentIndex + 1) % this.currentGroup.length;
       this.updateContent();
     },
@@ -314,6 +369,13 @@
 
       var total = this.currentGroup.length;
       var counterText = total > 1 ? ' (' + (this.currentIndex + 1) + ' / ' + total + ')' : '';
+
+      var prevBtn = this.el.querySelector('.sanz-lightbox-nav-prev');
+      var nextBtn = this.el.querySelector('.sanz-lightbox-nav-next');
+      if (prevBtn && nextBtn) {
+        prevBtn.style.display = total > 1 ? 'flex' : 'none';
+        nextBtn.style.display = total > 1 ? 'flex' : 'none';
+      }
 
       if (item.caption) {
         this.caption.textContent = item.caption + counterText;

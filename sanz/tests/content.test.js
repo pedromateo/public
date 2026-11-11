@@ -95,7 +95,7 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     // Título y branding oficial
     assert.match(html, /<title>.*?El Postrechino.*?Pasteler(?:í|&iacute;)a (?:y Confiter(?:í|&iacute;)a )?Sanz.*?<\/title>/i, 'Debe contener título oficial con Postrechino y Pastelería Sanz');
     assert.match(html, /<h1[^>]*>\s*El Postrechino\s*<\/h1>/i, 'Debe titularse al inicio simplemente "El Postrechino"');
-    assert.match(html, /El mejor se hace aqu(?:í|&iacute;)/i, 'Debe incluir el claim "El mejor se hace aquí"');
+    assert.doesNotMatch(html, /El mejor se hace aqu(?:í|&iacute;)/i, 'No debe incluir el claim "El mejor se hace aquí"');
 
     // Llamadas a la acción y restricciones requeridas
     assert.match(html, /href=[\"']tel:968402010[\"']/i, 'Debe incluir teléfono para encargos');
@@ -137,6 +137,7 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
 
     // Imágenes monográficas oficiales
     assert.match(html, /uploads\/postrechino\/postrechino_terminado_4_unidades\.jpg/, 'Debe incluir foto de 4 unidades terminadas');
+    assert.match(html, /uploads\/postrechino\/postrechino_desglose\.jpg/, 'Debe incluir foto de anatomía desglosada');
     assert.match(html, /uploads\/postrechino\/postrechino_aislado\.jpeg/, 'Debe incluir foto del postrechino aislado');
     assert.match(html, /uploads\/postrechino\/postrechino_proceso_1_de_2\.jpg/, 'Debe incluir foto de proceso 1');
     assert.match(html, /uploads\/postrechino\/postrechino_proceso_2_de_2\.jpg/, 'Debe incluir foto de proceso 2');
