@@ -2,6 +2,24 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+function cleanOldBackups(backupDir, maxToKeep = 3) {
+  const files = fs.readdirSync(backupDir)
+    .filter(f => f.startsWith('backup_') && f.endsWith('.zip'))
+    .sort();
+
+  if (files.length > maxToKeep) {
+    const toDelete = files.slice(0, files.length - maxToKeep);
+    toDelete.forEach(file => {
+      try {
+        fs.unlinkSync(path.join(backupDir, file));
+        console.log(`Eliminada copia de seguridad antigua: ${file}`);
+      } catch (err) {
+        console.warn(`No se pudo eliminar ${file}:`, err.message);
+      }
+    });
+  }
+}
+
 function createBackup() {
   const rootDir = path.resolve(__dirname, '..');
   const backupDir = path.join(rootDir, 'backup');
@@ -26,6 +44,10 @@ function createBackup() {
     const stat = fs.statSync(zipPath);
     const sizeMb = (stat.size / (1024 * 1024)).toFixed(2);
     console.log(`✓ Copia de seguridad completada con éxito: backup/${zipName} (${sizeMb} MB)`);
+
+    // Mantener únicamente las 3 copias más recientes
+    cleanOldBackups(backupDir, 3);
+
     return zipPath;
   } else {
     throw new Error('No se pudo generar el archivo de copia de seguridad.');
