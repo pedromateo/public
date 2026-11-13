@@ -41,6 +41,46 @@ body.affix .birdseye-header .logo img {
 }
 
 /* ==========================================================================
+   INTEGRACIÓN Y VISIBILIDAD DE LA CABECERA Y MENÚ DE NAVEGACIÓN
+   Garantiza que el menú principal y el logotipo estén siempre 100% visibles,
+   con transiciones suaves, soporte responsive y estados activos calibrados
+   con el color corporativo oficial #D8086A.
+   ========================================================================== */
+body:not(.wsite-editor) .birdseye-header .logo,
+body:not(.wsite-editor) .birdseye-header .desktop-nav,
+body.fade-in .birdseye-header .logo,
+body.fade-in .birdseye-header .desktop-nav {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Indicador de sección activa en menú de escritorio */
+.nav li.wsite-menu-item-wrap#active > .wsite-menu-item,
+.nav li.wsite-menu-item-wrap.wsite-nav-current > .wsite-menu-item {
+  border-color: currentColor !important;
+  font-weight: 700 !important;
+}
+
+body.affix .nav li.wsite-menu-item-wrap#active > .wsite-menu-item,
+body.affix .nav li.wsite-menu-item-wrap.wsite-nav-current > .wsite-menu-item {
+  border-color: var(--sanz-corporate, #D8086A) !important;
+  color: var(--sanz-corporate, #D8086A) !important;
+}
+
+body.affix .nav li .wsite-menu-item:hover {
+  color: var(--sanz-corporate, #D8086A) !important;
+  opacity: 1 !important;
+}
+
+/* Indicador de sección activa en menú móvil responsive */
+.mobile-nav li.wsite-menu-item-wrap#active > a.wsite-menu-item,
+.mobile-nav li.wsite-menu-item-wrap.wsite-nav-current > a.wsite-menu-item {
+  color: var(--sanz-corporate, #D8086A) !important;
+  font-weight: 700 !important;
+  background: rgba(216, 8, 106, 0.08) !important;
+}
+
+/* ==========================================================================
    1. SECCIÓN INTRODUCCIÓN (120 años de historia)
    ========================================================================== */
 .sanz-intro-section {
@@ -600,6 +640,49 @@ body.affix .birdseye-header .logo img {
   color: #faeaf4;
 }
 
+.sanz-carousel-cta-wrap {
+  margin-top: 36px;
+  text-align: center;
+}
+
+.sanz-carousel-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--sanz-primary, #D8086A);
+  color: #ffffff !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  padding: 14px 32px;
+  border-radius: 50px;
+  box-shadow: 0 4px 18px rgba(216, 8, 106, 0.45);
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.sanz-carousel-cta-btn:hover,
+.sanz-carousel-cta-btn:focus {
+  background: #ffffff;
+  color: var(--sanz-wine, #5D022E) !important;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
+}
+
+.sanz-carousel-cta-btn svg {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.sanz-carousel-cta-btn:hover svg,
+.sanz-carousel-cta-btn:focus svg {
+  transform: translateX(4px);
+}
+
 /* ==========================================================================
    6. VÍDEOS DE YOUTUBE (Cuadrícula Moderna y Responsive)
    ========================================================================== */
@@ -611,6 +694,21 @@ body.affix .birdseye-header .logo img {
 .sanz-videos-container {
   max-width: 1140px;
   margin: 0 auto;
+}
+
+.sanz-videos-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.sanz-videos-title {
+  font-family: "Montserrat", sans-serif !important;
+  font-size: clamp(1.8rem, 4vw, 2.7rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  color: var(--sanz-wine-dark) !important;
+  margin: 0 !important;
+  letter-spacing: -0.01em;
 }
 
 .sanz-video-featured {

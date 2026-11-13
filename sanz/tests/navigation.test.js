@@ -33,6 +33,16 @@ describe('Tests de Navegación - Menú y Enlaces Principales', () => {
       'Debe enlazar a la página monográfica del bisabuelo Indalecio');
   });
 
+  it('la sección de Nuestra historia en imágenes debe contener un CTA hacia la historia del bisabuelo Indalecio', () => {
+    const html = readHtml('index.html');
+    const historySection = html.match(/id=[\"']519622678600643819-gallery[\"'][\s\S]*?<\/section>/);
+    assert.ok(historySection, 'Debe existir la sección del carrusel de historia');
+    assert.match(historySection[0], /href=[\"']la-historia-del-bisabuelo-indalecio-sanz\.html[\"'][^>]*class=[\"'][^\"']*sanz-carousel-cta-btn/i,
+      'Debe contener el botón CTA enlazando a la historia del bisabuelo Indalecio Sanz');
+    assert.match(historySection[0], /Conoce la historia del bisabuelo Indalecio Sanz/i,
+      'Debe mostrar el texto de llamada a la acción hacia la historia del bisabuelo');
+  });
+
   it('las páginas interiores deben contener navegación cruzada hacia index.html', () => {
     const subpages = ['la-historia-del-bisabuelo-indalecio-sanz.html', 'postrechino.html'];
 
@@ -49,6 +59,30 @@ describe('Tests de Navegación - Menú y Enlaces Principales', () => {
     const html = readHtml('index.html');
     assert.match(html, /<a\s+class=[\"']hamburger[\"']/i,
       'Debe existir el elemento del botón hamburguesa para la navegación responsive');
+  });
+
+  it('postrechino.html debe incluir jQuery y tener el menú principal y footer integrados', () => {
+    const html = readHtml('postrechino.html');
+
+    // Debe cargar jQuery para garantizar que custom.js no falle y el menú no desaparezca
+    assert.match(html, /<script[^>]+src=[\"']jquery-1\.11\.2\.min\.js[\"']/i,
+      'postrechino.html debe cargar jquery-1.11.2.min.js en el head para evitar que el menú quede con opacity 0');
+
+    // Debe tener el contenedor de menú desktop y móvil
+    assert.match(html, /<div\s+class=[\"']nav desktop-nav[\"']>/i,
+      'postrechino.html debe incluir el menú de navegación para escritorio');
+    assert.match(html, /<div\s+id=[\"']navMobile[\"']\s+class=[\"']nav mobile-nav[\"']>/i,
+      'postrechino.html debe incluir el menú de navegación móvil');
+
+    // Debe marcar El Postrechino como página o sección activa
+    assert.match(html, /<li\s+id=[\"']active[\"'][^>]*>[\s\S]*?El Postrechino/i,
+      'El Postrechino debe estar marcado con id="active" en el menú');
+
+    // Debe incluir en el footer los enlaces clave integrados
+    assert.match(html, /<ul\s+class=[\"']site-footer-links[\"']>[\s\S]*?postrechino\.html[\s\S]*?<\/ul>/i,
+      'El footer de postrechino.html debe integrar el enlace a El Postrechino');
+    assert.match(html, /<ul\s+class=[\"']site-footer-links[\"']>[\s\S]*?index\.html#donde[\s\S]*?<\/ul>/i,
+      'El footer de postrechino.html debe integrar el enlace a ¿Dónde estamos?');
   });
 });
 

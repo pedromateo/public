@@ -151,6 +151,47 @@ describe('Tests de Contenido - Integridad Editorial y Estructura HTML', () => {
     assert.match(html, /Postrechino/i, 'El producto debe nombrarse Postrechino en JSON-LD');
   });
 
+  it('la galería de conócenos un poco más en index.html debe incluir las 27 fotos en las 8 categorías temáticas', () => {
+    const html = readHtml('index.html');
+    const galleryBlock = html.match(/id=[\"']600117005458031908-gallery[\"'][\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>/);
+    assert.ok(galleryBlock, 'Debe existir el contenedor del carrusel de la galería #600117005458031908-gallery');
+    
+    const slideMatches = [...galleryBlock[0].matchAll(/class=[\"'][^\"']*sanz-carousel-slide[^\"']*[\"']/g)];
+    assert.equal(slideMatches.length, 27, `La galería debe contener exactamente 27 diapositivas (encontradas: ${slideMatches.length})`);
+
+    // Comprobar presencia de las 8 categorías requeridas en los data-caption o nombres de imagen
+    assert.match(galleryBlock[0], /elaboracion_/i, 'Debe incluir diapositivas de elaboración');
+    assert.match(galleryBlock[0], /dulces_/i, 'Debe incluir diapositivas de dulces tradicionales');
+    assert.match(galleryBlock[0], /mini dulces|minipiezas/i, 'Debe incluir diapositivas de mini dulces');
+    assert.match(galleryBlock[0], /tarta_/i, 'Debe incluir diapositivas de tartas');
+    assert.match(galleryBlock[0], /bombones/i, 'Debe incluir diapositivas de bombones');
+    assert.match(galleryBlock[0], /navidad|navidenos/i, 'Debe incluir diapositivas de surtido de Navidad');
+    assert.match(galleryBlock[0], /dia_madre|Día de la Madre/i, 'Debe incluir diapositivas del Día de la Madre');
+    assert.match(galleryBlock[0], /solidari/i, 'Debe incluir diapositivas de la categoría solidario');
+
+    // Comprobar contador visual total
+    assert.match(html, /<span class=[\"']sanz-carousel-total[\"']>\s*27\s*<\/span>/, 'El contador total debe marcar 27');
+  });
+
+  it('la galería de dulces y tartas y la sección de vídeos deben tener los títulos requeridos', () => {
+    const html = readHtml('index.html');
+    
+    // Título de la galería 2
+    assert.match(html, /<h2[^>]*class=[\"'][^\"']*sanz-carousel-title[^\"']*[\"'][^>]*>\s*Nuestros dulces y tartas\s*<\/h2>/i,
+      'La galería debe titularse "Nuestros dulces y tartas"');
+
+    // Título de la sección de vídeos
+    assert.match(html, /<h2[^>]*class=[\"'][^\"']*sanz-videos-title[^\"']*[\"'][^>]*>\s*Con(?:ó|&oacute;)cenos un poco m(?:á|&aacute;)s\.\.\.\s*<\/h2>/i,
+      'La sección de vídeos debe titularse "Conócenos un poco más..."');
+
+    // Orden de secciones: "Nuestra historia en imágenes" seguido de "Nuestros dulces y tartas"
+    const posHistoria = html.indexOf('Nuestra historia en im');
+    const posDulces = html.indexOf('Nuestros dulces y tartas');
+    const posVideos = html.indexOf('sanz-videos-title');
+    assert.ok(posHistoria > 0 && posDulces > posHistoria && posVideos > posDulces,
+      'La sección "Nuestros dulces y tartas" debe colocarse después de "Nuestra historia en imágenes"');
+  });
+
   it('nuevos_servicios.html debe estar eliminada y no existir en el sitio', () => {
     const fullPath = path.join(ROOT_DIR, 'nuevos_servicios.html');
     assert.strictEqual(fs.existsSync(fullPath), false, 'nuevos_servicios.html no debe existir en el repositorio');
