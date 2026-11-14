@@ -64,24 +64,16 @@
   <main class="flex-grow max-w-3xl mx-auto px-3.5 sm:px-4 py-4 sm:py-6 w-full space-y-6">
     
     <!-- ENCABEZADO DEL INFORME -->
-    <div class="border-b border-slate-800 pb-4">
-      <div class="flex flex-wrap items-center gap-2 mb-2.5">
-        <span class="mono text-xs px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-semibold">
-          📅 {{ date }}
-        </span>
-        <span class="text-xs px-2.5 py-0.5 rounded-md font-semibold
-          {% if 'alcista' in report.sentimiento_general|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
-          {% elif 'bajista' in report.sentimiento_general|lower or 'cautela' in report.sentimiento_general|lower %} bg-rose-950 text-rose-400 border border-rose-800
-          {% else %} bg-amber-950 text-amber-400 border border-amber-800 {% endif %}">
-          {{ report.sentimiento_general }}
-        </span>
-      </div>
-      <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">
-        Informe de Quórum Bursátil & Estrategia
-      </h1>
-      <p class="mt-1 text-xs text-slate-400">
-        Fuentes: Consultorios de Bolsa de Capital Radio y Visionarios Bolsa.
-      </p>
+    <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
+      <span class="mono text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-semibold">
+        📅 {{ date }}
+      </span>
+      <span class="text-xs px-2.5 py-1 rounded-md font-semibold
+        {% if 'alcista' in report.sentimiento_general|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
+        {% elif 'bajista' in report.sentimiento_general|lower or 'cautela' in report.sentimiento_general|lower %} bg-rose-950 text-rose-400 border border-rose-800
+        {% else %} bg-amber-950 text-amber-400 border border-amber-800 {% endif %}">
+        {{ report.sentimiento_general }}
+      </span>
     </div>
 
     <!-- REPRODUCTOR DE PODCAST COMPACTO ARRIBA -->
