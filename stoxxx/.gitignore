@@ -1,0 +1,14 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Logs and temp files
+*.log
+.DS_Store
+.cache/
+temp_audio/

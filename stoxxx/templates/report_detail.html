@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Bursátil {{ date }} | STOXXX</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white">
+
+  <!-- TOP BAR DE NAVEGACIÓN Y ACCIONES RÁPIDAS -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="../../index.html" class="flex items-center space-x-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          <span>Volver al Índice</span>
+        </a>
+        <span class="hidden sm:inline text-slate-600">|</span>
+        <span class="hidden sm:inline text-xs text-slate-400 mono">Edición: {{ date }}</span>
+      </div>
+
+      <!-- ACCESOS DIRECTOS DESCARGA PDF Y AUDIO -->
+      <div class="flex items-center space-x-2">
+        {% if pdf_rel_path %}
+        <a href="{{ pdf_rel_path }}" download class="inline-flex items-center space-x-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-rose-600/90 hover:bg-rose-500 text-white shadow-sm transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span>Descargar PDF</span>
+        </a>
+        {% endif %}
+
+        {% if audio_rel_path %}
+        <a href="{{ audio_rel_path }}" download class="inline-flex items-center space-x-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-indigo-600/90 hover:bg-indigo-500 text-white shadow-sm transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          <span>Descargar MP3</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 py-8 w-full">
+    
+    <!-- BANNER DE ENCABEZADO -->
+    <div class="mb-8 border-b border-slate-800 pb-6">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <span class="mono text-xs px-3 py-1 rounded-md bg-blue-950 text-blue-400 border border-blue-800/60 font-semibold">
+          ANÁLISIS DE MERCADO & CONSENSO
+        </span>
+        <span class="mono text-xs px-3 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+          Fecha: {{ date }}
+        </span>
+        <span class="text-xs px-3 py-1 rounded-md font-semibold 
+          {% if 'alcista' in report.sentimiento_general|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
+          {% elif 'bajista' in report.sentimiento_general|lower or 'cautela' in report.sentimiento_general|lower %} bg-rose-950 text-rose-400 border border-rose-800
+          {% else %} bg-amber-950 text-amber-400 border border-amber-800 {% endif %}">
+          Sentimiento Predominante: {{ report.sentimiento_general }}
+        </span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+        Informe de Quórum Bursátil & Estrategia Operativa
+      </h1>
+      <p class="mt-2 text-xs text-slate-400">
+        Fuentes: Consultorios de Bolsa de Capital Radio y Visionarios Bolsa (Sito Rodríguez) analizados conjuntamente.
+      </p>
+    </div>
+
+    <!-- REPRODUCTOR DE PODCAST INTEGRADO ARRIBA -->
+    {% if audio_rel_path %}
+    <div class="mb-10 p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/30 to-slate-900 border border-indigo-900/40 shadow-xl">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-4">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 border border-indigo-500/30">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white">Escuchar Podcast de la Sesión (Diálogo Dual)</h3>
+            <p class="text-xs text-slate-400">Locutores: Carlos y Laura repasando el quórum y los valores clave.</p>
+          </div>
+        </div>
+        <audio controls class="w-full sm:w-96 h-10 rounded-lg">
+          <source src="{{ audio_rel_path }}" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- 1. RESUMEN EJECUTIVO -->
+    <section class="mb-12 bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8">
+      <div class="flex items-center space-x-2 text-blue-400 mb-4">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        <h2 class="text-lg font-bold tracking-tight text-white uppercase">
+          1. Resumen Ejecutivo (Lectura rápida: 3-5 minutos)
+        </h2>
+      </div>
+
+      <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
+        <p class="text-base text-slate-200 font-medium bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+          {{ report.resumen_ejecutivo.sintesis_sentimiento }}
+        </p>
+
+        <div>
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Hacia dónde apuntan los analistas:</h4>
+          <p>{{ report.resumen_ejecutivo.hacia_donde_apuntan }}</p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Puntos clave de mayor consenso:</h4>
+          <ul class="space-y-1.5 list-disc list-inside text-slate-300">
+            {% for punto in report.resumen_ejecutivo.puntos_clave_consenso %}
+            <li>{{ punto }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SENTIMIENTO DE MERCADO Y VISIÓN MACRO -->
+    <section class="mb-12">
+      <div class="flex items-center space-x-2 text-blue-400 mb-6">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path>
+        </svg>
+        <h2 class="text-lg font-bold tracking-tight text-white uppercase">
+          2. Sentimiento de Mercado y Visión Macro
+        </h2>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 mb-6">
+        <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Situación Global (Europa & EE.UU.):</h4>
+        <p class="text-sm text-slate-300 leading-relaxed">{{ report.sentimiento_macro.situacion_global }}</p>
+      </div>
+
+      <!-- GRID DE ÍNDICES -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {% for idx in report.sentimiento_macro.indices %}
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-white text-sm">{{ idx.nombre }}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded font-mono 
+              {% if 'alcista' in idx.tendencia|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
+              {% elif 'bajista' in idx.tendencia|lower %} bg-rose-950 text-rose-400 border border-rose-800
+              {% else %} bg-amber-950 text-amber-400 border border-amber-800 {% endif %}">
+              {{ idx.tendencia }}
+            </span>
+          </div>
+          <div class="text-xs space-y-1 mb-2 mono">
+            <div class="text-slate-400">Soporte: <span class="text-slate-200">{{ idx.soporte_clave }}</span></div>
+            <div class="text-slate-400">Resistencia: <span class="text-slate-200">{{ idx.resistencia_clave }}</span></div>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-normal border-t border-slate-800 pt-2">
+            {{ idx.consenso_analistas }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- COINCIDENCIAS Y DIVERGENCIAS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-emerald-950/20 border border-emerald-900/40 rounded-xl p-5">
+          <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">Coincidencias en Estrategia:</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">{{ report.sentimiento_macro.coincidencias_estrategia }}</p>
+        </div>
+        <div class="bg-amber-950/20 border border-amber-900/40 rounded-xl p-5">
+          <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">Divergencias entre Analistas:</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">{{ report.sentimiento_macro.divergencias_estrategia }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ANÁLISIS DE EMPRESAS -->
+    <section class="mb-12">
+      <div class="flex items-center space-x-2 text-blue-400 mb-6">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+        <h2 class="text-lg font-bold tracking-tight text-white uppercase">
+          3. Análisis de Empresas (Ordenadas por Nivel de Quórum)
+        </h2>
+      </div>
+
+      <!-- BLOQUE 1: VALORES NACIONALES -->
+      <div class="mb-8">
+        <div class="border-b border-slate-800 pb-2 mb-4 flex items-center justify-between">
+          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wide">
+            🇪🇸 Valores Nacionales (IBEX 35 / Mercado Continuo)
+          </h3>
+          <span class="text-xs text-slate-500">Orden decreciente por menciones</span>
+        </div>
+
+        <div class="space-y-4">
+          {% for comp in report.analisis_empresas.nacionales %}
+          <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div class="flex items-center space-x-2">
+                <span class="font-bold text-white text-base">{{ comp.nombre }}</span>
+                {% if comp.ticker %}<span class="mono text-xs text-slate-400">({{ comp.ticker }})</span>{% endif %}
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="mono text-xs px-2.5 py-0.5 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                  {{ comp.menciones }} mención{% if comp.menciones > 1 %}es{% endif %}
+                </span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full font-medium
+                  {% if 'alcista' in comp.nivel_consenso|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
+                  {% elif 'bajista' in comp.nivel_consenso|lower %} bg-rose-950 text-rose-400 border border-rose-800
+                  {% else %} bg-slate-800 text-slate-300 border border-slate-700 {% endif %}">
+                  {{ comp.nivel_consenso }}
+                </span>
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-400 mb-3">
+              Analistas: <strong class="text-slate-300">{{ comp.analistas|join(', ') }}</strong>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 mb-3 text-xs mono">
+              <div>Soporte: <span class="text-slate-200">{{ comp.soporte }}</span></div>
+              <div>Resistencia: <span class="text-slate-200">{{ comp.resistencia }}</span></div>
+              <div>Estrategia: <span class="text-blue-400 font-sans font-semibold">{{ comp.recomendacion }}</span></div>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed">{{ comp.tesis }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- BLOQUE 2: VALORES INTERNACIONALES -->
+      <div>
+        <div class="border-b border-slate-800 pb-2 mb-4 flex items-center justify-between">
+          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wide">
+            🌍 Valores Internacionales (Nasdaq, DAX, NYSE, etc.)
+          </h3>
+          <span class="text-xs text-slate-500">Orden decreciente por menciones</span>
+        </div>
+
+        <div class="space-y-4">
+          {% for comp in report.analisis_empresas.internacionales %}
+          <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div class="flex items-center space-x-2">
+                <span class="font-bold text-white text-base">{{ comp.nombre }}</span>
+                {% if comp.ticker %}<span class="mono text-xs text-slate-400">({{ comp.ticker }})</span>{% endif %}
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="mono text-xs px-2.5 py-0.5 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                  {{ comp.menciones }} mención{% if comp.menciones > 1 %}es{% endif %}
+                </span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full font-medium
+                  {% if 'alcista' in comp.nivel_consenso|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
+                  {% elif 'bajista' in comp.nivel_consenso|lower %} bg-rose-950 text-rose-400 border border-rose-800
+                  {% else %} bg-slate-800 text-slate-300 border border-slate-700 {% endif %}">
+                  {{ comp.nivel_consenso }}
+                </span>
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-400 mb-3">
+              Analistas: <strong class="text-slate-300">{{ comp.analistas|join(', ') }}</strong>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 mb-3 text-xs mono">
+              <div>Soporte: <span class="text-slate-200">{{ comp.soporte }}</span></div>
+              <div>Resistencia: <span class="text-slate-200">{{ comp.resistencia }}</span></div>
+              <div>Estrategia: <span class="text-blue-400 font-sans font-semibold">{{ comp.recomendacion }}</span></div>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed">{{ comp.tesis }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. GUION COMPLETO DEL PODCAST -->
+    {% if report.guion_podcast %}
+    <section class="mb-12 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8">
+      <div class="flex items-center space-x-2 text-indigo-400 mb-4">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path>
+        </svg>
+        <h2 class="text-lg font-bold tracking-tight text-white uppercase">
+          Guion Transcrito del Podcast (Carlos & Laura)
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {% for turn in report.guion_podcast %}
+        <div class="flex space-x-3 text-sm">
+          <div class="shrink-0 w-16 mono text-xs font-bold pt-0.5 
+            {% if turn.genero == 'masculino' %} text-blue-400 {% else %} text-pink-400 {% endif %}">
+            {{ turn.locutor }}:
+          </div>
+          <div class="text-slate-300 leading-relaxed bg-slate-950/40 p-3 rounded-xl border border-slate-800/60 flex-grow">
+            {{ turn.texto }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+  </main>
+
+  <footer class="border-t border-slate-800 bg-slate-900/50 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-5xl mx-auto px-4">
+      <p>STOXXX Financial Intelligence System. Publicado en GitHub Pages.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
