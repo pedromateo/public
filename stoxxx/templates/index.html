@@ -2,7 +2,7 @@
 <html lang="es" class="h-full bg-slate-950 text-slate-100">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>STOXXX | Informes Bursátiles y Consenso de Mercado</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,226 +15,184 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              50: '#eff6ff',
-              500: '#3b82f6',
-              600: '#2563eb',
-              900: '#1e3a8a',
-            }
           }
         }
       }
     }
   </script>
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
     .mono { font-family: 'JetBrains Mono', monospace; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="min-h-full flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white">
 
-  <!-- HEADER DE NAVEGACIÓN -->
-  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+  <!-- HEADER COMPACTO Y LIMPIO (OPTIMIZADO MÓVIL) -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center space-x-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md shadow-blue-500/20 shrink-0">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
           </svg>
         </div>
-        <div>
-          <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">STOXXX</span>
-          <span class="text-xs ml-2 px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 mono font-medium">Bolsa & Quórum</span>
-        </div>
+        <span class="text-lg font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">STOXXX</span>
       </div>
-      <div class="flex items-center space-x-4">
-        <span class="hidden sm:inline-flex items-center text-xs text-slate-400">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2"></span>
-          Sistema automatizado
-        </span>
-        <a href="#feed" class="text-xs px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 transition border border-slate-700">
-          Ver Últimas Ediciones
-        </a>
+      <div class="flex items-center space-x-2 text-xs mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-lg">
+        <span class="text-white font-bold">{{ reports|length }}</span> informe{% if reports|length != 1 %}s{% endif %}
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-    <div class="mb-8 flex flex-wrap items-center justify-between border-b border-slate-800/80 pb-6 gap-4">
-      <div class="flex items-center space-x-3 text-xs mono text-slate-400 bg-slate-900/60 border border-slate-800 px-4 py-2 rounded-xl">
-        <div>Total Informes: <span class="text-white font-bold">{{ reports|length }}</span></div>
-        <div class="text-slate-600">|</div>
-        <div>Último: <span class="text-blue-400 font-bold">{{ reports[0].date if reports else 'N/A' }}</span></div>
-      </div>
-    </div>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="flex-grow max-w-3xl mx-auto px-3.5 sm:px-4 py-4 sm:py-6 w-full">
 
-    <!-- BUSCADOR REACTIVO -->
-    <div class="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
-      <div class="relative w-full sm:w-96">
+    <!-- BUSCADOR & FILTROS (MOBILE-FIRST) -->
+    <div class="mb-5 space-y-2.5">
+      <div class="relative w-full">
         <input 
-          type="text" 
+          type="search" 
           id="search-input"
-          placeholder="Buscar por empresa, índice o fecha..." 
-          class="w-full bg-slate-900/90 border border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+          placeholder="Buscar empresa, ticker, índice o fecha..." 
+          class="w-full bg-slate-900/90 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition shadow-inner"
         >
-        <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-      <div class="text-xs text-slate-400 flex items-center space-x-2 w-full sm:w-auto justify-end">
-        <span>Filtro de quórum:</span>
-        <button onclick="filterSentiment('all')" class="sentiment-filter active px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700">Todos</button>
-        <button onclick="filterSentiment('alcista')" class="sentiment-filter px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-800">Alcista</button>
-        <button onclick="filterSentiment('bajista')" class="sentiment-filter px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-rose-400 border border-slate-800">Bajista / Cautela</button>
+
+      <!-- FILTRO DE SENTIMIENTO EN BARRA HORIZONTAL CON SCROLL TÁCTIL -->
+      <div class="flex items-center space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
+        <button onclick="filterSentiment('all')" class="sentiment-filter active whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium transition">Todos</button>
+        <button onclick="filterSentiment('alcista')" class="sentiment-filter whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-800 font-medium transition">Alcista</button>
+        <button onclick="filterSentiment('bajista')" class="sentiment-filter whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-rose-400 border border-slate-800 font-medium transition">Cautela / Bajista</button>
       </div>
     </div>
 
-    <!-- FEED CRONOLÓGICO DE INFORMES -->
-    <section id="feed" class="space-y-6">
+    <!-- FEED CRONOLÓGICO -->
+    <section id="feed" class="space-y-4">
       {% if not reports %}
-      <div class="text-center py-16 bg-slate-900/40 border border-slate-800/80 rounded-2xl">
-        <svg class="w-12 h-12 text-slate-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="text-center py-12 px-4 bg-slate-900/40 border border-slate-800 rounded-2xl">
+        <svg class="w-10 h-10 text-slate-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
         </svg>
-        <h3 class="text-lg font-medium text-slate-300">No hay informes publicados todavía</h3>
-        <p class="text-sm text-slate-500 mt-1 max-w-sm mx-auto">Ejecuta el script en local con <code class="text-blue-400 font-mono">python main.py</code> para generar la primera entrega.</p>
+        <h3 class="text-base font-semibold text-slate-300">No hay informes publicados todavía</h3>
+        <p class="text-xs text-slate-500 mt-1">Ejecuta <code class="text-blue-400 font-mono">python main.py</code> para generar una entrega.</p>
       </div>
       {% endif %}
 
       {% for r in reports %}
       <article 
-        class="report-card bg-slate-900/70 hover:bg-slate-900/90 border border-slate-800/80 rounded-2xl p-6 sm:p-7 transition-all duration-200 shadow-xl shadow-black/20"
+        class="report-card bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 sm:p-5 transition shadow-lg space-y-3.5"
         data-sentiment="{{ r.sentimiento_general|lower }}"
         data-keywords="{{ r.date }} {{ r.top_stocks|join(' ') }} {{ r.sentimiento_general }}"
       >
-        <!-- CARD HEADER -->
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/70 pb-4 mb-4">
-          <div class="flex items-center space-x-3">
-            <span class="mono text-xs px-3 py-1 rounded-full bg-slate-800 text-slate-300 font-semibold border border-slate-700">
-              📅 {{ r.date }}
-            </span>
-            <span class="text-xs px-2.5 py-1 rounded-full font-medium 
-              {% if 'alcista' in r.sentimiento_general|lower %} bg-emerald-950/80 text-emerald-400 border border-emerald-800/50
-              {% elif 'bajista' in r.sentimiento_general|lower or 'cautela' in r.sentimiento_general|lower %} bg-rose-950/80 text-rose-400 border border-rose-800/50
-              {% else %} bg-amber-950/80 text-amber-400 border border-amber-800/50 {% endif %}">
-              ● Sentimiento: {{ r.sentimiento_general }}
-            </span>
-          </div>
-          <div class="text-xs text-slate-400 mono">
-            Fuentes analizadas: <span class="text-slate-200 font-bold">{{ r.videos_count }} vídeos</span>
-          </div>
+        <!-- CABECERA DE LA TARJETA -->
+        <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+          <span class="mono text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-semibold border border-slate-700">
+            📅 {{ r.date }}
+          </span>
+          <span class="text-xs px-2.5 py-1 rounded-md font-semibold
+            {% if 'alcista' in r.sentimiento_general|lower %} bg-emerald-950/90 text-emerald-400 border border-emerald-800/60
+            {% elif 'bajista' in r.sentimiento_general|lower or 'cautela' in r.sentimiento_general|lower %} bg-rose-950/90 text-rose-400 border border-rose-800/60
+            {% else %} bg-amber-950/90 text-amber-400 border border-amber-800/60 {% endif %}">
+            {{ r.sentimiento_general }}
+          </span>
         </div>
 
-        <!-- RESUMEN PREVIEW -->
-        <div class="mb-5">
-          <h2 class="text-xl font-bold text-white mb-2 hover:text-blue-400 transition">
+        <!-- EXTRACTO DEL RESUMEN -->
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-white mb-1.5 hover:text-blue-400 transition leading-snug">
             <a href="{{ r.detail_url }}">Informe de Consenso Bursátil & Macro</a>
           </h2>
-          <p class="text-sm text-slate-300 leading-relaxed line-clamp-3">
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
             {{ r.summary_snippet }}
           </p>
         </div>
 
-        <!-- TOP EMPRESAS CON MAYOR QUÓRUM -->
+        <!-- TOP QUÓRUM EMPRESAS (PILLS RESPONSIVAS) -->
         {% if r.top_stocks %}
-        <div class="mb-5 flex flex-wrap items-center gap-2">
-          <span class="text-xs text-slate-400 font-medium">Mayor Quórum:</span>
+        <div class="flex flex-wrap items-center gap-1.5 pt-1">
+          <span class="text-[11px] text-slate-400 font-medium mr-1">Quórum:</span>
           {% for stock in r.top_stocks %}
-          <span class="text-xs px-2.5 py-0.5 rounded-md bg-blue-950/50 text-blue-300 border border-blue-800/50 mono">
+          <span class="text-[11px] px-2 py-0.5 rounded-md bg-blue-950/60 text-blue-300 border border-blue-800/40 mono">
             {{ stock }}
           </span>
           {% endfor %}
         </div>
         {% endif %}
 
-        <!-- REPRODUCTOR DE PODCAST MP3 -->
+        <!-- REPRODUCTOR DE AUDIO (100% RESPONSIVE EN MÓVIL) -->
         {% if r.audio_url %}
-        <div class="mb-5 p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="flex items-center space-x-3 w-full sm:w-auto">
-            <div class="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0 border border-indigo-500/20">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"></path>
-              </svg>
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/90 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+              <span class="font-semibold text-slate-200">Podcast Dual (Carlos & Laura)</span>
             </div>
-            <div>
-              <div class="text-xs font-semibold text-slate-200">Podcast Dual (Carlos & Laura)</div>
-              <div class="text-[11px] text-slate-500">Resumen conversacional de 4-6 min</div>
-            </div>
+            <a href="{{ r.audio_url }}" download class="text-[11px] text-indigo-400 hover:text-indigo-300 underline mono">
+              Descargar MP3
+            </a>
           </div>
-          <audio controls class="w-full sm:w-80 h-9 rounded-lg">
+          <audio controls class="w-full h-8 rounded-md" preload="none">
             <source src="{{ r.audio_url }}" type="audio/mpeg">
             Tu navegador no soporta el reproductor de audio.
           </audio>
         </div>
         {% endif %}
 
-        <!-- BOTONES DE ACCIÓN -->
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/70">
-          <a href="{{ r.detail_url }}" class="inline-flex items-center space-x-2 text-xs font-semibold px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm shadow-blue-600/30">
+        <!-- BOTONES DE ACCIÓN (GRANDES ÁREAS TÁCTILES PARA MÓVIL) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800/70">
+          <a href="{{ r.detail_url }}" class="flex items-center justify-center space-x-2 text-xs font-bold py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white transition shadow-sm">
             <span>Leer Informe Completo</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </a>
 
-          <div class="flex items-center space-x-2">
-            {% if r.pdf_url %}
-            <a href="{{ r.pdf_url }}" download class="inline-flex items-center space-x-1.5 text-xs px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
-              <svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              <span>Descargar PDF</span>
-            </a>
-            {% endif %}
-
-            {% if r.audio_url %}
-            <a href="{{ r.audio_url }}" download class="inline-flex items-center space-x-1.5 text-xs px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
-              <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-              </svg>
-              <span>MP3</span>
-            </a>
-            {% endif %}
-          </div>
+          {% if r.pdf_url %}
+          <a href="{{ r.pdf_url }}" download class="flex items-center justify-center space-x-1.5 text-xs font-semibold py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 border border-slate-700 transition">
+            <svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span>Descargar PDF</span>
+          </a>
+          {% endif %}
         </div>
       </article>
       {% endfor %}
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-slate-800 bg-slate-900/50 py-8 mt-16 text-center text-xs text-slate-500">
-    <div class="max-w-6xl mx-auto px-4">
-      <p>STOXXX Financial Intelligence System. Extracción y síntesis asistida por IA (Gemini API).</p>
-      <p class="mt-1">Aviso Legal: El contenido expuesto tiene carácter estrictamente informativo y no constituye una recomendación de inversión.</p>
-    </div>
+  <!-- FOOTER MÓVIL -->
+  <footer class="border-t border-slate-800/80 bg-slate-900/60 py-6 mt-10 text-center text-xs text-slate-500 px-4">
+    <p>STOXXX · Inteligencia Bursátil y Consenso de Analistas.</p>
   </footer>
 
-  <!-- SCRIPT PARA BÚSQUEDA Y FILTRADO -->
+  <!-- SCRIPT DE BÚSQUEDA Y FILTRADO REACTIVO -->
   <script>
     const searchInput = document.getElementById('search-input');
     const cards = document.querySelectorAll('.report-card');
+    const filterBtns = document.querySelectorAll('.sentiment-filter');
 
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase().trim();
         cards.forEach(card => {
           const keywords = card.getAttribute('data-keywords').toLowerCase();
-          if (keywords.includes(query)) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
+          card.style.display = keywords.includes(query) ? 'block' : 'none';
         });
       });
     }
 
     function filterSentiment(sentiment) {
+      filterBtns.forEach(b => b.classList.remove('active', 'bg-slate-700', 'text-white'));
+      event.target.classList.add('active', 'bg-slate-700', 'text-white');
+
       cards.forEach(card => {
         const cardSent = card.getAttribute('data-sentiment');
         if (sentiment === 'all') {
