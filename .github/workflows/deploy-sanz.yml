@@ -39,11 +39,17 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz dist/menum
+          mkdir -p dist/stoxxx dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz dist/menum
 
           # Root Portal
           if [ -f "index.html" ]; then
             cp index.html dist/ || true
+          fi
+
+          # STOXXX Copy
+          if [ -d "stoxxx" ]; then
+            echo "Packaging STOXXX..."
+            cp -r stoxxx/index.html stoxxx/data stoxxx/reports dist/stoxxx/ || true
           fi
 
           # Brainfit Copy
