@@ -12,3 +12,7 @@ __pycache__/
 .DS_Store
 .cache/
 temp_audio/
+
+# Transcripts cache (local persistence only, do not push to GitHub)
+data/transcripts/
+data/transcripts/*

@@ -15,6 +15,98 @@ class ValidationError(Exception):
     """Excepción para errores críticos de validación."""
     pass
 
+class TranscriptDoubleChecker:
+    """Motor de doble chequeo de fidelidad entre el informe generado y las transcripciones originales."""
+
+    @staticmethod
+    def cross_check(report_data: Dict[str, Any], videos: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Contrasta cada elemento del informe contra el corpus textual de las transcripciones:
+        - Presencia y quórum de empresas citadas.
+        - Presencia y declaraciones atribuidas a los analistas.
+        - Coherencia de índices y niveles mencionados.
+        """
+        corpus = " ".join([v.get("transcript", "") for v in videos]).lower()
+        titles = " ".join([v.get("title", "") for v in videos]).lower()
+        full_text = f"{titles} {corpus}"
+
+        results = {
+            "videos_analizados": len(videos),
+            "empresas_verificadas": [],
+            "empresas_no_encontradas": [],
+            "analistas_verificados": [],
+            "analistas_no_encontrados": [],
+            "indices_verificados": [],
+            "fidelidad_score": 100.0,
+            "detalles": []
+        }
+
+        # 1. Doble check de Empresas
+        empresas_dict = report_data.get("analisis_empresas", {})
+        total_items = 0
+        verified_items = 0
+
+        for block in ["nacionales", "internacionales"]:
+            for comp in empresas_dict.get(block, []):
+                total_items += 1
+                nombre = comp.get("nombre", "").lower()
+                ticker = comp.get("ticker", "").lower().replace(".mc", "")
+
+                found = (nombre in full_text) or (ticker and len(ticker) > 2 and ticker in full_text)
+                if found:
+                    verified_items += 1
+                    results["empresas_verificadas"].append({
+                        "nombre": comp.get("nombre"),
+                        "ticker": comp.get("ticker"),
+                        "menciones_reportadas": comp.get("menciones", 1),
+                        "en_transcripcion": True
+                    })
+                else:
+                    results["empresas_no_encontradas"].append(comp.get("nombre"))
+                    results["detalles"].append(f"Empresa '{comp.get('nombre')}' no tiene coincidencia textual directa en transcripciones.")
+
+        # 2. Doble check de Analistas citados
+        analistas_referencia = [
+            "Roberto Moro", "Alberto Iturralde", "Javier Alfayate",
+            "Sito Rodríguez", "Jorge del Canto", "David Galán",
+            "Víctor Galán", "Paco Pérez", "Gerardo Ortega", "José María Luna"
+        ]
+
+        situacion = report_data.get("sentimiento_macro", {}).get("situacion_global", "")
+        for analista in analistas_referencia:
+            if analista.lower() in situacion.lower() or any(
+                analista.lower() in [a.lower() for a in c.get("analistas", [])]
+                for block in ["nacionales", "internacionales"]
+                for c in empresas_dict.get(block, [])
+            ):
+                total_items += 1
+                # Comprobar apellido principal en el corpus o títulos
+                apellido = analista.split()[-1].lower()
+                if apellido in full_text:
+                    verified_items += 1
+                    results["analistas_verificados"].append(analista)
+                else:
+                    results["analistas_no_encontrados"].append(analista)
+                    results["detalles"].append(f"Analista '{analista}' citado en informe pero sin mención directa en transcripciones.")
+
+        # 3. Doble check de Índices
+        for idx in report_data.get("sentimiento_macro", {}).get("indices", []):
+            nom = idx.get("nombre", "").lower()
+            key_name = nom.split()[0]
+            total_items += 1
+            if key_name in full_text:
+                verified_items += 1
+                results["indices_verificados"].append(idx.get("nombre"))
+            else:
+                results["detalles"].append(f"Índice '{idx.get('nombre')}' con baja presencia en las transcripciones.")
+
+        # Calcular puntuación de fidelidad
+        if total_items > 0:
+            results["fidelidad_score"] = round((verified_items / total_items) * 100.0, 1)
+
+        report_data["_doble_check"] = results
+        return results
+
 class MarketReportValidator:
     """Validador exhaustivo de fuentes, cotizaciones en tiempo real y consistencia técnica."""
 

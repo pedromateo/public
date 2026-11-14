@@ -29,7 +29,7 @@ from src.audio_generator import PodcastGenerator
 from src.pdf_generator import PDFReportGenerator
 from src.web_publisher import WebPublisher
 from src.git_sync import GitSynchronizer
-from src.validators import MarketReportValidator
+from src.validators import MarketReportValidator, TranscriptDoubleChecker
 
 console = Console()
 
@@ -361,6 +361,7 @@ def main():
     parser.add_argument("--skip-audio", action="store_true", help="Omitir generación del podcast MP3")
     parser.add_argument("--skip-pdf", action="store_true", help="Omitir generación del informe PDF")
     parser.add_argument("--mock", action="store_true", help="Usar datos de prueba realistas sin invocar Gemini API")
+    parser.add_argument("--allow-partial", action="store_true", default=False, help="Proceder automáticamente con transcripciones parciales si faltan vídeos")
     parser.add_argument("--verbose", action="store_true", help="Activar modo verbose / debug")
 
     args = parser.parse_args()
@@ -380,8 +381,46 @@ def main():
     if not args.mock:
         with console.status("[bold green]Extrayendo vídeos y transcripciones de YouTube (Capital Radio & Visionarios Bolsa)..."):
             extractor = YouTubeExtractor(days_horizon=args.days)
-            videos = extractor.extract_all()
-        console.print(f"[bold green]✔[/bold green] Se obtuvieron [cyan]{len(videos)}[/cyan] vídeos con transcripción válida (persistidas en [cyan]data/transcripts/[/cyan]).")
+            ext_status = extractor.extract_with_status()
+            videos = ext_status["videos_obtenidos"]
+            faltantes = ext_status["videos_faltantes"]
+            total_loc = ext_status["total_localizados"]
+
+        console.print(f"[bold green]✔[/bold green] Se obtuvieron [cyan]{len(videos)}[/cyan] de [bold]{total_loc}[/bold] vídeos con transcripción válida.")
+        if ext_status["de_disco_count"] > 0:
+            console.print(f"[dim]ℹ {ext_status['de_disco_count']} transcripciones cargadas desde almacenamiento local en data/transcripts/[/dim]")
+
+        # Si faltan transcripciones de algunos vídeos, explicar la situación al usuario
+        if faltantes:
+            console.print(Panel(
+                f"[bold yellow]AVISO DE TRANSCRIPCIONES INCOMPLETAS:[/bold yellow]\n"
+                f"Se localizaron [bold]{total_loc}[/bold] vídeos publicados en los últimos {args.days} días.\n"
+                f"• Transcripciones disponibles: [bold green]{len(videos)}[/bold green]\n"
+                f"• Transcripciones no disponibles: [bold red]{len(faltantes)}[/bold red]\n\n"
+                f"[bold cyan]Motivo técnico:[/bold cyan] YouTube limita/bloquea peticiones directas de subtítulos automáticos (HTTP 429 / IpBlocked) "
+                f"o el canal no ha publicado subtítulos accesibles para esos vídeos específicos.\n\n"
+                f"Vídeos pendientes de transcripción:\n" +
+                "\n".join([f"  • [{v['id']}] {v['title'][:60]}..." for v in faltantes[:4]]),
+                title="[bold yellow]ESTADO DE FUENTES[/bold yellow]",
+                border_style="yellow"
+            ))
+
+            if not args.allow_partial and sys.stdin.isatty():
+                console.print("\n[bold cyan]¿Cómo deseas proceder?[/bold cyan]")
+                console.print("  [bold 1][/bold 1] Generar el informe con las transcripciones parciales disponibles.")
+                console.print("  [bold 2][/bold 2] Usar datos de consenso estructurados de respaldo.")
+                console.print("  [bold 3][/bold 3] Cancelar y seguir intentando más tarde.")
+                try:
+                    choice = input("Opción [1/2/3] (por defecto 1): ").strip() or "1"
+                    if choice == "2":
+                        videos = []
+                    elif choice == "3":
+                        console.print("[red]Ejecución detenida por el usuario.[/red]")
+                        sys.exit(0)
+                except (KeyboardInterrupt, EOFError):
+                    pass
+            else:
+                console.print(f"[cyan]ℹ Continuando con las {len(videos)} transcripciones parciales obtenidas.[/cyan]")
         
         # Validar fuentes y horizonte de los vídeos extraídos
         if videos:
@@ -392,7 +431,7 @@ def main():
                 console.print(f"[red]Error fuente:[/red] {err}")
 
         if not videos:
-            console.print("[yellow]⚠ No se encontraron vídeos con transcripción en el rango temporal. Pasando a datos de muestra representativos.[/yellow]")
+            console.print("[yellow]⚠ Sin transcripciones completas disponibles en este momento. Utilizando datos de respaldo estructurados.[/yellow]")
             report_data = get_sample_mock_report(date_str)
         else:
             # 2. ANÁLISIS CON GEMINI API
@@ -427,6 +466,23 @@ def main():
             for w in audit_info["warnings"]:
                 console.print(f"[yellow]Aviso auditoría:[/yellow] {w}")
     console.print("[bold green]✔[/bold green] Informe auditado y verificado con éxito.")
+
+    # 2.7. DOBLE CHECK CONTRA TRANSCRIPCIONES
+    ref_videos = videos if videos else YouTubeExtractor(days_horizon=args.days).load_all_cached_transcripts()
+    if ref_videos:
+        with console.status("[bold green]Realizando doble check de fidelidad entre informe y transcripciones..."):
+            dc_results = TranscriptDoubleChecker.cross_check(report_data, ref_videos)
+        fid = dc_results.get("fidelidad_score", 100.0)
+        c_score = "green" if fid >= 80 else ("yellow" if fid >= 50 else "red")
+        console.print(Panel(
+            f"Fidelidad de Contenido con Transcripciones: [bold {c_score}]{fid}%[/bold {c_score}]\n"
+            f"• Empresas verificadas con mención en transcripciones: [bold green]{len(dc_results.get('empresas_verificadas', []))}[/bold green]\n"
+            f"• Analistas contrastados: [bold green]{len(dc_results.get('analistas_verificados', []))}[/bold green]\n"
+            f"• Índices contrastados: [bold green]{len(dc_results.get('indices_verificados', []))}[/bold green]" +
+            (f"\n[dim]Observaciones:\n" + "\n".join([f"  • {d}" for d in dc_results.get('detalles', [])[:3]]) + "[/dim]" if dc_results.get('detalles') else ""),
+            title="[bold blue]✔ DOBLE CHECK DE FUENTES & TRANSCRIPCIONES[/bold blue]",
+            border_style="blue"
+        ))
 
     # 3. MOSTRAR INFORME EN TERMINAL
     print_terminal_report(report_data, date_str)

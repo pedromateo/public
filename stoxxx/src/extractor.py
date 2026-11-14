@@ -175,28 +175,65 @@ class YouTubeExtractor:
         cached_list.sort(key=lambda x: x.get("upload_date", ""), reverse=True)
         return cached_list
 
-    def extract_all(self) -> List[Dict[str, Any]]:
-        """Extrae vídeos y transcripciones de todos los canales, usando caché de disco como prioridad."""
-        results = []
-        for channel in YOUTUBE_CHANNELS:
-            videos = self.get_channel_videos(channel)
-            logger.info(f"Canal {channel['name']}: {len(videos)} vídeos localizados en los últimos {self.days_horizon} días.")
-            
-            for video in videos:
-                transcript = self.get_transcript(video["id"], video_meta=video)
-                if transcript and len(transcript) > 100:
-                    video["transcript"] = transcript
-                    video["char_count"] = len(transcript)
-                    results.append(video)
-                else:
-                    logger.warning(f"Vídeo omitido por falta de transcripción: {video['title']}")
+    def extract_with_status(self) -> Dict[str, Any]:
+        """
+        Extrae vídeos y transcripciones de todos los canales y devuelve un estado completo:
+        - videos_obtenidos: lista de vídeos con transcripción válida.
+        - videos_faltantes: lista de vídeos cuya transcripción no pudo descargarse.
+        - total_localizados: total de vídeos encontrados en el horizonte.
+        - de_disco_count: cantidad recuperada de ficheros locales.
+        - descargados_count: cantidad descargada nueva de la red.
+        """
+        videos_obtenidos = []
+        videos_faltantes = []
+        de_disco_count = 0
+        descargados_count = 0
+        total_localizados = 0
 
-        # Si la llamada a YouTube no devolvió nada (por ejemplo, por límite IP de YouTube),
-        # comprobar si ya disponemos de transcripciones en disco dentro del rango
-        if not results:
+        for channel in YOUTUBE_CHANNELS:
+            vids = self.get_channel_videos(channel)
+            total_localizados += len(vids)
+            logger.info(f"Canal {channel['name']}: {len(vids)} vídeos localizados en los últimos {self.days_horizon} días.")
+
+            for video in vids:
+                cached = self.get_cached_transcript(video["id"])
+                if cached:
+                    video["transcript"] = cached["transcript"]
+                    video["char_count"] = len(cached["transcript"])
+                    videos_obtenidos.append(video)
+                    de_disco_count += 1
+                else:
+                    transcript = self.get_transcript(video["id"], video_meta=video)
+                    if transcript and len(transcript) > 100:
+                        video["transcript"] = transcript
+                        video["char_count"] = len(transcript)
+                        videos_obtenidos.append(video)
+                        descargados_count += 1
+                    else:
+                        videos_faltantes.append({
+                            "id": video["id"],
+                            "title": video["title"],
+                            "channel": video.get("channel", ""),
+                            "url": video.get("url", "")
+                        })
+
+        # Si no hubo vídeos nuevos descargados pero tenemos cacheados en disco dentro del rango
+        if not videos_obtenidos:
             cached_available = self.load_all_cached_transcripts()
             if cached_available:
                 logger.info(f"Se reutilizan {len(cached_available)} transcripciones persistidas en {self.cache_dir}")
-                return cached_available
+                videos_obtenidos = cached_available
+                de_disco_count = len(cached_available)
 
-        return results
+        return {
+            "total_localizados": total_localizados,
+            "videos_obtenidos": videos_obtenidos,
+            "videos_faltantes": videos_faltantes,
+            "de_disco_count": de_disco_count,
+            "descargados_count": descargados_count
+        }
+
+    def extract_all(self) -> List[Dict[str, Any]]:
+        """Extrae vídeos y transcripciones de todos los canales, usando caché de disco como prioridad."""
+        status = self.extract_with_status()
+        return status["videos_obtenidos"]

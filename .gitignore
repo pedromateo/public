@@ -1,0 +1,5 @@
+# Monorepo gitignore
+stoxxx/data/transcripts/
+stoxxx/data/transcripts/*
+stoxxx/.venv/
+stoxxx/.env
