@@ -45,7 +45,7 @@ GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 # Configuración TTS
 TTS_PROVIDER = os.getenv("TTS_PROVIDER", "edge").lower()
 TTS_VOICE_MALE = os.getenv("TTS_VOICE_MALE", "es-ES-AlvaroNeural")
-TTS_VOICE_FEMALE = os.getenv("TTS_VOICE_FEMALE", "es-ES-ElviraNeural")
+TTS_VOICE_FEMALE = os.getenv("TTS_VOICE_FEMALE", "es-ES-XimenaNeural")
 
 # Git deployment
 AUTO_GIT_PUSH = os.getenv("AUTO_GIT_PUSH", "false").lower() in ("true", "1", "yes")

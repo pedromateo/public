@@ -141,16 +141,18 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
         "sentimiento_general": "Alcista con Cautela en Resistencias",
         "resumen_ejecutivo": {
             "lectura_tiempo": "3-5 minutos",
-            "sintesis_sentimiento": "El consenso general entre los consultorios de Capital Radio y los análisis de Visionarios Bolsa apunta a una continuidad de la tendencia alcista estructural en Europa y EE.UU., aunque con avisos unánimes de sobrecompra en índices directores y divergencias en el sector tecnológico.",
-            "hacia_donde_apuntan": "Los analistas recomiendan rotar beneficios tácticos hacia valores energéticos defensivos y banca europea, manteniendo exposición en grandes tecnológicas solo con stops ajustados bajo soportes de corto plazo.",
+            "sintesis_sentimiento": "El consenso consolidado tras analizar los consultorios de Capital Radio y los análisis de Visionarios Bolsa durante los últimos 7 días refleja una postura de cautela estratégica en plena fase de consolidación técnica. Aunque la tendencia primaria de fondo continúa siendo alcista en los principales selectivos mundiales, los analistas coinciden en alertar de lecturas de sobrecompra extrema en índices directores y una compresión de volatilidad que suele anticipar correcciones tácticas del 3% al 6%.\n\nEl mercado asimila la desaceleración del ritmo de bajadas de tipos de la Reserva Federal y un Banco Central Europeo forzado a acelerar recortes ante la fragilidad de la economía alemana. En este contexto, los gestores y analistas técnicos observan una rotación activa de capital: los inversores institucionales están reduciendo ponderación en megacaps tecnológicas con múltiplos exigentes para refugiarse en sectores generadores de caja predecible, tales como las utilities eléctricas, telecomunicaciones y la banca comercial europea que mantiene elevados márgenes de intermediación.",
+            "hacia_donde_apuntan": "Los analistas recomiendan de forma unánime evitar compras impulsivas en rupturas de resistencia sin confirmación de volumen. La directriz operativa mayoritaria pasa por mantener liquidez táctica entre el 15% y el 25% para aprovechar apoyos en soportes estructurales, rotar beneficios hacia valores de perfil defensivo y dividendo sostenible en Europa, y ceñir rigurosamente las órdenes stop-loss dinámicas en valores de alta beta y semiconductores.",
             "puntos_clave_consenso": [
-                "El IBEX 35 mantiene fortaleza relativa apoyado en el sector bancario y utilities.",
-                "Wall Street (S&P 500 y Nasdaq 100) afronta niveles de resistencia histórica donde se desaconseja comprar en euforia.",
-                "Quórum absoluto en vigilar el soporte clave de Nvidia antes de abrir nuevas posiciones alcistas."
+                "Fortaleza relativa del IBEX 35 y DAX europeo frente a la renta variable estadounidense, con especial atractivo en el sector bancario español y utilities reguladas.",
+                "Advertencia severa sobre los niveles de resistencia histórica en Wall Street (S&P 500 y Nasdaq 100), donde la divergencia entre precio y volumen desaconseja elevar exposición.",
+                "Quórum absoluto en vigilar el soporte crítico de corto plazo en Nvidia y el sector de semiconductores antes de considerar nuevas incorporaciones a cartera.",
+                "Estrategia de preservación de capital: prioridad total en la gestión de riesgo, utilizando stops de protección dinámicos bajo mínimos relativos de las últimas dos semanas.",
+                "Divergencia clara de opiniones en la toma de posiciones en compañías castigadas por resultados recientes (como Acciona o ASML), donde coexisten visiones de oportunidad histórica y riesgo de trampa de valor."
             ]
         },
         "sentimiento_macro": {
-            "situacion_global": "Semana marcada por la digestión de resultados corporativos y los tipos de interés de la Fed y el BCE. Los analistas coinciden en que no hay señal de giro bajista primario, pero sí riesgo elevado de corrección de corto plazo de entre un 3% y un 5%.",
+            "situacion_global": "El panorama macroeconómico global atraviesa una encrucijada caracterizada por la notable asimetría entre la resistencia del ciclo en Estados Unidos y la fragilidad del tejido industrial europeo. En EE.UU., la fortaleza del mercado laboral y un consumo privado vigoroso reducen la urgencia de la Reserva Federal para acelerar los recortes de tipos, manteniendo tensionada la rentabilidad del bono a 10 años y respaldando al dólar. Por su parte, el Banco Central Europeo navega en un escenario de debilidad manifiesta en Alemania, lo que presiona a la baja el precio del dinero e intensifica la rotación de capitales hacia sectores de alta rentabilidad por dividendo y flujos de caja predecibles.\n\nCitas y declaraciones de los analistas en los consultorios:\n• Roberto Moro (Capital Radio): 'El mercado está en una fase de digestión donde perseguir precios al alza en resistencias es un error de principiante; mientras el IBEX 35 no pierda los 11.450 puntos, la tendencia de fondo sigue absolutamente viva, pero comprar en máximos históricos ofrece un ratio riesgo-beneficio pésimo.'\n• Alberto Iturralde (Capital Radio): 'El dinero inteligente no está comprando en estos niveles de euforia en Wall Street, sino distribuyendo sigilosamente papel a los inversores minoristas. Mucho cuidado con creer que la subida tecnológica es infinita.'\n• Javier Alfayate (GPM Gestión Global): 'La debilidad de la economía alemana no debe confundirse con la debilidad de las empresas del DAX. Las multinacionales alemanas facturan fuera y tienen balances saneados, lo que explica que el selectivo siga marcando máximos con solidez técnica.'\n• Sito Rodríguez (Visionarios Bolsa): 'La demanda en semiconductores e infraestructura para IA es real y secular, pero las valoraciones actuales descuentan crecimientos sin margen de error. Quien esté dentro debe ceñir stops bajo soportes semanales.'",
             "indices": [
                 {
                     "nombre": "IBEX 35",
@@ -181,8 +183,8 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "consenso_analistas": "Dependencia extrema del comportamiento de los semiconductores y megacaps de IA."
                 }
             ],
-            "coincidencias_estrategia": "Todos los analistas recomiendan operar con stop-loss dinámico riguroso y priorizar la preservación de capital ante posibles tomas de beneficios.",
-            "divergencias_estrategia": "Mientras Roberto Moro ve oportunidad de entrada en correcciones de semiconductores, Alberto Iturralde advierte de distribución institucional en tecnológicas."
+            "coincidencias_estrategia": "1. Preservación estricta de capital: consenso absoluto en no abrir posiciones largas apalancadas en zonas de resistencia histórica.\n2. Gestión dinámica de stops: subir los niveles de stop bajo los mínimos de las últimas dos semanas en valores con ganancias acumuladas (Moro, Galán, Alfayate).\n3. Rotación hacia valor y defensivos: preferencia por valores con visibilidad de beneficios, negocios regulados y caja neta frente a crecimiento no rentable.",
+            "divergencias_estrategia": "1. Oportunidad en semiconductores: Mientras Roberto Moro y Sito Rodríguez ven las caídas de valores como ASML o correcciones en Nvidia como oportunidades de entrada gradual, Alberto Iturralde advierte de que el sector tecnológico podría haber formado un techo de medio plazo.\n2. Renta Variable Europea vs Estadounidense: Alberto Iturralde defiende que la bolsa española y europea superará en comportamiento al Nasdaq en los próximos trimestres, mientras que analistas cuantitativos en Wall Street destacan que el momentum de beneficios en EE.UU. sigue siendo superior."
         },
         "analisis_empresas": {
             "nacionales": [
@@ -260,27 +262,92 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
             {
                 "locutor": "Carlos",
                 "genero": "masculino",
-                "texto": "¡Muy buenas tardes y bienvenidos al repaso de mercado en STOXXX! Hoy analizamos las últimas dos semanas en los principales consultorios de bolsa."
+                "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva entrega de STOXXX, nuestro espacio semanal donde sintetizamos todo el quórum y las claves operativas de los consultorios de bolsa!"
             },
             {
                 "locutor": "Laura",
                 "genero": "femenino",
-                "texto": "Hola Carlos. Días de enorme interés, con un IBEX 35 rondando zonas de máximos y Wall Street manteniendo el pulso alcista, pero con advertencias claras de los expertos."
+                "texto": "Hola Carlos, y un saludo muy especial a todos los inversores que nos escuchan. Ha sido una semana de auténtico vértigo en los mercados, con los bancos centrales marcando el paso y los índices mundiales tanteando zonas de máximos históricos pero con señales evidentes de fatiga."
             },
             {
                 "locutor": "Carlos",
                 "genero": "masculino",
-                "texto": "Efectivamente, Laura. En el plano nacional hay un quórum casi absoluto en Iberdrola como el valor más sólido, mientras que la banca sigue consolidando ganancias."
+                "texto": "Exacto, Laura. Si miramos el mapa macro global, hay bastante coincidencia entre analistas como Roberto Moro, Alberto Iturralde y Sito Rodríguez: no estamos ante un cambio de tendencia bajista estructural, pero sí ante un riesgo muy elevado de corrección de corto plazo de entre un 3% y un 6%."
             },
             {
                 "locutor": "Laura",
                 "genero": "femenino",
-                "texto": "Y en el ámbito internacional, todos los ojos están puestos en Nvidia y ASML. Hay debate entre quienes ven una oportunidad irrepetible y quienes piden extremar la cautela."
+                "texto": "Así es, y los números hablan por sí solos. En Europa, el DAX alemán sigue mostrando una fuerza impresionante rozando los 19.600 puntos, tal como destacaba Javier Alfayate. Y en nuestro mercado doméstico, el IBEX 35 defiende con solvencia el soporte clave de los 11.450 puntos, apoyado en el empuje de la banca comercial."
             },
             {
                 "locutor": "Carlos",
                 "genero": "masculino",
-                "texto": "Así es. Recuerden revisar siempre sus stops de protección. ¡Nos escuchamos en el próximo análisis!"
+                "texto": "Sin embargo, en Wall Street la música suena diferente. Tanto el S&P 500 en la cota de los 5.800 como el Nasdaq 100 sobre los 20.200 puntos presentan lecturas de sobrecompra técnica notables. El quórum unánime de los analistas es tajante: en estos niveles de euforia no se compra; se vigila y se protegen las plusvalías."
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "Totalmente de acuerdo, Carlos. De hecho, donde más discrepancias hemos detectado entre los expertos es en la estrategia a seguir con la tecnología. Mientras analistas como Roberto Moro ven oportunidad para pescar en recortes, Alberto Iturralde alerta con contundencia de que podríamos estar viviendo una fase de distribución institucional en las grandes firmas de inteligencia artificial."
+            },
+            {
+                "locutor": "Carlos",
+                "genero": "masculino",
+                "texto": "Entremos de lleno en el bloque de empresas nacionales, Laura, porque aquí el quórum ha sido indiscutible. La gran protagonista de la semana en las consultas de los oyentes ha sido Iberdrola, con menciones unánimes de Moro, Iturralde y Alfayate."
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "Iberdrola está en una estructura técnica impecable, en auténtica subida libre. Los analistas coinciden en situar su soporte de referencia en torno a los 13,20 euros y consideran que sigue siendo el mejor refugio defensivo del mercado español por visibilidad de ingresos y dividendo."
+            },
+            {
+                "locutor": "Carlos",
+                "genero": "masculino",
+                "texto": "Y en el sector bancario, Banco Santander y BBVA siguen concentrando interés. Paco Pérez y Víctor Galán señalan que el rally navideño de los bancos aún puede tener recorrido, pero advierten que comprar ahora exige stops muy ceñidos, por ejemplo bajo los 4,25 euros en Santander."
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "También ha habido consultas muy intensas sobre valores en dificultades, como Acciona tras su desplome reciente, donde Roberto Moro y Jorge del Canto piden máxima cautela hasta confirmar un suelo firme, o Repsol, que según David Galán continúa atrapada en la montaña rusa de los precios del crudo."
+            },
+            {
+                "locutor": "Carlos",
+                "genero": "masculino",
+                "texto": "Pasemos ahora al bloque internacional, Laura, donde un nombre propio ha acaparado todas las miradas: Nvidia, comentada hasta en cuatro consultorios y análisis distintos durante estos siete días."
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "El debate en Nvidia es apasionante. Sito Rodríguez en Visionarios Bolsa recalca que la demanda de infraestructura para inteligencia artificial no tiene freno. En cambio, Iturralde insiste en su famoso aviso: ojo con quedar atrapados en máximos históricos cuando el dinero inteligente ya ha hecho su trabajo."
+            },
+            {
+                "locutor": "Carlos",
+                "genero": "masculino",
+                "texto": "En niveles técnicos, el soporte a vigilar en Nvidia son los 130 dólares. Y otro valor estrella en semiconductores ha sido ASML Holding, donde Gerardo Ortega y varios expertos coinciden en que, tras el severo castigo de sus cuentas, empieza a ser una oportunidad de valor muy atractiva para inversores de largo plazo."
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "No olvidemos tampoco al Oro, Carlos. Roberto Moro destacaba esta semana que el metal precioso se aproxima a una zona clave de rebote que podría ofrecer una oportunidad de entrada con gran relación rentabilidad-riesgo ante las tensiones geopolíticas y la política monetaria."
+            },
+            {
+                "locutor": "Carlos",
+                "genero": "masculino",
+                "texto": "Para ir cerrando, Laura, me quedo con la regla de oro que mencionaba José María Luna en Capital Radio: la regla de las tres D: defensa en la selección de activos, diversificación real de carteras y disciplina férrea en la ejecución de los stops."
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "Una recomendación imprescindible para navegar estas semanas. Recuerden que tienen a su disposición el informe PDF completo y todas las cotizaciones verificadas al minuto en nuestra plataforma web."
+            },
+            {
+                "locutor": "Carlos",
+                "genero": "masculino",
+                "texto": "¡Muchísimas gracias por acompañarnos, buen fin de semana y muy buenas inversiones a todos!"
+            },
+            {
+                "locutor": "Laura",
+                "genero": "femenino",
+                "texto": "¡Hasta la próxima entrega en STOXXX!"
             }
         ]
     }

@@ -105,9 +105,16 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
 }
 
 REGLAS CRÍTICAS DE ORDENACIÓN Y CALIDAD:
-1. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
-2. En cada bloque, ordena las empresas DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
-3. En el 'guion_podcast', genera un diálogo dinámico, profesional y entretenido entre Carlos (voz masculina) y Laura (voz femenina) con 8 a 14 intervenciones alternadas. Debe imitar el ritmo de los consultorios de radio: apertura con sentimiento de mercado e índices, seguido de un repaso directo a los valores con mayor quórum y conclusiones operativas.
+1. En 'resumen_ejecutivo', redacta una síntesis amplia y detallada (lectura completa de 3-5 minutos) con varios párrafos argumentados sobre el flujo de fondos, rotación sectorial y al menos 4 o 5 puntos clave de consenso fundamentados.
+2. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
+3. En cada bloque de empresas, ordena DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
+4. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre Carlos (voz masculina) y Laura (voz femenina). DEBE INCLUIR CASI TODA LA INFORMACIÓN DEL INFORME:
+   - Apertura dinámica imitando el ritmo radiofónico de los consultorios de Capital Radio y Visionarios Bolsa.
+   - Situación macroeconómica detallada (Europa y EE.UU., política monetaria, tipos).
+   - Repaso índice por índice (IBEX 35, DAX, S&P 500 y Nasdaq 100) con soportes, resistencias y divergencias.
+   - Repaso a fondo de las empresas nacionales con mayor quórum (Iberdrola, bancos, etc.) detallando niveles técnicos y analistas.
+   - Repaso a fondo de las empresas internacionales (Nvidia, ASML, megacaps de IA) analizando las tesis alcistas vs alertas de sobrecompra.
+   - Cierre con consejos operativos de gestión de riesgo y stops.
 """
 
 class MarketAnalyzer:
