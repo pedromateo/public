@@ -72,7 +72,7 @@ class MarketDataVerifier:
 
     @classmethod
     def enrich_report_data(cls, report_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Enriquece el informe con cotizaciones reales verificadas de índices y empresas."""
+        """Enriquece el informe con cotizaciones reales verificadas de índices y empresas y valida consistencia técnica."""
         # 1. Verificar Índices
         indices = report_data.get("sentimiento_macro", {}).get("indices", [])
         for idx in indices:
@@ -89,6 +89,17 @@ class MarketDataVerifier:
                 if quote:
                     idx["precio_actual"] = quote["formatted"]
                     idx["variacion_dia"] = f"{quote['change_pct']:+.2f}%"
+                    
+                    # Validación de consistencia técnica: si el soporte o resistencia están desfasados >20% del precio real
+                    price = quote["price"]
+                    try:
+                        soporte_num = float(str(idx.get("soporte_clave", "")).replace(".", "").replace(",", ".").replace("€", "").replace("$", "").strip())
+                        if abs(price - soporte_num) / price > 0.20:
+                            logger.warning(f"Inconsistencia detectada en {nombre}: Precio {price} vs Soporte {soporte_num}. Ajustando niveles técnicos al precio real.")
+                            idx["soporte_clave"] = f"{round(price * 0.985):,}".replace(",", ".")
+                            idx["resistencia_clave"] = f"{round(price * 1.015):,}".replace(",", ".")
+                    except Exception:
+                        pass
 
         # 2. Verificar Empresas Nacionales e Internacionales
         empresas_dict = report_data.get("analisis_empresas", {})
@@ -99,7 +110,7 @@ class MarketDataVerifier:
                 nombre = comp.get("nombre", "").strip()
 
                 # Resolver ticker si no está o es genérico
-                if not ticker or "." not in ticker and block == "nacionales":
+                if not ticker or ("." not in ticker and block == "nacionales"):
                     ticker = KNOWN_EQUITY_TICKERS.get(nombre, ticker)
                     if ticker:
                         comp["ticker"] = ticker
@@ -109,6 +120,17 @@ class MarketDataVerifier:
                     if quote:
                         comp["precio_actual"] = quote["formatted"]
                         comp["variacion_dia"] = f"{quote['change_pct']:+.2f}%"
+                        
+                        price = quote["price"]
+                        curr = "€" if "EUR" in quote["currency"] else "$"
+                        try:
+                            sop_str = str(comp.get("soporte", "")).replace("€", "").replace("$", "").replace(".", "").replace(",", ".").strip()
+                            sop_val = float(sop_str)
+                            if abs(price - sop_val) / price > 0.20:
+                                comp["soporte"] = f"{price * 0.96:.2f}{curr}".replace(".", ",")
+                                comp["resistencia"] = f"{price * 1.04:.2f}{curr}".replace(".", ",")
+                        except Exception:
+                            pass
 
         report_data["cotizaciones_verificadas"] = True
         return report_data

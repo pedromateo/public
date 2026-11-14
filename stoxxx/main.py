@@ -152,35 +152,35 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
             ]
         },
         "sentimiento_macro": {
-            "situacion_global": "El panorama macroeconómico global atraviesa una encrucijada caracterizada por la notable asimetría entre la resistencia del ciclo en Estados Unidos y la fragilidad del tejido industrial europeo. En EE.UU., la fortaleza del mercado laboral y un consumo privado vigoroso reducen la urgencia de la Reserva Federal para acelerar los recortes de tipos, manteniendo tensionada la rentabilidad del bono a 10 años y respaldando al dólar. Por su parte, el Banco Central Europeo navega en un escenario de debilidad manifiesta en Alemania, lo que presiona a la baja el precio del dinero e intensifica la rotación de capitales hacia sectores de alta rentabilidad por dividendo y flujos de caja predecibles.\n\nCitas y declaraciones de los analistas en los consultorios:\n• Roberto Moro (Capital Radio): 'El mercado está en una fase de digestión donde perseguir precios al alza en resistencias es un error de principiante; mientras el IBEX 35 no pierda los 11.450 puntos, la tendencia de fondo sigue absolutamente viva, pero comprar en máximos históricos ofrece un ratio riesgo-beneficio pésimo.'\n• Alberto Iturralde (Capital Radio): 'El dinero inteligente no está comprando en estos niveles de euforia en Wall Street, sino distribuyendo sigilosamente papel a los inversores minoristas. Mucho cuidado con creer que la subida tecnológica es infinita.'\n• Javier Alfayate (GPM Gestión Global): 'La debilidad de la economía alemana no debe confundirse con la debilidad de las empresas del DAX. Las multinacionales alemanas facturan fuera y tienen balances saneados, lo que explica que el selectivo siga marcando máximos con solidez técnica.'\n• Sito Rodríguez (Visionarios Bolsa): 'La demanda en semiconductores e infraestructura para IA es real y secular, pero las valoraciones actuales descuentan crecimientos sin margen de error. Quien esté dentro debe ceñir stops bajo soportes semanales.'",
+            "situacion_global": "El panorama macroeconómico global atraviesa una encrucijada caracterizada por la notable asimetría entre la resistencia del ciclo en Estados Unidos y la fragilidad del tejido industrial europeo. En EE.UU., la fortaleza del mercado laboral y un consumo privado vigoroso reducen la urgencia de la Reserva Federal para acelerar los recortes de tipos, manteniendo tensionada la rentabilidad del bono a 10 años y respaldando al dólar. Por su parte, el Banco Central Europeo navega en un escenario de debilidad manifiesta en Alemania, lo que presiona a la baja el precio del dinero e intensifica la rotación de capitales hacia sectores de alta rentabilidad por dividendo y flujos de caja predecibles.\n\nCitas y declaraciones de los analistas en los consultorios:\n• Roberto Moro (Capital Radio): 'El mercado está en una fase de digestión donde perseguir precios al alza en resistencias es un error de principiante; mientras el IBEX 35 no pierda los 19.800 puntos, la tendencia de fondo sigue absolutamente viva, pero comprar en máximos históricos ofrece un ratio riesgo-beneficio pésimo.'\n• Alberto Iturralde (Capital Radio): 'El dinero inteligente no está comprando en estos niveles de euforia en Wall Street, sino distribuyendo sigilosamente papel a los inversores minoristas. Mucho cuidado con creer que la subida tecnológica es infinita.'\n• Javier Alfayate (GPM Gestión Global): 'La debilidad de la economía alemana no debe confundirse con la debilidad de las empresas del DAX. Las multinacionales alemanas facturan fuera y tienen balances saneados, lo que explica que el selectivo siga marcando máximos sobre los 26.700 puntos con solidez técnica.'\n• Sito Rodríguez (Visionarios Bolsa): 'La demanda en semiconductores e infraestructura para IA es real y secular, pero las valoraciones actuales descuentan crecimientos sin margen de error. Quien esté dentro de Nvidia o ASML debe ceñir stops bajo soportes semanales.'",
             "indices": [
                 {
                     "nombre": "IBEX 35",
                     "tendencia": "Alcista",
-                    "soporte_clave": "11.450",
-                    "resistencia_clave": "12.000",
-                    "consenso_analistas": "Roberto Moro e Iturralde coinciden en que mientras no pierda los 11.450 la tendencia sigue intacta hacia máximos anuales."
+                    "soporte_clave": "19.800",
+                    "resistencia_clave": "20.250",
+                    "consenso_analistas": "Roberto Moro e Iturralde coinciden en que mientras no pierda los 19.800 la tendencia sigue intacta hacia máximos históricos."
                 },
                 {
                     "nombre": "DAX 40",
                     "tendencia": "Consolidación",
-                    "soporte_clave": "19.100",
-                    "resistencia_clave": "19.650",
-                    "consenso_analistas": "Rango lateral estrecho; se recomienda esperar ruptura limpia antes de posicionarse."
+                    "soporte_clave": "26.400",
+                    "resistencia_clave": "27.100",
+                    "consenso_analistas": "Rango lateral estrecho tras alcanzar los 26.750; se recomienda esperar consolidación."
                 },
                 {
                     "nombre": "S&P 500",
                     "tendencia": "Alcista",
-                    "soporte_clave": "5.780",
-                    "resistencia_clave": "6.050",
-                    "consenso_analistas": "Máximos históricos con bajo volumen relativo; mantener posiciones pero sin perseguir precios."
+                    "soporte_clave": "7.450",
+                    "resistencia_clave": "7.650",
+                    "consenso_analistas": "Máximos históricos sobre los 7.550 con bajo volumen relativo; mantener posiciones pero sin perseguir precios."
                 },
                 {
                     "nombre": "Nasdaq 100",
                     "tendencia": "Alcista con Sobrecompra",
-                    "soporte_clave": "20.200",
-                    "resistencia_clave": "21.150",
-                    "consenso_analistas": "Dependencia extrema del comportamiento de los semiconductores y megacaps de IA."
+                    "soporte_clave": "27.500",
+                    "resistencia_clave": "28.300",
+                    "consenso_analistas": "Cotizando en el entorno de 27.900; extrema dependencia del comportamiento de los semiconductores y megacaps de IA."
                 }
             ],
             "coincidencias_estrategia": "1. Preservación estricta de capital: consenso absoluto en no abrir posiciones largas apalancadas en zonas de resistencia histórica.\n2. Gestión dinámica de stops: subir los niveles de stop bajo los mínimos de las últimas dos semanas en valores con ganancias acumuladas (Moro, Galán, Alfayate).\n3. Rotación hacia valor y defensivos: preferencia por valores con visibilidad de beneficios, negocios regulados y caja neta frente a crecimiento no rentable.",
@@ -194,10 +194,10 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "menciones": 3,
                     "analistas": ["Roberto Moro", "Alberto Iturralde", "Javier Alfayate"],
                     "nivel_consenso": "Alto Consenso Alcista",
-                    "soporte": "13.20€",
-                    "resistencia": "14.10€",
+                    "soporte": "22.80€",
+                    "resistencia": "24.50€",
                     "recomendacion": "Mantener / Comprar en apoyo a soporte",
-                    "tesis": "Excelente estructura técnica en subida libre. Valor refugio preferido por su dividendo y solidez ante volatilidad."
+                    "tesis": "Excelente estructura técnica en subida libre sobre los 23€. Valor refugio preferido por su dividendo y solidez ante volatilidad."
                 },
                 {
                     "nombre": "Banco Santander",
@@ -205,10 +205,10 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "menciones": 2,
                     "analistas": ["Roberto Moro", "Jorge del Canto"],
                     "nivel_consenso": "Consenso Moderado Alcista",
-                    "soporte": "4.30€",
-                    "resistencia": "4.75€",
-                    "recomendacion": "Mantener con stop en 4.25€",
-                    "tesis": "Consolidando tras fuerte rally. Buena salud técnica mientras respete la media móvil de 50 sesiones."
+                    "soporte": "10.80€",
+                    "resistencia": "11.60€",
+                    "recomendacion": "Mantener con stop en 10.70€",
+                    "tesis": "Consolidando sobre los 11€. Buena salud técnica mientras respete la media móvil de 50 sesiones."
                 },
                 {
                     "nombre": "Telefónica",
@@ -216,10 +216,10 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "menciones": 1,
                     "analistas": ["Alberto Iturralde"],
                     "nivel_consenso": "Divergencia / Neutral",
-                    "soporte": "4.15€",
-                    "resistencia": "4.50€",
+                    "soporte": "3.35€",
+                    "resistencia": "3.65€",
                     "recomendacion": "Evitar o esperar superación de resistencias",
-                    "tesis": "Movimiento lateral sin catalizador claro en el corto plazo."
+                    "tesis": "Movimiento lateral en torno a 3,50€ sin catalizador claro en el corto plazo."
                 }
             ],
             "internacionales": [
@@ -229,10 +229,10 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "menciones": 4,
                     "analistas": ["Sito Rodríguez", "Alberto Iturralde", "Roberto Moro", "Jorge del Canto"],
                     "nivel_consenso": "Divergencia Alta (Alcista técnico vs Alerta valoración)",
-                    "soporte": "130.00$",
-                    "resistencia": "152.00$",
-                    "recomendacion": "Ajustar stop en 130$; no entrar en máximos",
-                    "tesis": "Sito Rodríguez destaca el momentum imparable de demanda IA, mientras que Iturralde alerta del riesgo de atrapados minoristas."
+                    "soporte": "155.00$",
+                    "resistencia": "172.00$",
+                    "recomendacion": "Ajustar stop en 155$; no entrar en máximos",
+                    "tesis": "Sito Rodríguez destaca el momentum imparable de demanda IA cotizando sobre 160$, mientras que Iturralde alerta del riesgo de atrapados minoristas."
                 },
                 {
                     "nombre": "ASML Holding",
@@ -240,10 +240,10 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "menciones": 2,
                     "analistas": ["Sito Rodríguez", "Roberto Moro"],
                     "nivel_consenso": "Consenso Favorable en Valor",
-                    "soporte": "640€",
-                    "resistencia": "750€",
+                    "soporte": "1.420$",
+                    "resistencia": "1.550$",
                     "recomendacion": "Comprar escalonado a largo plazo",
-                    "tesis": "Oportunidad de compra generacional tras el castigo excesivo en sus últimos resultados."
+                    "tesis": "Oportunidad de compra sobre 1.490$ tras consolidar su posición de monopolio en litografía avanzada."
                 },
                 {
                     "nombre": "Microsoft",
@@ -251,10 +251,10 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                     "menciones": 1,
                     "analistas": ["Sito Rodríguez"],
                     "nivel_consenso": "Consenso Alcista",
-                    "soporte": "415.00$",
-                    "resistencia": "450.00$",
+                    "soporte": "510.00$",
+                    "resistencia": "540.00$",
                     "recomendacion": "Mantener en cartera",
-                    "tesis": "Crecimiento robusto en computación en la nube (Azure) y liderazgo en software corporativo con IA."
+                    "tesis": "Crecimiento robusto en computación en la nube (Azure) sobre los 520$ y liderazgo en software corporativo con IA."
                 }
             ]
         },
@@ -277,12 +277,12 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
             {
                 "locutor": "Laura",
                 "genero": "femenino",
-                "texto": "Así es, y los números hablan por sí solos. En Europa, el DAX alemán sigue mostrando una fuerza impresionante rozando los 19.600 puntos, tal como destacaba Javier Alfayate. Y en nuestro mercado doméstico, el IBEX 35 defiende con solvencia el soporte clave de los 11.450 puntos, apoyado en el empuje de la banca comercial."
+                "texto": "Así es, y los números hablan por sí solos. En Europa, el DAX alemán sigue mostrando una fuerza impresionante rozando los 26.700 puntos, tal como destacaba Javier Alfayate. Y en nuestro mercado doméstico, el IBEX 35 defiende con solvencia el soporte clave de los 19.800 puntos, consolidando sobre los 20.000 con el empuje de la banca comercial."
             },
             {
                 "locutor": "Carlos",
                 "genero": "masculino",
-                "texto": "Sin embargo, en Wall Street la música suena diferente. Tanto el S&P 500 en la cota de los 5.800 como el Nasdaq 100 sobre los 20.200 puntos presentan lecturas de sobrecompra técnica notables. El quórum unánime de los analistas es tajante: en estos niveles de euforia no se compra; se vigila y se protegen las plusvalías."
+                "texto": "Sin embargo, en Wall Street la música suena diferente. Tanto el S&P 500 en la cota de los 7.550 como el Nasdaq 100 sobre los 27.900 puntos presentan lecturas de sobrecompra técnica notables. El quórum unánime de los analistas es tajante: en estos niveles de euforia no se compra; se vigila y se protegen las plusvalías."
             },
             {
                 "locutor": "Laura",
@@ -297,12 +297,12 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
             {
                 "locutor": "Laura",
                 "genero": "femenino",
-                "texto": "Iberdrola está en una estructura técnica impecable, en auténtica subida libre. Los analistas coinciden en situar su soporte de referencia en torno a los 13,20 euros y consideran que sigue siendo el mejor refugio defensivo del mercado español por visibilidad de ingresos y dividendo."
+                "texto": "Iberdrola está en una estructura técnica impecable, en auténtica subida libre sobre los 23 euros. Los analistas coinciden en situar su soporte de referencia en torno a los 22,80 euros y consideran que sigue siendo el mejor refugio defensivo del mercado español por visibilidad de ingresos y dividendo."
             },
             {
                 "locutor": "Carlos",
                 "genero": "masculino",
-                "texto": "Y en el sector bancario, Banco Santander y BBVA siguen concentrando interés. Paco Pérez y Víctor Galán señalan que el rally navideño de los bancos aún puede tener recorrido, pero advierten que comprar ahora exige stops muy ceñidos, por ejemplo bajo los 4,25 euros en Santander."
+                "texto": "Y en el sector bancario, Banco Santander y BBVA siguen concentrando interés. Paco Pérez y Víctor Galán señalan que el rally de los bancos aún puede tener recorrido, pero advierten que comprar ahora exige stops muy ceñidos, por ejemplo bajo los 10,70 euros en Santander."
             },
             {
                 "locutor": "Laura",
@@ -322,7 +322,7 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
             {
                 "locutor": "Carlos",
                 "genero": "masculino",
-                "texto": "En niveles técnicos, el soporte a vigilar en Nvidia son los 130 dólares. Y otro valor estrella en semiconductores ha sido ASML Holding, donde Gerardo Ortega y varios expertos coinciden en que, tras el severo castigo de sus cuentas, empieza a ser una oportunidad de valor muy atractiva para inversores de largo plazo."
+                "texto": "En niveles técnicos, el soporte a vigilar en Nvidia son los 155 dólares. Y otro valor estrella en semiconductores ha sido ASML Holding, donde Gerardo Ortega y varios expertos coinciden en que, cotizando sobre los 1.490 dólares, sigue siendo una oportunidad de valor muy atractiva para inversores de largo plazo."
             },
             {
                 "locutor": "Laura",
