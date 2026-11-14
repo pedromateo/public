@@ -76,6 +76,7 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
     # Tabla de Índices
     table_indices = Table(title="Niveles Clave de Índices Principales", border_style="blue")
     table_indices.add_column("Índice", style="bold cyan")
+    table_indices.add_column("Cotización Verificada", style="bold white")
     table_indices.add_column("Tendencia", style="bold")
     table_indices.add_column("Soporte Clave", style="green")
     table_indices.add_column("Resistencia Clave", style="red")
@@ -84,8 +85,10 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
     for idx in macro.get("indices", []):
         tend = idx.get("tendencia", "Neutral")
         tend_style = "green" if "Alcista" in tend else ("red" if "Bajista" in tend else "yellow")
+        cotiz = f"{idx.get('precio_actual', 'N/D')} ({idx.get('variacion_dia', '')})" if idx.get("precio_actual") else "N/D"
         table_indices.add_row(
             idx.get("nombre", ""),
+            cotiz,
             f"[{tend_style}]{tend}[/{tend_style}]",
             idx.get("soporte_clave", ""),
             idx.get("resistencia_clave", ""),
@@ -102,6 +105,7 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
     def print_company_table(title: str, items: list, flag: str):
         table = Table(title=f"{flag} {title} (Ordenadas por Nivel de Quórum)", border_style="cyan")
         table.add_column("Empresa (Ticker)", style="bold white")
+        table.add_column("Precio Real", style="bold white")
         table.add_column("Menciones", style="bold yellow", justify="center")
         table.add_column("Analistas", style="dim")
         table.add_column("Nivel Consenso", style="bold")
@@ -113,8 +117,10 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
             ticker = f" ({item.get('ticker')})" if item.get("ticker") else ""
             consenso = item.get("nivel_consenso", "Neutral")
             c_style = "green" if "Alcista" in consenso else ("red" if "Bajista" in consenso else "yellow")
+            cotiz = f"{item.get('precio_actual', 'N/D')} ({item.get('variacion_dia', '')})" if item.get("precio_actual") else "N/D"
             table.add_row(
                 f"{item.get('nombre')}{ticker}",
+                cotiz,
                 str(item.get("menciones", 1)),
                 ", ".join(item.get("analistas", [])),
                 f"[{c_style}]{consenso}[/{c_style}]",
@@ -327,6 +333,12 @@ def main():
     else:
         console.print("[cyan]ℹ Modo mock activado: utilizando datos de consenso bursátil estructurados.[/cyan]")
         report_data = get_sample_mock_report(date_str)
+
+    # 2.5. VERIFICACIÓN Y ENRIQUECIMIENTO DE MERCADO CON COTIZACIONES REALES
+    with console.status("[bold green]Verificando cotizaciones en tiempo real (Yahoo Finance / Google Finance)..."):
+        from src.market_verifier import MarketDataVerifier
+        report_data = MarketDataVerifier.enrich_report_data(report_data)
+    console.print("[bold green]✔[/bold green] Cotizaciones actuales de índices y acciones verificadas con éxito.")
 
     # 3. MOSTRAR INFORME EN TERMINAL
     print_terminal_report(report_data, date_str)

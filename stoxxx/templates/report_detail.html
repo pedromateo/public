@@ -147,7 +147,14 @@
         {% for idx in report.sentimiento_macro.indices %}
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-extrabold text-white text-sm">{{ idx.nombre }}</span>
+            <div>
+              <span class="font-extrabold text-white text-sm">{{ idx.nombre }}</span>
+              {% if idx.precio_actual %}
+              <div class="text-[11px] mono text-slate-300 font-bold">
+                Cotización: {{ idx.precio_actual }} <span class="text-[10px] {% if '+' in idx.variacion_dia %}text-emerald-400{% else %}text-rose-400{% endif %}">({{ idx.variacion_dia }})</span>
+              </div>
+              {% endif %}
+            </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-mono font-semibold
               {% if 'alcista' in idx.tendencia|lower %} bg-emerald-950 text-emerald-400 border border-emerald-800
               {% elif 'bajista' in idx.tendencia|lower %} bg-rose-950 text-rose-400 border border-rose-800
@@ -203,9 +210,14 @@
           {% for comp in report.analisis_empresas.nacionales %}
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">{{ comp.nombre }}</span>
                 {% if comp.ticker %}<span class="mono text-xs text-slate-400">({{ comp.ticker }})</span>{% endif %}
+                {% if comp.precio_actual %}
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  {{ comp.precio_actual }} <span class="{% if '+' in comp.variacion_dia %}text-emerald-400{% else %}text-rose-400{% endif %}">({{ comp.variacion_dia }})</span>
+                </span>
+                {% endif %}
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
@@ -249,9 +261,14 @@
           {% for comp in report.analisis_empresas.internacionales %}
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">{{ comp.nombre }}</span>
                 {% if comp.ticker %}<span class="mono text-xs text-slate-400">({{ comp.ticker }})</span>{% endif %}
+                {% if comp.precio_actual %}
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  {{ comp.precio_actual }} <span class="{% if '+' in comp.variacion_dia %}text-emerald-400{% else %}text-rose-400{% endif %}">({{ comp.variacion_dia }})</span>
+                </span>
+                {% endif %}
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">

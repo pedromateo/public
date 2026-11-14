@@ -170,7 +170,10 @@ class PDFReportGenerator:
 
             pdf.set_font(font, "", 8)
             for idx in indices:
-                pdf.cell(35, 6, idx.get("nombre", ""), border=1)
+                nom = idx.get("nombre", "")
+                if idx.get("precio_actual"):
+                    nom = f"{nom} ({idx.get('precio_actual')})"
+                pdf.cell(35, 6, nom[:20], border=1)
                 pdf.cell(28, 6, idx.get("tendencia", ""), border=1)
                 pdf.cell(28, 6, idx.get("soporte_clave", ""), border=1)
                 pdf.cell(28, 6, idx.get("resistencia_clave", ""), border=1)
@@ -235,7 +238,8 @@ class PDFReportGenerator:
                 # Fila de Título de la Empresa
                 pdf.set_font(font, "B", 9)
                 pdf.set_text_color(15, 23, 42)
-                header_text = f"{nombre} ({ticker})  |  Menciones: {menciones}  |  Consenso: {consenso}"
+                precio_info = f"  |  Cotización: {comp.get('precio_actual')} ({comp.get('variacion_dia')})" if comp.get("precio_actual") else ""
+                header_text = f"{nombre} ({ticker})  |  Menciones: {menciones}{precio_info}  |  Consenso: {consenso}"
                 pdf.cell(190, 6, header_text, border="T", ln=True)
 
                 pdf.set_font(font, "", 8)

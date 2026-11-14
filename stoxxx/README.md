@@ -6,7 +6,7 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
 
 ## 🚀 Características Principales
 
-1. **Extracción Automatizada de YouTube (Horizonte configurable, 14 días por defecto)**:
+1. **Extracción Automatizada de YouTube (Horizonte configurable, 7 días / 1 semana por defecto)**:
    - Monitoriza los consultorios de bolsa de **Capital Radio** (con expertos como Roberto Moro, Alberto Iturralde, Javier Alfayate, Gerardo Ortega) y el canal **Visionarios Bolsa** (Sito Rodríguez).
    - Descarga y consolida las transcripciones completas en español.
 2. **Análisis de Consenso con Google Gemini (Gemini 2.0 Flash)**:
@@ -85,8 +85,8 @@ TTS_PROVIDER=edge
 TTS_VOICE_MALE=es-ES-AlvaroNeural
 TTS_VOICE_FEMALE=es-ES-ElviraNeural
 
-# Horizonte de búsqueda de vídeos en días
-DAYS_HORIZON=14
+# Horizonte de búsqueda de vídeos en días (por defecto: 7 días / 1 semana)
+DAYS_HORIZON=7
 
 # Publicar automáticamente a GitHub Pages tras cada análisis (true/false)
 AUTO_GIT_PUSH=false
@@ -100,7 +100,7 @@ AUTO_GIT_PUSH=false
 ```bash
 .venv/bin/python main.py
 ```
-*Extrae los últimos 14 días, consulta a Gemini, imprime el informe por consola, genera el PDF, sintetiza el podcast MP3 y actualiza la web.*
+*Extrae los últimos 7 días (1 semana), consulta a Gemini, imprime el informe por consola, genera el PDF, sintetiza el podcast MP3 y actualiza la web.*
 
 ### Ejecución con despliegue automático en GitHub Pages:
 ```bash
@@ -111,7 +111,7 @@ AUTO_GIT_PUSH=false
 
 | Parámetro | Descripción |
 | :--- | :--- |
-| `--days <N>` | Cambia el horizonte temporal (ej. `--days 7` para la última semana). Por defecto: 14. |
+| `--days <N>` | Cambia el horizonte temporal (por defecto: 7). |
 | `--push` | Ejecuta `git add`, `git commit` y `git push origin main` al finalizar. |
 | `--no-push` | Desactiva el push a GitHub incluso si está activo en `.env`. |
 | `--mock` | Ejecuta todo el flujo (PDF, Audio, Web) con datos realistas sin gastar tokens de Gemini. |

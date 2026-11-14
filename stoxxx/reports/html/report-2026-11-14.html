@@ -50,13 +50,6 @@
         
 
         
-        <a href="../audio/podcast-2026-11-14.mp3" download class="inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-indigo-600/90 hover:bg-indigo-500 text-white shadow-sm transition">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-          </svg>
-          <span class="hidden sm:inline">Descargar </span><span>MP3</span>
-        </a>
-        
       </div>
     </div>
   </header>
@@ -76,23 +69,6 @@
     </div>
 
     <!-- REPRODUCTOR DE PODCAST COMPACTO ARRIBA -->
-    
-    <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-indigo-900/50 shadow-md space-y-2">
-      <div class="flex items-center justify-between text-xs">
-        <div class="flex items-center space-x-2">
-          <div class="w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"></path>
-            </svg>
-          </div>
-          <span class="font-bold text-white">Podcast Dual (Carlos & Laura)</span>
-        </div>
-        <span class="text-[11px] text-slate-400 mono">Resumen conversacional</span>
-      </div>
-      <audio controls class="w-full h-9 rounded-lg">
-        <source src="../audio/podcast-2026-11-14.mp3" type="audio/mpeg">
-      </audio>
-    </div>
     
 
     <!-- 1. RESUMEN EJECUTIVO -->
@@ -150,7 +126,14 @@
         
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-extrabold text-white text-sm">IBEX 35</span>
+            <div>
+              <span class="font-extrabold text-white text-sm">IBEX 35</span>
+              
+              <div class="text-[11px] mono text-slate-300 font-bold">
+                Cotización: 20.020,10 EUR <span class="text-[10px] text-emerald-400">(+0.08%)</span>
+              </div>
+              
+            </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-mono font-semibold
                bg-emerald-950 text-emerald-400 border border-emerald-800
               ">
@@ -168,7 +151,14 @@
         
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-extrabold text-white text-sm">DAX 40</span>
+            <div>
+              <span class="font-extrabold text-white text-sm">DAX 40</span>
+              
+              <div class="text-[11px] mono text-slate-300 font-bold">
+                Cotización: 26.749,95 EUR <span class="text-[10px] text-rose-400">(-0.25%)</span>
+              </div>
+              
+            </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-mono font-semibold
                bg-amber-950 text-amber-400 border border-amber-800 ">
               Consolidación
@@ -185,7 +175,14 @@
         
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-extrabold text-white text-sm">S&P 500</span>
+            <div>
+              <span class="font-extrabold text-white text-sm">S&P 500</span>
+              
+              <div class="text-[11px] mono text-slate-300 font-bold">
+                Cotización: 7.561,67 USD <span class="text-[10px] text-rose-400">(-0.40%)</span>
+              </div>
+              
+            </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-mono font-semibold
                bg-emerald-950 text-emerald-400 border border-emerald-800
               ">
@@ -203,7 +200,14 @@
         
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-extrabold text-white text-sm">Nasdaq 100</span>
+            <div>
+              <span class="font-extrabold text-white text-sm">Nasdaq 100</span>
+              
+              <div class="text-[11px] mono text-slate-300 font-bold">
+                Cotización: 27.943,74 USD <span class="text-[10px] text-rose-400">(-1.21%)</span>
+              </div>
+              
+            </div>
             <span class="text-[10px] px-2 py-0.5 rounded font-mono font-semibold
                bg-emerald-950 text-emerald-400 border border-emerald-800
               ">
@@ -258,9 +262,14 @@
           
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">Iberdrola</span>
                 <span class="mono text-xs text-slate-400">(IBE.MC)</span>
+                
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  23,70 EUR <span class="text-emerald-400">(+1.50%)</span>
+                </span>
+                
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
@@ -289,9 +298,14 @@
           
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">Banco Santander</span>
                 <span class="mono text-xs text-slate-400">(SAN.MC)</span>
+                
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  11,09 EUR <span class="text-rose-400">(-0.32%)</span>
+                </span>
+                
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
@@ -320,9 +334,14 @@
           
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">Telefónica</span>
                 <span class="mono text-xs text-slate-400">(TEF.MC)</span>
+                
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  3,48 EUR <span class="text-emerald-400">(+0.29%)</span>
+                </span>
+                
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
@@ -364,9 +383,14 @@
           
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">Nvidia</span>
                 <span class="mono text-xs text-slate-400">(NVDA)</span>
+                
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  162,85 USD <span class="text-rose-400">(-3.08%)</span>
+                </span>
+                
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
@@ -395,9 +419,14 @@
           
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">ASML Holding</span>
                 <span class="mono text-xs text-slate-400">(ASML)</span>
+                
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  1.495,16 USD <span class="text-rose-400">(-1.16%)</span>
+                </span>
+                
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
@@ -425,9 +454,14 @@
           
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-1.5">
-              <div class="flex items-center space-x-2">
+              <div class="flex flex-wrap items-center gap-1.5">
                 <span class="font-extrabold text-white text-base">Microsoft</span>
                 <span class="mono text-xs text-slate-400">(MSFT)</span>
+                
+                <span class="mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700">
+                  523,88 USD <span class="text-emerald-400">(+0.36%)</span>
+                </span>
+                
               </div>
               <div class="flex items-center space-x-1.5">
                 <span class="mono text-[11px] px-2 py-0.5 rounded-md bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
