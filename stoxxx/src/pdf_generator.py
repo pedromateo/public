@@ -119,7 +119,13 @@ class PDFReportGenerator:
         pdf.set_fill_color(248, 250, 252)
         sintesis = resumen.get("sintesis_sentimiento", "")
         if sintesis:
-            pdf.multi_cell(190, 5, sintesis, border=0, fill=True)
+            pdf.set_font(font, "B", 9)
+            pdf.cell(0, 5, "Síntesis del Mercado:", ln=True)
+            pdf.set_font(font, "", 9)
+            for line in sintesis.split("\n"):
+                if line.strip():
+                    pdf.cell(5, 5, "•", align="C")
+                    pdf.multi_cell(185, 5, line.lstrip("•- ").strip())
             pdf.ln(2)
 
         hacia_donde = resumen.get("hacia_donde_apuntan", "")
@@ -127,7 +133,10 @@ class PDFReportGenerator:
             pdf.set_font(font, "B", 9)
             pdf.cell(0, 5, "Hacia dónde apuntan los analistas:", ln=True)
             pdf.set_font(font, "", 9)
-            pdf.multi_cell(190, 5, hacia_donde)
+            for line in hacia_donde.split("\n"):
+                if line.strip():
+                    pdf.cell(5, 5, "•", align="C")
+                    pdf.multi_cell(185, 5, line.lstrip("•- ").strip())
             pdf.ln(2)
 
         puntos_consenso = resumen.get("puntos_clave_consenso", [])
@@ -136,8 +145,8 @@ class PDFReportGenerator:
             pdf.cell(0, 5, "Puntos de mayor consenso:", ln=True)
             pdf.set_font(font, "", 9)
             for pt in puntos_consenso:
-                pdf.cell(6, 5, "•", align="C")
-                pdf.multi_cell(184, 5, pt)
+                pdf.cell(5, 5, "•", align="C")
+                pdf.multi_cell(185, 5, pt.lstrip("•- ").strip())
             pdf.ln(4)
 
         # === 2. SENTIMIENTO DE MERCADO Y VISIÓN MACRO ===
@@ -151,9 +160,14 @@ class PDFReportGenerator:
 
         situacion = macro.get("situacion_global", "")
         if situacion:
+            pdf.set_font(font, "B", 9)
+            pdf.cell(0, 5, "Situación Global & Citas de los Analistas:", ln=True)
             pdf.set_font(font, "", 9)
             pdf.set_text_color(51, 65, 85)
-            pdf.multi_cell(190, 5, situacion)
+            for line in situacion.split("\n"):
+                if line.strip():
+                    pdf.cell(5, 5, "•", align="C")
+                    pdf.multi_cell(185, 5, line.lstrip("•- ").strip())
             pdf.ln(3)
 
         # Tabla de Índices
@@ -185,7 +199,10 @@ class PDFReportGenerator:
             pdf.set_font(font, "B", 9)
             pdf.cell(0, 5, "Coincidencias en la estrategia operativa:", ln=True)
             pdf.set_font(font, "", 9)
-            pdf.multi_cell(190, 5, coincidencias)
+            for line in coincidencias.split("\n"):
+                if line.strip():
+                    pdf.cell(5, 5, "•", align="C")
+                    pdf.multi_cell(185, 5, line.lstrip("•-0123456789. ").strip())
             pdf.ln(2)
 
         divergencias = macro.get("divergencias_estrategia", "")
@@ -193,7 +210,10 @@ class PDFReportGenerator:
             pdf.set_font(font, "B", 9)
             pdf.cell(0, 5, "Divergencias detectadas entre analistas:", ln=True)
             pdf.set_font(font, "", 9)
-            pdf.multi_cell(190, 5, divergencias)
+            for line in divergencias.split("\n"):
+                if line.strip():
+                    pdf.cell(5, 5, "•", align="C")
+                    pdf.multi_cell(185, 5, line.lstrip("•-0123456789. ").strip())
             pdf.ln(5)
 
         # === 3. ANÁLISIS DE EMPRESAS (ORDENADAS POR QUÓRUM) ===

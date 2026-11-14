@@ -105,7 +105,7 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
 }
 
 REGLAS CRÍTICAS DE ORDENACIÓN Y CALIDAD:
-1. En 'resumen_ejecutivo', redacta una síntesis amplia y detallada (lectura completa de 3-5 minutos) con varios párrafos argumentados sobre el flujo de fondos, rotación sectorial y al menos 4 o 5 puntos clave de consenso fundamentados.
+1. En 'resumen_ejecutivo' y 'sentimiento_macro', UTILIZA SIEMPRE BULLETS (viñetas con '• ') para desglosar la síntesis, las directrices y la situación global. La lectura debe ser ágil y ejecutiva, estructurada con viñetas claras.
 2. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
 3. En cada bloque de empresas, ordena DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
 4. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre Carlos (voz masculina) y Laura (voz femenina). DEBE INCLUIR CASI TODA LA INFORMACIÓN DEL INFORME:

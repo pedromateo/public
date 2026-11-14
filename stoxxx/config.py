@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 # Directorios de salida
 DATA_DIR = BASE_DIR / "data"
+TRANSCRIPTS_DIR = DATA_DIR / "transcripts"
 REPORTS_DIR = BASE_DIR / "reports"
 PDF_DIR = REPORTS_DIR / "pdf"
 AUDIO_DIR = REPORTS_DIR / "audio"
@@ -18,7 +19,7 @@ INDEX_HTML = BASE_DIR / "index.html"
 TEMPLATES_DIR = BASE_DIR / "templates"
 
 # Asegurar existencia de directorios
-for directory in [DATA_DIR, REPORTS_DIR, PDF_DIR, AUDIO_DIR, HTML_DIR, TEMPLATES_DIR]:
+for directory in [DATA_DIR, TRANSCRIPTS_DIR, REPORTS_DIR, PDF_DIR, AUDIO_DIR, HTML_DIR, TEMPLATES_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
 # Fuentes de YouTube a monitorizar

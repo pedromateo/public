@@ -29,6 +29,7 @@ from src.audio_generator import PodcastGenerator
 from src.pdf_generator import PDFReportGenerator
 from src.web_publisher import WebPublisher
 from src.git_sync import GitSynchronizer
+from src.validators import MarketReportValidator
 
 console = Console()
 
@@ -141,8 +142,8 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
         "sentimiento_general": "Alcista con Cautela en Resistencias",
         "resumen_ejecutivo": {
             "lectura_tiempo": "3-5 minutos",
-            "sintesis_sentimiento": "El consenso consolidado tras analizar los consultorios de Capital Radio y los análisis de Visionarios Bolsa durante los últimos 7 días refleja una postura de cautela estratégica en plena fase de consolidación técnica. Aunque la tendencia primaria de fondo continúa siendo alcista en los principales selectivos mundiales, los analistas coinciden en alertar de lecturas de sobrecompra extrema en índices directores y una compresión de volatilidad que suele anticipar correcciones tácticas del 3% al 6%.\n\nEl mercado asimila la desaceleración del ritmo de bajadas de tipos de la Reserva Federal y un Banco Central Europeo forzado a acelerar recortes ante la fragilidad de la economía alemana. En este contexto, los gestores y analistas técnicos observan una rotación activa de capital: los inversores institucionales están reduciendo ponderación en megacaps tecnológicas con múltiplos exigentes para refugiarse en sectores generadores de caja predecible, tales como las utilities eléctricas, telecomunicaciones y la banca comercial europea que mantiene elevados márgenes de intermediación.",
-            "hacia_donde_apuntan": "Los analistas recomiendan de forma unánime evitar compras impulsivas en rupturas de resistencia sin confirmación de volumen. La directriz operativa mayoritaria pasa por mantener liquidez táctica entre el 15% y el 25% para aprovechar apoyos en soportes estructurales, rotar beneficios hacia valores de perfil defensivo y dividendo sostenible en Europa, y ceñir rigurosamente las órdenes stop-loss dinámicas en valores de alta beta y semiconductores.",
+            "sintesis_sentimiento": "• Consolidación técnica general: Fase de pausa y digestión en índices directores tras las subidas acumuladas, con compresión de volatilidad que suele anticipar correcciones tácticas del 3% al 6%.\n• Asimetría de Bancos Centrales: Resistencia del ciclo y empleo en EE.UU. que reduce la urgencia de recortes de la Reserva Federal frente a un BCE forzado a acelerar bajadas ante la contracción industrial en Alemania.\n• Rotación sectorial hacia valor: Salida activa de capitales institucionales desde megacaps tecnológicas con múltiplos exigentes para refugiarse en sectores de caja predecible (utilities eléctricas reguladas, telecomunicaciones y banca comercial con elevados márgenes).",
+            "hacia_donde_apuntan": "• Disciplina en entradas: Prohibición unánime de compras impulsivas en rupturas de resistencia sin confirmación de volumen.\n• Cojín de liquidez estratégica: Mantener entre el 15% y el 25% de liquidez táctica para aprovechar apoyos en soportes estructurales.\n• Rotación a dividendos y sectores defensivos: Priorizar compañías europeas con visibilidad de beneficios y dividendo sostenible.\n• Gestión de riesgo férrea: Ceñir rigurosamente las órdenes stop-loss dinámicas bajo mínimos de las últimas dos semanas en alta beta y semiconductores.",
             "puntos_clave_consenso": [
                 "Fortaleza relativa del IBEX 35 y DAX europeo frente a la renta variable estadounidense, con especial atractivo en el sector bancario español y utilities reguladas.",
                 "Advertencia severa sobre los niveles de resistencia histórica en Wall Street (S&P 500 y Nasdaq 100), donde la divergencia entre precio y volumen desaconseja elevar exposición.",
@@ -152,7 +153,7 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
             ]
         },
         "sentimiento_macro": {
-            "situacion_global": "El panorama macroeconómico global atraviesa una encrucijada caracterizada por la notable asimetría entre la resistencia del ciclo en Estados Unidos y la fragilidad del tejido industrial europeo. En EE.UU., la fortaleza del mercado laboral y un consumo privado vigoroso reducen la urgencia de la Reserva Federal para acelerar los recortes de tipos, manteniendo tensionada la rentabilidad del bono a 10 años y respaldando al dólar. Por su parte, el Banco Central Europeo navega en un escenario de debilidad manifiesta en Alemania, lo que presiona a la baja el precio del dinero e intensifica la rotación de capitales hacia sectores de alta rentabilidad por dividendo y flujos de caja predecibles.\n\nCitas y declaraciones de los analistas en los consultorios:\n• Roberto Moro (Capital Radio): 'El mercado está en una fase de digestión donde perseguir precios al alza en resistencias es un error de principiante; mientras el IBEX 35 no pierda los 19.800 puntos, la tendencia de fondo sigue absolutamente viva, pero comprar en máximos históricos ofrece un ratio riesgo-beneficio pésimo.'\n• Alberto Iturralde (Capital Radio): 'El dinero inteligente no está comprando en estos niveles de euforia en Wall Street, sino distribuyendo sigilosamente papel a los inversores minoristas. Mucho cuidado con creer que la subida tecnológica es infinita.'\n• Javier Alfayate (GPM Gestión Global): 'La debilidad de la economía alemana no debe confundirse con la debilidad de las empresas del DAX. Las multinacionales alemanas facturan fuera y tienen balances saneados, lo que explica que el selectivo siga marcando máximos sobre los 26.700 puntos con solidez técnica.'\n• Sito Rodríguez (Visionarios Bolsa): 'La demanda en semiconductores e infraestructura para IA es real y secular, pero las valoraciones actuales descuentan crecimientos sin margen de error. Quien esté dentro de Nvidia o ASML debe ceñir stops bajo soportes semanales.'",
+            "situacion_global": "• Asimetría Macro EE.UU. vs Europa: La resistencia del empleo y consumo en EE.UU. sostiene las rentabilidades del bono a 10 años y respalda al dólar, mientras la debilidad manufacturera alemana acelera las rebajas del BCE.\n• Rotación hacia activos de valor: Los gestores priman empresas con generación de caja recurrente y bajo endeudamiento frente a valores de crecimiento con múltiplos extremos.\n• Roberto Moro (Capital Radio): 'El mercado está en una fase de digestión donde perseguir precios al alza en resistencias es un error de principiante; mientras el IBEX 35 no pierda los 19.800 puntos, la tendencia de fondo sigue absolutamente viva, pero comprar en máximos históricos ofrece un ratio riesgo-beneficio pésimo.'\n• Alberto Iturralde (Capital Radio): 'El dinero inteligente no está comprando en estos niveles de euforia en Wall Street, sino distribuyendo sigilosamente papel a los inversores minoristas. Mucho cuidado con creer que la subida tecnológica es infinita.'\n• Javier Alfayate (GPM Gestión Global): 'La debilidad de la economía alemana no debe confundirse con la debilidad de las empresas del DAX. Las multinacionales alemanas facturan fuera y tienen balances saneados, lo que explica que el selectivo siga marcando máximos sobre los 26.700 puntos con solidez técnica.'\n• Sito Rodríguez (Visionarios Bolsa): 'La demanda en semiconductores e infraestructura para IA es real y secular, pero las valoraciones actuales descuentan crecimientos sin margen de error. Quien esté dentro de Nvidia o ASML debe ceñir stops bajo soportes semanales.'",
             "indices": [
                 {
                     "nombre": "IBEX 35",
@@ -380,8 +381,16 @@ def main():
         with console.status("[bold green]Extrayendo vídeos y transcripciones de YouTube (Capital Radio & Visionarios Bolsa)..."):
             extractor = YouTubeExtractor(days_horizon=args.days)
             videos = extractor.extract_all()
-        console.print(f"[bold green]✔[/bold green] Se obtuvieron [cyan]{len(videos)}[/cyan] vídeos con transcripción válida.")
+        console.print(f"[bold green]✔[/bold green] Se obtuvieron [cyan]{len(videos)}[/cyan] vídeos con transcripción válida (persistidas en [cyan]data/transcripts/[/cyan]).")
         
+        # Validar fuentes y horizonte de los vídeos extraídos
+        if videos:
+            is_valid, src_errors, src_warnings = MarketReportValidator.verify_video_sources(videos, days_horizon=args.days)
+            for w in src_warnings:
+                console.print(f"[yellow]Aviso fuente:[/yellow] {w}")
+            for err in src_errors:
+                console.print(f"[red]Error fuente:[/red] {err}")
+
         if not videos:
             console.print("[yellow]⚠ No se encontraron vídeos con transcripción en el rango temporal. Pasando a datos de muestra representativos.[/yellow]")
             report_data = get_sample_mock_report(date_str)
@@ -406,6 +415,18 @@ def main():
         from src.market_verifier import MarketDataVerifier
         report_data = MarketDataVerifier.enrich_report_data(report_data)
     console.print("[bold green]✔[/bold green] Cotizaciones actuales de índices y acciones verificadas con éxito.")
+
+    # 2.6. AUDITORÍA INTEGRAL DE CONSISTENCIA Y NIVELES TÉCNICOS
+    with console.status("[bold green]Auditando integridad técnica y coherencia de soportes/resistencias..."):
+        report_data = MarketReportValidator.audit_and_verify_report(report_data)
+        audit_info = report_data.get("_audit", {})
+        if audit_info.get("reconciliations"):
+            for rec in audit_info["reconciliations"]:
+                console.print(f"[bold yellow]⚡ Reconciliación técnica aplicada:[/bold yellow] [dim]{rec}[/dim]")
+        if audit_info.get("warnings"):
+            for w in audit_info["warnings"]:
+                console.print(f"[yellow]Aviso auditoría:[/yellow] {w}")
+    console.print("[bold green]✔[/bold green] Informe auditado y verificado con éxito.")
 
     # 3. MOSTRAR INFORME EN TERMINAL
     print_terminal_report(report_data, date_str)
