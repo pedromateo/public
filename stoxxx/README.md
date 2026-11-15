@@ -9,6 +9,7 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
 1. **Extracción Automatizada de YouTube (Horizonte configurable, 7 días / 1 semana por defecto)**:
    - Monitoriza los consultorios de bolsa de **Capital Radio** (con expertos como Roberto Moro, Alberto Iturralde, Javier Alfayate, Gerardo Ortega) y el canal **Visionarios Bolsa** (Sito Rodríguez).
    - Descarga y consolida las transcripciones completas en español.
+   - **Persistencia y Versionado en GitHub (`data/transcripts/`)**: Todas las transcripciones se guardan en formato JSON y se versionan en el repositorio de GitHub para garantizar máxima trazabilidad, reproducibilidad histórica de los informes bursátiles y optimización de llamadas de red.
 2. **Análisis de Consenso con Google Gemini (Gemini 2.0 Flash)**:
    - Identifica el **quórum real** entre los analistas, niveles clave de índices mundiales (IBEX 35, DAX, S&P 500, Nasdaq 100) y divergencias estratégicas.
    - Clasifica empresas en **Valores Nacionales** e **Internacionales**, ordenadas de mayor a menor número de menciones.
@@ -16,10 +17,10 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
    - 🖥️ **Terminal Interactiva**: Presentación visual completa con tablas de índices, quórum y colores enriquecidos (`rich`).
    - 📄 **Informe PDF Profesional**: Maquetado corporativo con soporte UTF-8, cajas de resumen, niveles de soporte/resistencia y numeración de páginas.
    - 🎙️ **Podcast Dual en MP3**: Diálogo dinámico de radio entre dos locutores (**Carlos** y **Laura**) con voces neuronales realistas (Edge-TTS / Google Cloud TTS).
-4. **Publicación Automática en GitHub Pages**:
+4. **Publicación Automática en GitHub Pages y Versionado de Datos**:
    - Web estática responsiva (`index.html`) construida con HTML5, Tailwind CSS y Vanilla JS.
    - Feed cronológico con reproductor de audio embebido, vista de detalle por informe y botones directos de descarga (PDF y MP3).
-   - Automatización de `git add`, `git commit` y `git push` en cada ejecución.
+   - Automatización de `git add`, `git commit` y `git push` en cada ejecución, sincronizando tanto la web como las transcripciones y reportes.
 
 ---
 
@@ -44,7 +45,8 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
 │   ├── index.html           # Plantilla principal del portal y feed de informes
 │   └── report_detail.html   # Plantilla para la vista detallada de cada informe
 ├── data/
-│   └── reports.json         # Base de datos JSON de publicaciones
+│   ├── reports.json         # Base de datos JSON de publicaciones
+│   └── transcripts/         # Transcripciones completas en JSON versionadas en GitHub
 ├── reports/
 │   ├── pdf/                 # Documentos PDF generados
 │   ├── audio/               # Archivos MP3 de los podcasts

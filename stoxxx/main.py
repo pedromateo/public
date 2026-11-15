@@ -135,6 +135,26 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
     print_company_table("Valores Nacionales (IBEX / Continuo)", empresas.get("nacionales", []), "🇪🇸")
     print_company_table("Valores Internacionales (Nasdaq, DAX, etc.)", empresas.get("internacionales", []), "🌍")
 
+    # 4. FUENTES CONSULTADAS Y REFERENCIAS
+    fuentes = report_data.get("fuentes_consultadas", [])
+    if fuentes:
+        table_src = Table(title="📚 Fuentes Consultadas y Referencias Audiovisuales (Consultorios)", border_style="blue")
+        table_src.add_column("Canal", style="bold cyan")
+        table_src.add_column("Fecha", style="white")
+        table_src.add_column("Título / Consultorio", style="white")
+        table_src.add_column("Caracteres", justify="right", style="green")
+        table_src.add_column("Estado", style="dim")
+        for f in fuentes:
+            table_src.add_row(
+                f.get("channel", ""),
+                f.get("date_formatted", ""),
+                f.get("title", "")[:50] + ("..." if len(f.get("title", "")) > 50 else ""),
+                f"{f.get('char_count', 0):,}".replace(",", "."),
+                f.get("status", "Transcrito")
+            )
+        console.print(table_src)
+        console.print("\n")
+
 def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
     """Genera datos de prueba realistas para pruebas sin consumir API de Gemini."""
     return {
@@ -350,6 +370,68 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
                 "genero": "femenino",
                 "texto": "¡Un cordial saludo, y hasta nuestra próxima edición en STOXXX!"
             }
+        ],
+        "fuentes_consultadas": [
+            {
+                "id": "cZ4eKx8B1o0",
+                "title": "Consultorio de bolsa con Roberto Moro: Niveles clave del IBEX 35, banca y soportes",
+                "channel": "Capital Radio",
+                "date_formatted": "14/11/2026",
+                "url": "https://www.youtube.com/watch?v=cZ4eKx8B1o0",
+                "char_count": 28450,
+                "status": "Transcrito completo",
+                "description": "Análisis técnico de soportes en 19.800 del IBEX 35, estrategias en Santander, BBVA y recomendación de Iberdrola."
+            },
+            {
+                "id": "aY7fLz9C2p1",
+                "title": "Consultorio de bolsa con Alberto Iturralde: Psicología del mercado y alerta en Wall Street",
+                "channel": "Capital Radio",
+                "date_formatted": "12/11/2026",
+                "url": "https://www.youtube.com/watch?v=aY7fLz9C2p1",
+                "char_count": 31200,
+                "status": "Transcrito completo",
+                "description": "Tesis sobre distribución silenciosa de manos fuertes en tecnológicas y fortaleza relativa de eléctricas europeas."
+            },
+            {
+                "id": "dX2gMv3E4q5",
+                "title": "Consultorio con Javier Alfayate: Momentum europeo, máximos del DAX y gestión cuantitativa",
+                "channel": "Capital Radio",
+                "date_formatted": "10/11/2026",
+                "url": "https://www.youtube.com/watch?v=dX2gMv3E4q5",
+                "char_count": 22800,
+                "status": "Transcrito completo",
+                "description": "Comportamiento del DAX 40 en 26.700, sectores con fuerza relativa Mansfield y valores directores defensivos."
+            },
+            {
+                "id": "eW5hNw6F7r8",
+                "title": "Consultorio de bolsa con Jorge del Canto: Oportunidades en renta variable española",
+                "channel": "Capital Radio",
+                "date_formatted": "07/11/2026",
+                "url": "https://www.youtube.com/watch?v=eW5hNw6F7r8",
+                "char_count": 19650,
+                "status": "Transcrito completo",
+                "description": "Análisis de Banco Santander, Telefónica y fijación de stops de protección dinámica ante volatilidad."
+            },
+            {
+                "id": "fU8jPx9G0s2",
+                "title": "Consultorio y Análisis de Valores con Sito Rodríguez: Nvidia, ASML y semiconductores",
+                "channel": "Visionarios Bolsa",
+                "date_formatted": "11/11/2026",
+                "url": "https://www.youtube.com/watch?v=fU8jPx9G0s2",
+                "char_count": 34100,
+                "status": "Transcrito completo",
+                "description": "Tesis de inversión sobre la demanda secular de chips para centros de datos, márgenes de ASML y soporte técnico en 155$ de Nvidia."
+            },
+            {
+                "id": "gT1kQy2H3t4",
+                "title": "Repaso Semanal de Mercados y Tesis Tecnológicas con Sito Rodríguez: Nasdaq 100 y Microsoft",
+                "channel": "Visionarios Bolsa",
+                "date_formatted": "05/11/2026",
+                "url": "https://www.youtube.com/watch?v=gT1kQy2H3t4",
+                "char_count": 26700,
+                "status": "Transcrito completo",
+                "description": "Análisis de Microsoft, rotación a compañías con generación de caja recurrente y directrices de liquidez para final de año."
+            }
         ]
     }
 
@@ -484,6 +566,23 @@ def main():
             border_style="blue"
         ))
 
+    # 2.8. POBLAR FUENTES CONSULTADAS SI NO ESTÁN DEFINIDAS
+    if not report_data.get("fuentes_consultadas"):
+        src_vids = videos if videos else (ref_videos if 'ref_videos' in locals() and ref_videos else [])
+        if src_vids:
+            report_data["fuentes_consultadas"] = [
+                {
+                    "id": v.get("id", ""),
+                    "title": v.get("title", ""),
+                    "channel": v.get("channel", ""),
+                    "date_formatted": v.get("date_formatted", v.get("upload_date", "")),
+                    "url": v.get("url", f"https://www.youtube.com/watch?v={v.get('id', '')}"),
+                    "char_count": len(v.get("transcript", "")),
+                    "status": "Transcrito completo" if len(v.get("transcript", "")) > 0 else "Disponible"
+                }
+                for v in src_vids
+            ]
+
     # 3. MOSTRAR INFORME EN TERMINAL
     print_terminal_report(report_data, date_str)
 
@@ -505,7 +604,10 @@ def main():
             with console.status("[bold green]Sintetizando podcast dual en MP3..."):
                 podcast_gen = PodcastGenerator()
                 audio_path = podcast_gen.generate_podcast(guion, date_str)
-            console.print(f"[bold green]✔[/bold green] Podcast MP3 generado: [cyan]{audio_path}[/cyan]")
+            if audio_path and audio_path.exists():
+                console.print(f"[bold green]✔[/bold green] Podcast MP3 generado: [cyan]{audio_path}[/cyan]")
+            else:
+                console.print(f"[yellow]⚠ Síntesis de voz no disponible o sin conexión. Continuando fluidamente...[/yellow]")
         else:
             console.print("[yellow]⚠ No se encontró guion de podcast en el informe.[/yellow]")
     else:

@@ -11,7 +11,11 @@ from config import YOUTUBE_CHANNELS, TRANSCRIPTS_DIR
 logger = logging.getLogger(__name__)
 
 class YouTubeExtractor:
-    """Extractor de vídeos y transcripciones de canales de bolsa en YouTube con persistencia en disco."""
+    """
+    Extractor de vídeos y transcripciones de canales de bolsa en YouTube.
+    Gestiona la persistencia y control de versiones en el repositorio de GitHub (data/transcripts/)
+    para asegurar máxima trazabilidad histórica, reproducibilidad y auditoría sin consumo redundante de red.
+    """
 
     def __init__(self, days_horizon: int = 14, cache_dir: Optional[Path] = None):
         self.days_horizon = days_horizon
@@ -22,21 +26,21 @@ class YouTubeExtractor:
         self.transcript_api = YouTubeTranscriptApi()
 
     def get_cached_transcript(self, video_id: str) -> Optional[Dict[str, Any]]:
-        """Recupera la transcripción guardada en disco si existe."""
+        """Recupera la transcripción versionada en data/transcripts/ si existe."""
         cache_file = self.cache_dir / f"{video_id}.json"
         if cache_file.exists():
             try:
                 with open(cache_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     if data.get("transcript") and len(data["transcript"]) > 50:
-                        logger.info(f"Transcripción cargada desde disco para vídeo {video_id} ('{data.get('title', '')}')")
+                        logger.info(f"Transcripción cargada desde repositorio local para vídeo {video_id} ('{data.get('title', '')}')")
                         return data
             except Exception as e:
                 logger.warning(f"Error leyendo transcripción en caché {cache_file}: {e}")
         return None
 
     def save_cached_transcript(self, video_data: Dict[str, Any]) -> Path:
-        """Guarda la transcripción y metadatos en un fichero JSON persistente."""
+        """Guarda la transcripción y metadatos en un fichero JSON versionado para seguimiento en GitHub."""
         video_id = video_data["id"]
         cache_file = self.cache_dir / f"{video_id}.json"
         payload = {

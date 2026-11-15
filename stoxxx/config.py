@@ -7,8 +7,9 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Directorios de salida
+# Directorios de salida y persistencia
 DATA_DIR = BASE_DIR / "data"
+# Transcripciones en JSON versionadas y sincronizadas con GitHub para máxima trazabilidad y reproducibilidad
 TRANSCRIPTS_DIR = DATA_DIR / "transcripts"
 REPORTS_DIR = BASE_DIR / "reports"
 PDF_DIR = REPORTS_DIR / "pdf"

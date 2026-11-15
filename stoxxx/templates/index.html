@@ -1,49 +1,152 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-950 text-slate-100">
+<html lang="es" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>STOXXX | Informes Bursátiles y Consenso de Mercado</title>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="192x192" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#fbf5ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)">
+  
+  <!-- Detección y aplicación inmediata de tema antes de renderizar (evita FOUT) -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('stoxxx_theme');
+        // Por defecto: 'expansion' (tema claro prensa económica)
+        const theme = savedTheme ? savedTheme : 'expansion';
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('theme-expansion');
+        } else {
+          document.documentElement.classList.add('theme-expansion');
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('theme-expansion');
+      }
+    })();
+  </script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tipografías: Inter para lectura ágil, Merriweather para estilo Expansión y JetBrains Mono para datos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
+          colors: {
+            expansion: {
+              salmon: '#fbf5ee',
+              paper: '#fffdfa',
+              surface: '#f5eee3',
+              border: '#e4d7c6',
+              borderDark: '#d5c3ac',
+              ink: '#111827',
+              navy: '#0f2e4e',
+              navyLight: '#1e3a8a',
+              burgundy: '#b91c1c',
+              forest: '#15803d',
+              gold: '#b45309'
+            }
+          },
           fontFamily: {
             sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
             mono: ['JetBrains Mono', 'monospace'],
           }
         }
       }
     }
   </script>
+
   <style>
     body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
     .mono { font-family: 'JetBrains Mono', monospace; }
+    .font-serif { font-family: 'Merriweather', Georgia, serif; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Estilos del Tema Expansión */
+    html.theme-expansion body {
+      background-color: #fbf5ee;
+      color: #1f2937;
+    }
+    html.theme-expansion ::selection {
+      background-color: #0f2e4e;
+      color: #ffffff;
+    }
+    html.dark body {
+      background-color: #020617;
+      color: #f1f5f9;
+    }
+    html.dark ::selection {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
   </style>
 </head>
-<body class="min-h-full flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white">
+<body class="min-h-full flex flex-col bg-[#fbf5ee] dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-200">
 
-  <!-- HEADER COMPACTO Y LIMPIO (OPTIMIZADO MÓVIL) -->
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
-      <div class="flex items-center space-x-2.5">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md shadow-blue-500/20 shrink-0">
+  <!-- CABECERA PRINCIPAL (STICKY CON THEME SWITCHER) -->
+  <header class="border-b border-[#e2d5c3] dark:border-slate-800 bg-[#fbf5ee]/95 dark:bg-slate-900/90 backdrop-blur sticky top-0 z-50 transition-colors">
+    <!-- Barra superior fina estilo prensa -->
+    <div class="h-1 bg-gradient-to-r from-[#0f2e4e] via-[#b91c1c] to-[#0f2e4e] dark:from-blue-600 dark:via-indigo-500 dark:to-cyan-400"></div>
+
+    <div class="max-w-3xl mx-auto px-3.5 sm:px-4 h-14 flex items-center justify-between">
+      <!-- LOGO / BRANDING -->
+      <a href="index.html" class="flex items-center space-x-2.5 group">
+        <div class="w-8 h-8 rounded-lg bg-[#0f2e4e] dark:bg-gradient-to-tr dark:from-blue-600 dark:to-indigo-500 flex items-center justify-center shadow-sm shadow-[#0f2e4e]/20 dark:shadow-blue-500/20 shrink-0">
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
           </svg>
         </div>
-        <span class="text-lg font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">STOXXX</span>
-      </div>
-      <div class="flex items-center space-x-2 text-xs mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-lg">
-        <span class="text-white font-bold">{{ reports|length }}</span> informe{% if reports|length != 1 %}s{% endif %}
+        <div class="flex flex-col">
+          <span class="text-lg font-black tracking-tight font-serif text-[#0f2e4e] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-slate-100 dark:to-slate-300">
+            STOXXX<span class="text-[#b91c1c] dark:text-blue-400 font-sans">.</span>
+          </span>
+          <span class="text-[9px] tracking-widest uppercase font-semibold text-[#6b7280] dark:text-slate-400 -mt-1 hidden xs:inline">
+            Inteligencia Bursátil
+          </span>
+        </div>
+      </a>
+
+      <!-- CONTROLES DEL HEADER: CONTADOR + THEME SWITCHER -->
+      <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-1.5 text-xs mono text-[#555d6b] dark:text-slate-400 bg-[#f4ecdf] dark:bg-slate-900 border border-[#ded0bd] dark:border-slate-800 px-2.5 py-1 rounded-lg">
+          <span class="text-[#0f2e4e] dark:text-white font-bold">{{ reports|length }}</span> informe{% if reports|length != 1 %}s{% endif %}
+        </div>
+
+        <!-- BOTÓN THEME SWITCHER (EXPANSIÓN / OSCURO) -->
+        <button 
+          id="theme-toggle" 
+          type="button" 
+          onclick="toggleTheme()"
+          aria-label="Alternar tema de visualización"
+          class="flex items-center space-x-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border border-[#ded0bd] dark:border-slate-800 bg-[#f4ecdf] dark:bg-slate-900 text-[#0f2e4e] dark:text-slate-200 hover:bg-[#ece2d1] dark:hover:bg-slate-800 transition cursor-pointer shadow-sm"
+          title="Alternar entre tema Expansión (Salmón) y Terminal (Oscuro)"
+        >
+          <!-- Icono Luna (visible cuando estamos en tema Expansión/claro para ir a Oscuro) -->
+          <svg id="theme-icon-moon" class="w-4 h-4 text-[#0f2e4e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <!-- Icono Sol (visible cuando estamos en tema Dark para ir a Expansión) -->
+          <svg id="theme-icon-sun" class="w-4 h-4 text-amber-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <span id="theme-toggle-label" class="hidden sm:inline font-medium">Expansión</span>
+        </button>
       </div>
     </div>
   </header>
@@ -51,65 +154,80 @@
   <!-- CONTENIDO PRINCIPAL -->
   <main class="flex-grow max-w-3xl mx-auto px-3.5 sm:px-4 py-4 sm:py-6 w-full">
 
-    <!-- BUSCADOR & FILTROS (MOBILE-FIRST) -->
+    <!-- BUSCADOR & FILTROS (OPTIMIZADO MÓVIL Y DESKTOP) -->
     <div class="mb-5 space-y-2.5">
       <div class="relative w-full">
         <input 
           type="search" 
           id="search-input"
           placeholder="Buscar empresa, ticker, índice o fecha..." 
-          class="w-full bg-slate-900/90 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition shadow-inner"
+          class="w-full bg-[#fffdfa] dark:bg-slate-900/90 border border-[#e2d5c3] dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-[#111827] dark:text-slate-100 placeholder-[#7d8590] dark:placeholder-slate-500 focus:outline-none focus:border-[#0f2e4e] dark:focus:border-blue-500 focus:ring-1 focus:ring-[#0f2e4e] dark:focus:ring-blue-500 transition shadow-inner"
         >
-        <svg class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 absolute left-3.5 top-3.5 text-[#7d8590] dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
 
-      <!-- FILTRO DE SENTIMIENTO EN BARRA HORIZONTAL CON SCROLL TÁCTIL -->
+      <!-- FILTRO DE SENTIMIENTO EN BARRA HORIZONTAL -->
       <div class="flex items-center space-x-2 overflow-x-auto pb-1 text-xs no-scrollbar">
-        <button onclick="filterSentiment('all')" class="sentiment-filter active whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium transition">Todos</button>
-        <button onclick="filterSentiment('alcista')" class="sentiment-filter whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-800 font-medium transition">Alcista</button>
-        <button onclick="filterSentiment('bajista')" class="sentiment-filter whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-rose-400 border border-slate-800 font-medium transition">Cautela / Bajista</button>
+        <button 
+          onclick="filterSentiment('all')" 
+          class="sentiment-filter active whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#0f2e4e] dark:bg-slate-800 text-white dark:text-slate-200 border border-[#0f2e4e] dark:border-slate-700 font-medium transition shadow-sm"
+        >
+          Todos
+        </button>
+        <button 
+          onclick="filterSentiment('alcista')" 
+          class="sentiment-filter whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#fffdfa] dark:bg-slate-900 hover:bg-emerald-50 dark:hover:bg-slate-800 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-slate-800 font-medium transition"
+        >
+          Alcista
+        </button>
+        <button 
+          onclick="filterSentiment('bajista')" 
+          class="sentiment-filter whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#fffdfa] dark:bg-slate-900 hover:bg-rose-50 dark:hover:bg-slate-800 text-rose-700 dark:text-rose-400 border border-rose-300 dark:border-slate-800 font-medium transition"
+        >
+          Cautela / Bajista
+        </button>
       </div>
     </div>
 
-    <!-- FEED CRONOLÓGICO -->
+    <!-- FEED CRONOLÓGICO DE INFORMES -->
     <section id="feed" class="space-y-4">
       {% if not reports %}
-      <div class="text-center py-12 px-4 bg-slate-900/40 border border-slate-800 rounded-2xl">
-        <svg class="w-10 h-10 text-slate-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="text-center py-12 px-4 bg-[#fffdfa] dark:bg-slate-900/40 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl shadow-sm">
+        <svg class="w-10 h-10 text-slate-400 dark:text-slate-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
         </svg>
-        <h3 class="text-base font-semibold text-slate-300">No hay informes publicados todavía</h3>
-        <p class="text-xs text-slate-500 mt-1">Ejecuta <code class="text-blue-400 font-mono">python main.py</code> para generar una entrega.</p>
+        <h3 class="text-base font-serif font-bold text-[#0f2e4e] dark:text-slate-300">No hay informes publicados todavía</h3>
+        <p class="text-xs text-[#6b7280] dark:text-slate-500 mt-1">Ejecuta <code class="text-[#0f2e4e] dark:text-blue-400 font-mono font-semibold">python main.py</code> para generar una entrega.</p>
       </div>
       {% endif %}
 
       {% for r in reports %}
       <article 
-        class="report-card bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 sm:p-5 transition shadow-lg space-y-3.5"
+        class="report-card bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800/90 rounded-2xl p-4 sm:p-5 transition-all duration-200 shadow-sm hover:shadow-md space-y-3.5"
         data-sentiment="{{ r.sentimiento_general|lower }}"
         data-keywords="{{ r.date }} {{ r.top_stocks|join(' ') }} {{ r.sentimiento_general }}"
       >
-        <!-- CABECERA DE LA TARJETA -->
-        <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
-          <span class="mono text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-semibold border border-slate-700">
+        <!-- CABECERA DE LA TARJETA (FECHA ESTILO PRENSA & SENTIMIENTO) -->
+        <div class="flex items-center justify-between gap-2 border-b border-[#ece2d4] dark:border-slate-800/80 pb-3">
+          <span class="mono text-xs px-2.5 py-1 rounded-md bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-300 font-bold border border-[#dccbb5] dark:border-slate-700">
             📅 {{ r.date }}
           </span>
           <span class="text-xs px-2.5 py-1 rounded-md font-semibold
-            {% if 'alcista' in r.sentimiento_general|lower %} bg-emerald-950/90 text-emerald-400 border border-emerald-800/60
-            {% elif 'bajista' in r.sentimiento_general|lower or 'cautela' in r.sentimiento_general|lower %} bg-rose-950/90 text-rose-400 border border-rose-800/60
-            {% else %} bg-amber-950/90 text-amber-400 border border-amber-800/60 {% endif %}">
+            {% if 'alcista' in r.sentimiento_general|lower %} bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/90 dark:text-emerald-400 dark:border-emerald-800/60
+            {% elif 'bajista' in r.sentimiento_general|lower or 'cautela' in r.sentimiento_general|lower %} bg-rose-50 text-rose-800 border border-rose-300 dark:bg-rose-950/90 dark:text-rose-400 dark:border-rose-800/60
+            {% else %} bg-amber-50 text-amber-900 border border-amber-300 dark:bg-amber-950/90 dark:text-amber-400 dark:border-amber-800/60 {% endif %}">
             {{ r.sentimiento_general }}
           </span>
         </div>
 
         <!-- EXTRACTO DEL RESUMEN -->
         <div>
-          <h2 class="text-base sm:text-lg font-bold text-white mb-1.5 hover:text-blue-400 transition leading-snug">
+          <h2 class="text-base sm:text-xl font-serif font-black text-[#0f2e4e] dark:text-white mb-1.5 hover:text-[#b91c1c] dark:hover:text-blue-400 transition leading-snug">
             <a href="{{ r.detail_url }}">Informe de Consenso Bursátil & Macro</a>
           </h2>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+          <p class="text-xs sm:text-sm text-[#374151] dark:text-slate-300 leading-relaxed line-clamp-3">
             {{ r.summary_snippet }}
           </p>
         </div>
@@ -117,24 +235,53 @@
         <!-- TOP QUÓRUM EMPRESAS (PILLS RESPONSIVAS) -->
         {% if r.top_stocks %}
         <div class="flex flex-wrap items-center gap-1.5 pt-1">
-          <span class="text-[11px] text-slate-400 font-medium mr-1">Quórum:</span>
+          <span class="text-[11px] text-[#6b7280] dark:text-slate-400 font-medium mr-1">Quórum destacado:</span>
           {% for stock in r.top_stocks %}
-          <span class="text-[11px] px-2 py-0.5 rounded-md bg-blue-950/60 text-blue-300 border border-blue-800/40 mono">
+          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40 mono font-semibold">
             {{ stock }}
           </span>
           {% endfor %}
         </div>
         {% endif %}
 
-        <!-- REPRODUCTOR DE AUDIO (100% RESPONSIVE EN MÓVIL) -->
+        <!-- BADGE / INDICADOR COLAPSABLE DE FUENTES CONSULTADAS -->
+        <div class="pt-0.5">
+          <details class="group bg-[#f8f3ec] dark:bg-slate-950/60 border border-[#e4d7c6] dark:border-slate-800/80 rounded-xl overflow-hidden text-xs">
+            <summary class="cursor-pointer list-none px-3 py-2 flex items-center justify-between text-[#4b5563] dark:text-slate-400 hover:text-[#0f2e4e] dark:hover:text-white transition select-none">
+              <div class="flex items-center space-x-1.5 font-medium">
+                <span>📚</span>
+                <span>Fuentes consultadas ({{ r.videos_count or 5 }} emisiones monitorizadas)</span>
+              </div>
+              <div class="flex items-center space-x-1 text-[11px] text-[#0f2e4e] dark:text-blue-400 font-semibold">
+                <span>Detalle</span>
+                <svg class="w-3.5 h-3.5 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </summary>
+            <div class="p-3 border-t border-[#e4d7c6] dark:border-slate-800 space-y-1.5 bg-[#fffdfa] dark:bg-slate-900/60 text-[11px]">
+              <div class="text-[#374151] dark:text-slate-300 leading-relaxed">
+                Emisiones de <strong class="text-[#0f2e4e] dark:text-blue-400 font-bold">Capital Radio</strong> y <strong class="text-[#92400e] dark:text-amber-400 font-bold">Visionarios Bolsa</strong> con transcripción completa y verificación técnica cruzada.
+              </div>
+              <div class="flex items-center justify-between pt-1 text-[10px] text-[#6b7280] dark:text-slate-500">
+                <span>Auditoría de quórum y niveles técnicos</span>
+                <a href="{{ r.detail_url }}#fuentes" class="text-[#0f2e4e] dark:text-blue-400 hover:underline font-bold">
+                  Ver fuentes originales en el informe &rarr;
+                </a>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- REPRODUCTOR DE AUDIO PODCAST DUAL (RESPONSIVE) -->
         {% if r.audio_url %}
-        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/90 space-y-2">
+        <div class="p-3 rounded-xl bg-[#f8f3ec] dark:bg-slate-950 border border-[#e2d5c3] dark:border-slate-800/90 space-y-2">
           <div class="flex items-center justify-between text-xs">
             <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-              <span class="font-semibold text-slate-200">Podcast Dual</span>
+              <span class="w-2 h-2 rounded-full bg-[#0f2e4e] dark:bg-indigo-500 animate-pulse"></span>
+              <span class="font-bold text-[#0f2e4e] dark:text-slate-200">Podcast Dual de Resumen</span>
             </div>
-            <a href="{{ r.audio_url }}" download class="text-[11px] text-indigo-400 hover:text-indigo-300 underline mono">
+            <a href="{{ r.audio_url }}" download class="text-[11px] text-[#0f2e4e] dark:text-indigo-400 hover:underline mono font-semibold">
               Descargar MP3
             </a>
           </div>
@@ -145,9 +292,9 @@
         </div>
         {% endif %}
 
-        <!-- BOTONES DE ACCIÓN (GRANDES ÁREAS TÁCTILES PARA MÓVIL) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800/70">
-          <a href="{{ r.detail_url }}" class="flex items-center justify-center space-x-2 text-xs font-bold py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white transition shadow-sm">
+        <!-- BOTONES DE ACCIÓN (GRANDES ÁREAS TÁCTILES) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-[#ece2d4] dark:border-slate-800/70">
+          <a href="{{ r.detail_url }}" class="flex items-center justify-center space-x-2 text-xs font-bold py-2.5 px-4 rounded-xl bg-[#0f2e4e] hover:bg-[#1e3a8a] active:bg-[#0a1e33] dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white transition shadow-sm">
             <span>Leer Informe Completo</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -155,8 +302,8 @@
           </a>
 
           {% if r.pdf_url %}
-          <a href="{{ r.pdf_url }}" download class="flex items-center justify-center space-x-1.5 text-xs font-semibold py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 border border-slate-700 transition">
-            <svg class="w-3.5 h-3.5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="{{ r.pdf_url }}" download class="flex items-center justify-center space-x-1.5 text-xs font-semibold py-2.5 px-4 rounded-xl bg-[#fffdfa] hover:bg-[#fbf5ee] dark:bg-slate-800 dark:hover:bg-slate-700 text-[#b91c1c] dark:text-slate-200 border border-[#e2d5c3] hover:border-[#b91c1c] dark:border-slate-700 transition">
+            <svg class="w-3.5 h-3.5 text-[#b91c1c] dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
             <span>Descargar PDF</span>
@@ -168,13 +315,52 @@
     </section>
   </main>
 
-  <!-- FOOTER MÓVIL -->
-  <footer class="border-t border-slate-800/80 bg-slate-900/60 py-6 mt-10 text-center text-xs text-slate-500 px-4">
-    <p>STOXXX · Inteligencia Bursátil y Consenso de Analistas.</p>
+  <!-- PIE DE PÁGINA (ESTILO PRENSA) -->
+  <footer class="border-t border-[#e2d5c3] dark:border-slate-800/80 bg-[#f4ecdf]/80 dark:bg-slate-900/60 py-6 mt-10 text-center text-xs text-[#6b7280] dark:text-slate-500 px-4">
+    <div class="max-w-3xl mx-auto space-y-1">
+      <p class="font-serif font-bold text-[#0f2e4e] dark:text-slate-400">STOXXX · Inteligencia Bursátil y Consenso de Analistas</p>
+      <p class="text-[11px]">Diseño inspirado en la prensa económica de referencia con soporte multitema Expansión y Terminal.</p>
+    </div>
   </footer>
 
-  <!-- SCRIPT DE BÚSQUEDA Y FILTRADO REACTIVO -->
+  <!-- SCRIPT DE BÚSQUEDA, FILTRADO Y GESTIÓN DE TEMA -->
   <script>
+    // Theme Switcher Logic
+    function updateThemeUI() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const iconSun = document.getElementById('theme-icon-sun');
+      const iconMoon = document.getElementById('theme-icon-moon');
+      const label = document.getElementById('theme-toggle-label');
+
+      if (isDark) {
+        if (iconSun) iconSun.classList.remove('hidden');
+        if (iconMoon) iconMoon.classList.add('hidden');
+        if (label) label.textContent = 'Terminal';
+      } else {
+        if (iconSun) iconSun.classList.add('hidden');
+        if (iconMoon) iconMoon.classList.remove('hidden');
+        if (label) label.textContent = 'Expansión';
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('theme-expansion');
+        localStorage.setItem('stoxxx_theme', 'expansion');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('theme-expansion');
+        localStorage.setItem('stoxxx_theme', 'dark');
+      }
+      updateThemeUI();
+    }
+
+    // Inicializar iconos al cargar
+    updateThemeUI();
+
+    // Filtros de búsqueda reactiva
     const searchInput = document.getElementById('search-input');
     const cards = document.querySelectorAll('.report-card');
     const filterBtns = document.querySelectorAll('.sentiment-filter');
@@ -190,8 +376,12 @@
     }
 
     function filterSentiment(sentiment) {
-      filterBtns.forEach(b => b.classList.remove('active', 'bg-slate-700', 'text-white'));
-      event.target.classList.add('active', 'bg-slate-700', 'text-white');
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-[#0f2e4e]', 'dark:bg-slate-700', 'text-white');
+        b.classList.add('bg-[#fffdfa]', 'dark:bg-slate-900');
+      });
+      event.target.classList.remove('bg-[#fffdfa]', 'dark:bg-slate-900');
+      event.target.classList.add('active', 'bg-[#0f2e4e]', 'dark:bg-slate-700', 'text-white');
 
       cards.forEach(card => {
         const cardSent = card.getAttribute('data-sentiment');

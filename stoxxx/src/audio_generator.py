@@ -20,10 +20,15 @@ class PodcastGenerator:
         self.voice_male = voice_male
         self.voice_female = voice_female
 
-    async def _synthesize_edge_turn(self, text: str, voice: str, output_path: Path):
+    async def _synthesize_edge_turn(self, text: str, voice: str, output_path: Path) -> bool:
         """Sintetiza un turno de diálogo utilizando Edge-TTS."""
-        communicate = edge_tts.Communicate(text, voice)
-        await communicate.save(str(output_path))
+        try:
+            communicate = edge_tts.Communicate(text, voice)
+            await communicate.save(str(output_path))
+            return True
+        except Exception as e:
+            logger.warning(f"No se pudo conectar con el servicio Edge-TTS: {e}. Continuando sin interrumpir...")
+            return False
 
     def _synthesize_google_turn(self, text: str, gender: str, output_path: Path):
         """Sintetiza un turno utilizando Google Cloud Text-to-Speech si está disponible."""
@@ -66,7 +71,7 @@ class PodcastGenerator:
         guion: List[Dict[str, str]],
         date_str: str,
         output_dir: Optional[Path] = None
-    ) -> Path:
+    ) -> Optional[Path]:
         """Genera el podcast completo combinando todos los turnos de diálogo."""
         target_dir = output_dir or AUDIO_DIR
         target_dir.mkdir(parents=True, exist_ok=True)
@@ -89,14 +94,22 @@ class PodcastGenerator:
 
                 temp_file = temp_dir / f"turn_{idx:03d}_{genero}.mp3"
 
-                if self.provider == "google":
-                    self._synthesize_google_turn(texto, genero, temp_file)
-                else:
-                    voice = self.voice_male if genero == "masculino" else self.voice_female
-                    await self._synthesize_edge_turn(texto, voice, temp_file)
+                try:
+                    if self.provider == "google":
+                        self._synthesize_google_turn(texto, genero, temp_file)
+                    else:
+                        voice = self.voice_male if genero == "masculino" else self.voice_female
+                        await self._synthesize_edge_turn(texto, voice, temp_file)
+                except Exception as e:
+                    logger.warning(f"No se pudo conectar con el servicio Edge-TTS: {e}. Continuando sin interrumpir...")
 
-                temp_files.append(temp_file)
-                logger.debug(f"Turno {idx + 1}/{len(guion)} ({locutor} - {genero}) sintetizado.")
+                if temp_file.exists() and temp_file.stat().st_size > 0:
+                    temp_files.append(temp_file)
+                    logger.debug(f"Turno {idx + 1}/{len(guion)} ({locutor} - {genero}) sintetizado.")
+
+            if not temp_files:
+                logger.warning("No se pudo conectar con el servicio Edge-TTS o generar fragmentos de audio. Continuando sin interrumpir...")
+                return None
 
             # Unir todos los segmentos MP3
             logger.info(f"Ensamblando {len(temp_files)} fragmentos de audio en {final_mp3_path}...")
@@ -108,6 +121,10 @@ class PodcastGenerator:
 
             logger.info(f"Podcast generado con éxito: {final_mp3_path} ({final_mp3_path.stat().st_size} bytes)")
             return final_mp3_path
+
+        except Exception as e:
+            logger.warning(f"No se pudo conectar con el servicio Edge-TTS: {e}. Continuando sin interrumpir...")
+            return None
 
         finally:
             # Limpiar archivos temporales
@@ -128,6 +145,10 @@ class PodcastGenerator:
         guion: List[Dict[str, str]],
         date_str: str,
         output_dir: Optional[Path] = None
-    ) -> Path:
+    ) -> Optional[Path]:
         """Punto de entrada síncrono para generar el podcast."""
-        return asyncio.run(self.generate_podcast_async(guion, date_str, output_dir))
+        try:
+            return asyncio.run(self.generate_podcast_async(guion, date_str, output_dir))
+        except Exception as e:
+            logger.warning(f"No se pudo conectar con el servicio Edge-TTS: {e}. Continuando sin interrumpir...")
+            return None

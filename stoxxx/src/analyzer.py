@@ -174,7 +174,23 @@ class MarketAnalyzer:
 
         try:
             report_data = json.loads(response.text)
-            return report_data
         except Exception as e:
             logger.error(f"Error parseando respuesta JSON de Gemini: {e}\nRespuesta recibida:\n{response.text}")
             raise RuntimeError(f"La respuesta de Gemini no pudo ser parseada como JSON: {e}")
+
+        # Asegurar que fuentes_consultadas esté siempre poblada a partir de los vídeos procesados
+        if not report_data.get("fuentes_consultadas"):
+            report_data["fuentes_consultadas"] = [
+                {
+                    "id": vid.get("id", ""),
+                    "title": vid.get("title", ""),
+                    "channel": vid.get("channel", ""),
+                    "date_formatted": vid.get("date_formatted", vid.get("upload_date", "")),
+                    "url": vid.get("url", f"https://www.youtube.com/watch?v={vid.get('id', '')}"),
+                    "char_count": len(vid.get("transcript", "")),
+                    "status": "Transcrito completo" if len(vid.get("transcript", "")) > 0 else "Disponible"
+                }
+                for vid in videos
+            ]
+
+        return report_data

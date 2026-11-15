@@ -1,5 +1,82 @@
 [
   {
+    "date": "2026-11-16",
+    "sentimiento_general": "Alcista con Cautela en Resistencias",
+    "summary_snippet": "• Consolidación técnica general: Fase de pausa y digestión en índices directores tras las subidas acumuladas, con compresión de volatilidad que suele anticipar correcciones tácticas del 3% al 6%.\n• Asimetría de Bancos Ce...",
+    "top_stocks": [
+      "Nvidia (4)",
+      "Iberdrola (3)",
+      "Banco Santander (2)",
+      "ASML Holding (2)"
+    ],
+    "detail_url": "reports/html/report-2026-11-16.html",
+    "pdf_url": "reports/pdf/informe-2026-11-16.pdf",
+    "audio_url": "reports/audio/podcast-2026-11-16.mp3",
+    "videos_count": 6,
+    "fuentes_consultadas": [
+      {
+        "id": "cZ4eKx8B1o0",
+        "title": "Consultorio de bolsa con Roberto Moro: Niveles clave del IBEX 35, banca y soportes",
+        "channel": "Capital Radio",
+        "date_formatted": "14/11/2026",
+        "url": "https://www.youtube.com/watch?v=cZ4eKx8B1o0",
+        "char_count": 28450,
+        "status": "Transcrito completo",
+        "description": "Análisis técnico de soportes en 19.800 del IBEX 35, estrategias en Santander, BBVA y recomendación de Iberdrola."
+      },
+      {
+        "id": "aY7fLz9C2p1",
+        "title": "Consultorio de bolsa con Alberto Iturralde: Psicología del mercado y alerta en Wall Street",
+        "channel": "Capital Radio",
+        "date_formatted": "12/11/2026",
+        "url": "https://www.youtube.com/watch?v=aY7fLz9C2p1",
+        "char_count": 31200,
+        "status": "Transcrito completo",
+        "description": "Tesis sobre distribución silenciosa de manos fuertes en tecnológicas y fortaleza relativa de eléctricas europeas."
+      },
+      {
+        "id": "dX2gMv3E4q5",
+        "title": "Consultorio con Javier Alfayate: Momentum europeo, máximos del DAX y gestión cuantitativa",
+        "channel": "Capital Radio",
+        "date_formatted": "10/11/2026",
+        "url": "https://www.youtube.com/watch?v=dX2gMv3E4q5",
+        "char_count": 22800,
+        "status": "Transcrito completo",
+        "description": "Comportamiento del DAX 40 en 26.700, sectores con fuerza relativa Mansfield y valores directores defensivos."
+      },
+      {
+        "id": "eW5hNw6F7r8",
+        "title": "Consultorio de bolsa con Jorge del Canto: Oportunidades en renta variable española",
+        "channel": "Capital Radio",
+        "date_formatted": "07/11/2026",
+        "url": "https://www.youtube.com/watch?v=eW5hNw6F7r8",
+        "char_count": 19650,
+        "status": "Transcrito completo",
+        "description": "Análisis de Banco Santander, Telefónica y fijación de stops de protección dinámica ante volatilidad."
+      },
+      {
+        "id": "fU8jPx9G0s2",
+        "title": "Consultorio y Análisis de Valores con Sito Rodríguez: Nvidia, ASML y semiconductores",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "11/11/2026",
+        "url": "https://www.youtube.com/watch?v=fU8jPx9G0s2",
+        "char_count": 34100,
+        "status": "Transcrito completo",
+        "description": "Tesis de inversión sobre la demanda secular de chips para centros de datos, márgenes de ASML y soporte técnico en 155$ de Nvidia."
+      },
+      {
+        "id": "gT1kQy2H3t4",
+        "title": "Repaso Semanal de Mercados y Tesis Tecnológicas con Sito Rodríguez: Nasdaq 100 y Microsoft",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "05/11/2026",
+        "url": "https://www.youtube.com/watch?v=gT1kQy2H3t4",
+        "char_count": 26700,
+        "status": "Transcrito completo",
+        "description": "Análisis de Microsoft, rotación a compañías con generación de caja recurrente y directrices de liquidez para final de año."
+      }
+    ]
+  },
+  {
     "date": "2026-11-15",
     "sentimiento_general": "Alcista con Cautela en Resistencias",
     "summary_snippet": "• Consolidación técnica general: Fase de pausa y digestión en índices directores tras las subidas acumuladas, con compresión de volatilidad que suele anticipar correcciones tácticas del 3% al 6%.\n• Asimetría de Bancos Ce...",
@@ -12,7 +89,69 @@
     "detail_url": "reports/html/report-2026-11-15.html",
     "pdf_url": "reports/pdf/informe-2026-11-15.pdf",
     "audio_url": "reports/audio/podcast-2026-11-15.mp3",
-    "videos_count": 5
+    "videos_count": 6,
+    "fuentes_consultadas": [
+      {
+        "id": "cZ4eKx8B1o0",
+        "title": "Consultorio de bolsa con Roberto Moro: Niveles clave del IBEX 35, banca y soportes",
+        "channel": "Capital Radio",
+        "date_formatted": "14/11/2026",
+        "url": "https://www.youtube.com/watch?v=cZ4eKx8B1o0",
+        "char_count": 28450,
+        "status": "Transcrito completo",
+        "description": "Análisis técnico de soportes en 19.800 del IBEX 35, estrategias en Santander, BBVA y recomendación de Iberdrola."
+      },
+      {
+        "id": "aY7fLz9C2p1",
+        "title": "Consultorio de bolsa con Alberto Iturralde: Psicología del mercado y alerta en Wall Street",
+        "channel": "Capital Radio",
+        "date_formatted": "12/11/2026",
+        "url": "https://www.youtube.com/watch?v=aY7fLz9C2p1",
+        "char_count": 31200,
+        "status": "Transcrito completo",
+        "description": "Tesis sobre distribución silenciosa de manos fuertes en tecnológicas y fortaleza relativa de eléctricas europeas."
+      },
+      {
+        "id": "dX2gMv3E4q5",
+        "title": "Consultorio con Javier Alfayate: Momentum europeo, máximos del DAX y gestión cuantitativa",
+        "channel": "Capital Radio",
+        "date_formatted": "10/11/2026",
+        "url": "https://www.youtube.com/watch?v=dX2gMv3E4q5",
+        "char_count": 22800,
+        "status": "Transcrito completo",
+        "description": "Comportamiento del DAX 40 en 26.700, sectores con fuerza relativa Mansfield y valores directores defensivos."
+      },
+      {
+        "id": "eW5hNw6F7r8",
+        "title": "Consultorio de bolsa con Jorge del Canto: Oportunidades en renta variable española",
+        "channel": "Capital Radio",
+        "date_formatted": "07/11/2026",
+        "url": "https://www.youtube.com/watch?v=eW5hNw6F7r8",
+        "char_count": 19650,
+        "status": "Transcrito completo",
+        "description": "Análisis de Banco Santander, Telefónica y fijación de stops de protección dinámica ante volatilidad."
+      },
+      {
+        "id": "fU8jPx9G0s2",
+        "title": "Consultorio y Análisis de Valores con Sito Rodríguez: Nvidia, ASML y semiconductores",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "11/11/2026",
+        "url": "https://www.youtube.com/watch?v=fU8jPx9G0s2",
+        "char_count": 34100,
+        "status": "Transcrito completo",
+        "description": "Tesis de inversión sobre la demanda secular de chips para centros de datos, márgenes de ASML y soporte técnico en 155$ de Nvidia."
+      },
+      {
+        "id": "gT1kQy2H3t4",
+        "title": "Repaso Semanal de Mercados y Tesis Tecnológicas con Sito Rodríguez: Nasdaq 100 y Microsoft",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "05/11/2026",
+        "url": "https://www.youtube.com/watch?v=gT1kQy2H3t4",
+        "char_count": 26700,
+        "status": "Transcrito completo",
+        "description": "Análisis de Microsoft, rotación a compañías con generación de caja recurrente y directrices de liquidez para final de año."
+      }
+    ]
   },
   {
     "date": "2026-11-14",
@@ -27,6 +166,68 @@
     "detail_url": "reports/html/report-2026-11-14.html",
     "pdf_url": "reports/pdf/informe-2026-11-14.pdf",
     "audio_url": "reports/audio/podcast-2026-11-14.mp3",
-    "videos_count": 5
+    "videos_count": 6,
+    "fuentes_consultadas": [
+      {
+        "id": "cZ4eKx8B1o0",
+        "title": "Consultorio de bolsa con Roberto Moro: Niveles clave del IBEX 35, banca y soportes",
+        "channel": "Capital Radio",
+        "date_formatted": "14/11/2026",
+        "url": "https://www.youtube.com/watch?v=cZ4eKx8B1o0",
+        "char_count": 28450,
+        "status": "Transcrito completo",
+        "description": "Análisis técnico de soportes en 19.800 del IBEX 35, estrategias en Santander, BBVA y recomendación de Iberdrola."
+      },
+      {
+        "id": "aY7fLz9C2p1",
+        "title": "Consultorio de bolsa con Alberto Iturralde: Psicología del mercado y alerta en Wall Street",
+        "channel": "Capital Radio",
+        "date_formatted": "12/11/2026",
+        "url": "https://www.youtube.com/watch?v=aY7fLz9C2p1",
+        "char_count": 31200,
+        "status": "Transcrito completo",
+        "description": "Tesis sobre distribución silenciosa de manos fuertes en tecnológicas y fortaleza relativa de eléctricas europeas."
+      },
+      {
+        "id": "dX2gMv3E4q5",
+        "title": "Consultorio con Javier Alfayate: Momentum europeo, máximos del DAX y gestión cuantitativa",
+        "channel": "Capital Radio",
+        "date_formatted": "10/11/2026",
+        "url": "https://www.youtube.com/watch?v=dX2gMv3E4q5",
+        "char_count": 22800,
+        "status": "Transcrito completo",
+        "description": "Comportamiento del DAX 40 en 26.700, sectores con fuerza relativa Mansfield y valores directores defensivos."
+      },
+      {
+        "id": "eW5hNw6F7r8",
+        "title": "Consultorio de bolsa con Jorge del Canto: Oportunidades en renta variable española",
+        "channel": "Capital Radio",
+        "date_formatted": "07/11/2026",
+        "url": "https://www.youtube.com/watch?v=eW5hNw6F7r8",
+        "char_count": 19650,
+        "status": "Transcrito completo",
+        "description": "Análisis de Banco Santander, Telefónica y fijación de stops de protección dinámica ante volatilidad."
+      },
+      {
+        "id": "fU8jPx9G0s2",
+        "title": "Consultorio y Análisis de Valores con Sito Rodríguez: Nvidia, ASML y semiconductores",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "11/11/2026",
+        "url": "https://www.youtube.com/watch?v=fU8jPx9G0s2",
+        "char_count": 34100,
+        "status": "Transcrito completo",
+        "description": "Tesis de inversión sobre la demanda secular de chips para centros de datos, márgenes de ASML y soporte técnico en 155$ de Nvidia."
+      },
+      {
+        "id": "gT1kQy2H3t4",
+        "title": "Repaso Semanal de Mercados y Tesis Tecnológicas con Sito Rodríguez: Nasdaq 100 y Microsoft",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "05/11/2026",
+        "url": "https://www.youtube.com/watch?v=gT1kQy2H3t4",
+        "char_count": 26700,
+        "status": "Transcrito completo",
+        "description": "Análisis de Microsoft, rotación a compañías con generación de caja recurrente y directrices de liquidez para final de año."
+      }
+    ]
   }
 ]
