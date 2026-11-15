@@ -92,14 +92,14 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
   },
   "guion_podcast": [
     {
-      "locutor": "Carlos",
+      "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "¡Hola a todos y bienvenidos a este repaso semanal de mercado! Hoy analizamos qué han dicho los principales expertos en los consultorios de bolsa..."
+      "texto": "¡Hola a todos, y bienvenidos a este repaso semanal de mercado! Hoy analizamos las claves operativas y el quórum de los principales consultorios bursátiles..."
     },
     {
-      "locutor": "Laura",
+      "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Así es, Carlos. Han sido dos semanas intensas con mucha atención puesta en los niveles clave del IBEX y Wall Street..."
+      "texto": "Efectivamente. Han sido jornadas de máxima intensidad en los parqués, con la mirada puesta en los niveles clave del IBEX y Wall Street..."
     }
   ]
 }
@@ -108,9 +108,11 @@ REGLAS CRÍTICAS DE ORDENACIÓN Y CALIDAD:
 1. En 'resumen_ejecutivo' y 'sentimiento_macro', UTILIZA SIEMPRE BULLETS (viñetas con '• ') para desglosar la síntesis, las directrices y la situación global. La lectura debe ser ágil y ejecutiva, estructurada con viñetas claras.
 2. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
 3. En cada bloque de empresas, ordena DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
-4. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre Carlos (voz masculina) y Laura (voz femenina). DEBE INCLUIR CASI TODA LA INFORMACIÓN DEL INFORME:
-   - Apertura dinámica imitando el ritmo radiofónico de los consultorios de Capital Radio y Visionarios Bolsa.
-   - Situación macroeconómica detallada (Europa y EE.UU., política monetaria, tipos).
+4. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre dos analistas (voz masculina y voz femenina):
+   - REGLA ESTRICTA DE LOCUTORES: NO incluyas nombres propios de los locutores ni en el campo 'locutor' ni dentro del diálogo hablado (prohibido decir 'Hola Carlos', 'Gracias Laura', o nombres similares). Usa simplemente 'Voz 1' y 'Voz 2' en el campo 'locutor'.
+   - DICCIÓN Y PUNTUACIÓN: Cuida al máximo los puntos, las comas y los signos de puntuación para que la síntesis de voz (TTS) ejecute pausas y respiraciones naturales, logrando una locución fluida y profesional.
+   - Apertura dinámica imitando el ritmo radiofónico de los consultorios de bolsa.
+   - Situación macroeconómica detallada (Europa y EE.UU., política monetaria, tipos de interés).
    - Repaso índice por índice (IBEX 35, DAX, S&P 500 y Nasdaq 100) con soportes, resistencias y divergencias.
    - Repaso a fondo de las empresas nacionales con mayor quórum (Iberdrola, bancos, etc.) detallando niveles técnicos y analistas.
    - Repaso a fondo de las empresas internacionales (Nvidia, ASML, megacaps de IA) analizando las tesis alcistas vs alertas de sobrecompra.

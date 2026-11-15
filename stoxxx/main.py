@@ -261,94 +261,94 @@ def get_sample_mock_report(date_str: str) -> Dict[str, Any]:
         },
         "guion_podcast": [
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva entrega de STOXXX, nuestro espacio semanal donde sintetizamos todo el quórum y las claves operativas de los consultorios de bolsa!"
+                "texto": "¡Muy buenas tardes a todos, y bienvenidos a una nueva entrega de STOXXX! Nuestro espacio semanal donde sintetizamos todo el quórum, y las claves operativas, de los principales consultorios de bolsa."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "Hola Carlos, y un saludo muy especial a todos los inversores que nos escuchan. Ha sido una semana de auténtico vértigo en los mercados, con los bancos centrales marcando el paso y los índices mundiales tanteando zonas de máximos históricos pero con señales evidentes de fatiga."
+                "texto": "Un saludo muy especial a toda nuestra comunidad inversora. Cerramos una semana de gran intensidad en los mercados financieros, con los bancos centrales marcando el compás y los índices tanteando zonas de máximos históricos, aunque con ciertas señales de fatiga técnica."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "Exacto, Laura. Si miramos el mapa macro global, hay bastante coincidencia entre analistas como Roberto Moro, Alberto Iturralde y Sito Rodríguez: no estamos ante un cambio de tendencia bajista estructural, pero sí ante un riesgo muy elevado de corrección de corto plazo de entre un 3% y un 6%."
+                "texto": "Efectivamente. Al analizar el mapa macroeconómico global, encontramos un consenso muy claro entre analistas de referencia como Roberto Moro, Alberto Iturralde o Sito Rodríguez. No estamos ante un cambio estructural a la baja, pero sí ante un riesgo elevado de corrección táctica a corto plazo, en torno al 3 o al 6 por ciento."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "Así es, y los números hablan por sí solos. En Europa, el DAX alemán sigue mostrando una fuerza impresionante rozando los 26.700 puntos, tal como destacaba Javier Alfayate. Y en nuestro mercado doméstico, el IBEX 35 defiende con solvencia el soporte clave de los 19.800 puntos, consolidando sobre los 20.000 con el empuje de la banca comercial."
+                "texto": "Así es, y las cifras técnicas lo confirman con nitidez. En Europa, el DAX alemán mantiene una fortaleza notable, rozando los 26.700 puntos, tal como destacaba Javier Alfayate. Mientras tanto, en nuestro selectivo doméstico, el IBEX 35 consolida sobre los 20.000 enteros con el respaldo de la banca comercial, defendiendo con solvencia su soporte clave en los 19.800 puntos."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "Sin embargo, en Wall Street la música suena diferente. Tanto el S&P 500 en la cota de los 7.550 como el Nasdaq 100 sobre los 27.900 puntos presentan lecturas de sobrecompra técnica notables. El quórum unánime de los analistas es tajante: en estos niveles de euforia no se compra; se vigila y se protegen las plusvalías."
+                "texto": "Sin embargo, al otro lado del Atlántico el panorama exige mayor prudencia. Tanto el S&P 500 en los 7.550 enteros, como el Nasdaq 100 sobre los 27.900 puntos, muestran lecturas de sobrecompra evidentes. El criterio compartido por los analistas es contundente: en estos niveles de complacencia no se entra a comprar; conviene vigilar de cerca y proteger beneficios acumulados."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "Totalmente de acuerdo, Carlos. De hecho, donde más discrepancias hemos detectado entre los expertos es en la estrategia a seguir con la tecnología. Mientras analistas como Roberto Moro ven oportunidad para pescar en recortes, Alberto Iturralde alerta con contundencia de que podríamos estar viviendo una fase de distribución institucional en las grandes firmas de inteligencia artificial."
+                "texto": "Totalmente de acuerdo. De hecho, donde mayor divergencia de opiniones hemos observado es en la renta variable tecnológica. Mientras expertos como Roberto Moro ven valor para acumular en recortes, Alberto Iturralde advierte con firmeza sobre un posible proceso de distribución institucional en las grandes cotizadas de inteligencia artificial."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "Entremos de lleno en el bloque de empresas nacionales, Laura, porque aquí el quórum ha sido indiscutible. La gran protagonista de la semana en las consultas de los oyentes ha sido Iberdrola, con menciones unánimes de Moro, Iturralde y Alfayate."
+                "texto": "Entremos de lleno en el bloque de empresas nacionales, porque aquí el quórum de los consultorios ha sido indiscutible. El foco indiscutible de las consultas de los inversores ha sido Iberdrola, con valoraciones unánimes de Moro, Iturralde y Alfayate."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "Iberdrola está en una estructura técnica impecable, en auténtica subida libre sobre los 23 euros. Los analistas coinciden en situar su soporte de referencia en torno a los 22,80 euros y consideran que sigue siendo el mejor refugio defensivo del mercado español por visibilidad de ingresos y dividendo."
+                "texto": "Iberdrola muestra una estructura gráfica excelente, en auténtica subida libre por encima de los 23 euros por acción. Los analistas fijan su soporte de referencia en torno a los 22 euros con 80 céntimos, considerándola un valor defensivo idóneo por visibilidad y rentabilidad por dividendo."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "Y en el sector bancario, Banco Santander y BBVA siguen concentrando interés. Paco Pérez y Víctor Galán señalan que el rally de los bancos aún puede tener recorrido, pero advierten que comprar ahora exige stops muy ceñidos, por ejemplo bajo los 10,70 euros en Santander."
+                "texto": "En el sector financiero, Banco Santander y BBVA continúan concentrando buena parte del interés. Paco Pérez y Víctor Galán señalan que la tendencia alcista de la banca aún tiene recorrido, aunque subrayan la necesidad de mantener stops ajustados, por ejemplo por debajo de los 10 euros con 70 céntimos en el caso de Santander."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "También ha habido consultas muy intensas sobre valores en dificultades, como Acciona tras su desplome reciente, donde Roberto Moro y Jorge del Canto piden máxima cautela hasta confirmar un suelo firme, o Repsol, que según David Galán continúa atrapada en la montaña rusa de los precios del crudo."
+                "texto": "También ha habido consultas recurrentes sobre valores rezagados. Es el caso de Acciona, tras su reciente castigo en cotización, donde Roberto Moro y Jorge del Canto recomiendan paciencia hasta ver un suelo fiable; o Repsol, que según David Galán continúa muy condicionada por la volatilidad en el precio del crudo."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "Pasemos ahora al bloque internacional, Laura, donde un nombre propio ha acaparado todas las miradas: Nvidia, comentada hasta en cuatro consultorios y análisis distintos durante estos siete días."
+                "texto": "Pasemos al bloque internacional, donde un protagonista indiscutible ha acaparado la atención: Nvidia, mencionada y analizada hasta en cuatro consultorios independientes a lo largo de estos días."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "El debate en Nvidia es apasionante. Sito Rodríguez en Visionarios Bolsa recalca que la demanda de infraestructura para inteligencia artificial no tiene freno. En cambio, Iturralde insiste en su famoso aviso: ojo con quedar atrapados en máximos históricos cuando el dinero inteligente ya ha hecho su trabajo."
+                "texto": "El contraste de tesis en Nvidia es muy enriquecedor. Sito Rodríguez resalta que la demanda de infraestructura de centros de datos sigue sin freno. Por contra, Iturralde reitera su advertencia habitual: prudencia máxima ante el riesgo de comprar en máximos cuando las manos fuertes ya han completado su movimiento."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "En niveles técnicos, el soporte a vigilar en Nvidia son los 155 dólares. Y otro valor estrella en semiconductores ha sido ASML Holding, donde Gerardo Ortega y varios expertos coinciden en que, cotizando sobre los 1.490 dólares, sigue siendo una oportunidad de valor muy atractiva para inversores de largo plazo."
+                "texto": "Desde una perspectiva técnica, el nivel clave a monitorizar en Nvidia se ubica en los 155 dólares. En cuanto a semiconductores europeos, destaca ASML Holding, donde Gerardo Ortega y varios expertos coinciden en que, cotizando cerca de los 1.490 dólares, ofrece una ecuación rentabilidad-riesgo atractiva a largo plazo."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "No olvidemos tampoco al Oro, Carlos. Roberto Moro destacaba esta semana que el metal precioso se aproxima a una zona clave de rebote que podría ofrecer una oportunidad de entrada con gran relación rentabilidad-riesgo ante las tensiones geopolíticas y la política monetaria."
+                "texto": "Conviene mencionar también las materias primas, en particular el Oro. Roberto Moro señalaba esta semana que el activo dorado se sitúa en una zona óptima de apoyo, ofreciendo una oportunidad interesante de cobertura ante las tensiones geopolíticas y la incertidumbre de tipos."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "Para ir cerrando, Laura, me quedo con la regla de oro que mencionaba José María Luna en Capital Radio: la regla de las tres D: defensa en la selección de activos, diversificación real de carteras y disciplina férrea en la ejecución de los stops."
+                "texto": "Para ir concluyendo este repaso, nos quedamos con una regla estratégica fundamental: la regla de las tres D. Selección rigurosa para la Defensa del patrimonio, Diversificación global equilibrada, y Disciplina innegociable en la gestión de las órdenes de stop."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "Una recomendación imprescindible para navegar estas semanas. Recuerden que tienen a su disposición el informe PDF completo y todas las cotizaciones verificadas al minuto en nuestra plataforma web."
+                "texto": "Una pauta esencial para preservar capital en el contexto actual. Les recordamos que disponen del informe completo en formato PDF, así como de todas las cotizaciones verificadas al minuto en nuestro portal web."
             },
             {
-                "locutor": "Carlos",
+                "locutor": "Voz 1",
                 "genero": "masculino",
-                "texto": "¡Muchísimas gracias por acompañarnos, buen fin de semana y muy buenas inversiones a todos!"
+                "texto": "Muchas gracias por acompañarnos en este análisis. Les deseamos una excelente semana y muy buenas decisiones de inversión."
             },
             {
-                "locutor": "Laura",
+                "locutor": "Voz 2",
                 "genero": "femenino",
-                "texto": "¡Hasta la próxima entrega en STOXXX!"
+                "texto": "¡Un cordial saludo, y hasta nuestra próxima edición en STOXXX!"
             }
         ]
     }
@@ -502,7 +502,7 @@ def main():
     if not args.skip_audio:
         guion = report_data.get("guion_podcast", [])
         if guion:
-            with console.status("[bold green]Sintetizando podcast dual en MP3 (Carlos & Laura)..."):
+            with console.status("[bold green]Sintetizando podcast dual en MP3..."):
                 podcast_gen = PodcastGenerator()
                 audio_path = podcast_gen.generate_podcast(guion, date_str)
             console.print(f"[bold green]✔[/bold green] Podcast MP3 generado: [cyan]{audio_path}[/cyan]")
