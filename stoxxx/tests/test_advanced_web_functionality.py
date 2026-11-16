@@ -220,5 +220,20 @@ class AdvancedWebFunctionalityTests(unittest.TestCase):
             self.assertIn("Google Finance", link.get("aria-label", ""), "El atributo aria-label debe referenciar Google Finance")
             self.assertTrue(link["href"].startswith("https://www.google.com/finance/quote/"))
 
+    # =========================================================================
+    # 7. PRUEBAS DE AUSENCIA DE EMOJIS (DISEÑO PROFESIONAL CON ICONOS SVG)
+    # =========================================================================
+
+    def test_strict_no_emojis_in_web_interface(self):
+        """Verifica que no se utilicen emojis en la interfaz web, asegurando el uso de iconos SVG profesionales."""
+        import re
+        emoji_pattern = re.compile(
+            r'[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50]|[\u3030]|[\u00a9\u00ae]|✔|📅|📚|📻|🇪🇸|🌍|📈|📄'
+        )
+        for soup, doc_name in [(self.index_soup, "index.html"), (self.detail_soup, "report_detail.html")]:
+            html_text = str(soup)
+            emojis_found = emoji_pattern.findall(html_text)
+            self.assertEqual(len(emojis_found), 0, f"No deben existir emojis en {doc_name}. Se encontraron: {set(emojis_found)}")
+
 if __name__ == "__main__":
     unittest.main()

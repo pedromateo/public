@@ -132,13 +132,13 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
         console.print(table)
         console.print("\n")
 
-    print_company_table("Valores Nacionales (IBEX / Continuo)", empresas.get("nacionales", []), "🇪🇸")
-    print_company_table("Valores Internacionales (Nasdaq, DAX, etc.)", empresas.get("internacionales", []), "🌍")
+    print_company_table("Valores Nacionales (IBEX / Continuo)", empresas.get("nacionales", []))
+    print_company_table("Valores Internacionales (Nasdaq, DAX, etc.)", empresas.get("internacionales", []))
 
     # 4. FUENTES CONSULTADAS Y REFERENCIAS
     fuentes = report_data.get("fuentes_consultadas", [])
     if fuentes:
-        table_src = Table(title="📚 Fuentes Consultadas y Referencias Audiovisuales (Consultorios)", border_style="blue")
+        table_src = Table(title="Fuentes Consultadas y Referencias Audiovisuales (Consultorios)", border_style="blue")
         table_src.add_column("Canal", style="bold cyan")
         table_src.add_column("Fecha", style="white")
         table_src.add_column("Título / Consultorio", style="white")

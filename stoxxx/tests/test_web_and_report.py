@@ -44,6 +44,9 @@ class TestWebAndReport(unittest.TestCase):
 
         # Textos prohibidos
         self.assertNotIn("(Por Nivel de Quórum)", content, "No debe aparecer '(Por Nivel de Quórum)'")
+        self.assertNotIn("Diseño inspirado en la prensa económica de referencia con soporte multitema Expansión y Terminal.", content, "Frase eliminada no debe figurar")
+        self.assertNotIn("📅", content, "No deben utilizarse emojis en index.html")
+        self.assertNotIn("📚", content, "No deben utilizarse emojis en index.html")
 
         # Fuentes
         self.assertIn("16 emisiones monitorizadas", content, "Debe indicar 16 emisiones monitorizadas")
@@ -67,8 +70,9 @@ class TestWebAndReport(unittest.TestCase):
         with open(self.report_detail, "r", encoding="utf-8") as f:
             content = f.read()
 
-        # Fecha junto al icono del calendario
-        self.assertIn("📅 2026-11-16", content, "Debe aparecer la fecha '2026-11-16' al lado de '📅'")
+        # Fecha junto al icono SVG del calendario (sin emojis)
+        self.assertIn("2026-11-16", content, "Debe aparecer la fecha '2026-11-16'")
+        self.assertNotIn("📅", content, "No deben utilizarse emojis como 📅 en el informe")
 
         # Audio
         self.assertIn("Resumen de audio", content, "Debe titularse 'Resumen de audio'")

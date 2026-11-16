@@ -162,12 +162,18 @@
     <!-- ENCABEZADO Y DATELINE DEL INFORME -->
     <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="mono text-xs px-2.5 py-1 rounded-md bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-300 border border-[#ded0bd] dark:border-slate-700 font-bold">
-          📅 {{ date or report.fecha_informe or date_str }}
+        <span class="mono text-xs px-2.5 py-1 rounded-md bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-300 border border-[#ded0bd] dark:border-slate-700 font-bold inline-flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 text-[#0f2e4e] dark:text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span>{{ date or report.fecha_informe or date_str }}</span>
         </span>
         {% if report._doble_check %}
-        <span class="mono text-[11px] px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 font-medium">
-          ✔ Doble Check: {{ report._doble_check.fidelidad_score }}% fidelidad
+        <span class="mono text-[11px] px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 font-medium inline-flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Doble Check: {{ report._doble_check.fidelidad_score }}% fidelidad</span>
         </span>
         {% endif %}
       </div>
@@ -341,8 +347,11 @@
       <!-- BLOQUE 1: VALORES NACIONALES -->
       <div class="space-y-3">
         <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-1.5 flex items-center justify-between">
-          <h3 class="text-xs font-bold font-serif text-[#0f2e4e] dark:text-slate-200 uppercase tracking-wide">
-            🇪🇸 Valores Nacionales (IBEX / Continuo)
+          <h3 class="text-xs font-bold font-serif text-[#0f2e4e] dark:text-slate-200 uppercase tracking-wide inline-flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5 text-[#0f2e4e] dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+            <span>Valores Nacionales (IBEX / Continuo)</span>
           </h3>
           <span class="text-[10px] text-[#6b7280] dark:text-slate-500 font-medium">Mayor quórum primero</span>
         </div>
@@ -404,8 +413,11 @@
       <!-- BLOQUE 2: VALORES INTERNACIONALES -->
       <div class="space-y-3 pt-2">
         <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-1.5 flex items-center justify-between">
-          <h3 class="text-xs font-bold font-serif text-[#0f2e4e] dark:text-slate-200 uppercase tracking-wide">
-            🌍 Valores Internacionales (Nasdaq, DAX, etc.)
+          <h3 class="text-xs font-bold font-serif text-[#0f2e4e] dark:text-slate-200 uppercase tracking-wide inline-flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5 text-[#0f2e4e] dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+            </svg>
+            <span>Valores Internacionales (Nasdaq, DAX, etc.)</span>
           </h3>
           <span class="text-[10px] text-[#6b7280] dark:text-slate-500 font-medium">Mayor quórum primero</span>
         </div>
@@ -470,7 +482,9 @@
       <details id="fuentes" class="group bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
         <summary class="cursor-pointer list-none px-4 py-3.5 sm:px-5 sm:py-4 flex items-center justify-between bg-[#fbf5ee] dark:bg-slate-900/90 hover:bg-[#f6eee2] dark:hover:bg-slate-800/90 transition select-none">
           <div class="flex items-center space-x-2.5">
-            <span class="text-base sm:text-lg">📚</span>
+            <svg class="w-4 h-4 text-[#0f2e4e] dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
             <div>
               <h3 class="text-sm font-serif font-bold text-[#0f2e4e] dark:text-white uppercase tracking-wide">
                 Fuentes Consultadas y Referencias de Análisis
@@ -505,13 +519,19 @@
             <div class="p-3.5 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex flex-wrap items-center gap-1.5">
-                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
                     {% if 'capital' in canal_nombre|lower %} bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
                     {% else %} bg-[#fef3c7] text-[#92400e] dark:bg-amber-950 dark:text-amber-300 border border-amber-200 dark:border-amber-800 {% endif %}">
-                    📻 {{ canal_nombre }}
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>{{ canal_nombre }}</span>
                   </span>
-                  <span class="mono text-[11px] text-[#6b7280] dark:text-slate-400">
-                    📅 {{ fecha_str }}
+                  <span class="mono text-[11px] text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>{{ fecha_str }}</span>
                   </span>
                 </div>
                 {% if fuente.url %}
@@ -543,7 +563,12 @@
                 </div>
                 <div class="mono font-medium">
                   {% if chars_count %}
-                  <span>📄 {{ "{:,}".format(chars_count).replace(",", ".") }} caracteres de transcripción</span>
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>{{ "{:,}".format(chars_count).replace(",", ".") }} caracteres de transcripción</span>
+                  </span>
                   {% endif %}
                 </div>
               </div>
@@ -553,8 +578,11 @@
             <!-- Fuentes por defecto de los canales monitorizados -->
             <div class="p-3.5 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                  📻 Capital Radio
+                <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800 inline-flex items-center space-x-1.5">
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                  </svg>
+                  <span>Capital Radio</span>
                 </span>
                 <a href="https://www.youtube.com/playlist?list=PLR1EASbH4_HN2WCUIyxqxsmi25wYBGn2d" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:underline">
                   Ver Playlist Consultorios &rarr;
@@ -564,14 +592,17 @@
                 Consultorio de Bolsa - Capital Radio (Emisiones Semanales)
               </h4>
               <p class="text-[11px] text-[#555d6b] dark:text-slate-400">
-                Roberto Moro, Alberto Iturralde, Javier Alfayate y Jorge del Canto.
+                R. Moro, A. Iturralde, J. Alfayate y J. del Canto.
               </p>
             </div>
 
             <div class="p-3.5 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider bg-[#fef3c7] text-[#92400e] dark:bg-amber-950 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
-                  📈 Visionarios Bolsa
+                <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider bg-[#fef3c7] text-[#92400e] dark:bg-amber-950 dark:text-amber-300 border border-amber-200 dark:border-amber-800 inline-flex items-center space-x-1.5">
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                  </svg>
+                  <span>Visionarios Bolsa</span>
                 </span>
                 <a href="https://www.youtube.com/@VisionariosBolsa/videos" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:underline">
                   Ver Canal &rarr;
