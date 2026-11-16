@@ -162,7 +162,7 @@ def main():
     parser.add_argument("--no-push", action="store_false", dest="push", help="No realizar git push")
     parser.add_argument("--skip-audio", action="store_true", help="Omitir generación del podcast MP3")
     parser.add_argument("--skip-pdf", action="store_true", help="Omitir generación del informe PDF")
-    parser.add_argument("--allow-partial", action="store_true", default=False, help="Proceder automáticamente con transcripciones parciales si faltan vídeos")
+    parser.add_argument("--allow-partial", action="store_true", default=True, help="Proceder automáticamente con transcripciones parciales si faltan vídeos")
     parser.add_argument("--verbose", action="store_true", help="Activar modo verbose / debug")
 
     args = parser.parse_args()
@@ -335,7 +335,7 @@ def main():
     with console.status("[bold green]Ejecutando tests de integridad web y maquetación..."):
         import unittest
         loader = unittest.TestLoader()
-        suite = loader.loadTestsFromName("tests.test_web_and_report")
+        suite = loader.discover("tests", pattern="test_*.py")
         runner = unittest.TextTestRunner(verbosity=0)
         test_result = runner.run(suite)
     if test_result.wasSuccessful():

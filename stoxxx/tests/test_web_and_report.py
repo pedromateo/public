@@ -48,6 +48,11 @@ class TestWebAndReport(unittest.TestCase):
         # Fuentes
         self.assertIn("16 emisiones monitorizadas", content, "Debe indicar 16 emisiones monitorizadas")
 
+        # Accesibilidad y SEO
+        self.assertIn('name="description"', content, "Debe incluir meta description para SEO")
+        self.assertIn('property="og:title"', content, "Debe incluir etiqueta OpenGraph og:title")
+        self.assertIn('aria-label="Buscar empresa, ticker, índice o fecha"', content, "El input de búsqueda debe tener aria-label")
+
         # Botón de modo claro / oscuro sin texto
         theme_btn_match = re.search(r'<button\s+id="theme-toggle"[^>]*>(.*?)</button>', content, re.DOTALL)
         self.assertTrue(theme_btn_match, "El botón #theme-toggle debe existir")

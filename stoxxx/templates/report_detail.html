@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Informe Bursátil {{ date }} | STOXXX</title>
+  <title>Informe Bursátil {{ date or report.fecha_informe or date_str }} | STOXXX</title>
+  <meta name="description" content="Informe financiero detallado: consenso de consultorios de bolsa, niveles técnicos y resumen de audio para {{ date or report.fecha_informe or date_str }}.">
+  <meta property="og:title" content="Informe Bursátil {{ date or report.fecha_informe or date_str }} | STOXXX">
+  <meta property="og:description" content="Consenso de consultorios de bolsa, niveles técnicos de soporte y resistencia y resumen de audio.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../../apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
   
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
@@ -193,7 +199,7 @@
     {% endif %}
 
     <!-- 1. RESUMEN EJECUTIVO -->
-    <section class="bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-sm">
+    <section id="resumen" class="bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-sm">
       <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -241,7 +247,7 @@
     </section>
 
     <!-- 2. SENTIMIENTO DE MERCADO Y VISIÓN MACRO -->
-    <section class="space-y-4">
+    <section id="macro" class="space-y-4">
       <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path>
@@ -322,7 +328,7 @@
     </section>
 
     <!-- 3. ANÁLISIS DE EMPRESAS (ORDENADAS POR QUÓRUM) -->
-    <section class="space-y-5">
+    <section id="empresas" class="space-y-5">
       <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
@@ -460,7 +466,7 @@
           </div>
         </summary>
         
-        <div class="p-4 sm:p-5 space-y-3.5 border-t border-[#e2d5c3] dark:border-slate-800 bg-[#fffdfa] dark:bg-slate-900/40">
+        <div id="lista-fuentes" class="p-4 sm:p-5 space-y-3.5 border-t border-[#e2d5c3] dark:border-slate-800 bg-[#fffdfa] dark:bg-slate-900/40">
           <p class="text-xs text-[#555d6b] dark:text-slate-400 leading-relaxed mb-1">
             Cada emisión ha sido procesada de manera íntegra, extrayendo los timestamps, menciones de analistas y niveles técnicos contrastados frente a la cotización en tiempo real:
           </p>

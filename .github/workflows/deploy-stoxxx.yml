@@ -41,6 +41,7 @@ jobs:
           if [ -d "stoxxx" ]; then
             echo "Packaging STOXXX..."
             cp -r stoxxx/index.html stoxxx/data stoxxx/reports dist/stoxxx/ || true
+            cp -f stoxxx/favicon* stoxxx/apple-touch-icon.png dist/stoxxx/ 2>/dev/null || true
           fi
 
           # Brainfit Copy
