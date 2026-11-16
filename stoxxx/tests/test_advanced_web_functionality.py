@@ -200,5 +200,23 @@ class AdvancedWebFunctionalityTests(unittest.TestCase):
             btn_text = btn.get_text(strip=True)
             self.assertEqual(btn_text, "", f"El botón #theme-toggle en {doc} no debe tener texto visible")
 
+    # =========================================================================
+    # 6. PRUEBAS DE ENLACES A GOOGLE FINANCE EN ANÁLISIS DE EMPRESAS
+    # =========================================================================
+
+    def test_google_finance_links_in_company_analysis(self):
+        """Verifica que cada empresa analizada tenga junto a su nombre un enlace funcional a su ficha en Google Finance."""
+        empresas_section = self.detail_soup.find("section", id="empresas")
+        self.assertIsNotNone(empresas_section, "Debe existir la sección #empresas")
+
+        gf_links = empresas_section.find_all("a", href=lambda h: h and "google.com/finance/quote" in h)
+        self.assertEqual(len(gf_links), 19, "Deben existir exactamente 19 enlaces a fichas de Google Finance (12 nacionales + 7 internacionales)")
+
+        for link in gf_links:
+            self.assertEqual(link.get("target"), "_blank", "El enlace a Google Finance debe abrirse en nueva pestaña")
+            self.assertEqual(link.get("rel"), ["noopener", "noreferrer"], "El enlace debe incluir rel='noopener noreferrer'")
+            self.assertIn("Google Finance", link.get_text(), "El texto visible o badge debe indicar 'Google Finance'")
+            self.assertTrue(link["href"].startswith("https://www.google.com/finance/quote/"))
+
 if __name__ == "__main__":
     unittest.main()

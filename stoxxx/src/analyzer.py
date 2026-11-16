@@ -142,6 +142,55 @@ ANALYST_ABBREVIATIONS = {
     "Sito Rodriguez": "S. Rodríguez",
 }
 
+CANONICAL_GOOGLE_FINANCE_QUOTES = {
+    "IBE.MC": "IBE:BME",
+    "SAN.MC": "SAN:BME",
+    "ITX.MC": "ITX:BME",
+    "ACS.MC": "ACS:BME",
+    "ACX.MC": "ACX:BME",
+    "REP.MC": "REP:BME",
+    "ELE.MC": "ELE:BME",
+    "GRF.MC": "GRF:BME",
+    "IAG.MC": "IAG:BME",
+    "ANA.MC": "ANA:BME",
+    "FDR.MC": "FDR:BME",
+    "TEF.MC": "TEF:BME",
+    "NVDA": "NVDA:NASDAQ",
+    "AVGO": "AVGO:NASDAQ",
+    "AMD": "AMD:NASDAQ",
+    "MSFT": "MSFT:NASDAQ",
+    "ASML": "ASML:NASDAQ",
+    "HEIA.AS": "HEIA:AMS",
+    "BAS.DE": "BAS:ETR",
+}
+
+def get_google_finance_url(company: Dict[str, Any]) -> str:
+    """Genera la URL canónica y verificada para la ficha en Google Finance de una empresa."""
+    ticker = (company.get("ticker") or "").strip()
+    nombre = (company.get("nombre") or "").strip()
+
+    if ticker in CANONICAL_GOOGLE_FINANCE_QUOTES:
+        return f"https://www.google.com/finance/quote/{CANONICAL_GOOGLE_FINANCE_QUOTES[ticker]}"
+
+    # Reglas basadas en mercado y sufijos bursátiles habituales
+    if ticker.endswith(".MC"):
+        return f"https://www.google.com/finance/quote/{ticker[:-3]}:BME"
+    elif ticker.endswith(".AS"):
+        return f"https://www.google.com/finance/quote/{ticker[:-3]}:AMS"
+    elif ticker.endswith(".DE"):
+        return f"https://www.google.com/finance/quote/{ticker[:-3]}:ETR"
+    elif ticker.endswith(".PA"):
+        return f"https://www.google.com/finance/quote/{ticker[:-3]}:EPA"
+    elif ticker.endswith(".L"):
+        return f"https://www.google.com/finance/quote/{ticker[:-2]}:LON"
+    elif ticker:
+        return f"https://www.google.com/finance/quote/{ticker}:NASDAQ"
+    elif nombre:
+        import urllib.parse
+        return f"https://www.google.com/finance/quote/{urllib.parse.quote(nombre)}"
+
+    return "https://www.google.com/finance"
+
 def format_analyst_abbreviations(obj):
     if isinstance(obj, str):
         for full, abbr in ANALYST_ABBREVIATIONS.items():
@@ -238,5 +287,11 @@ class MarketAnalyzer:
                 }
                 for vid in videos
             ]
+
+        # Asegurar URLs de Google Finance para cada empresa analizada
+        empresas = report_data.get("analisis_empresas", {})
+        for comp in empresas.get("nacionales", []) + empresas.get("internacionales", []):
+            if not comp.get("google_finance_url"):
+                comp["google_finance_url"] = get_google_finance_url(comp)
 
         return format_analyst_abbreviations(report_data)

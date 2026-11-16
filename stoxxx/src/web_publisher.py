@@ -10,6 +10,7 @@ from config import (
     REPORTS_JSON,
     BASE_DIR
 )
+from src.analyzer import get_google_finance_url
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,8 @@ class WebPublisher:
 
     def __init__(self):
         self.env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
+        self.env.filters["google_finance_url"] = get_google_finance_url
+        self.env.globals["get_google_finance_url"] = get_google_finance_url
         self.index_template = self.env.get_template("index.html")
         self.detail_template = self.env.get_template("report_detail.html")
 
@@ -140,6 +143,12 @@ class WebPublisher:
 
         # Asegurar metadatos de fuentes consultadas
         fuentes = self.ensure_sources_metadata(report_data, date_str, videos_count)
+
+        # Asegurar URLs de Google Finance para cada empresa analizada
+        empresas = report_data.get("analisis_empresas", {})
+        for comp in empresas.get("nacionales", []) + empresas.get("internacionales", []):
+            if not comp.get("google_finance_url"):
+                comp["google_finance_url"] = get_google_finance_url(comp)
 
         # Rutas relativas para navegación interna en GitHub Pages
         pdf_rel_path = f"../pdf/informe-{date_str}.pdf" if has_pdf else None

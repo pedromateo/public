@@ -65,7 +65,8 @@
         "soporte": "14.00€",
         "resistencia": "Subida Libre (>158.000 M€)",
         "recomendacion": "Mantener / Comprar; caballo ganador del mercado",
-        "tesis": "Sube con mínima volatilidad encadenando 10 semanas al alza. Beneficiaria neta de la demanda eléctrica de centros de datos de IA. Flujos récord de fondos institucionales."
+        "tesis": "Sube con mínima volatilidad encadenando 10 semanas al alza. Beneficiaria neta de la demanda eléctrica de centros de datos de IA. Flujos récord de fondos institucionales.",
+        "google_finance_url": "https://www.google.com/finance/quote/IBE:BME"
       },
       {
         "nombre": "Banco Santander",
@@ -82,7 +83,8 @@
         "soporte": "10.74€",
         "resistencia": "11.50€",
         "recomendacion": "Comprar / Mantener con stop en 10.74€",
-        "tesis": "Iturralde lo selecciona en Minuto de Oro (compra en 11,03€, obj 11,50€ por efecto electoral). Motor bancario del Ibex 35 junto a BBVA y CaixaBank."
+        "tesis": "Iturralde lo selecciona en Minuto de Oro (compra en 11,03€, obj 11,50€ por efecto electoral). Motor bancario del Ibex 35 junto a BBVA y CaixaBank.",
+        "google_finance_url": "https://www.google.com/finance/quote/SAN:BME"
       },
       {
         "nombre": "Inditex",
@@ -98,7 +100,8 @@
         "soporte": "54.00€",
         "resistencia": "Máximos Históricos (>58€)",
         "recomendacion": "Comprar / Mantener en máximos",
-        "tesis": "Consolidando máximos históricos por encima de 58€. R. Moro y V. Galán coinciden en que es el valor más sólido del mercado español."
+        "tesis": "Consolidando máximos históricos por encima de 58€. R. Moro y V. Galán coinciden en que es el valor más sólido del mercado español.",
+        "google_finance_url": "https://www.google.com/finance/quote/ITX:BME"
       },
       {
         "nombre": "ACS",
@@ -114,7 +117,8 @@
         "soporte": "89.00€",
         "resistencia": "98.00€",
         "recomendacion": "Operar solo rebote táctico con stop ceñido",
-        "tesis": "Castigada por moratorias en datacenters en EE.UU. Ortega y Pinto ven formación de suelo para rebotar hacia 98-100€, mientras Alfayate y Pérez alertan de caídas posteriores a 75€."
+        "tesis": "Castigada por moratorias en datacenters en EE.UU. Ortega y Pinto ven formación de suelo para rebotar hacia 98-100€, mientras Alfayate y Pérez alertan de caídas posteriores a 75€.",
+        "google_finance_url": "https://www.google.com/finance/quote/ACS:BME"
       },
       {
         "nombre": "Acerinox",
@@ -129,7 +133,8 @@
         "soporte": "14.85€",
         "resistencia": "17.20€",
         "recomendacion": "Comprar para rebote táctico",
-        "tesis": "Apoyo perfecto en retroceso del 50% de Fibonacci y base de Bollinger. Formó isla alcista en suelo con objetivos en 16,75€ y 17,20€."
+        "tesis": "Apoyo perfecto en retroceso del 50% de Fibonacci y base de Bollinger. Formó isla alcista en suelo con objetivos en 16,75€ y 17,20€.",
+        "google_finance_url": "https://www.google.com/finance/quote/ACX:BME"
       },
       {
         "nombre": "Repsol",
@@ -144,7 +149,8 @@
         "soporte": "27.80€",
         "resistencia": "Máximos Históricos (+7,5%)",
         "recomendacion": "Vigilar stop en 27.80€; no abrir largos sin confirmación",
-        "tesis": "Clatum compra esperando petróleo a 113$ por conflicto con Irán. Moro recomienda cortos o deshacer por ruptura bajista del crudo hacia 76$. Galán exige ceñir stop en 27,80€."
+        "tesis": "Clatum compra esperando petróleo a 113$ por conflicto con Irán. Moro recomienda cortos o deshacer por ruptura bajista del crudo hacia 76$. Galán exige ceñir stop en 27,80€.",
+        "google_finance_url": "https://www.google.com/finance/quote/REP:BME"
       },
       {
         "nombre": "Endesa",
@@ -158,7 +164,8 @@
         "soporte": "43.58€",
         "resistencia": "Máximos Históricos",
         "recomendacion": "Mantener en subida libre",
-        "tesis": "Estructura impecable en subida libre con reducida volatilidad. Bolinches prefiere Iberdrola por liquidez global pero califica a Endesa de valor refugio excelente."
+        "tesis": "Estructura impecable en subida libre con reducida volatilidad. Bolinches prefiere Iberdrola por liquidez global pero califica a Endesa de valor refugio excelente.",
+        "google_finance_url": "https://www.google.com/finance/quote/ELE:BME"
       },
       {
         "nombre": "Grifols",
@@ -172,7 +179,8 @@
         "soporte": "9.70€",
         "resistencia": "12.75€",
         "recomendacion": "Mantener con stop en 445$ / 9.70€",
-        "tesis": "Morgan Stanley elevó su participación al 6,93%. El valor superó los 10,80€ con throwback sobre media de 200 ascendente. Del Canto aconseja ceñir stop."
+        "tesis": "Morgan Stanley elevó su participación al 6,93%. El valor superó los 10,80€ con throwback sobre media de 200 ascendente. Del Canto aconseja ceñir stop.",
+        "google_finance_url": "https://www.google.com/finance/quote/GRF:BME"
       },
       {
         "nombre": "IAG",
@@ -186,7 +194,8 @@
         "soporte": "4.50€",
         "resistencia": "Subida Libre",
         "recomendacion": "Comprar en retroceso / Mantener",
-        "tesis": "Ruptura de canal descendente con fuerte volumen institucional (+5,7% semanal). Subida libre mensual de libro."
+        "tesis": "Ruptura de canal descendente con fuerte volumen institucional (+5,7% semanal). Subida libre mensual de libro.",
+        "google_finance_url": "https://www.google.com/finance/quote/IAG:BME"
       },
       {
         "nombre": "Acciona",
@@ -200,7 +209,8 @@
         "soporte": "195.00€",
         "resistencia": "203.00€",
         "recomendacion": "Evitar; stop innegociable en 195€ para quien esté dentro",
-        "tesis": "Caída del 8% tras resultados. R. Moro advierte 'mírame y no me toques'. Solo mantener si respeta el suelo de 195€."
+        "tesis": "Caída del 8% tras resultados. R. Moro advierte 'mírame y no me toques'. Solo mantener si respeta el suelo de 195€.",
+        "google_finance_url": "https://www.google.com/finance/quote/ANA:BME"
       },
       {
         "nombre": "Fluidra",
@@ -213,7 +223,8 @@
         "soporte": "17.00€",
         "resistencia": "20.00€",
         "recomendacion": "Venta / Evitar",
-        "tesis": "Peor valor del Ibex en 2026. Triple techo en 20€ y trayectoria bajista primaria hacia 17€ y 15€."
+        "tesis": "Peor valor del Ibex en 2026. Triple techo en 20€ y trayectoria bajista primaria hacia 17€ y 15€.",
+        "google_finance_url": "https://www.google.com/finance/quote/FDR:BME"
       },
       {
         "nombre": "Telefónica",
@@ -226,7 +237,8 @@
         "soporte": "3.30€",
         "resistencia": "3.53€",
         "recomendacion": "Aprovechar rebotes a 3.50€ para vender",
-        "tesis": "Comportamiento débil frente a sus pares europeas. Alfayate aconseja salir en cualquier acercamiento a resistencias."
+        "tesis": "Comportamiento débil frente a sus pares europeas. Alfayate aconseja salir en cualquier acercamiento a resistencias.",
+        "google_finance_url": "https://www.google.com/finance/quote/TEF:BME"
       }
     ],
     "internacionales": [
@@ -251,7 +263,8 @@
         "soporte": "148.00$",
         "resistencia": "187.00$",
         "recomendacion": "Comprar solo para rebote táctico a 187$; stop en 148$",
-        "tesis": "La salida forzada de Jensen Huang desplomó la acción (-12,75% semanal hasta 148$), perforando la media de 20 meses y forzando la salida de S. Rodríguez tras un +200%. Quórum unánime en que la sobrerreacción generó capitulación minorista propicia para un rebote a 187$-190$."
+        "tesis": "La salida forzada de Jensen Huang desplomó la acción (-12,75% semanal hasta 148$), perforando la media de 20 meses y forzando la salida de S. Rodríguez tras un +200%. Quórum unánime en que la sobrerreacción generó capitulación minorista propicia para un rebote a 187$-190$.",
+        "google_finance_url": "https://www.google.com/finance/quote/NVDA:NASDAQ"
       },
       {
         "nombre": "Broadcom",
@@ -265,7 +278,8 @@
         "soporte": "Media 20 meses",
         "resistencia": "Máximos Históricos",
         "recomendacion": "Comprar / Sobreponderar en IA",
-        "tesis": "La gran ganadora estructural de la crisis de Nvidia (+18% a +24% semanal). Lidera el diseño de silicio personalizado (ASICs) junto a Google (TPUs), Meta y OpenAI."
+        "tesis": "La gran ganadora estructural de la crisis de Nvidia (+18% a +24% semanal). Lidera el diseño de silicio personalizado (ASICs) junto a Google (TPUs), Meta y OpenAI.",
+        "google_finance_url": "https://www.google.com/finance/quote/AVGO:NASDAQ"
       },
       {
         "nombre": "AMD",
@@ -279,7 +293,8 @@
         "soporte": "400.00$",
         "resistencia": "494.00$",
         "recomendacion": "Mantener / Comprar en apoyo a media de 40 semanas",
-        "tesis": "Alternativa directa en GPUs para clientes que diversifican proveedores tras la crisis de Nvidia. Fuerte vela alcista (+19% a +29%) rebotando en 400$ con objetivos en 494$ y 518$."
+        "tesis": "Alternativa directa en GPUs para clientes que diversifican proveedores tras la crisis de Nvidia. Fuerte vela alcista (+19% a +29%) rebotando en 400$ con objetivos en 494$ y 518$.",
+        "google_finance_url": "https://www.google.com/finance/quote/AMD:NASDAQ"
       },
       {
         "nombre": "Microsoft",
@@ -294,7 +309,8 @@
         "soporte": "Media 10 semanas",
         "resistencia": "560.00$",
         "recomendacion": "Mantener con stop ceñido o recoger beneficios parciales",
-        "tesis": "Dibujando pauta de acumulación tipo taza con asa respetando la media de 10 semanas. No obstante, R. Moro sugiere cerrar posiciones compradas en 342$ al quedarle escaso recorrido potencial."
+        "tesis": "Dibujando pauta de acumulación tipo taza con asa respetando la media de 10 semanas. No obstante, R. Moro sugiere cerrar posiciones compradas en 342$ al quedarle escaso recorrido potencial.",
+        "google_finance_url": "https://www.google.com/finance/quote/MSFT:NASDAQ"
       },
       {
         "nombre": "ASML Holding",
@@ -307,7 +323,8 @@
         "soporte": "1.600€",
         "resistencia": "Media de largo plazo",
         "recomendacion": "Acumular si consolida soporte semanal",
-        "tesis": "Apoyada en bandas lentas semanales en 1.600€. Si consolida este nivel al unísono con el índice SOX superando los 10.900 puntos, dará por concluida la corrección."
+        "tesis": "Apoyada en bandas lentas semanales en 1.600€. Si consolida este nivel al unísono con el índice SOX superando los 10.900 puntos, dará por concluida la corrección.",
+        "google_finance_url": "https://www.google.com/finance/quote/ASML:NASDAQ"
       },
       {
         "nombre": "Heineken",
@@ -323,7 +340,8 @@
         "soporte": "80.00€",
         "resistencia": "90.00€",
         "recomendacion": "Comprar / Sobreponderar en consumo",
-        "tesis": "Rompió resistencia clave de 80€ convirtiéndola en soporte. Flujo institucional masivo en compras defensivas (indicador CFI en verde). Objetivos en 86,80€ y 90,00€."
+        "tesis": "Rompió resistencia clave de 80€ convirtiéndola en soporte. Flujo institucional masivo en compras defensivas (indicador CFI en verde). Objetivos en 86,80€ y 90,00€.",
+        "google_finance_url": "https://www.google.com/finance/quote/HEIA:AMS"
       },
       {
         "nombre": "BASF",
@@ -337,7 +355,8 @@
         "soporte": "51.00€",
         "resistencia": "Máximos del DAX",
         "recomendacion": "Comprar con stop en 51€",
-        "tesis": "Líder del sector químico europeo. Apoyo en pivote de 54€ confirmando formación de suelo tras batir los 55€. Canaliza la rotación desde la tecnología americana."
+        "tesis": "Líder del sector químico europeo. Apoyo en pivote de 54€ confirmando formación de suelo tras batir los 55€. Canaliza la rotación desde la tecnología americana.",
+        "google_finance_url": "https://www.google.com/finance/quote/BAS:ETR"
       }
     ]
   },

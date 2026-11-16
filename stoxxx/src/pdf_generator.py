@@ -5,6 +5,7 @@ from typing import Dict, Any, Optional, List
 from fpdf import FPDF
 from fpdf.enums import XPos, YPos
 from config import PDF_DIR
+from src.analyzer import get_google_finance_url
 
 logger = logging.getLogger(__name__)
 
@@ -272,7 +273,8 @@ class PDFReportGenerator:
                 recomendacion = comp.get("recomendacion", "")
                 tesis = comp.get("tesis", "")
 
-                # 1. Cabecera de la Empresa (Nombre + Ticker a la izquierda, Menciones y Cotización a la derecha)
+                # 1. Cabecera de la Empresa (Nombre + Ticker a la izquierda con enlace a Google Finance, Menciones y Cotización a la derecha)
+                gf_url = comp.get("google_finance_url") or get_google_finance_url(comp)
                 pdf.set_x(MARGIN)
                 pdf.set_font(font, "B", 9)
                 pdf.set_text_color(15, 23, 42)
@@ -282,7 +284,7 @@ class PDFReportGenerator:
                 precio_info = f" | Cotiz: {comp.get('precio_actual')} ({comp.get('variacion_dia')})" if comp.get("precio_actual") else ""
                 right_meta = f"Menciones: {menciones}{precio_info}"
 
-                pdf.cell(100, 6, left_title, border="T", align="L")
+                pdf.cell(100, 6, left_title, border="T", align="L", link=gf_url)
                 pdf.set_font(font, "B", 8)
                 pdf.set_text_color(71, 85, 105)
                 pdf.cell(PRINT_WIDTH - 100, 6, right_meta, border="T", align="R", ln=True)
