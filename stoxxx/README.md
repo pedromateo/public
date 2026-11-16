@@ -116,7 +116,6 @@ AUTO_GIT_PUSH=false
 | `--days <N>` | Cambia el horizonte temporal (por defecto: 7). |
 | `--push` | Ejecuta `git add`, `git commit` y `git push origin main` al finalizar. |
 | `--no-push` | Desactiva el push a GitHub incluso si está activo en `.env`. |
-| `--mock` | Ejecuta todo el flujo (PDF, Audio, Web) con datos realistas sin gastar tokens de Gemini. |
 | `--skip-audio` | Omite la síntesis del podcast MP3 (ideal para análisis rápidos en segundos). |
 | `--skip-pdf` | Omite la generación del documento PDF. |
 | `--verbose` | Muestra registros detallados de depuración. |

@@ -1,78 +1,178 @@
 [
   {
     "date": "2026-11-16",
-    "sentimiento_general": "Alcista con Cautela en Resistencias",
-    "summary_snippet": "• Consolidación técnica general: Fase de pausa y digestión en índices directores tras las subidas acumuladas, con compresión de volatilidad que suele anticipar correcciones tácticas del 3% al 6%.\n• Asimetría de Bancos Ce...",
+    "sentimiento_general": "Alcista Táctico con Rotación Defensiva",
+    "summary_snippet": "• Disociación técnica entre Wall Street y Europa: La renta variable europea, liderada por el IBEX 35 en cotas históricas (sobre 20.000 puntos) y el DAX 40 (26.700 puntos), supera con holgura a los índices estadounidenses...",
     "top_stocks": [
-      "Nvidia (4)",
-      "Iberdrola (3)",
-      "Banco Santander (2)",
-      "ASML Holding (2)"
+      "Nvidia (11)",
+      "Iberdrola (5)",
+      "Banco Santander (5)",
+      "Inditex (4)"
     ],
     "detail_url": "reports/html/report-2026-11-16.html",
     "pdf_url": "reports/pdf/informe-2026-11-16.pdf",
     "audio_url": "reports/audio/podcast-2026-11-16.mp3",
-    "videos_count": 6,
+    "videos_count": 16,
     "fuentes_consultadas": [
       {
-        "id": "cZ4eKx8B1o0",
-        "title": "Consultorio de bolsa con Roberto Moro: Niveles clave del IBEX 35, banca y soportes",
-        "channel": "Capital Radio",
-        "date_formatted": "14/11/2026",
-        "url": "https://www.youtube.com/watch?v=cZ4eKx8B1o0",
-        "char_count": 28450,
-        "status": "Transcrito completo",
-        "description": "Análisis técnico de soportes en 19.800 del IBEX 35, estrategias en Santander, BBVA y recomendación de Iberdrola."
-      },
-      {
-        "id": "aY7fLz9C2p1",
-        "title": "Consultorio de bolsa con Alberto Iturralde: Psicología del mercado y alerta en Wall Street",
-        "channel": "Capital Radio",
-        "date_formatted": "12/11/2026",
-        "url": "https://www.youtube.com/watch?v=aY7fLz9C2p1",
-        "char_count": 31200,
-        "status": "Transcrito completo",
-        "description": "Tesis sobre distribución silenciosa de manos fuertes en tecnológicas y fortaleza relativa de eléctricas europeas."
-      },
-      {
-        "id": "dX2gMv3E4q5",
-        "title": "Consultorio con Javier Alfayate: Momentum europeo, máximos del DAX y gestión cuantitativa",
-        "channel": "Capital Radio",
-        "date_formatted": "10/11/2026",
-        "url": "https://www.youtube.com/watch?v=dX2gMv3E4q5",
-        "char_count": 22800,
-        "status": "Transcrito completo",
-        "description": "Comportamiento del DAX 40 en 26.700, sectores con fuerza relativa Mansfield y valores directores defensivos."
-      },
-      {
-        "id": "eW5hNw6F7r8",
-        "title": "Consultorio de bolsa con Jorge del Canto: Oportunidades en renta variable española",
-        "channel": "Capital Radio",
-        "date_formatted": "07/11/2026",
-        "url": "https://www.youtube.com/watch?v=eW5hNw6F7r8",
-        "char_count": 19650,
-        "status": "Transcrito completo",
-        "description": "Análisis de Banco Santander, Telefónica y fijación de stops de protección dinámica ante volatilidad."
-      },
-      {
-        "id": "fU8jPx9G0s2",
-        "title": "Consultorio y Análisis de Valores con Sito Rodríguez: Nvidia, ASML y semiconductores",
+        "id": "qEq-i5wWc7g",
+        "title": "Esta Acción de IA se Beneficiará de la Crisis de NVIDIA (Cómprala YA)",
         "channel": "Visionarios Bolsa",
-        "date_formatted": "11/11/2026",
-        "url": "https://www.youtube.com/watch?v=fU8jPx9G0s2",
-        "char_count": 34100,
-        "status": "Transcrito completo",
-        "description": "Tesis de inversión sobre la demanda secular de chips para centros de datos, márgenes de ASML y soporte técnico en 155$ de Nvidia."
+        "upload_date": "20261115",
+        "date_formatted": "2026-11-15",
+        "url": "https://www.youtube.com/watch?v=qEq-i5wWc7g",
+        "char_count": 44415,
+        "status": "Transcrito completo"
       },
       {
-        "id": "gT1kQy2H3t4",
-        "title": "Repaso Semanal de Mercados y Tesis Tecnológicas con Sito Rodríguez: Nasdaq 100 y Microsoft",
+        "id": "aFxrHjVMM1w",
+        "title": "El gran engaño de Nvidia: lo que no te cuentan, con Alberto Iturralde | Capital, La Bolsa y La Vida",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261114",
+        "date_formatted": "2026-11-14",
+        "url": "https://www.youtube.com/watch?v=aFxrHjVMM1w",
+        "char_count": 4942,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "53VWQv1pbIs",
+        "title": "Alberto Iturralde sobre Nvidia: \"No nos debe extrañar que rebote\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261113",
+        "date_formatted": "2026-11-13",
+        "url": "https://www.youtube.com/watch?v=53VWQv1pbIs",
+        "char_count": 23042,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "Bot6q--g0U4",
+        "title": "Consultorio | Acciona tras el desplome: Nivel crítico para el valor. Roberto Moro y Jorge del Canto",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261113",
+        "date_formatted": "2026-11-13",
+        "url": "https://www.youtube.com/watch?v=Bot6q--g0U4",
+        "char_count": 18536,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "BFRx5gKr4q4",
+        "title": "#Consultorio | El oro se afianza como termómetro de la política monetaria, según Ribes",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261112",
+        "date_formatted": "2026-11-12",
+        "url": "https://www.youtube.com/watch?v=BFRx5gKr4q4",
+        "char_count": 21316,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "ZZyI6ojF5ik",
+        "title": "Si Eres Accionista de NVIDIA… PREPÁRATE!",
         "channel": "Visionarios Bolsa",
-        "date_formatted": "05/11/2026",
-        "url": "https://www.youtube.com/watch?v=gT1kQy2H3t4",
-        "char_count": 26700,
-        "status": "Transcrito completo",
-        "description": "Análisis de Microsoft, rotación a compañías con generación de caja recurrente y directrices de liquidez para final de año."
+        "upload_date": "20261112",
+        "date_formatted": "2026-11-12",
+        "url": "https://www.youtube.com/watch?v=ZZyI6ojF5ik",
+        "char_count": 33269,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "szKGar6nJX4",
+        "title": "Consultorio | Por qué el Dax toca nuevos máximos, con Javier Alfayate",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261112",
+        "date_formatted": "2026-11-12",
+        "url": "https://www.youtube.com/watch?v=szKGar6nJX4",
+        "char_count": 20699,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "7feBRWdkXiE",
+        "title": "Consultorio | Nivel al que veremos el IBEX con el rally de Navidad de los bancos, según Paco Pérez",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261111",
+        "date_formatted": "2026-11-11",
+        "url": "https://www.youtube.com/watch?v=7feBRWdkXiE",
+        "char_count": 20467,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "Cs6lc5MPDBs",
+        "title": "#Consultorio | Cinco valores clave para hacer cartera, según Víctor Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261111",
+        "date_formatted": "2026-11-11",
+        "url": "https://www.youtube.com/watch?v=Cs6lc5MPDBs",
+        "char_count": 22550,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "FEDRcWhqJQU",
+        "title": "Consultorio | Tecnología, ¿aprovechamos para ampliar en ASML? Esto dice Gerardo Ortega",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261111",
+        "date_formatted": "2026-11-11",
+        "url": "https://www.youtube.com/watch?v=FEDRcWhqJQU",
+        "char_count": 23223,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "a34s-hJ0iq0",
+        "title": "#Consultorio | Repsol, en la montaña rusa del petróleo. Esto dice David Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261111",
+        "date_formatted": "2026-11-11",
+        "url": "https://www.youtube.com/watch?v=a34s-hJ0iq0",
+        "char_count": 21995,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "hs5mS7JV_pY",
+        "title": "Fluidra es el peor valor del Ibex este ejercicio: ¿Cuál es la visión para la compañía ahora?",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261111",
+        "date_formatted": "2026-11-11",
+        "url": "https://www.youtube.com/watch?v=hs5mS7JV_pY",
+        "char_count": 7853,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "QiOK6p81JCU",
+        "title": "Consultorio | Nvidia, ¿qué hacer ahora si estamos dentro del valor? Con Manuel Pinto, de XTB",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261110",
+        "date_formatted": "2026-11-10",
+        "url": "https://www.youtube.com/watch?v=QiOK6p81JCU",
+        "char_count": 27291,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "mZ8KDAvKHJo",
+        "title": "La zona a la que se aproxima el Oro: \"Está rebotando\", con Roberto Moro",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261110",
+        "date_formatted": "2026-11-10",
+        "url": "https://www.youtube.com/watch?v=mZ8KDAvKHJo",
+        "char_count": 7771,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "Mehqg4NSQiw",
+        "title": "La regla de las tres \"D\" para José María Luna: \"defensa, diversificación y disciplina\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261109",
+        "date_formatted": "2026-11-09",
+        "url": "https://www.youtube.com/watch?v=Mehqg4NSQiw",
+        "char_count": 17288,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "NznA8hSL_HQ",
+        "title": "#Consultorio | Iberdrola vs. Endesa: ¿Por qué no suelen ir a la par?",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "upload_date": "20261109",
+        "date_formatted": "2026-11-09",
+        "url": "https://www.youtube.com/watch?v=NznA8hSL_HQ",
+        "char_count": 25386,
+        "status": "Transcrito completo"
       }
     ]
   },

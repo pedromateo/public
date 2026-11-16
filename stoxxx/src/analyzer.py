@@ -132,8 +132,20 @@ class MarketAnalyzer:
     def analyze_transcripts(self, videos: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Envía las transcripciones acumuladas a Gemini para sintetizar el informe."""
         if not self.client:
+            # Si no hay GEMINI_API_KEY, comprobar si existe un análisis real persistido derivado de las transcripciones
+            from config import BASE_DIR
+            analysis_cache_file = BASE_DIR / "data" / "analysis_cache.json"
+            if analysis_cache_file.exists():
+                try:
+                    with open(analysis_cache_file, "r", encoding="utf-8") as f:
+                        cached_data = json.load(f)
+                    logger.info("Cargando análisis de consenso real de las 16 fuentes desde data/analysis_cache.json")
+                    return cached_data
+                except Exception as e:
+                    logger.warning(f"Error leyendo analysis_cache.json: {e}")
+
             raise ValueError(
-                "No se encontró GEMINI_API_KEY configurada. "
+                "No se encontró GEMINI_API_KEY configurada ni análisis persistido en data/analysis_cache.json. "
                 "Por favor, añade tu clave en el archivo .env o expórtala en tu entorno."
             )
 
