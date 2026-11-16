@@ -331,6 +331,21 @@ def main():
     console.print(f"[bold green]✔[/bold green] Detalle de informe: [cyan]{web_res['detail']}[/cyan]")
     console.print(f"[bold green]✔[/bold green] Índice principal: [cyan]{web_res['index']}[/cyan]")
 
+    # 6.5. EJECUTAR SUITE DE TESTS AUTOMATIZADA
+    with console.status("[bold green]Ejecutando tests de integridad web y maquetación..."):
+        import unittest
+        loader = unittest.TestLoader()
+        suite = loader.loadTestsFromName("tests.test_web_and_report")
+        runner = unittest.TextTestRunner(verbosity=0)
+        test_result = runner.run(suite)
+    if test_result.wasSuccessful():
+        console.print(f"[bold green]✔[/bold green] Tests de integridad web superados ({test_result.testsRun} tests ejecutados con éxito).")
+    else:
+        console.print(f"[bold red]✖ Fallaron {len(test_result.failures) + len(test_result.errors)} tests de integridad.[/bold red]")
+        if args.push:
+            console.print("[red]Cancelando publicación en Git debido a fallos en los tests.[/red]")
+            sys.exit(1)
+
     # 7. PUBLICACIÓN AUTOMÁTICA EN GITHUB PAGES
     if args.push:
         with console.status("[bold green]Sincronizando con repositorio GitHub Pages (git push)..."):

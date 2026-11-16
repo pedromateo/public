@@ -157,7 +157,7 @@
     <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
       <div class="flex flex-wrap items-center gap-2">
         <span class="mono text-xs px-2.5 py-1 rounded-md bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-300 border border-[#ded0bd] dark:border-slate-700 font-bold">
-          📅 {{ date }}
+          📅 {{ date or report.fecha_informe or date_str }}
         </span>
         {% if report._doble_check %}
         <span class="mono text-[11px] px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 font-medium">
@@ -183,9 +183,8 @@
               <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"></path>
             </svg>
           </div>
-          <span class="font-serif font-bold text-[#0f2e4e] dark:text-white">Podcast Dual de Resumen</span>
+          <span class="font-serif font-bold text-[#0f2e4e] dark:text-white">Resumen de audio</span>
         </div>
-        <span class="text-[11px] text-[#6b7280] dark:text-slate-400 mono font-medium">Repaso conversacional</span>
       </div>
       <audio controls class="w-full h-9 rounded-lg">
         <source src="{{ audio_rel_path }}" type="audio/mpeg">

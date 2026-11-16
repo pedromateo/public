@@ -146,9 +146,11 @@ class WebPublisher:
         audio_rel_path = f"../audio/podcast-{date_str}.mp3" if has_audio else None
 
         # 1. Renderizar la página de detalle
+        report_data["fecha_informe"] = date_str
         detail_html = self.detail_template.render(
             report=report_data,
             date=date_str,
+            date_str=date_str,
             pdf_rel_path=pdf_rel_path,
             audio_rel_path=audio_rel_path
         )

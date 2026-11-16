@@ -105,19 +105,53 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
 }
 
 REGLAS CRÍTICAS DE ORDENACIÓN Y CALIDAD:
-1. En 'resumen_ejecutivo' y 'sentimiento_macro', UTILIZA SIEMPRE BULLETS (viñetas con '• ') para desglosar la síntesis, las directrices y la situación global. La lectura debe ser ágil y ejecutiva, estructurada con viñetas claras.
-2. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
-3. En cada bloque de empresas, ordena DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
-4. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre dos analistas (voz masculina y voz femenina):
+1. FORMATO DE ANALISTAS: Al citar o listar analistas, usa SIEMPRE la inicial del nombre y el apellido (ej. 'R. Moro', 'A. Iturralde', 'S. Rodríguez', 'J. Alfayate', 'V. Galán', 'P. Pérez'), nunca el nombre de pila completo.
+2. En 'resumen_ejecutivo' y 'sentimiento_macro', UTILIZA SIEMPRE BULLETS (viñetas con '• ') para desglosar la síntesis, las directrices y la situación global. La lectura debe ser ágil y ejecutiva, estructurada con viñetas claras.
+3. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
+4. En cada bloque de empresas, ordena DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
+5. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre dos analistas (voz masculina y voz femenina):
    - REGLA ESTRICTA DE LOCUTORES: NO incluyas nombres propios de los locutores ni en el campo 'locutor' ni dentro del diálogo hablado (prohibido decir 'Hola Carlos', 'Gracias Laura', o nombres similares). Usa simplemente 'Voz 1' y 'Voz 2' en el campo 'locutor'.
    - DICCIÓN Y PUNTUACIÓN: Cuida al máximo los puntos, las comas y los signos de puntuación para que la síntesis de voz (TTS) ejecute pausas y respiraciones naturales, logrando una locución fluida y profesional.
    - Apertura dinámica imitando el ritmo radiofónico de los consultorios de bolsa.
    - Situación macroeconómica detallada (Europa y EE.UU., política monetaria, tipos de interés).
    - Repaso índice por índice (IBEX 35, DAX, S&P 500 y Nasdaq 100) con soportes, resistencias y divergencias.
-   - Repaso a fondo de las empresas nacionales con mayor quórum (Iberdrola, bancos, etc.) detallando niveles técnicos y analistas.
+   - Repaso a fondo de las empresas nacionales con mayor quórum (Iberdrola, bancos, etc.) detallando niveles técnicos y analistas (usando inicial y apellido).
    - Repaso a fondo de las empresas internacionales (Nvidia, ASML, megacaps de IA) analizando las tesis alcistas vs alertas de sobrecompra.
    - Cierre con consejos operativos de gestión de riesgo y stops.
 """
+
+ANALYST_ABBREVIATIONS = {
+    "Roberto Moro": "R. Moro",
+    "Alberto Iturralde": "A. Iturralde",
+    "Javier Alfayate": "J. Alfayate",
+    "Víctor Galán": "V. Galán",
+    "Victor Galan": "V. Galán",
+    "David Galán": "D. Galán",
+    "David Galan": "D. Galán",
+    "Gerardo Ortega": "G. Ortega",
+    "Paco Pérez": "P. Pérez",
+    "Paco Perez": "P. Pérez",
+    "Manuel Pinto": "M. Pinto",
+    "Marc Ribes": "M. Ribes",
+    "José María Luna": "J. M. Luna",
+    "Jose Maria Luna": "J. M. Luna",
+    "Sergio Clatum": "S. Clatum",
+    "Jorge del Canto": "J. del Canto",
+    "Eduardo Bolinches": "E. Bolinches",
+    "Sito Rodríguez": "S. Rodríguez",
+    "Sito Rodriguez": "S. Rodríguez",
+}
+
+def format_analyst_abbreviations(obj):
+    if isinstance(obj, str):
+        for full, abbr in ANALYST_ABBREVIATIONS.items():
+            obj = obj.replace(full, abbr)
+        return obj
+    elif isinstance(obj, list):
+        return [format_analyst_abbreviations(x) for x in obj]
+    elif isinstance(obj, dict):
+        return {k: format_analyst_abbreviations(v) for k, v in obj.items()}
+    return obj
 
 class MarketAnalyzer:
     """Procesa transcripciones de analistas utilizando la API de Google Gemini."""
@@ -205,4 +239,4 @@ class MarketAnalyzer:
                 for vid in videos
             ]
 
-        return report_data
+        return format_analyst_abbreviations(report_data)
