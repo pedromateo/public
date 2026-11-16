@@ -54,7 +54,7 @@ class GitSynchronizer:
                 )
 
             # 3. git commit
-            commit_msg = f"feat(stoxxx): publicar informe bursátil y transcripciones {date_str} [skip ci]"
+            commit_msg = f"feat(stoxxx): publicar informe bursátil y transcripciones {date_str}"
             logger.info(f"Creando commit: '{commit_msg}'...")
             subprocess.run(
                 ["git", "commit", "-m", commit_msg],
