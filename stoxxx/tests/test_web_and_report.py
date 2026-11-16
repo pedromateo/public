@@ -33,8 +33,9 @@ class TestWebAndReport(unittest.TestCase):
         with open(self.index_html, "r", encoding="utf-8") as f:
             content = f.read()
 
-        # Contador de informes
-        self.assertIn("1</span> informe", content, "El contador del header debe marcar '1 informe'")
+        # Contador de informes (con separación clara de spans y gap)
+        self.assertIn(">1</span>", content, "El número de informes debe ser 1")
+        self.assertIn("<span>informe</span>", content, "La etiqueta debe contener '<span>informe</span>'")
         self.assertNotIn("3 informes", content, "No deben aparecer informes antiguos")
 
         # Texto del audio
