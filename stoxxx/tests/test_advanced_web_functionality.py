@@ -215,7 +215,9 @@ class AdvancedWebFunctionalityTests(unittest.TestCase):
         for link in gf_links:
             self.assertEqual(link.get("target"), "_blank", "El enlace a Google Finance debe abrirse en nueva pestaña")
             self.assertEqual(link.get("rel"), ["noopener", "noreferrer"], "El enlace debe incluir rel='noopener noreferrer'")
-            self.assertIn("Google Finance", link.get_text(), "El texto visible o badge debe indicar 'Google Finance'")
+            self.assertEqual(link.get_text(strip=True), "", "El enlace debe ser solo un icono sin texto visible para mantener la web sencilla")
+            self.assertIsNotNone(link.find("svg"), "El enlace debe contener el icono SVG")
+            self.assertIn("Google Finance", link.get("aria-label", ""), "El atributo aria-label debe referenciar Google Finance")
             self.assertTrue(link["href"].startswith("https://www.google.com/finance/quote/"))
 
 if __name__ == "__main__":
