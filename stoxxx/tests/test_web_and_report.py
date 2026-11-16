@@ -51,6 +51,9 @@ class TestWebAndReport(unittest.TestCase):
         # Fuentes
         self.assertIn("16 emisiones monitorizadas", content, "Debe indicar 16 emisiones monitorizadas")
 
+        # Título del informe con fecha entre paréntesis
+        self.assertIn("Informe de Consenso Bursátil & Macro (2026-11-16)", content, "El título debe incluir la fecha entre paréntesis al final")
+
         # Accesibilidad y SEO
         self.assertIn('name="description"', content, "Debe incluir meta description para SEO")
         self.assertIn('property="og:title"', content, "Debe incluir etiqueta OpenGraph og:title")
