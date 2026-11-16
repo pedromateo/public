@@ -244,7 +244,7 @@ class PDFReportGenerator:
         pdf.add_page()
         pdf.set_font(font, "B", 12)
         pdf.set_text_color(15, 23, 42)
-        pdf.cell(0, 8, "3. ANÁLISIS DE EMPRESAS (Ordenadas por Nivel de Quórum)", ln=True)
+        pdf.cell(0, 8, "3. ANÁLISIS DE EMPRESAS", ln=True)
         pdf.set_draw_color(59, 130, 246)
         pdf.line(10, pdf.get_y(), 200, pdf.get_y())
         pdf.ln(4)

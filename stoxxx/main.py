@@ -104,7 +104,7 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
     empresas = report_data.get("analisis_empresas", {})
 
     def print_company_table(title: str, items: list, flag: str):
-        table = Table(title=f"{flag} {title} (Ordenadas por Nivel de Quórum)", border_style="cyan")
+        table = Table(title=f"{flag} {title}", border_style="cyan")
         table.add_column("Empresa (Ticker)", style="bold white")
         table.add_column("Precio Real", style="bold white")
         table.add_column("Menciones", style="bold yellow", justify="center")
