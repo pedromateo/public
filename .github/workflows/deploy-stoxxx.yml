@@ -35,6 +35,8 @@ jobs:
           # Root Portal
           if [ -f "index.html" ]; then
             cp index.html dist/ || true
+            cp -r assets dist/ 2>/dev/null || true
+            touch dist/.nojekyll
           fi
 
           # STOXXX Copy
