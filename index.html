@@ -1,362 +1,771 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Pedro Mateo — PWAs & Aplicaciones Web</title>
-  <meta name="description" content="Colección de aplicaciones web progresivas (PWAs) y herramientas públicas de Pedro Mateo.">
-  <meta name="theme-color" content="#090d16">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedro Mateo · Proyectos & Aplicaciones</title>
+  <meta name="description" content="Colección de aplicaciones web progresivas (PWAs), herramientas interactivas, audio DSP, modelos IA y utilidades independientes de Pedro Mateo.">
+  <link rel="canonical" href="https://pedromateo.github.io/">
+  <meta property="og:title" content="Pedro Mateo · Proyectos">
+  <meta property="og:description" content="Once proyectos web y aplicaciones independientes: qué hace cada una, tecnologías y acceso directo.">
   <link rel="icon" type="image/svg+xml" href="medit/icons/favicon.svg">
-
-  <style>
-    :root {
-      --bg: #090d16;
-      --surface: rgba(18, 24, 38, 0.7);
-      --surface-hover: rgba(28, 38, 58, 0.85);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(99, 102, 241, 0.4);
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.2);
-      --tag-bg: rgba(99, 102, 241, 0.12);
-      --tag-text: #a5b4fc;
-      --radius: 16px;
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc;
-        --surface: rgba(255, 255, 255, 0.85);
-        --surface-hover: #ffffff;
-        --border: rgba(0, 0, 0, 0.08);
-        --border-hover: rgba(99, 102, 241, 0.5);
-        --text: #0f172a;
-        --text-muted: #64748b;
-        --accent: #4f46e5;
-        --accent-glow: rgba(79, 70, 229, 0.15);
-        --tag-bg: rgba(79, 70, 229, 0.08);
-        --tag-text: #4338ca;
-      }
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.5;
-      padding: 2rem 1.25rem;
-    }
-
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      width: 100%;
-      flex: 1;
-    }
-
-    header {
-      margin-bottom: 2.5rem;
-      text-align: center;
-    }
-
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      margin-bottom: 1rem;
-      letter-spacing: 0.02em;
-    }
-
-    .header-badge .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 2.75rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(135deg, var(--text) 30%, var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p.subtitle {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: var(--surface);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-hover);
-      box-shadow: 0 12px 32px var(--accent-glow);
-      background: var(--surface-hover);
-    }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      padding: 8px;
-    }
-
-    .card-icon img, .card-icon svg {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-    }
-
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .card-arrow {
-      margin-left: auto;
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s ease;
-      font-size: 1.1rem;
-      color: var(--accent);
-    }
-
-    .card:hover .card-arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.925rem;
-      line-height: 1.45;
-      flex: 1;
-    }
-
-    footer {
-      margin-top: 3.5rem;
-      text-align: center;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.875rem;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="header-badge">
-        <span class="dot"></span>
-        <span>Despliegue en Producción Activo</span>
-      </div>
-      <h1>Pedro Mateo</h1>
-      <p class="subtitle">Colección de aplicaciones web progresivas (PWAs) y utilidades interactivas de código abierto.</p>
-    </header>
+<div class="stage" id="stage" aria-hidden="true"></div>
 
-    <main class="grid">
-      <!-- MenuM -->
-      <a href="menum/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="menum/icons/favicon.svg" alt="MenuM" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Cocina Familiar</span>
-        </div>
-        <h2 class="card-title">MenuM <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Decisor de menús familiares saludables y equilibrados para grandes y pequeños (&lt;4 años). Filtros por despensa, pasos express y ruleta aleatoria.</p>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">pedromateo <span>/ proyectos</span></a>
+    <div class="mini" id="mini" aria-label="Proyectos"></div>
+    <nav>
+      <a class="icon-btn" href="https://github.com/pedromateo" target="_blank" rel="noopener noreferrer" aria-label="Pedro Mateo en GitHub" title="GitHub">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
       </a>
-
-      <!-- Medit -->
-      <a href="medit/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="medit/icons/favicon.svg" alt="Medit" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Bienestar</span>
-        </div>
-        <h2 class="card-title">Medit <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Micro-meditación, neuro-reset (NSDR) y protocolo S.T.O.P. basado en ciencia. Temporizador Zen y locuciones guiadas offline.</p>
-      </a>
-
-      <!-- MurMeteo -->
-      <a href="murmeteo/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="murmeteo/icons/icon.svg" alt="MurMeteo" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Clima</span>
-        </div>
-        <h2 class="card-title">MurMeteo <span class="card-arrow">→</span></h2>
-        <p class="card-desc">PWA meteorológica oficial para Murcia y alrededores con datos AEMET OpenData, fondos dinámicos 24h y avisos en tiempo real.</p>
-      </a>
-
-      <!-- Brainfit -->
-      <a href="brainfit/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="brainfit/assets/icon.svg" alt="Brainfit" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Cognitivo</span>
-        </div>
-        <h2 class="card-title">Brainfit <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Gimnasia cerebral con 17 minijuegos interactivos de agilidad mental, memoria, velocidad de cálculo y atención selectiva.</p>
-      </a>
-
-      <!-- Loopp -->
-      <a href="loopp/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="loopp/icons/icon-192.svg" alt="Loopp" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Audio</span>
-        </div>
-        <h2 class="card-title">Loopp <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Loop Station multipista en el navegador con Web Audio API, cuantización por compás y exportación a archivos WAV y MP3.</p>
-      </a>
-
-      <!-- ElParte -->
-      <a href="elparte/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="elparte/icons/icon.svg" alt="ElParte" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Tiempo</span>
-        </div>
-        <h2 class="card-title">ElParte <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Pronóstico meteorológico detallado por horas, radar interactivo y previsión a 7 días con soporte offline completo.</p>
-      </a>
-
-      <!-- mSchool -->
-      <a href="mschool/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="mschool/icon-192.svg" alt="mSchool" width="32" height="32">
-          </div>
-          <span class="badge">PWA · Educación</span>
-        </div>
-        <h2 class="card-title">mSchool <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Método de estimulación temprana diaria de 30 minutos adaptado de Alpha School: bits de inteligencia y desafíos motrices.</p>
-      </a>
-
-      <!-- MyLanding -->
-      <a href="mylanding/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="mylanding/index_files/favicon.svg" alt="MyLanding" width="32" height="32">
-          </div>
-          <span class="badge">Dashboard</span>
-        </div>
-        <h2 class="card-title">MyLanding <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Dashboard de inicio rápido optimizado para móviles con accesos directos, marcadores rápidos y widget meteorológico.</p>
-      </a>
-
-      <!-- Pastelería Sanz -->
-      <a href="sanz/" class="card">
-        <div class="card-top">
-          <div class="card-icon">
-            <img src="sanz/apple-touch-icon.png" alt="Pastelería Sanz" width="32" height="32">
-          </div>
-          <span class="badge">Web · Tradición</span>
-        </div>
-        <h2 class="card-title">Pastelería Sanz <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Sitio web oficial y archivo histórico de la Confitería Artesana Sanz (Puerto Lumbreras). Especialistas en postre chino y repostería tradicional desde 1895.</p>
-      </a>
-
-      <!-- STOXXX -->
-      <a href="stoxxx/" class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); border-radius: 8px; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; font-size: 18px;">
-            📈
-          </div>
-          <span class="badge">IA · Bolsa & Podcasts</span>
-        </div>
-        <h2 class="card-title">STOXXX <span class="card-arrow">→</span></h2>
-        <p class="card-desc">Inteligencia y consenso bursátil bajo demanda. Extracción de consultorios de bolsa, análisis de quórum con Gemini, informe PDF y podcast dual en audio MP3.</p>
-      </a>
-    </main>
-
-    <footer>
-      <p>Proyectos desarrollados por <a href="https://github.com/pedromateo" target="_blank" rel="noopener noreferrer">Pedro Mateo</a> · Código fuente en <a href="https://github.com/pedromateo/public" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-    </footer>
+      <button class="theme-btn" id="theme" type="button" aria-label="Cambiar tema">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3v18"/>
+          <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
   </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" data-bg="#3f51e0 #06b6d4">
+    <div class="hero-top">
+      <div class="hero-text">
+        <a class="me" href="https://github.com/pedromateo" target="_blank" rel="noopener noreferrer">
+          <img src="https://github.com/pedromateo.png" width="68" height="68" alt="Pedro Mateo" onerror="this.onerror=null;this.src='medit/icons/favicon.svg';">
+          <span><b>Pedro Mateo</b><small>@pedromateo</small></span>
+        </a>
+        <div class="eyebrow">Open source · PWAs & Aplicaciones · 11 proyectos</div>
+        <h1>Once proyectos web y aplicaciones independientes.</h1>
+        <p class="lead">Loop station multipista en el navegador; micro-meditación basada en neurociencia de Stanford; meteorología oficial con AEMET OpenData; gimnasia cerebral diaria; menús infantiles equilibrados; consenso financiero analizado por IA y utilidades nativas. Casi todo funciona de forma instantánea, offline y respetando tu privacidad.</p>
+        <div class="meta">
+          <a class="btn primary" href="#projects">Explorar proyectos ↓</a>
+          <a class="btn" href="https://github.com/pedromateo" target="_blank" rel="noopener noreferrer">github.com/pedromateo</a>
+        </div>
+      </div>
+      <figure class="quote">
+        <blockquote><p>Software enfocado, rápido y sin capas intermedias superfluas.</p></blockquote>
+        <figcaption>Pedro Mateo, sobre el desarrollo orientado a usuario</figcaption>
+      </figure>
+    </div>
+
+    <!-- Quick index grid -->
+    <ol class="index">
+      <li>
+        <a href="#menum">
+          <img src="menum/icons/favicon.svg" alt="MenuM" width="36" height="36">
+          <span><b>MenuM</b><small>Cocina familiar</small></span>
+          <span class="num">01</span>
+        </a>
+      </li>
+      <li>
+        <a href="#medit">
+          <img src="medit/icons/favicon.svg" alt="Medit" width="36" height="36">
+          <span><b>Medit</b><small>Neuro-reset & Zen</small></span>
+          <span class="num">02</span>
+        </a>
+      </li>
+      <li>
+        <a href="#murmeteo">
+          <img src="murmeteo/icons/icon.svg" alt="MurMeteo" width="36" height="36">
+          <span><b>MurMeteo</b><small>Clima Murcia AEMET</small></span>
+          <span class="num">03</span>
+        </a>
+      </li>
+      <li>
+        <a href="#brainfit">
+          <img src="brainfit/assets/icon.svg" alt="Brainfit" width="36" height="36">
+          <span><b>Brainfit</b><small>Gimnasia cerebral</small></span>
+          <span class="num">04</span>
+        </a>
+      </li>
+      <li>
+        <a href="#loopp">
+          <img src="loopp/icons/icon-192.svg" alt="Loopp" width="36" height="36">
+          <span><b>Loopp</b><small>Loop station audio</small></span>
+          <span class="num">05</span>
+        </a>
+      </li>
+      <li>
+        <a href="#stoxxx">
+          <img src="stoxxx/favicon.svg" alt="STOXXX" width="36" height="36">
+          <span><b>STOXXX</b><small>IA & Consenso bolsa</small></span>
+          <span class="num">06</span>
+        </a>
+      </li>
+      <li>
+        <a href="#elparte">
+          <img src="elparte/icons/icon.svg" alt="ElParte" width="36" height="36">
+          <span><b>ElParte</b><small>Previsión horaria</small></span>
+          <span class="num">07</span>
+        </a>
+      </li>
+      <li>
+        <a href="#mschool">
+          <img src="mschool/icon-192.svg" alt="mSchool" width="36" height="36">
+          <span><b>mSchool</b><small>Estimulación diaria</small></span>
+          <span class="num">08</span>
+        </a>
+      </li>
+      <li>
+        <a href="#mylanding">
+          <img src="mylanding/index_files/favicon.svg" alt="MyLanding" width="36" height="36">
+          <span><b>MyLanding</b><small>Dashboard móvil</small></span>
+          <span class="num">09</span>
+        </a>
+      </li>
+      <li>
+        <a href="#sanz">
+          <img src="sanz/apple-touch-icon.png" alt="Pastelería Sanz" width="36" height="36">
+          <span><b>Pastelería Sanz</b><small>Tradición 1895</small></span>
+          <span class="num">10</span>
+        </a>
+      </li>
+      <li>
+        <a href="#swipeclean">
+          <img src="swipeclean/icon.svg" alt="SwipeClean" width="36" height="36">
+          <span><b>SwipeClean</b><small>Galería Android</small></span>
+          <span class="num">11</span>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <div id="projects" class="projects-container">
+
+    <!-- 01 · MenuM -->
+    <span class="anchor" id="menum"></span>
+    <article class="project" data-id="menum" data-bg="#ea580c #f59e0b">
+      <div class="text">
+        <div class="kicker">Cocina Familiar · PWA</div>
+        <div class="p-head">
+          <img src="menum/icons/favicon.svg" alt="MenuM">
+          <div><span class="num">01</span><h3>MenuM</h3></div>
+        </div>
+        <p class="tagline">Decisor de menús familiares saludables y equilibrados para grandes y pequeños.</p>
+        <p>Una aplicación web progresiva diseñada para resolver el clásico "¿qué comemos hoy?". Filtra recetas según los ingredientes reales disponibles en la despensa, adapta porciones y técnicas de preparación para niños pequeños (&lt;4 años), y ofrece una ruleta aleatoria para romper el bloqueo de ideas.</p>
+        <ul class="feats">
+          <li><b>Filtro inteligente por despensa</b>: aprovecha lo que ya tienes sin necesidad de compras extra.</li>
+          <li><b>Adaptaciones Baby & Toddler</b>: pautas seguras de textura, sal y cortes para edades tempranas.</li>
+          <li><b>Ruleta interactiva & pasos express</b>: recetas balanceadas guiadas paso a paso en menos de 25 minutos.</li>
+        </ul>
+        <ul class="chips">
+          <li>PWA</li>
+          <li>Offline-First</li>
+          <li>IndexedDB</li>
+          <li>Nutrición Infantil</li>
+          <li>Vanilla JS</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="menum/">Abrir MenuM ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/menum" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">menum · planificador</span>
+          </div>
+          <div class="preview-interactive">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <small style="color:var(--ink-3); font-weight:600; text-transform:uppercase; font-size:11px;">Sugerencia de hoy</small>
+                <div style="font-size:18px; font-weight:700; margin-top:2px;">Guisantes salteados con huevo poché</div>
+              </div>
+              <span style="background:rgba(234,88,12,0.12); color:#ea580c; font-weight:700; font-size:12px; padding:4px 10px; border-radius:99px;">20 min</span>
+            </div>
+            <div class="chain">
+              <div class="node"><b>Despensa</b><small>Huevos, guisantes, AOVE</small></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>Corte peque</b><small>Chafado ligero &lt;4a</small></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>Equilibrio</b><small>Proteína + Fibra vegetal</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 · Medit -->
+    <span class="anchor" id="medit"></span>
+    <article class="project" data-id="medit" data-bg="#059669 #0284c7">
+      <div class="text">
+        <div class="kicker">Bienestar & Neurociencia · PWA</div>
+        <div class="p-head">
+          <img src="medit/icons/favicon.svg" alt="Medit">
+          <div><span class="num">02</span><h3>Medit</h3></div>
+        </div>
+        <p class="tagline">Micro-meditación, neuro-reset (NSDR) y protocolo S.T.O.P. basado en ciencia.</p>
+        <p>Herramienta minimalista fundamentada en las investigaciones de Stanford (Dr. Andrew Huberman) y la neurocientífica Amishi Jha. Proporciona descansos profundos sin sueño (NSDR), temporizador Zen para pausas conscientes y sesiones guiadas que funcionan 100% sin conexión.</p>
+        <ul class="feats">
+          <li><b>Protocolos S.T.O.P. y NSDR</b>: reinicio rápido del sistema nervioso en sesiones de 3 a 10 minutos.</li>
+          <li><b>Temporizador Zen acústico</b>: sintetizador Web Audio con cuencos tibetanos afinados.</li>
+          <li><b>Privacidad total offline</b>: tus registros, rachas y notas se almacenan únicamente en tu dispositivo.</li>
+        </ul>
+        <ul class="chips">
+          <li>PWA</li>
+          <li>Web Audio API</li>
+          <li>NSDR</li>
+          <li>Neurociencia</li>
+          <li>Zero-Cloud</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="medit/">Abrir Medit ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/medit" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">medit · neuro-reset</span>
+          </div>
+          <div class="zen-preview">
+            <div class="zen-ring">
+              <b>03:00</b>
+              <small>Fase Zen</small>
+            </div>
+            <div class="zen-steps">
+              <div class="zen-step-badge"><span>S</span> Stop (Para lo que estás haciendo)</div>
+              <div class="zen-step-badge"><span>T</span> Take a breath (Inhala profundo)</div>
+              <div class="zen-step-badge"><span>O</span> Observe (Nota tu cuerpo sin juicio)</div>
+              <div class="zen-step-badge"><span>P</span> Proceed (Continúa con calma)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 · MurMeteo -->
+    <span class="anchor" id="murmeteo"></span>
+    <article class="project" data-id="murmeteo" data-bg="#0284c7 #38bdf8">
+      <div class="text">
+        <div class="kicker">Meteorología & Open Data · PWA</div>
+        <div class="p-head">
+          <img src="murmeteo/icons/icon.svg" alt="MurMeteo">
+          <div><span class="num">03</span><h3>MurMeteo</h3></div>
+        </div>
+        <p class="tagline">Meteorología oficial para la Región de Murcia con datos de AEMET OpenData en tiempo real.</p>
+        <p>Una PWA meteorológica hiperlocal concebida para los municipios y comarcas de Murcia. Integra directamente el catálogo de datos abiertos de AEMET, mapas interactivos, avisos de fenómenos adversos y fondos vectoriales que evolucionan a lo largo de las 24 horas del día según la climatología.</p>
+        <ul class="feats">
+          <li><b>Conexión directa AEMET OpenData</b>: estaciones oficiales de la Región actualizadas periódicamente.</li>
+          <li><b>Ilustraciones dinámicas 24h</b>: atmósfera visual adaptada a la hora solar y nubosidad en tiempo real.</li>
+          <li><b>Alertas y avisos en vivo</b>: seguimiento de viento, lluvias torrenciales y olas de calor estivales.</li>
+        </ul>
+        <ul class="chips">
+          <li>PWA</li>
+          <li>AEMET API</li>
+          <li>SVG Dinámico</li>
+          <li>Geolocalización</li>
+          <li>Service Worker</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="murmeteo/">Abrir MurMeteo ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/murmeteo" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">murcia · tiempo actual</span>
+          </div>
+          <div class="preview-interactive">
+            <div class="weather-card-preview">
+              <div class="weather-icon-box">
+                <img src="murmeteo/card_images/svg/01_despejado_dia.svg" alt="Despejado día" width="44" height="44">
+              </div>
+              <div>
+                <div style="font-weight:700; font-size:16px;">Murcia Capital</div>
+                <div style="font-size:13px; color:var(--ink-3);">Despejado · Viento 12 km/h E</div>
+              </div>
+              <div class="weather-temp">22°</div>
+            </div>
+            <div class="weather-strip">
+              <div class="weather-hour">14:00<span>22°</span></div>
+              <div class="weather-hour">16:00<span>23°</span></div>
+              <div class="weather-hour">18:00<span>20°</span></div>
+              <div class="weather-hour">20:00<span>17°</span></div>
+              <div class="weather-hour">22:00<span>15°</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 · Brainfit -->
+    <span class="anchor" id="brainfit"></span>
+    <article class="project" data-id="brainfit" data-bg="#7c3aed #db2777">
+      <div class="text">
+        <div class="kicker">Entrenamiento Cognitivo · PWA</div>
+        <div class="p-head">
+          <img src="brainfit/assets/icon.svg" alt="Brainfit">
+          <div><span class="num">04</span><h3>Brainfit</h3></div>
+        </div>
+        <p class="tagline">Gimnasia cerebral con 17 minijuegos interactivos de agilidad mental y memoria.</p>
+        <p>Suite completa de entrenamiento cognitivo enfocada en cuatro áreas fundamentales: memoria de trabajo, velocidad de cálculo matemático, atención selectiva y agilidad de respuesta visual. Incluye progresión dinámica de dificultad y métricas evolutivas.</p>
+        <ul class="feats">
+          <li><b>17 Minijuegos específicos</b>: ejercicios de Stroop, cálculo relámpago, secuencias y memoria espacial.</li>
+          <li><b>Dificultad adaptativa</b>: el reto sube de nivel en caliente según tus aciertos y tiempos de reacción.</li>
+          <li><b>Panel de habilidades</b>: radar comparativo de percentiles y racha diaria sin necesidad de registro.</li>
+        </ul>
+        <ul class="chips">
+          <li>PWA</li>
+          <li>HTML5 Canvas</li>
+          <li>Web Audio</li>
+          <li>Algoritmos Adaptativos</li>
+          <li>Local Storage</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="brainfit/">Abrir Brainfit ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/brainfit" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">brainfit · test de velocidad</span>
+          </div>
+          <div class="preview-interactive">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; font-weight:600; color:var(--ink-2);">Atención Selectiva (Efecto Stroop)</span>
+              <span style="font:700 12px 'JetBrains Mono',monospace; color:#8b5cf6;">Combo x12</span>
+            </div>
+            <div style="background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:24px; text-align:center;">
+              <span style="font-size:32px; font-weight:900; letter-spacing:0.04em; color:#ef4444;">VERDE</span>
+              <p style="margin:8px 0 0; font-size:13px; color:var(--ink-3);">¿Coincide el color de la tinta con el texto?</p>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <button class="btn" style="justify-content:center; background:#ef4444; color:#fff; border:0;">No (Rojo)</button>
+              <button class="btn" style="justify-content:center; background:#10b981; color:#fff; border:0;">Sí</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 · Loopp -->
+    <span class="anchor" id="loopp"></span>
+    <article class="project" data-id="loopp" data-bg="#4f46e5 #9333ea">
+      <div class="text">
+        <div class="kicker">Producción de Audio · PWA</div>
+        <div class="p-head">
+          <img src="loopp/icons/icon-192.svg" alt="Loopp">
+          <div><span class="num">05</span><h3>Loopp</h3></div>
+        </div>
+        <p class="tagline">Loop Station multipista en el navegador con Web Audio API y cuantización al compás.</p>
+        <p>Una estación de loops ultraligera para grabar pistas musicales e improvisaciones en directo con sincronización perfecta. Ofrece ecualización por canal, paneo estéreo, metrónomo visual y motor de exportación directo a formato WAV y MP3 procesado en segundo plano.</p>
+        <ul class="feats">
+          <li><b>Cuantización por compás</b>: sincronización automática del inicio/fin del bucle sin desfases audibles.</li>
+          <li><b>Procesamiento DSP Web Audio</b>: volumen individual, monitoreo en vivo y supresión de latencia.</li>
+          <li><b>Exportación WAV & MP3</b>: codificación en cliente mediante Web Workers sin saturar el hilo principal.</li>
+        </ul>
+        <ul class="chips">
+          <li>Web Audio API</li>
+          <li>Web Workers</li>
+          <li>WAV / MP3 Encoder</li>
+          <li>Low-Latency</li>
+          <li>PWA</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="loopp/">Abrir Loopp ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/loopp" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="looper-preview">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #2a2d3d; padding-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+              <b style="font:600 13px 'JetBrains Mono',monospace;">MASTER · 120 BPM · 4/4</b>
+            </div>
+            <span style="font:500 12px 'JetBrains Mono',monospace; color:var(--term-dim);">4 PISTAS</span>
+          </div>
+          <div class="looper-track">
+            <span class="looper-track-name">TRK 1</span>
+            <div class="looper-wave">
+              <span style="height:40%;"></span><span style="height:70%;"></span><span style="height:90%;"></span><span style="height:55%;"></span><span style="height:80%;"></span><span style="height:100%;"></span><span style="height:60%;"></span>
+            </div>
+            <span class="looper-status">PLAYING</span>
+          </div>
+          <div class="looper-track">
+            <span class="looper-track-name">TRK 2</span>
+            <div class="looper-wave">
+              <span style="height:20%; background:#8e9bff;"></span><span style="height:45%; background:#8e9bff;"></span><span style="height:60%; background:#8e9bff;"></span><span style="height:75%; background:#8e9bff;"></span><span style="height:50%; background:#8e9bff;"></span><span style="height:35%; background:#8e9bff;"></span><span style="height:25%; background:#8e9bff;"></span>
+            </div>
+            <span class="looper-status">PLAYING</span>
+          </div>
+          <div class="looper-track">
+            <span class="looper-track-name">TRK 3</span>
+            <div class="looper-wave">
+              <span style="height:10%; background:#7d8194;"></span><span style="height:10%; background:#7d8194;"></span><span style="height:10%; background:#7d8194;"></span><span style="height:10%; background:#7d8194;"></span><span style="height:10%; background:#7d8194;"></span>
+            </div>
+            <span style="font:500 11px 'JetBrains Mono',monospace; color:var(--term-dim);">MUTED</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 · STOXXX -->
+    <span class="anchor" id="stoxxx"></span>
+    <article class="project" data-id="stoxxx" data-bg="#1d4ed8 #059669">
+      <div class="text">
+        <div class="kicker">Inteligencia Artificial & Finanzas · Web</div>
+        <div class="p-head">
+          <img src="stoxxx/favicon.svg" alt="STOXXX">
+          <div><span class="num">06</span><h3>STOXXX</h3></div>
+        </div>
+        <p class="tagline">Inteligencia y consenso bursátil bajo demanda impulsado por modelos LLM.</p>
+        <p>Plataforma para inversores que analiza consultorios de radio y opiniones de expertos financieros. Utiliza modelos Gemini para calcular consensos objetivos, generar fichas técnicas descargables en PDF y sintetizar podcasts diarios en audio MP3 a dos voces.</p>
+        <ul class="feats">
+          <li><b>Cálculo de consenso con IA</b>: ponderación de sentimiento alcista/bajista por analista y ticker.</li>
+          <li><b>Podcasts diarios autogenerados</b>: locución sintética y guionizada de las claves de la jornada bursátil.</li>
+          <li><b>Informes ejecutivos PDF</b>: resumen de soporte, resistencia y directrices técnicas en un click.</li>
+        </ul>
+        <ul class="chips">
+          <li>Gemini 1.5 / Flash</li>
+          <li>Python / Node</li>
+          <li>Text-to-Speech</li>
+          <li>PDF Generation</li>
+          <li>Financial Analytics</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="stoxxx/">Abrir STOXXX ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/stoxxx" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">stoxxx · informe de quórum</span>
+          </div>
+          <div class="preview-interactive">
+            <div class="stocks-preview">
+              <div class="stock-ticker-row">
+                <div>
+                  <b>IBEX 35 · Telefónica (TEF)</b>
+                  <small style="display:block; color:var(--ink-3);">4 analistas · Consenso: Mantener / Comprar</small>
+                </div>
+                <span class="stock-tag-up">+72% Alcista</span>
+              </div>
+              <div class="stock-ticker-row">
+                <div>
+                  <b>NASDAQ · Nvidia (NVDA)</b>
+                  <small style="display:block; color:var(--ink-3);">6 analistas · Consenso: Sobreponderar</small>
+                </div>
+                <span class="stock-tag-up">+88% Alcista</span>
+              </div>
+              <div style="background:var(--surface-2); border-radius:8px; padding:12px; border:1px solid var(--line); display:flex; align-items:center; gap:12px;">
+                <span style="font-size:22px;">🎙️</span>
+                <div style="flex:1;">
+                  <b style="font-size:13px; display:block;">Podcast Diario Generado</b>
+                  <small style="color:var(--ink-3);">Resumen a 2 voces · 04:32 min · Audio MP3</small>
+                </div>
+                <span class="btn" style="padding:4px 8px; font-size:12px;">Escuchar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07 · ElParte -->
+    <span class="anchor" id="elparte"></span>
+    <article class="project" data-id="elparte" data-bg="#0ea5e9 #f59e0b">
+      <div class="text">
+        <div class="kicker">Clima & Previsión · PWA</div>
+        <div class="p-head">
+          <img src="elparte/icons/icon.svg" alt="ElParte">
+          <div><span class="num">07</span><h3>ElParte</h3></div>
+        </div>
+        <p class="tagline">Pronóstico meteorológico detallado por horas y radar interactivo a 7 días.</p>
+        <p>Una aplicación de consulta meteorológica ágil y directa. Ofrece predicción detallada por horas de lluvia acumulada, ráfagas de viento y humedad relativa, complementada con un mapa de radar en tiempo real y soporte offline completo.</p>
+        <ul class="feats">
+          <li><b>Curva de lluvia y temperatura</b>: visualización horaria gráfica para planificar tus salidas al aire libre.</li>
+          <li><b>Radar de nubosidad interactivo</b>: barrido por capas geográficas de frentes de precipitación.</li>
+          <li><b>Carga ultrarrápida</b>: arquitectura estática optimizada para consumir el mínimo ancho de banda.</li>
+        </ul>
+        <ul class="chips">
+          <li>PWA</li>
+          <li>Radar Doppler</li>
+          <li>Weather API</li>
+          <li>Offline Cache</li>
+          <li>Responsive</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="elparte/">Abrir ElParte ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/elparte" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">elparte · previsión 7 días</span>
+          </div>
+          <div class="preview-interactive">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <b>Evolución a 7 días</b>
+              <small style="color:var(--ink-3); font-weight:600;">Prob. lluvia &lt; 10%</small>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; text-align:center;">
+              <div style="background:var(--surface-2); padding:10px 4px; border-radius:8px; border:1px solid var(--line);">
+                <small style="font-weight:600; color:var(--ink-3);">Hoy</small>
+                <div style="font-size:18px; margin:4px 0;">☀️</div>
+                <b>24° / 12°</b>
+              </div>
+              <div style="background:var(--surface-2); padding:10px 4px; border-radius:8px; border:1px solid var(--line);">
+                <small style="font-weight:600; color:var(--ink-3);">Mié</small>
+                <div style="font-size:18px; margin:4px 0;">🌤️</div>
+                <b>23° / 13°</b>
+              </div>
+              <div style="background:var(--surface-2); padding:10px 4px; border-radius:8px; border:1px solid var(--line);">
+                <small style="font-weight:600; color:var(--ink-3);">Jue</small>
+                <div style="font-size:18px; margin:4px 0;">⛅</div>
+                <b>21° / 11°</b>
+              </div>
+              <div style="background:var(--surface-2); padding:10px 4px; border-radius:8px; border:1px solid var(--line);">
+                <small style="font-weight:600; color:var(--ink-3);">Vie</small>
+                <div style="font-size:18px; margin:4px 0;">☀️</div>
+                <b>25° / 14°</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08 · mSchool -->
+    <span class="anchor" id="mschool"></span>
+    <article class="project" data-id="mschool" data-bg="#e11d48 #f97316">
+      <div class="text">
+        <div class="kicker">Educación Infantil · PWA</div>
+        <div class="p-head">
+          <img src="mschool/icon-192.svg" alt="mSchool">
+          <div><span class="num">08</span><h3>mSchool</h3></div>
+        </div>
+        <p class="tagline">Método de estimulación temprana de 30 minutos diarios adaptado de Alpha School.</p>
+        <p>Una aplicación de acompañamiento pedagógico familiar pensada para estructurar la estimulación temprana de los más pequeños. Organiza sesiones de 30 minutos sin sobreestimulación digital: bits de inteligencia de vocabulario y arte, retos motrices y canciones formativas.</p>
+        <ul class="feats">
+          <li><b>Estructura en bloques temporizados</b>: 5 a 10 minutos por bloque para respetar la atención infantil.</li>
+          <li><b>Bits de inteligencia</b>: fichas visuales de vocabulario, fauna, pintura clásica y operaciones lógicas.</li>
+          <li><b>Sin pantallas pasivas</b>: concebido como herramienta para el padre o educador, no como chupete digital.</li>
+        </ul>
+        <ul class="chips">
+          <li>PWA</li>
+          <li>Educación Temprana</li>
+          <li>Alpha School Model</li>
+          <li>Timer Guiado</li>
+          <li>IndexedDB</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="mschool/">Abrir mSchool ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/mschool" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">mschool · rutina diaria</span>
+          </div>
+          <div class="preview-interactive">
+            <div class="chain">
+              <div class="node"><b>01 · Bits (8 min)</b><small>Vocabulario y Arte</small></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>02 · Motriz (12 min)</b><small>Equilibrio y Salto</small></div>
+              <div class="arrow">→</div>
+              <div class="node"><b>03 · Ritmo (10 min)</b><small>Canto y Compás</small></div>
+            </div>
+            <div style="background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:14px; display:flex; align-items:center; gap:14px;">
+              <div style="font-size:32px;">🎨</div>
+              <div>
+                <b style="display:block; font-size:14px;">Bit de hoy: 'Los Girasoles' (Van Gogh)</b>
+                <small style="color:var(--ink-3);">Reconocimiento de colores primarios y trazo</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09 · MyLanding -->
+    <span class="anchor" id="mylanding"></span>
+    <article class="project" data-id="mylanding" data-bg="#475569 #2563eb">
+      <div class="text">
+        <div class="kicker">Productividad & Dashboard · Web</div>
+        <div class="p-head">
+          <img src="mylanding/index_files/favicon.svg" alt="MyLanding">
+          <div><span class="num">09</span><h3>MyLanding</h3></div>
+        </div>
+        <p class="tagline">Dashboard de inicio rápido optimizado para móviles con widgets y accesos directos.</p>
+        <p>Una página de inicio personal de carga casi instantánea (&lt;100ms) creada para reemplazar la pestaña en blanco del navegador móvil. Diseñada con una ergonomía que permite llegar a todos los accesos rápidos con una sola mano.</p>
+        <ul class="feats">
+          <li><b>Carga ultra-ligera (&lt;100ms)</b>: código HTML/CSS puro sin frameworks pesados ni rastreadores.</li>
+          <li><b>Widgets integrados</b>: clima local resumido, cotización de divisas y buscador unificado.</li>
+          <li><b>Ergonomía mobile-first</b>: distribución pensada para pantallas táctiles de gran tamaño.</li>
+        </ul>
+        <ul class="chips">
+          <li>Dashboard</li>
+          <li>Mobile-First</li>
+          <li>Ultra-light</li>
+          <li>Vanilla JS</li>
+          <li>Ergonómico</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="mylanding/">Abrir MyLanding ↗</a>
+          <a class="btn" href="https://github.com/pedromateo/public/tree/main/mylanding" target="_blank" rel="noopener noreferrer">Código</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="card-showcase">
+          <div class="card-showcase-header">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span class="badge-tag">mylanding · pantalla de inicio</span>
+          </div>
+          <div class="preview-interactive">
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; text-align:center;">
+              <div style="background:var(--surface-2); padding:12px 6px; border-radius:12px; border:1px solid var(--line);">
+                <div style="font-size:22px; margin-bottom:4px;">💬</div>
+                <small style="font-weight:600; font-size:11px;">Chat</small>
+              </div>
+              <div style="background:var(--surface-2); padding:12px 6px; border-radius:12px; border:1px solid var(--line);">
+                <div style="font-size:22px; margin-bottom:4px;">📰</div>
+                <small style="font-weight:600; font-size:11px;">Noticias</small>
+              </div>
+              <div style="background:var(--surface-2); padding:12px 6px; border-radius:12px; border:1px solid var(--line);">
+                <div style="font-size:22px; margin-bottom:4px;">⛅</div>
+                <small style="font-weight:600; font-size:11px;">Meteo</small>
+              </div>
+              <div style="background:var(--surface-2); padding:12px 6px; border-radius:12px; border:1px solid var(--line);">
+                <div style="font-size:22px; margin-bottom:4px;">📈</div>
+                <small style="font-weight:600; font-size:11px;">Bolsa</small>
+              </div>
+            </div>
+            <div style="padding:10px 14px; background:var(--surface-2); border-radius:10px; border:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:var(--ink-2);">Búsqueda rápida...</span>
+              <kbd style="font:500 11px 'JetBrains Mono',monospace; background:var(--surface); padding:2px 6px; border-radius:4px; border:1px solid var(--line);">↵</kbd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10 · Pastelería Sanz -->
+    <span class="anchor" id="sanz"></span>
+    <article class="project" data-id="sanz" data-bg="#b45309 #78350f">
+      <div class="text">
+        <div class="kicker">Tradición & Patrimonio · Web</div>
+        <div class="p-head">
+          <img src="sanz/apple-touch-icon.png" alt="Pastelería Sanz">
+          <div><span class="num">10</span><h3>Pastelería Sanz</h3></div>
+        </div>
+        <p class="tagline">Sitio web oficial y archivo histórico de la Confitería Artesana Sanz (fundada en 1895).</p>
+        <p>Homenaje digital y archivo histórico de la confitería centenaria de Puerto Lumbreras (Murcia). Cuna del célebre «Postre Chino», milhojas de merengue tostado a pala y repostería tradicional artesana transmitida durante más de cuatro generaciones familiares.</p>
+        <ul class="feats">
+          <li><b>Archivo del Postre Chino</b>: documentación fotográfica del proceso tradicional de emborrizado y merengue.</li>
+          <li><b>Galería histórica de especialidades</b>: tartas de autor, milhojas de hojaldre caramelizado y dulces navideños.</li>
+          <li><b>Diseño editorial cálido</b>: maquetación que refleja la nobleza de la harina, el azúcar tostado y el horno de leña.</li>
+        </ul>
+        <ul class="chips">
+          <li>Web Editorial</li>
+          <li>Patrimonio Cultural</li>
+          <li>Archivo Fotográfico</li>
+          <li>SEO Local</li>
+          <li>Puerto Lumbreras</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="sanz/">Abrir Pastelería Sanz ↗</a>
+          <a class="btn" href="https://pasteleriasanz.weebly.com/" target="_blank" rel="noopener noreferrer">Web Oficial</a>
+        </div>
+      </div>
+      <div class="media">
+        <figure class="photo-card">
+          <img src="sanz/uploads/postrechino/postrechino_terminado_4_unidades.jpg" alt="El Postre Chino artesano de Pastelería Sanz" loading="lazy">
+          <figcaption>El emblemático «Postre Chino» terminado: cuatro unidades de merengue suave y bizcocho artesano.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 11 · SwipeClean -->
+    <span class="anchor" id="swipeclean"></span>
+    <article class="project" data-id="swipeclean" data-bg="#059669 #2563eb">
+      <div class="text">
+        <div class="kicker">Android Nativo · Utilidad</div>
+        <div class="p-head">
+          <img src="swipeclean/icon.svg" alt="SwipeClean">
+          <div><span class="num">11</span><h3>SwipeClean</h3></div>
+        </div>
+        <p class="tagline">Clasificador y limpiador de galería fotográfica mediante interacción ágil por tarjetas swipe.</p>
+        <p>Aplicación Android nativa desarrollada 100% en Jetpack Compose y Material 3. Permite hacer limpieza de la galería fotográfica de manera natural: desliza a la izquierda para descartar a la papelera nativa y a la derecha para conservar, con soporte para deshacer (Undo) espacial instantáneo.</p>
+        <ul class="feats">
+          <li><b>Bucle de swipe por tarjetas</b>: precarga acelerada por hardware de imágenes con Coil y memoria controlada.</li>
+          <li><b>Deshacer (Undo) Espacial LIFO</b>: restaura de inmediato cualquier foto deslizándola desde el mismo lateral.</li>
+          <li><b>Borrado seguro en papelera</b>: utiliza la API nativa de Android (<code>MediaStore.createTrashRequest</code>) sin borrado destructivo inmediato.</li>
+        </ul>
+        <ul class="chips">
+          <li>Android</li>
+          <li>Jetpack Compose</li>
+          <li>Kotlin</li>
+          <li>Material 3</li>
+          <li>MVI Clean Arch</li>
+          <li>Scoped Storage</li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="https://github.com/pedromateo/public/tree/main/swipeclean" target="_blank" rel="noopener noreferrer">Ver Código en GitHub ↗</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="term">
+          <div class="term-bar"><i></i><i></i><i></i><span>bash · Gradle build</span></div>
+<pre><span class="c"># Compilación nativa con Kotlin & Jetpack Compose</span>
+<span class="p">$</span> ./gradlew assembleDebug
+
+<span class="c"># Arquitectura MVI Unidirectional Data Flow (UDF)</span>
+<span class="kw">data class</span> <span class="o">SwipeState</span>(
+    <span class="kw">val</span> cards: List&lt;PhotoCard&gt;,
+    <span class="kw">val</span> trashStack: List&lt;PhotoCard&gt;,
+    <span class="kw">val</span> freedBytes: Long = 0L
+)</pre>
+        </div>
+        <div class="diagram">
+          <h4>Flujo seguro de clasificación fotográfica</h4>
+          <div class="chain">
+            <div class="node"><b>Swipe Izquierda</b><small>Descartar foto</small></div>
+            <div class="arrow">→</div>
+            <div class="node"><b>Pila LIFO</b><small>Undo espacial</small></div>
+            <div class="arrow">→</div>
+            <div class="node"><b>Papelera 30d</b><small>MediaStore Nativo</small></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Pedro Mateo · <a href="https://github.com/pedromateo" target="_blank" rel="noopener noreferrer">github.com/pedromateo</a></span>
+    <span>Proyectos de código abierto y aplicaciones web independientes.</span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
 </body>
 </html>
