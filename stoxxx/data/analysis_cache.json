@@ -4,31 +4,31 @@
   "resumen_ejecutivo": {
     "lectura_tiempo": "3-5 minutos",
     "sintesis_sentimiento": "• Disociación técnica entre Wall Street y Europa: La renta variable europea, liderada por el IBEX 35 en cotas históricas (sobre 20.000 puntos) y el DAX 40 (26.700 puntos), supera con holgura a los índices estadounidenses gracias a la rotación masiva hacia banca comercial, utilities y sectores defensivos no vinculados a la IA.\n• Terremoto de gobernanza en Nvidia: El escándalo interno y la salida forzada de Jensen Huang precipitaron un severo castigo en el valor (-12,75% semanal) y arrastraron al sector tecnológico global. No obstante, existe quórum unánime entre los analistas sobre la inminencia de un rebote técnico táctico hacia la zona de 187$ - 190$ al alcanzarse soportes mensuales clave.\n• Rotación masiva hacia la 'vieja economía': El dinero institucional no abandona los mercados, sino que se refugia con fuerza en utilities (Iberdrola como 'caballo ganador' del mercado por su provisión energética a centros de datos), alimentación y bebidas (Heineken rompiendo resistencias en 80€), químicas (BASF) y banca comercial con elevados márgenes.",
-    "hacia_donde_apuntan": "• Sobreponderar renta variable europea y española: Aprovechar la fortaleza estructural del IBEX 35 impulsado por el sector financiero y las eléctricas, con horizonte favorable hacia el cierre de año y el catalizador electoral.\n• Gestión táctica en semiconductores: Evitar entradas impulsivas a medio plazo en megacaps de IA pero aprovechar el rebote por sobreventa en Nvidia, vigilando si cierra el gap de 187$ o si perfora el soporte estructural de 148$.\n• Preservación estricta de capital: Ceñir stops dinámicos bajo soportes de las dos últimas semanas y mantener una reserva estratégica de liquidez para operar caídas en valoraciones exigentes.",
+    "hacia_donde_apuntan": "• Sobreponderar renta variable europea y española: Aprovechar la fortaleza estructural del IBEX 35 impulsado por el sector financiero y las eléctricas, con horizonte favorable hacia el cierre de año y el catalizador electoral.\n• Gestión táctica en semiconductores: Evitar entradas impulsivas a medio plazo en megacaps de IA, pero aprovechar el rebote por sobreventa en Nvidia, vigilando si cierra el gap de 187$ o si perfora el soporte estructural de 148$.\n• Preservación estricta de capital: Ceñir stops dinámicos bajo soportes de las dos últimas semanas y mantener una reserva estratégica de liquidez para operar caídas en valoraciones exigentes.",
     "puntos_clave_consenso": [
-      "Liderazgo incontestable de Iberdrola: Unanimidad absoluta entre analistas como R. Moro, A. Iturralde, J. Alfayate, V. Galán y E. Bolinches al considerarla el valor defensivo por excelencia, en subida libre (>158.000 M€ de capitalización) y beneficiaria neta del consumo eléctrico de datacenters.",
+      "Liderazgo incontestable de Iberdrola: Unanimidad absoluta entre analistas como R. Moro, A. Iturralde, J. Alfayate, V. Galán y E. Bolinches al considerarla el valor defensivo por excelencia, en subida libre (>158.000 M€ de capitalización) y beneficiaria neta del consumo eléctrico de centros de datos.",
       "Consenso de rebote técnico en Nvidia: Coincidencia en que la venta masiva por el cese de Jensen Huang ha generado una capitulación de minoristas que abre la puerta a un rebote de corto plazo hacia 187$-190$, aunque con dudas sobre su sostenibilidad estructural sin un liderazgo claro.",
       "Fortaleza del IBEX 35 y DAX frente a EE.UU.: Ausencia de exposición a la purga de la IA y fuerte respaldo de la banca española y multinacionales alemanas diversificadas.",
       "Rotación institucional hacia consumo defensivo y valor: Fuerte captación de flujos en compañías como Heineken, BASF, Pernod Ricard y Procter & Gamble.",
-      "Fuerte divergencia en materias primas (Oro y Petróleo): Choque frontal entre la visión alcista de Moro y Pinto en Oro (hacia 4.600$) frente a la cautela de Ribes; y entre la apuesta compradora de Clatum en Repsol frente a los cortos recomendados por Moro ante la debilidad del crudo."
+      "Fuerte divergencia en materias primas (oro y petróleo): Choque frontal entre la visión alcista de Moro y Pinto en el oro (hacia 4.600$) frente a la cautela de Ribes; y entre la apuesta compradora de Clatum en Repsol frente a los cortos recomendados por Moro ante la debilidad del crudo."
     ]
   },
   "sentimiento_macro": {
-    "situacion_global": "• Asimetría EE.UU. vs. Europa: Mientras el S&P 500 y el Nasdaq digieren la ruptura de medias de 40 semanas y la crisis en el ecosistema semiconductor, el selectivo español IBEX 35 y el DAX alemán marcan hitos históricos impulsados por flujos procedentes de carteras internacionales que buscan dividendo y certidumbre de beneficios.\n• R. Moro (Capital Radio): 'El IBEX 35 muestra una salud técnica intachable defendiendo los 19.900 puntos. En el oro vemos un suelo muy claro con proyección a 4.600-4.700$, mientras que en petróleo recomiendo cautela máxima o cortos ante la pérdida de soportes clave en el crudo.'\n• A. Iturralde (Capital Radio): 'El mercado bursátil español suele vivir sus mejores momentos al calor de los procesos electorales. Valores directores como Banco Santander e Iberdrola siguen guiando las alzas, y el castigo en Nvidia ha sido un movimiento de ilusionismo clásico para expulsar a minoristas en pánico.'\n• J. Alfayate (GPM Gestión Global): 'La fortaleza del DAX 40 sobre los 26.700 puntos tiene recorrido hacia los 28.000 puntos. Los sectores que lideran Europa son químico, reaseguros y alimentación; ahí es donde se debe estar invertido.'\n• S. Rodríguez (Visionarios Bolsa): 'Estamos ante el ejercicio más volátil del Nasdaq desde 2022. La dimisión forzada de Jensen Huang ha roto la media de 20 meses en Nvidia, obligándonos a aplicar la disciplina del sistema y vender el 100% de la posición tras un +200% acumulado. Quien busque oportunidades debe mirar a los beneficiarios de la diversificación de chips como Broadcom o AMD.'\n• P. Pérez (Capital Radio): 'El IBEX 35 tiene combustible para extender el rally de Navidad hacia los 20.500 o incluso 21.000 enteros. En Nvidia y Acerinox los apoyos en soportes mensuales activan rebotes tácticos inmediatos.'\n• D. Galán (Bolsa General): 'El IBEX 35 mantiene su directriz alcista con soporte clave en los 18.644 puntos. Es momento de primar compañías que rompen resistencias con volumen institucional como Heineken o Técnicas Reunidas.'",
+    "situacion_global": "• Asimetría EE.UU. vs. Europa: Mientras el S&P 500 y el Nasdaq digieren la ruptura de medias de 40 semanas y la crisis en el ecosistema semiconductor, el selectivo español IBEX 35 y el DAX alemán marcan hitos históricos impulsados por flujos procedentes de carteras internacionales que buscan dividendo y certidumbre de beneficios.\n• R. Moro (Capital Radio): 'El IBEX 35 muestra una salud técnica intachable defendiendo los 19.900 puntos. En el oro vemos un suelo muy claro con proyección a 4.600-4.700$, mientras que en el petróleo recomiendo cautela máxima o cortos ante la pérdida de soportes clave en el crudo.'\n• A. Iturralde (Capital Radio): 'El mercado bursátil español suele vivir sus mejores momentos al calor de los procesos electorales. Valores directores como Banco Santander e Iberdrola siguen guiando las alzas, y el castigo en Nvidia ha sido un movimiento de ilusionismo clásico para expulsar a minoristas en pánico.'\n• J. Alfayate (GPM Gestión Global): 'La fortaleza del DAX 40 sobre los 26.700 puntos tiene recorrido hacia los 28.000 puntos. Los sectores que lideran Europa son químico, reaseguros y alimentación; ahí es donde se debe estar invertido.'\n• S. Rodríguez (Visionarios Bolsa): 'Estamos ante el ejercicio más volátil del Nasdaq desde 2022. La dimisión forzada de Jensen Huang ha roto la media de 20 meses en Nvidia, obligándonos a aplicar la disciplina del sistema y vender el 100% de la posición tras un +200% acumulado. Quien busque oportunidades debe mirar a los beneficiarios de la diversificación de chips como Broadcom o AMD.'\n• P. Pérez (Capital Radio): 'El IBEX 35 tiene combustible para extender el rally de Navidad hacia los 20.500 o incluso 21.000 enteros. En Nvidia y Acerinox los apoyos en soportes mensuales activan rebotes tácticos inmediatos.'\n• D. Galán (Bolsa General): 'El IBEX 35 mantiene su directriz alcista con soporte clave en los 18.644 puntos. Es momento de primar compañías que rompen resistencias con volumen institucional como Heineken o Técnicas Reunidas.'",
     "indices": [
       {
         "nombre": "IBEX 35",
         "tendencia": "Alcista",
         "soporte_clave": "19.900",
         "resistencia_clave": "20.356",
-        "consenso_analistas": "Fuerte consenso alcista; cotizando sobre los 20.000 puntos con objetivos de extensión hacia 20.500 - 21.000 puntos respaldado por banca y utilities."
+        "consenso_analistas": "Fuerte consenso alcista; cotizando sobre los 20.000 puntos con objetivos de extensión hacia 20.500 - 21.000 puntos respaldado por la banca y las utilities."
       },
       {
         "nombre": "DAX 40",
         "tendencia": "Alcista",
         "soporte_clave": "25.300",
         "resistencia_clave": "26.692",
-        "consenso_analistas": "Máximos históricos en 26.700; proyección técnica hacia los 28.000 puntos impulsado por sectores defensivos (químico, reaseguro, consumo)."
+        "consenso_analistas": "Máximos históricos en 26.700; proyección técnica hacia los 28.000 puntos impulsado por sectores defensivos (químico, reaseguros, consumo)."
       },
       {
         "nombre": "S&P 500",
@@ -45,8 +45,8 @@
         "consenso_analistas": "Recorte del 16% digiriendo la crisis en semiconductores; formación de doji en media de 40 semanas y rebote táctico en curso."
       }
     ],
-    "coincidencias_estrategia": "1. Hegemonía y sobreponderación de Iberdrola y el mercado español frente a Wall Street: consenso absoluto en aprovechar la ausencia de tecnológicas castigadas en el selectivo español.\n2. Rotación institucional hacia la vieja economía defensiva: masiva entrada de flujos hacia Heineken, BASF, Pernod Ricard y banca comercial.\n3. Rebote técnico táctico en Nvidia: acuerdo en que el castigo por el cese de su CEO ha sido exagerado a corto plazo, abriendo un rebote hacia 187$-190$.",
-    "divergencias_estrategia": "1. Repsol y Petróleo: S. Clatum apuesta por fuertes subidas hacia máximos (+7,5%) por tensión bélica con Irán, mientras R. Moro recomienda cortos ante la rotura bajista del West Texas.\n2. Oro: R. Moro y M. Pinto prevén subidas a 4.600$-4.700$, mientras M. Ribes advierte de mínimos decrecientes y exige 50% de liquidez.\n3. ACS: G. Ortega y M. Pinto ven suelo en 89-91€ con rebote a 100€, mientras P. Pérez y J. Alfayate anticipan caídas posteriores hacia 75€."
+    "coincidencias_estrategia": "1. Hegemonía y sobreponderación de Iberdrola y el mercado español frente a Wall Street: consenso absoluto en aprovechar la ausencia de tecnológicas castigadas en el selectivo español.\n2. Rotación institucional hacia la vieja economía defensiva: masiva entrada de flujos hacia Heineken, BASF, Pernod Ricard y banca comercial.\n3. Rebote técnico-táctico en Nvidia: acuerdo en que el castigo por el cese de su CEO ha sido exagerado a corto plazo, abriendo un rebote hacia 187$-190$.",
+    "divergencias_estrategia": "1. Repsol y petróleo: S. Clatum apuesta por fuertes subidas hacia máximos (+7,5%) por tensión bélica con Irán, mientras R. Moro recomienda cortos ante la rotura bajista del West Texas.\n2. Oro: R. Moro y M. Pinto prevén subidas a 4.600$-4.700$, mientras M. Ribes advierte de mínimos decrecientes y exige un 50% de liquidez.\n3. ACS: G. Ortega y M. Pinto ven suelo en 89-91€ con rebote a 100€, mientras P. Pérez y J. Alfayate anticipan caídas posteriores hacia 75€."
   },
   "analisis_empresas": {
     "nacionales": [
@@ -65,7 +65,7 @@
         "soporte": "14.00€",
         "resistencia": "Subida Libre (>158.000 M€)",
         "recomendacion": "Mantener / Comprar; caballo ganador del mercado",
-        "tesis": "Sube con mínima volatilidad encadenando 10 semanas al alza. Beneficiaria neta de la demanda eléctrica de centros de datos de IA. Flujos récord de fondos institucionales.",
+        "tesis": "Sube con mínima volatilidad, encadenando diez semanas al alza. Beneficiaria neta de la demanda eléctrica de centros de datos de IA. Flujos récord de fondos institucionales.",
         "google_finance_url": "https://www.google.com/finance/quote/IBE:BME"
       },
       {
@@ -83,7 +83,7 @@
         "soporte": "10.74€",
         "resistencia": "11.50€",
         "recomendacion": "Comprar / Mantener con stop en 10.74€",
-        "tesis": "Iturralde lo selecciona en Minuto de Oro (compra en 11,03€, obj 11,50€ por efecto electoral). Motor bancario del Ibex 35 junto a BBVA y CaixaBank.",
+        "tesis": "Iturralde lo selecciona en Minuto de Oro (compra en 11,03 €, obj. 11,50 € por efecto electoral). Motor bancario del IBEX 35 junto a BBVA y CaixaBank.",
         "google_finance_url": "https://www.google.com/finance/quote/SAN:BME"
       },
       {
@@ -113,11 +113,11 @@
           "P. Pérez",
           "M. Pinto"
         ],
-        "nivel_consenso": "Divergencia (Rebote Táctico vs Cautela Medio Plazo)",
+        "nivel_consenso": "Divergencia (rebote táctico vs. cautela a medio plazo)",
         "soporte": "89.00€",
         "resistencia": "98.00€",
         "recomendacion": "Operar solo rebote táctico con stop ceñido",
-        "tesis": "Castigada por moratorias en datacenters en EE.UU. Ortega y Pinto ven formación de suelo para rebotar hacia 98-100€, mientras Alfayate y Pérez alertan de caídas posteriores a 75€.",
+        "tesis": "Castigada por moratorias en centros de datos en EE.UU. Ortega y Pinto ven formación de suelo para rebotar hacia 98-100€, mientras Alfayate y Pérez alertan de caídas posteriores a 75€.",
         "google_finance_url": "https://www.google.com/finance/quote/ACS:BME"
       },
       {
@@ -164,7 +164,7 @@
         "soporte": "43.58€",
         "resistencia": "Máximos Históricos",
         "recomendacion": "Mantener en subida libre",
-        "tesis": "Estructura impecable en subida libre con reducida volatilidad. Bolinches prefiere Iberdrola por liquidez global pero califica a Endesa de valor refugio excelente.",
+        "tesis": "Estructura impecable en subida libre con reducida volatilidad. Bolinches prefiere Iberdrola por liquidez global, pero califica a Endesa como valor refugio excelente.",
         "google_finance_url": "https://www.google.com/finance/quote/ELE:BME"
       },
       {
@@ -178,7 +178,7 @@
         "nivel_consenso": "Consenso Alcista con Stop",
         "soporte": "9.70€",
         "resistencia": "12.75€",
-        "recomendacion": "Mantener con stop en 445$ / 9.70€",
+        "recomendacion": "Mantener con stop en 9.70€",
         "tesis": "Morgan Stanley elevó su participación al 6,93%. El valor superó los 10,80€ con throwback sobre media de 200 ascendente. Del Canto aconseja ceñir stop.",
         "google_finance_url": "https://www.google.com/finance/quote/GRF:BME"
       },
@@ -223,7 +223,7 @@
         "soporte": "17.00€",
         "resistencia": "20.00€",
         "recomendacion": "Venta / Evitar",
-        "tesis": "Peor valor del Ibex en 2026. Triple techo en 20€ y trayectoria bajista primaria hacia 17€ y 15€.",
+        "tesis": "Peor valor del IBEX en 2026. Triple techo en 20€ y trayectoria bajista primaria hacia 17€ y 15€.",
         "google_finance_url": "https://www.google.com/finance/quote/FDR:BME"
       },
       {
@@ -259,7 +259,7 @@
           "J. Alfayate",
           "J. M. Luna"
         ],
-        "nivel_consenso": "Rebote Táctico de Corto Plazo vs Cautela Estructural",
+        "nivel_consenso": "Rebote táctico a corto plazo vs. cautela estructural",
         "soporte": "148.00$",
         "resistencia": "187.00$",
         "recomendacion": "Comprar solo para rebote táctico a 187$; stop en 148$",
@@ -305,7 +305,7 @@
           "R. Moro",
           "A. Iturralde"
         ],
-        "nivel_consenso": "Consenso Neutral / Toma de Beneficios",
+        "nivel_consenso": "Consenso neutral / toma de beneficios",
         "soporte": "Media 10 semanas",
         "resistencia": "560.00$",
         "recomendacion": "Mantener con stop ceñido o recoger beneficios parciales",
@@ -336,7 +336,7 @@
           "P. Pérez",
           "E. Bolinches"
         ],
-        "nivel_consenso": "Unanimidad Alcista (Top Pick Defensivo)",
+        "nivel_consenso": "Unanimidad alcista (top pick defensivo)",
         "soporte": "80.00€",
         "resistencia": "90.00€",
         "recomendacion": "Comprar / Sobreponderar en consumo",
@@ -351,7 +351,7 @@
           "V. Galán",
           "E. Bolinches"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
+        "nivel_consenso": "Alto consenso alcista",
         "soporte": "51.00€",
         "resistencia": "Máximos del DAX",
         "recomendacion": "Comprar con stop en 51€",
@@ -364,7 +364,7 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "¡Muy buenas tardes a todos, y bienvenidos a una nueva edición de STOXXX! Hoy analizamos las claves operativas y el quórum de los dieciséis consultorios de bolsa emitidos a lo largo de esta última semana."
+      "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva edición de STOXXX! Hoy analizamos las claves operativas y el quórum de los dieciséis consultorios de bolsa emitidos a lo largo de esta última semana."
     },
     {
       "locutor": "Voz 2",
@@ -454,7 +454,7 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "En las materias primas, el Oro también ha dividido a los expertos. R. Moro y M. Pinto ven un suelo inequívoco con proyección hacia los 4.600 o 4.700 dólares por onza ante el debate del techo de deuda en Estados Unidos. Por el contrario, M. Ribes sugiere cautela y mantener hasta un 50% de liquidez ante el endurecimiento de los tipos de interés reales."
+      "texto": "En las materias primas, el oro también ha dividido a los expertos. R. Moro y M. Pinto ven un suelo inequívoco con proyección hacia los 4.600 o 4.700 dólares por onza ante el debate del techo de deuda en Estados Unidos. Por el contrario, M. Ribes sugiere cautela y mantener hasta un 50% de liquidez ante el endurecimiento de los tipos de interés reales."
     },
     {
       "locutor": "Voz 2",
@@ -474,13 +474,13 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "¡Un cordial saludo a todos, y hasta la próxima edición en STOXXX!"
+      "texto": "¡Un cordial saludo a todos y hasta la próxima edición en STOXXX!"
     }
   ],
   "fuentes_consultadas": [
     {
       "id": "qEq-i5wWc7g",
-      "title": "Esta Acción de IA se Beneficiará de la Crisis de NVIDIA (Cómprala YA)",
+      "title": "Esta acción de IA se beneficiará de la crisis de NVIDIA (¡Cómprala ya!)",
       "channel": "Visionarios Bolsa",
       "upload_date": "20261115",
       "date_formatted": "2026-11-15",
@@ -490,7 +490,7 @@
     },
     {
       "id": "aFxrHjVMM1w",
-      "title": "El gran engaño de Nvidia: lo que no te cuentan, con A. Iturralde | Capital, La Bolsa y La Vida",
+      "title": "El gran engaño de Nvidia: lo que no te cuentan, con A. Iturralde | Capital, la bolsa y la vida",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261114",
       "date_formatted": "2026-11-14",
@@ -510,7 +510,7 @@
     },
     {
       "id": "Bot6q--g0U4",
-      "title": "Consultorio | Acciona tras el desplome: Nivel crítico para el valor. R. Moro y J. del Canto",
+      "title": "Consultorio | Acciona tras el desplome: nivel crítico para el valor. R. Moro y J. del Canto",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261113",
       "date_formatted": "2026-11-13",
@@ -520,7 +520,7 @@
     },
     {
       "id": "BFRx5gKr4q4",
-      "title": "#Consultorio | El oro se afianza como termómetro de la política monetaria, según Ribes",
+      "title": "Consultorio | El oro se afianza como termómetro de la política monetaria, según Ribes",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261112",
       "date_formatted": "2026-11-12",
@@ -530,7 +530,7 @@
     },
     {
       "id": "ZZyI6ojF5ik",
-      "title": "Si Eres Accionista de NVIDIA… PREPÁRATE!",
+      "title": "Si eres accionista de NVIDIA... ¡PREPÁRATE!",
       "channel": "Visionarios Bolsa",
       "upload_date": "20261112",
       "date_formatted": "2026-11-12",
@@ -540,7 +540,7 @@
     },
     {
       "id": "szKGar6nJX4",
-      "title": "Consultorio | Por qué el Dax toca nuevos máximos, con J. Alfayate",
+      "title": "Consultorio | Por qué el DAX toca nuevos máximos, con J. Alfayate",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261112",
       "date_formatted": "2026-11-12",
@@ -560,7 +560,7 @@
     },
     {
       "id": "Cs6lc5MPDBs",
-      "title": "#Consultorio | Cinco valores clave para hacer cartera, según V. Galán",
+      "title": "Consultorio | Cinco valores clave para hacer cartera, según V. Galán",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -580,7 +580,7 @@
     },
     {
       "id": "a34s-hJ0iq0",
-      "title": "#Consultorio | Repsol, en la montaña rusa del petróleo. Esto dice D. Galán",
+      "title": "Consultorio | Repsol, en la montaña rusa del petróleo. Esto dice D. Galán",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -590,7 +590,7 @@
     },
     {
       "id": "hs5mS7JV_pY",
-      "title": "Fluidra es el peor valor del Ibex este ejercicio: ¿Cuál es la visión para la compañía ahora?",
+      "title": "Fluidra es el peor valor del IBEX este ejercicio: ¿cuál es la visión para la compañía ahora?",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -610,7 +610,7 @@
     },
     {
       "id": "mZ8KDAvKHJo",
-      "title": "La zona a la que se aproxima el Oro: \"Está rebotando\", con R. Moro",
+      "title": "La zona a la que se aproxima el oro: \"Está rebotando\", con R. Moro",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261110",
       "date_formatted": "2026-11-10",
@@ -630,7 +630,7 @@
     },
     {
       "id": "NznA8hSL_HQ",
-      "title": "#Consultorio | Iberdrola vs. Endesa: ¿Por qué no suelen ir a la par?",
+      "title": "Consultorio | Iberdrola frente a Endesa: ¿por qué no suelen ir a la par?",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261109",
       "date_formatted": "2026-11-09",
