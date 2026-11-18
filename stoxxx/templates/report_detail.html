@@ -419,7 +419,7 @@
                   </div>
                   <div class="flex items-center space-x-1.5">
                     <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
-                      {{ comp.menciones }} mención{% if comp.menciones > 1 %}es{% endif %}
+                      {% if comp.menciones == 1 %}1 mención{% else %}{{ comp.menciones }} menciones{% endif %}
                     </span>
                     <span class="text-xs px-2 py-0.5 rounded-md font-semibold
                       {% if 'alcista' in comp.nivel_consenso|lower %} bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
@@ -485,7 +485,7 @@
                   </div>
                   <div class="flex items-center space-x-1.5">
                     <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
-                      {{ comp.menciones }} mención{% if comp.menciones > 1 %}es{% endif %}
+                      {% if comp.menciones == 1 %}1 mención{% else %}{{ comp.menciones }} menciones{% endif %}
                     </span>
                     <span class="text-xs px-2 py-0.5 rounded-md font-semibold
                       {% if 'alcista' in comp.nivel_consenso|lower %} bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
