@@ -21,7 +21,9 @@ from config import (
     DEFAULT_HORIZON_DAYS,
     GEMINI_API_KEY,
     AUTO_GIT_PUSH,
-    BASE_DIR
+    BASE_DIR,
+    PDF_DIR,
+    AUDIO_DIR
 )
 from src.extractor import YouTubeExtractor
 from src.analyzer import MarketAnalyzer
@@ -272,22 +274,25 @@ def main():
             border_style="blue"
         ))
 
-    # 2.8. POBLAR FUENTES CONSULTADAS SI NO ESTÁN DEFINIDAS
-    if not report_data.get("fuentes_consultadas"):
-        src_vids = videos if videos else (ref_videos if 'ref_videos' in locals() and ref_videos else [])
-        if src_vids:
-            report_data["fuentes_consultadas"] = [
-                {
-                    "id": v.get("id", ""),
-                    "title": v.get("title", ""),
-                    "channel": v.get("channel", ""),
-                    "date_formatted": v.get("date_formatted", v.get("upload_date", "")),
-                    "url": v.get("url", f"https://www.youtube.com/watch?v={v.get('id', '')}"),
-                    "char_count": len(v.get("transcript", "")),
-                    "status": "Transcrito completo" if len(v.get("transcript", "")) > 0 else "Disponible"
-                }
-                for v in src_vids
-            ]
+    # 2.8. POBLAR FUENTES CONSULTADAS SIEMPRE A PARTIR DE LOS VÍDEOS EXTRAÍDOS
+    src_vids = videos if videos else (ref_videos if 'ref_videos' in locals() and ref_videos else [])
+    if src_vids:
+        report_data["fuentes_consultadas"] = [
+            {
+                "id": v.get("id", ""),
+                "title": v.get("title", ""),
+                "channel": v.get("channel", ""),
+                "date_formatted": v.get("date_formatted", v.get("upload_date", "")),
+                "url": v.get("url", f"https://www.youtube.com/watch?v={v.get('id', '')}"),
+                "char_count": len(v.get("transcript", "")),
+                "status": "Transcrito completo" if len(v.get("transcript", "")) > 0 else "Disponible"
+            }
+            for v in sorted(
+                src_vids,
+                key=lambda x: str(x.get("upload_date", "") or x.get("date_formatted", "")),
+                reverse=True
+            )
+        ]
 
     # 3. MOSTRAR INFORME EN TERMINAL
     print_terminal_report(report_data, date_str)
@@ -326,8 +331,8 @@ def main():
             report_data=report_data,
             date_str=date_str,
             videos_count=len(videos) if videos else 5,
-            has_pdf=(pdf_path is not None and pdf_path.exists()),
-            has_audio=(audio_path is not None and audio_path.exists())
+            has_pdf=(pdf_path is not None and pdf_path.exists()) or (PDF_DIR / f"informe-{date_str}.pdf").exists(),
+            has_audio=(audio_path is not None and audio_path.exists()) or (AUDIO_DIR / f"podcast-{date_str}.mp3").exists()
         )
     console.print(f"[bold green]✔[/bold green] Detalle de informe: [cyan]{web_res['detail']}[/cyan]")
     console.print(f"[bold green]✔[/bold green] Índice principal: [cyan]{web_res['index']}[/cyan]")
