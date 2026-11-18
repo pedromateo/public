@@ -233,7 +233,7 @@ def main():
     try:
         with console.status("[bold green]Analizando transcripciones y buscando quórum de analistas..."):
             analyzer = MarketAnalyzer()
-            report_data = analyzer.analyze_transcripts(videos)
+            report_data = analyzer.analyze_transcripts(videos, date_str=date_str)
         console.print("[bold green]✔[/bold green] Análisis completado con éxito a partir de fuentes reales.")
     except Exception as e:
         console.print(f"[bold red]Error durante el análisis:[/bold red] {e}")

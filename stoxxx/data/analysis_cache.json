@@ -1,346 +1,211 @@
 {
-  "fecha_informe": "2026-11-16",
-  "sentimiento_general": "Alcista Táctico con Rotación Defensiva",
+  "fecha_informe": "2026-11-18",
+  "sentimiento_general": "Alcista Táctico con Rotación hacia Valor y Cortos en Metales",
   "resumen_ejecutivo": {
     "lectura_tiempo": "3-5 minutos",
-    "sintesis_sentimiento": "• Disociación técnica entre Wall Street y Europa: La renta variable europea, liderada por el IBEX 35 en cotas históricas (sobre 20.000 puntos) y el DAX 40 (26.700 puntos), supera con holgura a los índices estadounidenses gracias a la rotación masiva hacia banca comercial, utilities y sectores defensivos no vinculados a la IA.\n• Terremoto de gobernanza en Nvidia: El escándalo interno y la salida forzada de Jensen Huang precipitaron un severo castigo en el valor (-12,75% semanal) y arrastraron al sector tecnológico global. No obstante, existe quórum unánime entre los analistas sobre la inminencia de un rebote técnico táctico hacia la zona de 187$ - 190$ al alcanzarse soportes mensuales clave.\n• Rotación masiva hacia la 'vieja economía': El dinero institucional no abandona los mercados, sino que se refugia con fuerza en utilities (Iberdrola como 'caballo ganador' del mercado por su provisión energética a centros de datos), alimentación y bebidas (Heineken rompiendo resistencias en 80€), químicas (BASF) y banca comercial con elevados márgenes.",
-    "hacia_donde_apuntan": "• Sobreponderar renta variable europea y española: Aprovechar la fortaleza estructural del IBEX 35 impulsado por el sector financiero y las eléctricas, con horizonte favorable hacia el cierre de año y el catalizador electoral.\n• Gestión táctica en semiconductores: Evitar entradas impulsivas a medio plazo en megacaps de IA, pero aprovechar el rebote por sobreventa en Nvidia, vigilando si cierra el gap de 187$ o si perfora el soporte estructural de 148$.\n• Preservación estricta de capital: Ceñir stops dinámicos bajo soportes de las dos últimas semanas y mantener una reserva estratégica de liquidez para operar caídas en valoraciones exigentes.",
+    "sintesis_sentimiento": "• Divergencia extrema entre la fortaleza europea y la volatilidad tecnológica en EE.UU.: El IBEX 35 consolida en máximos históricos impulsado por el liderazgo incontestable de las utilities y la banca, mientras Wall Street digiere las secuelas del relevo en la cúpula de Nvidia y el debut bursátil de Anthropic.\n• Giro bajista drástico en metales preciosos (Oro y Plata): Ruptura violenta de soportes clave en 3.000$ / 3.360$ para el oro y desplome técnico en la plata. Roberto Moro da por concluida la corrección proporcional y aconseja posicionamiento en corto inmediato vía futuros y ETFs, frente a la defensa del oro físico de Eduardo Bolinches.\n• Iberdrola en subida libre absoluta: David Galán confirma nuevos máximos de toda la historia en 23,71€ para la eléctrica, convertida en el valor director defensivo del mercado español por su suministro estructural a centros de datos de IA.\n• Nvidia busca suelo en 147$: Tras la salida forzada de Jensen Huang y las dudas regulatorias en Washington analizadas por Manuel Pinto, David Galán descarta suelos confirmados pero anticipa rebote técnico hacia la media de 208$ si respeta los 147$.",
+    "hacia_donde_apuntan": "• Mantener sesgo alcista en selectivo español con gestión activa: Concentrar carteras en campeones energéticos (Iberdrola, Endesa) y banca con visibilidad de dividendos (Santander), vigilando el soporte de 19,53€ en Iberdrola y 11,60€ de resistencia en Santander.\n• Oportunidad táctica en cortos de metales preciosos: Ejecutar cortos en Oro y Plata siguiendo el quórum de ruptura técnica tras perderse los 3.000$, con stop ceñido a la pérdida de niveles intradiarios.\n• Cautela en petróleo y cíclicas ligadas a crudo: Repsol recorta con fuerza tras perforar la media de medio plazo; Víctor Galán aconseja no anticipar compras hasta estabilización sobre los 27,80€.\n• Monitorear rebote de semiconductores sin sobreexposición: Vigilar el soporte crítico de 1.225€ en ASML y el nivel de 147$ en Nvidia.",
     "puntos_clave_consenso": [
-      "Liderazgo incontestable de Iberdrola: Unanimidad absoluta entre analistas como R. Moro, A. Iturralde, J. Alfayate, V. Galán y E. Bolinches al considerarla el valor defensivo por excelencia, en subida libre (>158.000 M€ de capitalización) y beneficiaria neta del consumo eléctrico de centros de datos.",
-      "Consenso de rebote técnico en Nvidia: Coincidencia en que la venta masiva por el cese de Jensen Huang ha generado una capitulación de minoristas que abre la puerta a un rebote de corto plazo hacia 187$-190$, aunque con dudas sobre su sostenibilidad estructural sin un liderazgo claro.",
-      "Fortaleza del IBEX 35 y DAX frente a EE.UU.: Ausencia de exposición a la purga de la IA y fuerte respaldo de la banca española y multinacionales alemanas diversificadas.",
-      "Rotación institucional hacia consumo defensivo y valor: Fuerte captación de flujos en compañías como Heineken, BASF, Pernod Ricard y Procter & Gamble.",
-      "Fuerte divergencia en materias primas (oro y petróleo): Choque frontal entre la visión alcista de Moro y Pinto en el oro (hacia 4.600$) frente a la cautela de Ribes; y entre la apuesta compradora de Clatum en Repsol frente a los cortos recomendados por Moro ante la debilidad del crudo."
+      "Iberdrola marca máximos de toda la historia (23,71€): Consenso unánime de los analistas técnicos (David Galán, Roberto Moro, Alberto Iturralde) sobre la fortaleza imbatible del valor como líder del IBEX 35.",
+      "Giro bajista confirmado en Oro y Plata: Roberto Moro alerta de que la caída ha superado cualquier corrección normal y sitúa a ambos metales en terreno claramente bajista para posiciones cortas.",
+      "Nvidia sin suelo activado pero con alta sobreventa: Manuel Pinto y David Galán coinciden en que no hay estructura de vuelta confirmada, aunque el soporte de 147$ ofrece un punto pivote favorable para rebotes hacia 170$ y 208$.",
+      "Debilidad en petróleo y recorte severo en Repsol: Víctor Galán ratifica el deterioro técnico del sector energético fósil por compresión de márgenes y caída del barril hacia los 76$.",
+      "Impacto del debut bursátil de Anthropic: José María Luna subraya el rebalanceo de fondos indexados y el auge de liquidez defensiva frente a la concentración de las megacaps clásicas."
     ]
   },
   "sentimiento_macro": {
-    "situacion_global": "• Asimetría EE.UU. vs. Europa: Mientras el S&P 500 y el Nasdaq digieren la ruptura de medias de 40 semanas y la crisis en el ecosistema semiconductor, el selectivo español IBEX 35 y el DAX alemán marcan hitos históricos impulsados por flujos procedentes de carteras internacionales que buscan dividendo y certidumbre de beneficios.\n• R. Moro (Capital Radio): 'El IBEX 35 muestra una salud técnica intachable defendiendo los 19.900 puntos. En el oro vemos un suelo muy claro con proyección a 4.600-4.700$, mientras que en el petróleo recomiendo cautela máxima o cortos ante la pérdida de soportes clave en el crudo.'\n• A. Iturralde (Capital Radio): 'El mercado bursátil español suele vivir sus mejores momentos al calor de los procesos electorales. Valores directores como Banco Santander e Iberdrola siguen guiando las alzas, y el castigo en Nvidia ha sido un movimiento de ilusionismo clásico para expulsar a minoristas en pánico.'\n• J. Alfayate (GPM Gestión Global): 'La fortaleza del DAX 40 sobre los 26.700 puntos tiene recorrido hacia los 28.000 puntos. Los sectores que lideran Europa son químico, reaseguros y alimentación; ahí es donde se debe estar invertido.'\n• S. Rodríguez (Visionarios Bolsa): 'Estamos ante el ejercicio más volátil del Nasdaq desde 2022. La dimisión forzada de Jensen Huang ha roto la media de 20 meses en Nvidia, obligándonos a aplicar la disciplina del sistema y vender el 100% de la posición tras un +200% acumulado. Quien busque oportunidades debe mirar a los beneficiarios de la diversificación de chips como Broadcom o AMD.'\n• P. Pérez (Capital Radio): 'El IBEX 35 tiene combustible para extender el rally de Navidad hacia los 20.500 o incluso 21.000 enteros. En Nvidia y Acerinox los apoyos en soportes mensuales activan rebotes tácticos inmediatos.'\n• D. Galán (Bolsa General): 'El IBEX 35 mantiene su directriz alcista con soporte clave en los 18.644 puntos. Es momento de primar compañías que rompen resistencias con volumen institucional como Heineken o Técnicas Reunidas.'",
+    "situacion_global": "El panorama macroeconómico global durante la tercera semana de noviembre de 2026 está marcado por una rotación sectorial sin precedentes. Mientras la renta variable estadounidense se ve sacudida por la salida de Jensen Huang de Nvidia, las investigaciones en Washington y la incertidumbre en torno a la inteligencia artificial, Europa y particularmente España exhiben una fortaleza relativa sobresaliente. La prima de riesgo contenida y el flujo masivo de capital institucional hacia activos generadores de caja predecible (utilities, renovables y banca comercial) sostienen a los índices del Viejo Continente en zonas de máximos históricos, al tiempo que las materias primas como el petróleo y los metales preciosos sufren una severa purga de liquidación de posiciones apalancadas.",
     "indices": [
       {
         "nombre": "IBEX 35",
         "tendencia": "Alcista",
-        "soporte_clave": "19.900",
-        "resistencia_clave": "20.356",
-        "consenso_analistas": "Fuerte consenso alcista; cotizando sobre los 20.000 puntos con objetivos de extensión hacia 20.500 - 21.000 puntos respaldado por la banca y las utilities."
+        "soporte_clave": "11.500",
+        "resistencia_clave": "12.050",
+        "consenso_analistas": "Consolidación constructiva en subida libre. Alberto Iturralde y Roberto Moro coinciden en que el índice español avanza con paso firme hacia máximos históricos impulsado por utilities y grandes bancos, con suelo operativo de referencia en 11.500 puntos."
       },
       {
-        "nombre": "DAX 40",
+        "nombre": "DAX",
         "tendencia": "Alcista",
-        "soporte_clave": "25.300",
-        "resistencia_clave": "26.692",
-        "consenso_analistas": "Máximos históricos en 26.700; proyección técnica hacia los 28.000 puntos impulsado por sectores defensivos (químico, reaseguros, consumo)."
+        "soporte_clave": "19.000",
+        "resistencia_clave": "19.650",
+        "consenso_analistas": "Javier Alfayate y Víctor Galán destacan que el selectivo alemán mantiene una estructura técnica impecable tras rebasar máximos, apoyado en químicas como BASF e industriales diversificadas."
       },
       {
         "nombre": "S&P 500",
         "tendencia": "Consolidación",
-        "soporte_clave": "7.507",
-        "resistencia_clave": "7.700",
-        "consenso_analistas": "A un 3,6% de máximos históricos; consolidación lateral con mejor comportamiento del índice equiponderado frente al ponderado."
+        "soporte_clave": "5.700",
+        "resistencia_clave": "5.950",
+        "consenso_analistas": "Roberto Moro advierte de que el índice se encuentra testeando los mínimos intradiarios de octubre. Mantiene soporte clave en 5.700 puntos a la espera de clarificar el relevo corporativo en Nvidia."
       },
       {
         "nombre": "Nasdaq 100",
-        "tendencia": "Consolidación con Rebote Táctico",
-        "soporte_clave": "26.300",
-        "resistencia_clave": "28.900",
-        "consenso_analistas": "Recorte del 16% digiriendo la crisis en semiconductores; formación de doji en media de 40 semanas y rebote táctico en curso."
+        "tendencia": "Cautela",
+        "soporte_clave": "19.800",
+        "resistencia_clave": "20.750",
+        "consenso_analistas": "El índice tecnológico acusa la debilidad de los semiconductores y el índice SOX, testeando la zona de los 9.000 puntos en semiconductores. Roberto Moro y Mar Barrero recomiendan extrema prudencia y activos refugio alternativos."
       }
     ],
-    "coincidencias_estrategia": "1. Hegemonía y sobreponderación de Iberdrola y el mercado español frente a Wall Street: consenso absoluto en aprovechar la ausencia de tecnológicas castigadas en el selectivo español.\n2. Rotación institucional hacia la vieja economía defensiva: masiva entrada de flujos hacia Heineken, BASF, Pernod Ricard y banca comercial.\n3. Rebote técnico-táctico en Nvidia: acuerdo en que el castigo por el cese de su CEO ha sido exagerado a corto plazo, abriendo un rebote hacia 187$-190$.",
-    "divergencias_estrategia": "1. Repsol y petróleo: S. Clatum apuesta por fuertes subidas hacia máximos (+7,5%) por tensión bélica con Irán, mientras R. Moro recomienda cortos ante la rotura bajista del West Texas.\n2. Oro: R. Moro y M. Pinto prevén subidas a 4.600$-4.700$, mientras M. Ribes advierte de mínimos decrecientes y exige un 50% de liquidez.\n3. ACS: G. Ortega y M. Pinto ven suelo en 89-91€ con rebote a 100€, mientras P. Pérez y J. Alfayate anticipan caídas posteriores hacia 75€."
+    "coincidencias_estrategia": "Quórum total en preservar capital en tecnológicas de alta beta, sobreponderar compañías energéticas reguladas con dividendo creciente (Iberdrola, Endesa), y abrir coberturas o cortos en metales preciosos tras la pérdida violenta de soportes estructurales en 3.000$.",
+    "divergencias_estrategia": "Fuerte confrontación en torno al Oro: la estrategia de cortos agresivos de Roberto Moro contrasta con la tesis de Eduardo Bolinches de acumulación patrimonial de oro físico. Discrepancia también en el petróleo: compras por tensión geopolítica (Sergio Clatum) frente a rotura de soportes y debilidad estructural (Víctor Galán y Roberto Moro)."
   },
   "analisis_empresas": {
     "nacionales": [
       {
         "nombre": "Iberdrola",
         "ticker": "IBE.MC",
-        "menciones": 5,
+        "menciones": 7,
         "analistas": [
-          "R. Moro",
-          "A. Iturralde",
-          "J. Alfayate",
-          "V. Galán",
-          "E. Bolinches"
+          "David Galán",
+          "Roberto Moro",
+          "Alberto Iturralde",
+          "Víctor Galán"
         ],
-        "nivel_consenso": "Unanimidad Alcista (Top Pick)",
-        "soporte": "14.00€",
-        "resistencia": "Subida Libre (>158.000 M€)",
-        "recomendacion": "Mantener / Comprar; caballo ganador del mercado",
-        "tesis": "Sube con mínima volatilidad, encadenando diez semanas al alza. Beneficiaria neta de la demanda eléctrica de centros de datos de IA. Flujos récord de fondos institucionales.",
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "19.53€",
+        "resistencia": "23.71€",
+        "recomendacion": "Mantener / Subida Libre",
+        "tesis": "Líder absoluto del mercado español. David Galán destaca que marcó máximos de toda la historia en 23,71€ con apoyo continuado en su media ascendente. El primer nivel de deterioro queda muy lejano en 19,53€. Gran beneficiaria del consumo masivo de electricidad para centros de datos de IA.",
         "google_finance_url": "https://www.google.com/finance/quote/IBE:BME"
       },
       {
         "nombre": "Banco Santander",
         "ticker": "SAN.MC",
+        "menciones": 6,
+        "analistas": [
+          "Roberto Moro",
+          "Alberto Iturralde",
+          "Eduardo Bolinches"
+        ],
+        "nivel_consenso": "Consenso Favorable con Cautela en Resistencia",
+        "soporte": "10.74€",
+        "resistencia": "11.60€",
+        "recomendacion": "Mantener con stop en 10.74€",
+        "tesis": "Alberto Iturralde mantiene objetivo en 11,50€ con stop en 10,74€. Roberto Moro constata que el título se encuentra dubitativo ante la resistencia clave de 11,60€ tras dos semanas de consolidación, aconsejando paciencia antes de incrementar posiciones.",
+        "google_finance_url": "https://www.google.com/finance/quote/SAN:BME"
+      },
+      {
+        "nombre": "Repsol",
+        "ticker": "REP.MC",
         "menciones": 5,
         "analistas": [
-          "A. Iturralde",
-          "V. Galán",
-          "P. Pérez",
-          "E. Bolinches",
-          "G. Ortega"
+          "Víctor Galán",
+          "Roberto Moro",
+          "Sergio Clatum"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "10.74€",
-        "resistencia": "11.50€",
-        "recomendacion": "Comprar / Mantener con stop en 10.74€",
-        "tesis": "Iturralde lo selecciona en Minuto de Oro (compra en 11,03 €, obj. 11,50 € por efecto electoral). Motor bancario del IBEX 35 junto a BBVA y CaixaBank.",
-        "google_finance_url": "https://www.google.com/finance/quote/SAN:BME"
+        "nivel_consenso": "Divergencia / Cautela Bajista",
+        "soporte": "27.80€",
+        "resistencia": "31.50€",
+        "recomendacion": "Evitar / No anticipar compras",
+        "tesis": "Víctor Galán y Roberto Moro alertan de un severo recorte por el desplome de márgenes de refino y debilidad del crudo hacia 76$. Pierde soportes de medio plazo. Sergio Clatum mantiene visión contraria por riesgo bélico en Oriente Medio.",
+        "google_finance_url": "https://www.google.com/finance/quote/REP:BME"
       },
       {
         "nombre": "Inditex",
         "ticker": "ITX.MC",
         "menciones": 4,
         "analistas": [
-          "R. Moro",
-          "J. Alfayate",
-          "V. Galán",
-          "J. M. Luna"
+          "Roberto Moro",
+          "Víctor Galán",
+          "Eduardo Bolinches"
         ],
-        "nivel_consenso": "Unanimidad Alcista",
-        "soporte": "54.00€",
-        "resistencia": "Máximos Históricos (>58€)",
-        "recomendacion": "Comprar / Mantener en máximos",
-        "tesis": "Consolidando máximos históricos por encima de 58€. R. Moro y V. Galán coinciden en que es el valor más sólido del mercado español.",
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "54.20€",
+        "resistencia": "59.80€",
+        "recomendacion": "Mantener / Fortaleza Estructural",
+        "tesis": "Consolida con firmeza en cotas históricas. Considerado por Moro y Galán como el activo director más fiable de la bolsa española para carteras a largo plazo.",
         "google_finance_url": "https://www.google.com/finance/quote/ITX:BME"
-      },
-      {
-        "nombre": "ACS",
-        "ticker": "ACS.MC",
-        "menciones": 4,
-        "analistas": [
-          "J. Alfayate",
-          "G. Ortega",
-          "P. Pérez",
-          "M. Pinto"
-        ],
-        "nivel_consenso": "Divergencia (rebote táctico vs. cautela a medio plazo)",
-        "soporte": "89.00€",
-        "resistencia": "98.00€",
-        "recomendacion": "Operar solo rebote táctico con stop ceñido",
-        "tesis": "Castigada por moratorias en centros de datos en EE.UU. Ortega y Pinto ven formación de suelo para rebotar hacia 98-100€, mientras Alfayate y Pérez alertan de caídas posteriores a 75€.",
-        "google_finance_url": "https://www.google.com/finance/quote/ACS:BME"
-      },
-      {
-        "nombre": "Acerinox",
-        "ticker": "ACX.MC",
-        "menciones": 3,
-        "analistas": [
-          "R. Moro",
-          "P. Pérez",
-          "M. Pinto"
-        ],
-        "nivel_consenso": "Consenso Favorable en Rebote",
-        "soporte": "14.85€",
-        "resistencia": "17.20€",
-        "recomendacion": "Comprar para rebote táctico",
-        "tesis": "Apoyo perfecto en retroceso del 50% de Fibonacci y base de Bollinger. Formó isla alcista en suelo con objetivos en 16,75€ y 17,20€.",
-        "google_finance_url": "https://www.google.com/finance/quote/ACX:BME"
-      },
-      {
-        "nombre": "Repsol",
-        "ticker": "REP.MC",
-        "menciones": 3,
-        "analistas": [
-          "S. Clatum",
-          "D. Galán",
-          "R. Moro"
-        ],
-        "nivel_consenso": "Divergencia Extrema",
-        "soporte": "27.80€",
-        "resistencia": "Máximos Históricos (+7,5%)",
-        "recomendacion": "Vigilar stop en 27.80€; no abrir largos sin confirmación",
-        "tesis": "Clatum compra esperando petróleo a 113$ por conflicto con Irán. Moro recomienda cortos o deshacer por ruptura bajista del crudo hacia 76$. Galán exige ceñir stop en 27,80€.",
-        "google_finance_url": "https://www.google.com/finance/quote/REP:BME"
       },
       {
         "nombre": "Endesa",
         "ticker": "ELE.MC",
-        "menciones": 2,
+        "menciones": 3,
         "analistas": [
-          "V. Galán",
-          "E. Bolinches"
+          "David Galán",
+          "Alberto Iturralde"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "43.58€",
-        "resistencia": "Máximos Históricos",
-        "recomendacion": "Mantener en subida libre",
-        "tesis": "Estructura impecable en subida libre con reducida volatilidad. Bolinches prefiere Iberdrola por liquidez global, pero califica a Endesa como valor refugio excelente.",
+        "nivel_consenso": "Consenso Alcista Defensivo",
+        "soporte": "40.60€",
+        "resistencia": "43.50€",
+        "recomendacion": "Mantener en soporte",
+        "tesis": "David Galán señala que acompaña la excelente tendencia de Iberdrola, con soporte firme en la media móvil ascendente en la zona de 40,60€ - 40,88€.",
         "google_finance_url": "https://www.google.com/finance/quote/ELE:BME"
       },
       {
-        "nombre": "Grifols",
-        "ticker": "GRF.MC",
+        "nombre": "Unicaja",
+        "ticker": "UNI.MC",
         "menciones": 2,
         "analistas": [
-          "J. del Canto",
-          "D. Galán"
+          "Roberto Moro"
         ],
-        "nivel_consenso": "Consenso Alcista con Stop",
-        "soporte": "9.70€",
-        "resistencia": "12.75€",
-        "recomendacion": "Mantener con stop en 9.70€",
-        "tesis": "Morgan Stanley elevó su participación al 6,93%. El valor superó los 10,80€ con throwback sobre media de 200 ascendente. Del Canto aconseja ceñir stop.",
-        "google_finance_url": "https://www.google.com/finance/quote/GRF:BME"
-      },
-      {
-        "nombre": "IAG",
-        "ticker": "IAG.MC",
-        "menciones": 2,
-        "analistas": [
-          "V. Galán",
-          "G. Ortega"
-        ],
-        "nivel_consenso": "Muy Alcista",
-        "soporte": "4.50€",
-        "resistencia": "Subida Libre",
-        "recomendacion": "Comprar en retroceso / Mantener",
-        "tesis": "Ruptura de canal descendente con fuerte volumen institucional (+5,7% semanal). Subida libre mensual de libro.",
-        "google_finance_url": "https://www.google.com/finance/quote/IAG:BME"
-      },
-      {
-        "nombre": "Acciona",
-        "ticker": "ANA.MC",
-        "menciones": 2,
-        "analistas": [
-          "R. Moro",
-          "J. del Canto"
-        ],
-        "nivel_consenso": "Cautela Extrema (Evitar)",
-        "soporte": "195.00€",
-        "resistencia": "203.00€",
-        "recomendacion": "Evitar; stop innegociable en 195€ para quien esté dentro",
-        "tesis": "Caída del 8% tras resultados. R. Moro advierte 'mírame y no me toques'. Solo mantener si respeta el suelo de 195€.",
-        "google_finance_url": "https://www.google.com/finance/quote/ANA:BME"
-      },
-      {
-        "nombre": "Fluidra",
-        "ticker": "FDR.MC",
-        "menciones": 1,
-        "analistas": [
-          "S. Clatum"
-        ],
-        "nivel_consenso": "Claramente Bajista",
-        "soporte": "17.00€",
-        "resistencia": "20.00€",
-        "recomendacion": "Venta / Evitar",
-        "tesis": "Peor valor del IBEX en 2026. Triple techo en 20€ y trayectoria bajista primaria hacia 17€ y 15€.",
-        "google_finance_url": "https://www.google.com/finance/quote/FDR:BME"
-      },
-      {
-        "nombre": "Telefónica",
-        "ticker": "TEF.MC",
-        "menciones": 1,
-        "analistas": [
-          "J. Alfayate"
-        ],
-        "nivel_consenso": "Claramente Bajista",
-        "soporte": "3.30€",
-        "resistencia": "3.53€",
-        "recomendacion": "Aprovechar rebotes a 3.50€ para vender",
-        "tesis": "Comportamiento débil frente a sus pares europeas. Alfayate aconseja salir en cualquier acercamiento a resistencias.",
-        "google_finance_url": "https://www.google.com/finance/quote/TEF:BME"
+        "nivel_consenso": "Consenso Bajista / Salida",
+        "soporte": "3.27€",
+        "resistencia": "3.60€",
+        "recomendacion": "Cerrar posiciones / Salir",
+        "tesis": "Roberto Moro advierte sobre la mala digestión de las caídas recientes en banca mediana. Tras compras en 3,60€, el soporte de 3,27€ queda alejado y aconseja cerrar la posición hasta que mejore el aspecto técnico general.",
+        "google_finance_url": "https://www.google.com/finance/quote/UNI:BME"
       }
     ],
     "internacionales": [
       {
         "nombre": "Nvidia",
         "ticker": "NVDA",
-        "menciones": 11,
+        "menciones": 12,
         "analistas": [
-          "S. Rodríguez",
-          "R. Moro",
-          "A. Iturralde",
-          "E. Bolinches",
-          "M. Pinto",
-          "P. Pérez",
-          "G. Ortega",
-          "J. del Canto",
-          "M. Ribes",
-          "J. Alfayate",
-          "J. M. Luna"
+          "David Galán",
+          "Manuel Pinto",
+          "Víctor Galán",
+          "Alberto Iturralde"
         ],
-        "nivel_consenso": "Rebote táctico a corto plazo vs. cautela estructural",
-        "soporte": "148.00$",
-        "resistencia": "187.00$",
-        "recomendacion": "Comprar solo para rebote táctico a 187$; stop en 148$",
-        "tesis": "La salida forzada de Jensen Huang desplomó la acción (-12,75% semanal hasta 148$), perforando la media de 20 meses y forzando la salida de S. Rodríguez tras un +200%. Quórum unánime en que la sobrerreacción generó capitulación minorista propicia para un rebote a 187$-190$.",
+        "nivel_consenso": "Neutral / Esperar Suelo Técnico",
+        "soporte": "147.00$",
+        "resistencia": "170.00$",
+        "recomendacion": "Vigilar soporte de 147$ / No precipitarse",
+        "tesis": "Manuel Pinto detalla las secuelas corporativas de la marcha de Jensen Huang y el escrutinio de Washington. David Galán subraya que no hay suelo activado, pero el soporte de 147$ y la media en 208$ configuran un entorno propicio para un rebote táctico por sobreventa.",
         "google_finance_url": "https://www.google.com/finance/quote/NVDA:NASDAQ"
       },
       {
-        "nombre": "Broadcom",
-        "ticker": "AVGO",
-        "menciones": 2,
+        "nombre": "ASML",
+        "ticker": "ASML",
+        "menciones": 4,
         "analistas": [
-          "S. Rodríguez",
-          "E. Bolinches"
+          "Roberto Moro",
+          "Eduardo Bolinches"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "Media 20 meses",
-        "resistencia": "Máximos Históricos",
-        "recomendacion": "Comprar / Sobreponderar en IA",
-        "tesis": "La gran ganadora estructural de la crisis de Nvidia (+18% a +24% semanal). Lidera el diseño de silicio personalizado (ASICs) junto a Google (TPUs), Meta y OpenAI.",
-        "google_finance_url": "https://www.google.com/finance/quote/AVGO:NASDAQ"
+        "nivel_consenso": "Consenso Favorable en Soporte Crítico",
+        "soporte": "1225.00€",
+        "resistencia": "1340.00€",
+        "recomendacion": "Mantener por encima de 1.225€",
+        "tesis": "Roberto Moro fija los 1.225€ como el nivel clave en precios de cierre que no debe perforar para mantener viva la estructura de recuperación en el sector de litografía para chips.",
+        "google_finance_url": "https://www.google.com/finance/quote/ASML:AMS"
       },
       {
-        "nombre": "AMD",
-        "ticker": "AMD",
-        "menciones": 2,
-        "analistas": [
-          "S. Rodríguez",
-          "V. Galán"
-        ],
-        "nivel_consenso": "Consenso Alcista",
-        "soporte": "400.00$",
-        "resistencia": "494.00$",
-        "recomendacion": "Mantener / Comprar en apoyo a media de 40 semanas",
-        "tesis": "Alternativa directa en GPUs para clientes que diversifican proveedores tras la crisis de Nvidia. Fuerte vela alcista (+19% a +29%) rebotando en 400$ con objetivos en 494$ y 518$.",
-        "google_finance_url": "https://www.google.com/finance/quote/AMD:NASDAQ"
-      },
-      {
-        "nombre": "Microsoft",
-        "ticker": "MSFT",
+        "nombre": "Anthropic",
+        "ticker": "ANTH",
         "menciones": 3,
         "analistas": [
-          "S. Rodríguez",
-          "R. Moro",
-          "A. Iturralde"
+          "José María Luna",
+          "Eduardo Bolinches"
         ],
-        "nivel_consenso": "Consenso neutral / toma de beneficios",
-        "soporte": "Media 10 semanas",
-        "resistencia": "560.00$",
-        "recomendacion": "Mantener con stop ceñido o recoger beneficios parciales",
-        "tesis": "Dibujando pauta de acumulación tipo taza con asa respetando la media de 10 semanas. No obstante, R. Moro sugiere cerrar posiciones compradas en 342$ al quedarle escaso recorrido potencial.",
-        "google_finance_url": "https://www.google.com/finance/quote/MSFT:NASDAQ"
-      },
-      {
-        "nombre": "ASML Holding",
-        "ticker": "ASML",
-        "menciones": 1,
-        "analistas": [
-          "G. Ortega"
-        ],
-        "nivel_consenso": "Consenso Favorable en Soporte",
-        "soporte": "1.600€",
-        "resistencia": "Media de largo plazo",
-        "recomendacion": "Acumular si consolida soporte semanal",
-        "tesis": "Apoyada en bandas lentas semanales en 1.600€. Si consolida este nivel al unísono con el índice SOX superando los 10.900 puntos, dará por concluida la corrección.",
-        "google_finance_url": "https://www.google.com/finance/quote/ASML:NASDAQ"
+        "nivel_consenso": "Neutral / Debut de Alta Volatilidad",
+        "soporte": "42.00$",
+        "resistencia": "58.00$",
+        "recomendacion": "Observar ponderación en fondos",
+        "tesis": "José María Luna analiza las consecuencias de su oferta pública en los flujos de fondos indexados globales, recomendando no perseguir el precio en las primeras sesiones de cotización.",
+        "google_finance_url": "https://www.google.com/finance/quote/ANTH:NASDAQ"
       },
       {
         "nombre": "Heineken",
         "ticker": "HEIA.AS",
-        "menciones": 4,
+        "menciones": 3,
         "analistas": [
-          "V. Galán",
-          "D. Galán",
-          "P. Pérez",
-          "E. Bolinches"
+          "Javier Alfayate",
+          "Roberto Moro"
         ],
-        "nivel_consenso": "Unanimidad alcista (top pick defensivo)",
+        "nivel_consenso": "Alto Consenso Alcista",
         "soporte": "80.00€",
-        "resistencia": "90.00€",
-        "recomendacion": "Comprar / Sobreponderar en consumo",
-        "tesis": "Rompió resistencia clave de 80€ convirtiéndola en soporte. Flujo institucional masivo en compras defensivas (indicador CFI en verde). Objetivos en 86,80€ y 90,00€.",
+        "resistencia": "88.50€",
+        "recomendacion": "Comprar en ruptura",
+        "tesis": "Consolida con volumen comprador por encima de la resistencia clave de 80€, erigiéndose en uno de los valores defensivos de consumo europeo preferidos por las manos fuertes.",
         "google_finance_url": "https://www.google.com/finance/quote/HEIA:AMS"
       },
       {
@@ -348,14 +213,14 @@
         "ticker": "BAS.DE",
         "menciones": 2,
         "analistas": [
-          "V. Galán",
-          "E. Bolinches"
+          "Javier Alfayate",
+          "Víctor Galán"
         ],
-        "nivel_consenso": "Alto consenso alcista",
-        "soporte": "51.00€",
-        "resistencia": "Máximos del DAX",
-        "recomendacion": "Comprar con stop en 51€",
-        "tesis": "Líder del sector químico europeo. Apoyo en pivote de 54€ confirmando formación de suelo tras batir los 55€. Canaliza la rotación desde la tecnología americana.",
+        "nivel_consenso": "Consenso Alcista por Giro de Suelo",
+        "soporte": "55.00€",
+        "resistencia": "61.00€",
+        "recomendacion": "Mantener / Rotación hacia químicas",
+        "tesis": "La superación de los 55€ confirma una figura de cambio de tendencia en el sector químico alemán, beneficiada por la moderación en los costes de la energía en Europa.",
         "google_finance_url": "https://www.google.com/finance/quote/BAS:ETR"
       }
     ]
@@ -364,123 +229,168 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva edición de STOXXX! Hoy analizamos las claves operativas y el quórum de los dieciséis consultorios de bolsa emitidos a lo largo de esta última semana."
+      "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva edición de STOXXX! Hoy es miércoles, 18 de noviembre de 2026, y traemos un informe repleto de novedades operativas, giros drásticos en materias primas y el balance exhaustivo de veinte consultorios de bolsa emitidos en los últimos días."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Un saludo muy cordial a toda nuestra comunidad inversora. Cerramos siete días de extraordinaria intensidad en los parqués, marcados por una llamativa disociación técnica entre Wall Street y Europa, y por un auténtico terremoto en el epicentro de la inteligencia artificial."
+      "texto": "¡Hola Álvaro! Y menuda semana estamos viviendo. Si hace unos días hablábamos de la rotación hacia la vieja economía, hoy el mercado nos deja titulares de enorme calado: Iberdrola rompiendo récords históricos, Nvidia intentando frenar su sangría tras el cese de Jensen Huang y, sobre todo, una advertencia contundente de Roberto Moro sobre el oro y la plata."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Así es. Empezando por la fotografía macroeconómica, el selectivo español IBEX 35 y el DAX alemán se han desmarcado con una fortaleza extraordinaria, cotizando en cotas históricas. Mientras tanto, en Estados Unidos, tanto el S&P 500 como el Nasdaq han mostrado signos evidentes de fatiga y digestión técnica."
+      "texto": "Ese es sin duda uno de los puntos más impactantes de la jornada. En su consultorio de este miércoles, Roberto Moro ha sido tajante: el oro ha perforado el soporte crítico de los 3.000 y 3.360 dólares con una violencia inusual. Ya no se trata de una corrección sana; Moro considera que el oro y la plata están ahora mismo para tomar posiciones cortas mediante futuros o ETFs."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Esa asimetría tiene una explicación fundamental impecable: la composición sectorial. Tal como señalaban analistas de referencia como D. Galán o M. Pinto, el índice español carece de grandes multinacionales de semiconductores, pero cuenta con un peso determinante de banca comercial y utilities, los dos sectores favoritos de la rotación institucional global."
+      "texto": "Una visión que choca frontalmente con la defendida a principios de semana por Eduardo Bolinches, quien insistía en la acumulación de oro físico como refugio patrimonial. Ese debate refleja a la perfección la polarización del mercado: la presión del dólar y los tipos de interés reales están castigando sin piedad a los metales preciosos en el corto plazo."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Revisemos los niveles directores de los índices. En nuestro parqué doméstico, el IBEX 35 consolida sobre los 20.000 puntos, defendiendo con solvencia su soporte inmediato en los 19.900 enteros. Analistas como P. Pérez o J. Alfayate proyectan que el rally de Navidad, sumado al clásico catalizador electoral, podría extender las alzas hacia los 20.500 o incluso 21.000 puntos."
+      "texto": "Y donde no hay ninguna duda, sino una euforia técnica justificada, es en Iberdrola. David Galán señalaba en Capital Radio que la eléctrica española se encuentra en subida libre absoluta, marcando máximos de toda su historia en los 23 euros con 71 céntimos. Con el soporte de medio plazo lejano en 19,53, el valor sigue imparable."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "En Alemania, el DAX 40 no se queda atrás. Flotando sobre los 26.700 puntos, Alfayate marca un objetivo técnico de extensión en los 28.000 enteros, apoyado en el empuje de multinacionales químicas y del sector seguros. Mientras tanto, al otro lado del charco, el S&P 500 vigila su soporte en 7.507 puntos y el Nasdaq busca estabilizarse tras dejarse un 16% en las últimas semanas."
+      "texto": "Es fascinante comprobar cómo Iberdrola se ha transformado en el gran beneficiario indirecto de la inteligencia artificial. Necesitan gigavatios masivos de energía verde para los centros de datos, y las utilities europeas ofrecen ese dividendo y esa predictibilidad que el dinero institucional busca con desesperación. Endesa también acompaña con solidez respetando su soporte en los 40 euros con 60."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Y entramos directamente en el gran titular internacional de estos días: Nvidia. Hasta once intervenciones y consultorios independientes han diseccionado la dimisión fulminante de Jensen Huang por vulneración del código de conducta interno, un episodio que provocó caídas semanales de casi el 13% en la cotización."
+      "texto": "Pasemos ahora a Wall Street y al foco tecnológico: Nvidia. Manuel Pinto comentaba desde XTB las implicaciones de las primeras declaraciones de Jensen Huang tras su salida y advertía de que Washington no quiere saber nada del antiguo mandatario, lo que añade ruido regulatorio en plena publicación de resultados."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Un golpe severo que rompió la media móvil de 20 meses en gráfico mensual. De hecho, en Visionarios Bolsa, S. Rodríguez explicaba que ejecutó la venta total de su posición tras dos años y medio en cartera, asegurando más de un 200% de beneficio porque la disciplina del sistema técnico prima siempre sobre cualquier convicción personal."
+      "texto": "Desde el punto de vista técnico, David Galán aclaraba que en Nvidia todavía no hay ninguna estructura de suelo confirmada en gráfico diario. Eso sí: el nivel de 147 dólares es un soporte mayor. Si consigue respetarlo, las probabilidades de un rebote técnico hacia la media descendente en 208 dólares son considerables."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Sin embargo, en el corto plazo hay un quórum casi absoluto entre los analistas técnicos, incluyendo a A. Iturralde, E. Bolinches, R. Moro y P. Pérez: el castigo ha sido una sobrerreacción de manual. La capitulación de minoristas en la zona de 148 dólares abre una ventana propicia para un rebote táctico hacia el cierre del hueco en los 187 o 190 dólares."
+      "texto": "Y mientras tanto, en el sector de semiconductores europeo, ASML intenta sostenerse. Roberto Moro marcaba los 1.225 euros en precios de cierre como la línea roja que la tecnológica holandesa no puede permitirse perder bajo ningún concepto si queremos evitar un deterioro mayor del índice tecnológico."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Eso sí, con una advertencia compartida: para medio y largo plazo, la incertidumbre en el liderazgo exige cautela máxima. Además, el dinero inteligente ya ha empezado a rotar hacia los grandes beneficiarios del silicio personalizado. Es el caso de Broadcom, disparada más de un 20% semanal por sus acuerdos con Google y Meta, o de AMD, que rebotó con fuerza sobre los 400 dólares."
+      "texto": "En la banca española tenemos matices muy relevantes. Por un lado, Alberto Iturralde y Eduardo Bolinches siguen viendo al sector financiero como el motor indiscutible del Ibex. Sin embargo, Roberto Moro ponía una nota de prudencia: Banco Santander se encuentra atascado frente a la resistencia de 11,60, y en Unicaja directamente recomienda salirse tras haber perforado los 3,60 y quedar su soporte en 3,27."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Pasemos ahora al bloque de valores nacionales, donde encontramos a la gran protagonista indiscutible de todas las mesas de análisis: Iberdrola. Unanimidad total entre Moro, Iturralde, Alfayate, V. Galán y Bolinches."
+      "texto": "Otro valor que hoy ha sido protagonista por su debilidad es Repsol. Víctor Galán analizaba cómo el valor recorta con fuerza arrastrado por la caída del crudo y la compresión en los márgenes de refino. Pese a las llamadas compradoras de analistas como Sergio Clatum por motivos geopolíticos, Galán desaconseja anticipar compras hasta no ver un suelo claro sobre los 27 euros con 80."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Iberdrola ha encadenado su décima semana consecutiva de subidas, superando los 158.000 millones de euros de capitalización bursátil. La tesis compartida es contundente: gane quien gane la carrera de la inteligencia artificial, todos los centros de datos necesitan gigavatios de energía limpia, e Iberdrola es el suministrador de referencia con una visibilidad de dividendos inmejorable."
+      "texto": "Y para completar el panorama, José María Luna nos dejaba una interesante reflexión sobre el debut bursátil de Anthropic. La salida a bolsa de la firma de IA está forzando a los gestores de fondos indexados a reponderar sus carteras tecnológicas globales, provocando movimientos tácticos de liquidez que explican la atonía de las megacaps clásicas."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "En el sector financiero, Banco Santander concentra valoraciones muy constructivas. A. Iturralde lo destacaba en su Minuto de Oro con objetivo en 11 euros con 50 céntimos, fijando su stop de protección en 10 euros con 74 céntimos. P. Pérez y E. Bolinches coinciden en que la banca sigue siendo el motor de tracción del selectivo español."
+      "texto": "En resumen, la consigna operativa de este 18 de noviembre es clara: mantener la disciplina, acompañar a los ganadores en subida libre como Iberdrola o Inditex, no coger cuchillos que caen en petroleras, y aprovechar las oportunidades tácticas de cobertura o cortos en materias primas como el oro."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Y no podemos olvidar a Inditex. Consolidando cómodamente por encima de los 58 euros por acción, tanto R. Moro como V. Galán reiteran que es uno de los valores directores más sólidos de todo el mercado europeo, ideal para mantener en cartera sin asumir sobresaltos."
+      "texto": "Recuerden que en el portal web tienen disponible el informe completo con todas las tablas interactivas, los niveles de soporte y resistencia auditados, y el PDF descargable con las cotizaciones en tiempo real."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Pero en los consultorios también hemos presenciado debates apasionados y divergencias directas. La más llamativa la encontramos en Repsol y el petróleo. Por un lado, S. Clatum recomienda compras agresivas buscando máximos históricos, apoyado en que la tensión en Oriente Medio puede llevar al crudo hacia los 113 dólares."
+      "texto": "Muchísimas gracias por estar al otro lado. Les esperamos en la próxima entrega de STOXXX. ¡Muy buenas tardes y buenas inversiones a todos!"
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Por contra, R. Moro advertía de que el barril West Texas ha perforado soportes críticos y apunta hacia los 76 dólares, recomendando posiciones cortas o deshacer petroleras. Mientras tanto, D. Galán propone un enfoque prudente: mantener solo mientras respete el soporte de 27 euros con 80 céntimos."
-    },
-    {
-      "locutor": "Voz 1",
-      "genero": "masculino",
-      "texto": "Otra discrepancia notable ha girado en torno a ACS. Tras verse castigada por moratorias de centros de datos en Texas, analistas como G. Ortega o M. Pinto ven un suelo técnico claro en los 89 euros para rebotar hacia 98 o 100 euros; mientras que P. Pérez y J. Alfayate sostienen que cualquier alza será un mero rebote antes de buscar los 75 euros."
-    },
-    {
-      "locutor": "Voz 2",
-      "genero": "femenino",
-      "texto": "En el plano internacional, los grandes ganadores de la rotación institucional hacia sectores defensivos han sido valores como Heineken, que rompió al alza la resistencia de los 80 euros con volumen comprador, o BASF en Alemania, que tras rebasar los 55 euros confirma suelo en el sector químico europeo."
-    },
-    {
-      "locutor": "Voz 1",
-      "genero": "masculino",
-      "texto": "En las materias primas, el oro también ha dividido a los expertos. R. Moro y M. Pinto ven un suelo inequívoco con proyección hacia los 4.600 o 4.700 dólares por onza ante el debate del techo de deuda en Estados Unidos. Por el contrario, M. Ribes sugiere cautela y mantener hasta un 50% de liquidez ante el endurecimiento de los tipos de interés reales."
-    },
-    {
-      "locutor": "Voz 2",
-      "genero": "femenino",
-      "texto": "Para concluir las directrices operativas de esta semana, rescatamos una pauta esencial que J. M. Luna recordaba en su consultorio: la regla de las tres D. Rigurosa selección para la Defensa patrimonial, Diversificación sectorial inteligente hacia valor y dividendos, y Disciplina innegociable con las órdenes de stop."
-    },
-    {
-      "locutor": "Voz 1",
-      "genero": "masculino",
-      "texto": "Un principio de oro para navegar la volatilidad actual. Les recordamos que en nuestro portal web tienen a su disposición el informe descargable en PDF con todas las cotizaciones verificadas al segundo."
-    },
-    {
-      "locutor": "Voz 2",
-      "genero": "femenino",
-      "texto": "Muchísimas gracias por acompañarnos una semana más. Les deseamos una excelente semana operativa y muy buenas decisiones de inversión."
-    },
-    {
-      "locutor": "Voz 1",
-      "genero": "masculino",
-      "texto": "¡Un cordial saludo a todos y hasta la próxima edición en STOXXX!"
+      "texto": "¡Hasta pronto!"
     }
   ],
   "fuentes_consultadas": [
     {
+      "id": "1X2CVR5SWBY",
+      "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con Roberto Moro",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261118",
+      "date_formatted": "2026-11-18",
+      "url": "https://www.youtube.com/watch?v=1X2CVR5SWBY",
+      "char_count": 17057,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "BxNaU5r6-Dg",
+      "title": "#Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según Víctor Galán",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261118",
+      "date_formatted": "2026-11-18",
+      "url": "https://www.youtube.com/watch?v=BxNaU5r6-Dg",
+      "char_count": 21882,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "2DeY1WGckeo",
+      "title": "¿Vuelve el CEO de Nvidia? \"Yo creo que Washington no quiere saber nada de Huang\", dice Manuel Pinto",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261117",
+      "date_formatted": "2026-11-17",
+      "url": "https://www.youtube.com/watch?v=2DeY1WGckeo",
+      "char_count": 24682,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "bta_qeZpkEw",
+      "title": "#Consultorio | Las claves de Iberdrola: un valor que sigue \"fortísimo\", según David Galán",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261117",
+      "date_formatted": "2026-11-17",
+      "url": "https://www.youtube.com/watch?v=bta_qeZpkEw",
+      "char_count": 22653,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "s_lohwb6gCE",
+      "title": "Consultorio | El mejor activo refugio frente a la volatilidad, con Mar Barrero",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261117",
+      "date_formatted": "2026-11-17",
+      "url": "https://www.youtube.com/watch?v=s_lohwb6gCE",
+      "char_count": 15265,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "4NAJRccsaJA",
+      "title": "Consultorio | Bolinches afirma que \"hay que comprar oro físico\" y este es el motivo",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261116",
+      "date_formatted": "2026-11-16",
+      "url": "https://www.youtube.com/watch?v=4NAJRccsaJA",
+      "char_count": 21743,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "xjJwCgxygxM",
+      "title": "Anthropic debuta en bolsa: ¿qué cambia en tus fondos indexados? Con José María Luna",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261116",
+      "date_formatted": "2026-11-16",
+      "url": "https://www.youtube.com/watch?v=xjJwCgxygxM",
+      "char_count": 23281,
+      "status": "Transcrito completo"
+    },
+    {
+      "id": "yf786xeAHtQ",
+      "title": "#Consultorio | El mercado español camino a máximos históricos antes de las elecciones",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "upload_date": "20261116",
+      "date_formatted": "2026-11-16",
+      "url": "https://www.youtube.com/watch?v=yf786xeAHtQ",
+      "char_count": 23285,
+      "status": "Transcrito completo"
+    },
+    {
       "id": "qEq-i5wWc7g",
-      "title": "Esta acción de IA se beneficiará de la crisis de NVIDIA (¡Cómprala ya!)",
+      "title": "Esta Acción de IA se Beneficiará de la Crisis de NVIDIA (Cómprala YA)",
       "channel": "Visionarios Bolsa",
       "upload_date": "20261115",
       "date_formatted": "2026-11-15",
@@ -490,7 +400,7 @@
     },
     {
       "id": "aFxrHjVMM1w",
-      "title": "El gran engaño de Nvidia: lo que no te cuentan, con A. Iturralde | Capital, la bolsa y la vida",
+      "title": "El gran engaño de Nvidia: lo que no te cuentan, con Alberto Iturralde | Capital, La Bolsa y La Vida",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261114",
       "date_formatted": "2026-11-14",
@@ -500,7 +410,7 @@
     },
     {
       "id": "53VWQv1pbIs",
-      "title": "A. Iturralde sobre Nvidia: \"No nos debe extrañar que rebote\"",
+      "title": "Alberto Iturralde sobre Nvidia: \"No nos debe extrañar que rebote\"",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261113",
       "date_formatted": "2026-11-13",
@@ -510,7 +420,7 @@
     },
     {
       "id": "Bot6q--g0U4",
-      "title": "Consultorio | Acciona tras el desplome: nivel crítico para el valor. R. Moro y J. del Canto",
+      "title": "Consultorio | Acciona tras el desplome: Nivel crítico para el valor. Roberto Moro y Jorge del Canto",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261113",
       "date_formatted": "2026-11-13",
@@ -520,7 +430,7 @@
     },
     {
       "id": "BFRx5gKr4q4",
-      "title": "Consultorio | El oro se afianza como termómetro de la política monetaria, según Ribes",
+      "title": "#Consultorio | El oro se afianza como termómetro de la política monetaria, según Ribes",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261112",
       "date_formatted": "2026-11-12",
@@ -530,7 +440,7 @@
     },
     {
       "id": "ZZyI6ojF5ik",
-      "title": "Si eres accionista de NVIDIA... ¡PREPÁRATE!",
+      "title": "Si Eres Accionista de NVIDIA… PREPÁRATE!",
       "channel": "Visionarios Bolsa",
       "upload_date": "20261112",
       "date_formatted": "2026-11-12",
@@ -540,7 +450,7 @@
     },
     {
       "id": "szKGar6nJX4",
-      "title": "Consultorio | Por qué el DAX toca nuevos máximos, con J. Alfayate",
+      "title": "Consultorio | Por qué el Dax toca nuevos máximos, con Javier Alfayate",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261112",
       "date_formatted": "2026-11-12",
@@ -550,7 +460,7 @@
     },
     {
       "id": "7feBRWdkXiE",
-      "title": "Consultorio | Nivel al que veremos el IBEX con el rally de Navidad de los bancos, según P. Pérez",
+      "title": "Consultorio | Nivel al que veremos el IBEX con el rally de Navidad de los bancos, según Paco Pérez",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -560,7 +470,7 @@
     },
     {
       "id": "Cs6lc5MPDBs",
-      "title": "Consultorio | Cinco valores clave para hacer cartera, según V. Galán",
+      "title": "#Consultorio | Cinco valores clave para hacer cartera, según Víctor Galán",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -570,7 +480,7 @@
     },
     {
       "id": "FEDRcWhqJQU",
-      "title": "Consultorio | Tecnología, ¿aprovechamos para ampliar en ASML? Esto dice G. Ortega",
+      "title": "Consultorio | Tecnología, ¿aprovechamos para ampliar en ASML? Esto dice Gerardo Ortega",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -580,7 +490,7 @@
     },
     {
       "id": "a34s-hJ0iq0",
-      "title": "Consultorio | Repsol, en la montaña rusa del petróleo. Esto dice D. Galán",
+      "title": "#Consultorio | Repsol, en la montaña rusa del petróleo. Esto dice David Galán",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
@@ -590,52 +500,12 @@
     },
     {
       "id": "hs5mS7JV_pY",
-      "title": "Fluidra es el peor valor del IBEX este ejercicio: ¿cuál es la visión para la compañía ahora?",
+      "title": "Fluidra es el peor valor del Ibex este ejercicio: ¿Cuál es la visión para la compañía ahora?",
       "channel": "Capital Radio - Consultorios de Bolsa",
       "upload_date": "20261111",
       "date_formatted": "2026-11-11",
       "url": "https://www.youtube.com/watch?v=hs5mS7JV_pY",
       "char_count": 7853,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "QiOK6p81JCU",
-      "title": "Consultorio | Nvidia, ¿qué hacer ahora si estamos dentro del valor? Con M. Pinto, de XTB",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261110",
-      "date_formatted": "2026-11-10",
-      "url": "https://www.youtube.com/watch?v=QiOK6p81JCU",
-      "char_count": 27291,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "mZ8KDAvKHJo",
-      "title": "La zona a la que se aproxima el oro: \"Está rebotando\", con R. Moro",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261110",
-      "date_formatted": "2026-11-10",
-      "url": "https://www.youtube.com/watch?v=mZ8KDAvKHJo",
-      "char_count": 7771,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "Mehqg4NSQiw",
-      "title": "La regla de las tres \"D\" para J. M. Luna: \"defensa, diversificación y disciplina\"",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261109",
-      "date_formatted": "2026-11-09",
-      "url": "https://www.youtube.com/watch?v=Mehqg4NSQiw",
-      "char_count": 17288,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "NznA8hSL_HQ",
-      "title": "Consultorio | Iberdrola frente a Endesa: ¿por qué no suelen ir a la par?",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261109",
-      "date_formatted": "2026-11-09",
-      "url": "https://www.youtube.com/watch?v=NznA8hSL_HQ",
-      "char_count": 25386,
       "status": "Transcrito completo"
     }
   ]

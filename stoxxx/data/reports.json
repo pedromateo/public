@@ -1,13 +1,13 @@
 [
   {
     "date": "2026-11-18",
-    "sentimiento_general": "Alcista Táctico con Rotación Defensiva",
-    "summary_snippet": "• Disociación técnica entre Wall Street y Europa: La renta variable europea, liderada por el IBEX 35 en cotas históricas (sobre 20.000 puntos) y el DAX 40 (26.700 puntos), supera con holgura a los índices estadounidenses...",
+    "sentimiento_general": "Alcista Táctico con Rotación hacia Valor y Cortos en Metales",
+    "summary_snippet": "• Divergencia extrema entre la fortaleza europea y la volatilidad tecnológica en EE.UU.: El IBEX 35 consolida en máximos históricos impulsado por el liderazgo incontestable de las utilities y la banca, mientras Wall Stre...",
     "top_stocks": [
-      "Nvidia (11)",
-      "Iberdrola (5)",
-      "Banco Santander (5)",
-      "Inditex (4)"
+      "Nvidia (12)",
+      "Iberdrola (7)",
+      "Banco Santander (6)",
+      "Repsol (5)"
     ],
     "detail_url": "reports/html/report-2026-11-18.html",
     "pdf_url": "reports/pdf/informe-2026-11-18.pdf",

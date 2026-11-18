@@ -212,7 +212,7 @@ class MarketAnalyzer:
         if self.api_key:
             self.client = genai.Client(api_key=self.api_key)
 
-    def analyze_transcripts(self, videos: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def analyze_transcripts(self, videos: List[Dict[str, Any]], date_str: Optional[str] = None) -> Dict[str, Any]:
         """Envía las transcripciones acumuladas a Gemini para sintetizar el informe."""
         if not self.client:
             # Si no hay GEMINI_API_KEY, comprobar si existe un análisis real persistido derivado de las transcripciones
@@ -222,7 +222,14 @@ class MarketAnalyzer:
                 try:
                     with open(analysis_cache_file, "r", encoding="utf-8") as f:
                         cached_data = json.load(f)
-                    logger.info("Cargando análisis de consenso real de las 16 fuentes desde data/analysis_cache.json")
+                    cached_date = cached_data.get("fecha_informe")
+                    if date_str and cached_date and cached_date != date_str:
+                        logger.warning(
+                            f"AVISO: El caché persistido en data/analysis_cache.json corresponde al día {cached_date}, "
+                            f"mientras que la fecha del informe en curso es {date_str}."
+                        )
+                    fuentes_count = len(cached_data.get("fuentes_consultadas", []))
+                    logger.info(f"Cargando análisis de consenso persistido ({cached_date}, {fuentes_count} fuentes) desde data/analysis_cache.json")
                     return cached_data
                 except Exception as e:
                     logger.warning(f"Error leyendo analysis_cache.json: {e}")
