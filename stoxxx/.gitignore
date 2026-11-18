@@ -9,6 +9,7 @@ __pycache__/
 
 # Logs and temp files
 *.log
+logs/
 .DS_Store
 .cache/
 temp_audio/

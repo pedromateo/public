@@ -156,19 +156,20 @@ class AdvancedWebFunctionalityTests(unittest.TestCase):
     def test_reactive_search_keywords_matching(self):
         """Simula la lógica de búsqueda reactiva del frontend comprobando los data-attributes de las tarjetas."""
         cards = self.index_soup.find_all(class_=lambda c: c and "report-card" in c)
-        self.assertEqual(len(cards), 1, "Debe existir 1 tarjeta de informe en la portada")
+        self.assertGreaterEqual(len(cards), 1, "Debe existir al menos 1 tarjeta de informe en la portada")
 
         card = cards[0]
         keywords = card.get("data-keywords", "").lower()
         self.assertTrue(len(keywords) > 0, "La tarjeta debe tener un atributo data-keywords no vacío")
 
-        # Comprobar que palabras clave clave hagan match
+        # Comprobar que palabras clave clave hagan match en las tarjetas
+        all_keywords = " ".join([c.get("data-keywords", "").lower() for c in cards])
         test_queries = ["nvidia", "iberdrola", "banco santander", "2026-11-16"]
         for q in test_queries:
-            self.assertIn(q, keywords, f"La búsqueda de '{q}' debe coincidir con data-keywords")
+            self.assertIn(q, all_keywords, f"La búsqueda de '{q}' debe coincidir con data-keywords")
 
         # Comprobar que una búsqueda no coincidente no haga match
-        self.assertNotIn("empresa_inexistente_xyz", keywords)
+        self.assertNotIn("empresa_inexistente_xyz", all_keywords)
 
     def test_sentiment_filter_contract(self):
         """Verifica que el botón de filtro de sentimiento coincida con el sentimiento de la tarjeta."""

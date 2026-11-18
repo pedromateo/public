@@ -103,8 +103,9 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
     # 3. ANÁLISIS DE EMPRESAS
     empresas = report_data.get("analisis_empresas", {})
 
-    def print_company_table(title: str, items: list, flag: str):
-        table = Table(title=f"{flag} {title}", border_style="cyan")
+    def print_company_table(title: str, items: list, flag: str = ""):
+        header_title = f"{flag} {title}".strip() if flag else title
+        table = Table(title=header_title, border_style="cyan")
         table.add_column("Empresa (Ticker)", style="bold white")
         table.add_column("Precio Real", style="bold white")
         table.add_column("Menciones", style="bold yellow", justify="center")
@@ -132,8 +133,8 @@ def print_terminal_report(report_data: Dict[str, Any], date_str: str):
         console.print(table)
         console.print("\n")
 
-    print_company_table("Valores Nacionales (IBEX / Continuo)", empresas.get("nacionales", []))
-    print_company_table("Valores Internacionales (Nasdaq, DAX, etc.)", empresas.get("internacionales", []))
+    print_company_table("Valores Nacionales (IBEX / Continuo)", empresas.get("nacionales", []), "🇪🇸")
+    print_company_table("Valores Internacionales (Nasdaq, DAX, etc.)", empresas.get("internacionales", []), "🌍")
 
     # 4. FUENTES CONSULTADAS Y REFERENCIAS
     fuentes = report_data.get("fuentes_consultadas", [])

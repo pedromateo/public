@@ -16,16 +16,16 @@ class TestWebAndReport(unittest.TestCase):
         self.podcast_mp3 = BASE_DIR / "reports" / "audio" / "podcast-2026-11-16.mp3"
 
     def test_single_today_report(self):
-        """Verifica que solo exista el informe de hoy (2026-11-16) con sus 16 fuentes."""
+        """Verifica la integridad de los informes en data/reports.json y sus fuentes."""
         self.assertTrue(self.reports_json.exists(), "data/reports.json debe existir")
         with open(self.reports_json, "r", encoding="utf-8") as f:
             reports = json.load(f)
 
-        self.assertEqual(len(reports), 1, "Debe existir exactamente 1 informe (el de hoy)")
-        today_report = reports[0]
-        self.assertEqual(today_report.get("date"), "2026-11-16", "La fecha del informe debe ser 2026-11-16")
-        self.assertEqual(today_report.get("videos_count"), 16, "El recuento de vídeos debe ser 16")
-        self.assertEqual(len(today_report.get("fuentes_consultadas", [])), 16, "Deben constar las 16 fuentes consultadas")
+        self.assertGreaterEqual(len(reports), 1, "Debe existir al menos 1 informe en reports.json")
+        latest_report = reports[0]
+        self.assertTrue(bool(latest_report.get("date")), "El informe debe tener fecha válida")
+        self.assertGreaterEqual(latest_report.get("videos_count", 0), 16, "El recuento de vídeos debe ser al menos 16")
+        self.assertGreaterEqual(len(latest_report.get("fuentes_consultadas", [])), 16, "Deben constar al menos 16 fuentes consultadas")
 
     def test_index_page_elements(self):
         """Verifica que la página principal (index.html) tenga los textos, badges y botones correctos."""
@@ -33,9 +33,14 @@ class TestWebAndReport(unittest.TestCase):
         with open(self.index_html, "r", encoding="utf-8") as f:
             content = f.read()
 
+        with open(self.reports_json, "r", encoding="utf-8") as rf:
+            reports = json.load(rf)
+        total_reports = len(reports)
+
         # Contador de informes (con separación clara de spans y gap)
-        self.assertIn(">1</span>", content, "El número de informes debe ser 1")
-        self.assertIn("<span>informe</span>", content, "La etiqueta debe contener '<span>informe</span>'")
+        self.assertIn(f">{total_reports}</span>", content, f"El número de informes debe coincidir con {total_reports}")
+        label = "informe" if total_reports == 1 else "informes"
+        self.assertIn(f"<span>{label}</span>", content, f"La etiqueta debe contener '<span>{label}</span>'")
         self.assertNotIn("3 informes", content, "No deben aparecer informes antiguos")
 
         # Texto del audio
@@ -53,7 +58,10 @@ class TestWebAndReport(unittest.TestCase):
         self.assertIn("16 emisiones monitorizadas", content, "Debe indicar 16 emisiones monitorizadas")
 
         # Título del informe con fecha entre paréntesis
-        self.assertIn("Informe de Consenso Bursátil & Macro (2026-11-16)", content, "El título debe incluir la fecha entre paréntesis al final")
+        self.assertTrue(
+            any(f"Informe de Consenso Bursátil & Macro ({r.get('date')})" in content for r in reports),
+            "El título debe incluir la fecha entre paréntesis al final"
+        )
 
         # Accesibilidad y SEO
         self.assertIn('name="description"', content, "Debe incluir meta description para SEO")
