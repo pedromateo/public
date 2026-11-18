@@ -65,7 +65,17 @@ class GitSynchronizer:
                 text=True
             )
 
-            # 4. git push
+            # 4. git pull --rebase y git push
+            logger.info("Sincronizando con remoto (git pull --rebase origin main)...")
+            subprocess.run(
+                ["git", "pull", "--rebase", "origin", "main"],
+                cwd=str(BASE_DIR),
+                env=git_env,
+                capture_output=True,
+                text=True,
+                check=False
+            )
+
             logger.info("Enviando cambios a GitHub (git push origin main)...")
             push_res = subprocess.run(
                 ["git", "push", "origin", "main"],
