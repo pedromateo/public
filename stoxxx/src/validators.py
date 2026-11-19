@@ -201,13 +201,14 @@ class MarketReportValidator:
         return True, soporte_str, resistencia_str, None
 
     @classmethod
-    def audit_and_verify_report(cls, report_data: Dict[str, Any]) -> Dict[str, Any]:
+    def audit_and_verify_report(cls, report_data: Dict[str, Any], date_str: Optional[str] = None) -> Dict[str, Any]:
         """
         Ejecuta una auditoría completa sobre el informe antes de publicarlo o maquetarlo:
         1. Valida cotizaciones y ajusta cualquier inconsistencia técnica.
         2. Verifica que no existan valores vacíos o mocks no resueltos.
         3. Comprueba el orden de menciones y el quórum de empresas.
         4. Valida el guion del podcast.
+        5. Reconcilia la fecha hablada y el número de fuentes del horizonte.
         """
         audit_log = {
             "timestamp": datetime.now().isoformat(),
@@ -296,6 +297,32 @@ class MarketReportValidator:
             (r"\b(Gracias|Dinos|Cuéntanos),?\s+(Carlos|Laura|Álvaro|Alvaro|María|Maria)\b[!,.]?", r"\1,"),
         ]
 
+        # 3.5. Reconciliación de Fecha y Cantidad de Consultorios en el Podcast
+        effective_date_str = date_str or report_data.get("fecha_informe") or datetime.now().strftime("%Y-%m-%d")
+        report_data["fecha_informe"] = effective_date_str
+        try:
+            dt = datetime.strptime(effective_date_str, "%Y-%m-%d")
+            days_es = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+            months_es = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+            day_name = days_es[dt.weekday()]
+            day_num = dt.day
+            month_name = months_es[dt.month - 1]
+            year_num = dt.year
+            spoken_date = f"{day_name}, {day_num} de {month_name} de {year_num}"
+            short_spoken_date = f"{day_num} de {month_name}"
+        except Exception:
+            spoken_date = effective_date_str
+            short_spoken_date = effective_date_str
+
+        num_words = {
+            1: "un", 2: "dos", 3: "tres", 4: "cuatro", 5: "cinco", 6: "seis",
+            7: "siete", 8: "ocho", 9: "nueve", 10: "diez", 11: "once", 12: "doce",
+            13: "trece", 14: "catorce", 15: "quince", 16: "dieciséis", 17: "diecisiete",
+            18: "dieciocho", 19: "diecinueve", 20: "veinte"
+        }
+        fuentes_count = len(report_data.get("fuentes_consultadas", []))
+        spoken_sources = num_words.get(fuentes_count, str(fuentes_count)) if fuentes_count > 0 else "varios"
+
         for turn in guion:
             if turn.get("locutor") not in ("Voz 1", "Voz 2"):
                 turn["locutor"] = "Voz 1" if turn.get("genero") == "masculino" else "Voz 2"
@@ -303,6 +330,36 @@ class MarketReportValidator:
             txt = turn.get("texto", "")
             for pattern, repl in forbidden_greetings:
                 txt = re.sub(pattern, repl, txt, flags=re.IGNORECASE)
+
+            # Reconciliar fecha hablada en cabecera ("Hoy es ...")
+            txt = re.sub(
+                r"Hoy es [^,]+,\s*\d{1,2}\s+de\s+[a-záéíóú]+\s+de\s+\d{4}",
+                f"Hoy es {spoken_date}",
+                txt,
+                flags=re.IGNORECASE
+            )
+            # Reconciliar referencias a fechas concretas desfasadas ("este 18 de noviembre")
+            txt = re.sub(
+                r"\beste \d{1,2} de [a-záéíóú]+\b",
+                f"este {short_spoken_date}",
+                txt,
+                flags=re.IGNORECASE
+            )
+            # Reconciliar número de consultorios/emisiones con el conteo real
+            if fuentes_count > 0:
+                txt = re.sub(
+                    r"\b(veinte|20|quince|15|diez|10|doce|12|ocho|8)\s+consultorios\b",
+                    f"{spoken_sources} consultorios",
+                    txt,
+                    flags=re.IGNORECASE
+                )
+                txt = re.sub(
+                    r"\b(veinte|20|quince|15|diez|10|doce|12|ocho|8)\s+emisiones\b",
+                    f"{spoken_sources} emisiones",
+                    txt,
+                    flags=re.IGNORECASE
+                )
+
             turn["texto"] = txt
 
             if not turn.get("texto") or len(turn.get("texto", "").strip()) < 10:

@@ -268,7 +268,7 @@ def main():
 
     # 2.6. AUDITORÍA INTEGRAL DE CONSISTENCIA Y NIVELES TÉCNICOS
     with console.status("[bold green]Auditando integridad técnica y coherencia de soportes/resistencias..."):
-        report_data = MarketReportValidator.audit_and_verify_report(report_data)
+        report_data = MarketReportValidator.audit_and_verify_report(report_data, date_str=date_str)
         audit_info = report_data.get("_audit", {})
         if audit_info.get("reconciliations"):
             for rec in audit_info["reconciliations"]:

@@ -1,5 +1,5 @@
 {
-  "fecha_informe": "2026-11-18",
+  "fecha_informe": "2026-11-19",
   "sentimiento_general": "Alcista Táctico con Rotación hacia Valor y Cortos en Metales",
   "resumen_ejecutivo": {
     "lectura_tiempo": "3-5 minutos",
@@ -53,7 +53,7 @@
       {
         "nombre": "Iberdrola",
         "ticker": "IBE.MC",
-        "menciones": 7,
+        "menciones": 6,
         "analistas": [
           "D. Galán",
           "R. Moro",
@@ -149,7 +149,7 @@
       {
         "nombre": "Nvidia",
         "ticker": "NVDA",
-        "menciones": 12,
+        "menciones": 6,
         "analistas": [
           "D. Galán",
           "M. Pinto",
@@ -229,7 +229,7 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva edición de STOXXX! Hoy es miércoles, 18 de noviembre de 2026, y traemos un informe repleto de novedades operativas, giros drásticos en materias primas y el balance exhaustivo de veinte consultorios de bolsa emitidos en los últimos días."
+      "texto": "¡Muy buenas tardes a todos y bienvenidos a una nueva edición de STOXXX! Hoy es jueves, 19 de noviembre de 2026, y traemos un informe repleto de novedades operativas, giros drásticos en materias primas y el balance exhaustivo de seis consultorios de bolsa emitidos en los últimos días."
     },
     {
       "locutor": "Voz 2",
@@ -289,7 +289,7 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "En resumen, la consigna operativa de este 18 de noviembre es clara: mantener la disciplina, acompañar a los ganadores en subida libre como Iberdrola o Inditex, no coger cuchillos que caen en petroleras, y aprovechar las oportunidades tácticas de cobertura o cortos en materias primas como el oro."
+      "texto": "En resumen, la consigna operativa de este 19 de noviembre es clara: mantener la disciplina, acompañar a los ganadores en subida libre como Iberdrola o Inditex, no coger cuchillos que caen en petroleras, y aprovechar las oportunidades tácticas de cobertura o cortos en materias primas como el oro."
     },
     {
       "locutor": "Voz 2",
@@ -309,208 +309,62 @@
   ],
   "fuentes_consultadas": [
     {
-      "id": "1X2CVR5SWBY",
-      "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con R. Moro",
+      "id": "C_LfMFiKsoc",
+      "title": "Nvidia: Resultados extraordinarios pero sigue la tormenta tecnológica. Con G. Ortega",
       "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261118",
       "date_formatted": "2026-11-18",
-      "url": "https://www.youtube.com/watch?v=1X2CVR5SWBY",
-      "char_count": 17057,
+      "url": "https://www.youtube.com/watch?v=C_LfMFiKsoc",
+      "char_count": 22004,
       "status": "Transcrito completo"
     },
     {
       "id": "BxNaU5r6-Dg",
       "title": "#Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según V. Galán",
       "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261118",
       "date_formatted": "2026-11-18",
       "url": "https://www.youtube.com/watch?v=BxNaU5r6-Dg",
       "char_count": 21882,
       "status": "Transcrito completo"
     },
     {
-      "id": "2DeY1WGckeo",
-      "title": "¿Vuelve el CEO de Nvidia? \"Yo creo que Washington no quiere saber nada de Huang\", dice M. Pinto",
+      "id": "1X2CVR5SWBY",
+      "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con R. Moro",
       "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261117",
-      "date_formatted": "2026-11-17",
-      "url": "https://www.youtube.com/watch?v=2DeY1WGckeo",
-      "char_count": 24682,
+      "date_formatted": "2026-11-18",
+      "url": "https://www.youtube.com/watch?v=1X2CVR5SWBY",
+      "char_count": 17057,
       "status": "Transcrito completo"
     },
     {
       "id": "bta_qeZpkEw",
       "title": "#Consultorio | Las claves de Iberdrola: un valor que sigue \"fortísimo\", según D. Galán",
       "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261117",
       "date_formatted": "2026-11-17",
       "url": "https://www.youtube.com/watch?v=bta_qeZpkEw",
       "char_count": 22653,
       "status": "Transcrito completo"
     },
     {
+      "id": "2DeY1WGckeo",
+      "title": "¿Vuelve el CEO de Nvidia? \"Yo creo que Washington no quiere saber nada de Huang\", dice M. Pinto",
+      "channel": "Capital Radio - Consultorios de Bolsa",
+      "date_formatted": "2026-11-17",
+      "url": "https://www.youtube.com/watch?v=2DeY1WGckeo",
+      "char_count": 24682,
+      "status": "Transcrito completo"
+    },
+    {
       "id": "s_lohwb6gCE",
       "title": "Consultorio | El mejor activo refugio frente a la volatilidad, con M. Barrero",
       "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261117",
       "date_formatted": "2026-11-17",
       "url": "https://www.youtube.com/watch?v=s_lohwb6gCE",
       "char_count": 15265,
       "status": "Transcrito completo"
-    },
-    {
-      "id": "4NAJRccsaJA",
-      "title": "Consultorio | Bolinches afirma que \"hay que comprar oro físico\" y este es el motivo",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261116",
-      "date_formatted": "2026-11-16",
-      "url": "https://www.youtube.com/watch?v=4NAJRccsaJA",
-      "char_count": 21743,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "xjJwCgxygxM",
-      "title": "Anthropic debuta en bolsa: ¿qué cambia en tus fondos indexados? Con J. M. Luna",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261116",
-      "date_formatted": "2026-11-16",
-      "url": "https://www.youtube.com/watch?v=xjJwCgxygxM",
-      "char_count": 23281,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "yf786xeAHtQ",
-      "title": "#Consultorio | El mercado español camino a máximos históricos antes de las elecciones",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261116",
-      "date_formatted": "2026-11-16",
-      "url": "https://www.youtube.com/watch?v=yf786xeAHtQ",
-      "char_count": 23285,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "qEq-i5wWc7g",
-      "title": "Esta Acción de IA se Beneficiará de la Crisis de NVIDIA (Cómprala YA)",
-      "channel": "Visionarios Bolsa",
-      "upload_date": "20261115",
-      "date_formatted": "2026-11-15",
-      "url": "https://www.youtube.com/watch?v=qEq-i5wWc7g",
-      "char_count": 44415,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "aFxrHjVMM1w",
-      "title": "El gran engaño de Nvidia: lo que no te cuentan, con A. Iturralde | Capital, La Bolsa y La Vida",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261114",
-      "date_formatted": "2026-11-14",
-      "url": "https://www.youtube.com/watch?v=aFxrHjVMM1w",
-      "char_count": 4942,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "53VWQv1pbIs",
-      "title": "A. Iturralde sobre Nvidia: \"No nos debe extrañar que rebote\"",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261113",
-      "date_formatted": "2026-11-13",
-      "url": "https://www.youtube.com/watch?v=53VWQv1pbIs",
-      "char_count": 23042,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "Bot6q--g0U4",
-      "title": "Consultorio | Acciona tras el desplome: Nivel crítico para el valor. R. Moro y J. del Canto",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261113",
-      "date_formatted": "2026-11-13",
-      "url": "https://www.youtube.com/watch?v=Bot6q--g0U4",
-      "char_count": 18536,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "BFRx5gKr4q4",
-      "title": "#Consultorio | El oro se afianza como termómetro de la política monetaria, según Ribes",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261112",
-      "date_formatted": "2026-11-12",
-      "url": "https://www.youtube.com/watch?v=BFRx5gKr4q4",
-      "char_count": 21316,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "ZZyI6ojF5ik",
-      "title": "Si Eres Accionista de NVIDIA… PREPÁRATE!",
-      "channel": "Visionarios Bolsa",
-      "upload_date": "20261112",
-      "date_formatted": "2026-11-12",
-      "url": "https://www.youtube.com/watch?v=ZZyI6ojF5ik",
-      "char_count": 33269,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "szKGar6nJX4",
-      "title": "Consultorio | Por qué el Dax toca nuevos máximos, con J. Alfayate",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261112",
-      "date_formatted": "2026-11-12",
-      "url": "https://www.youtube.com/watch?v=szKGar6nJX4",
-      "char_count": 20699,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "7feBRWdkXiE",
-      "title": "Consultorio | Nivel al que veremos el IBEX con el rally de Navidad de los bancos, según P. Pérez",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261111",
-      "date_formatted": "2026-11-11",
-      "url": "https://www.youtube.com/watch?v=7feBRWdkXiE",
-      "char_count": 20467,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "Cs6lc5MPDBs",
-      "title": "#Consultorio | Cinco valores clave para hacer cartera, según V. Galán",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261111",
-      "date_formatted": "2026-11-11",
-      "url": "https://www.youtube.com/watch?v=Cs6lc5MPDBs",
-      "char_count": 22550,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "FEDRcWhqJQU",
-      "title": "Consultorio | Tecnología, ¿aprovechamos para ampliar en ASML? Esto dice G. Ortega",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261111",
-      "date_formatted": "2026-11-11",
-      "url": "https://www.youtube.com/watch?v=FEDRcWhqJQU",
-      "char_count": 23223,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "a34s-hJ0iq0",
-      "title": "#Consultorio | Repsol, en la montaña rusa del petróleo. Esto dice D. Galán",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261111",
-      "date_formatted": "2026-11-11",
-      "url": "https://www.youtube.com/watch?v=a34s-hJ0iq0",
-      "char_count": 21995,
-      "status": "Transcrito completo"
-    },
-    {
-      "id": "hs5mS7JV_pY",
-      "title": "Fluidra es el peor valor del Ibex este ejercicio: ¿Cuál es la visión para la compañía ahora?",
-      "channel": "Capital Radio - Consultorios de Bolsa",
-      "upload_date": "20261111",
-      "date_formatted": "2026-11-11",
-      "url": "https://www.youtube.com/watch?v=hs5mS7JV_pY",
-      "char_count": 7853,
-      "status": "Transcrito completo"
     }
   ],
   "_audit": {
-    "timestamp": "2026-11-19T10:40:46.958205",
+    "timestamp": "2026-11-19T11:05:22.437957",
     "passed": true,
     "reconciliations": [],
     "warnings": [],
