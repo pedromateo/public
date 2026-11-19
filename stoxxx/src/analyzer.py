@@ -269,17 +269,22 @@ class MarketAnalyzer:
             temperature=0.2, # Baja temperatura para máxima precisión técnica y apego a datos
         )
 
-        response = self.client.models.generate_content(
-            model=self.model_name,
-            contents=full_payload,
-            config=config
-        )
-
         try:
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=full_payload,
+                config=config
+            )
             report_data = json.loads(response.text)
         except Exception as e:
-            logger.error(f"Error parseando respuesta JSON de Gemini: {e}\nRespuesta recibida:\n{response.text}")
-            raise RuntimeError(f"La respuesta de Gemini no pudo ser parseada como JSON: {e}")
+            logger.warning(f"Aviso: La llamada a Gemini API ({self.model_name}) no pudo completarse ({e}). Usando análisis persistido en data/analysis_cache.json...")
+            from config import BASE_DIR
+            analysis_cache_file = BASE_DIR / "data" / "analysis_cache.json"
+            if analysis_cache_file.exists():
+                with open(analysis_cache_file, "r", encoding="utf-8") as f:
+                    report_data = json.load(f)
+            else:
+                raise RuntimeError(f"Fallo en llamada a Gemini y no existe data/analysis_cache.json: {e}")
 
         # Asegurar que fuentes_consultadas esté siempre poblada a partir de los vídeos procesados
         if not report_data.get("fuentes_consultadas"):

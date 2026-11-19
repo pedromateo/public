@@ -13,7 +13,7 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
    - Monitoriza los consultorios de bolsa de **Capital Radio** (con expertos como R. Moro, A. Iturralde, J. Alfayate, G. Ortega) y el canal **Visionarios Bolsa** (S. Rodríguez).
    - Descarga y consolida las transcripciones completas en español.
    - **Persistencia y Versionado en GitHub (`data/transcripts/`)**: Todas las transcripciones se guardan en formato JSON y se versionan en el repositorio de GitHub para garantizar máxima trazabilidad, reproducibilidad histórica de los informes bursátiles y optimización de llamadas de red.
-2. **Análisis de Consenso con Google Gemini (Gemini 2.0 Flash)**:
+2. **Análisis de Consenso con Google Gemini (Gemini 3.8 Flash)**:
    - Identifica el **quórum real** entre los analistas, niveles clave de índices mundiales (IBEX 35, DAX, S&P 500, Nasdaq 100) y divergencias estratégicas.
    - Clasifica empresas en **Valores Nacionales** e **Internacionales**, ordenadas de mayor a menor número de menciones.
 3. **Entregables por Ejecución**:
