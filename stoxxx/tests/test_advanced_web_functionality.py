@@ -175,7 +175,11 @@ class AdvancedWebFunctionalityTests(unittest.TestCase):
         """Verifica que el botón de filtro de sentimiento coincida con el sentimiento de la tarjeta."""
         card = self.index_soup.find(class_=lambda c: c and "report-card" in c)
         card_sentiment = card.get("data-sentiment", "").lower()
-        self.assertIn("alcista", card_sentiment, "La tarjeta de hoy debe clasificarse como alcista")
+        valid_sentiments = ["alcista", "bajista", "cautela", "neutral", "consolidación"]
+        self.assertTrue(
+            any(s in card_sentiment for s in valid_sentiments),
+            f"La tarjeta debe clasificarse con un sentimiento válido (obtenido: '{card_sentiment}')"
+        )
 
         # Comprobar que los botones de filtro existan
         filter_buttons = self.index_soup.find_all("button", class_=lambda c: c and "sentiment-filter" in c)

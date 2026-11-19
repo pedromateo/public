@@ -1,5 +1,76 @@
 [
   {
+    "date": "2026-11-19",
+    "sentimiento_general": "Cautela",
+    "summary_snippet": "• El mercado muestra un tono de profunda cautela y selectividad extrema, marcado por la digestión de resultados en megacaps tecnológicas como Nvidia y la presión bajista en semiconductores.\n• Los analistas coinciden en q...",
+    "top_stocks": [
+      "Nvidia (6)",
+      "Banco Santander (4)",
+      "Indra (3)",
+      "Iberdrola (2)"
+    ],
+    "detail_url": "reports/html/report-2026-11-19.html",
+    "pdf_url": "reports/pdf/informe-2026-11-19.pdf",
+    "audio_url": "reports/audio/podcast-2026-11-19.mp3",
+    "videos_count": 6,
+    "fuentes_consultadas": [
+      {
+        "id": "C_LfMFiKsoc",
+        "title": "Nvidia: Resultados extraordinarios pero sigue la tormenta tecnológica. Con G. Ortega",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-18",
+        "url": "https://www.youtube.com/watch?v=C_LfMFiKsoc",
+        "char_count": 22004,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "BxNaU5r6-Dg",
+        "title": "#Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según V. Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-18",
+        "url": "https://www.youtube.com/watch?v=BxNaU5r6-Dg",
+        "char_count": 21882,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "1X2CVR5SWBY",
+        "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con R. Moro",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-18",
+        "url": "https://www.youtube.com/watch?v=1X2CVR5SWBY",
+        "char_count": 17057,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "bta_qeZpkEw",
+        "title": "#Consultorio | Las claves de Iberdrola: un valor que sigue \"fortísimo\", según D. Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-17",
+        "url": "https://www.youtube.com/watch?v=bta_qeZpkEw",
+        "char_count": 22653,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "2DeY1WGckeo",
+        "title": "¿Vuelve el CEO de Nvidia? \"Yo creo que Washington no quiere saber nada de Huang\", dice M. Pinto",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-17",
+        "url": "https://www.youtube.com/watch?v=2DeY1WGckeo",
+        "char_count": 24682,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "s_lohwb6gCE",
+        "title": "Consultorio | El mejor activo refugio frente a la volatilidad, con M. Barrero",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-17",
+        "url": "https://www.youtube.com/watch?v=s_lohwb6gCE",
+        "char_count": 15265,
+        "status": "Transcrito completo"
+      }
+    ]
+  },
+  {
     "date": "2026-11-18",
     "sentimiento_general": "Alcista Táctico con Rotación hacia Valor y Cortos en Metales",
     "summary_snippet": "• Divergencia extrema entre la fortaleza europea y la volatilidad tecnológica en EE.UU.: El IBEX 35 consolida en máximos históricos impulsado por el liderazgo incontestable de las utilities y la banca, mientras Wall Stre...",

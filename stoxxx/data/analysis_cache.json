@@ -1,0 +1,551 @@
+{
+  "fecha_informe": "2026-11-18",
+  "sentimiento_general": "Cautela",
+  "resumen_ejecutivo": {
+    "lectura_tiempo": "3-5 minutos",
+    "sintesis_sentimiento": "• El mercado muestra un tono de profunda cautela y selectividad extrema, marcado por la digestión de resultados en megacaps tecnológicas como Nvidia y la presión bajista en semiconductores.\n• Los analistas coinciden en que los índices principales (Nasdaq, S&P 500 y DAX) se encuentran en zonas críticas de soporte, obligados a reaccionar para evitar correcciones de mayor envergadura.\n• La rotación sectorial hacia valores defensivos (utilities como Iberdrola, consumo estable) contrasta con las dudas y la debilidad técnica que acusan la tecnología y el sector financiero a corto plazo.",
+    "hacia_donde_apuntan": "• Los flujos de capital huyen temporalmente de la sobrecompra tecnológica y de los semiconductores, buscando refugio en renta fija a corto plazo, oro físico y en valores con flujos de caja sólidos y menor volatilidad.\n• Se recomienda mantener liquidez como una posición activa y no precipitar compras en cuchillos cayendo hasta que aparezcan patrones de giro o dobles suelos claros.\n• El posicionamiento estratégico exige paciencia, priorizando la selección individual de acciones líderes europeas frente al deterioro observado en Wall Street.",
+    "puntos_clave_consenso": [
+      "Vigilancia estricta de los soportes clave en los índices americanos y sectoriales de semiconductores (SOX).",
+      "Evitar el sector financiero a corto plazo debido a su incapacidad para sostener el rebote inicial tras las correcciones.",
+      "Fortaleza indiscutible de las utilities europeas (Iberdrola, Endesa) como refugio principal frente a la volatilidad."
+    ]
+  },
+  "sentimiento_macro": {
+    "situacion_global": "• Contexto macroeconómico dominado por la incertidumbre geopolítica, la persistencia de tensiones inflacionistas y el giro de los bancos centrales hacia políticas más restrictivas o tipos de interés elevados.\n• En Estados Unidos, el temor a una desaceleración económica y la presión sobre los rendimientos de los bonos generan un entorno adyacente de alta volatilidad y recogida de beneficios.\n• Europa muestra una relativa resiliencia gracias a la fortaleza de sectores defensivos y a la debilidad del euro, aunque sujeta al contagio de los bandazos tecnológicos de Wall Street.",
+    "indices": [
+      {
+        "nombre": "IBEX 35",
+        "tendencia": "Consolidación",
+        "soporte_clave": "19.200",
+        "resistencia_clave": "20.087",
+        "consenso_analistas": "Se mueve en un amplio rango lateral tras alejarse de la cota de los 20.000 puntos, con riesgo de corrección hacia la media de 200 sesiones."
+      },
+      {
+        "nombre": "DAX",
+        "tendencia": "Consolidación",
+        "soporte_clave": "24.792",
+        "resistencia_clave": "27.001",
+        "consenso_analistas": "Tras marcar máximos históricos, muestra riesgos de un descanso adicional hacia sus medias, manteniendo un mínimo creciente clave que preserva la estructura de fondo."
+      },
+      {
+        "nombre": "S&P 500",
+        "tendencia": "Cautela",
+        "soporte_clave": "7.237",
+        "resistencia_clave": "7.652",
+        "consenso_analistas": "Jugueteando con las medias y formando máximos decrecientes; se exige la superación de la directriz bajista para confirmar el fin de la fase correctiva."
+      },
+      {
+        "nombre": "Nasdaq 100",
+        "tendencia": "Bajista",
+        "soporte_clave": "26.000",
+        "resistencia_clave": "28.593",
+        "consenso_analistas": "Fuerte corrección liderada por el castigo en inteligencia artificial y semiconductores, con divergencias técnicas que obligan a vigilar soportes críticos."
+      }
+    ],
+    "coincidencias_estrategia": "• Coincidencia unánime en que el mercado no ofrece un suelo claro en el sector tecnológico y que operar en este momento equivale a un alto riesgo operativo.\n• Acuerdo generalizado en que los metales preciosos (oro y plata) atraviesan una fase correctiva profunda que los sitúa en escenarios óptimos para posiciones bajistas o cortos en el corto plazo.",
+    "divergencias_estrategia": "• Discrepancia en el grado de optimismo sobre la banca: mientras algunos analistas descartan totalmente el sector por debilidad técnica, otros matizan oportunidades selectivas de cara al medio plazo si se defienden soportes estructurales."
+  },
+  "analisis_empresas": {
+    "nacionales": [
+      {
+        "nombre": "Banco Santander",
+        "ticker": "SAN.MC",
+        "menciones": 4,
+        "analistas": [
+          "G. Ortega",
+          "R. Moro",
+          "M. Pinto"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "9.80€",
+        "resistencia": "11.50€",
+        "recomendacion": "Evitar",
+        "tesis": "Desarrolla una estructura de caída en ondas (pata bajista y probable onda C) perdiendo las medias móviles principales, sin ofrecer garantías técnicas para la entrada."
+      },
+      {
+        "nombre": "Indra",
+        "ticker": "IDR.MC",
+        "menciones": 3,
+        "analistas": [
+          "V. Galán",
+          "R. Moro",
+          "M. Pinto"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "44.50€",
+        "resistencia": "55.60€",
+        "recomendacion": "Evitar",
+        "tesis": "Fuerte castigo bursátil tras noticias de investigación en contratos y ruptura de soportes clave; aspecto neutral-bajista a corto plazo."
+      },
+      {
+        "nombre": "Iberdrola",
+        "ticker": "IBE.MC",
+        "menciones": 2,
+        "analistas": [
+          "R. Moro",
+          "D. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "19.53€",
+        "resistencia": "23.71€",
+        "recomendacion": "Comprar en corrección / Mantener",
+        "tesis": "Valor fortísimo dentro del sector utilities europeo, apoyándose de forma recurrente en su media móvil ascendente con impecable tendencia de fondo."
+      },
+      {
+        "nombre": "Enagas",
+        "ticker": "ENG.MC",
+        "menciones": 2,
+        "analistas": [
+          "V. Galán",
+          "R. Moro"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "17.00€",
+        "resistencia": "20.00€",
+        "recomendacion": "Mantener",
+        "tesis": "Tras romper un entorno lateral, experimenta una corrección en forma de vela envolvente que sugiere un descanso lógico dentro de su estructura."
+      },
+      {
+        "nombre": "Repsol",
+        "ticker": "REP.MC",
+        "menciones": 2,
+        "analistas": [
+          "V. Galán",
+          "M. Pinto"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "28.00€",
+        "resistencia": "31.00€",
+        "recomendacion": "Comprar en corrección",
+        "tesis": "A pesar de los recortes recientes, mantiene un excelente comportamiento relativo en su industria, ofreciendo una oportunidad para establecer soportes clave."
+      },
+      {
+        "nombre": "Clínica Baviera",
+        "ticker": "CBAV.MC",
+        "menciones": 1,
+        "analistas": [
+          "M. Pinto"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "25.00€",
+        "resistencia": "30.00€",
+        "recomendacion": "Comprar",
+        "tesis": "Destaca como el valor de mejor aspecto técnico en el mercado continuo español, rompiendo con fuerza un canal bajista previo."
+      },
+      {
+        "nombre": "Inditex",
+        "ticker": "ITX.MC",
+        "menciones": 1,
+        "analistas": [
+          "G. Ortega"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "59.00€",
+        "resistencia": "61.00€",
+        "recomendacion": "Mantener",
+        "tesis": "Tendencia alcista estructural intacta, aunque sujeta a la vigilancia del soporte de corto plazo en 59 euros."
+      },
+      {
+        "nombre": "Meliá Hotels",
+        "ticker": "MEL.MC",
+        "menciones": 1,
+        "analistas": [
+          "G. Ortega"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "11.00€",
+        "resistencia": "12.00€",
+        "recomendacion": "Mantener",
+        "tesis": "Apunta hacia la recuperación de máximos con un aspecto técnico en plazos largos favorable."
+      },
+      {
+        "nombre": "Acciona",
+        "ticker": "ANA.MC",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "196.50€",
+        "resistencia": "205.00€",
+        "recomendacion": "Evitar",
+        "tesis": "Estructura lateral con resultados flojos que aconseja deshacer posiciones si perfora los niveles clave de soporte."
+      },
+      {
+        "nombre": "Grifols",
+        "ticker": "GRF.MC",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "10.50€",
+        "resistencia": "11.80€",
+        "recomendacion": "Comprar en ruptura",
+        "tesis": "Muestra un comportamiento relativo positivo frente al mercado, activando señal clara de compra si consolida por encima de la resistencia."
+      },
+      {
+        "nombre": "Unicaja",
+        "ticker": "UNI.MC",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "3.27€",
+        "resistencia": "3.60€",
+        "recomendacion": "Evitar",
+        "tesis": "Acusa la debilidad general del sector bancario español con soportes alejados, recomendando proteger capital."
+      },
+      {
+        "nombre": "Endesa",
+        "ticker": "ELE.MC",
+        "menciones": 1,
+        "analistas": [
+          "D. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "40.50€",
+        "resistencia": "46.12€",
+        "recomendacion": "Mantener",
+        "tesis": "Valor refugio muy sólido dentro del sector eléctrico, sin señales de cambio de tendencia y con la media como soporte operativo."
+      }
+    ],
+    "internacionales": [
+      {
+        "nombre": "Nvidia",
+        "ticker": "NVDA",
+        "menciones": 6,
+        "analistas": [
+          "G. Ortega",
+          "V. Galán",
+          "R. Moro",
+          "D. Galán",
+          "M. Pinto",
+          "M. Barrero"
+        ],
+        "nivel_consenso": "Divergencia",
+        "soporte": "147.00$",
+        "resistencia": "208.00$",
+        "recomendacion": "Evitar / Esperar suelo",
+        "tesis": "Resultados extraordinarios batidos pero acompañados de alta volatilidad, salida del CEO y dudas contables/geopolíticas que dañan temporalmente el gráfico técnico."
+      },
+      {
+        "nombre": "Salesforce",
+        "ticker": "CRM",
+        "menciones": 1,
+        "analistas": [
+          "D. Galán"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "154.87$",
+        "resistencia": "220.00$",
+        "recomendacion": "Evitar",
+        "tesis": "Deterioro técnico grave tras romper la media de 200 sesiones y perforar niveles clave de soporte con hueco bajista."
+      },
+      {
+        "nombre": "Palantir",
+        "ticker": "PLTR",
+        "menciones": 1,
+        "analistas": [
+          "M. Pinto"
+        ],
+        "nivel_consenso": "Divergencia",
+        "soporte": "147.80$",
+        "resistencia": "176.00$",
+        "recomendacion": "Mantener / Vigilar soporte",
+        "tesis": "Retroceso hacia el nivel de Fibonacci del 61.8%; se vigila el soporte clave para evitar caídas adicionales hacia la zona de 105 dólares."
+      },
+      {
+        "nombre": "IBM",
+        "ticker": "IBM",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "217.00$",
+        "resistencia": "291.00$",
+        "recomendacion": "Evitar",
+        "tesis": "Fuerte corrección tras presentación de resultados decepcionantes, con un periodo lateral prolongado por delante."
+      },
+      {
+        "nombre": "Puma",
+        "ticker": "PUM.DE",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "24.40€",
+        "resistencia": "29.00€",
+        "recomendacion": "Mantener",
+        "tesis": "Intento de formación de suelo tras caídas drásticas, con indicios incipientes de entrada de flujos institucionales en el sector."
+      },
+      {
+        "nombre": "Nautilus Biotechnology",
+        "ticker": "NAUT",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "2.09$",
+        "resistencia": "3.46$",
+        "recomendacion": "Tomar beneficios parciales",
+        "tesis": "Alta volatilidad propia del sector biotecnológico; se aconseja asegurar beneficios parciales ante la falta de diversificación del negocio."
+      },
+      {
+        "nombre": "Waters Corporation",
+        "ticker": "WAT",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "425.00$",
+        "resistencia": "445.00$",
+        "recomendacion": "Comprar",
+        "tesis": "Acción defensiva de alta calidad que rompe consolidaciones plurianuales con fuerte entrada de mano fuerte institucional."
+      },
+      {
+        "nombre": "BASF",
+        "ticker": "BAS.DE",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "49.00€",
+        "resistencia": "52.00€",
+        "recomendacion": "Mantener",
+        "tesis": "Consolidación prolongada con corrección reciente que exige respetar soportes clave para validar mínimos crecientes."
+      },
+      {
+        "nombre": "Ferrari",
+        "ticker": "RACE",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "325.00$",
+        "resistencia": "374.00$",
+        "recomendacion": "Comprar",
+        "tesis": "Triple suelo confirmado con retesteo exitoso a medias y superación de resistencias que la devuelven a máximos."
+      },
+      {
+        "nombre": "Air Liquide",
+        "ticker": "AI.PA",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "174.00€",
+        "resistencia": "180.00€",
+        "recomendacion": "Comprar en corrección",
+        "tesis": "Líder indiscutible dentro del sector químico europeo con entrada constante de dinero institucional."
+      },
+      {
+        "nombre": "Spotify",
+        "ticker": "SPOT",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "587.00$",
+        "resistencia": "650.00$",
+        "recomendacion": "Mantener",
+        "tesis": "Suelo de medio plazo consolidado con mínimos crecientes y ruptura de máximos recientes."
+      },
+      {
+        "nombre": "Deutsche Börse",
+        "ticker": "DB1.DE",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "300.00€",
+        "resistencia": "320.00€",
+        "recomendacion": "Comprar en corrección",
+        "tesis": "Excelente comportamiento tras romper resistencias, ofreciendo oportunidades de entrada en soportes técnicos."
+      },
+      {
+        "nombre": "Pernod Ricard",
+        "ticker": "RI.PA",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "70.75€",
+        "resistencia": "72.10€",
+        "recomendacion": "Comprar",
+        "tesis": "Aspecto técnico muy favorable tras perforar al alza resistencias clave en el mercado francés."
+      },
+      {
+        "nombre": "Alstom",
+        "ticker": "ALO.PA",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "4.80€",
+        "resistencia": "9.25€",
+        "recomendacion": "Evitar",
+        "tesis": "Estructura terriblemente bajista tras romper soportes de largísimo plazo y acumular problemas financieros y operativos."
+      },
+      {
+        "nombre": "ASML Holding",
+        "ticker": "ASML",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Divergencia",
+        "soporte": "1225.00€",
+        "resistencia": "1350.00€",
+        "recomendacion": "Mantener con cautela",
+        "tesis": "Alta volatilidad apoyada en los mínimos anteriores; la pérdida de niveles clave invalidaría cualquier intento de rebote."
+      },
+      {
+        "nombre": "Netflix",
+        "ticker": "NFLX",
+        "menciones": 1,
+        "analistas": [
+          "D. Galán"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "550.00$",
+        "resistencia": "67.43$",
+        "recomendacion": "Evitar",
+        "tesis": "Estructura bajista persistente de máximos y mínimos decrecientes, sin mostrar señales claras de suelo."
+      },
+      {
+        "nombre": "SanDisk",
+        "ticker": "SNDK",
+        "menciones": 1,
+        "analistas": [
+          "M. Pinto"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "695.00$",
+        "resistencia": "750.00$",
+        "recomendacion": "Evitar",
+        "tesis": "Perdida sucesiva de soportes y medias móviles sin conseguir consolidar un rebote técnico sostenible."
+      }
+    ]
+  },
+  "guion_podcast": [
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "¡Hola a todos, y bienvenidos a este repaso estratégico de mercado! Hoy analizamos las claves operativas y el quórum de los principales consultorios bursátiles de los últimos días."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Efectivamente. Han sido jornadas de máxima intensidad en los parqués, marcadas por la cautela, la digestión de resultados tecnológicos y la búsqueda de refugio en Europa."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "Comenzando por el contexto macroeconómico, observamos que los analistas coinciden en un escenario de alta selectividad. La Reserva Federal mantiene un tono firme, lo que incrementa la presión sobre los tipos y genera volatilidad en Wall Street."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Así es. Mientras tanto, Europa muestra una relativa fortaleza apoyada en el sector defensivo y en la debilidad del euro, aunque con la atención puesta en los niveles críticos de los índices principales."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "Repasando los índices, el IBEX 35 se mueve en un rango lateral de consolidación, vigilando de cerca el soporte en los 19.200 puntos tras alejarse de la cota de los 20.000."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Por su parte, el DAX alemán, a pesar de marcar máximos históricos recientes, muestra riesgos de corrección hacia su media, fijando un soporte clave en los 24.792 puntos."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "Al otro lado del Atlántico, el S&P 500 y el Nasdaq 100 reflejan un deterioro evidente, liderado por el castigo en el sector de semiconductores y la inteligencia artificial."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Y aquí es donde entra el epicentro de la tormenta: Nvidia. Con resultados extraordinarios pero con la dimisión de su CEO y dudas geopolíticas, los expertos recomiendan extremar la prudencia."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "Exacto. G. Ortega y M. Pinto coinciden en que, técnico en mano, Nvidia ha buscado niveles de retroceso importantes, pero advierten que no existe un suelo confirmado para lanzarse a comprar."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Pasando al mercado nacional, las miradas se centran en el sector bancario. Valores como Banco Santander generan un claro consenso bajista para el corto plazo."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "R. Moro y M. Pinto señalan que Santander dibuja una estructura de caída en ondas, rompiendo medias y sin ofrecer garantías técnicas para una entrada inmediata antes de testar los 9.80 euros."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Situación similar para Indra, que tras sufrir recortes importantes por la investigación en contratos de defensa, recibe recomendaciones unánimes de mantenerse al margen."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "En la otra cara de la moneda destacan las utilities. Iberdrola y Endesa continúan siendo baluartes defensivos muy sólidos en las carteras de los inversores."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "D. Galán y R. Moro recalcan que Iberdrola mantiene una tendencia alcista impecable, apoyándose de forma recurrente en su media móvil con un soporte clave muy bien definido."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "A nivel internacional, el foco se divide entre las alertas en tecnología y la solidez de compañías industriales y de consumo en Europa."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "V. Galán destaca el excelente comportamiento de valores como Ferrari, Waters Corporation o Air Liquide, que muestran flujos institucionales positivos frente al desánimo de las megacaps tecnológicas."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "Incluso en el ámbito de los metales preciosos, tanto R. Moro como V. Galán coinciden en que el oro y la plata muestran un sesgo bajista claro, situándose en zonas óptimas para estrategias cortas."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Para la parte defensiva de la cartera, gestores como M. Barrero sugieren alternar fondos monetarios sostenibles y renta fija a corto plazo como refugio frente a la volatilidad."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "En conclusión, nos encontramos en un momento de gestión de riesgo estricta: proteger el capital, evitar adivinar suelos en valores dañados y mantener liquidez."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Efectivamente. La paciencia y la disciplina operativa serán las mejores herramientas para navegar con éxito lo que resta de ejercicio bursátil."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "Gracias a todos por acompañarnos en este análisis detallado. Les esperamos en los próximos consultorios con más claves de los mercados financieros."
+    }
+  ]
+}

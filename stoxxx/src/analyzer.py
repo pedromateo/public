@@ -269,22 +269,46 @@ class MarketAnalyzer:
             temperature=0.2, # Baja temperatura para máxima precisión técnica y apego a datos
         )
 
-        try:
-            response = self.client.models.generate_content(
-                model=self.model_name,
-                contents=full_payload,
-                config=config
-            )
-            report_data = json.loads(response.text)
-        except Exception as e:
-            logger.warning(f"Aviso: La llamada a Gemini API ({self.model_name}) no pudo completarse ({e}). Usando análisis persistido en data/analysis_cache.json...")
+        models_to_try = [self.model_name]
+        for fallback in ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]:
+            if fallback not in models_to_try:
+                models_to_try.append(fallback)
+
+        report_data = None
+        last_error = None
+
+        for model in models_to_try:
+            try:
+                logger.info(f"Intentando llamada a Gemini con modelo: {model}")
+                response = self.client.models.generate_content(
+                    model=model,
+                    contents=full_payload,
+                    config=config
+                )
+                report_data = json.loads(response.text)
+                # Guardar en data/analysis_cache.json para persistencia y recuperación offline
+                try:
+                    from config import BASE_DIR
+                    analysis_cache_file = BASE_DIR / "data" / "analysis_cache.json"
+                    with open(analysis_cache_file, "w", encoding="utf-8") as f:
+                        json.dump(report_data, f, ensure_ascii=False, indent=2)
+                    logger.info("Análisis persistido con éxito en data/analysis_cache.json")
+                except Exception as save_err:
+                    logger.warning(f"No se pudo persistir analysis_cache.json: {save_err}")
+                break
+            except Exception as e:
+                last_error = e
+                logger.warning(f"Aviso: La llamada a Gemini API ({model}) no pudo completarse ({e}).")
+
+        if report_data is None:
+            logger.warning("Usando análisis persistido en data/analysis_cache.json...")
             from config import BASE_DIR
             analysis_cache_file = BASE_DIR / "data" / "analysis_cache.json"
             if analysis_cache_file.exists():
                 with open(analysis_cache_file, "r", encoding="utf-8") as f:
                     report_data = json.load(f)
             else:
-                raise RuntimeError(f"Fallo en llamada a Gemini y no existe data/analysis_cache.json: {e}")
+                raise RuntimeError(f"Fallo en llamada a Gemini y no existe data/analysis_cache.json: {last_error}")
 
         # Asegurar que fuentes_consultadas esté siempre poblada a partir de los vídeos procesados
         if not report_data.get("fuentes_consultadas"):
