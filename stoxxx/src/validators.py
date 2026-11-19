@@ -111,14 +111,15 @@ class MarketReportValidator:
     """Validador exhaustivo de fuentes, cotizaciones en tiempo real y consistencia técnica."""
 
     @staticmethod
-    def verify_video_sources(videos: List[Dict[str, Any]], days_horizon: int = 7) -> Tuple[bool, List[str], List[str]]:
+    def verify_video_sources(videos: List[Dict[str, Any]], days_horizon: int = 3) -> Tuple[bool, List[str], List[str]]:
         """
         Valida que todos los vídeos analizados pertenezcan estrictamente al horizonte temporal
         y a los canales oficiales autorizados.
         """
         errors = []
         warnings = []
-        cutoff_date = datetime.now() - timedelta(days=days_horizon)
+        # Horizonte en días naturales (ej. 3 días = hoy, ayer y antesdeayer):
+        cutoff_date = datetime.now() - timedelta(days=max(0, days_horizon - 1))
         cutoff_str = cutoff_date.strftime("%Y%m%d")
 
         for vid in videos:
@@ -274,14 +275,35 @@ class MarketReportValidator:
                 comp_list.sort(key=lambda x: x.get("menciones", 0), reverse=True)
                 audit_log["reconciliations"].append(f"Bloque {block}: Reordenado por número de menciones descendente.")
 
-        # 3. Auditoría del Guion del Podcast
+        # 3. Auditoría del Guion del Podcast (turnos y eliminación estricta de nombres de locutores)
         guion = report_data.get("guion_podcast", [])
         if len(guion) < 14:
             audit_log["warnings"].append(f"El podcast tiene solo {len(guion)} turnos; se recomienda un mínimo de 16-18 turnos.")
 
+        import re
+        forbidden_greetings = [
+            (r"[¡!]?(Hola|Buenas|Qué tal|Saludos),?\s+(Carlos|Laura|Álvaro|Alvaro|María|Maria)\b[!,.]?", "¡Hola a todos!"),
+            (r"\b(Gracias|Dinos|Cuéntanos),?\s+(Carlos|Laura|Álvaro|Alvaro|María|Maria)\b[!,.]?", r"\1,"),
+        ]
+
         for turn in guion:
+            if turn.get("locutor") not in ("Voz 1", "Voz 2"):
+                turn["locutor"] = "Voz 1" if turn.get("genero") == "masculino" else "Voz 2"
+
+            txt = turn.get("texto", "")
+            for pattern, repl in forbidden_greetings:
+                txt = re.sub(pattern, repl, txt, flags=re.IGNORECASE)
+            turn["texto"] = txt
+
             if not turn.get("texto") or len(turn.get("texto", "").strip()) < 10:
                 audit_log["warnings"].append(f"Turno de podcast con texto insuficiente: {turn}")
+
+        # 4. Normalización obligatoria de estilo de analistas (ej. 'R. Moro' en vez de 'Roberto Moro')
+        try:
+            from src.analyzer import format_analyst_abbreviations
+            report_data = format_analyst_abbreviations(report_data)
+        except Exception as e:
+            logger.debug(f"No se pudo aplicar format_analyst_abbreviations: {e}")
 
         # Guardar registro de auditoría dentro del reporte
         report_data["_audit"] = audit_log

@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 FINANCIAL_ANALYST_SYSTEM_PROMPT = """Eres un Arquitecto de Software y Analista Financiero Senior con décadas de experiencia en mercados de renta variable (Europa y EE.UU.), análisis técnico y macroeconomía.
 
-Tu misión es procesar de forma conjunta las transcripciones de consultorios de bolsa (Capital Radio y Visionarios Bolsa) correspondientes a las últimas dos semanas.
+Tu misión es procesar de forma conjunta las transcripciones de consultorios de bolsa (Capital Radio y Visionarios Bolsa) correspondientes a los últimos 3 días (el día de hoy, el de ayer y antesdeayer).
 Debes buscar estrictamente el QUÓRUM y PATRONES entre los analistas, identificando dónde hay consenso claro, dónde hay discrepancias y qué niveles técnicos (soportes y resistencias) coinciden.
 
 Debes responder exclusivamente en formato JSON válido con la siguiente estructura:
@@ -68,7 +68,7 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
         "nombre": "Nombre de la empresa (ej. Telefónica, Iberdrola)",
         "ticker": "TEF.MC",
         "menciones": 3,
-        "analistas": ["Roberto Moro", "Alberto Iturralde"],
+        "analistas": ["R. Moro", "A. Iturralde"],
         "nivel_consenso": "Alto Consenso Alcista" | "Consenso Neutral" | "Divergencia" | "Consenso Bajista",
         "soporte": "ej. 4.10€",
         "resistencia": "ej. 4.45€",
@@ -81,7 +81,7 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
         "nombre": "Nombre de la empresa (ej. Nvidia, Apple, ASML)",
         "ticker": "NVDA",
         "menciones": 4,
-        "analistas": ["Sito Rodríguez", "Alberto Iturralde"],
+        "analistas": ["S. Rodríguez", "A. Iturralde"],
         "nivel_consenso": "Alto Consenso Alcista",
         "soporte": "...",
         "resistencia": "...",
@@ -105,12 +105,12 @@ Debes responder exclusivamente en formato JSON válido con la siguiente estructu
 }
 
 REGLAS CRÍTICAS DE ORDENACIÓN Y CALIDAD:
-1. FORMATO DE ANALISTAS: Al citar o listar analistas, usa SIEMPRE la inicial del nombre y el apellido (ej. 'R. Moro', 'A. Iturralde', 'S. Rodríguez', 'J. Alfayate', 'V. Galán', 'P. Pérez'), nunca el nombre de pila completo.
+1. FORMATO OBLIGATORIO DE ANALISTAS: Al citar o listar analistas en CUALQUIER sección (incluyendo 'analistas', 'consenso_analistas', 'divergencias_estrategia', 'tesis', 'guion_podcast', etc.), usa SIEMPRE Y EXCLUSIVAMENTE la inicial del nombre y el apellido (ej. 'R. Moro', 'A. Iturralde', 'S. Rodríguez', 'J. Alfayate', 'V. Galán', 'D. Galán', 'P. Pérez', 'E. Bolinches', 'M. Barrero', 'M. Pinto', 'G. Ortega', 'J. M. Luna'), NUNCA el nombre completo como 'Roberto Moro' o 'Alberto Iturralde'.
 2. En 'resumen_ejecutivo' y 'sentimiento_macro', UTILIZA SIEMPRE BULLETS (viñetas con '• ') para desglosar la síntesis, las directrices y la situación global. La lectura debe ser ágil y ejecutiva, estructurada con viñetas claras.
 3. En 'analisis_empresas', divide estrictamente en 'nacionales' (IBEX 35 / Mercado Continuo español) e 'internacionales' (EE.UU., Europa, etc.).
 4. En cada bloque de empresas, ordena DE MAYOR A MENOR NÚMERO DE MENCIONES (las comentadas por varios analistas primero, y al final las que solo tienen 1 mención).
 5. En el 'guion_podcast', genera un diálogo EXTENSO Y PROFUNDO (entre 18 y 26 intervenciones alternadas) entre dos analistas (voz masculina y voz femenina):
-   - REGLA ESTRICTA DE LOCUTORES: NO incluyas nombres propios de los locutores ni en el campo 'locutor' ni dentro del diálogo hablado (prohibido decir 'Hola Carlos', 'Gracias Laura', o nombres similares). Usa simplemente 'Voz 1' y 'Voz 2' en el campo 'locutor'.
+   - REGLA ESTRICTA DE LOCUTORES: TOTALMENTE PROHIBIDO dar nombres propios a los locutores (como Carlos, Laura, Álvaro, María, etc.) tanto en el campo 'locutor' como dentro del texto hablado del diálogo. Los locutores NUNCA deben saludarse ni llamarse por nombres personales ('Hola Carlos', 'Hola Álvaro', 'Gracias Laura', etc.). Deben dirigirse entre ellos de forma natural y profesional sin usar nombres propios, o al público general ('¡Hola a todos!', 'Efectivamente, compañeros', etc.). Usa siempre 'Voz 1' y 'Voz 2' en el campo 'locutor'.
    - DICCIÓN Y PUNTUACIÓN: Cuida al máximo los puntos, las comas y los signos de puntuación para que la síntesis de voz (TTS) ejecute pausas y respiraciones naturales, logrando una locución fluida y profesional.
    - Apertura dinámica imitando el ritmo radiofónico de los consultorios de bolsa.
    - Situación macroeconómica detallada (Europa y EE.UU., política monetaria, tipos de interés).
@@ -140,6 +140,7 @@ ANALYST_ABBREVIATIONS = {
     "Eduardo Bolinches": "E. Bolinches",
     "Sito Rodríguez": "S. Rodríguez",
     "Sito Rodriguez": "S. Rodríguez",
+    "Mar Barrero": "M. Barrero",
 }
 
 CANONICAL_GOOGLE_FINANCE_QUOTES = {

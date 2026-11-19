@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Informe Bursátil 2026-11-19 | STOXXX</title>
+  <meta name="description" content="Informe financiero detallado: consenso de consultorios de bolsa, niveles técnicos y resumen de audio para 2026-11-19.">
+  <meta property="og:title" content="Informe Bursátil 2026-11-19 | STOXXX">
+  <meta property="og:description" content="Consenso de consultorios de bolsa, niveles técnicos de soporte y resistencia y resumen de audio.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="../../apple-touch-icon.png">
+  <meta name="twitter:card" content="summary">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.png">
+  <link rel="alternate icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="192x192" href="../../apple-touch-icon.png">
+  <meta name="theme-color" content="#fbf5ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)">
+  
+  <!-- Detección y aplicación inmediata de tema antes de renderizar (evita FOUT) -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('stoxxx_theme');
+        const theme = savedTheme ? savedTheme : 'expansion';
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('theme-expansion');
+        } else {
+          document.documentElement.classList.add('theme-expansion');
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('theme-expansion');
+      }
+    })();
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tipografías: Inter, Merriweather (Expansión) y JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            expansion: {
+              salmon: '#fbf5ee',
+              paper: '#fffdfa',
+              surface: '#f5eee3',
+              border: '#e4d7c6',
+              borderDark: '#d5c3ac',
+              ink: '#111827',
+              navy: '#0f2e4e',
+              navyLight: '#1e3a8a',
+              burgundy: '#b91c1c',
+              forest: '#15803d',
+              gold: '#b45309'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .font-serif { font-family: 'Merriweather', Georgia, serif; }
+
+    /* Estilos del Tema Expansión */
+    html.theme-expansion body {
+      background-color: #fbf5ee;
+      color: #1f2937;
+    }
+    html.theme-expansion ::selection {
+      background-color: #0f2e4e;
+      color: #ffffff;
+    }
+    html.dark body {
+      background-color: #020617;
+      color: #f1f5f9;
+    }
+    html.dark ::selection {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-[#fbf5ee] dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-200">
+
+  <!-- TOP BAR DE NAVEGACIÓN Y ACCIONES RÁPIDAS (STICKY CON THEME SWITCHER) -->
+  <header class="border-b border-[#e2d5c3] dark:border-slate-800 bg-[#fbf5ee]/95 dark:bg-slate-900/90 backdrop-blur sticky top-0 z-50 transition-colors">
+    <!-- Barra superior fina estilo prensa -->
+    <div class="h-1 bg-gradient-to-r from-[#0f2e4e] via-[#b91c1c] to-[#0f2e4e] dark:from-blue-600 dark:via-indigo-500 dark:to-cyan-400"></div>
+
+    <div class="max-w-3xl mx-auto px-3.5 sm:px-4 h-14 flex items-center justify-between">
+      <!-- BOTÓN VOLVER AL ÍNDICE -->
+      <a href="../../index.html" class="flex items-center space-x-1.5 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-[#f4ecdf] hover:bg-[#ece2d1] dark:bg-slate-800 dark:hover:bg-slate-700 text-[#0f2e4e] dark:text-slate-200 border border-[#ded0bd] dark:border-slate-700 transition shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span>Volver</span>
+      </a>
+
+      <!-- ACCESOS RÁPIDOS & THEME SWITCHER -->
+      <div class="flex items-center space-x-2">
+        <!-- BOTÓN THEME SWITCHER (MODO CLARO / OSCURO) -->
+        <button 
+          id="theme-toggle" 
+          type="button" 
+          onclick="toggleTheme()"
+          aria-label="Alternar modo claro u oscuro"
+          class="flex items-center justify-center p-2 rounded-lg border border-[#ded0bd] dark:border-slate-800 bg-[#f4ecdf] dark:bg-slate-900 text-[#0f2e4e] dark:text-slate-200 hover:bg-[#ece2d1] dark:hover:bg-slate-800 transition cursor-pointer shadow-sm"
+          title="Alternar modo claro / oscuro"
+        >
+          <svg id="theme-icon-moon" class="w-4 h-4 text-[#0f2e4e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg id="theme-icon-sun" class="w-4 h-4 text-amber-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+
+        
+        <a href="../pdf/informe-2026-11-19.pdf" download class="inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-[#b91c1c] hover:bg-[#991b1b] dark:bg-rose-600/90 dark:hover:bg-rose-500 text-white shadow-sm transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span class="hidden sm:inline">Descargar </span><span>PDF</span>
+        </a>
+        
+
+        
+        <a href="../audio/podcast-2026-11-19.mp3" download class="inline-flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-[#0f2e4e] hover:bg-[#1e3a8a] dark:bg-indigo-600/90 dark:hover:bg-indigo-500 text-white shadow-sm transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          <span class="hidden sm:inline">Descargar </span><span>MP3</span>
+        </a>
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL DEL INFORME -->
+  <main class="flex-grow max-w-3xl mx-auto px-2 sm:px-4 py-3 sm:py-6 w-full space-y-4 sm:space-y-6">
+    
+    <!-- ENCABEZADO Y DATELINE DEL INFORME -->
+    <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2 px-1">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="mono text-xs sm:text-sm px-2.5 py-1 rounded-md bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-300 border border-[#ded0bd] dark:border-slate-700 font-bold inline-flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 text-[#0f2e4e] dark:text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span>2026-11-19</span>
+        </span>
+        
+        <span class="mono text-xs px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80 font-medium inline-flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Doble verificación: 93.3% de fidelidad</span>
+        </span>
+        
+      </div>
+      <span class="text-xs sm:text-sm px-2.5 py-1 rounded-md font-semibold
+         bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+        ">
+        Alcista Táctico con Rotación hacia Valor y Cortos en Metales
+      </span>
+    </div>
+
+    <!-- REPRODUCTOR DE PODCAST COMPACTO ARRIBA -->
+    
+    <div class="p-3 sm:p-4 rounded-2xl bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-indigo-900/50 shadow-sm space-y-2">
+      <div class="flex items-center justify-between text-xs sm:text-sm">
+        <div class="flex items-center space-x-2">
+          <div class="w-6 h-6 rounded-full bg-[#0f2e4e]/10 text-[#0f2e4e] dark:bg-indigo-500/20 dark:text-indigo-400 flex items-center justify-center shrink-0">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"></path>
+            </svg>
+          </div>
+          <span class="font-serif font-bold text-sm sm:text-base text-[#0f2e4e] dark:text-white">Resumen de audio</span>
+        </div>
+      </div>
+      <audio controls class="w-full h-9 rounded-lg">
+        <source src="../audio/podcast-2026-11-19.mp3" type="audio/mpeg">
+        Tu navegador no soporta el reproductor de audio.
+      </audio>
+    </div>
+    
+
+    <!-- 1. RESUMEN EJECUTIVO (COLAPSABLE) -->
+    <section id="resumen">
+      <details open class="group bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+        <summary class="cursor-pointer list-none px-3.5 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between bg-[#fbf5ee] dark:bg-slate-900/90 hover:bg-[#f6eee2] dark:hover:bg-slate-800/90 transition select-none">
+          <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <h2 class="text-sm sm:text-base font-serif font-black tracking-tight text-[#0f2e4e] dark:text-white uppercase">
+              1. Resumen ejecutivo (lectura: 3-5 min)
+            </h2>
+          </div>
+          <div class="flex items-center space-x-1.5 text-[#555d6b] dark:text-slate-400">
+            <svg class="w-4 h-4 transform transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </summary>
+
+        <div class="p-2.5 sm:p-4 space-y-3 border-t border-[#e2d5c3] dark:border-slate-800 bg-[#fffdfa] dark:bg-slate-900/40">
+          <!-- Síntesis del mercado -->
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-[#f8f3ec] dark:bg-slate-950/70 border border-[#e2d5c3] dark:border-slate-800 text-sm sm:text-base text-[#2b303a] dark:text-slate-200 leading-relaxed space-y-2">
+            <h4 class="text-xs sm:text-sm font-bold text-[#0f2e4e] dark:text-blue-400 uppercase tracking-wider mb-1">Síntesis del mercado:</h4>
+            <ul class="space-y-2">
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#0f2e4e] dark:text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Divergencia extrema entre la fortaleza europea y la volatilidad tecnológica en EE.UU.: El IBEX 35 consolida en máximos históricos impulsado por el liderazgo incontestable de las utilities y la banca, mientras Wall Street digiere las secuelas del relevo en la cúpula de Nvidia y el debut bursátil de Anthropic.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#0f2e4e] dark:text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Giro bajista drástico en metales preciosos (Oro y Plata): Ruptura violenta de soportes clave en 3.000$ / 3.360$ para el oro y desplome técnico en la plata. R. Moro da por concluida la corrección proporcional y aconseja posicionamiento en corto inmediato vía futuros y ETFs, frente a la defensa del oro físico de E. Bolinches.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#0f2e4e] dark:text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Iberdrola en subida libre absoluta: D. Galán confirma nuevos máximos de toda la historia en 23,71€ para la eléctrica, convertida en el valor director defensivo del mercado español por su suministro estructural a centros de datos de IA.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#0f2e4e] dark:text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Nvidia busca suelo en 147$: Tras la salida forzada de Jensen Huang y las dudas regulatorias en Washington analizadas por M. Pinto, D. Galán descarta suelos confirmados pero anticipa rebote técnico hacia la media de 208$ si respeta los 147$.</span>
+              </li>
+              
+            </ul>
+          </div>
+
+          <!-- Hacia dónde apuntan los analistas (Espaciado optimizado para móvil) -->
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-[#faf4ec] dark:bg-slate-950/40 border border-[#e4d7c6] dark:border-slate-800/80 text-sm sm:text-base text-[#374151] dark:text-slate-300 space-y-2">
+            <h4 class="text-xs sm:text-sm font-bold text-[#b45309] dark:text-amber-400 uppercase tracking-wider">Hacia dónde apuntan los analistas:</h4>
+            <ul class="space-y-2">
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#b45309] dark:text-amber-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Mantener sesgo alcista en selectivo español con gestión activa: Concentrar carteras en campeones energéticos (Iberdrola, Endesa) y banca con visibilidad de dividendos (Santander), vigilando el soporte de 19,53€ en Iberdrola y 11,60€ de resistencia en Santander.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#b45309] dark:text-amber-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Oportunidad táctica en cortos de metales preciosos: Ejecutar cortos en Oro y Plata siguiendo el quórum de ruptura técnica tras perderse los 3.000$, con stop ceñido a la pérdida de niveles intradiarios.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#b45309] dark:text-amber-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Cautela en petróleo y cíclicas ligadas a crudo: Repsol recorta con fuerza tras perforar la media de medio plazo; V. Galán aconseja no anticipar compras hasta estabilización sobre los 27,80€.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#b45309] dark:text-amber-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Monitorear rebote de semiconductores sin sobreexposición: Vigilar el soporte crítico de 1.225€ en ASML y el nivel de 147$ en Nvidia.</span>
+              </li>
+              
+            </ul>
+          </div>
+
+          <!-- Puntos clave de consenso -->
+          <div class="p-2.5 sm:p-3.5 rounded-xl bg-[#f4f8f4] dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-900/40 text-sm sm:text-base text-[#374151] dark:text-slate-300 space-y-2">
+            <h4 class="text-xs sm:text-sm font-bold text-[#15803d] dark:text-emerald-400 uppercase tracking-wider">Puntos clave de consenso:</h4>
+            <ul class="space-y-2">
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#15803d] dark:text-emerald-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Iberdrola marca máximos de toda la historia (23,71€): Consenso unánime de los analistas técnicos (D. Galán, R. Moro, A. Iturralde) sobre la fortaleza imbatible del valor como líder del IBEX 35.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#15803d] dark:text-emerald-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Giro bajista confirmado en Oro y Plata: R. Moro alerta de que la caída ha superado cualquier corrección normal y sitúa a ambos metales en terreno claramente bajista para posiciones cortas.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#15803d] dark:text-emerald-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Nvidia sin suelo activado pero con alta sobreventa: M. Pinto y D. Galán coinciden en que no hay estructura de vuelta confirmada, aunque el soporte de 147$ ofrece un punto pivote favorable para rebotes hacia 170$ y 208$.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#15803d] dark:text-emerald-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Debilidad en petróleo y recorte severo en Repsol: V. Galán ratifica el deterioro técnico del sector energético fósil por compresión de márgenes y caída del barril hacia los 76$.</span>
+              </li>
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#15803d] dark:text-emerald-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">Impacto del debut bursátil de Anthropic: J. M. Luna subraya el rebalanceo de fondos indexados y el auge de liquidez defensiva frente a la concentración de las megacaps clásicas.</span>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 2. SENTIMIENTO DE MERCADO Y VISIÓN MACRO (COLAPSABLE) -->
+    <section id="macro">
+      <details open class="group bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+        <summary class="cursor-pointer list-none px-3.5 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between bg-[#fbf5ee] dark:bg-slate-900/90 hover:bg-[#f6eee2] dark:hover:bg-slate-800/90 transition select-none">
+          <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path>
+            </svg>
+            <h2 class="text-sm sm:text-base font-serif font-black tracking-tight text-[#0f2e4e] dark:text-white uppercase">
+              2. Sentimiento de mercado y visión macro
+            </h2>
+          </div>
+          <div class="flex items-center space-x-1.5 text-[#555d6b] dark:text-slate-400">
+            <svg class="w-4 h-4 transform transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </summary>
+
+        <div class="p-2.5 sm:p-4 space-y-3.5 border-t border-[#e2d5c3] dark:border-slate-800 bg-[#fffdfa] dark:bg-slate-900/40">
+          <!-- Situación global -->
+          <div class="bg-[#f8f3ec] dark:bg-slate-950/70 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-2.5 sm:p-3.5 text-sm sm:text-base text-[#374151] dark:text-slate-300 space-y-2">
+            <h4 class="text-xs sm:text-sm font-bold text-[#6b7280] dark:text-slate-400 uppercase tracking-wider">Situación global y citas de los analistas:</h4>
+            <ul class="space-y-2">
+              
+              <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                <span class="text-[#0f2e4e] dark:text-blue-400 font-bold shrink-0 mt-0.5">•</span>
+                <span class="leading-relaxed">El panorama macroeconómico global durante la tercera semana de noviembre de 2026 está marcado por una rotación sectorial sin precedentes. Mientras la renta variable estadounidense se ve sacudida por la salida de Jensen Huang de Nvidia, las investigaciones en Washington y la incertidumbre en torno a la inteligencia artificial, Europa y particularmente España exhiben una fortaleza relativa sobresaliente. La prima de riesgo contenida y el flujo masivo de capital institucional hacia activos generadores de caja predecible (utilities, renovables y banca comercial) sostienen a los índices del Viejo Continente en zonas de máximos históricos, al tiempo que las materias primas como el petróleo y los metales preciosos sufren una severa purga de liquidación de posiciones apalancadas.</span>
+              </li>
+              
+            </ul>
+          </div>
+
+          <!-- ÍNDICES EN TARJETAS RESPONSIVAS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+            
+            <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-3.5 space-y-2 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">IBEX 35</span>
+                  
+                  <div class="text-xs sm:text-sm mono text-[#2b303a] dark:text-slate-300 font-bold">
+                    Cotización: 19.393,80 EUR <span class="text-[#b91c1c] dark:text-rose-400">(-0.03%)</span>
+                  </div>
+                  
+                </div>
+                <span class="text-xs px-2 py-0.5 rounded font-mono font-semibold
+                   bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                  ">
+                  Alcista
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm mono bg-[#f8f3ec] dark:bg-slate-950/60 p-2 rounded-lg border border-[#e2d5c3] dark:border-slate-800/80">
+                <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">19.103</span></div>
+                <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">19.685</span></div>
+              </div>
+              <p class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400 leading-relaxed pt-1 border-t border-[#ece2d4] dark:border-slate-800">
+                Consolidación constructiva en subida libre. A. Iturralde y R. Moro coinciden en que el índice español avanza con paso firme hacia máximos históricos impulsado por utilities y grandes bancos, con suelo operativo de referencia en 11.500 puntos.
+              </p>
+            </div>
+            
+            <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-3.5 space-y-2 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">DAX</span>
+                  
+                  <div class="text-xs sm:text-sm mono text-[#2b303a] dark:text-slate-300 font-bold">
+                    Cotización: 25.824,60 EUR <span class="text-[#15803d] dark:text-emerald-400">(+0.27%)</span>
+                  </div>
+                  
+                </div>
+                <span class="text-xs px-2 py-0.5 rounded font-mono font-semibold
+                   bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                  ">
+                  Alcista
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm mono bg-[#f8f3ec] dark:bg-slate-950/60 p-2 rounded-lg border border-[#e2d5c3] dark:border-slate-800/80">
+                <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">25.437</span></div>
+                <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">26.212</span></div>
+              </div>
+              <p class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400 leading-relaxed pt-1 border-t border-[#ece2d4] dark:border-slate-800">
+                J. Alfayate y V. Galán destacan que el selectivo alemán mantiene una estructura técnica impecable tras rebasar máximos, apoyado en químicas como BASF e industriales diversificadas.
+              </p>
+            </div>
+            
+            <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-3.5 space-y-2 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">S&P 500</span>
+                  
+                  <div class="text-xs sm:text-sm mono text-[#2b303a] dark:text-slate-300 font-bold">
+                    Cotización: 7.323,63 USD <span class="text-[#b91c1c] dark:text-rose-400">(-0.23%)</span>
+                  </div>
+                  
+                </div>
+                <span class="text-xs px-2 py-0.5 rounded font-mono font-semibold
+                   bg-amber-50 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-800 ">
+                  Consolidación
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm mono bg-[#f8f3ec] dark:bg-slate-950/60 p-2 rounded-lg border border-[#e2d5c3] dark:border-slate-800/80">
+                <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">7.214</span></div>
+                <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">7.433</span></div>
+              </div>
+              <p class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400 leading-relaxed pt-1 border-t border-[#ece2d4] dark:border-slate-800">
+                R. Moro advierte de que el índice se encuentra testeando los mínimos intradiarios de octubre. Mantiene soporte clave en 5.700 puntos a la espera de clarificar el relevo corporativo en Nvidia.
+              </p>
+            </div>
+            
+            <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-3.5 space-y-2 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Nasdaq 100</span>
+                  
+                  <div class="text-xs sm:text-sm mono text-[#2b303a] dark:text-slate-300 font-bold">
+                    Cotización: 27.116,26 USD <span class="text-[#15803d] dark:text-emerald-400">(+0.44%)</span>
+                  </div>
+                  
+                </div>
+                <span class="text-xs px-2 py-0.5 rounded font-mono font-semibold
+                   bg-amber-50 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-800 ">
+                  Cautela
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm mono bg-[#f8f3ec] dark:bg-slate-950/60 p-2 rounded-lg border border-[#e2d5c3] dark:border-slate-800/80">
+                <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">26.710</span></div>
+                <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">27.523</span></div>
+              </div>
+              <p class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400 leading-relaxed pt-1 border-t border-[#ece2d4] dark:border-slate-800">
+                El índice tecnológico acusa la debilidad de los semiconductores y el índice SOX, testeando la zona de los 9.000 puntos en semiconductores. R. Moro y M. Barrero recomiendan extrema prudencia y activos refugio alternativos.
+              </p>
+            </div>
+            
+          </div>
+
+          <!-- COINCIDENCIAS Y DIVERGENCIAS -->
+          <div class="space-y-2.5">
+            <div class="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 rounded-xl p-2.5 sm:p-3.5 text-sm sm:text-base space-y-2">
+              <h4 class="text-xs sm:text-sm font-bold text-[#15803d] dark:text-emerald-400 uppercase tracking-wider">Coincidencias en estrategia:</h4>
+              <ul class="space-y-1.5">
+                
+                <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                  <span class="text-[#15803d] dark:text-emerald-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span class="leading-relaxed">Quórum total en preservar capital en tecnológicas de alta beta, sobreponderar compañías energéticas reguladas con dividendo creciente (Iberdrola, Endesa), y abrir coberturas o cortos en metales preciosos tras la pérdida violenta de soportes estructurales en 3.000$.</span>
+                </li>
+                
+              </ul>
+            </div>
+            <div class="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 rounded-xl p-2.5 sm:p-3.5 text-sm sm:text-base space-y-2">
+              <h4 class="text-xs sm:text-sm font-bold text-[#b45309] dark:text-amber-400 uppercase tracking-wider">Divergencias entre analistas:</h4>
+              <ul class="space-y-1.5">
+                
+                <li class="flex items-start space-x-2 text-[#374151] dark:text-slate-300 text-sm sm:text-base">
+                  <span class="text-[#b45309] dark:text-amber-400 font-bold shrink-0 mt-0.5">•</span>
+                  <span class="leading-relaxed">Fuerte confrontación en torno al Oro: la estrategia de cortos agresivos de R. Moro contrasta con la tesis de E. Bolinches de acumulación patrimonial de oro físico. Discrepancia también en el petróleo: compras por tensión geopolítica (S. Clatum) frente a rotura de soportes y debilidad estructural (V. Galán y R. Moro).</span>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 3. ANÁLISIS DE EMPRESAS (COLAPSABLE) -->
+    <section id="empresas">
+      <details open class="group bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+        <summary class="cursor-pointer list-none px-3.5 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between bg-[#fbf5ee] dark:bg-slate-900/90 hover:bg-[#f6eee2] dark:hover:bg-slate-800/90 transition select-none">
+          <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            <h2 class="text-sm sm:text-base font-serif font-black tracking-tight text-[#0f2e4e] dark:text-white uppercase">
+              3. Análisis de Empresas
+            </h2>
+          </div>
+          <div class="flex items-center space-x-1.5 text-[#555d6b] dark:text-slate-400">
+            <svg class="w-4 h-4 transform transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </summary>
+
+        <div class="p-2.5 sm:p-4 space-y-4 border-t border-[#e2d5c3] dark:border-slate-800 bg-[#fffdfa] dark:bg-slate-900/40">
+          <!-- BLOQUE 1: VALORES NACIONALES -->
+          <div class="space-y-3">
+            <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-1.5 flex items-center justify-between">
+              <h3 class="text-xs sm:text-sm font-bold font-serif text-[#0f2e4e] dark:text-slate-200 uppercase tracking-wide inline-flex items-center space-x-1.5">
+                <svg class="w-3.5 h-3.5 text-[#0f2e4e] dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <span>Valores nacionales (IBEX / Continuo)</span>
+              </h3>
+              <span class="text-xs text-[#6b7280] dark:text-slate-500 font-medium">Mayor quórum primero</span>
+            </div>
+
+            <div class="space-y-3">
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Iberdrola</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(IBE.MC)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/IBE:BME" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Iberdrola en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      22,55 EUR <span class="text-[#b91c1c] dark:text-rose-400">(-1.14%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      7 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                      ">
+                      Alto Consenso Alcista
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">D. Galán, R. Moro, A. Iturralde, V. Galán</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">21,65€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">23,45€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Mantener / Subida Libre</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">Líder absoluto del mercado español. D. Galán destaca que marcó máximos de toda la historia en 23,71€ con apoyo continuado en su media ascendente. El primer nivel de deterioro queda muy lejano en 19,53€. Gran beneficiaria del consumo masivo de electricidad para centros de datos de IA.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Banco Santander</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(SAN.MC)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/SAN:BME" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Banco Santander en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      10,73 EUR <span class="text-[#15803d] dark:text-emerald-400">(+0.88%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      6 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-[#f4ecdf] text-[#555d6b] border border-[#ded0bd] dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 ">
+                      Consenso Favorable con Cautela en Resistencia
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">R. Moro, A. Iturralde, E. Bolinches</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">10,30€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">11,16€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Mantener con stop en 10.74€</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">A. Iturralde mantiene objetivo en 11,50€ con stop en 10,74€. R. Moro constata que el título se encuentra dubitativo ante la resistencia clave de 11,60€ tras dos semanas de consolidación, aconsejando paciencia antes de incrementar posiciones.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Repsol</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(REP.MC)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/REP:BME" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Repsol en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      29,13 EUR <span class="text-[#15803d] dark:text-emerald-400">(+0.55%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      5 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-rose-50 text-rose-800 border border-rose-300 dark:bg-rose-950 dark:text-rose-400 dark:border-rose-800
+                      ">
+                      Divergencia / Cautela Bajista
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">V. Galán, R. Moro, S. Clatum</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">27,96€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">30,30€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Evitar / No anticipar compras</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">V. Galán y R. Moro alertan de un severo recorte por el desplome de márgenes de refino y debilidad del crudo hacia 76$. Pierde soportes de medio plazo. S. Clatum mantiene visión contraria por riesgo bélico en Oriente Medio.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Inditex</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(ITX.MC)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/ITX:BME" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Inditex en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      59,20 EUR <span class="text-[#b91c1c] dark:text-rose-400">(-0.20%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      4 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                      ">
+                      Alto Consenso Alcista
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">R. Moro, V. Galán, E. Bolinches</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">56,83€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">61,57€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Mantener / Fortaleza Estructural</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">Consolida con firmeza en cotas históricas. Considerado por Moro y Galán como el activo director más fiable de la bolsa española para carteras a largo plazo.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Endesa</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(ELE.MC)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/ELE:BME" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Endesa en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      42,84 EUR <span class="text-[#b91c1c] dark:text-rose-400">(-1.40%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      3 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                      ">
+                      Consenso Alcista Defensivo
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">D. Galán, A. Iturralde</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">41,13€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">44,55€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Mantener en soporte</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">D. Galán señala que acompaña la excelente tendencia de Iberdrola, con soporte firme en la media móvil ascendente en la zona de 40,60€ - 40,88€.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Unicaja</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(UNI.MC)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/UNI:BME" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Unicaja en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      3,35 EUR <span class="text-[#15803d] dark:text-emerald-400">(+0.36%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      2 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-rose-50 text-rose-800 border border-rose-300 dark:bg-rose-950 dark:text-rose-400 dark:border-rose-800
+                      ">
+                      Consenso Bajista / Salida
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">R. Moro</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">3,22€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">3,48€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Cerrar posiciones / Salir</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">R. Moro advierte sobre la mala digestión de las caídas recientes en banca mediana. Tras compras en 3,60€, el soporte de 3,27€ queda alejado y aconseja cerrar la posición hasta que mejore el aspecto técnico general.</p>
+              </div>
+              
+            </div>
+          </div>
+
+          <!-- BLOQUE 2: VALORES INTERNACIONALES -->
+          <div class="space-y-3 pt-2">
+            <div class="border-b border-[#e2d5c3] dark:border-slate-800 pb-1.5 flex items-center justify-between">
+              <h3 class="text-xs sm:text-sm font-bold font-serif text-[#0f2e4e] dark:text-slate-200 uppercase tracking-wide inline-flex items-center space-x-1.5">
+                <svg class="w-3.5 h-3.5 text-[#0f2e4e] dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+                <span>Valores internacionales (Nasdaq, DAX, etc.)</span>
+              </h3>
+              <span class="text-xs text-[#6b7280] dark:text-slate-500 font-medium">Mayor quórum primero</span>
+            </div>
+
+            <div class="space-y-3">
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Nvidia</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(NVDA)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/NVDA:NASDAQ" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Nvidia en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      150,96 USD <span class="text-[#b91c1c] dark:text-rose-400">(-0.66%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      12 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-[#f4ecdf] text-[#555d6b] border border-[#ded0bd] dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 ">
+                      Neutral / Esperar Suelo Técnico
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">D. Galán, M. Pinto, V. Galán, A. Iturralde</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">144,92$</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">157,00$</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Vigilar soporte de 147$ / No precipitarse</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">M. Pinto detalla las secuelas corporativas de la marcha de Jensen Huang y el escrutinio de Washington. D. Galán subraya que no hay suelo activado, pero el soporte de 147$ y la media en 208$ configuran un entorno propicio para un rebote táctico por sobreventa.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">ASML</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(ASML)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/ASML:AMS" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de ASML en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      1.395,27 USD <span class="text-[#b91c1c] dark:text-rose-400">(-1.40%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      4 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-[#f4ecdf] text-[#555d6b] border border-[#ded0bd] dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 ">
+                      Consenso Favorable en Soporte Crítico
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">R. Moro, E. Bolinches</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">1339,46$</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">1451,08$</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Mantener por encima de 1.225€</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">R. Moro fija los 1.225€ como el nivel clave en precios de cierre que no debe perforar para mantener viva la estructura de recuperación en el sector de litografía para chips.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Anthropic</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(ANTH)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/ANTH:NASDAQ" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Anthropic en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      0,00 USD <span class="text-[#15803d] dark:text-emerald-400">(+0.00%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      3 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-[#f4ecdf] text-[#555d6b] border border-[#ded0bd] dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 ">
+                      Neutral / Debut de Alta Volatilidad
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">J. M. Luna, E. Bolinches</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">42.00$</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">58.00$</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Observar ponderación en fondos</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">J. M. Luna analiza las consecuencias de su oferta pública en los flujos de fondos indexados globales, recomendando no perseguir el precio en las primeras sesiones de cotización.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">Heineken</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(HEIA.AS)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/HEIA:AMS" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de Heineken en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      83,32 EUR <span class="text-[#b91c1c] dark:text-rose-400">(-1.12%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      3 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                      ">
+                      Alto Consenso Alcista
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">J. Alfayate, R. Moro</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">79,99€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">86,65€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Comprar en ruptura</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">Consolida con volumen comprador por encima de la resistencia clave de 80€, erigiéndose en uno de los valores defensivos de consumo europeo preferidos por las manos fuertes.</p>
+              </div>
+              
+              <div class="bg-[#fffdfa] dark:bg-slate-900 border border-[#e2d5c3] dark:border-slate-800 rounded-xl p-3 sm:p-4 space-y-2.5 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-serif font-extrabold text-[#0f2e4e] dark:text-white text-base sm:text-lg">BASF</span>
+                    <span class="mono text-xs sm:text-sm text-[#6b7280] dark:text-slate-400">(BAS.DE)</span>
+                    <a 
+                      href="https://www.google.com/finance/quote/BAS:ETR" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Ver ficha en Google Finance"
+                      aria-label="Ver ficha de BASF en Google Finance"
+                      class="inline-flex items-center justify-center p-1 rounded hover:bg-[#e8decb] dark:hover:bg-slate-800 text-[#0f2e4e] dark:text-blue-400 transition"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                    
+                    <span class="mono text-xs px-2 py-0.5 rounded bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-200 font-bold border border-[#ded0bd] dark:border-slate-700">
+                      51,56 EUR <span class="text-[#15803d] dark:text-emerald-400">(+0.45%)</span>
+                    </span>
+                    
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="mono text-xs px-2 py-0.5 rounded-md bg-[#edf4fb] text-[#1e3a8a] border border-[#c7dcf0] dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800 font-bold">
+                      2 menciones
+                    </span>
+                    <span class="text-xs px-2 py-0.5 rounded-md font-semibold
+                       bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800
+                      ">
+                      Consenso Alcista por Giro de Suelo
+                    </span>
+                  </div>
+                </div>
+
+                <div class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400">
+                  Analistas: <strong class="text-[#111827] dark:text-slate-200">J. Alfayate, V. Galán</strong>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 bg-[#f8f3ec] dark:bg-slate-950/60 p-2 sm:p-2.5 rounded-lg border border-[#e2d5c3] dark:border-slate-800 text-xs sm:text-sm mono">
+                  <div>Soporte: <span class="text-[#15803d] dark:text-emerald-400 font-bold">49,50€</span></div>
+                  <div>Resistencia: <span class="text-[#b91c1c] dark:text-rose-400 font-bold">53,62€</span></div>
+                  <div class="sm:col-span-1">Estrategia: <span class="text-[#0f2e4e] dark:text-blue-400 font-sans font-bold">Mantener / Rotación hacia químicas</span></div>
+                </div>
+
+                <p class="text-sm sm:text-base text-[#374151] dark:text-slate-300 leading-relaxed">La superación de los 55€ confirma una figura de cambio de tendencia en el sector químico alemán, beneficiada por la moderación en los costes de la energía en Europa.</p>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 4. APARTADO COLAPSADO: FUENTES CONSULTADAS Y REFERENCIAS -->
+    <section class="pt-1">
+      <details id="fuentes" class="group bg-[#fffdfa] dark:bg-slate-900/80 border border-[#e2d5c3] dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+        <summary class="cursor-pointer list-none px-3.5 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between bg-[#fbf5ee] dark:bg-slate-900/90 hover:bg-[#f6eee2] dark:hover:bg-slate-800/90 transition select-none">
+          <div class="flex items-center space-x-2 text-[#0f2e4e] dark:text-blue-400">
+            <svg class="w-4 h-4 text-[#0f2e4e] dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            <div>
+              <h3 class="text-sm sm:text-base font-serif font-bold text-[#0f2e4e] dark:text-white uppercase tracking-wide">
+                Fuentes consultadas y referencias
+              </h3>
+              <p class="text-xs text-[#555d6b] dark:text-slate-400">
+                Emisiones de consultorios bursátiles (6 fuentes)
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-1.5">
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold bg-[#f4ecdf] dark:bg-slate-800 text-[#0f2e4e] dark:text-slate-300 border border-[#ded0bd] dark:border-slate-700">
+              6 fuentes
+            </span>
+            <svg class="w-4 h-4 text-[#0f2e4e] dark:text-slate-400 transform transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </summary>
+        
+        <div id="lista-fuentes" class="p-3 sm:p-4 space-y-3 border-t border-[#e2d5c3] dark:border-slate-800 bg-[#fffdfa] dark:bg-slate-900/40">
+          <p class="text-xs sm:text-sm text-[#555d6b] dark:text-slate-400 leading-relaxed mb-1">
+            Cada emisión ha sido procesada de manera íntegra, extrayendo los timestamps, menciones de analistas y niveles técnicos contrastados frente a la cotización en tiempo real:
+          </p>
+
+          <!-- LISTADO DE FUENTES -->
+          
+            
+            
+            
+            
+            
+            <div class="p-3 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
+                     bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
+                    ">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>Capital Radio - Consultorios de Bolsa</span>
+                  </span>
+                  <span class="mono text-xs text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>2026-11-18</span>
+                  </span>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=C_LfMFiKsoc" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:text-[#b91c1c] dark:hover:text-blue-300 transition">
+                  <span>Ver emisión original</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+                
+              </div>
+              
+              <h4 class="text-xs sm:text-sm font-serif font-bold text-[#111827] dark:text-white leading-snug">
+                Nvidia: Resultados extraordinarios pero sigue la tormenta tecnológica. Con Gerardo Ortega
+              </h4>
+
+              
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-[#ece2d4] dark:border-slate-800/60 text-[#555d6b] dark:text-slate-400">
+                <div>
+                  
+                </div>
+                <div class="mono font-medium">
+                  
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>22.004 caracteres de transcripción</span>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="p-3 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
+                     bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
+                    ">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>Capital Radio - Consultorios de Bolsa</span>
+                  </span>
+                  <span class="mono text-xs text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>2026-11-18</span>
+                  </span>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=BxNaU5r6-Dg" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:text-[#b91c1c] dark:hover:text-blue-300 transition">
+                  <span>Ver emisión original</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+                
+              </div>
+              
+              <h4 class="text-xs sm:text-sm font-serif font-bold text-[#111827] dark:text-white leading-snug">
+                #Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según Víctor Galán
+              </h4>
+
+              
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-[#ece2d4] dark:border-slate-800/60 text-[#555d6b] dark:text-slate-400">
+                <div>
+                  
+                </div>
+                <div class="mono font-medium">
+                  
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>21.882 caracteres de transcripción</span>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="p-3 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
+                     bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
+                    ">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>Capital Radio - Consultorios de Bolsa</span>
+                  </span>
+                  <span class="mono text-xs text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>2026-11-18</span>
+                  </span>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=1X2CVR5SWBY" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:text-[#b91c1c] dark:hover:text-blue-300 transition">
+                  <span>Ver emisión original</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+                
+              </div>
+              
+              <h4 class="text-xs sm:text-sm font-serif font-bold text-[#111827] dark:text-white leading-snug">
+                Consultorio | Oportunidad en el Oro y la Plata: "Están para cortos", con Roberto Moro
+              </h4>
+
+              
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-[#ece2d4] dark:border-slate-800/60 text-[#555d6b] dark:text-slate-400">
+                <div>
+                  
+                </div>
+                <div class="mono font-medium">
+                  
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>17.057 caracteres de transcripción</span>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="p-3 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
+                     bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
+                    ">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>Capital Radio - Consultorios de Bolsa</span>
+                  </span>
+                  <span class="mono text-xs text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>2026-11-17</span>
+                  </span>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=bta_qeZpkEw" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:text-[#b91c1c] dark:hover:text-blue-300 transition">
+                  <span>Ver emisión original</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+                
+              </div>
+              
+              <h4 class="text-xs sm:text-sm font-serif font-bold text-[#111827] dark:text-white leading-snug">
+                #Consultorio | Las claves de Iberdrola: un valor que sigue "fortísimo", según David Galán
+              </h4>
+
+              
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-[#ece2d4] dark:border-slate-800/60 text-[#555d6b] dark:text-slate-400">
+                <div>
+                  
+                </div>
+                <div class="mono font-medium">
+                  
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>22.653 caracteres de transcripción</span>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="p-3 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
+                     bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
+                    ">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>Capital Radio - Consultorios de Bolsa</span>
+                  </span>
+                  <span class="mono text-xs text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>2026-11-17</span>
+                  </span>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=2DeY1WGckeo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:text-[#b91c1c] dark:hover:text-blue-300 transition">
+                  <span>Ver emisión original</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+                
+              </div>
+              
+              <h4 class="text-xs sm:text-sm font-serif font-bold text-[#111827] dark:text-white leading-snug">
+                ¿Vuelve el CEO de Nvidia? "Yo creo que Washington no quiere saber nada de Huang", dice Manuel Pinto
+              </h4>
+
+              
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-[#ece2d4] dark:border-slate-800/60 text-[#555d6b] dark:text-slate-400">
+                <div>
+                  
+                </div>
+                <div class="mono font-medium">
+                  
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>24.682 caracteres de transcripción</span>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="p-3 rounded-xl border border-[#e4d7c6] dark:border-slate-800/90 bg-[#faf6f0] dark:bg-slate-950/60 hover:border-[#0f2e4e]/40 dark:hover:border-blue-500/40 transition space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-xs px-2.5 py-0.5 rounded font-bold uppercase tracking-wider inline-flex items-center space-x-1.5
+                     bg-[#dbeafe] text-[#1e40af] dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800
+                    ">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    <span>Capital Radio - Consultorios de Bolsa</span>
+                  </span>
+                  <span class="mono text-xs text-[#6b7280] dark:text-slate-400 inline-flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>2026-11-17</span>
+                  </span>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=s_lohwb6gCE" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-xs font-bold text-[#0f2e4e] dark:text-blue-400 hover:text-[#b91c1c] dark:hover:text-blue-300 transition">
+                  <span>Ver emisión original</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+                
+              </div>
+              
+              <h4 class="text-xs sm:text-sm font-serif font-bold text-[#111827] dark:text-white leading-snug">
+                Consultorio | El mejor activo refugio frente a la volatilidad, con Mar Barrero
+              </h4>
+
+              
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-[#ece2d4] dark:border-slate-800/60 text-[#555d6b] dark:text-slate-400">
+                <div>
+                  
+                </div>
+                <div class="mono font-medium">
+                  
+                  <span class="inline-flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5 text-[#6b7280] dark:text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>15.265 caracteres de transcripción</span>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+            
+          
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA (ESTILO PRENSA) -->
+  <footer class="border-t border-[#e2d5c3] dark:border-slate-800/80 bg-[#f4ecdf]/80 dark:bg-slate-900/60 py-6 text-center text-xs text-[#6b7280] dark:text-slate-500 px-4 mt-8">
+    <div class="max-w-3xl mx-auto space-y-1">
+      <p class="font-serif font-bold text-[#0f2e4e] dark:text-slate-400">STOXXX · Inteligencia Bursátil</p>
+      <p class="text-[11px]">Informe elaborado mediante síntesis de quórum con Gemini API y verificación técnica en tiempo real.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT THEME SWITCHER -->
+  <script>
+    function updateThemeUI() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const iconSun = document.getElementById('theme-icon-sun');
+      const iconMoon = document.getElementById('theme-icon-moon');
+      const label = document.getElementById('theme-toggle-label');
+
+      if (isDark) {
+        if (iconSun) iconSun.classList.remove('hidden');
+        if (iconMoon) iconMoon.classList.add('hidden');
+        if (label) label.textContent = 'Terminal';
+      } else {
+        if (iconSun) iconSun.classList.add('hidden');
+        if (iconMoon) iconMoon.classList.remove('hidden');
+        if (label) label.textContent = 'Expansión';
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('theme-expansion');
+        localStorage.setItem('stoxxx_theme', 'expansion');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('theme-expansion');
+        localStorage.setItem('stoxxx_theme', 'dark');
+      }
+      updateThemeUI();
+    }
+
+    // Inicializar UI al cargar
+    updateThemeUI();
+  </script>
+
+</body>
+</html>

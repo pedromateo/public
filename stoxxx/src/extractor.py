@@ -17,9 +17,10 @@ class YouTubeExtractor:
     para asegurar máxima trazabilidad histórica, reproducibilidad y auditoría sin consumo redundante de red.
     """
 
-    def __init__(self, days_horizon: int = 14, cache_dir: Optional[Path] = None):
+    def __init__(self, days_horizon: int = 3, cache_dir: Optional[Path] = None):
         self.days_horizon = days_horizon
-        self.cutoff_date = datetime.now() - timedelta(days=days_horizon)
+        # Horizonte en días naturales (ej. 3 días = hoy, ayer y antesdeayer):
+        self.cutoff_date = datetime.now() - timedelta(days=max(0, days_horizon - 1))
         self.cutoff_str = self.cutoff_date.strftime("%Y%m%d")
         self.cache_dir = cache_dir or TRANSCRIPTS_DIR
         self.cache_dir.mkdir(parents=True, exist_ok=True)

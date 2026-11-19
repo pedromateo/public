@@ -40,7 +40,7 @@ YOUTUBE_CHANNELS = [
 ]
 
 # Configuración de ejecución
-DEFAULT_HORIZON_DAYS = int(os.getenv("DAYS_HORIZON", "7"))
+DEFAULT_HORIZON_DAYS = int(os.getenv("DAYS_HORIZON", "3"))
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 

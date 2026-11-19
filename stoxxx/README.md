@@ -4,10 +4,13 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
 
 ---
 
+> [!TIP]
+> **Para Agentes AI y Desarrolladores**: Consulta [AGENTS.md](AGENTS.md) para acceder a la guía técnica detallada, el mapa de componentes del pipeline y la matriz de configuración rápida ("Dónde tocar para cambiar X").
+
 ## 🚀 Características Principales
 
-1. **Extracción Automatizada de YouTube (Horizonte configurable, 7 días / 1 semana por defecto)**:
-   - Monitoriza los consultorios de bolsa de **Capital Radio** (con expertos como Roberto Moro, Alberto Iturralde, Javier Alfayate, Gerardo Ortega) y el canal **Visionarios Bolsa** (Sito Rodríguez).
+1. **Extracción Automatizada de YouTube (Horizonte configurable, 3 días por defecto: hoy, ayer y antesdeayer)**:
+   - Monitoriza los consultorios de bolsa de **Capital Radio** (con expertos como R. Moro, A. Iturralde, J. Alfayate, G. Ortega) y el canal **Visionarios Bolsa** (S. Rodríguez).
    - Descarga y consolida las transcripciones completas en español.
    - **Persistencia y Versionado en GitHub (`data/transcripts/`)**: Todas las transcripciones se guardan en formato JSON y se versionan en el repositorio de GitHub para garantizar máxima trazabilidad, reproducibilidad histórica de los informes bursátiles y optimización de llamadas de red.
 2. **Análisis de Consenso con Google Gemini (Gemini 2.0 Flash)**:
@@ -16,7 +19,7 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
 3. **Entregables por Ejecución**:
    - 🖥️ **Terminal Interactiva**: Presentación visual completa con tablas de índices, quórum y colores enriquecidos (`rich`).
    - 📄 **Informe PDF Profesional**: Maquetado corporativo con soporte UTF-8, cajas de resumen, niveles de soporte/resistencia y numeración de páginas.
-   - 🎙️ **Podcast Dual en MP3**: Diálogo dinámico de radio entre dos locutores (**Carlos** y **Laura**) con voces neuronales realistas (Edge-TTS / Google Cloud TTS).
+   - 🎙️ **Podcast Dual en MP3**: Diálogo dinámico de radio entre dos locutores (Voz 1 y Voz 2, sin nombres propios) con voces neuronales realistas (Edge-TTS / Google Cloud TTS).
 4. **Publicación Automática en GitHub Pages y Versionado de Datos**:
    - Web estática responsiva (`index.html`) construida con HTML5, Tailwind CSS y Vanilla JS.
    - Feed cronológico con reproductor de audio embebido, vista de detalle por informe y botones directos de descarga (PDF y MP3).
@@ -33,7 +36,8 @@ Agente automatizado ejecutable desde consola bajo demanda que extrae, analiza y 
 ├── requirements.txt         # Dependencias de Python
 ├── config.py                # Configuración global de fuentes, rutas y modelos
 ├── main.py                  # CLI principal ejecutable
-├── README.md                # Documentación del sistema
+├── README.md                # Documentación pública del sistema
+├── AGENTS.md                # Guía técnica interna y matriz de configuración para agentes
 ├── src/
 │   ├── extractor.py         # Extracción de vídeos y transcripciones de YouTube
 │   ├── analyzer.py          # Prompting estructurado e inferencia con Gemini API
@@ -87,8 +91,8 @@ TTS_PROVIDER=edge
 TTS_VOICE_MALE=es-ES-AlvaroNeural
 TTS_VOICE_FEMALE=es-ES-ElviraNeural
 
-# Horizonte de búsqueda de vídeos en días (por defecto: 7 días / 1 semana)
-DAYS_HORIZON=7
+# Horizonte de búsqueda de vídeos en días (por defecto: 3 días: hoy, ayer y antesdeayer)
+DAYS_HORIZON=3
 
 # Publicar automáticamente a GitHub Pages tras cada análisis (true/false)
 AUTO_GIT_PUSH=false
@@ -102,7 +106,7 @@ AUTO_GIT_PUSH=false
 ```bash
 .venv/bin/python main.py
 ```
-*Extrae los últimos 7 días (1 semana), consulta a Gemini, imprime el informe por consola, genera el PDF, sintetiza el podcast MP3 y actualiza la web.*
+*Extrae los últimos 3 días (hoy, ayer y antesdeayer), consulta a Gemini, imprime el informe por consola, genera el PDF, sintetiza el podcast MP3 y actualiza la web.*
 
 ### Ejecución con despliegue automático en GitHub Pages:
 ```bash
@@ -113,7 +117,7 @@ AUTO_GIT_PUSH=false
 
 | Parámetro | Descripción |
 | :--- | :--- |
-| `--days <N>` | Cambia el horizonte temporal (por defecto: 7). |
+| `--days <N>` | Cambia el horizonte temporal (por defecto: 3). |
 | `--push` | Ejecuta `git add`, `git commit` y `git push origin main` al finalizar. |
 | `--no-push` | Desactiva el push a GitHub incluso si está activo en `.env`. |
 | `--skip-audio` | Omite la síntesis del podcast MP3 (ideal para análisis rápidos en segundos). |
