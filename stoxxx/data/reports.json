@@ -4,9 +4,9 @@
     "sentimiento_general": "Alcista Táctico con Rotación hacia Valor y Cortos en Metales",
     "summary_snippet": "• Divergencia extrema entre la fortaleza europea y la volatilidad tecnológica en EE.UU.: El IBEX 35 consolida en máximos históricos impulsado por el liderazgo incontestable de las utilities y la banca, mientras Wall Stre...",
     "top_stocks": [
-      "Nvidia (12)",
-      "Iberdrola (7)",
+      "Iberdrola (6)",
       "Banco Santander (6)",
+      "Nvidia (6)",
       "Repsol (5)"
     ],
     "detail_url": "reports/html/report-2026-11-19.html",
@@ -16,7 +16,7 @@
     "fuentes_consultadas": [
       {
         "id": "C_LfMFiKsoc",
-        "title": "Nvidia: Resultados extraordinarios pero sigue la tormenta tecnológica. Con Gerardo Ortega",
+        "title": "Nvidia: Resultados extraordinarios pero sigue la tormenta tecnológica. Con G. Ortega",
         "channel": "Capital Radio - Consultorios de Bolsa",
         "date_formatted": "2026-11-18",
         "url": "https://www.youtube.com/watch?v=C_LfMFiKsoc",
@@ -25,7 +25,7 @@
       },
       {
         "id": "BxNaU5r6-Dg",
-        "title": "#Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según Víctor Galán",
+        "title": "#Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según V. Galán",
         "channel": "Capital Radio - Consultorios de Bolsa",
         "date_formatted": "2026-11-18",
         "url": "https://www.youtube.com/watch?v=BxNaU5r6-Dg",
@@ -34,7 +34,7 @@
       },
       {
         "id": "1X2CVR5SWBY",
-        "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con Roberto Moro",
+        "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con R. Moro",
         "channel": "Capital Radio - Consultorios de Bolsa",
         "date_formatted": "2026-11-18",
         "url": "https://www.youtube.com/watch?v=1X2CVR5SWBY",
@@ -43,7 +43,7 @@
       },
       {
         "id": "bta_qeZpkEw",
-        "title": "#Consultorio | Las claves de Iberdrola: un valor que sigue \"fortísimo\", según David Galán",
+        "title": "#Consultorio | Las claves de Iberdrola: un valor que sigue \"fortísimo\", según D. Galán",
         "channel": "Capital Radio - Consultorios de Bolsa",
         "date_formatted": "2026-11-17",
         "url": "https://www.youtube.com/watch?v=bta_qeZpkEw",
@@ -52,7 +52,7 @@
       },
       {
         "id": "2DeY1WGckeo",
-        "title": "¿Vuelve el CEO de Nvidia? \"Yo creo que Washington no quiere saber nada de Huang\", dice Manuel Pinto",
+        "title": "¿Vuelve el CEO de Nvidia? \"Yo creo que Washington no quiere saber nada de Huang\", dice M. Pinto",
         "channel": "Capital Radio - Consultorios de Bolsa",
         "date_formatted": "2026-11-17",
         "url": "https://www.youtube.com/watch?v=2DeY1WGckeo",
@@ -61,7 +61,7 @@
       },
       {
         "id": "s_lohwb6gCE",
-        "title": "Consultorio | El mejor activo refugio frente a la volatilidad, con Mar Barrero",
+        "title": "Consultorio | El mejor activo refugio frente a la volatilidad, con M. Barrero",
         "channel": "Capital Radio - Consultorios de Bolsa",
         "date_formatted": "2026-11-17",
         "url": "https://www.youtube.com/watch?v=s_lohwb6gCE",

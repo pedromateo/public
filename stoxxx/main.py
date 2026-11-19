@@ -245,36 +245,8 @@ def main():
         report_data = MarketDataVerifier.enrich_report_data(report_data)
     console.print("[bold green]✔[/bold green] Cotizaciones actuales de índices y acciones verificadas con éxito.")
 
-    # 2.6. AUDITORÍA INTEGRAL DE CONSISTENCIA Y NIVELES TÉCNICOS
-    with console.status("[bold green]Auditando integridad técnica y coherencia de soportes/resistencias..."):
-        report_data = MarketReportValidator.audit_and_verify_report(report_data)
-        audit_info = report_data.get("_audit", {})
-        if audit_info.get("reconciliations"):
-            for rec in audit_info["reconciliations"]:
-                console.print(f"[bold yellow]⚡ Reconciliación técnica aplicada:[/bold yellow] [dim]{rec}[/dim]")
-        if audit_info.get("warnings"):
-            for w in audit_info["warnings"]:
-                console.print(f"[yellow]Aviso auditoría:[/yellow] {w}")
-    console.print("[bold green]✔[/bold green] Informe auditado y verificado con éxito.")
-
-    # 2.7. DOBLE CHECK CONTRA TRANSCRIPCIONES
+    # 2.55. POBLAR FUENTES CONSULTADAS A PARTIR DE LOS VÍDEOS EXTRAÍDOS
     ref_videos = videos if videos else YouTubeExtractor(days_horizon=args.days).load_all_cached_transcripts()
-    if ref_videos:
-        with console.status("[bold green]Realizando doble check de fidelidad entre informe y transcripciones..."):
-            dc_results = TranscriptDoubleChecker.cross_check(report_data, ref_videos)
-        fid = dc_results.get("fidelidad_score", 100.0)
-        c_score = "green" if fid >= 80 else ("yellow" if fid >= 50 else "red")
-        console.print(Panel(
-            f"Fidelidad de Contenido con Transcripciones: [bold {c_score}]{fid}%[/bold {c_score}]\n"
-            f"• Empresas verificadas con mención en transcripciones: [bold green]{len(dc_results.get('empresas_verificadas', []))}[/bold green]\n"
-            f"• Analistas contrastados: [bold green]{len(dc_results.get('analistas_verificados', []))}[/bold green]\n"
-            f"• Índices contrastados: [bold green]{len(dc_results.get('indices_verificados', []))}[/bold green]" +
-            (f"\n[dim]Observaciones:\n" + "\n".join([f"  • {d}" for d in dc_results.get('detalles', [])[:3]]) + "[/dim]" if dc_results.get('detalles') else ""),
-            title="[bold blue]✔ DOBLE CHECK DE FUENTES & TRANSCRIPCIONES[/bold blue]",
-            border_style="blue"
-        ))
-
-    # 2.8. POBLAR FUENTES CONSULTADAS SIEMPRE A PARTIR DE LOS VÍDEOS EXTRAÍDOS
     src_vids = videos if videos else (ref_videos if 'ref_videos' in locals() and ref_videos else [])
     if src_vids:
         report_data["fuentes_consultadas"] = [
@@ -293,6 +265,34 @@ def main():
                 reverse=True
             )
         ]
+
+    # 2.6. AUDITORÍA INTEGRAL DE CONSISTENCIA Y NIVELES TÉCNICOS
+    with console.status("[bold green]Auditando integridad técnica y coherencia de soportes/resistencias..."):
+        report_data = MarketReportValidator.audit_and_verify_report(report_data)
+        audit_info = report_data.get("_audit", {})
+        if audit_info.get("reconciliations"):
+            for rec in audit_info["reconciliations"]:
+                console.print(f"[bold yellow]⚡ Reconciliación técnica aplicada:[/bold yellow] [dim]{rec}[/dim]")
+        if audit_info.get("warnings"):
+            for w in audit_info["warnings"]:
+                console.print(f"[yellow]Aviso auditoría:[/yellow] {w}")
+    console.print("[bold green]✔[/bold green] Informe auditado y verificado con éxito.")
+
+    # 2.7. DOBLE CHECK CONTRA TRANSCRIPCIONES
+    if ref_videos:
+        with console.status("[bold green]Realizando doble check de fidelidad entre informe y transcripciones..."):
+            dc_results = TranscriptDoubleChecker.cross_check(report_data, ref_videos)
+        fid = dc_results.get("fidelidad_score", 100.0)
+        c_score = "green" if fid >= 80 else ("yellow" if fid >= 50 else "red")
+        console.print(Panel(
+            f"Fidelidad de Contenido con Transcripciones: [bold {c_score}]{fid}%[/bold {c_score}]\n"
+            f"• Empresas verificadas con mención en transcripciones: [bold green]{len(dc_results.get('empresas_verificadas', []))}[/bold green]\n"
+            f"• Analistas contrastados: [bold green]{len(dc_results.get('analistas_verificados', []))}[/bold green]\n"
+            f"• Índices contrastados: [bold green]{len(dc_results.get('indices_verificados', []))}[/bold green]" +
+            (f"\n[dim]Observaciones:\n" + "\n".join([f"  • {d}" for d in dc_results.get('detalles', [])[:3]]) + "[/dim]" if dc_results.get('detalles') else ""),
+            title="[bold blue]✔ DOBLE CHECK DE FUENTES & TRANSCRIPCIONES[/bold blue]",
+            border_style="blue"
+        ))
 
     # 3. MOSTRAR INFORME EN TERMINAL
     print_terminal_report(report_data, date_str)

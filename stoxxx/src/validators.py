@@ -247,8 +247,18 @@ class MarketReportValidator:
         empresas = report_data.get("analisis_empresas", {})
         for block in ["nacionales", "internacionales"]:
             comp_list = empresas.get(block, [])
+            fuentes_count = len(report_data.get("fuentes_consultadas", []))
             for comp in comp_list:
                 nombre = comp.get("nombre", "")
+                menciones = comp.get("menciones", 0)
+
+                # Coherencia de menciones vs total de fuentes
+                if fuentes_count > 0 and menciones > fuentes_count:
+                    comp["menciones"] = fuentes_count
+                    audit_log["reconciliations"].append(
+                        f"Empresa {nombre}: Menciones ({menciones}) acotadas a {fuentes_count} (máximo de fuentes consultadas en el horizonte)."
+                    )
+
                 cotiz_str = comp.get("precio_actual", "")
                 price_num = None
                 if cotiz_str:
