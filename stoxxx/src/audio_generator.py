@@ -133,6 +133,45 @@ class PodcastGenerator:
         """Sanitiza el texto de un turno para síntesis fluida."""
         return clean_tts_text(text)
 
+    def save_script_markdown(
+        self,
+        guion: List[Dict[str, str]],
+        date_str: str,
+        output_dir: Optional[Path] = None
+    ) -> Optional[Path]:
+        """
+        Guarda el guion del podcast en formato Markdown (.md) junto al archivo MP3.
+        No accesible desde la web pública; accesible directamente vía repositorio Git.
+        """
+        if not guion:
+            return None
+        target_dir = output_dir or AUDIO_DIR
+        target_dir.mkdir(parents=True, exist_ok=True)
+        md_path = target_dir / f"podcast-{date_str}.md"
+
+        lines = [
+            f"# Guion del Podcast - {date_str}",
+            "",
+            f"- **Fecha:** {date_str}",
+            "- **Formato:** Diálogo dual (Voz 1 - Masculino, Voz 2 - Femenino)",
+            f"- **Archivo de audio asociado:** `podcast-{date_str}.mp3`",
+            f"- **Total de intervenciones:** {len(guion)}",
+            "",
+            "---",
+            "",
+            "### Diálogo",
+            "",
+        ]
+
+        for turn in guion:
+            locutor = turn.get("locutor", "Locutor")
+            texto = turn.get("texto", "").strip()
+            lines.append(f"**{locutor}**: {texto}\n")
+
+        md_path.write_text("\n".join(lines), encoding="utf-8")
+        logger.info(f"Guion del podcast guardado en Markdown: {md_path}")
+        return md_path
+
     async def _synthesize_edge_turn(self, text: str, voice: str, output_path: Path) -> bool:
         """Sintetiza un turno de diálogo utilizando Edge-TTS."""
         try:
@@ -258,6 +297,9 @@ class PodcastGenerator:
         target_dir = output_dir or AUDIO_DIR
         target_dir.mkdir(parents=True, exist_ok=True)
         final_mp3_path = target_dir / f"podcast-{date_str}.mp3"
+
+        # Guardar automáticamente el guion en formato Markdown (.md) junto al MP3
+        self.save_script_markdown(guion, date_str, target_dir)
 
         temp_files: List[Path] = []
         processed_files: List[Path] = []

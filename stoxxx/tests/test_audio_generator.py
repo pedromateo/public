@@ -69,6 +69,27 @@ class TestAudioGenerator(unittest.TestCase):
         res = gen.clean_text("D. Galán y M. Pinto en EE.UU.\nRevisan el IBEX.")
         self.assertEqual(res, "David Galán y Manuel Pinto en Estados Unidos Revisan el IBEX.")
 
+    def test_save_script_markdown(self):
+        """Verifica que el guion del podcast se guarde correctamente en formato Markdown."""
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            temp_path = Path(tmpdir)
+            gen = PodcastGenerator()
+            guion_sample = [
+                {"locutor": "Voz 1", "genero": "masculino", "texto": "Bienvenidos a STOXXX."},
+                {"locutor": "Voz 2", "genero": "femenino", "texto": "Repasamos las claves de la sesión."}
+            ]
+            saved_file = gen.save_script_markdown(guion_sample, "2026-11-19", output_dir=temp_path)
+            self.assertIsNotNone(saved_file)
+            self.assertTrue(saved_file.exists())
+            self.assertEqual(saved_file.name, "podcast-2026-11-19.md")
+
+            content = saved_file.read_text(encoding="utf-8")
+            self.assertIn("# Guion del Podcast - 2026-11-19", content)
+            self.assertIn("**Voz 1**: Bienvenidos a STOXXX.", content)
+            self.assertIn("**Voz 2**: Repasamos las claves de la sesión.", content)
+            self.assertIn("- **Total de intervenciones:** 2", content)
+
 
 if __name__ == "__main__":
     unittest.main()

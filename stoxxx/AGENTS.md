@@ -11,6 +11,7 @@ Este documento contiene la **arquitectura técnica completa, el mapa de componen
 3. **Locutores del Podcast sin nombres propios**: En el guion y el audio del podcast, los locutores son estrictamente `Voz 1` (masculino) y `Voz 2` (femenino). Está **terminantemente prohibido** asignarles nombres como *Carlos*, *Laura*, *Álvaro*, etc., o saludarse con nombres personales.
 4. **Veracidad y Fidelidad 100%**: No se inventan cotizaciones ni recomendaciones. Los niveles técnicos se reconcilian con precios reales de Yahoo Finance (`yfinance`) y las afirmaciones se contrastan con las transcripciones en `data/transcripts/`.
 5. **Persistencia y Reproducibilidad**: Todas las transcripciones se guardan en JSON (`data/transcripts/{video_id}.json`) y se versionan en Git para auditoría sin consumo redundante de red.
+6. **Persistencia del Guion del Podcast en Markdown (`.md`)**: Junto a cada archivo MP3 sintetizado (`reports/audio/podcast-YYYY-MM-DD.mp3`), se guarda obligatoriamente el guion estructurado en Markdown (`reports/audio/podcast-YYYY-MM-DD.md`) con las intervenciones de `Voz 1` y `Voz 2`. Este archivo se versiona en Git para consulta interna en GitHub, pero está **terminantemente prohibido** enlazarlo o hacerlo accesible desde la web estática pública (`reports.json`, `index.html` o vistas HTML).
 
 ---
 
@@ -25,6 +26,7 @@ Este documento contiene la **arquitectura técnica completa, el mapa de componen
 | **Abreviaciones de Analistas** | [src/analyzer.py](file:///home/pit/dev/public/stoxxx/src/analyzer.py) | `ANALYST_ABBREVIATIONS` | Diccionario de reemplazo directo `Nombre Completo -> Inicial. Apellido`. |
 | **Reglas de Locutores del Podcast** | [src/analyzer.py](file:///home/pit/dev/public/stoxxx/src/analyzer.py) y [src/validators.py](file:///home/pit/dev/public/stoxxx/src/validators.py) | `FINANCIAL_ANALYST_SYSTEM_PROMPT` (Regla 5) y `audit_and_verify_report` | Prohibición y regex de limpieza de nombres en el audio. |
 | **Voces y Proveedor de Audio** | [config.py](file:///home/pit/dev/public/stoxxx/config.py) y [.env](file:///home/pit/dev/public/stoxxx/.env) | `TTS_PROVIDER`, `TTS_VOICE_MALE`, `TTS_VOICE_FEMALE` | Por defecto `edge`, `es-ES-AlvaroNeural` y `es-ES-XimenaNeural` / `es-ES-ElviraNeural`. |
+| **Guion de Podcast en Markdown (.md)** | [src/audio_generator.py](file:///home/pit/dev/public/stoxxx/src/audio_generator.py) y [main.py](file:///home/pit/dev/public/stoxxx/main.py) | `save_script_markdown`, `reports/audio/podcast-YYYY-MM-DD.md` | Guarda el guion en Markdown junto al MP3. Excluido de la web pública. |
 | **Modelo de Lenguaje (LLM)** | [config.py](file:///home/pit/dev/public/stoxxx/config.py) y [.env](file:///home/pit/dev/public/stoxxx/.env) | `GEMINI_MODEL`, `GEMINI_API_KEY` | Por defecto `gemini-3.8-flash`. |
 | **Despliegue Git Automático** | [config.py](file:///home/pit/dev/public/stoxxx/config.py) y [main.py](file:///home/pit/dev/public/stoxxx/main.py) | `AUTO_GIT_PUSH`, flag `--push` | Ejecuta `git add`, `git commit` y `git push origin main`. |
 | **Ejecución Periódica Desatendida** | [scripts/cron_runner.sh](file:///home/pit/dev/public/stoxxx/scripts/cron_runner.sh) | `crontab -e` / `cron_runner.sh` | Invoca `agy` o `main.py --push` y guarda logs en `logs/`. |
@@ -72,7 +74,8 @@ flowchart TD
    - `audit_and_verify_report` contrasta soportes y resistencias contra cotizaciones reales (`yfinance`). Si hay desviación >20% por desactualización de los analistas, ajusta los niveles de forma coherente.
    - Ordena los bloques de empresas por número de menciones descendente.
    - Sanitiza el guion del podcast eliminando nombres propios de locutores y forzando `Voz 1` / `Voz 2`.
-5. **Generación de Podcast (`src/audio_generator.py`)**:
+5. **Generación de Podcast y Guion Markdown (`src/audio_generator.py`)**:
+   - Guarda el guion completo del podcast en formato Markdown en `reports/audio/podcast-YYYY-MM-DD.md` (no expuesto en la interfaz web pública).
    - Sintetiza cada turno del guion de forma asíncrona con Edge-TTS (`asyncio`).
    - Concatena las pistas en un único archivo MP3 estéreo en `reports/audio/podcast-YYYY-MM-DD.mp3`.
 6. **Maquetación PDF (`src/pdf_generator.py`)**:

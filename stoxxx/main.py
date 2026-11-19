@@ -307,22 +307,26 @@ def main():
     else:
         console.print("[dim]Omitiendo generación de PDF (--skip-pdf)[/dim]")
 
-    # 5. GENERAR PODCAST MP3 (DIÁLOGO DUAL)
+    # 5. GENERAR PODCAST MP3 (DIÁLOGO DUAL) Y GUION MARKDOWN
     audio_path = None
-    if not args.skip_audio:
-        guion = report_data.get("guion_podcast", [])
-        if guion:
+    guion = report_data.get("guion_podcast", [])
+    if guion:
+        podcast_gen = PodcastGenerator()
+        md_script_path = podcast_gen.save_script_markdown(guion, date_str)
+        if md_script_path and md_script_path.exists():
+            console.print(f"[bold green]✔[/bold green] Guion de podcast guardado en MD: [cyan]{md_script_path}[/cyan]")
+
+        if not args.skip_audio:
             with console.status("[bold green]Sintetizando podcast dual en MP3..."):
-                podcast_gen = PodcastGenerator()
                 audio_path = podcast_gen.generate_podcast(guion, date_str)
             if audio_path and audio_path.exists():
                 console.print(f"[bold green]✔[/bold green] Podcast MP3 generado: [cyan]{audio_path}[/cyan]")
             else:
                 console.print(f"[yellow]⚠ Síntesis de voz no disponible o sin conexión. Continuando fluidamente...[/yellow]")
         else:
-            console.print("[yellow]⚠ No se encontró guion de podcast en el informe.[/yellow]")
+            console.print("[dim]Omitiendo generación de Audio MP3 (--skip-audio)[/dim]")
     else:
-        console.print("[dim]Omitiendo generación de Audio MP3 (--skip-audio)[/dim]")
+        console.print("[yellow]⚠ No se encontró guion de podcast en el informe.[/yellow]")
 
     # 6. GENERAR Y ACTUALIZAR WEB ESTÁTICA
     with console.status("[bold green]Actualizando web estática para GitHub Pages..."):
