@@ -1,5 +1,103 @@
 [
   {
+    "date": "2026-11-20",
+    "sentimiento_general": "Cautela",
+    "summary_snippet": "• El tono dominante entre los analistas durante las últimas sesiones es de marcada cautela y advertencia de corrección técnica.\n• Se constata un agotamiento del impulso alcista tras el debut bursátil de Anthropic y la di...",
+    "top_stocks": [
+      "Nvidia (7)",
+      "Anthropic (7)",
+      "Banco Santander (5)",
+      "Inditex (4)"
+    ],
+    "detail_url": "reports/html/report-2026-11-20.html",
+    "pdf_url": "reports/pdf/informe-2026-11-20.pdf",
+    "audio_url": "reports/audio/podcast-2026-11-20.mp3",
+    "videos_count": 9,
+    "fuentes_consultadas": [
+      {
+        "id": "YBNUWyjkmOc",
+        "title": "#Consultorio | Amazon y Alphabet, ¿en niveles de compra?",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-20",
+        "url": "https://www.youtube.com/watch?v=YBNUWyjkmOc",
+        "char_count": 19858,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "JHUq2Rudeck",
+        "title": "A. Iturralde y lo que viene en bolsa española tras las elecciones del 29N",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-20",
+        "url": "https://www.youtube.com/watch?v=JHUq2Rudeck",
+        "char_count": 21376,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "kHPrDm1Of6s",
+        "title": "#Consultorio | Ribes descarta Anthropic: \"No vamos a entrar\", y apuesta por diversificar en IA",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-19",
+        "url": "https://www.youtube.com/watch?v=kHPrDm1Of6s",
+        "char_count": 21522,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "5kulExxFpuQ",
+        "title": "Consultorio | Estreno de Anthropic: \"Estamos ante un valor ahora mismo puramente especulativo\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-19",
+        "url": "https://www.youtube.com/watch?v=5kulExxFpuQ",
+        "char_count": 20459,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "ETNGzVGMPh4",
+        "title": "¿Se ha abierto una oportunidad de compra en Nvidia? Con Rafael Ojeda",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-19",
+        "url": "https://www.youtube.com/watch?v=ETNGzVGMPh4",
+        "char_count": 20299,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "AUlYNo1LdpU",
+        "title": "El Crash que Cambiará a Toda una Generación",
+        "channel": "Visionarios Bolsa",
+        "date_formatted": "2026-11-19",
+        "url": "https://www.youtube.com/watch?v=AUlYNo1LdpU",
+        "char_count": 12146,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "C_LfMFiKsoc",
+        "title": "Nvidia: Resultados extraordinarios pero sigue la tormenta tecnológica. Con G. Ortega",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-18",
+        "url": "https://www.youtube.com/watch?v=C_LfMFiKsoc",
+        "char_count": 22004,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "BxNaU5r6-Dg",
+        "title": "#Consultorio | Repsol recorta con fuerza: Las claves a tener en cuenta, según V. Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-18",
+        "url": "https://www.youtube.com/watch?v=BxNaU5r6-Dg",
+        "char_count": 21882,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "1X2CVR5SWBY",
+        "title": "Consultorio | Oportunidad en el Oro y la Plata: \"Están para cortos\", con R. Moro",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-18",
+        "url": "https://www.youtube.com/watch?v=1X2CVR5SWBY",
+        "char_count": 17057,
+        "status": "Transcrito completo"
+      }
+    ]
+  },
+  {
     "date": "2026-11-19",
     "sentimiento_general": "Cautela",
     "summary_snippet": "• El mercado muestra un tono de profunda cautela y selectividad extrema, marcado por la digestión de resultados en megacaps tecnológicas como Nvidia y la presión bajista en semiconductores.\n• Los analistas coinciden en q...",

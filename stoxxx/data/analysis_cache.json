@@ -1,110 +1,160 @@
 {
-  "fecha_informe": "2026-11-18",
+  "fecha_informe": "2026-11-20",
   "sentimiento_general": "Cautela",
   "resumen_ejecutivo": {
     "lectura_tiempo": "3-5 minutos",
-    "sintesis_sentimiento": "• El mercado muestra un tono de profunda cautela y selectividad extrema, marcado por la digestión de resultados en megacaps tecnológicas como Nvidia y la presión bajista en semiconductores.\n• Los analistas coinciden en que los índices principales (Nasdaq, S&P 500 y DAX) se encuentran en zonas críticas de soporte, obligados a reaccionar para evitar correcciones de mayor envergadura.\n• La rotación sectorial hacia valores defensivos (utilities como Iberdrola, consumo estable) contrasta con las dudas y la debilidad técnica que acusan la tecnología y el sector financiero a corto plazo.",
-    "hacia_donde_apuntan": "• Los flujos de capital huyen temporalmente de la sobrecompra tecnológica y de los semiconductores, buscando refugio en renta fija a corto plazo, oro físico y en valores con flujos de caja sólidos y menor volatilidad.\n• Se recomienda mantener liquidez como una posición activa y no precipitar compras en cuchillos cayendo hasta que aparezcan patrones de giro o dobles suelos claros.\n• El posicionamiento estratégico exige paciencia, priorizando la selección individual de acciones líderes europeas frente al deterioro observado en Wall Street.",
+    "sintesis_sentimiento": "• El tono dominante entre los analistas durante las últimas sesiones es de marcada cautela y advertencia de corrección técnica.\n• Se constata un agotamiento del impulso alcista tras el debut bursátil de Anthropic y la digestión de resultados de Nvidia.\n• El consenso generalizado desaconseja promediar a la baja en valores rezagados y sugiere elevar drásticamente los niveles de liquidez o buscar coberturas ante la pérdida de soportes clave en los índices directores.",
+    "hacia_donde_apuntan": "• Rotación evidente de flujos de capital desde el sector de semiconductores e inteligencia artificial hacia activos defensivos, consumo básico, farmacéuticas y servicios públicos (utilities).\n• Fuerte recomendación táctica de posicionamiento largo en el dólar estadounidense frente a divisas europeas y materias primas.\n• Tesis bajista compartida en metales preciosos (oro y plata), donde varios analistas identifican estructuras idóneas para operativas cortas.",
     "puntos_clave_consenso": [
-      "Vigilancia estricta de los soportes clave en los índices americanos y sectoriales de semiconductores (SOX).",
-      "Evitar el sector financiero a corto plazo debido a su incapacidad para sostener el rebote inicial tras las correcciones.",
-      "Fortaleza indiscutible de las utilities europeas (Iberdrola, Endesa) como refugio principal frente a la volatilidad."
+      "Quórum en que la salida a bolsa de Anthropic representó un punto de saturación y complacencia, funcionando como catalizador de toma de beneficios generalizada en tecnología.",
+      "Consenso técnico en que Nvidia y las grandes firmas de semiconductores se encuentran en fase correctiva o lateral compleja, recomendando esperar señales claras de suelo antes de comprar.",
+      "Convergencia de opiniones sobre el sector bancario europeo y español: se detecta el agotamiento de la primera pata correctiva y el riesgo de una segunda onda de caídas, aconsejando proteger ganancias.",
+      "Advertencia unánime contra el sesgo de comprar títulos únicamente porque 'han caído mucho' (ejemplificado en Grenergy, Solaria o Alstom), subrayando la disciplina estricta de stop loss."
     ]
   },
   "sentimiento_macro": {
-    "situacion_global": "• Contexto macroeconómico dominado por la incertidumbre geopolítica, la persistencia de tensiones inflacionistas y el giro de los bancos centrales hacia políticas más restrictivas o tipos de interés elevados.\n• En Estados Unidos, el temor a una desaceleración económica y la presión sobre los rendimientos de los bonos generan un entorno adyacente de alta volatilidad y recogida de beneficios.\n• Europa muestra una relativa resiliencia gracias a la fortaleza de sectores defensivos y a la debilidad del euro, aunque sujeta al contagio de los bandazos tecnológicos de Wall Street.",
+    "situacion_global": "• En Estados Unidos, el mercado asimila la persistencia de tipos de interés restrictivos por parte de la Reserva Federal, con el rendimiento del bono soberano compitiendo frontalmente contra la renta variable y los metales preciosos.\n• El índice de volatilidad VIX coquetea de forma recurrente con la cota de los 25 a 28 puntos, reflejando nerviosismo institucional y falta de convicción compradora en Wall Street.\n• En Europa, la debilidad macroeconómica y el ruido geopolítico se combinan con la proximidad de citas electorales en España, factor que según analistas técnicos podría poner fin a la resistencia relativa que exhibía el selectivo español.\n• El crudo experimenta un retroceso notable hacia el entorno de los 80 dólares por barril, aliviando temporalmente las presiones inflacionistas pero evidenciando una menor demanda global y descartando primas de riesgo bélico inmediato.",
     "indices": [
       {
         "nombre": "IBEX 35",
         "tendencia": "Consolidación",
-        "soporte_clave": "19.200",
-        "resistencia_clave": "20.087",
-        "consenso_analistas": "Se mueve en un amplio rango lateral tras alejarse de la cota de los 20.000 puntos, con riesgo de corrección hacia la media de 200 sesiones."
+        "soporte_clave": "18.700",
+        "resistencia_clave": "19.600",
+        "consenso_analistas": "R. Moro y A. Iturralde coinciden en que el selectivo español cotiza en un rango lateral amplio sin dirección definida. A. Iturralde advierte de que el mercado se encuentra en la recta final de su fortaleza y anticipa recortes significativos a corto plazo."
       },
       {
         "nombre": "DAX",
-        "tendencia": "Consolidación",
-        "soporte_clave": "24.792",
-        "resistencia_clave": "27.001",
-        "consenso_analistas": "Tras marcar máximos históricos, muestra riesgos de un descanso adicional hacia sus medias, manteniendo un mínimo creciente clave que preserva la estructura de fondo."
+        "tendencia": "Bajista",
+        "soporte_clave": "25.050",
+        "resistencia_clave": "26.000",
+        "consenso_analistas": "Fuerte deterioro de corto plazo tras ceder los 26.000 enteros. A. Iturralde y V. Galán señalan sobreventa acusada que podría generar un rebote técnico puntual hacia 25.500 antes de reiniciar la secuencia bajista."
       },
       {
         "nombre": "S&P 500",
-        "tendencia": "Cautela",
-        "soporte_clave": "7.237",
-        "resistencia_clave": "7.652",
-        "consenso_analistas": "Jugueteando con las medias y formando máximos decrecientes; se exige la superación de la directriz bajista para confirmar el fin de la fase correctiva."
+        "tendencia": "Consolidación",
+        "soporte_clave": "7.000",
+        "resistencia_clave": "7.325",
+        "consenso_analistas": "Tensión en soportes intermedios. J. del Canto y D. Santa Creu destacan la perforación de zonas pivote como 7.325 y vigilan la zona psicológica de 7.000-6.890 como suelo estructural clave, sugiriendo aprovechar cualquier rebote para deshacer posiciones o cubrir."
       },
       {
         "nombre": "Nasdaq 100",
         "tendencia": "Bajista",
-        "soporte_clave": "26.000",
-        "resistencia_clave": "28.593",
-        "consenso_analistas": "Fuerte corrección liderada por el castigo en inteligencia artificial y semiconductores, con divergencias técnicas que obligan a vigilar soportes críticos."
+        "soporte_clave": "27.000",
+        "resistencia_clave": "27.800",
+        "consenso_analistas": "M. Ribes, G. Ortega y D. Santa Creu alertan sobre la debilidad técnica manifiesta tras fallar en la superación de su directriz bajista. G. Ortega recalca el peligro de convergencia bajista con el índice de semiconductores SOX si perfora soportes mayores."
       }
     ],
-    "coincidencias_estrategia": "• Coincidencia unánime en que el mercado no ofrece un suelo claro en el sector tecnológico y que operar en este momento equivale a un alto riesgo operativo.\n• Acuerdo generalizado en que los metales preciosos (oro y plata) atraviesan una fase correctiva profunda que los sitúa en escenarios óptimos para posiciones bajistas o cortos en el corto plazo.",
-    "divergencias_estrategia": "• Discrepancia en el grado de optimismo sobre la banca: mientras algunos analistas descartan totalmente el sector por debilidad técnica, otros matizan oportunidades selectivas de cara al medio plazo si se defienden soportes estructurales."
+    "coincidencias_estrategia": "• Coincidencia plena en incrementar el porcentaje de liquidez en cartera (hasta el 50% según M. Ribes).\n• Aceptación unánime de que promediar a la baja en acciones con caídas verticales destruye capital de forma sistemática.\n• Convicción compartida entre R. Moro, V. Galán y R. Ojeda en la vulnerabilidad de las materias primas, señalando operativas cortas en oro y plata ante la fortaleza del dólar estadounidense.",
+    "divergencias_estrategia": "• Discrepancia en la valoración de Nvidia: mientras R. Ojeda defiende una visión fundamental extraordinaria considerándola una compra inmejorable a PER bajo, M. Ribes y V. Galán prefieren mantenerse al margen o alertan de riesgos de caídas adicionales hacia 90-100 dólares.\n• Sobre el debut de Anthropic: R. Ojeda propone mantener las acciones adquiridas confiando en su trayectoria a largo plazo, mientras que A. Iturralde, D. Santa Creu y M. Ribes recomiendan vender de inmediato en mercado secundario tras la subida inicial, tachando el movimiento de puramente especulativo."
   },
   "analisis_empresas": {
     "nacionales": [
       {
         "nombre": "Banco Santander",
         "ticker": "SAN.MC",
-        "menciones": 4,
+        "menciones": 5,
         "analistas": [
+          "A. Iturralde",
+          "D. Santa Creu",
+          "R. Ojeda",
           "G. Ortega",
-          "R. Moro",
-          "M. Pinto"
+          "R. Moro"
         ],
-        "nivel_consenso": "Consenso Bajista",
-        "soporte": "9.80€",
-        "resistencia": "11.50€",
-        "recomendacion": "Evitar",
-        "tesis": "Desarrolla una estructura de caída en ondas (pata bajista y probable onda C) perdiendo las medias móviles principales, sin ofrecer garantías técnicas para la entrada."
+        "nivel_consenso": "Divergencia",
+        "soporte": "10,00€",
+        "resistencia": "11,50€",
+        "recomendacion": "Mantener / Salir en rebotes",
+        "tesis": "A. Iturralde anticipa un posible rebote táctico hacia 11,40€-11,50€ para ejecutar salidas, situando stop en 10,20€. R. Moro y D. Santa Creu advierten de que la estructura correctiva mensual sigue activa y que la pérdida de los 10,00€ activaría un deterioro mayor, desaconsejando nuevas compras. R. Ojeda mantiene confianza en su capacidad de generar ingresos a largo plazo pese al impacto en Brasil."
       },
       {
-        "nombre": "Indra",
-        "ticker": "IDR.MC",
-        "menciones": 3,
+        "nombre": "Inditex",
+        "ticker": "ITX.MC",
+        "menciones": 4,
         "analistas": [
+          "R. Ojeda",
+          "G. Ortega",
+          "V. Galán",
+          "R. Moro"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "58,00€",
+        "resistencia": "61,00€",
+        "recomendacion": "Mantener",
+        "tesis": "Valor defensivo y líder indiscutible en su sector. R. Ojeda y V. Galán destacan la entrada de flujos institucionales hacia textil y consumo. G. Ortega y R. Moro puntualizan que la acción se halla en subida libre estructural, vigilando los 58,00€-59,00€ como soporte inmediato y 55,00€ como nivel de control mayor."
+      },
+      {
+        "nombre": "Enagás",
+        "ticker": "ENG.MC",
+        "menciones": 4,
+        "analistas": [
+          "A. Iturralde",
           "V. Galán",
           "R. Moro",
-          "M. Pinto"
+          "R. Ojeda"
         ],
-        "nivel_consenso": "Consenso Bajista",
-        "soporte": "44.50€",
-        "resistencia": "55.60€",
-        "recomendacion": "Evitar",
-        "tesis": "Fuerte castigo bursátil tras noticias de investigación en contratos y ruptura de soportes clave; aspecto neutral-bajista a corto plazo."
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "17,00€",
+        "resistencia": "18,40€",
+        "recomendacion": "Recoger beneficios / Mantener con stop",
+        "tesis": "A. Iturralde subraya que tras alcanzar el objetivo técnico en 18,40€ ya no tiene sentido permanecer en el valor. V. Galán constata una vela envolvente bajista en el corto plazo pero sugiere mantener si aguanta la cota de 17,00€. R. Moro descarta entradas en el sector regulado."
       },
       {
         "nombre": "Iberdrola",
         "ticker": "IBE.MC",
-        "menciones": 2,
+        "menciones": 3,
         "analistas": [
           "R. Moro",
-          "D. Galán"
+          "A. Iturralde",
+          "R. Ojeda"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "19.53€",
-        "resistencia": "23.71€",
-        "recomendacion": "Comprar en corrección / Mantener",
-        "tesis": "Valor fortísimo dentro del sector utilities europeo, apoyándose de forma recurrente en su media móvil ascendente con impecable tendencia de fondo."
+        "nivel_consenso": "Divergencia",
+        "soporte": "21,90€",
+        "resistencia": "23,70€",
+        "recomendacion": "Mantener con stop / Reducir",
+        "tesis": "R. Moro recuerda que cotizaba en máximos de 23,70€ hace pocas jornadas y fija un stop estricto en 21,90€. Por el contrario, A. Iturralde advierte de que el sector energético sufrirá salidas de papel una vez concluido el ciclo electoral, instando a liquidar posiciones. R. Ojeda valora su predictibilidad fundamental a largo plazo."
       },
       {
-        "nombre": "Enagas",
-        "ticker": "ENG.MC",
+        "nombre": "Grenergy Renovables",
+        "ticker": "GRE.MC",
+        "menciones": 3,
+        "analistas": [
+          "J. del Canto",
+          "R. Moro",
+          "D. Santa Creu"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "47,50€",
+        "resistencia": "61,50€",
+        "recomendacion": "Evitar / Vender en pérdidas",
+        "tesis": "Deterioro técnico mayúsculo con caída acumulada superior al 55%. D. Santa Creu señala la perforación del soporte estructural de 60,60€ con volumen institucional extraordinario, fijando salida inmediata si no recupera 61,50€. J. del Canto y R. Moro censuran frontalmente las compras en caída libre y desaconsejan promediar; stop crítico en 47,50€."
+      },
+      {
+        "nombre": "Logista",
+        "ticker": "LOG.MC",
         "menciones": 2,
         "analistas": [
-          "V. Galán",
-          "R. Moro"
+          "J. del Canto",
+          "A. Iturralde"
         ],
-        "nivel_consenso": "Consenso Neutral",
-        "soporte": "17.00€",
-        "resistencia": "20.00€",
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "35,80€",
+        "resistencia": "37,00€",
+        "recomendacion": "Comprar en corrección / Mantener",
+        "tesis": "Valor refugio anticíclico por excelencia. A. Iturralde lo selecciona en su 'minuto de oro' recomendando compras en la zona de 36,00€ con objetivo en 37,00€ y stop riguroso en 36,00€. J. del Canto coincide en mantener la posición con stop de protección en 35,80€."
+      },
+      {
+        "nombre": "IAG",
+        "ticker": "IAG.MC",
+        "menciones": 2,
+        "analistas": [
+          "M. Ribes",
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "4,70€",
+        "resistencia": "5,20€",
         "recomendacion": "Mantener",
-        "tesis": "Tras romper un entorno lateral, experimenta una corrección en forma de vela envolvente que sugiere un descanso lógico dentro de su estructura."
+        "tesis": "M. Ribes resalta la fortaleza tendencial del título y su sucesión de nuevos máximos, aconsejando mantener con stop loss en 4,70€. V. Galán confirma la ruptura de su canal bajista de corto plazo y el sesgo constructivo mientras consolide el rebote europeo."
       },
       {
         "nombre": "Repsol",
@@ -112,65 +162,66 @@
         "menciones": 2,
         "analistas": [
           "V. Galán",
-          "M. Pinto"
+          "R. Ojeda"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "28.00€",
-        "resistencia": "31.00€",
-        "recomendacion": "Comprar en corrección",
-        "tesis": "A pesar de los recortes recientes, mantiene un excelente comportamiento relativo en su industria, ofreciendo una oportunidad para establecer soportes clave."
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "28,00€",
+        "resistencia": "31,00€",
+        "recomendacion": "Mantener / Esperar ruptura",
+        "tesis": "V. Galán considera el reciente recorte del 6,4% como una consolidación técnica saludable dentro de un canal lateral, estableciendo soporte firme en 28,00€ y señal de compra por encima de 31,00€. R. Ojeda previene sobre la estabilización a la baja del barril de crudo, lo que podría frenar su revalorización a medio plazo."
       },
       {
-        "nombre": "Clínica Baviera",
-        "ticker": "CBAV.MC",
-        "menciones": 1,
+        "nombre": "Indra",
+        "ticker": "IDR.MC",
+        "menciones": 2,
         "analistas": [
-          "M. Pinto"
+          "A. Iturralde",
+          "V. Galán"
         ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "25.00€",
-        "resistencia": "30.00€",
-        "recomendacion": "Comprar",
-        "tesis": "Destaca como el valor de mejor aspecto técnico en el mercado continuo español, rompiendo con fuerza un canal bajista previo."
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "44,00€",
+        "resistencia": "55,60€",
+        "recomendacion": "Evitar / Vender",
+        "tesis": "V. Galán constata la activación de un patrón de doble techo tras perder el soporte clave de 55,60€, con proyección bajista hacia la zona de 44,00€. A. Iturralde explica que los movimientos bursátiles en el sector de defensa reflejan colocaciones de papel institucional y aconseja cautela máxima antes del plan estratégico."
       },
       {
-        "nombre": "Inditex",
-        "ticker": "ITX.MC",
-        "menciones": 1,
-        "analistas": [
-          "G. Ortega"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "59.00€",
-        "resistencia": "61.00€",
-        "recomendacion": "Mantener",
-        "tesis": "Tendencia alcista estructural intacta, aunque sujeta a la vigilancia del soporte de corto plazo en 59 euros."
-      },
-      {
-        "nombre": "Meliá Hotels",
-        "ticker": "MEL.MC",
-        "menciones": 1,
-        "analistas": [
-          "G. Ortega"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "11.00€",
-        "resistencia": "12.00€",
-        "recomendacion": "Mantener",
-        "tesis": "Apunta hacia la recuperación de máximos con un aspecto técnico en plazos largos favorable."
-      },
-      {
-        "nombre": "Acciona",
-        "ticker": "ANA.MC",
+        "nombre": "Redeia",
+        "ticker": "RED.MC",
         "menciones": 1,
         "analistas": [
           "R. Moro"
         ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "15,80€",
+        "resistencia": "16,30€",
+        "recomendacion": "Mantener",
+        "tesis": "Consolidación estrecha en zona de resistencia del 61,8% de Fibonacci (16,30€). R. Moro recomienda mantener con stop en 15,80€; por encima de 16,30€ se activarían compras adicionales."
+      },
+      {
+        "nombre": "Solaria",
+        "ticker": "SLR.MC",
+        "menciones": 1,
+        "analistas": [
+          "D. Santa Creu"
+        ],
         "nivel_consenso": "Consenso Bajista",
-        "soporte": "196.50€",
-        "resistencia": "205.00€",
-        "recomendacion": "Evitar",
-        "tesis": "Estructura lateral con resultados flojos que aconseja deshacer posiciones si perfora los niveles clave de soporte."
+        "soporte": "13,50€",
+        "resistencia": "16,50€",
+        "recomendacion": "Evitar / Vender si perfora soporte",
+        "tesis": "D. Santa Creu identifica una secuencia muy bajista tras presentar resultados. Soporte crítico en 13,50€-13,60€; si se pierde en dos cierres consecutivos exige liquidar la posición. No hay compras por debajo de 16,50€."
+      },
+      {
+        "nombre": "ACS",
+        "ticker": "ACS.MC",
+        "menciones": 1,
+        "analistas": [
+          "M. Ribes"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "84,00€",
+        "resistencia": "92,00€",
+        "recomendacion": "Mantener con stop",
+        "tesis": "M. Ribes evalúa la corrección como un fallo de ruptura sin gravedad sistémica. Sugiere mantener con stop riguroso por debajo de 84,00€, siempre que el peso en cartera no exceda el 4% del capital total."
       },
       {
         "nombre": "Grifols",
@@ -180,10 +231,36 @@
           "R. Moro"
         ],
         "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "10.50€",
-        "resistencia": "11.80€",
+        "soporte": "11,60€",
+        "resistencia": "12,50€",
         "recomendacion": "Comprar en ruptura",
-        "tesis": "Muestra un comportamiento relativo positivo frente al mercado, activando señal clara de compra si consolida por encima de la resistencia."
+        "tesis": "R. Moro resalta su buen comportamiento relativo frente al mercado. Recomienda compra técnica en caso de consolidación por encima de 11,80€ con stop de protección en 11,60€."
+      },
+      {
+        "nombre": "Almirall",
+        "ticker": "ALM.MC",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "9,80€",
+        "resistencia": "12,00€",
+        "recomendacion": "Evitar",
+        "tesis": "V. Galán desaconseja totalmente la entrada; el valor exhibe un canal bajista claro desde máximos con salida continuada de dinero institucional (indicador CFI negativo)."
+      },
+      {
+        "nombre": "Meliá Hotels",
+        "ticker": "MEL.MC",
+        "menciones": 1,
+        "analistas": [
+          "G. Ortega"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "11,00€",
+        "resistencia": "12,20€",
+        "recomendacion": "Mantener",
+        "tesis": "G. Ortega mantiene una visión constructiva de corto y medio plazo mientras respete la cota de los 11,00€, con objetivo técnico fijado en el ataque a los máximos anuales."
       },
       {
         "nombre": "Unicaja",
@@ -193,82 +270,240 @@
           "R. Moro"
         ],
         "nivel_consenso": "Consenso Bajista",
-        "soporte": "3.27€",
-        "resistencia": "3.60€",
-        "recomendacion": "Evitar",
-        "tesis": "Acusa la debilidad general del sector bancario español con soportes alejados, recomendando proteger capital."
+        "soporte": "3,27€",
+        "resistencia": "3,65€",
+        "recomendacion": "Vender",
+        "tesis": "R. Moro alerta de la excesiva distancia hacia el soporte de 3,27€ para quienes entraron en 3,60€; recomienda ejecutar stop inmediato y alejarse del sector."
       },
       {
-        "nombre": "Endesa",
-        "ticker": "ELE.MC",
+        "nombre": "Mapfre",
+        "ticker": "MAP.MC",
         "menciones": 1,
         "analistas": [
-          "D. Galán"
+          "R. Moro"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "3,95€",
+        "resistencia": "4,45€",
+        "recomendacion": "Evitar",
+        "tesis": "R. Moro subraya que a 4,20€ el título está exactamente a mitad de camino entre soporte y resistencia, imposibilitando un ratio rentabilidad/riesgo operativo aceptable."
+      },
+      {
+        "nombre": "Acciona",
+        "ticker": "ANA.MC",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "196,50€",
+        "resistencia": "205,00€",
+        "recomendacion": "Vender",
+        "tesis": "R. Moro aconseja cerrar posiciones ante la pérdida del soporte clave de 196,50€ tras la publicación de resultados débiles y falta de impulso comprador."
+      },
+      {
+        "nombre": "Sacyr",
+        "ticker": "SCYR.MC",
+        "menciones": 1,
+        "analistas": [
+          "R. Moro"
         ],
         "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "40.50€",
-        "resistencia": "46.12€",
-        "recomendacion": "Mantener",
-        "tesis": "Valor refugio muy sólido dentro del sector eléctrico, sin señales de cambio de tendencia y con la media como soporte operativo."
+        "soporte": "3,20€",
+        "resistencia": "3,55€",
+        "recomendacion": "Comprar",
+        "tesis": "R. Moro la selecciona como una de las escasas excepciones positivas del mercado nacional por su sólida configuración técnica alcista y respeto a sus medias."
+      },
+      {
+        "nombre": "Puig Brands",
+        "ticker": "PUIG.MC",
+        "menciones": 1,
+        "analistas": [
+          "R. Ojeda"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "18,50€",
+        "resistencia": "21,00€",
+        "recomendacion": "Evitar",
+        "tesis": "R. Ojeda señala la ausencia total de tracción y fuerza relativa frente a colosos europeos del lujo como LVMH o Hermès, quedando excluida del radar institucional."
       }
     ],
     "internacionales": [
       {
         "nombre": "Nvidia",
         "ticker": "NVDA",
-        "menciones": 6,
+        "menciones": 7,
         "analistas": [
+          "J. del Canto",
+          "A. Iturralde",
+          "M. Ribes",
+          "R. Ojeda",
           "G. Ortega",
           "V. Galán",
-          "R. Moro",
-          "D. Galán",
-          "M. Pinto",
-          "M. Barrero"
+          "R. Moro"
         ],
         "nivel_consenso": "Divergencia",
-        "soporte": "147.00$",
-        "resistencia": "208.00$",
-        "recomendacion": "Evitar / Esperar suelo",
-        "tesis": "Resultados extraordinarios batidos pero acompañados de alta volatilidad, salida del CEO y dudas contables/geopolíticas que dañan temporalmente el gráfico técnico."
+        "soporte": "140,00$",
+        "resistencia": "191,00$",
+        "recomendacion": "Esperar suelo / Comprar en pánico",
+        "tesis": "Divergencia entre la perspectiva fundamental y técnica. R. Ojeda defiende una posición compradora agresiva por valoración fundamental tras corregir de 239$ a 150$, cotizando a múltiplos históricamente bajos. En contraste, G. Ortega, M. Ribes y V. Galán advierten de que el valor sigue por debajo de su media de 20 días y podría caer a 90$-100$ si el índice SOX no recupera soportes. J. del Canto recomienda aguardar a los 100$ si se desata un pánico vendedor."
       },
       {
-        "nombre": "Salesforce",
-        "ticker": "CRM",
-        "menciones": 1,
+        "nombre": "Anthropic",
+        "ticker": "ANTH",
+        "menciones": 7,
         "analistas": [
-          "D. Galán"
+          "A. Iturralde",
+          "M. Ribes",
+          "D. Santa Creu",
+          "R. Ojeda",
+          "G. Ortega",
+          "V. Galán",
+          "R. Moro"
+        ],
+        "nivel_consenso": "Divergencia",
+        "soporte": "98,00$",
+        "resistencia": "119,00$",
+        "recomendacion": "Vender en mercado secundario / Mantener a largo plazo",
+        "tesis": "Debut récord con salida en 84$ y picos iniciales de 116$-119$ antes de desinflarse hacia los 98$-100$. A. Iturralde, D. Santa Creu y M. Ribes coinciden en que se trata de un valor puramente especulativo donde los minoristas debían recoger las plusvalías del 40% inicial y retirarse. R. Ojeda discrepa y aconseja mantener a largo plazo asumiendo la alta volatilidad inicial, emulando los estrenos históricos de Meta o Alphabet."
+      },
+      {
+        "nombre": "Alphabet",
+        "ticker": "GOOGL",
+        "menciones": 3,
+        "analistas": [
+          "R. Moro",
+          "A. Iturralde",
+          "D. Santa Creu"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "270,00$",
+        "resistencia": "318,00$",
+        "recomendacion": "Comprar en soporte",
+        "tesis": "Tesis técnica convergente: el valor testea un soporte clave de medio plazo en 275$. R. Moro y D. Santa Creu valoran que el castigo del 30% desde máximos ofrece un ratio rentabilidad/riesgo muy favorable, fijando stop loss estricto bajo 270$ y objetivos de rebote en 300$ y 318$."
+      },
+      {
+        "nombre": "Amazon",
+        "ticker": "AMZN",
+        "menciones": 3,
+        "analistas": [
+          "J. del Canto",
+          "A. Iturralde",
+          "D. Santa Creu"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "244,00$",
+        "resistencia": "275,00$",
+        "recomendacion": "Mantener / Esperar confirmación",
+        "tesis": "J. del Canto y A. Iturralde señalan que el valor se ha mantenido relativamente sólido cerca de máximos sin sufrir el castigo de otros miembros de los 7 Magníficos. Sin embargo, cotiza en rango lateral estricto entre el soporte de 244$-245$ y la resistencia de 275$-276$. D. Santa Creu prefiere Alphabet por tener un catalizador técnico más nítido."
+      },
+      {
+        "nombre": "ASML Holding",
+        "ticker": "ASML",
+        "menciones": 2,
+        "analistas": [
+          "D. Santa Creu",
+          "R. Moro"
         ],
         "nivel_consenso": "Consenso Bajista",
-        "soporte": "154.87$",
-        "resistencia": "220.00$",
-        "recomendacion": "Evitar",
-        "tesis": "Deterioro técnico grave tras romper la media de 200 sesiones y perforar niveles clave de soporte con hueco bajista."
+        "soporte": "1.225,00$",
+        "resistencia": "1.488,00$",
+        "recomendacion": "Evitar / Salir si pierde soporte",
+        "tesis": "D. Santa Creu y R. Moro alertan de una estructura de máximos y mínimos decrecientes con cotización por debajo de sus tres medias móviles de referencia. R. Moro fija los 1.225$ como último soporte infranqueable para no profundizar caídas hacia 1.100$."
       },
       {
-        "nombre": "Palantir",
-        "ticker": "PLTR",
+        "nombre": "Advanced Micro Devices",
+        "ticker": "AMD",
+        "menciones": 2,
+        "analistas": [
+          "M. Ribes",
+          "D. Santa Creu"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "460,00$",
+        "resistencia": "510,00$",
+        "recomendacion": "Evitar / Stop innegociable",
+        "tesis": "M. Ribes advierte de la violencia del castigo intradiario y las posiciones cortas institucionales por presuntas restricciones comerciales en Asia; stop innegociable en 460$-470$ y abstenerse de abrir nuevas compras."
+      },
+      {
+        "nombre": "BASF",
+        "ticker": "BAS.DE",
+        "menciones": 2,
+        "analistas": [
+          "R. Ojeda",
+          "V. Galán"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "49,00€",
+        "resistencia": "52,00€",
+        "recomendacion": "Mantener con stop",
+        "tesis": "V. Galán observa un posible apoyo en medias si el cierre semanal aguanta por encima de 51,60€, situando el stop final en 49,00€. No obstante, prefiere otras químicas europeas como Air Liquide."
+      },
+      {
+        "nombre": "Siemens Energy",
+        "ticker": "ENR.DE",
+        "menciones": 2,
+        "analistas": [
+          "R. Moro",
+          "J. del Canto"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "110,00€",
+        "resistencia": "130,00€",
+        "recomendacion": "Evitar / No promediar",
+        "tesis": "R. Moro y J. del Canto critican con dureza la intención de promediar a la baja en el valor, que presenta una secuencia decreciente hacia el soporte de 110,00€ con riesgo de ruptura hacia los 90,00€."
+      },
+      {
+        "nombre": "Microsoft",
+        "ticker": "MSFT",
         "menciones": 1,
         "analistas": [
-          "M. Pinto"
+          "A. Iturralde"
         ],
-        "nivel_consenso": "Divergencia",
-        "soporte": "147.80$",
-        "resistencia": "176.00$",
-        "recomendacion": "Mantener / Vigilar soporte",
-        "tesis": "Retroceso hacia el nivel de Fibonacci del 61.8%; se vigila el soporte clave para evitar caídas adicionales hacia la zona de 105 dólares."
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "415,00$",
+        "resistencia": "445,00$",
+        "recomendacion": "No ampliar / Salir",
+        "tesis": "A. Iturralde argumenta que el mercado marcó techos tras las elecciones estadounidenses y que, pese a los rebotes que puedan producirse, el riesgo de corrección profunda en las megacaps es elevado."
       },
       {
-        "nombre": "IBM",
-        "ticker": "IBM",
+        "nombre": "Apple",
+        "ticker": "AAPL",
+        "menciones": 1,
+        "analistas": [
+          "A. Iturralde"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "225,00$",
+        "resistencia": "242,00$",
+        "recomendacion": "Mantener",
+        "tesis": "A. Iturralde destaca que Apple se ha desmarcado del pánico tecnológico marcando máximos históricos, sirviendo de ancla de estabilidad para Wall Street."
+      },
+      {
+        "nombre": "ArcelorMittal",
+        "ticker": "MT",
+        "menciones": 1,
+        "analistas": [
+          "M. Ribes"
+        ],
+        "nivel_consenso": "Consenso Bajista",
+        "soporte": "54,00€",
+        "resistencia": "62,00€",
+        "recomendacion": "Vender y recoger beneficios",
+        "tesis": "M. Ribes indica que ha llegado el momento de cosechar ganancias antes de que el deterioro cíclico de los metales y el encarecimiento monetario erosionen el capital."
+      },
+      {
+        "nombre": "Bayer",
+        "ticker": "BAYN.DE",
         "menciones": 1,
         "analistas": [
           "V. Galán"
         ],
-        "nivel_consenso": "Consenso Bajista",
-        "soporte": "217.00$",
-        "resistencia": "291.00$",
-        "recomendacion": "Evitar",
-        "tesis": "Fuerte corrección tras presentación de resultados decepcionantes, con un periodo lateral prolongado por delante."
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "42,63€",
+        "resistencia": "48,00€",
+        "recomendacion": "Comprar / Mantener",
+        "tesis": "V. Galán confirma una directriz alcista limpia con cuatro apoyos técnicos y entrada de dinero profesional en el sector farmacéutico europeo; soporte innegociable en 42,63€."
       },
       {
         "nombre": "Puma",
@@ -277,115 +512,11 @@
         "analistas": [
           "V. Galán"
         ],
-        "nivel_consenso": "Consenso Neutral",
-        "soporte": "24.40€",
-        "resistencia": "29.00€",
-        "recomendacion": "Mantener",
-        "tesis": "Intento de formación de suelo tras caídas drásticas, con indicios incipientes de entrada de flujos institucionales en el sector."
-      },
-      {
-        "nombre": "Nautilus Biotechnology",
-        "ticker": "NAUT",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
-        "nivel_consenso": "Consenso Neutral",
-        "soporte": "2.09$",
-        "resistencia": "3.46$",
-        "recomendacion": "Tomar beneficios parciales",
-        "tesis": "Alta volatilidad propia del sector biotecnológico; se aconseja asegurar beneficios parciales ante la falta de diversificación del negocio."
-      },
-      {
-        "nombre": "Waters Corporation",
-        "ticker": "WAT",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
         "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "425.00$",
-        "resistencia": "445.00$",
-        "recomendacion": "Comprar",
-        "tesis": "Acción defensiva de alta calidad que rompe consolidaciones plurianuales con fuerte entrada de mano fuerte institucional."
-      },
-      {
-        "nombre": "BASF",
-        "ticker": "BAS.DE",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
-        "nivel_consenso": "Consenso Neutral",
-        "soporte": "49.00€",
-        "resistencia": "52.00€",
-        "recomendacion": "Mantener",
-        "tesis": "Consolidación prolongada con corrección reciente que exige respetar soportes clave para validar mínimos crecientes."
-      },
-      {
-        "nombre": "Ferrari",
-        "ticker": "RACE",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "325.00$",
-        "resistencia": "374.00$",
-        "recomendacion": "Comprar",
-        "tesis": "Triple suelo confirmado con retesteo exitoso a medias y superación de resistencias que la devuelven a máximos."
-      },
-      {
-        "nombre": "Air Liquide",
-        "ticker": "AI.PA",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "174.00€",
-        "resistencia": "180.00€",
-        "recomendacion": "Comprar en corrección",
-        "tesis": "Líder indiscutible dentro del sector químico europeo con entrada constante de dinero institucional."
-      },
-      {
-        "nombre": "Spotify",
-        "ticker": "SPOT",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "587.00$",
-        "resistencia": "650.00$",
-        "recomendacion": "Mantener",
-        "tesis": "Suelo de medio plazo consolidado con mínimos crecientes y ruptura de máximos recientes."
-      },
-      {
-        "nombre": "Deutsche Börse",
-        "ticker": "DB1.DE",
-        "menciones": 1,
-        "analistas": [
-          "V. Galán"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "300.00€",
-        "resistencia": "320.00€",
-        "recomendacion": "Comprar en corrección",
-        "tesis": "Excelente comportamiento tras romper resistencias, ofreciendo oportunidades de entrada en soportes técnicos."
-      },
-      {
-        "nombre": "Pernod Ricard",
-        "ticker": "RI.PA",
-        "menciones": 1,
-        "analistas": [
-          "R. Moro"
-        ],
-        "nivel_consenso": "Alto Consenso Alcista",
-        "soporte": "70.75€",
-        "resistencia": "72.10€",
-        "recomendacion": "Comprar",
-        "tesis": "Aspecto técnico muy favorable tras perforar al alza resistencias clave en el mercado francés."
+        "soporte": "24,40€",
+        "resistencia": "29,00€",
+        "recomendacion": "Comprar en ruptura",
+        "tesis": "V. Galán aprecia una pauta de suelo consolidada tras una corrección secular; activación de compras institucionales al superar los 29,00€."
       },
       {
         "nombre": "Alstom",
@@ -395,49 +526,140 @@
           "R. Moro"
         ],
         "nivel_consenso": "Consenso Bajista",
-        "soporte": "4.80€",
-        "resistencia": "9.25€",
+        "soporte": "4,80€",
+        "resistencia": "11,50€",
         "recomendacion": "Evitar",
-        "tesis": "Estructura terriblemente bajista tras romper soportes de largísimo plazo y acumular problemas financieros y operativos."
+        "tesis": "R. Moro alerta de que tras romper soportes multianuales y anunciar pérdidas abultadas, el valor puede prolongar su desplome técnico hacia la cota de 4,80€."
       },
       {
-        "nombre": "ASML Holding",
-        "ticker": "ASML",
+        "nombre": "Pernod Ricard",
+        "ticker": "RI.PA",
         "menciones": 1,
         "analistas": [
           "R. Moro"
         ],
-        "nivel_consenso": "Divergencia",
-        "soporte": "1225.00€",
-        "resistencia": "1350.00€",
-        "recomendacion": "Mantener con cautela",
-        "tesis": "Alta volatilidad apoyada en los mínimos anteriores; la pérdida de niveles clave invalidaría cualquier intento de rebote."
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "70,75€",
+        "resistencia": "76,00€",
+        "recomendacion": "Comprar",
+        "tesis": "R. Moro la señala como una de las mejores configuraciones del mercado europeo tras consolidar por encima de 70,30€, con stop ajustado en 70,75€."
       },
       {
-        "nombre": "Netflix",
-        "ticker": "NFLX",
+        "nombre": "Coherent",
+        "ticker": "COHR",
         "menciones": 1,
         "analistas": [
-          "D. Galán"
+          "M. Ribes"
         ],
-        "nivel_consenso": "Consenso Bajista",
-        "soporte": "550.00$",
-        "resistencia": "67.43$",
-        "recomendacion": "Evitar",
-        "tesis": "Estructura bajista persistente de máximos y mínimos decrecientes, sin mostrar señales claras de suelo."
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "200,00$",
+        "resistencia": "232,00$",
+        "recomendacion": "Comprar en confirmación",
+        "tesis": "M. Ribes identifica un patrón técnico prometedor con stop loss en 200,00$, recomendando condicionar la entrada a que el precio recupere la zona de 231$-232$."
       },
       {
-        "nombre": "SanDisk",
-        "ticker": "SNDK",
+        "nombre": "ARM Holdings",
+        "ticker": "ARM",
         "menciones": 1,
         "analistas": [
-          "M. Pinto"
+          "D. Santa Creu"
         ],
         "nivel_consenso": "Consenso Bajista",
-        "soporte": "695.00$",
-        "resistencia": "750.00$",
-        "recomendacion": "Evitar",
-        "tesis": "Perdida sucesiva de soportes y medias móviles sin conseguir consolidar un rebote técnico sostenible."
+        "soporte": "165,00$",
+        "resistencia": "209,00$",
+        "recomendacion": "Vender en rebotes",
+        "tesis": "D. Santa Creu detalla la pérdida de soportes proporcionales de Fibonacci; aconseja usar cualquier rebote hacia 209$ para reducir cartera y fija stop de salida en 165$."
+      },
+      {
+        "nombre": "McDonald's",
+        "ticker": "MCD",
+        "menciones": 1,
+        "analistas": [
+          "M. Ribes"
+        ],
+        "nivel_consenso": "Consenso Neutral",
+        "soporte": "250,00$",
+        "resistencia": "270,00$",
+        "recomendacion": "Esperar en liquidez",
+        "tesis": "M. Ribes observa flujos hacia consumo defensivo pero detecta sobrecompra en el rebote actual; prefiere esperar una corrección hacia 250$-255$ antes de comprar."
+      },
+      {
+        "nombre": "Waters Corp",
+        "ticker": "WAT",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "445,00$",
+        "resistencia": "480,00$",
+        "recomendacion": "Comprar",
+        "tesis": "V. Galán resalta la ruptura alcista de un lateral plurianual con entrada masiva de dinero institucional y stop ceñido a la media móvil en 445$."
+      },
+      {
+        "nombre": "Crocs",
+        "ticker": "CROX",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "155,00$",
+        "resistencia": "220,00$",
+        "recomendacion": "Comprar",
+        "tesis": "V. Galán cataloga la ruptura sobre 155$ como una de las pautas más sólidas de Wall Street, proyectando un objetivo alcista hacia los 220$-225$."
+      },
+      {
+        "nombre": "Ferrari",
+        "ticker": "RACE",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "325,00€",
+        "resistencia": "385,00€",
+        "recomendacion": "Comprar",
+        "tesis": "V. Galán aplaude la culminación de un triple suelo sobre 325€ y la posterior reanudación alcista marcando máximos en 374€."
+      },
+      {
+        "nombre": "Spotify",
+        "ticker": "SPOT",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "587,00$",
+        "resistencia": "650,00$",
+        "recomendacion": "Mantener",
+        "tesis": "V. Galán ratifica la solidez de la formación de suelo estructural con mínimos crecientes, situando el soporte de referencia en 587$."
+      },
+      {
+        "nombre": "Deutsche Börse",
+        "ticker": "DB1.DE",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "288,00€",
+        "resistencia": "310,00€",
+        "recomendacion": "Comprar en apoyo",
+        "tesis": "V. Galán recomienda vigilar un apoyo técnico en las inmediaciones de 288€-300€ tras una revalorización del 13% para incorporarse a su tendencia alcista."
+      },
+      {
+        "nombre": "Air Liquide",
+        "ticker": "AI.PA",
+        "menciones": 1,
+        "analistas": [
+          "V. Galán"
+        ],
+        "nivel_consenso": "Alto Consenso Alcista",
+        "soporte": "174,00€",
+        "resistencia": "185,00€",
+        "recomendacion": "Comprar en corrección",
+        "tesis": "V. Galán la sitúa como la opción de mayor calidad técnica dentro del sector químico europeo tras batir los 180€, esperando un retesteo a 174€ para comprar."
       }
     ]
   },
@@ -445,107 +667,132 @@
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "¡Hola a todos, y bienvenidos a este repaso estratégico de mercado! Hoy analizamos las claves operativas y el quórum de los principales consultorios bursátiles de los últimos días."
+      "texto": "¡Hola a todos, y bienvenidos a este repaso semanal de mercado! Hoy analizamos las claves operativas y el quórum de los principales consultorios bursátiles tras unas jornadas de altísima tensión en los parqués internacionales."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Efectivamente. Han sido jornadas de máxima intensidad en los parqués, marcadas por la cautela, la digestión de resultados tecnológicos y la búsqueda de refugio en Europa."
+      "texto": "Efectivamente. Hemos vivido sesiones decisivas marcadas por el debut bursátil de Anthropic, la digestión de las cuentas de Nvidia y un incremento notable de la volatilidad, con el índice VIX rondando de nuevo los 25 y 28 puntos."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Comenzando por el contexto macroeconómico, observamos que los analistas coinciden en un escenario de alta selectividad. La Reserva Federal mantiene un tono firme, lo que incrementa la presión sobre los tipos y genera volatilidad en Wall Street."
+      "texto": "En el terreno macroeconómico, el mensaje conjunto es de prudencia. La Reserva Federal mantiene una postura restrictiva sobre los tipos de interés, lo que sostiene la rentabilidad de la deuda soberana americana en cotas muy atractivas frente a la renta variable."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Así es. Mientras tanto, Europa muestra una relativa fortaleza apoyada en el sector defensivo y en la debilidad del euro, aunque con la atención puesta en los niveles críticos de los índices principales."
+      "texto": "Así es, y esa fortaleza de los rendimientos del bono en Estados Unidos coincide con un dólar imparable. Analistas como R. Moro y V. Galán han reiterado que las posiciones largas en el billete verde siguen siendo de las más fiables, mientras que las materias primas sufren un castigo severo."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Repasando los índices, el IBEX 35 se mueve en un rango lateral de consolidación, vigilando de cerca el soporte en los 19.200 puntos tras alejarse de la cota de los 20.000."
+      "texto": "El oro y la plata son un claro ejemplo de ello. Coinciden varios expertos, entre ellos R. Moro y V. Galán, en que ambos metales han quebrado soportes clave y presentan estructuras óptimas para estrategias cortas o de cobertura, alejándose de cualquier interés comprador a corto plazo."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Por su parte, el DAX alemán, a pesar de marcar máximos históricos recientes, muestra riesgos de corrección hacia su media, fijando un soporte clave en los 24.792 puntos."
+      "texto": "Pasando al mapa de los índices, detengámonos en Wall Street. El S&P 500 ha estado poniendo a prueba la zona de los 7.325 puntos, y tanto J. del Canto como D. Santa Creu advierten de que una pérdida sostenida abriría el camino hacia el gran soporte psicológico de los 7.000 enteros."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Al otro lado del Atlántico, el S&P 500 y el Nasdaq 100 reflejan un deterioro evidente, liderado por el castigo en el sector de semiconductores y la inteligencia artificial."
+      "texto": "Y en el Nasdaq 100, la debilidad es todavía más evidente. M. Ribes y G. Ortega han alertado sobre la resistencia insalvable en los 27.800 puntos. G. Ortega señalaba que si el selectivo tecnológico converge a la baja con el índice de semiconductores de Filadelfia, la corrección global podría acelerarse."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Y aquí es donde entra el epicentro de la tormenta: Nvidia. Con resultados extraordinarios pero con la dimisión de su CEO y dudas geopolíticas, los expertos recomiendan extremar la prudencia."
+      "texto": "Mirando a Europa, el DAX alemán ha cedido con violencia el soporte de los 26.000 puntos. A. Iturralde destacaba que, pese a la enorme sobreventa acumulada que invita a un rebote puntual hacia 25.050 o 25.500 puntos, la tendencia dominante de corto plazo se ha tornado bajista."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Exacto. G. Ortega y M. Pinto coinciden en que, técnico en mano, Nvidia ha buscado niveles de retroceso importantes, pero advierten que no existe un suelo confirmado para lanzarse a comprar."
+      "texto": "¿Y qué ocurre con nuestro IBEX 35? R. Moro lo describe dentro de un rango lateral estricto de casi diez meses entre los 18.700 y los 19.600 puntos. Sin embargo, A. Iturralde avisa de que el selectivo español podría haber alcanzado el final de su fiesta particular antes de las elecciones generales."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Pasando al mercado nacional, las miradas se centran en el sector bancario. Valores como Banco Santander generan un claro consenso bajista para el corto plazo."
+      "texto": "Ese factor político enlaza directamente con los valores nacionales más comentados. Tomemos Banco Santander, analizado por cinco expertos. A. Iturralde sugiere aprovechar posibles rebotes hacia la zona de 11,40 o 11,50 euros para aligerar o salir, marcando un stop en 10,20 euros."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "R. Moro y M. Pinto señalan que Santander dibuja una estructura de caída en ondas, rompiendo medias y sin ofrecer garantías técnicas para una entrada inmediata antes de testar los 9.80 euros."
+      "texto": "En esa misma entidad, D. Santa Creu y R. Moro observan una formación correctiva abierta, advirtiendo de que si perfora el nivel psicológico de los 10 euros, el daño gráfico sería sustancial. Solo R. Ojeda mantiene una visión tranquila de cara a los próximos ejercicios por rentabilidad por dividendo."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Situación similar para Indra, que tras sufrir recortes importantes por la investigación en contratos de defensa, recibe recomendaciones unánimes de mantenerse al margen."
+      "texto": "Otro de los valores estrella del mercado español es Iberdrola. R. Moro situaba su nivel de protección en los 21,90 euros tras tocar máximos en 23,70, mientras que A. Iturralde advertía de que el sector energético regulado ya ha cumplido objetivos y puede experimentar fuertes salidas de dinero institucional."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "En la otra cara de la moneda destacan las utilities. Iberdrola y Endesa continúan siendo baluartes defensivos muy sólidos en las carteras de los inversores."
+      "texto": "Y donde el consenso es absoluto, pero en sentido negativo, es en Grenergy Renovables y Solaria. J. del Canto, R. Moro y D. Santa Creu han sido contundentes: Grenergy ha perdido el soporte vital de los 60 euros con volumen desproporcionado, y comprar en caída libre es un error operativo gravísimo."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "D. Galán y R. Moro recalcan que Iberdrola mantiene una tendencia alcista impecable, apoyándose de forma recurrente en su media móvil con un soporte clave muy bien definido."
+      "texto": "Completamente de acuerdo. J. del Canto ironizaba con que promediar a la baja es una enfermedad costosa. Pero no todo son alarmas en la bolsa doméstica. En el lado positivo destaca Inditex, elogiada por R. Ojeda, G. Ortega y V. Galán, mostrando una solidez técnica impecable por encima de los 58 euros."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "A nivel internacional, el foco se divide entre las alertas en tecnología y la solidez de compañías industriales y de consumo en Europa."
+      "texto": "Y no olvidemos a Logista. A. Iturralde la eligió en su minuto de oro como un valor refugio magnífico, recomendando compras en corrección hacia los 36 euros con objetivo en 37, planteamiento respaldado también por J. del Canto con stop en 35,80 euros."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "V. Galán destaca el excelente comportamiento de valores como Ferrari, Waters Corporation o Air Liquide, que muestran flujos institucionales positivos frente al desánimo de las megacaps tecnológicas."
+      "texto": "Demos el salto a los gigantes internacionales, porque el gran protagonista de la semana ha sido Anthropic. Salida en 84 dólares, subida fulgurante a 116 y posterior retroceso por debajo de 100 dólares. El quórum técnico entre A. Iturralde, D. Santa Creu y M. Ribes ha sido unánime: vender de inmediato en el estreno."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Incluso en el ámbito de los metales preciosos, tanto R. Moro como V. Galán coinciden en que el oro y la plata muestran un sesgo bajista claro, situándose en zonas óptimas para estrategias cortas."
+      "texto": "Los tres analistas coincidían en que, para el inversor minorista, esa salida era un vehículo puramente especulativo para capitalizar la prima inicial. Solo R. Ojeda recomendaba mantener con paciencia, argumentando que a largo plazo este tipo de corporaciones consolida su modelo de negocio."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Para la parte defensiva de la cartera, gestores como M. Barrero sugieren alternar fondos monetarios sostenibles y renta fija a corto plazo como refugio frente a la volatilidad."
+      "texto": "La otra gran batalla dialéctica se ha librado en torno a Nvidia. R. Ojeda la calificaba como una de las mejores compañías del mundo, afirmando que su corrección desde 239 hasta el entorno de los 150 dólares deja múltiplos de PER 16 difícilmente repetibles para abrir posiciones."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "En conclusión, nos encontramos en un momento de gestión de riesgo estricta: proteger el capital, evitar adivinar suelos en valores dañados y mantener liquidez."
+      "texto": "Sin embargo, el análisis técnico impone cautela. M. Ribes recordaba que la acción cotiza por debajo de su media de 20 sesiones, advirtiendo de que sin catalizadores claros podría buscar los 90 dólares. G. Ortega y J. del Canto prefieren esperar a que el precio confirme una señal de giro antes de precipitarse."
     },
     {
       "locutor": "Voz 2",
       "genero": "femenino",
-      "texto": "Efectivamente. La paciencia y la disciplina operativa serán las mejores herramientas para navegar con éxito lo que resta de ejercicio bursátil."
+      "texto": "Dentro de las grandes tecnológicas, Alphabet ofrece un consenso bastante más nítido. R. Moro y D. Santa Creu destacan que cotiza en un soporte relevante en 275 dólares tras acumular un castigo del 30%, lo que permite compras especulativas con un stop muy ceñido en los 270 dólares."
     },
     {
       "locutor": "Voz 1",
       "genero": "masculino",
-      "texto": "Gracias a todos por acompañarnos en este análisis detallado. Les esperamos en los próximos consultorios con más claves de los mercados financieros."
+      "texto": "En contraposición, títulos vinculados a semiconductores como AMD y ASML Holding muestran un aspecto francamente deteriorado. D. Santa Creu fijaba los 1.225 dólares como última línea de defensa en ASML, mientras M. Ribes exige situar un stop innegociable en AMD tras sus recientes caídas."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Por su parte, V. Galán ponía el acento en ideas internacionales descorrelacionadas que están batiendo con fuerza al mercado, como Crocs superando resistencias plurianuales, Ferrari en subida tras culminar un triple suelo, o la farmacéutica Bayer aguantando su directriz en 42,63 euros."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "La lección de fondo que transmiten todos los consultorios es idéntica a la reflexión histórica expuesta en Visionarios Bolsa: en épocas de euforia tecnológica, acertar con la tendencia global no garantiza ganar dinero si se compra tarde, con apalancamiento excesivo o sin una disciplina técnica férrea."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Exacto. M. Ribes lo resumía de manera brillante: la liquidez es una posición de inversión activa, y proteger el capital perdiendo un cero coma quince por ciento en un stop loss te mantiene vivo en el mercado cuando llega una fase bajista prolongada."
+    },
+    {
+      "locutor": "Voz 1",
+      "genero": "masculino",
+      "texto": "En conclusión: elevar niveles de liquidez, evitar perseguir rebotes en valores bajistas sin confirmación, respetar escrupulosamente los stops y buscar únicamente compañías líderes con fortaleza relativa institucional."
+    },
+    {
+      "locutor": "Voz 2",
+      "genero": "femenino",
+      "texto": "Un diagnóstico impecable para navegar este cierre semanal. Muchísimas gracias a todos por acompañarnos, sigan gestionando el riesgo con máxima prudencia y nos escuchamos en la próxima entrega."
     }
   ]
 }
