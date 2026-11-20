@@ -3,3 +3,7 @@ stoxxx/data/transcripts/
 stoxxx/data/transcripts/*
 stoxxx/.venv/
 stoxxx/.env
+
+# Backups temporales
+*_bak/
+*_bak

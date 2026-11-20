@@ -442,6 +442,7 @@ div.paragraph ol, div.paragraph ol li { list-style: decimal outside !important; 
   color: #fca5d0 !important;
   font-weight: 700 !important;
   text-decoration: none !important;
+  white-space: nowrap !important;
 }
 .footer-tel-link:hover {
   text-decoration: underline !important;

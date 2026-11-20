@@ -130,7 +130,7 @@ npm run test:navigation
 - **Contenido (`tests/content.test.js`)**:
   - Estructura HTML básica (`<!DOCTYPE html>`, `UTF-8`, `viewport`, etiquetas `<title>`).
   - Textos de identidad corporativa y memoria histórica (7 generaciones, Indalecio Sanz, Ezequiel, María «la confitera», *Postrechino*).
-  - Información de contacto obligatoria (teléfono `968 40 20 10`, dirección en Puerto Lumbreras).
+  - Información de contacto obligatoria (teléfonos `968 40 20 10` y `621 28 16 00`, dirección en Puerto Lumbreras).
   - Cero 404s en recursos locales: presencia y no vacuidad del logotipo, todas las imágenes `<img src="...">`, fuentes tipográficas de `main_style.css` y scripts de soporte.
 - **Limpieza e Independencia (`tests/content.test.js`)**:
   - Cero publicidad comercial de Weebly en el pie de página.
@@ -151,7 +151,7 @@ npm run test:navigation
   - Presencia del menú de navegación completo y botón hamburguesa responsive.
   - Resolución de anclas internas (`#historia`, `#dulces`, `#encargos`, `#donde`).
   - Enlaces relativos `.html` sin enlaces rotos.
-  - Enlaces de acción: teléfono directo (`tel:968402010`), mapas de Google y enlaces a redes sociales (`target="_blank"`).
+  - Enlaces de acción: teléfonos directos (`tel:968402010` y `tel:621281600`), mapas de Google y enlaces a redes sociales (`target="_blank"`).
 
 ---
 

@@ -162,6 +162,8 @@ describe('Tests de Navegación - Enlaces de Contacto, Mapas y Redes Sociales', (
     const html = readHtml('index.html');
     assert.match(html, /href=[\"']tel:968402010[\"']/i,
       'Debe contener un enlace clickeable con protocolo tel:968402010 para llamadas móviles');
+    assert.match(html, /href=[\"']tel:621281600[\"']/i,
+      'Debe contener un enlace clickeable con protocolo tel:621281600 para llamadas móviles');
   });
 
   it('debe contener enlaces válidos a Google Maps e iframe embebido', () => {
