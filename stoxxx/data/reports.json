@@ -1,5 +1,112 @@
 [
   {
+    "date": "2026-11-25",
+    "sentimiento_general": "Cautela",
+    "summary_snippet": "• El mercado muestra una fase clara de corrección y alta volatilidad tras alcanzar máximos, con un VIX elevado que obliga a extremar la cautela y mantener posiciones defensivas.\n• Los consultorios de bolsa coinciden de f...",
+    "top_stocks": [
+      "Nvidia (10)",
+      "Iberdrola (7)",
+      "Indra (6)",
+      "Banco Santander (5)"
+    ],
+    "detail_url": "reports/html/report-2026-11-25.html",
+    "pdf_url": "reports/pdf/informe-2026-11-25.pdf",
+    "audio_url": "reports/audio/podcast-2026-11-25.mp3",
+    "videos_count": 10,
+    "fuentes_consultadas": [
+      {
+        "id": "-TVUfPRb0oc",
+        "title": "#Consultorio | Roblox, Flywire o Airbnb, en el radar de V. Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-25",
+        "url": "https://www.youtube.com/watch?v=-TVUfPRb0oc",
+        "char_count": 23090,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "vTwOxx5BWAc",
+        "title": "Ojo a la caída del Nasdaq: \"El guantazo no es en Nvidia; viene del SOX\", explica Ortega",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-25",
+        "url": "https://www.youtube.com/watch?v=vTwOxx5BWAc",
+        "char_count": 21755,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "WC2_RASFHUo",
+        "title": "Consultorio | La advertencia de R. Moro tras las caídas: \"Algo sí se ha roto\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-25",
+        "url": "https://www.youtube.com/watch?v=WC2_RASFHUo",
+        "char_count": 13487,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "u8mMzaY5kRE",
+        "title": "#Consultorio | Iberdrola e Inditex, las apuestas de D. Galán para invertir en bolsa",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-24",
+        "url": "https://www.youtube.com/watch?v=u8mMzaY5kRE",
+        "char_count": 23384,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "0T-4WKsfFmk",
+        "title": "Consultorio | Cellnex resiste mejor que el mercado y M. Pinto aconseja aguantar",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-24",
+        "url": "https://www.youtube.com/watch?v=0T-4WKsfFmk",
+        "char_count": 26074,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "XIWo4O-09MA",
+        "title": "El Oro se desploma y Bitcóin tiembla: así vienen los mercados en el cierre de 2026",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-24",
+        "url": "https://www.youtube.com/watch?v=XIWo4O-09MA",
+        "char_count": 49691,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "PLinECWm_kI",
+        "title": "Consultorio | Invertir con equilibro ante una tecnología sin burbuja, con M. Barrero",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-24",
+        "url": "https://www.youtube.com/watch?v=PLinECWm_kI",
+        "char_count": 21303,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "OqRxYCLgkzw",
+        "title": "Consultorio con Iturralde: \"¿Volverá a ser Nvidia lo que era? Imposible\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-23",
+        "url": "https://www.youtube.com/watch?v=OqRxYCLgkzw",
+        "char_count": 20203,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "ZDwEOSrcCeY",
+        "title": "#CONSULTORIO | \"Es demasiado pronto para cantar victoria\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-23",
+        "url": "https://www.youtube.com/watch?v=ZDwEOSrcCeY",
+        "char_count": 23997,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "slMoS1Zh3vY",
+        "title": "Oportunidades para invertir: \"Cuidado con la ansiedad al entrar\", con J. M. Luna",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-23",
+        "url": "https://www.youtube.com/watch?v=slMoS1Zh3vY",
+        "char_count": 22442,
+        "status": "Transcrito completo"
+      }
+    ]
+  },
+  {
     "date": "2026-11-20",
     "sentimiento_general": "Cautela",
     "summary_snippet": "• El tono dominante entre los analistas durante las últimas sesiones es de marcada cautela y advertencia de corrección técnica.\n• Se constata un agotamiento del impulso alcista tras el debut bursátil de Anthropic y la di...",

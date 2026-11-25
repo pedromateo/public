@@ -1,6 +1,7 @@
 import unittest
 import tempfile
 import json
+from datetime import datetime
 from pathlib import Path
 from src.validators import MarketReportValidator
 from src.extractor import YouTubeExtractor
@@ -13,13 +14,16 @@ class TestValidatorsAndCache(unittest.TestCase):
             tmp_path = Path(tmp_dir)
             extractor = YouTubeExtractor(days_horizon=7, cache_dir=tmp_path)
             video_id = "test_vid_123"
+            today = datetime.now()
+            today_str = today.strftime("%Y%m%d")
+            today_iso = today.strftime("%Y-%m-%d")
             video_data = {
                 "id": video_id,
                 "title": "Consultorio de Bolsa Test",
                 "channel": "Capital Radio",
                 "channel_id": "capital_radio",
-                "upload_date": "20261114",
-                "date_formatted": "2026-11-14",
+                "upload_date": today_str,
+                "date_formatted": today_iso,
                 "transcript": "Esta es una transcripción de prueba completa sobre el IBEX 35 y Banco Santander."
             }
 
