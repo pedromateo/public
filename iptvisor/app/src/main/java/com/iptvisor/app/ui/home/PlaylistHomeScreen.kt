@@ -321,11 +321,13 @@ private fun SearchSection(
                     )
                     if (indexingProgress != null) {
                         LinearProgressIndicator(
-                            progress = { (indexingProgress.coerceIn(0, 100)) / 100f },
                             modifier = Modifier.fillMaxWidth()
                         )
+                        val formattedCount = remember(indexingProgress) {
+                            java.text.NumberFormat.getIntegerInstance().format(indexingProgress)
+                        }
                         Text(
-                            text = "Indexando catálogo: $indexingProgress%",
+                            text = "Indexando catálogo: $formattedCount elementos...",
                             style = MaterialTheme.typography.labelSmall
                         )
                     } else {
