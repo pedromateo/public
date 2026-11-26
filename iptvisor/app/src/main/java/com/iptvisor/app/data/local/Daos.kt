@@ -17,7 +17,7 @@ data class CategoryFavKey(
 @Dao
 interface PlaylistDao {
 
-    @Query("SELECT * FROM playlists ORDER BY id ASC")
+    @Query("SELECT * FROM playlists ORDER BY name COLLATE NOCASE ASC")
     fun observeAll(): Flow<List<PlaylistEntity>>
 
     @Query("SELECT * FROM playlists WHERE id = :id LIMIT 1")
@@ -44,13 +44,13 @@ interface CategoryDao {
 
     @Query(
         "SELECT * FROM categories WHERE playlistId = :playlistId AND type = :type " +
-            "ORDER BY name ASC",
+            "ORDER BY name COLLATE NOCASE ASC",
     )
     fun observeByType(playlistId: Long, type: ContentType): Flow<List<CategoryEntity>>
 
     @Query(
         "SELECT * FROM categories WHERE playlistId = :playlistId AND isFavorite = 1 " +
-            "ORDER BY name ASC",
+            "ORDER BY name COLLATE NOCASE ASC",
     )
     fun observeFavorites(playlistId: Long): Flow<List<CategoryEntity>>
 
@@ -94,7 +94,7 @@ interface StreamDao {
     @Query(
         "SELECT * FROM streams " +
             "WHERE playlistId = :playlistId AND type = :type AND categoryId = :categoryId " +
-            "ORDER BY id ASC",
+            "ORDER BY name COLLATE NOCASE ASC",
     )
     fun observeByCategory(
         playlistId: Long,
@@ -120,7 +120,8 @@ interface StreamDao {
     @Query(
         "SELECT streams.* FROM streams " +
             "JOIN streams_fts ON streams.id = streams_fts.rowid " +
-            "WHERE streams.playlistId = :playlistId AND streams_fts MATCH :ftsQuery LIMIT 200",
+            "WHERE streams.playlistId = :playlistId AND streams_fts MATCH :ftsQuery " +
+            "ORDER BY streams.name COLLATE NOCASE ASC LIMIT 200",
     )
     fun searchFts(playlistId: Long, ftsQuery: String): Flow<List<StreamEntity>>
 }
@@ -128,7 +129,7 @@ interface StreamDao {
 @Dao
 interface FavoriteDao {
 
-    @Query("SELECT * FROM favorite_streams WHERE playlistId = :playlistId ORDER BY name ASC")
+    @Query("SELECT * FROM favorite_streams WHERE playlistId = :playlistId ORDER BY name COLLATE NOCASE ASC")
     fun observeByPlaylist(playlistId: Long): Flow<List<FavoriteStreamEntity>>
 
     @Query(
