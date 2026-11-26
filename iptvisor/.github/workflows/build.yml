@@ -26,10 +26,21 @@ jobs:
           gradle-version: '8.10.2'
 
       - name: Run unit tests and lint
-        run: gradle testDebugUnitTest lintDebug
+        run: gradle testDebugUnitTest lintDebug --stacktrace
+
+      - name: Check release signing secrets
+        id: signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "has_keystore=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_keystore=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Build signed Release APK
-        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
+        if: steps.signing.outputs.has_keystore == 'true'
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -38,22 +49,33 @@ jobs:
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > release.jks
           export KEYSTORE_FILE="$PWD/release.jks"
-          gradle assembleRelease
+          gradle assembleRelease --stacktrace
+
+      - name: Build Debug APK
+        if: steps.signing.outputs.has_keystore != 'true'
+        run: gradle assembleDebug --stacktrace
+
+      - name: Verify APK installability and signature
+        run: |
+          APK_PATH=$(find app/build/outputs/apk -name "*.apk" | head -n 1)
+          echo "Verifying APK: $APK_PATH"
+          test -f "$APK_PATH"
+          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -n 1)
+          "$BUILD_TOOLS/aapt2" dump badging "$APK_PATH" | head -n 25
+          "$BUILD_TOOLS/apksigner" verify --verbose "$APK_PATH"
 
       - name: Upload Release APK
-        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
+        if: steps.signing.outputs.has_keystore == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: iptvisor-release-apk
           path: app/build/outputs/apk/release/*.apk
-
-      - name: Build Debug APK
-        if: ${{ secrets.KEYSTORE_BASE64 == '' }}
-        run: gradle assembleDebug
+          retention-days: 30
 
       - name: Upload Debug APK
-        if: ${{ secrets.KEYSTORE_BASE64 == '' }}
+        if: steps.signing.outputs.has_keystore != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: iptvisor-debug-apk
           path: app/build/outputs/apk/debug/*.apk
+          retention-days: 30
