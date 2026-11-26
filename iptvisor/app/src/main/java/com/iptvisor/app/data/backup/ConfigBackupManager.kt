@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.annotation.RequiresApi
 import com.google.gson.GsonBuilder
 import com.iptvisor.app.data.model.ContentType
 import com.iptvisor.app.data.model.PlaylistType
@@ -82,6 +83,11 @@ object ConfigBackupManager {
      */
     suspend fun autoSaveToDownloads(context: Context, json: String) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return
+        autoSaveToDownloadsQ(context, json)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private suspend fun autoSaveToDownloadsQ(context: Context, json: String) {
         withContext(Dispatchers.IO) {
             runCatching {
                 val resolver = context.contentResolver
