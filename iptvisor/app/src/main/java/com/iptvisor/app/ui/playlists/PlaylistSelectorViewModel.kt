@@ -2,7 +2,6 @@ package com.iptvisor.app.ui.playlists
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.iptvisor.app.data.local.PlaylistEntity
