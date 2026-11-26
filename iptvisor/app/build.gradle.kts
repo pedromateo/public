@@ -1,0 +1,110 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+}
+
+val releaseKeystoreFile = System.getenv("KEYSTORE_FILE")
+    ?.takeIf { it.isNotBlank() }
+    ?.let { file(it) }
+    ?.takeIf { it.exists() }
+
+android {
+    namespace = "com.iptvisor.app"
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.iptvisor.app"
+        minSdk = 24
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    if (releaseKeystoreFile != null) {
+        signingConfigs {
+            create("release") {
+                storeFile = releaseKeystoreFile
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            if (releaseKeystoreFile != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
+        debug {
+            isMinifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+    }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.activity.compose)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.navigation.compose)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    implementation(libs.okhttp)
+    implementation(libs.gson)
+    implementation(libs.coil.compose)
+
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.exoplayer.hls)
+    implementation(libs.media3.ui)
+    implementation(libs.media3.cast)
+
+    implementation(libs.play.services.cast.framework)
+    implementation(libs.androidx.mediarouter)
+
+    implementation(libs.kotlinx.coroutines.android)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.kotlinx.coroutines.test)
+}
