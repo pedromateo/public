@@ -3,6 +3,10 @@ package com.iptvisor.app.data.repository
 import android.content.Context
 import android.net.Uri
 import androidx.room.withTransaction
+import com.iptvisor.app.data.backup.BackupCategoryFav
+import com.iptvisor.app.data.backup.BackupFavoriteStream
+import com.iptvisor.app.data.backup.BackupPlaylist
+import com.iptvisor.app.data.backup.ConfigBackupManager
 import com.iptvisor.app.data.local.AppDatabase
 import com.iptvisor.app.data.local.CategoryEntity
 import com.iptvisor.app.data.local.CategoryFavKey
@@ -46,6 +50,7 @@ class PlaylistRepository(
         if (playlist.id == 0L) {
             val id = playlistDao.insert(playlist)
             refreshPlaylist(id)
+            autoBackup()
             return id
         }
 
@@ -62,11 +67,13 @@ class PlaylistRepository(
         if (connectionChanged) {
             refreshPlaylist(playlist.id)
         }
+        autoBackup()
         return playlist.id
     }
 
     suspend fun deletePlaylist(playlistId: Long) {
         playlistDao.deleteById(playlistId)
+        autoBackup()
     }
 
     /**
@@ -152,6 +159,7 @@ class PlaylistRepository(
 
     suspend fun toggleCategoryFavorite(categoryId: Long, isFavorite: Boolean) {
         categoryDao.setFavorite(categoryId, isFavorite)
+        autoBackup()
     }
 
     fun observeStreams(
@@ -273,10 +281,118 @@ class PlaylistRepository(
                 ),
             )
         }
+        autoBackup()
     }
 
     suspend fun removeFavorite(playlistId: Long, stableKey: String) {
         favoriteDao.delete(playlistId, stableKey)
+        autoBackup()
+    }
+
+    suspend fun exportBackupToUri(uri: Uri) {
+        val json = buildBackupJson()
+        ConfigBackupManager.writeToUri(context, uri, json)
+    }
+
+    suspend fun importBackupFromUri(uri: Uri): Int {
+        val json = ConfigBackupManager.readFromUri(context, uri)
+        val payload = ConfigBackupManager.deserialize(json)
+        val existing = playlistDao.observeAll().first()
+        var importedCount = 0
+
+        for (backup in payload.playlists) {
+            val alreadyExists = existing.any {
+                it.name == backup.name &&
+                    it.type == backup.type &&
+                    it.serverUrl == backup.serverUrl &&
+                    it.username == backup.username &&
+                    it.m3uUri == backup.m3uUri
+            }
+            if (alreadyExists) continue
+
+            val newId = playlistDao.insert(
+                PlaylistEntity(
+                    name = backup.name,
+                    type = backup.type,
+                    serverUrl = backup.serverUrl,
+                    username = backup.username,
+                    password = backup.password,
+                    m3uUri = backup.m3uUri,
+                    userAgent = backup.userAgent,
+                ),
+            )
+
+            for (fav in backup.favoriteStreams) {
+                favoriteDao.upsert(
+                    FavoriteStreamEntity(
+                        playlistId = newId,
+                        stableKey = fav.stableKey,
+                        streamId = fav.streamId,
+                        name = fav.name,
+                        logoUrl = fav.logoUrl,
+                        streamUrl = fav.streamUrl,
+                        containerExtension = fav.containerExtension,
+                        type = fav.type,
+                    ),
+                )
+            }
+
+            runCatching { refreshPlaylist(newId) }
+
+            if (backup.favoriteCategories.isNotEmpty()) {
+                val favKeys = backup.favoriteCategories.map { CategoryFavKey(it.type, it.categoryId) }.toSet()
+                for (type in ContentType.entries) {
+                    val cats = categoryDao.observeByType(newId, type).first()
+                    val toUpdate = cats.filter { CategoryFavKey(it.type, it.categoryId) in favKeys }
+                    if (toUpdate.isNotEmpty()) {
+                        categoryDao.upsertAll(toUpdate.map { it.copy(isFavorite = true) })
+                    }
+                }
+            }
+            importedCount++
+        }
+
+        autoBackup()
+        return importedCount
+    }
+
+    private suspend fun buildBackupJson(): String {
+        val playlists = playlistDao.observeAll().first()
+        val backupPlaylists = playlists.map { pl ->
+            val favCats = categoryDao.getFavoriteKeys(pl.id).map {
+                BackupCategoryFav(type = it.type, categoryId = it.categoryId)
+            }
+            val favStreams = favoriteDao.observeByPlaylist(pl.id).first().map {
+                BackupFavoriteStream(
+                    stableKey = it.stableKey,
+                    streamId = it.streamId,
+                    name = it.name,
+                    logoUrl = it.logoUrl,
+                    streamUrl = it.streamUrl,
+                    containerExtension = it.containerExtension,
+                    type = it.type,
+                )
+            }
+            BackupPlaylist(
+                name = pl.name,
+                type = pl.type,
+                serverUrl = pl.serverUrl,
+                username = pl.username,
+                password = pl.password,
+                m3uUri = pl.m3uUri,
+                userAgent = pl.userAgent,
+                favoriteCategories = favCats,
+                favoriteStreams = favStreams,
+            )
+        }
+        return ConfigBackupManager.serialize(backupPlaylists)
+    }
+
+    private suspend fun autoBackup() {
+        runCatching {
+            val json = buildBackupJson()
+            ConfigBackupManager.autoSaveToDownloads(context, json)
+        }
     }
 
     suspend fun getSeriesInfo(playlistId: Long, seriesId: String): SeriesInfo {

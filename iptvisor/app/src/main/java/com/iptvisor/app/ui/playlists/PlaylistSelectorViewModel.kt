@@ -1,6 +1,8 @@
 package com.iptvisor.app.ui.playlists
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.iptvisor.app.data.local.PlaylistEntity
@@ -145,6 +147,44 @@ class PlaylistSelectorViewModel(
 
     fun clearError() {
         errorMessageFlow.value = null
+    }
+
+    fun exportBackup(uri: Uri) {
+        viewModelScope.launch {
+            isSavingFlow.value = true
+            errorMessageFlow.value = null
+            try {
+                repository.exportBackupToUri(uri)
+                errorMessageFlow.value = "Copia de configuración guardada."
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                errorMessageFlow.value = e.message ?: "Error al exportar la copia."
+            } finally {
+                isSavingFlow.value = false
+            }
+        }
+    }
+
+    fun importBackup(uri: Uri) {
+        viewModelScope.launch {
+            isSavingFlow.value = true
+            errorMessageFlow.value = null
+            try {
+                val count = repository.importBackupFromUri(uri)
+                errorMessageFlow.value = if (count > 0) {
+                    "Restauradas $count listas correctamente."
+                } else {
+                    "No había listas nuevas para restaurar."
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                errorMessageFlow.value = e.message ?: "Error al restaurar la copia."
+            } finally {
+                isSavingFlow.value = false
+            }
+        }
     }
 
     companion object {

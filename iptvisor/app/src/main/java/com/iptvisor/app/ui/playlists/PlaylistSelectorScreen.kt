@@ -24,9 +24,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
@@ -88,6 +90,18 @@ fun PlaylistSelectorScreen(
     var editingPlaylist by remember { mutableStateOf<PlaylistEntity?>(null) }
     var playlistPendingDelete by remember { mutableStateOf<PlaylistEntity?>(null) }
 
+    val exportLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("application/json")
+    ) { uri ->
+        if (uri != null) viewModel.exportBackup(uri)
+    }
+
+    val importLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) viewModel.importBackup(uri)
+    }
+
     LaunchedEffect(uiState.errorMessage) {
         val error = uiState.errorMessage
         if (error != null) {
@@ -99,7 +113,17 @@ fun PlaylistSelectorScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("IPTVisor") }
+                title = { Text("IPTVisor") },
+                actions = {
+                    if (uiState.playlists.isNotEmpty()) {
+                        IconButton(onClick = { exportLauncher.launch("iptvisor-backup.json") }) {
+                            Icon(Icons.Default.Upload, contentDescription = "Exportar copia")
+                        }
+                    }
+                    IconButton(onClick = { importLauncher.launch(arrayOf("application/json", "*/*")) }) {
+                        Icon(Icons.Default.Download, contentDescription = "Restaurar copia")
+                    }
+                }
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
@@ -138,6 +162,13 @@ fun PlaylistSelectorScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
+                    OutlinedButton(
+                        onClick = { importLauncher.launch(arrayOf("application/json", "*/*")) }
+                    ) {
+                        Icon(Icons.Default.Download, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Restaurar copia del teléfono")
+                    }
                 }
             }
         } else {
