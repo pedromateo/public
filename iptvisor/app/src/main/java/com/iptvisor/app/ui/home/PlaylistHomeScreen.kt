@@ -193,7 +193,17 @@ fun PlaylistHomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            if (isSearchActive) {
+            if (isRefreshing) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+            if (playlist == null) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            } else if (isSearchActive) {
                 SearchSection(
                     playlist = playlist,
                     query = searchQuery,
