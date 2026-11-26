@@ -1,5 +1,6 @@
 package com.iptvisor.app.data.backup
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
@@ -87,6 +88,7 @@ object ConfigBackupManager {
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
+    @SuppressLint("NewApi")
     private suspend fun autoSaveToDownloadsQ(context: Context, json: String) {
         withContext(Dispatchers.IO) {
             runCatching {
