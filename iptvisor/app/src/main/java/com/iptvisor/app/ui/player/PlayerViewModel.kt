@@ -136,6 +136,77 @@ class PlayerViewModel(
         }
     }
 
+    fun loadFavorite(playlistId: Long, stableKey: String) {
+        lastPlaylistId = playlistId
+        lastStreamId = null
+        loadJob?.cancel()
+        favoriteJob?.cancel()
+
+        loadJob = viewModelScope.launch {
+            baseState.value = BasePlayerState(isLoading = true)
+            try {
+                val playlist = repository.getPlaylist(playlistId)
+                val fav = repository.getFavorite(playlistId, stableKey)
+                if (playlist == null || fav == null) {
+                    baseState.value = BasePlayerState(
+                        loadError = "No se encontró el canal favorito o la lista.",
+                        isLoading = false
+                    )
+                    return@launch
+                }
+
+                val stream = StreamEntity(
+                    playlistId = playlistId,
+                    categoryId = "",
+                    streamId = fav.streamId,
+                    stableKey = fav.stableKey,
+                    name = fav.name,
+                    streamUrl = fav.streamUrl,
+                    logoUrl = fav.logoUrl,
+                    containerExtension = fav.containerExtension,
+                    type = fav.type
+                )
+                currentPlaylist = playlist
+                currentStream = stream
+
+                val localUrl = StreamUrlBuilder.buildLocalUrl(playlist, stream)
+                val castUrl = StreamUrlBuilder.buildCastUrl(playlist, stream)
+                val isLive = fav.type == ContentType.LIVE
+
+                baseState.value = BasePlayerState(
+                    title = fav.name,
+                    localUrl = localUrl,
+                    castUrl = castUrl,
+                    isLive = isLive,
+                    isFavorite = true,
+                    loadError = null,
+                    isLoading = false
+                )
+
+                favoriteJob = launch {
+                    repository.isFavorite(playlistId, fav.stableKey).collect { isFav ->
+                        baseState.value = baseState.value.copy(isFavorite = isFav)
+                    }
+                }
+
+                playbackManager.play(
+                    localUrl = localUrl,
+                    castUrl = castUrl,
+                    title = fav.name,
+                    userAgent = playlist.userAgent,
+                    isLive = isLive
+                )
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                baseState.value = BasePlayerState(
+                    loadError = e.message ?: "Error al cargar la reproducción.",
+                    isLoading = false
+                )
+            }
+        }
+    }
+
     fun loadDirectUrl(playlistId: Long, title: String, url: String, isLive: Boolean) {
         lastPlaylistId = playlistId
         lastStreamId = null

@@ -96,6 +96,7 @@ fun PlayerScreen(
     directTitle: String? = null,
     directUrl: String? = null,
     directIsLive: Boolean = false,
+    favoriteStableKey: String? = null,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -134,9 +135,11 @@ fun PlayerScreen(
         }
     }
 
-    LaunchedEffect(playlistId, streamId, directUrl) {
+    LaunchedEffect(playlistId, streamId, directUrl, favoriteStableKey) {
         if (streamId != null) {
             viewModel.loadStream(playlistId, streamId)
+        } else if (favoriteStableKey != null) {
+            viewModel.loadFavorite(playlistId, favoriteStableKey)
         } else if (directUrl != null) {
             viewModel.loadDirectUrl(
                 playlistId = playlistId,

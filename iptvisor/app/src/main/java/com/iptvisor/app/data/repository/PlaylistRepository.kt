@@ -289,6 +289,9 @@ class PlaylistRepository(
         autoBackup()
     }
 
+    suspend fun getFavorite(playlistId: Long, stableKey: String): FavoriteStreamEntity? =
+        favoriteDao.observeByPlaylist(playlistId).first().firstOrNull { it.stableKey == stableKey }
+
     suspend fun exportBackupToUri(uri: Uri) {
         val json = buildBackupJson()
         ConfigBackupManager.writeToUri(context, uri, json)

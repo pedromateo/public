@@ -79,12 +79,9 @@ private fun IPTVisorNavHost() {
                 onOpenStream = { streamId ->
                     navController.navigate("player/$playlistId/$streamId")
                 },
-                onOpenDirectStream = { title, url, isLive ->
-                    val encodedTitle = Uri.encode(title)
-                    val encodedUrl = Uri.encode(url)
-                    navController.navigate(
-                        "playerDirect/$playlistId?title=$encodedTitle&url=$encodedUrl&isLive=$isLive"
-                    )
+                onOpenFavoriteStream = { stableKey ->
+                    val encodedKey = Uri.encode(stableKey)
+                    navController.navigate("playerFav/$playlistId/$encodedKey")
                 }
             )
         }
@@ -198,6 +195,25 @@ private fun IPTVisorNavHost() {
                 directTitle = title,
                 directUrl = url,
                 directIsLive = isLive,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = "playerFav/{playlistId}/{stableKey}",
+            arguments = listOf(
+                navArgument("playlistId") { type = NavType.LongType },
+                navArgument("stableKey") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val args = backStackEntry.arguments
+            val playlistId = args?.getLong("playlistId") ?: 0L
+            val stableKey = Uri.decode(args?.getString("stableKey") ?: "")
+
+            PlayerScreen(
+                playlistId = playlistId,
+                streamId = null,
+                favoriteStableKey = stableKey,
                 onBack = { navController.popBackStack() }
             )
         }

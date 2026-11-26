@@ -83,7 +83,7 @@ fun PlaylistHomeScreen(
     onOpenCategory: (ContentType, String, String) -> Unit,
     onOpenSeries: (String, String) -> Unit,
     onOpenStream: (Long) -> Unit,
-    onOpenDirectStream: (title: String, url: String, isLive: Boolean) -> Unit
+    onOpenFavoriteStream: (String) -> Unit
 ) {
     val context = LocalContext.current
     val container = (context.applicationContext as IPTVisorApp).container
@@ -147,19 +147,6 @@ fun PlaylistHomeScreen(
                         IconButton(onClick = { viewModel.refreshPlaylist() }) {
                             Icon(Icons.Default.Refresh, contentDescription = "Actualizar")
                         }
-                    }
-                    IconButton(
-                        onClick = {
-                            isSearchActive = !isSearchActive
-                            if (!isSearchActive) {
-                                viewModel.updateSearchQuery("")
-                            }
-                        }
-                    ) {
-                        Icon(
-                            imageVector = if (isSearchActive) Icons.Default.Close else Icons.Default.Search,
-                            contentDescription = if (isSearchActive) "Cerrar búsqueda" else "Buscar"
-                        )
                     }
                 }
             )
@@ -231,11 +218,7 @@ fun PlaylistHomeScreen(
                             if (fav.type == ContentType.SERIES) {
                                 onOpenSeries(fav.streamId, fav.name)
                             } else {
-                                onOpenDirectStream(
-                                    fav.name,
-                                    fav.streamUrl,
-                                    fav.type == ContentType.LIVE
-                                )
+                                onOpenFavoriteStream(fav.stableKey)
                             }
                         },
                         onRemoveFavorite = { fav ->
@@ -557,11 +540,12 @@ private fun FavoriteStreamCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            IconButton(onClick = onPlay) {
-                Icon(Icons.Default.PlayArrow, contentDescription = "Reproducir")
-            }
             IconButton(onClick = onRemove) {
-                Icon(Icons.Default.Delete, contentDescription = "Quitar de favoritos")
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Quitar de favoritos",
+                    tint = MaterialTheme.colorScheme.primary
+                )
             }
         }
     }
