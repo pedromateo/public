@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
@@ -23,6 +24,12 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+
+data class FavoritesUiState(
+    val isLoaded: Boolean = false,
+    val categories: List<CategoryEntity> = emptyList(),
+    val streams: List<FavoriteStreamEntity> = emptyList()
+)
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class PlaylistHomeViewModel(
@@ -32,27 +39,30 @@ class PlaylistHomeViewModel(
 
     val playlist: StateFlow<PlaylistEntity?> = repository.observePlaylists()
         .map { playlists -> playlists.firstOrNull { it.id == playlistId } }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-    val favoriteCategories: StateFlow<List<CategoryEntity>> =
-        repository.observeFavoriteCategories(playlistId)
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-
-    val favoriteStreams: StateFlow<List<FavoriteStreamEntity>> =
+    val favoritesState: StateFlow<FavoritesUiState> = combine(
+        repository.observeFavoriteCategories(playlistId),
         repository.observeFavorites(playlistId)
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    ) { categories, streams ->
+        FavoritesUiState(
+            isLoaded = true,
+            categories = categories,
+            streams = streams
+        )
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, FavoritesUiState())
 
     val liveCategories: StateFlow<List<CategoryEntity>> =
         repository.observeCategories(playlistId, ContentType.LIVE)
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val vodCategories: StateFlow<List<CategoryEntity>> =
         repository.observeCategories(playlistId, ContentType.VOD)
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val seriesCategories: StateFlow<List<CategoryEntity>> =
         repository.observeCategories(playlistId, ContentType.SERIES)
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()

@@ -93,8 +93,7 @@ fun PlaylistHomeScreen(
     )
 
     val playlist by viewModel.playlist.collectAsState()
-    val favoriteCategories by viewModel.favoriteCategories.collectAsState()
-    val favoriteStreams by viewModel.favoriteStreams.collectAsState()
+    val favoritesState by viewModel.favoritesState.collectAsState()
     val liveCategories by viewModel.liveCategories.collectAsState()
     val vodCategories by viewModel.vodCategories.collectAsState()
     val seriesCategories by viewModel.seriesCategories.collectAsState()
@@ -213,8 +212,7 @@ fun PlaylistHomeScreen(
             } else {
                 when (tabs[selectedTabIndex]) {
                     HomeTab.FAVORITES -> FavoritesTabContent(
-                        favoriteCategories = favoriteCategories,
-                        favoriteStreams = favoriteStreams,
+                        favoritesState = favoritesState,
                         onOpenCategory = onOpenCategory,
                         onToggleCategoryFavorite = { cat ->
                             viewModel.toggleCategoryFavorite(cat.id, !cat.isFavorite)
@@ -421,13 +419,25 @@ private fun StreamSearchCard(
 
 @Composable
 private fun FavoritesTabContent(
-    favoriteCategories: List<CategoryEntity>,
-    favoriteStreams: List<FavoriteStreamEntity>,
+    favoritesState: FavoritesUiState,
     onOpenCategory: (ContentType, String, String) -> Unit,
     onToggleCategoryFavorite: (CategoryEntity) -> Unit,
     onPlayFavorite: (FavoriteStreamEntity) -> Unit,
     onRemoveFavorite: (FavoriteStreamEntity) -> Unit
 ) {
+    if (!favoritesState.isLoaded) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+        return
+    }
+
+    val favoriteCategories = favoritesState.categories
+    val favoriteStreams = favoritesState.streams
+
     if (favoriteCategories.isEmpty() && favoriteStreams.isEmpty()) {
         Box(
             modifier = Modifier
