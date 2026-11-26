@@ -590,20 +590,61 @@ private fun CategoryListContent(
         return
     }
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(
-            items = categories,
-            key = { it.id }
-        ) { category ->
-            CategoryRowCard(
-                category = category,
-                onClick = { onCategoryClick(category) },
-                onToggleFavorite = { onToggleFavorite(category) }
-            )
+    var filterQuery by rememberSaveable(emptyMessage) { mutableStateOf("") }
+    val filteredCategories = remember(categories, filterQuery) {
+        val q = filterQuery.trim()
+        if (q.isEmpty()) categories else categories.filter { it.name.contains(q, ignoreCase = true) }
+    }
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        OutlinedTextField(
+            value = filterQuery,
+            onValueChange = { filterQuery = it },
+            placeholder = { Text("Filtrar secciones...") },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+            trailingIcon = {
+                if (filterQuery.isNotEmpty()) {
+                    IconButton(onClick = { filterQuery = "" }) {
+                        Icon(Icons.Default.Close, contentDescription = "Limpiar filtro")
+                    }
+                }
+            },
+            singleLine = true,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        )
+
+        if (filteredCategories.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(32.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Sin secciones para \"$filterQuery\".",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(
+                    items = filteredCategories,
+                    key = { it.id }
+                ) { category ->
+                    CategoryRowCard(
+                        category = category,
+                        onClick = { onCategoryClick(category) },
+                        onToggleFavorite = { onToggleFavorite(category) }
+                    )
+                }
+            }
         }
     }
 }
