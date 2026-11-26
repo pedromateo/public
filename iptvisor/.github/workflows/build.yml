@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -63,19 +66,23 @@ jobs:
           BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -n 1)
           "$BUILD_TOOLS/aapt2" dump badging "$APK_PATH" | head -n 25
           "$BUILD_TOOLS/apksigner" verify --verbose "$APK_PATH"
+          mkdir -p dist
+          if [ "${{ steps.signing.outputs.has_keystore }}" = "true" ]; then
+            cp "$APK_PATH" dist/IPTVisor-release.apk
+          else
+            cp "$APK_PATH" dist/IPTVisor-debug.apk
+          fi
 
-      - name: Upload Release APK
-        if: steps.signing.outputs.has_keystore == 'true'
-        uses: actions/upload-artifact@v4
+      - name: Publish direct APK to GitHub Release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v2
         with:
-          name: iptvisor-release-apk
-          path: app/build/outputs/apk/release/*.apk
-          retention-days: 30
-
-      - name: Upload Debug APK
-        if: steps.signing.outputs.has_keystore != 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: iptvisor-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
-          retention-days: 30
+          tag_name: iptvisor-latest-apk
+          name: "IPTVisor APK (Última versión)"
+          body: |
+            APK compilada automáticamente por GitHub Actions (descarga directa sin ZIP).
+            - Commit: `${{ github.sha }}`
+            - Rama: `${{ github.ref_name }}`
+          draft: false
+          prerelease: false
+          files: dist/*.apk
