@@ -37,7 +37,21 @@ jobs:
 
       - name: Run unit tests and lint
         working-directory: iptvisor
-        run: gradle testDebugUnitTest lintDebug --stacktrace
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle testDebugUnitTest lintDebug --stacktrace 2>&1 | tee build_log.txt
+
+      - name: Publish failure diagnostics
+        if: failure()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: iptvisor-build-log
+          name: "IPTVisor Build Failure Log"
+          body: "Log de compilación y lint para diagnóstico"
+          draft: false
+          prerelease: true
+          files: iptvisor/build_log.txt
 
       - name: Check release signing secrets
         id: signing
