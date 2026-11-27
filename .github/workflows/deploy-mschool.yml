@@ -110,6 +110,14 @@ jobs:
             cd ..
           fi
 
+          # Agenda Murcia Copy
+          if [ -d "agendamurcia" ]; then
+            echo "Packaging Agenda Murcia..."
+            mkdir -p dist/agendamurcia
+            cp agendamurcia/index.html agendamurcia/events.json agendamurcia/events.js agendamurcia/favicon.svg dist/agendamurcia/ 2>/dev/null || true
+            touch dist/agendamurcia/.nojekyll
+          fi
+
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
