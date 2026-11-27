@@ -1,5 +1,103 @@
 [
   {
+    "date": "2026-11-27",
+    "sentimiento_general": "Cautela",
+    "summary_snippet": "• El sentimiento predominante en los parqués oscila entre una severa cautela y la búsqueda táctica de rebotes tras jornadas marcadas por una volatilidad extrema y sacudidas en los índices globales.\n• Analistas como R. Mo...",
+    "top_stocks": [
+      "Banco Santander (6)",
+      "Iberdrola (5)",
+      "Puig Brands (4)",
+      "Nvidia (4)"
+    ],
+    "detail_url": "reports/html/report-2026-11-27.html",
+    "pdf_url": "reports/pdf/informe-2026-11-27.pdf",
+    "audio_url": "reports/audio/podcast-2026-11-27.mp3",
+    "videos_count": 9,
+    "fuentes_consultadas": [
+      {
+        "id": "-UJSMPMuU7Q",
+        "title": "#Consulturio | Dos valores españoles para comprar este Black Friday",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-27",
+        "url": "https://www.youtube.com/watch?v=-UJSMPMuU7Q",
+        "char_count": 20335,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "yzf9XdM5o6Y",
+        "title": "Ojo con estos dos valores que A. Iturralde \"mantendría al margen\" tras las subidas",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-27",
+        "url": "https://www.youtube.com/watch?v=yzf9XdM5o6Y",
+        "char_count": 21259,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "BgfaoMjQTI4",
+        "title": "#Consultorio | M. Ribes ve en Wall Street una oportunidad de compra",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-26",
+        "url": "https://www.youtube.com/watch?v=BgfaoMjQTI4",
+        "char_count": 22861,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "rRfo2pvgU-A",
+        "title": "Consultorio | ¿Se puede confiar en el rebote en Europa? Esto dice Daniel Santacreu",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-26",
+        "url": "https://www.youtube.com/watch?v=rRfo2pvgU-A",
+        "char_count": 23362,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "6o4Oy-Qc6Gk",
+        "title": "El IBEX35 con los gobiernos de Pedro Sánchez: \"Sube un 186%\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-26",
+        "url": "https://www.youtube.com/watch?v=6o4Oy-Qc6Gk",
+        "char_count": 5541,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "j8ommXIibHg",
+        "title": "Consultorio | ¿Por qué hay que comprar oro según M. Pinto?",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-26",
+        "url": "https://www.youtube.com/watch?v=j8ommXIibHg",
+        "char_count": 24907,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "-TVUfPRb0oc",
+        "title": "#Consultorio | Roblox, Flywire o Airbnb, en el radar de V. Galán",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-25",
+        "url": "https://www.youtube.com/watch?v=-TVUfPRb0oc",
+        "char_count": 23090,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "vTwOxx5BWAc",
+        "title": "Ojo a la caída del Nasdaq: \"El guantazo no es en Nvidia; viene del SOX\", explica Ortega",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-25",
+        "url": "https://www.youtube.com/watch?v=vTwOxx5BWAc",
+        "char_count": 21755,
+        "status": "Transcrito completo"
+      },
+      {
+        "id": "WC2_RASFHUo",
+        "title": "Consultorio | La advertencia de R. Moro tras las caídas: \"Algo sí se ha roto\"",
+        "channel": "Capital Radio - Consultorios de Bolsa",
+        "date_formatted": "2026-11-25",
+        "url": "https://www.youtube.com/watch?v=WC2_RASFHUo",
+        "char_count": 13487,
+        "status": "Transcrito completo"
+      }
+    ]
+  },
+  {
     "date": "2026-11-25",
     "sentimiento_general": "Cautela",
     "summary_snippet": "• El mercado muestra una fase clara de corrección y alta volatilidad tras alcanzar máximos, con un VIX elevado que obliga a extremar la cautela y mantener posiciones defensivas.\n• Los consultorios de bolsa coinciden de f...",
