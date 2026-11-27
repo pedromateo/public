@@ -44,6 +44,7 @@ jobs:
         working-directory: agendamurcia
         run: |
           pip install -r requirements-dev.txt
+          playwright install chromium
           python -m pytest tests -q
 
       - name: Guardar cambios en el repositorio

@@ -56,8 +56,15 @@ def site(tmp_path_factory):
 
 @pytest.fixture(scope="session")
 def browser_type_launch_args():
-    # usa el Chrome instalado: evita descargar Chromium (el proxy corporativo lo bloquea)
-    return {"channel": "chrome"}
+    # Usa Chrome/Chromium instalado si existe (evita descargar bajo proxy corporativo);
+    # si no, usa el Chromium descargado por `playwright install chromium` (CI).
+    if Path("/opt/google/chrome/chrome").exists():
+        return {"channel": "chrome"}
+    for exe in ("google-chrome", "chromium-browser", "chromium"):
+        found = shutil.which(exe)
+        if found:
+            return {"executable_path": found}
+    return {}
 
 
 @pytest.fixture
