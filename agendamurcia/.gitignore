@@ -3,3 +3,4 @@ __pycache__/
 .playwright-mcp/
 .DS_Store
 _site/
+logs/

@@ -495,13 +495,53 @@ def etiquetas(e):
     return tags
 
 
+def finalize_and_write(events, out_path, today):
+    """Limpia lugares, consolida, aplica etiquetas, exclusiones y horizontes y escribe .json y .js."""
+    for e in events:
+        e["lugar"] = clean_place(e["lugar"], e.get("localidad", ""))
+        e["tipo"] = refine_simple({**e, "tipo": simplify_type(e["tipo"])})
+    events = consolidate(events)
+    events = [e for e in events if not any(e["titulo"].lower().startswith(t) for t in MANUAL_EXCLUDE)]
+    for e in events:
+        e.pop("publico", None)
+    for e in events:
+        e["categorias"] = etiquetas(e)
+        del e["tipo"]
+    cfg = CONFIG.get("horizontes", {})
+    events = [e for e in events if within_horizon(e, today, cfg)]
+    for e in events:
+        e["fecha_orden"] = max(e["fecha_inicio"], today.isoformat())
+    out = sorted(events, key=lambda e: (e["fecha_orden"], e["horario"] or "99", e["titulo"]))
+    data = {"generado": today.isoformat(), "total": len(out), "web": CONFIG.get("web", {}), "eventos": out}
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    # copia como script para que index.html funcione abierto directamente (file://)
+    with open(os.path.splitext(out_path)[0] + ".js", "w", encoding="utf-8") as f:
+        f.write("window.EVENTS_DATA = " + json.dumps(data, ensure_ascii=False) + ";\n")
+    print(f"{len(out)} eventos escritos en {out_path}", file=sys.stderr)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="events.json")
     ap.add_argument("--localidad", default="murcia")
+    ap.add_argument("--retag", action="store_true",
+                    help="Reaplica config.json (etiquetas, exclusiones, alias y horizontes) sobre --out sin volver a scrapear")
     args = ap.parse_args()
 
     today = date.today()
+
+    if args.retag:
+        try:
+            with open(args.out, encoding="utf-8") as f:
+                loaded = json.load(f).get("eventos", [])
+        except (OSError, ValueError) as exc:
+            print(f"Error leyendo {args.out}: {exc}", file=sys.stderr)
+            sys.exit(1)
+        for e in loaded:
+            e["tipo"] = e.pop("categorias", None) or e.get("tipo") or "Otros"
+        finalize_and_write(loaded, args.out, today)
+        return
 
     def murciaturistica():
         jobs = [(None, "otro")] + list(TYPES.items())
@@ -546,28 +586,7 @@ def main():
         e["fecha_orden"] = max(e["fecha_inicio"], today.isoformat())
 
     merged = merge_with_existing(events, args.out, today)
-    for e in merged:
-        e["lugar"] = clean_place(e["lugar"], e["localidad"])
-        e["tipo"] = refine_simple({**e, "tipo": simplify_type(e["tipo"])})
-    merged = consolidate(merged)
-    merged = [e for e in merged if not any(e["titulo"].lower().startswith(t) for t in MANUAL_EXCLUDE)]
-    for e in merged:
-        e.pop("publico", None)
-    for e in merged:
-        e["categorias"] = etiquetas(e)
-        del e["tipo"]
-    cfg = CONFIG.get("horizontes", {})
-    merged = [e for e in merged if within_horizon(e, today, cfg)]
-    for e in merged:
-        e["fecha_orden"] = max(e["fecha_inicio"], today.isoformat())
-    out = sorted(merged, key=lambda e: (e["fecha_orden"], e["horario"] or "99", e["titulo"]))
-    data = {"generado": today.isoformat(), "total": len(out), "web": CONFIG.get("web", {}), "eventos": out}
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    # copia como script para que index.html funcione abierto directamente (file://)
-    with open(os.path.splitext(args.out)[0] + ".js", "w", encoding="utf-8") as f:
-        f.write("window.EVENTS_DATA = " + json.dumps(data, ensure_ascii=False) + ";\n")
-    print(f"{len(out)} eventos escritos en {args.out}", file=sys.stderr)
+    finalize_and_write(merged, args.out, today)
 
 
 if __name__ == "__main__":

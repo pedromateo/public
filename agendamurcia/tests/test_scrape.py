@@ -133,3 +133,32 @@ def test_config_coherente():
         for t in ([tags] if isinstance(tags, str) else tags):
             assert t in orden, t
     assert set(cfg["horizontes"]["categorias"]) <= set(orden)
+
+
+def test_retag_reaplica_etiquetas_y_escribe_json_y_js(tmp_path, monkeypatch):
+    out_json = tmp_path / "events.json"
+    out_js = tmp_path / "events.js"
+    future = date.fromordinal(date.today().toordinal() + 5).isoformat()
+    ev = {
+        "titulo": "Rupatrupa",
+        "subtitulo": None,
+        "descripcion": "",
+        "fecha_inicio": future,
+        "fecha_fin": future,
+        "horario": "21:00",
+        "lugar": "Sala Mamba, Murcia",
+        "enlace": "http://example.com/rupatrupa",
+        "precio": None,
+        "categorias": ["Otros"],
+    }
+    out_json.write_text(json.dumps({"eventos": [ev]}), encoding="utf-8")
+    monkeypatch.setattr("sys.argv", ["scrape.py", "--retag", "--out", str(out_json)])
+    scrape.main()
+
+    data = json.loads(out_json.read_text(encoding="utf-8"))
+    assert data["total"] == 1
+    assert data["eventos"][0]["categorias"] == ["Música"]
+    assert "tipo" not in data["eventos"][0]
+    js_text = out_js.read_text(encoding="utf-8")
+    assert js_text.startswith("window.EVENTS_DATA = ")
+    assert '"Música"' in js_text
