@@ -31,7 +31,7 @@ jobs:
 
       - name: Prepare production build
         run: |
-          mkdir -p dist/stoxxx dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz dist/menum dist/assets
+          mkdir -p dist/stoxxx dist/brainfit dist/loopp dist/mylanding dist/mschool dist/medit dist/sanz dist/menum dist/assets
 
           # Root Portal & Assets
           cp index.html dist/
@@ -53,17 +53,6 @@ jobs:
             cd ..
           fi
 
-          # MurMeteo Copy
-          if [ -d "murmeteo" ]; then
-            echo "Packaging MurMeteo..."
-            cd murmeteo
-            cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ 2>/dev/null || true
-            cp -r icons ../dist/murmeteo/ 2>/dev/null || true
-            cp -r card_images ../dist/murmeteo/ 2>/dev/null || true
-            cp -f forecast.json ../dist/murmeteo/ 2>/dev/null || true
-            cp -r forecasts ../dist/murmeteo/ 2>/dev/null || true
-            cd ..
-          fi
 
           # Loopp Copy
           if [ -d "loopp" ]; then
@@ -83,14 +72,6 @@ jobs:
             cd ..
           fi
 
-          # ElParte Copy
-          if [ -d "elparte" ]; then
-            echo "Packaging ElParte..."
-            cd elparte
-            cp index.html manifest.webmanifest sw.js style.css app.js ../dist/elparte/ 2>/dev/null || true
-            cp -r icons ../dist/elparte/ 2>/dev/null || true
-            cd ..
-          fi
 
           # mSchool Copy
           if [ -d "mschool" ]; then

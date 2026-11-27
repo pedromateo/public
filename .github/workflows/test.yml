@@ -5,7 +5,6 @@ on:
     branches: [ "main", "master" ]
     paths:
       - 'brainfit/**'
-      - 'murmeteo/**'
       - 'loopp/**'
       - 'medit/**'
       - 'menum/**'
@@ -15,7 +14,6 @@ on:
     branches: [ "main", "master" ]
     paths:
       - 'brainfit/**'
-      - 'murmeteo/**'
       - 'loopp/**'
       - 'medit/**'
       - 'menum/**'
@@ -36,8 +34,6 @@ jobs:
             - '.github/workflows/**'
           brainfit:
             - 'brainfit/**'
-          murmeteo:
-            - 'murmeteo/**'
           loopp:
             - 'loopp/**'
           medit:
@@ -58,14 +54,6 @@ jobs:
       run: |
         npm install
         npm run test || true
-
-    - name: Run MurMeteo Tests
-      if: (steps.filter.outputs.murmeteo == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('murmeteo/package.json') != ''
-      working-directory: murmeteo
-      run: |
-        npm ci || npm install
-        npx playwright install --with-deps chromium
-        npm run test
 
     - name: Run Loopp Tests
       if: (steps.filter.outputs.loopp == 'true' || steps.filter.outputs.workflows == 'true') && hashFiles('loopp/package.json') != ''
