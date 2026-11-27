@@ -1,0 +1,188 @@
+{
+ "_ayuda": "Configuración única de agenda.murcia. 'web': textos y comportamiento de la página (se copian a events.json/events.js al generar). 'horizontes': días hacia delante por categoría. 'clasificacion': reglas de etiquetado. Tras editarla, ejecuta scrape.py (o reaplica el etiquetado) para regenerar los datos.",
+ "web": {
+  "titulo_negrita": "agenda",
+  "titulo_resto": ".murcia",
+  "descripcion": "Agenda cultural de Murcia: conciertos, exposiciones, teatro, cine, talleres y más, ordenados por fecha.",
+  "buscador_placeholder": "Buscar eventos…",
+  "texto_boton_filtros": "Filtros",
+  "clave_almacenamiento": "agenda.murcia.filtros.v2",
+  "ancho_minimo_tarjeta_px": 300,
+  "orden_categorias": [
+   "Música",
+   "Teatro",
+   "Comedia",
+   "Danza",
+   "Circo y magia",
+   "Infantil",
+   "Exposiciones",
+   "Festivales",
+   "Fiestas",
+   "Conferencias",
+   "Literatura",
+   "Gastronomía",
+   "Talleres",
+   "Visitas",
+   "Cine",
+   "Otros"
+  ]
+ },
+ "horizontes": {
+  "por_defecto": 120,
+  "categorias": {
+   "Infantil": 60,
+   "Talleres": 60,
+   "Visitas": 60,
+   "Circo y magia": 90,
+   "Fiestas": 90,
+   "Exposiciones": 180,
+   "Cine": 120,
+   "Comedia": 365,
+   "Teatro": 365,
+   "Danza": 365,
+   "Música": 365,
+   "Conferencias": 120,
+   "Festivales": 365,
+   "Literatura": 120,
+   "Otros": 365
+  }
+ },
+ "clasificacion": {
+  "palabras_clave": {
+   "Música": "concierto|music|músic|recital|orquest|sinf[oó]nic|filarm[oó]nic|\\bcoro\\b|\\bcoral\\b|[oó]pera\\b|zarzuela|jazz|flamenc|\\bcante\\b|cantaor|cantante|\\bdj\\b|\\bdjs\\b|rock|\\bpop\\b|\\bblues\\b|\\brap\\b|reggae|\\bbanda\\b|violin|violonchelo|piano|guitarr|cuarteto|\\btrio\\b|\\bdúo\\b|sinfon|cantata|gospel|folk|copla|\\bfado\\b|\\bsalsa\\b|rumba|\\bfest\\b",
+   "Conferencias": "conferenc|congreso|\\bforo\\b|ponencia|coloquio|mesa redonda|\\bjornadas?\\b|seminario|simposio|\\bcharla|presentaci[oó]n de (la |el )?(publicaci|libro)|mentes expertas",
+   "Infantil": "\\bfamiliar\\b|(a partir de )?\\d+[- ]a[ñn]os|infantil",
+   "Gastronomía": "gastronom|\\bcata\\b|catas\\b|degustaci|\\btapas\\b|culinari|show ?cooking|cocina creativa"
+  },
+  "musica_solo_titulo_en": [
+   "Exposiciones",
+   "Visitas",
+   "Talleres",
+   "Literatura",
+   "Cine"
+  ],
+  "etiquetas_manuales": {
+   "El círculo vicioso. Encuentros de dramaturgos y lectores": ["Literatura", "Teatro"],
+   "Previo a verte. Cía Fran Linares": ["Danza", "Teatro"],
+   "Sentadas al borde. Muestras de Mentorías de Danza": "Danza",
+   "Fresh Eyes. Danza y (Re)Encuentro": ["Talleres", "Danza"],
+   "La familia. Julio Ruiz": ["Danza", "Música"],
+   "Rupatrupa": "Música",
+   "Conchita": "Música",
+   "Odisea - Film Symphony Orchestra": "Música",
+   "Vive Beethoven!": "Música",
+   "Belén Aguilera": "Música",
+   "ASÍ CANTA JEREZ en Navidad": "Música",
+   "María Peláe": "Música",
+   "Bublé Christmas Tribute": "Música",
+   "Café Quijano Gira Final Miami Tour 2027": "Música",
+   "Crossing The Road: a New Beatles Experience": "Música",
+   "Arco": "Música",
+   "Depedro": "Música",
+   "Albert Pla": "Música",
+   "Álex Ubago": "Música",
+   "M-Clan": "Música",
+   "Tributo Al Canto del Loco": "Música",
+   "Fac y Jara + Sadd Mortt": "Música",
+   "ZIMMER, WILLIAMS y 100 AÑOS DE CINE": "Música",
+   "\"Morricone y 100 Años de Cine\"": "Música",
+   "Cosmos Quartet": "Música",
+   "Martín García García": "Música",
+   "Esther Yoo y Haochen Zhang": "Música",
+   "Jan Antem y Miquel Ortega": "Música",
+   "Álvaro Lozano y Miguel Ángel Ortega Chavaldas": "Música",
+   "Zee Zee": "Música",
+   "Sara Baras": "Danza",
+   "La Bella Durmiente": "Danza",
+   "Daniel Fez": "Comedia",
+   "Manuel Ángel Redondo": "Comedia",
+   "Yo, Literal": "Comedia",
+   "Somos Monos": "Comedia",
+   "Suspendido - Madre Mía": "Comedia",
+   "Raro de los 90": "Comedia",
+   "Fernando Bernal y Juancho Bernabé en Murcia": "Comedia",
+   "Ronem Ram": "Teatro",
+   "'Ronem Ram' (Varios pases, aforo reducido)": "Teatro",
+   "Quo No Vadis": "Teatro",
+   "'Quo no vadis'. Ciclo Clásicos de Enero": "Teatro",
+   "'Sexy Ubú' (Make Ubú Great Again)": "Teatro",
+   "\"Bailar y Otras Formas de Jugarse la Vida\"": "Teatro",
+   "El Elfo Travieso": "Infantil",
+   "Superthings Live: la Superfiesta": "Infantil",
+   "Los Secretos de Mr. Stromboli": "Circo y magia",
+   "Une Partie de Soi": "Circo y magia",
+   "'Une partie de soi'. Ciclo A Pie de Calle": "Circo y magia",
+   "L Appel Du Vide": "Circo y magia",
+   "El Circo de los Sentidos": "Circo y magia",
+   "'El circo de los sentidos'. Espectáculo de calle": "Circo y magia",
+   "MERCADILLO DE NAVIDAD DE MURCIA": "Fiestas",
+   "XLII Muestra de Artesanía de Navidad": "Fiestas",
+   "Exhibición de Arte Abstracto. Artista: Paula Ciani": "Exposiciones",
+   "Bob Pop: Hablar No Sirve. de Nada": [
+    "Festivales",
+    "Teatro"
+   ],
+   "Jaime Caravaca": "Comedia",
+   "Bailar y otras maneras de jugarse la vida": "Teatro",
+   "'Bailar y otras maneras de jugarse la vida'": "Teatro",
+   "Bailar y Otras Maneras de Jugarse la Vida": "Teatro",
+   "The Kooks; Viva Suecia": [
+    "Festivales",
+    "Música"
+   ],
+   "'Historias para ser contadas'": "Literatura",
+   "Tuyo Cid": "Teatro",
+   "'Tuyo Cid'. Ciclo Clásicos de Enero": "Teatro",
+   "The Night To Be (N2b)": "Música",
+   "Yo Soy el Eliseo": "Música",
+   "Vorágine": "Comedia",
+   "'Vorágine'": "Comedia",
+   "Claramonte": [
+    "Teatro",
+    "Danza"
+   ],
+   "'Claramonte'. Arena Teatro y Danza": [
+    "Teatro",
+    "Danza"
+   ],
+   "Elegancia salvaje": [
+    "Conferencias",
+    "Gastronomía"
+   ],
+   "Érase una vez un 'tabanko'": [
+    "Conferencias",
+    "Gastronomía"
+   ],
+   "Taller de Dulces Navideños": [
+    "Talleres",
+    "Gastronomía"
+   ],
+   "Taller infantil de decoración de galletas": [
+    "Talleres",
+    "Gastronomía"
+   ]
+  },
+  "excluir": [
+   "Clinic de Navidad",
+   "La Femme y los Fatales"
+  ]
+ },
+ "recintos": {
+  "_ayuda": "'direcciones': calle (en minúsculas) -> recinto, para fuentes que dan la dirección en vez del nombre. 'alias': nombre (en minúsculas) -> nombre canónico, para unificar el mismo sitio escrito de varias formas.",
+  "direcciones": {
+   "calle victorio 36": "Sala Revólver",
+   "c/ victorio 36": "Sala Revólver",
+   "c/ santa quiteria 22": "La Yesería",
+   "c/ puerta nueva 33": "Sala REM",
+   "calle puerta nueva 33": "Sala REM"
+  },
+  "alias": {
+   "sala garaje beat club": "Garaje Beat Club",
+   "bar la yesería": "La Yesería",
+   "auditorio municipal cabezo de torres": "Auditorio de Cabezo de Torres",
+   "auditorio y centro municipal de cabezo de torres": "Auditorio de Cabezo de Torres",
+   "auditorio municipal de algezares": "Auditorio de Algezares",
+   "auditorio municipal miguel ángel clares": "Auditorio de Algezares"
+  }
+ }
+}

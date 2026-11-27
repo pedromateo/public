@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>agenda.murcia</title>
+<meta name="description" content="Agenda cultural de Murcia: conciertos, exposiciones, teatro, cine, talleres y más, ordenados por fecha.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="agenda.murcia">
+<meta property="og:description" content="Agenda cultural de Murcia: conciertos, exposiciones, teatro, cine, talleres y más.">
+<meta property="og:locale" content="es_ES">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  :root { --bg:#fafafa; --card:#fff; --text:#111; --muted:#6b6b6b; --line:#dcdcdc; --accent:#111; --chip:transparent; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); }
+  header { background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10;
+           padding-top:calc(12px + env(safe-area-inset-top)); }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 max(14px, env(safe-area-inset-left)); }
+  h1 { font:400 1.2rem/1.2 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:-.02em; margin:0; }
+  h1 { display:flex; align-items:center; gap:10px; }
+  h1 img { width:1.5em; height:1.5em; flex:none; }
+  h1 b { font-weight:800; }
+  .sub { color:var(--muted); font-size:.8rem; margin:2px 0 10px; }
+  /* móvil: buscador a ancho completo y los dos filtros en una fila */
+  .controls { display:flex; gap:8px; margin-top:16px; padding-bottom:12px; }
+  input { flex:1; min-width:0; min-height:44px; padding:10px 12px; border:1px solid var(--line); border-radius:0;
+          font:inherit; font-size:16px; background:#fff; color:inherit; -webkit-appearance:none; appearance:none; }
+  input:focus { outline:2px solid var(--accent); outline-offset:-1px; border-color:var(--accent); }
+  button { font:inherit; cursor:pointer; border-radius:0; }
+  #toggle { min-height:44px; padding:0 14px; border:1px solid var(--accent); background:#fff; color:var(--accent); font-weight:600; white-space:nowrap; }
+  #toggle[aria-expanded="true"], #toggle.on { background:var(--accent); color:#fff; }
+  #panel { border-top:1px solid var(--line); padding:12px 0 14px; max-height:55vh; overflow:auto; }
+  #panel[hidden] { display:none; }
+  .group + .group { margin-top:14px; }
+  .group h3 { margin:0 0 8px; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; }
+  #active { display:flex; flex-wrap:wrap; gap:6px; padding-bottom:12px; }
+  #active:empty { display:none; }
+  .sel { display:inline-flex; align-items:center; gap:8px; min-height:32px; padding:0 8px 0 10px; border:1px solid var(--accent); background:var(--accent); color:#fff; font-size:.82rem; }
+  .sel span { font-size:1.1rem; line-height:1; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { min-height:36px; padding:0 12px; border:1px solid var(--line); background:#fff; color:var(--text); font-size:.85rem; }
+  .chip[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  #clear { margin-top:14px; background:none; border:0; padding:0; color:var(--muted); text-decoration:underline; font-size:.85rem; }
+  .count { color:var(--muted); font-size:.85rem; margin:14px 0 10px; }
+  .grid { display:grid; grid-template-columns:minmax(0,1fr); gap:12px; padding-bottom:calc(32px + env(safe-area-inset-bottom)); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:0; padding:14px; display:flex; flex-direction:column; gap:6px; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { border:1px solid var(--line); border-radius:0; padding:1px 8px; text-transform:uppercase; letter-spacing:.04em; font-size:.68rem; color:var(--muted); }
+  .tag.cat { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .card h2 { font-size:1.05rem; font-weight:600; letter-spacing:-.01em; margin:2px 0 0; line-height:1.3; }
+  .meta { font-size:.9rem; margin:0; overflow-wrap:anywhere; }
+  .meta span { color:var(--muted); }
+  .desc { overflow-wrap:anywhere; font-size:.85rem; color:var(--muted); margin:0; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .links { margin-top:6px; display:flex; gap:8px; }
+  .links a, .links button { flex:1; text-align:center; padding:11px 8px; border-radius:0; border:1px solid var(--accent); color:var(--accent); font-size:.9rem; font-weight:600; text-decoration:none; background:none; }
+  .links a:first-child, .links button:first-child { background:var(--accent); color:#fff; }
+  .links a:active, .links button:active { opacity:.8; }
+  /* ficha del evento: pantalla completa en móvil, cuadro centrado en escritorio */
+  dialog { border:1px solid var(--accent); padding:0; width:100%; height:100%; max-width:none; max-height:none; margin:0; background:var(--card); color:var(--text); }
+  dialog::backdrop { background:rgba(0,0,0,.45); }
+  .modal { position:relative; display:flex; flex-direction:column; height:100%; }
+  .modal-body { flex:1; overflow:auto; padding:calc(18px + env(safe-area-inset-top)) 18px 18px; display:flex; flex-direction:column; gap:8px; }
+  .modal-body h2 { font-size:1.3rem; line-height:1.3; margin:4px 0 0; letter-spacing:-.01em; }
+  .modal-body .sub2 { color:var(--muted); margin:0; font-size:.95rem; }
+  .modal-body .full { white-space:pre-line; overflow-wrap:anywhere; font-size:.95rem; margin:6px 0 0; }
+  .modal-body .url a { overflow-wrap:anywhere; color:var(--accent); }
+  #m-share { position:absolute; top:calc(10px + env(safe-area-inset-top)); right:10px; width:38px; height:38px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); background:#fff; color:var(--accent); padding:0; }
+  #m-share:active { background:var(--accent); color:#fff; }
+  #m-share svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  #m-toast { position:absolute; top:calc(54px + env(safe-area-inset-top)); right:10px; background:var(--accent); color:#fff; font-size:.8rem; padding:6px 10px; }
+  #m-toast[hidden] { display:none; }
+  .modal-body h2 { padding-right:46px; }
+  .modal-foot { padding:12px 18px calc(12px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); }
+  .modal-foot button { width:100%; min-height:46px; border:1px solid var(--accent); background:var(--accent); color:#fff; font-weight:600; }
+  .empty { text-align:center; color:var(--muted); padding:48px 0; }
+  @media (min-width:640px) {
+    .wrap { padding:0 20px; }
+    h1 { font-size:1.5rem; }
+    header { padding-top:calc(18px + env(safe-area-inset-top)); }
+    .sub { font-size:.9rem; }
+    .controls { margin-top:22px; padding-bottom:16px; }
+    .grid { grid-template-columns:repeat(auto-fill,minmax(var(--card-min,300px),1fr)); gap:16px; }
+    .links button { flex:none; padding:0; border:0; background:none !important; color:var(--accent) !important; text-decoration:underline; cursor:pointer; }
+    .links { gap:14px; }
+    dialog { width:min(640px,92vw); height:auto; max-height:88vh; margin:auto; }
+    .modal { max-height:88vh; }
+    .modal-body { padding-top:22px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1><img src="favicon.svg" alt="" width="28" height="28"><span id="title"><b>agenda</b>.murcia</span></h1>
+    <div class="controls">
+      <input id="q" type="search" placeholder="Buscar eventos…" enterkeyhint="search">
+      <button id="toggle" type="button" aria-expanded="false" aria-controls="panel">Filtros</button>
+    </div>
+    <div id="active"></div>
+    <div id="panel" hidden>
+      <div class="group"><h3>Categoría</h3><div class="chips" id="cat"></div></div>
+      <button id="clear" type="button">Quitar todos los filtros</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+</main>
+<dialog id="modal" aria-labelledby="m-title">
+  <div class="modal">
+    <button type="button" id="m-share" aria-label="Compartir" title="Compartir">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+    </button>
+    <span id="m-toast" role="status" hidden></span>
+    <div class="modal-body" id="m-body"></div>
+    <div class="modal-foot"><button type="button" id="m-back">Volver</button></div>
+  </div>
+</dialog>
+<script src="events.js"></script>
+<script>
+let events = [];
+const $ = id => document.getElementById(id);
+const norm = s => (s || "").toString().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const esc = s => (s || "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const fmt = iso => new Date(iso + "T00:00").toLocaleDateString("es-ES", { weekday:"short", day:"numeric", month:"short" });
+
+function when(e) {
+  if (e.fecha_inicio === e.fecha_fin) return fmt(e.fecha_inicio);
+  return `${fmt(e.fecha_inicio)} – ${fmt(e.fecha_fin)}`;
+}
+
+let shown = [];
+function render() {
+  const q = norm($("q").value.trim());
+  // dentro de un grupo se suman las opciones (o); entre grupos se combinan (y)
+  const list = events.filter(e =>
+    (!sel.cat.size || e.categorias.some(c => sel.cat.has(c))) &&
+    (!q || e._search.includes(q)));
+  shown = list;
+  $("count").textContent = `${list.length} evento${list.length === 1 ? "" : "s"}`;
+  $("grid").innerHTML = list.length ? list.map((e, i) => `
+    <article class="card">
+      <h2>${esc(e.titulo)}</h2>
+      <p class="meta"><span>Cuándo:</span> ${when(e)}${e.horario ? " · " + esc(e.horario) : ""}</p>
+      <p class="meta"><span>Dónde:</span> ${esc(e.lugar || e.localidad || "Murcia")}</p>
+      ${e.precio ? `<p class="meta"><span>Precio:</span> ${esc(e.precio)}</p>` : ""}
+      <div class="links"><button type="button" data-i="${i}">Más info</button></div>
+    </article>`).join("") : `<div class="empty">No hay eventos que coincidan con la búsqueda.</div>`;
+}
+
+function applyWeb(w) {
+  // textos y ajustes de la página vienen de config.json (sección web); los valores del HTML son el respaldo
+  if (w.titulo_negrita || w.titulo_resto) {
+    $("title").innerHTML = `<b>${esc(w.titulo_negrita || "")}</b>${esc(w.titulo_resto || "")}`;
+    document.title = (w.titulo_negrita || "") + (w.titulo_resto || "");
+  }
+  if (w.descripcion) document.querySelector('meta[name="description"]').content = w.descripcion;
+  if (w.buscador_placeholder) $("q").placeholder = w.buscador_placeholder;
+  if (w.texto_boton_filtros) TOGGLE_TEXT = w.texto_boton_filtros;
+  if (w.clave_almacenamiento) STORE = w.clave_almacenamiento;
+  if (w.ancho_minimo_tarjeta_px) document.documentElement.style.setProperty("--card-min", w.ancho_minimo_tarjeta_px + "px");
+  ORDER = w.orden_categorias || [];
+}
+
+function init(d) {
+  applyWeb(d.web || {});
+  // events.json ya viene filtrado y ordenado cronológicamente; la web solo lo muestra
+  events = d.eventos
+    .map(e => ({ ...e, categorias: e.categorias, _search: norm([e.titulo, e.subtitulo, e.descripcion, e.lugar, e.localidad, e.categorias, e.precio, e.horario].join(" ")) }));
+  const rank = t => (ORDER.indexOf(t) + 1) || 999; // las no listadas van al final, por orden alfabético
+  buildChips("cat", [...new Set(events.flatMap(e => e.categorias))].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b, "es")).map(t => [t, t]));
+  restoreFilters();
+  render();
+}
+
+const sel = { cat: new Set() };
+function buildChips(id, options) {
+  $(id).innerHTML = options.map(([v, label]) =>
+    `<button type="button" class="chip" data-v="${esc(v)}" aria-pressed="false">${esc(label)}</button>`).join("");
+  $(id).addEventListener("click", ev => {
+    const b = ev.target.closest(".chip"); if (!b) return;
+    const on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", on);
+    sel[id][on ? "add" : "delete"](b.dataset.v);
+    changed();
+  });
+}
+
+// la configuración de filtros se recuerda en el navegador (localStorage) entre visitas
+let STORE = "agenda.murcia.filtros.v2", TOGGLE_TEXT = "Filtros", ORDER = [];
+function restoreFilters() {
+  let s = {};
+  try { s = JSON.parse(localStorage.getItem(STORE)) || {}; } catch {}
+  $("q").value = s.q || "";
+  ["cat"].forEach(id => document.querySelectorAll(`#${id} .chip`).forEach(b => {
+    const on = (s[id] || []).includes(b.dataset.v); // las opciones que ya no existen se ignoran
+    b.setAttribute("aria-pressed", on);
+    if (on) sel[id].add(b.dataset.v);
+  }));
+  updateToggle();
+}
+function updateToggle() {
+  const n = sel.cat.size;
+  $("toggle").textContent = n ? `${TOGGLE_TEXT} · ${n}` : TOGGLE_TEXT;
+  $("toggle").classList.toggle("on", n > 0);
+  $("active").innerHTML = [...sel.cat].map(v =>
+    `<button type="button" class="sel" data-v="${esc(v)}" aria-label="Quitar ${esc(v)}">${esc(v)} <span aria-hidden="true">×</span></button>`).join("");
+}
+function changed() {
+  updateToggle();
+  try { localStorage.setItem(STORE, JSON.stringify({ q: $("q").value, cat: [...sel.cat] })); } catch {}
+  render();
+}
+
+// events.js es una copia de events.json como script, para poder abrir index.html sin servidor (file://)
+if (window.EVENTS_DATA) init(window.EVENTS_DATA);
+else fetch("events.json").then(r => r.json()).then(init)
+  .catch(() => { $("grid").innerHTML = `<div class="empty">No se pudieron cargar los eventos.</div>`; });
+
+$("q").addEventListener("input", changed);
+$("active").addEventListener("click", ev => {
+  const b = ev.target.closest(".sel"); if (!b) return;
+  sel.cat.delete(b.dataset.v);
+  document.querySelectorAll("#cat .chip").forEach(c => { if (c.dataset.v === b.dataset.v) c.setAttribute("aria-pressed", "false"); });
+  changed();
+});
+$("toggle").addEventListener("click", () => {
+  const open = $("panel").hidden;
+  $("panel").hidden = !open;
+  $("toggle").setAttribute("aria-expanded", open);
+});
+document.addEventListener("click", ev => {
+  // composedPath: al pulsar una etiqueta «×» el botón ya no está en el DOM cuando llega el evento
+  if ($("panel").hidden || ev.composedPath().some(n => ["panel", "toggle", "active"].includes(n.id))) return;
+  $("panel").hidden = true;
+  $("toggle").setAttribute("aria-expanded", "false");
+});
+$("clear").addEventListener("click", () => {
+  sel.cat.clear();
+  document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", "false"));
+  changed();
+});
+
+let current = null;
+function openModal(e) {
+  current = e;
+  $("m-body").innerHTML = `
+    <div class="tags">${e.categorias.map((c, i) => `<span class="tag${i ? "" : " cat"}">${esc(c)}</span>`).join("")}</div>
+    <h2 id="m-title">${esc(e.titulo)}</h2>
+    ${e.subtitulo ? `<p class="sub2">${esc(e.subtitulo)}</p>` : ""}
+    <p class="meta"><span>Cuándo:</span> ${when(e)}${e.horario ? " · " + esc(e.horario) : ""}</p>
+    <p class="meta"><span>Dónde:</span> ${esc(e.lugar || e.localidad || "Murcia")}</p>
+    ${e.precio ? `<p class="meta"><span>Precio:</span> ${esc(e.precio)}</p>` : ""}
+    ${e.descripcion ? `<p class="full">${esc(e.descripcion)}</p>` : ""}
+    <p class="meta url"><span>Web:</span> <a href="${esc(e.enlace)}" target="_blank" rel="noopener">${esc(e.enlace)}</a></p>
+    ${e.enlace_entradas && e.enlace_entradas !== e.enlace ? `<p class="meta url"><span>Entradas:</span> <a href="${esc(e.enlace_entradas)}" target="_blank" rel="noopener">${esc(e.enlace_entradas)}</a></p>` : ""}`;
+  $("m-body").scrollTop = 0;
+  $("modal").showModal();
+  history.pushState({ modal: true }, "");
+}
+$("m-share").addEventListener("click", async () => {
+  if (!current) return;
+  const data = { title: current.titulo, text: `${current.titulo} · ${when(current)}${current.horario ? " · " + current.horario : ""} · ${current.lugar || "Murcia"}`, url: current.enlace };
+  if (navigator.share) { try { await navigator.share(data); } catch {} return; }
+  let ok = false;
+  try { await navigator.clipboard.writeText(`${data.text}\n${data.url}`); ok = true; } catch {}
+  const t = $("m-toast");
+  t.textContent = ok ? "Copiado al portapapeles" : "No se pudo copiar";
+  t.hidden = false;
+  setTimeout(() => { t.hidden = true; }, 2000);
+});
+function closeModal() { if ($("modal").open) $("modal").close(); }
+$("grid").addEventListener("click", ev => {
+  const b = ev.target.closest("button[data-i]"); if (!b) return;
+  openModal(shown[+b.dataset.i]);
+});
+// "Volver" y el botón atrás del móvil cierran la ficha y dejan la búsqueda y los filtros como estaban
+$("m-back").addEventListener("click", () => history.state && history.state.modal ? history.back() : closeModal());
+$("modal").addEventListener("cancel", ev => { ev.preventDefault(); history.state && history.state.modal ? history.back() : closeModal(); });
+window.addEventListener("popstate", closeModal);
+</script>
+</body>
+</html>

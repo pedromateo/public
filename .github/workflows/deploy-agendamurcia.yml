@@ -1,0 +1,182 @@
+name: Deploy Agenda Murcia
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # cada día a las 05:00 UTC
+  workflow_dispatch:
+  push:
+    branches: [ "main", "master" ]
+    paths:
+      - 'agendamurcia/**'
+      - '.github/workflows/deploy-agendamurcia.yml'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: agendamurcia/requirements*.txt
+
+      - name: Buscar eventos y fusionar con events.json
+        if: github.event_name != 'push'
+        working-directory: agendamurcia
+        run: |
+          pip install -r requirements.txt
+          python scrape.py
+
+      - name: Tests (unitarios, datos y web con Playwright)
+        working-directory: agendamurcia
+        run: |
+          pip install -r requirements-dev.txt
+          python -m pytest tests -q
+
+      - name: Guardar cambios en el repositorio
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agendamurcia/events.json agendamurcia/events.js
+          git diff --cached --quiet || (git commit -m "chore(agendamurcia): actualizar eventos" && git push)
+
+      - name: Prepare production build
+        run: |
+          mkdir -p dist/brainfit dist/murmeteo dist/loopp dist/mylanding dist/elparte dist/mschool dist/medit dist/sanz dist/menum dist/stoxxx dist/agendamurcia
+
+          # Root Portal
+          if [ -f "index.html" ]; then
+            cp index.html dist/ || true
+            cp -r assets dist/ 2>/dev/null || true
+            touch dist/.nojekyll
+          fi
+
+          # STOXXX Copy
+          if [ -d "stoxxx" ]; then
+            echo "Packaging STOXXX..."
+            cp -r stoxxx/index.html stoxxx/data stoxxx/reports dist/stoxxx/ || true
+            cp -f stoxxx/favicon* stoxxx/apple-touch-icon.png dist/stoxxx/ 2>/dev/null || true
+          fi
+
+          # Brainfit Copy
+          if [ -d "brainfit" ]; then
+            echo "Packaging Brainfit..."
+            cd brainfit
+            cp index.html manifest.json sw.js config.json ../dist/brainfit/ || true
+            cp -r css js assets ../dist/brainfit/ || true
+            cd ..
+          fi
+
+          # MurMeteo Copy
+          if [ -d "murmeteo" ]; then
+            echo "Packaging MurMeteo..."
+            cd murmeteo
+            cp index.html manifest.json sw.js config.json aemetService.js app.js style.css package.json ../dist/murmeteo/ || true
+            cp -r icons ../dist/murmeteo/ || true
+            cp -r card_images ../dist/murmeteo/ || true
+            cp -f forecast.json ../dist/murmeteo/ || true
+            cp -r forecasts ../dist/murmeteo/ || true
+            cd ..
+          fi
+
+          # Loopp Copy
+          if [ -d "loopp" ]; then
+            echo "Packaging Loopp..."
+            cd loopp
+            cp index.html manifest.json sw.js ../dist/loopp/ || true
+            cp -r js icons ../dist/loopp/ || true
+            cd ..
+          fi
+
+          # MyLanding Copy
+          if [ -d "mylanding" ]; then
+            echo "Packaging MyLanding..."
+            cd mylanding
+            cp index.html ../dist/mylanding/ || true
+            cp -r index_files ../dist/mylanding/ || true
+            cd ..
+          fi
+
+          # ElParte Copy
+          if [ -d "elparte" ]; then
+            echo "Packaging ElParte..."
+            cd elparte
+            cp index.html manifest.webmanifest sw.js style.css app.js ../dist/elparte/ || true
+            cp -r icons ../dist/elparte/ || true
+            cd ..
+          fi
+
+          # mSchool Copy
+          if [ -d "mschool" ]; then
+            echo "Packaging mSchool..."
+            cd mschool
+            cp index.html manifest.json sw.js icon-192.svg icon-512.svg juegos_estimulacion_movil.html ../dist/mschool/ || true
+            cd ..
+          fi
+
+          # Medit Copy
+          if [ -d "medit" ]; then
+            echo "Packaging Medit..."
+            cd medit
+            cp index.html manifest.json sw.js package.json ../dist/medit/ || true
+            cp -r js css icons audio ../dist/medit/ || true
+            cd ..
+          fi
+
+          # Sanz Copy
+          if [ -d "sanz" ]; then
+            echo "Packaging Sanz..."
+            cd sanz
+            cp *.html favicon* apple-touch-icon.png jquery-1.11.2.min.js .nojekyll package.json ../dist/sanz/ || true
+            cp -r files uploads apps ../dist/sanz/ || true
+            cd ..
+          fi
+
+          # MenuM Copy
+          if [ -d "menum" ]; then
+            echo "Packaging MenuM..."
+            cd menum
+            sed -i "s/menum-cache-v[0-9]*/menum-cache-${{ github.sha }}/g" sw.js || true
+            cp index.html manifest.json sw.js package.json ../dist/menum/ || true
+            cp -r data css js icons ../dist/menum/ || true
+            cd ..
+          fi
+
+          # Agenda Murcia Copy
+          if [ -d "agendamurcia" ]; then
+            echo "Packaging Agenda Murcia..."
+            cp agendamurcia/index.html agendamurcia/events.json agendamurcia/events.js agendamurcia/favicon.svg dist/agendamurcia/
+            touch dist/agendamurcia/.nojekyll
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
