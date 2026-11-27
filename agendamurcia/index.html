@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#ffffff">
 <title>agenda.murcia</title>
 <meta name="description" content="Agenda cultural de Murcia: conciertos, exposiciones, teatro, cine, talleres y más, ordenados por fecha.">
@@ -120,7 +123,6 @@
     <div class="modal-foot"><button type="button" id="m-back">Volver</button></div>
   </div>
 </dialog>
-<script src="events.js"></script>
 <script>
 let events = [];
 const $ = id => document.getElementById(id);
@@ -216,9 +218,19 @@ function changed() {
   render();
 }
 
-// events.js es una copia de events.json como script, para poder abrir index.html sin servidor (file://)
-if (window.EVENTS_DATA) init(window.EVENTS_DATA);
-else fetch("events.json").then(r => r.json()).then(init)
+// Sobre HTTP/HTTPS siempre se descarga events.json sin caché; en file:// se carga events.js.
+function loadLocalEventsScript() {
+  const s = document.createElement("script");
+  s.src = "events.js";
+  s.onload = () => window.EVENTS_DATA ? init(window.EVENTS_DATA)
+    : ($("grid").innerHTML = `<div class="empty">No se pudieron cargar los eventos.</div>`);
+  s.onerror = () => { $("grid").innerHTML = `<div class="empty">No se pudieron cargar los eventos.</div>`; };
+  document.head.appendChild(s);
+}
+if (location.protocol === "file:") loadLocalEventsScript();
+else fetch("events.json", { cache: "no-store" })
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(init)
   .catch(() => { $("grid").innerHTML = `<div class="empty">No se pudieron cargar los eventos.</div>`; });
 
 $("q").addEventListener("input", changed);

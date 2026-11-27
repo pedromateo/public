@@ -72,3 +72,41 @@ def test_consolidate_es_idempotente():
             ev("Hamlet", "2026-12-05")]
     once = consolidate(data)
     assert consolidate(once) == once
+
+
+def test_dedupe_auditorio_alberca_y_consenso():
+    a = ev("El Pequeño Mundo de la Música", "2026-11-29", lugar="Auditorio de La Alberca, Murcia",
+           horario="12:00", fuente="murciocio.es", precio="5€", categorias=["Teatro", "Infantil"])
+    b = ev("El pequeño mundo de la música", "2026-11-29", lugar="Auditorio Municipal La Alberca, Murcia",
+           horario="12:00", fuente="eventos.murcia.es", descripcion="Historia musical infantil",
+           categorias=["Danza", "Música"])
+    out = dedupe([a, b])
+    assert len(out) == 1
+    assert out[0]["precio"] == "5€"
+    assert out[0]["descripcion"] == "Historia musical infantil"
+    assert set(out[0]["categorias"]) == {"Danza", "Música", "Teatro", "Infantil"}
+
+
+def test_dedupe_espectaculo_calle_cruzado_teatro_municipal():
+    circo = ev("El Circo de los Sentidos", "2026-11-27", "2026-11-28", lugar="Teatro Circo, Murcia",
+               horario="11:00; 17:00", fuente="teatrocircomurcia.es", descripcion="", enlace="https://circo")
+    romea = ev("El Circo de los Sentidos", "2026-11-27", "2026-11-28", lugar="Teatro Romea, Murcia",
+               horario="11:00; 17:00", fuente="teatroromea.es", descripcion="", enlace="https://romea")
+    calle = ev("'El circo de los sentidos'. Espectáculo de calle", "2026-11-27", "2026-11-28",
+               lugar="Plaza Santo Domingo, Murcia", horario="17:00", fuente="eventos.murcia.es",
+               descripcion="Instalación inmersiva en la calle.", enlace="https://murcia")
+    out = dedupe([circo, romea, calle])
+    assert len(out) == 1
+    assert out[0]["lugar"] == "Plaza Santo Domingo, Murcia"
+    assert out[0]["horario"] == "11:00; 17:00"
+    assert "Instalación inmersiva" in out[0]["descripcion"]
+
+
+def test_dedupe_tributo_mismo_dia_y_sala():
+    a = ev("El mejor tributo a HÉROES DEL SILENCIO", "2026-12-18", lugar="Garaje Beat Club, Murcia",
+           horario="21:00", fuente="compralaentrada.com", precio="Desde 10 €")
+    b = ev("Héroes el Culto", "2026-12-18", lugar="Garaje Beat Club, Murcia",
+           horario="22:00", fuente="murciocio.es", precio="12€")
+    out = dedupe([a, b])
+    assert len(out) == 1
+    assert out[0]["fuente"] == "compralaentrada.com"

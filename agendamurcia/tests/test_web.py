@@ -351,6 +351,26 @@ def test_mensaje_de_error_si_no_hay_datos(page, site):
     expect(page.locator(".empty")).to_have_text("No se pudieron cargar los eventos.")
 
 
+def test_refresco_siempre_descarga_events_json_sin_cache(page, site):
+    data2 = json.loads(json.dumps(site["data"]))
+    data2["eventos"] = data2["eventos"][:2]
+    calls = []
+
+    def handler(route):
+        calls.append(route.request.url)
+        payload = site["data"] if len(calls) == 1 else data2
+        route.fulfill(status=200, content_type="application/json",
+                      headers={"Cache-Control": "public, max-age=3600"},
+                      body=json.dumps(payload))
+
+    page.route("**/events.json", handler)
+    page.goto(site["url"] + "/index.html")
+    expect(cards(page)).to_have_count(5)
+    page.reload()
+    expect(cards(page)).to_have_count(2)
+    assert len(calls) == 2
+
+
 @pytest.mark.parametrize("vp", [MOVIL, ESCRITORIO], ids=["movil", "escritorio"])
 def test_sin_desbordamiento_horizontal(app, vp):
     app.set_viewport_size(vp)
