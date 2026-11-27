@@ -33,18 +33,19 @@ jobs:
           cache: pip
           cache-dependency-path: agendamurcia/requirements*.txt
 
+      - name: Instalar dependencias
+        working-directory: agendamurcia
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
       - name: Buscar eventos y fusionar con events.json
         if: github.event_name != 'push'
         working-directory: agendamurcia
-        run: |
-          pip install -r requirements.txt
-          python scrape.py
+        run: python scrape.py
 
       - name: Tests (unitarios, datos y web con Playwright)
         working-directory: agendamurcia
         run: |
-          pip install -r requirements-dev.txt
-          playwright install chromium
+          playwright install --with-deps chromium
           python -m pytest tests -q
 
       - name: Guardar cambios en el repositorio
