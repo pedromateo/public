@@ -160,11 +160,14 @@
    "Taller infantil de decoración de galletas": [
     "Talleres",
     "Gastronomía"
-   ]
+   ],
+   "Russingers": "Música",
+   "Nadine Sierra y la Orchestre de L Opéra Royal de Versailles": "Música"
   },
   "excluir": [
    "Clinic de Navidad",
-   "La Femme y los Fatales"
+   "La Femme y los Fatales",
+   "Ciclo Auditorio 2026-2027"
   ]
  },
  "recintos": {
@@ -190,7 +193,10 @@
    "auditorio municipal cabezo de torres": "Auditorio de Cabezo de Torres",
    "auditorio y centro municipal de cabezo de torres": "Auditorio de Cabezo de Torres",
    "auditorio municipal de algezares": "Auditorio de Algezares",
-   "auditorio municipal miguel ángel clares": "Auditorio de Algezares"
+   "auditorio municipal miguel ángel clares": "Auditorio de Algezares",
+   "sala rem": "Sala REM",
+   "auditorio municipal de la alberca": "Auditorio Municipal La Alberca",
+   "plaza de toros de la condomina": "Plaza de Toros"
   }
  }
 }

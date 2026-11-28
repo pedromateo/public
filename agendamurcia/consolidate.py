@@ -2,6 +2,7 @@
 import re
 import unicodedata
 from datetime import date
+from difflib import SequenceMatcher
 
 PRIORITY = ["teatrocircomurcia.es", "teatroromea.es", "auditoriomurcia.org", "salamamba.com",
             "compralaentrada.com", "ticketmaster.es", "eventos.murcia.es", "murciaturistica.es", "murciocio.es"]
@@ -72,6 +73,8 @@ def same_event(a, b):
         cross_theater = a.get("fuente") in THEATER_CROSS_SOURCES or b.get("fuente") in THEATER_CROSS_SOURCES
         return bool(cross_theater and related_titles(a["titulo"], b["titulo"]) and _hours_compatible(a, b))
     if related_titles(a["titulo"], b["titulo"]):
+        return True
+    if SequenceMatcher(None, norm(a["titulo"]), norm(b["titulo"])).ratio() >= 0.85:
         return True
     same_day = a["fecha_inicio"] == b["fecha_inicio"] == a["fecha_fin"] == b["fecha_fin"]
     if same_day and a.get("horario") and a["horario"] == b.get("horario"):
